@@ -97,7 +97,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			} else {
 				// TODO:
 				//   - Find a way to output the old module into the Extbase module itself
-				//   - Refactor this (related to previous point)
+				//   - Refactor this (related to previous point) ==> delegate to default action from default controller instead?
 				//   - Find out why ExtJS code from modFunc is not rendered
 				
 					// Support for external plain-old module rendering
