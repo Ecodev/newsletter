@@ -1,0 +1,49 @@
+Index: t3lib/class.t3lib_loadmodules.php
+===================================================================
+--- t3lib/class.t3lib_loadmodules.php	(revision 5734)
++++ t3lib/class.t3lib_loadmodules.php	(working copy)
+@@ -384,6 +384,14 @@
+ 	 * @return	mixed		See description of function
+ 	 */
+ 	function checkMod($name, $fullpath)	{
++			// check for own way of configure module
++		if (is_array($GLOBALS['TBE_EXTBASE_MODULES'][$name]['configureModuleFunction'])) {
++			$obj = $GLOBALS['TBE_EXTBASE_MODULES'][$name]['configureModuleFunction'];
++			if (is_callable($obj)) {
++				$MCONF = $MLANG = array();
++				return call_user_func($obj, $name, $MCONF, $MLANG);
++			}
++		}
+ 		$modconf=Array();
+ 		$path = preg_replace('/\/[^\/.]+\/\.\.\//', '/', $fullpath); // because 'path/../path' does not work
+ 		if (@is_dir($path) && file_exists($path.'/conf.php')) 	{
+Index: typo3/mod.php
+===================================================================
+--- typo3/mod.php	(revision 5734)
++++ typo3/mod.php	(working copy)
+@@ -42,13 +42,18 @@
+ 
+ 	// Find module path:
+ $temp_M = (string)t3lib_div::_GET('M');
+-if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{
+-	$MCONF['_'] = 'mod.php?M='.rawurlencode($temp_M);
+-	require($temp_path.'conf.php');
+-	$BACK_PATH='';
+-	require($temp_path.'index.php');
++if (substr($temp_M, 0, 3) === 'TX_') {
++	$dispatcher = t3lib_div::makeInstance('Tx_MvcExtjs_BackendDispatcher');
++	$dispatcher->callModule(substr($temp_M, 3));
+ } else {
+-	die('Value "'.htmlspecialchars($temp_M).'" for "M" was not found as a module');
++	if ($temp_path = $TBE_MODULES['_PATHS'][$temp_M])	{
++		$MCONF['_'] = 'mod.php?M=' . rawurlencode($temp_M);
++		require($temp_path . 'conf.php');
++		$BACK_PATH = '';
++		require($temp_path . 'index.php');
++	} else {
++		die('Value "' . htmlspecialchars($temp_M) . '" for "M" was not found as a module');
++	}
+ }
+ 
+ ?>
+\ No newline at end of file

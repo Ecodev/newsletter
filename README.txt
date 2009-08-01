@@ -1,0 +1,1 @@
+Make sure to read http://forge.typo3.org/news/show/169 before starting.

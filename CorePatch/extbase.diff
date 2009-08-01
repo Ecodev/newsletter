@@ -1,0 +1,29 @@
+Index: Classes/MVC/Web/Routing/URIBuilder.php
+===================================================================
+--- Classes/MVC/Web/Routing/URIBuilder.php	(revision 983)
++++ Classes/MVC/Web/Routing/URIBuilder.php	(working copy)
+@@ -156,8 +156,21 @@
+ 		if ($linkAccessRestrictedPages) {
+ 			$typolinkConfiguration['linkAccessRestrictedPages'] = 1;
+ 		}
+-
+-		return $this->contentObject->typoLink_URL($typolinkConfiguration);
++		
++		if (TYPO3_MODE === 'FE') {
++			return $this->contentObject->typoLink_URL($typolinkConfiguration);
++		} else {	// TYPO3_MODE === 'BE'
++			$additionalParams = t3lib_div::trimExplode('&', $typolinkConfiguration['additionalParams'], true);
++			$dispatcher = array_pop($additionalParams);
++			array_unshift($additionalParams, $dispatcher);
++			$parameters = array();
++			foreach ($additionalParams as $params) {
++				list($key, $value) = explode('=', $params);
++				$parameters[$key] = $value;
++			}
++			
++			return t3lib_div::linkThisUrl($typolinkConfiguration['parameter'], $parameters);
++		}
+ 	}
+ }
+ ?>
+\ No newline at end of file

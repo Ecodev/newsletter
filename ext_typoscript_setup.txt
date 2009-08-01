@@ -1,0 +1,1 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:mvc_extjs/Configuration/TypoScript/ajax.txt">
