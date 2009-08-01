@@ -56,7 +56,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			$permClause = $GLOBALS['BE_USER']->getPagePermsClause(true);
 			$access = is_array(t3lib_BEfunc::readPageAccess($id, $permClause));
 			if (!$access) {
-				t3lib_BEfunc::typo3PrintError ('No Access', 'You don\'t have access to this page', 0);
+				t3lib_BEfunc::typo3PrintError('No Access', 'You don\'t have access to this page', 0);
 			}
 		}
 		
@@ -89,11 +89,32 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		
 			// Allow function dispatcher to override controller/action
 		if ($set = t3lib_div::_GET('SET')) {
-			// TODO: Add support for external plain-old module rendering
+			$currentFunction = $set['function'];
 			
-			if (preg_match('/^(.*)->(.*)$/', $set['function'], $matches)) {
+			if (preg_match('/^(.*)->(.*)$/', $currentFunction, $matches)) {
 				$controller = $matches[1];
 				$action = $matches[2];
+			} else {
+				// TODO: Find a way to output the old module into the Extbase module itself
+				
+					// Support for external plain-old module rendering
+				$functions = $GLOBALS['TBE_MODULES_EXT'][$module]['MOD_MENU']['function'];
+				if (isset($functions[$currentFunction])) {
+					$modFunc = $functions[$currentFunction];
+					$className = $modFunc['name'];
+					$path = $modFunc['path'];
+					
+					require_once($path);
+					$modFuncClass = t3lib_div::makeInstance($className);
+					
+					$doc = t3lib_div::makeInstance('template'); 
+					$doc->backPath = $GLOBALS['BACK_PATH'];
+					
+					$modFuncClass->_init($doc);
+						// TODO: renders the whole page (header/footer)
+					echo $modFuncClass->main();
+					return;
+				}
 			}
 		}
 		

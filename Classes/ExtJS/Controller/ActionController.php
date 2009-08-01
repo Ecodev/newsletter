@@ -261,7 +261,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	protected function UriFor($pageUid = NULL, $actionName = NULL, $arguments = array(), $controllerName = NULL, $extensionName = NULL, $pluginName = NULL, $pageType = 0, $noCache = FALSE, $useCacheHash = TRUE, $section = '', $linkAccessRestrictedPages = FALSE, array $additionalParams = array()) {
 		if (TYPO3_MODE === 'FE') {
 			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
-		} else {	// TYPO3_MODE === 'BE'
+		} else { // TYPO3_MODE === 'BE'
 			if ($pluginName === NULL) {
 				$pluginName = $this->settings['pluginName'];
 			}
@@ -346,7 +346,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		if (TYPO3_MODE === 'FE') {
 			$lang = $GLOBALS['TSFE']->lang;
 			$allLabels = $GLOBALS['TSFE']->readLLfile($fileRef);
-		} else {	// TYPO3_MODE === 'BE'
+		} else { // TYPO3_MODE === 'BE'
 			$lang = $GLOBALS['BE_USER']->user['lang'];
 			$lang = $lang ? $lang : 'default';
 			$allLabels = t3lib_div::readLLfile($fileRef, $lang);
@@ -402,6 +402,15 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 */
 	protected function setMenu(array $menu) {
 		$this->menu = $menu;
+		
+			// Merge other extension module functions
+		$pluginName = $this->settings['pluginName'];
+		
+			// Details in t3lib_extMgm::insertModuleFunction()
+		$functions = $GLOBALS['TBE_MODULES_EXT'][$pluginName]['MOD_MENU']['function'];
+		foreach ($functions as $function) {
+			$this->menu[$function['name']] = $GLOBALS['LANG']->sL($function['title']);
+		}
 	}
 	
 	/**
