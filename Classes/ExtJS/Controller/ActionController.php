@@ -126,6 +126,16 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->masterView->setControllerContext($controllerContext);
 			$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs') . 'Resources/Private/Templates/module.html');
 			$this->masterView->injectSettings($this->settings);
+			
+			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
+			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
+			$this->scBase->init();
+			
+				// Prepare template class
+			$this->doc = t3lib_div::makeInstance('template'); 
+			$this->doc->backPath = $GLOBALS['BACK_PATH'];
+			
+			$this->pageIncludes = $this->doc->pageIncludes;
 		}
 	}
 	
@@ -142,16 +152,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 					// temporary fix for t3style		
 				$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
 			}
-		} else {
-			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
-			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
-			$this->scBase->init();
-			
-				// Prepare template class
-			$this->doc = t3lib_div::makeInstance('template'); 
-			$this->doc->backPath = $GLOBALS['BACK_PATH'];
-			
-			$this->pageIncludes = $this->doc->pageIncludes;
 		}
 		
 		$this->pageIncludes->moveJsFromHeaderToFooter = $moveJsFromHeaderToFooter;
@@ -404,13 +404,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		$this->menu = $menu;
 		
 			// Merge other extension module functions
-		$pluginName = $this->settings['pluginName'];
-		
-			// Details in t3lib_extMgm::insertModuleFunction()
-		$functions = $GLOBALS['TBE_MODULES_EXT'][$pluginName]['MOD_MENU']['function'];
-		foreach ($functions as $function) {
-			$this->menu[$function['name']] = $GLOBALS['LANG']->sL($function['title']);
-		}
+		$this->menu = $this->scBase->mergeExternalItems($this->settings['pluginName'], 'function', $this->menu);
 	}
 	
 	/**
