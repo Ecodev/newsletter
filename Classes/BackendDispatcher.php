@@ -49,7 +49,16 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		$config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
 		
 			// Check permissions and exit if the user has no permission for entry
-		$GLOBALS['BE_USER']->modAccess($config, 1);
+		$GLOBALS['BE_USER']->modAccess($config, TRUE);
+		if (t3lib_div::_GP('id')) {
+			// check page access
+			$id = t3lib_div::_GP('id');
+			$permClause = $GLOBALS['BE_USER']->getPagePermsClause(TRUE);
+			$access = is_array(t3lib_BEfunc::readPageAccess($id, $permClause));
+			if (!$access) {
+				t3lib_BEfunc::typo3PrintError ('No Access', 'You don\'t have access to this page', 0);
+			}
+		}
 		
 			// Extract dispatcher settings from request
 		$argumentPrefix = strtolower('tx_' . $config['extensionName'] . '_' . $config['name']);
