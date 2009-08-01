@@ -117,7 +117,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * Beware: make sure to call parent::initializeAction if you need to do something in your child class 
 	 */
 	protected function initializeAction() {
-		if (TYPO3_MODE === 'BE') {
+		if (TYPO3_MODE === 'FE') {
+			$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+		} else { // TYPO3_MODE === 'BE'
 			$this->injectSettings(Tx_Extbase_Dispatcher::getSettings());
 			
 				// Prepare the view
@@ -137,6 +139,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			
 			$this->pageIncludes = $this->doc->pageIncludes;
 		}
+		
+		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
+		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
 	}
 	
 	/**
@@ -145,13 +150,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	protected function initializeExtJSAction($useExtCore = FALSE, $moveJsFromHeaderToFooter = FALSE) {
 		$this->useExtCore = $useExtCore;
 		
-		if (TYPO3_MODE === 'FE') {
-			$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
-			
-			if (!$useExtCore) {
-					// temporary fix for t3style		
-				$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
-			}
+		if (TYPO3_MODE === 'FE' && !$useExtCore) {
+				// temporary fix for t3style		
+			$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
 		}
 		
 		$this->pageIncludes->moveJsFromHeaderToFooter = $moveJsFromHeaderToFooter;
@@ -167,9 +168,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			// Namespace will be registered in ExtJS when calling method outputJsCode
 			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
-		
-		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
-		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
 		
 			// Initialize the ExtJS settings service 
 		$this->settingsExtJS = t3lib_div::makeInstance('Tx_MvcExtjs_ExtJS_SettingsService', $this->extJSNamespace);
