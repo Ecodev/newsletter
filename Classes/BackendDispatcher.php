@@ -95,54 +95,11 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 				$controller = $matches[1];
 				$action = $matches[2];
 			} else {
-				// TODO:
-				//   - Find a way to output the old module into the Extbase module itself
-				//   - Refactor this (related to previous point) ==> delegate to default action from default controller instead?
-				//   - Find out why ExtJS code from modFunc is not rendered
-				
 					// Support for external plain-old module rendering
 				$functions = $GLOBALS['TBE_MODULES_EXT'][$module]['MOD_MENU']['function'];
 				if (isset($functions[$currentFunction])) {
-					$modFunc = $functions[$currentFunction];
-					$className = $modFunc['name'];
-					$path = $modFunc['path'];
-					
-					require_once($path);
-					$extObj = t3lib_div::makeInstance($className);
-					
-					$pObj = t3lib_div::makeInstance('t3lib_SCbase');
-					$pObj->MCONF['name'] = $module;
-					$pObj->init();
-					
-						// Prepare template class
-					$doc = t3lib_div::makeInstance('template'); 
-					$doc->backPath = $GLOBALS['BACK_PATH'];
-					
-					$template = '
-						<div class="typo3-fullDoc">
-							<div id="typo3-docbody">
-								<div id="typo3-inner-docbody">%s</div>
-							</div>
-						</div>
-					';
-					
-						// Emulate method extObjContent() of t3lib_SCbase
-						// in order to use our renderer instead of outputting
-						// content from the controller itself
-					$content = $doc->startPage('TITLE');
-					
-					$extObj->pObj = &$pObj;
-					if (is_callable(array($extObj, '_init'))) {
-						$extObj->_init($doc);
-					}
-					if (is_callable(array($extObj, 'main'))) {
-						$content .= sprintf($template, $extObj->main());
-					}
-					
-					$content .= $doc->endPage();
-					
-					echo $content;
-					return;
+					$controller = $defaultController;
+					$action = 'extObj';
 				}
 			}
 		}
@@ -174,6 +131,11 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		
 		$i = 1;
 		foreach ($config['controllerActions'] as $controller => $actions) {
+				// Add an "extObj" action for the default controller to handle external
+				// SCbase modules which add function menu entries
+			if ($i == 1) {
+				$actions .= ',extObj'; 
+			}
 			$extbaseConfiguration['switchableControllerActions.'][$i++ . '.'] = array(
 				'controller' => $controller,
 				'actions' => $actions,

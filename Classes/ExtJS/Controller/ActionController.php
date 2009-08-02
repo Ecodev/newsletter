@@ -405,7 +405,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * Override this method to set the menu entries you need for your own module (see setMenu()).
 	 */
 	protected function menuConfig() {
-		
 	}
 	
 	/**
@@ -545,6 +544,36 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		}
 		
 		$this->view = $this->masterView;
+	}
+	
+	/**
+	 * Special action used to handle external SCbase actions registered in the function menu.
+	 *
+	 * @return string The rendered view
+	 */
+	public function extObjAction() {
+		$this->initializeExtJSAction();
+		
+		$pluginName = $this->settings['pluginName'];
+		$set = t3lib_div::_GET('SET');
+		$legacyAction = $set['function'];
+		$functions = $GLOBALS['TBE_MODULES_EXT'][$pluginName]['MOD_MENU']['function'];
+		
+		$this->scBase->extClassConf = $functions[$legacyAction];
+		
+		require_once($this->scBase->extClassConf['path']);
+		$this->scBase->checkExtObj();
+		
+		$this->scBase->extObjContent();
+		
+		$this->addJsInlineCode('
+			var mod1 = new Ext.Panel({
+				html: "' . str_replace('"', '\\"', $this->scBase->content) . '",
+				border: false
+			});
+		');
+		
+		$this->renderExtJSModule('mod1');
 	}
 	
 }
