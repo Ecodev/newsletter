@@ -91,15 +91,21 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 *
 	 * @param string $class
 	 * @param object $obj
+	 * @param array $columns array of columns/properties to be returned from the class $class 
 	 * @return string
 	 */
-	public static function getJSONReader($class, $obj = NULL) {
+	public static function getJSONReader($class, $obj = NULL, $columns = array()) {
 		$jsonReader = 'new Ext.data.JsonReader({
 			fields: [ %s ],
 			root: "results",
 			totalProperty: "totalItems",
 			id: "uid"
 		})';
+		
+			// uid should always be returned
+		if (count($columns) > 0 && !in_array('uid', $columns)) {
+			$columns[] = 'uid';
+		}
 		
 		$fields = array();
 		
@@ -115,6 +121,11 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		$properties = $rc->getProperties();
 		
 		foreach ($properties as $property) {
+			if (count($columns) > 0 && !in_array($property->name, $columns)) {
+					// Current property should not be returned
+				continue;
+			}
+			
 			$propertyGetterName = 'get' . ucfirst($property->name);
 			
 			if (method_exists($object, $propertyGetterName)) {
