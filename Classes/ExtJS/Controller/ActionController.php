@@ -137,6 +137,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->doc = t3lib_div::makeInstance('template'); 
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 			
+			$this->scBase->doc = $this->doc;
 			$this->pageIncludes = $this->doc->pageIncludes;
 			
 				// Prepare menu and merge other extension module functions
@@ -568,7 +569,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
-				html: "' . str_replace('"', '\\"', $this->scBase->content) . '",
+				html: "' . str_replace(array('"', "\n"), array('\\"', '\\n'), $this->scBase->content) . '",
+				preventBodyReset: true,
 				border: false
 			});
 		');
