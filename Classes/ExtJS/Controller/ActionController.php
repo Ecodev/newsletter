@@ -138,6 +138,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 			
 			$this->pageIncludes = $this->doc->pageIncludes;
+			
+				// Prepare menu and merge other extension module functions
+			$this->menuConfig();
+			$this->menu = $this->scBase->mergeExternalItems($this->settings['pluginName'], 'function', $this->menu);
 		}
 		
 		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
@@ -393,6 +397,18 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	// ----------------------------------------------------------------
 	
 	/**
+	 * Initializes the internal menu array setting and unsetting items based on various conditions. It also merges in external menu
+	 * items from the global array TBE_MODULES_EXT (see mergeExternalItems())
+	 * Then MOD_SETTINGS array is cleaned up (see t3lib_BEfunc::getModuleData()) so it contains only valid values. It's also updated
+	 * with any SET[] values submitted. 
+	 * 
+	 * Override this method to set the menu entries you need for your own module (see setMenu()).
+	 */
+	protected function menuConfig() {
+		
+	}
+	
+	/**
 	 * Sets the menu of the backend module.
 	 *
 	 * @param array $menu
@@ -400,9 +416,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 */
 	protected function setMenu(array $menu) {
 		$this->menu = $menu;
-		
-			// Merge other extension module functions
-		$this->menu = $this->scBase->mergeExternalItems($this->settings['pluginName'], 'function', $this->menu);
 	}
 	
 	/**
