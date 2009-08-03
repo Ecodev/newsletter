@@ -160,7 +160,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
 		}
 		
-		$this->pageIncludes->moveJsFromHeaderToFooter = $moveJsFromHeaderToFooter;
+		$this->pageIncludes->setMoveJsFromHeaderToFooter();
 		
 		if ($useExtCore) {
 				// Load ExtCore library
@@ -309,7 +309,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		$block .= $this->extJSNamespace . '.plugin.init();';   
 		
 			// Start code when ExtJS is ready 
-		$this->pageIncludes->enableExtJSQuickTips = $this->enableExtJSQuickTips; 
+		if ($this->enableExtJSQuickTips) {
+			$this->pageIncludes->enableExtJSQuickTips();
+		}
 		$this->pageIncludes->addJsHandlerCode($block, t3lib_pageIncludes::JSHANDLER_EXTONREADY);
 		
 		if (count($this->cssInline)) {
