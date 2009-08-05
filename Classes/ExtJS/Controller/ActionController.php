@@ -160,7 +160,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
 		}
 		
-		$this->pageIncludes->setMoveJsFromHeaderToFooter();
+		if ($moveJsFromHeaderToFooter) {
+			$this->pageIncludes->setMoveJsFromHeaderToFooter();
+		}
 		
 		if ($useExtCore) {
 				// Load ExtCore library
