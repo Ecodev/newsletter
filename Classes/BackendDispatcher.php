@@ -60,6 +60,22 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			}
 		}
 		
+			// Resolve the controller/action to use
+		list($controller, $action) = $this->resolveControllerAction($module);
+		
+		echo $this->transfer($module, $controller, $action);
+	}
+	
+	/**
+	 * Resolves the controller and action to use for current call.
+	 * This takes into account any function menu that has being called. 
+	 *
+	 * @param string $module
+	 * @return array Array containing the controller and the action to use for current call
+	 */
+	private function resolveControllerAction($module) {
+		$config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
+		
 			// Extract dispatcher settings from request
 		$argumentPrefix = strtolower('tx_' . $config['extensionName'] . '_' . $config['name']);
 		$dispatcherParams = t3lib_div::_GP($argumentPrefix);
@@ -88,9 +104,11 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		}
 		
 			// Allow function dispatcher to override controller/action
-		if ($set = t3lib_div::_GP('SET')) {
+		$set = t3lib_div::_GP('SET');
+		if ($set) {
 			$currentFunction = $set['function'];
 			
+			$matches = array();
 			if (preg_match('/^(.*)->(.*)$/', $currentFunction, $matches)) {
 				$controller = $matches[1];
 				$action = $matches[2];
@@ -104,7 +122,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			}
 		}
 		
-		echo $this->transfer($module, $controller, $action);
+		return array($controller, $action);
 	}
 	
 	/**
@@ -116,7 +134,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 	 * @param string $action
 	 * @return string The module rendered view
 	 */
-	public function transfer($module, $controller, $action) {
+	private function transfer($module, $controller, $action) {
 		 $config = $GLOBALS['TBE_EXTBASE_MODULES'][$module];
 		 
 		 $extbaseConfiguration = array(
