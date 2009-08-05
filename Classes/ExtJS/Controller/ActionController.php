@@ -127,7 +127,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$controllerContext = $this->buildControllerContext();
 			$this->masterView->setControllerContext($controllerContext);
 			$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs') . 'Resources/Private/Templates/module.html');
-			$this->masterView->injectSettings($this->settings);
 			
 			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
 			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
@@ -484,7 +483,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				');
 				
 					// Select current function
-				if ($set = t3lib_div::_GET('SET')) {
+				if ($set = t3lib_div::_GP('SET')) {
 					$currentFunction = $this->menu[$set['function']];
 				}
 				if (!$currentFunction) {
@@ -560,7 +559,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		$this->initializeExtJSAction();
 		
 		$pluginName = $this->settings['pluginName'];
-		$set = t3lib_div::_GET('SET');
+		$set = t3lib_div::_GP('SET');
 		$legacyAction = $set['function'];
 		$functions = $GLOBALS['TBE_MODULES_EXT'][$pluginName]['MOD_MENU']['function'];
 		

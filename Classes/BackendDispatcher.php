@@ -88,7 +88,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 		}
 		
 			// Allow function dispatcher to override controller/action
-		if ($set = t3lib_div::_GET('SET')) {
+		if ($set = t3lib_div::_GP('SET')) {
 			$currentFunction = $set['function'];
 			
 			if (preg_match('/^(.*)->(.*)$/', $currentFunction, $matches)) {
