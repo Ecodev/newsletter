@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Utilities to manage the modules of an extension.
+ * Utility to manage the modules of an extension.
  *
  * @category    Extbase
  * @package     TYPO3
@@ -90,20 +90,22 @@ class Tx_MvcExtjs_Utility_Module {
 	}
 	
 	/**
-	* this is called from t3lib_loadModules::checkMod and it replaces old conf.php
-	* 
-	* @param string $key
-	* @param array $MCONF
-	* @param array $MLANG
-	*/
-	public function setModuleConfiguration($key, &$MCONF, &$MLANG) {
-		
+	 * This method is called from t3lib_loadModules::checkMod and it replaces old conf.php.
+	 * 
+	 * @param string $key	The module name
+	 * @param string $fullpath	Absolute path to module
+	 * @param array $MCONF	Reference to the array holding the configuration of the module
+	 * @param array $MLANG	Reference to the array holding the localized module labels
+	 * @return array Configuration of the module
+	 */
+	public function setModuleConfiguration($key, $fullpath, &$MCONF, &$MLANG) {
+		$path = preg_replace('/\/[^\/.]+\/\.\.\//', '/', $fullpath); // because 'path/../path' does not work
 		$config = $GLOBALS['TBE_EXTBASE_MODULES'][$key]['config'];
 		define('TYPO3_MOD_PATH', $config['extRelPath']);
 
-		$GLOBALS['BACK_PATH'] = '';  
-		
-		// Fill $MCONF
+		$GLOBALS['BACK_PATH'] = '';
+
+			// Fill $MCONF
 		$MCONF['name'] = $key;
 		$MCONF['access'] = $config['access'];
 		$MCONF['script'] = '_DISPATCH';
