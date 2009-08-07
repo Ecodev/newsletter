@@ -65,6 +65,10 @@ class Tx_MvcExtjs_Utility_Module {
 		} else {
 			$main = $main ? $main : $extensionName;
 		}
+		if ($sub) {
+				// Prevent hide of other extension's controller with same name
+			$sub = strtolower('tx' . $extensionName) . ucfirst($sub);
+		}
 		
 		if (!is_array($config) || count($config) == 0) {
 			$config['access'] = 'admin';
