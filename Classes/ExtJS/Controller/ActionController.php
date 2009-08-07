@@ -80,7 +80,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	/**
 	 * @var boolean
 	 */
-	protected $useExtCore = false;
+	protected $useExtCore = FALSE;
 	
 	// -- FE-only properties
 	
