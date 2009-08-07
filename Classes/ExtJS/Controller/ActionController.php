@@ -120,8 +120,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		if (TYPO3_MODE === 'FE') {
 			$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
 		} else { // TYPO3_MODE === 'BE'
-			$this->injectSettings(Tx_Extbase_Dispatcher::getSettings());
-			
+						
 				// Prepare the view
 			$this->masterView = t3lib_div::makeInstance('Tx_Fluid_View_TemplateView');
 			$controllerContext = $this->buildControllerContext();
@@ -129,7 +128,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs') . 'Resources/Private/Templates/module.html');
 			
 			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
-			$this->scBase->MCONF['name'] = $this->settings['pluginName'];
+			$this->scBase->MCONF['name'] = $this->request->getPluginName();
 			$this->scBase->init();
 			
 				// Prepare template class
@@ -141,7 +140,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			
 				// Prepare menu and merge other extension module functions
 			$this->menuConfig();
-			$this->menu = $this->scBase->mergeExternalItems($this->settings['pluginName'], 'function', $this->menu);
+			$this->menu = $this->scBase->mergeExternalItems($this->request->getPluginName(), 'function', $this->menu);
 		}
 		
 		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
@@ -267,7 +266,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
 		} else { // TYPO3_MODE === 'BE'
 			if ($pluginName === NULL) {
-				$pluginName = $this->settings['pluginName'];
+				$pluginName = $this->request->getPluginName();
 			}
 			$additionalParams['M'] = 'TX_' . $pluginName;
 			
@@ -434,7 +433,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		}
 		
 		if ($this->doc) {
-			$title = $this->settings['pluginName'];
+			$title = $this->request->getPluginName();
 			
 				// Store current controller/action url
 			$this->settingsExtJS->assign('selfUrl', $this->UriFor());
@@ -558,7 +557,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	public function extObjAction() {
 		$this->initializeExtJSAction();
 		
-		$pluginName = $this->settings['pluginName'];
+		$pluginName = $this->request->getPluginName();
 		$set = t3lib_div::_GP('SET');
 		$legacyAction = $set['function'];
 		$functions = $GLOBALS['TBE_MODULES_EXT'][$pluginName]['MOD_MENU']['function'];
