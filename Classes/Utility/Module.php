@@ -154,7 +154,7 @@ class Tx_MvcExtjs_Utility_Module {
 		}
 		
 			// Fill $modconf
-		$modconf['script'] = 'mod.php?M=TX_' . rawurlencode($key);
+		$modconf['script'] = 'mod.php?M=Tx_' . rawurlencode($key);
 		$modconf['name'] = $key;
 					
 				// Default tab setting

@@ -27,7 +27,7 @@ Index: t3lib/class.t3lib_loadmodules.php
  				if ($MCONF['script']==='_DISPATCH')	{
 -					$modconf['script'] = 'mod.php?M='.rawurlencode($name);
 +					if ($MCONF['extbase']) {
-+						$modconf['script'] = 'mod.php?M=TX_' . rawurlencode($name);
++						$modconf['script'] = 'mod.php?M=Tx_' . rawurlencode($name);
 +					} else {
 +						$modconf['script'] = 'mod.php?M=' . rawurlencode($name);	
 +					}
@@ -47,7 +47,7 @@ Index: typo3/mod.php
 -	require($temp_path.'conf.php');
 -	$BACK_PATH='';
 -	require($temp_path.'index.php');
-+if (substr($temp_M, 0, 3) === 'TX_') {
++if (substr($temp_M, 0, 3) === 'Tx_') {
 +	$dispatcher = t3lib_div::makeInstance('Tx_MvcExtjs_BackendDispatcher');
 +	$dispatcher->callModule(substr($temp_M, 3));
  } else {
