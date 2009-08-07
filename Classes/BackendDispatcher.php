@@ -51,7 +51,7 @@ class Tx_MvcExtjs_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			// Check permissions and exit if the user has no permission for entry
 		$GLOBALS['BE_USER']->modAccess($config, TRUE);
 		if (t3lib_div::_GP('id')) {
-				// check page access
+				// Check page access
 			$id = t3lib_div::_GP('id');
 			$permClause = $GLOBALS['BE_USER']->getPagePermsClause(TRUE);
 			$access = is_array(t3lib_BEfunc::readPageAccess($id, $permClause));
