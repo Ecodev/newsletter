@@ -268,7 +268,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			if ($pluginName === NULL) {
 				$pluginName = $this->request->getPluginName();
 			}
-			$additionalParams['M'] = 'TX_' . $pluginName;
+			$additionalParams['M'] = 'Tx_' . $pluginName;
 			
 			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
 		}
