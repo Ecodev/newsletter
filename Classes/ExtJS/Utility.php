@@ -138,7 +138,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 			}
 		}
 		
-		return sprintf($jsonReader, join(',', $fields));
+		return sprintf($jsonReader, implode(',', $fields));
 	}
 	
 	/**
