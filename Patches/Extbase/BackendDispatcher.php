@@ -29,7 +29,7 @@
  *
  * @package Extbase
  * @subpackage extbase
- * @version $Id:$
+ * @version $Id$
  */
 class Tx_Extbase_BackendDispatcher extends Tx_Extbase_Dispatcher {
 
@@ -212,10 +212,10 @@ class Tx_Extbase_BackendDispatcher extends Tx_Extbase_Dispatcher {
 			'userFunc' => 'tx_extbase_dispatcher->dispatch',
 			'pluginName' => $module,
 			'extensionName' => $config['extensionName'],
-			'enableAutomaticCacheClearing' => 1,
 			'controller' => $controller,
 			'action' => $action,
-			'switchableControllerActions.' => array()
+			'switchableControllerActions.' => array(),
+			//'persistence' => '< plugin.tx_' . strtolower($config['extensionName']) . '.persistence',
 		);
 		
 		$i = 1;
