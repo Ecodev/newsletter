@@ -300,7 +300,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->extJSNamespace . '.plugin = function() {
 				return {
 					init: function() {
-						' . join(chr(10), $this->jsInline) . '
+						' . implode(chr(10), $this->jsInline) . '
 					}
 				}
 			}();
@@ -392,7 +392,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		for ($i = 1; $i < count($parts); $i++) {
 			$parts[$i] = ucfirst($parts[$i]);
 		}
-		return join ('', $parts);
+		return implode('', $parts);
 	}
 	
 	// ----------------------------------------------------------------
@@ -469,7 +469,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 						store: new Ext.data.ArrayStore({
 							autoDestroy: true,
 							fields: ["key", "title"],
-							data: [' . join(',', $menuEntries) . ']
+							data: [' . implode(',', $menuEntries) . ']
 						}),
 						displayField: "title",
 						readOnly: true,
