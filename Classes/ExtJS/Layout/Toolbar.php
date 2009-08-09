@@ -64,7 +64,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	/**
 	 * @var array
 	 */
-	protected $buttonCallbacks;
+	protected $buttons;
 	
 	/**
 	 * Default constructor.
@@ -79,10 +79,22 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		$this->pluginName = $pluginName;
 		$this->scBase = $scBase;
 		
-		$this->buttonCallbacks = array(
-			'VIEW' => '',
-			'EDIT' => '',
-			'SAVE' => '',
+		$this->buttons = array(
+			'VIEW' => array(
+				'callback' => '',
+				'icon'     => 'sysext/t3skin/icons/gfx/zoom.gif',
+				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.view'),
+			),
+			'EDIT' => array(
+				'callback' => '',
+				'icon'     => 'sysext/t3skin/icons/gfx/edit2.gif',
+				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.edit'),
+			),
+			'SAVE' => array(
+				'callback' => '',
+				'icon'     => 'sysext/t3skin/icons/gfx/savedok.gif',
+				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.save'),
+			),
 		);
 	}
 	
@@ -100,30 +112,42 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * Sets a callback function when button 'VIEW' is clicked.
 	 *
 	 * @param string $callback
+	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonViewCallback($callback) {
-		$this->buttonCallbacks['VIEW'] = $callback;
+	public function setButtonViewCallback($callback, $tooltip = '') {
+		$this->buttons['VIEW']['callback'] = $callback;
+		if ($tooltip) {
+			$this->buttons['VIEW']['tooltip'] = $tooltip;
+		}
 	}
 	
 	/**
 	 * Sets a callback function when button 'EDIT' is clicked.
 	 *
 	 * @param string $callback
+	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonEditCallback($callback) {
-		$this->buttonCallbacks['EDIT'] = $callback;
+	public function setButtonEditCallback($callback, $tooltip = '') {
+		$this->buttons['EDIT']['callback'] = $callback;
+		if ($tooltip) {
+			$this->buttons['EDIT']['tooltip'] = $tooltip;
+		}
 	}
 	
 	/**
 	 * Sets a callback function when button 'SAVE' is clicked.
 	 *
 	 * @param string $callback
+	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonSaveCallback($callback) {
-		$this->buttonCallbacks['SAVE'] = $callback;
+	public function setButtonSaveCallback($callback, $tooltip = '') {
+		$this->buttons['SAVE']['callback'] = $callback;
+		if ($tooltip) {
+			$this->buttons['SAVE']['tooltip'] = $tooltip;
+		}
 	}
 	
 	/**
@@ -209,20 +233,8 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	protected function prepareButtons() {
 		$addSeparator = count($this->toolbarItems) > 0;
 		
-		foreach ($this->buttonCallbacks as $type => $callback) {
-			if ($callback) {
-				switch ($type) {
-					case 'VIEW':
-						$icon = 'sysext/t3skin/icons/gfx/zoom.gif';
-						break;
-					case 'EDIT':
-						$icon = 'sysext/t3skin/icons/gfx/edit2.gif';
-						break;
-					case 'SAVE':
-						$icon = 'sysext/t3skin/icons/gfx/savedok.gif';
-						break;
-				}
-				
+		foreach ($this->buttons as $info) {
+			if ($info['callback']) {
 				if ($addSeparator) {
 					$this->toolbarItems[] = '
 						{
@@ -236,8 +248,10 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 					{
 						xtype: "tbbutton",
 						cls: "x-btn-icon",
-						icon: "'. $icon . '",
-						handler: function() { ' . $callback . ' }
+						icon: "'. $info['icon'] . '",
+						tooltip: "' . $info['tooltip'] . '",
+						tooltipType: "title",
+						handler: function() { ' . $info['callback'] . ' }
 					}
 				';
 			}
