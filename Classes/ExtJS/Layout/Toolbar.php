@@ -67,6 +67,11 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	protected $buttons;
 	
 	/**
+	 * @var array
+	 */
+	protected $userItems = array();
+	
+	/**
 	 * Default constructor.
 	 *
 	 * @param Tx_MvcExtjs_ExtJS_Controller_ActionController $controller
@@ -84,16 +89,19 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 				'callback' => '',
 				'icon'     => 'sysext/t3skin/icons/gfx/zoom.gif',
 				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.view'),
+				'text'     => '',
 			),
 			'EDIT' => array(
 				'callback' => '',
 				'icon'     => 'sysext/t3skin/icons/gfx/edit2.gif',
 				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.edit'),
+				'text'     => '',
 			),
 			'SAVE' => array(
 				'callback' => '',
 				'icon'     => 'sysext/t3skin/icons/gfx/savedok.gif',
 				'tooltip'  => $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:cm.save'),
+				'text'     => '',
 			),
 		);
 	}
@@ -115,11 +123,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonViewCallback($callback, $tooltip = '') {
+	public function setButtonViewCallback($callback, $tooltip = '', $text = '') {
 		$this->buttons['VIEW']['callback'] = $callback;
 		if ($tooltip) {
 			$this->buttons['VIEW']['tooltip'] = $tooltip;
 		}
+		$this->buttons['VIEW']['text'] = $text;
 	}
 	
 	/**
@@ -129,11 +138,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonEditCallback($callback, $tooltip = '') {
+	public function setButtonEditCallback($callback, $tooltip = '', $text = '') {
 		$this->buttons['EDIT']['callback'] = $callback;
 		if ($tooltip) {
 			$this->buttons['EDIT']['tooltip'] = $tooltip;
 		}
+		$this->buttons['EDIT']['text'] = $text;
 	}
 	
 	/**
@@ -143,11 +153,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $tooltip
 	 * @return void
 	 */
-	public function setButtonSaveCallback($callback, $tooltip = '') {
+	public function setButtonSaveCallback($callback, $tooltip = '', $text = '') {
 		$this->buttons['SAVE']['callback'] = $callback;
 		if ($tooltip) {
 			$this->buttons['SAVE']['tooltip'] = $tooltip;
 		}
+		$this->buttons['SAVE']['text'] = $text;
 	}
 	
 	/**
@@ -158,21 +169,45 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $tooltip
 	 * @return void
 	 */
-	public function addButton($icon, $callback, $tooltip = '') {
+	public function addButton($icon, $callback, $tooltip = '', $text = '') {
 		if (substr($icon, 0, 4) === 'EXT:') {
 			list($extKey, $local) = explode('/', substr($icon, 4), 2);
 			$icon = t3lib_extMgm::extRelPath($extKey) . $local;
 		}
-		
 		if (substr($tooltip, 0, 4) === 'LLL:') {
 			$tooltip = $GLOBALS['LANG']->sL($tooltip);
 		}
+		if (substr($text, 0, 4) === 'LLL:') {
+			$text = $GLOBALS['LANG']->sL($text);
+		}
 		
-		$this->buttons[] = array(
+		$key = 'USER_' . count($this->buttons);
+		$this->buttons[$key] = array(
 			'icon'     => $icon,
 			'callback' => $callback,
 			'tooltip'  => $tooltip,
+			'text'     => $text,
 		);
+		$this->userItems[] = $key;
+	}
+	
+	/**
+	 * Adds a separator.
+	 *
+	 * @return void
+	 */
+	public function addSeparator() {
+		$this->addExtJSItem('{ xtype: "tbspacer" }');
+	}
+	
+	/**
+	 * Adds an arbitrary ExtJS toolbar item.
+	 *
+	 * @param string $item The ExtJS definition
+	 * @return void
+	 */
+	public function addExtJSItem($item) {
+		$this->userItems[] = $item;
 	}
 	
 	/**
@@ -183,7 +218,18 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 */
 	public function prepareToolbarRendering($selfUrl) {
 		$this->prepareFunctionMenu($selfUrl);
+		
+		if (count($this->toolbarItems) > 0) {
+			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
+		}
+		
 		$this->prepareButtons();
+		
+		if (count($this->toolbarItems) > 0) {
+			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
+		}
+		
+		$this->prepareUserContent();
 	}
 	
 	/**
@@ -256,27 +302,57 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @return void
 	 */
 	protected function prepareButtons() {
-		$addSeparator = count($this->toolbarItems) > 0;
-		
-		foreach ($this->buttons as $info) {
-			if ($info['callback']) {
-				if ($addSeparator) {
-					$this->toolbarItems[] = '
-						{
-							xtype: "tbspacer"
-						}
-					';
-					$addSeparator = false;
-				}
-				
+		foreach ($this->buttons as $key => $button) {
+			if (substr($key, 0, 5) !== 'USER_') {
+				$this->appendButton($button);
+			}
+		}
+	}
+	
+	/**
+	 * Prepare user-defined items
+	 *
+	 * @return void
+	 */
+	protected function prepareUserContent() {
+		foreach ($this->userItems as $item) {
+			if (substr($item, 0, 5) === 'USER_') {
+				$this->appendButton($this->buttons[$item]);
+			} else {
+				$this->toolbarItems[] = $item;
+			}
+		}
+	}
+	
+	/**
+	 * Appends a button to the toolbar.
+	 *
+	 * @param array $button
+	 * @return void
+	 */
+	protected function appendButton($button) {
+		if ($button['callback']) {
+			if ($button['text']) {
+				$this->toolbarItems[] = '
+					{
+						xtype: "tbbutton",
+						cls: "x-btn-text-icon",
+						icon: "'. $button['icon'] . '",
+						text: "' . str_replace('"', '\\"', $button['text']) . '",
+						tooltip: "' . str_replace('"', '\\"', $button['tooltip']) . '",
+						tooltipType: "title",
+						handler: function() { ' . $button['callback'] . ' }
+					}
+				';
+			} else {
 				$this->toolbarItems[] = '
 					{
 						xtype: "tbbutton",
 						cls: "x-btn-icon",
-						icon: "'. $info['icon'] . '",
-						tooltip: "' . $info['tooltip'] . '",
+						icon: "'. $button['icon'] . '",
+						tooltip: "' . str_replace('"', '\\"', $button['tooltip']) . '",
 						tooltipType: "title",
-						handler: function() { ' . $info['callback'] . ' }
+						handler: function() { ' . $button['callback'] . ' }
 					}
 				';
 			}
