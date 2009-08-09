@@ -151,6 +151,31 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	}
 	
 	/**
+	 * Adds a button to the toolbar.
+	 *
+	 * @param string $icon
+	 * @param string $callback
+	 * @param string $tooltip
+	 * @return void
+	 */
+	public function addButton($icon, $callback, $tooltip = '') {
+		if (substr($icon, 0, 4) === 'EXT:') {
+			list($extKey, $local) = explode('/', substr($icon, 4), 2);
+			$icon = t3lib_extMgm::extRelPath($extKey) . $local;
+		}
+		
+		if (substr($tooltip, 0, 4) === 'LLL:') {
+			$tooltip = $GLOBALS['LANG']->sL($tooltip);
+		}
+		
+		$this->buttons[] = array(
+			'icon'     => $icon,
+			'callback' => $callback,
+			'tooltip'  => $tooltip,
+		);
+	}
+	
+	/**
 	 * Initializes all ExtJS elements that will be used when integrating the toolbar into a panel items collection.
 	 *
 	 * @param string $selfUrl An ExtJS variable containing module's self URL (not the URL itself!)
