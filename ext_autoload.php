@@ -5,6 +5,7 @@
 $extensionClassesPath = t3lib_extMgm::extPath('mvc_extjs') . 'Classes/';
 return array(
 	'tx_mvcextjs_backenddispatcher' => $extensionClassesPath . 'BackendDispatcher.php',
+	'tx_mvcextjs_extjs_layout_toolbar' => $extensionClassesPath . 'ExtJS/Layout/Toolbar.php',
 	'tx_mvcextjs_extjs_settingsservice' => $extensionClassesPath . 'ExtJS/SettingsService.php',
 	'tx_mvcextjs_extjs_utility' => $extensionClassesPath . 'ExtJS/Utility.php',
 	'tx_mvcextjs_extjs_controller_actioncontroller' => $extensionClassesPath . 'ExtJS/Controller/ActionController.php',

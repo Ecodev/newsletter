@@ -78,6 +78,11 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	protected $settingsExtJS;
 	
 	/**
+	 * @var Tx_MvcExtjs_ExtJS_Layout_Toolbar
+	 */
+	protected $toolbar;
+	
+	/**
 	 * @var boolean
 	 */
 	protected $useExtCore = FALSE;
@@ -97,11 +102,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	private $masterView;
 	
 	/**
-	 * @var array
-	 */
-	private $menu = array();
-	
-	/**
 	 * @var template
 	 */
 	private $doc;
@@ -114,7 +114,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	/**
 	 * Initializes the action.
 	 * 
-	 * Beware: make sure to call parent::initializeAction if you need to do something in your child class 
+	 * Beware: make sure to call parent::initializeAction if you need to do something in your child class
+	 * 
+	 * @return void 
 	 */
 	protected function initializeAction() {
 		if (TYPO3_MODE === 'FE') {
@@ -139,8 +141,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->pageIncludes = $this->doc->pageIncludes;
 			
 				// Prepare menu and merge other extension module functions
+			$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
 			$this->menuConfig();
-			$this->menu = $this->scBase->mergeExternalItems($this->request->getPluginName(), 'function', $this->menu);
 		}
 		
 		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
@@ -148,7 +150,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	 * Should be called in an action method, before doing anything else.
+	 * USAGE: Should be called in an action method, before doing anything else.
+	 * 
+	 * @return void
 	 */
 	protected function initializeExtJSAction($useExtCore = FALSE, $moveJsFromHeaderToFooter = FALSE) {
 		$this->useExtCore = $useExtCore;
@@ -179,11 +183,12 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	 * Adds JS inline code.
+	 * Adds JavaScript inline code.
 	 * 
-	 * @var string $block
+	 * @param string $block
+	 * @return void
 	 */
-	protected function addCssInlineBlock($block) {
+	public function addCssInlineBlock($block) {
 		$this->cssInline[] = $block;
 	}
 	
@@ -195,9 +200,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $type
 	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
-	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
+	* @return void	
 	*/
-	protected function addCssFile($cssFile, $rel = 'stylesheet', $media = 'screen', $title = '', $compressed = FALSE, $forceOnTop = FALSE) {
+	public function addCssFile($cssFile, $rel = 'stylesheet', $media = 'screen', $title = '', $compressed = FALSE, $forceOnTop = FALSE) {
 		$cssFile = 'Resources/Public/CSS/' . $cssFile;
 		
 		if (!@is_file($this->extPath . $cssFile)) {
@@ -210,9 +216,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	/**
 	 * Adds JS inline code.
 	 * 
-	 * @var string $block
+	 * @param string $block
+	 * @return void
 	 */
-	protected function addJsInlineCode($block) {
+	public function addJsInlineCode($block) {
 		$this->jsInline[] = $block;
 	}
 	
@@ -224,9 +231,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $type
 	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
-	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
+	* @return void	
 	*/
-	protected function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
+	public function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
 		if (!@is_file($this->extPath . $jsFile)) {
@@ -244,9 +252,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $type
 	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
-	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block	
+	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
+	* @return void	
 	*/
-	protected function addJsFile($file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
+	public function addJsFile($file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
 		if (!@is_file($this->extPath . $jsFile)) {
@@ -275,10 +284,11 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	 * Outputs JS code to the page
+	 * Outputs JS code to the page.
 	 * 
 	 * @param boolean $compressed
 	 * @param boolean $forceOnTop
+	 * @return void
 	 */
 	protected function outputJsCode($compressed = FALSE, $forceOnTop = FALSE) {
 		$labels = $this->getExtJSLabels();
@@ -385,6 +395,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * Returns a key to be used in ExtJS.
 	 * 
 	 * @param string $key The key as found in a TYPO3 XML file (locallang.xml, ...)
+	 * @return string
 	 */
 	private function getExtJSKey($xmlKey) {
 		$parts = explode('.', $xmlKey);
@@ -405,19 +416,11 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * Then MOD_SETTINGS array is cleaned up (see t3lib_BEfunc::getModuleData()) so it contains only valid values. It's also updated
 	 * with any SET[] values submitted. 
 	 * 
-	 * Override this method to set the menu entries you need for your own module (see setMenu()).
-	 */
-	protected function menuConfig() {
-	}
-	
-	/**
-	 * Sets the menu of the backend module.
-	 *
-	 * @param array $menu
+	 * Override this method to set the menu entries you need for your own module (see Tx_Mvcextjs_ExtJS_Layout_Toolbar::setFunctionMenu()).
+	 * 
 	 * @return void
 	 */
-	protected function setMenu(array $menu) {
-		$this->menu = $menu;
+	protected function menuConfig() {
 	}
 	
 	/**
@@ -454,47 +457,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				$shortcut = '';
 			}
 			
-			if (count($this->menu)) {
-			$menuEntries = array();
-				foreach ($this->menu as $id => $title) {
-					$menuEntry = json_encode(array($id => $title));
-					$menuEntry = preg_replace('/^{(.*)":"(.*)}/', '[\1","\2]', $menuEntry);
-					$menuEntries[] = $menuEntry;
-				}
-				
-				$this->addJsInlineCode('
-					var funcMenu = new Ext.form.ComboBox({
-						triggerAction: "all",
-						mode: "local",
-						store: new Ext.data.ArrayStore({
-							autoDestroy: true,
-							fields: ["key", "title"],
-							data: [' . implode(',', $menuEntries) . ']
-						}),
-						displayField: "title",
-						readOnly: true,
-						listeners:{
-							select:function(combo, record, index) {
-								jumpToUrl(' . $this->settingsExtJS->getExtJS('selfUrl') . ' + "&SET[function]=" + record.data.key);
-							}
-						}
-					});
-				');
-				
-					// Select current function
-				if ($set = t3lib_div::_GP('SET')) {
-					$currentFunction = $this->menu[$set['function']];
-				}
-				if (!$currentFunction) {
-					$keys = array_keys($this->menu);
-					$currentFunction = $this->menu[$keys[0]];
-				}
-				
-				$this->addJsInlineCode('
-					funcMenu.setValue("' . str_replace('"', '\\"', $currentFunction) . '");
-				');
-			}
-						
+				// Render the function menu (prepare it)
+			$funcMenuElement = $this->toolbar->renderFunctionMenu($this->settingsExtJS->getExtJS('selfUrl'));
+			
 			$this->addJsInlineCode('
 				var viewport = new Ext.Viewport({
 					layout: "border",
@@ -508,13 +473,13 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 						}
 			');
 			
-			if (count($this->menu)) {
-				$this->addJsInlineCode('
-						, funcMenu
-				');
+			if ($funcMenuElement) {
+					// Insert the function menu in the module layout
+				$this->addJsInlineCode(',' . $funcMenuElement);
 			}
 			
 			if ($shortcut) {
+				$matches = array();
 				preg_match('/(top.ShortcutManager.createShortcut.*;)return false;/', $shortcut, $matches);
 				$this->addJsInlineCode('
 						,{
