@@ -57,6 +57,16 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	protected $functionMenu = array();
 	
 	/**
+	 * @var array
+	 */
+	protected $toolbarItems = array();
+	
+	/**
+	 * @var array
+	 */
+	protected $buttonCallbacks;
+	
+	/**
 	 * Default constructor.
 	 *
 	 * @param Tx_MvcExtjs_ExtJS_Controller_ActionController $controller
@@ -68,6 +78,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		$this->controller = $controller;
 		$this->pluginName = $pluginName;
 		$this->scBase = $scBase;
+		
+		$this->buttonCallbacks = array(
+			'VIEW' => '',
+			'EDIT' => '',
+			'SAVE' => '',
+		);
 	}
 	
 	/**
@@ -81,15 +97,65 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	}
 	
 	/**
-	 * Renders the function menu as an ExtJS combobox.
+	 * Sets a callback function when button 'VIEW' is clicked.
 	 *
-	 * @param string $selfUrl An ExtJS variable containing self URL (not the URL itself!)
-	 * @return string Variable name holding the function menu 
+	 * @param string $callback
+	 * @return void
 	 */
-	public function renderFunctionMenu($selfUrl) {
+	public function setButtonViewCallback($callback) {
+		$this->buttonCallbacks['VIEW'] = $callback;
+	}
+	
+	/**
+	 * Sets a callback function when button 'EDIT' is clicked.
+	 *
+	 * @param string $callback
+	 * @return void
+	 */
+	public function setButtonEditCallback($callback) {
+		$this->buttonCallbacks['EDIT'] = $callback;
+	}
+	
+	/**
+	 * Sets a callback function when button 'SAVE' is clicked.
+	 *
+	 * @param string $callback
+	 * @return void
+	 */
+	public function setButtonSaveCallback($callback) {
+		$this->buttonCallbacks['SAVE'] = $callback;
+	}
+	
+	/**
+	 * Initializes all ExtJS elements that will be used when integrating the toolbar into a panel items collection.
+	 *
+	 * @param string $selfUrl An ExtJS variable containing module's self URL (not the URL itself!)
+	 * @return void
+	 */
+	public function prepareToolbarRendering($selfUrl) {
+		$this->prepareFunctionMenu($selfUrl);
+		$this->prepareButtons();
+	}
+	
+	/**
+	 * Return a comma-separated list of toolbar items.
+	 *
+	 * @return string
+	 */
+	public function getToolbarItemList() {
+		return implode(',', $this->toolbarItems);
+	}
+	
+	/**
+	 * Initializes the function menu combobox.
+	 *
+	 * @param string $selfUrl An ExtJS variable containing module's self URL (not the URL itself!)
+	 * @return void
+	 */
+	protected function prepareFunctionMenu($selfUrl) {
 		if (!count($this->functionMenu)) {
 				// Early return
-			return '';
+			return;
 		}
 		
 		$menuEntries = array();
@@ -132,7 +198,50 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			funcMenu.setValue("' . str_replace('"', '\\"', $currentFunction) . '");
 		');
 		
-		return 'funcMenu';
+		$this->toolbarItems[] = 'funcMenu';
+	}
+	
+	/**
+	 * Initializes the toolbar buttons.
+	 *
+	 * @return void
+	 */
+	protected function prepareButtons() {
+		$addSeparator = count($this->toolbarItems) > 0;
+		
+		foreach ($this->buttonCallbacks as $type => $callback) {
+			if ($callback) {
+				switch ($type) {
+					case 'VIEW':
+						$icon = 'sysext/t3skin/icons/gfx/zoom.gif';
+						break;
+					case 'EDIT':
+						$icon = 'sysext/t3skin/icons/gfx/edit2.gif';
+						break;
+					case 'SAVE':
+						$icon = 'sysext/t3skin/icons/gfx/savedok.gif';
+						break;
+				}
+				
+				if ($addSeparator) {
+					$this->toolbarItems[] = '
+						{
+							xtype: "tbspacer"
+						}
+					';
+					$addSeparator = false;
+				}
+				
+				$this->toolbarItems[] = '
+					{
+						xtype: "tbbutton",
+						cls: "x-btn-icon",
+						icon: "'. $icon . '",
+						handler: function() { ' . $callback . ' }
+					}
+				';
+			}
+		}
 	}
 	
 }

@@ -457,8 +457,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				$shortcut = '';
 			}
 			
-				// Render the function menu (prepare it)
-			$funcMenuElement = $this->toolbar->renderFunctionMenu($this->settingsExtJS->getExtJS('selfUrl'));
+				// Prepare the toolbar rendering by creating ExtJS toolbar items
+			$this->toolbar->prepareToolbarRendering($this->settingsExtJS->getExtJS('selfUrl'));
 			
 			$this->addJsInlineCode('
 				var viewport = new Ext.Viewport({
@@ -473,9 +473,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 						}
 			');
 			
-			if ($funcMenuElement) {
-					// Insert the function menu in the module layout
-				$this->addJsInlineCode(',' . $funcMenuElement);
+			$toolbarItems = $this->toolbar->getToolbarItemList();
+			if ($toolbarItems) {
+					// Insert the toolbar items in the module layout
+				$this->addJsInlineCode(',' . $toolbarItems);
 			}
 			
 			if ($shortcut) {
