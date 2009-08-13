@@ -90,9 +90,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	// -- FE-only properties
 	
 	/**
-	 * @var t3lib_pageIncludes
+	 * @var object
 	 */
-	protected $pageIncludes;
+	protected $pageRenderObject;
 	
 	// -- BE-only properties
 	
@@ -120,7 +120,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 */
 	protected function initializeAction() {
 		if (TYPO3_MODE === 'FE') {
-			$this->pageIncludes = $GLOBALS['TSFE']->pageIncludes;
+			$this->pageRenderObject = $GLOBALS['TSFE'];
+			$this->pageRenderObject->backPath = 'typo3/';
 		} else { // TYPO3_MODE === 'BE'
 						
 				// Prepare the view
@@ -138,7 +139,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 			
 			$this->scBase->doc = $this->doc;
-			$this->pageIncludes = $this->doc->pageIncludes;
+			$this->pageRenderObject = $this->doc;
 			
 				// Prepare menu and merge other extension module functions
 			$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
@@ -159,19 +160,19 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		if (TYPO3_MODE === 'FE' && !$useExtCore) {
 				// temporary fix for t3style		
-			$GLOBALS['TBE_STYLES']['extJS']['theme'] = t3lib_extMgm::extRelPath('t3skin') . 'extjs/xtheme-t3skin.css';	
+			$GLOBALS['TBE_STYLES']['extJS']['theme'] = '../typo3/sysext/t3skin/extjs/xtheme-t3skin.css';	
 		}
 		
 		if ($moveJsFromHeaderToFooter) {
-			$this->pageIncludes->setMoveJsFromHeaderToFooter();
+			$this->pageRenderObject->setMoveJsFromHeaderToFooter();
 		}
 		
 		if ($useExtCore) {
 				// Load ExtCore library
-			$this->pageIncludes->loadExtCore();		
+			$this->pageRenderObject->loadExtCore();		
 		} else {
 				// Load ExtJS libraries and stylesheets
-			$this->pageIncludes->loadExtJS();
+			$this->pageRenderObject->loadExtJS();
 		}
 		
 			// Namespace will be registered in ExtJS when calling method outputJsCode
@@ -198,7 +199,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -210,7 +211,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			die('File "' . $this->extPath . $cssFile . '" not found!');
 		}
 		
-		$this->pageIncludes->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
+		$this->pageRenderObject->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -229,19 +230,19 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
 	*/
-	public function addJsLibrary($name, $file, $type = 'text/javascript', $section = t3lib_pageIncludes::PART_HEADER, $compressed = TRUE, $forceOnTop = FALSE) {
+	public function addJsLibrary($name, $file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
 		if (!@is_file($this->extPath . $jsFile)) {
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageIncludes->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $section, $compressed, $forceOnTop);
+		$this->pageRenderObject->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -250,7 +251,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageIncludes::PART_HEADER (0) or t3lib_pageIncludes::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -262,7 +263,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageIncludes->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		$this->pageRenderObject->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -320,12 +321,12 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 			// Start code when ExtJS is ready 
 		if ($this->enableExtJSQuickTips) {
-			$this->pageIncludes->enableExtJSQuickTips();
+			$this->pageRenderObject->enableExtJSQuickTips();
 		}
-		$this->pageIncludes->addJsHandlerCode($block, t3lib_pageIncludes::JSHANDLER_EXTONREADY);
+		$this->pageRenderObject->addExtOnReadyCode($block);
 		
 		if (count($this->cssInline)) {
-			$this->pageIncludes->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
+			$this->pageRenderObject->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
 		}
 		
 	}
