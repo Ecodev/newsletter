@@ -275,6 +275,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		if (TYPO3_MODE === 'FE') {
 			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
 		} else { // TYPO3_MODE === 'BE'
+			if ($pageUid === NULL) {
+				$pageUid = 'mod.php';
+			}
 			if ($pluginName === NULL) {
 				$pluginName = $this->request->getPluginName();
 			}
@@ -440,7 +443,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$title = $this->request->getPluginName();
 			
 				// Store current controller/action url
-			$this->settingsExtJS->assign('selfUrl', $this->UriFor('mod.php'));
+			$this->settingsExtJS->assign('selfUrl', $this->UriFor());
 			
 			$this->doc->form = '';
 			$this->doc->JScode = '
