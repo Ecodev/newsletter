@@ -121,7 +121,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	protected function initializeAction() {
 		if (TYPO3_MODE === 'FE') {
 			$this->pageRenderObject = $GLOBALS['TSFE'];
-			$this->pageRenderObject->backPath = 'typo3/';
+			$this->pageRenderObject->backPath = TYPO3_mainDir;
 		} else { // TYPO3_MODE === 'BE'
 						
 				// Prepare the view
@@ -160,7 +160,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		if (TYPO3_MODE === 'FE' && !$useExtCore) {
 				// temporary fix for t3style		
-			$GLOBALS['TBE_STYLES']['extJS']['theme'] = '../typo3/sysext/t3skin/extjs/xtheme-t3skin.css';	
+			$GLOBALS['TBE_STYLES']['extJS']['theme'] = '../' . TYPO3_mainDir . 'sysext/t3skin/extjs/xtheme-t3skin.css';	
 		}
 		
 		if ($moveJsFromHeaderToFooter) {
@@ -440,7 +440,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$title = $this->request->getPluginName();
 			
 				// Store current controller/action url
-			$this->settingsExtJS->assign('selfUrl', $this->UriFor());
+			$this->settingsExtJS->assign('selfUrl', $this->UriFor('mod.php'));
 			
 			$this->doc->form = '';
 			$this->doc->JScode = '
