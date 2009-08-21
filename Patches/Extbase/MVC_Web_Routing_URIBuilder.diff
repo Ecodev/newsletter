@@ -1,16 +1,16 @@
 Index: Classes/MVC/Web/Routing/URIBuilder.php
 ===================================================================
---- Classes/MVC/Web/Routing/URIBuilder.php	(revision 1064)
+--- Classes/MVC/Web/Routing/URIBuilder.php	(revision 1123)
 +++ Classes/MVC/Web/Routing/URIBuilder.php	(working copy)
-@@ -152,8 +152,18 @@
+@@ -158,8 +158,18 @@
  		if ($linkAccessRestrictedPages) {
  			$typolinkConfiguration['linkAccessRestrictedPages'] = 1;
  		}
 -
--		return $this->contentObject->typoLink_URL($typolinkConfiguration);
+-		return ($absolute === TRUE ? $this->request->getBaseURI() : '') . $this->contentObject->typoLink_URL($typolinkConfiguration);
 +		
 +		if (TYPO3_MODE === 'FE') {
-+			return $this->contentObject->typoLink_URL($typolinkConfiguration);
++			return ($absolute === TRUE ? $this->request->getBaseURI() : '') . $this->contentObject->typoLink_URL($typolinkConfiguration);
 +		} else { // TYPO3_MODE === 'BE'
 +			$additionalParams = t3lib_div::trimExplode('&', $typolinkConfiguration['additionalParams'], TRUE);
 +			$parameters = array();
@@ -22,5 +22,6 @@ Index: Classes/MVC/Web/Routing/URIBuilder.php
 +		}
  	}
  }
- ?>
+-?>
 \ No newline at end of file
++?>
