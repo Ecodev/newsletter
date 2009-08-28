@@ -410,6 +410,18 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		return implode('', $parts);
 	}
 	
+	/**
+	 * Encodes a html snippet in order to include it in an ExtJS declaration.
+	 *  
+	 * @param $html
+	 * @return string
+	 */
+	protected function encodeInlineHtml($html) {
+		$html = str_replace(array('"', "\n"), array('\\"', '\\n'), $html);
+		
+		return '"' . $html . '"';
+	}
+	
 	// ----------------------------------------------------------------
 	// BACKEND-ONLY METHODS
 	// ----------------------------------------------------------------
@@ -454,7 +466,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 					}
 				</script>
 			';
-						
+			
 			if ($GLOBALS['BE_USER']->mayMakeShortcut()) {
 				$shortcut = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
 			} else {
@@ -463,6 +475,23 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			
 				// Prepare the toolbar rendering by creating ExtJS toolbar items
 			$this->toolbar->prepareToolbarRendering($this->settingsExtJS->getExtJS('selfUrl'));
+			
+				// Prepare the panel for Flash messages
+			$flashMessages = $this->doc->popFlashMessages();
+			if (count($flashMessages)) {
+				$html = '';
+				foreach ($flashMessages as $flashMessage) {
+					/* @var $flashMessage t3lib_FlashMessage */
+					$html .= $flashMessage->render();
+				}
+				
+				$this->addJsInlineCode('
+					var coreFlashMessages = new Ext.Panel({
+						html: ' . $this->encodeInlineHtml($html) . ',
+						border: false
+					});
+				');
+			}
 			
 			$this->addJsInlineCode('
 				var viewport = new Ext.Viewport({
@@ -498,12 +527,23 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				');
 			}
 			
+				// Prepare module content
+			if ($contentPanel) {
+				if (count($flashMessages)) {
+					$content = 'items: [ coreFlashMessages,' . $contentPanel . ' ]';
+				} else {
+					$content = 'items: ' . $contentPanel;
+				}
+			} else {
+				$content = 'html: "MODULE GOES HERE"';
+			}
+			
 			$this->addJsInlineCode('
 						]
 					},{
 						region: "center",
 						xtype: "panel",
-						' . ($contentPanel ? 'items: ' . $contentPanel : 'html: "MODULE GOES HERE"') . '
+						' . $content . '
 					}]
 				});
 			');
@@ -541,13 +581,24 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
-				html: "' . str_replace(array('"', "\n"), array('\\"', '\\n'), $this->scBase->content) . '",
+				html: ' . $this->encodeInlineHtml($this->scBase->content) . ',
 				preventBodyReset: true,
 				border: false
 			});
 		');
 		
 		$this->renderExtJSModule('mod1');
+	}
+	
+	/**
+	 * Adds a flash message to the queue. It will live until the next call to
+	 * popFlashMessages() in the current session.
+	 *
+	 * @param	t3lib_FlashMessage	A flash message object.
+	 * @return	void
+	 */
+	public function pushFlashMessage(t3lib_FlashMessage $message) {
+		$this->doc->pushFlashMessage($message);
 	}
 	
 }
