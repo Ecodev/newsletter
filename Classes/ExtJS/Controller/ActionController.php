@@ -267,27 +267,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	 * Same function as $this->URIBuilder but with split between Backend and Frontend.
-	 *
-	 * @return string
-	 */
-	protected function UriFor($pageUid = NULL, $actionName = NULL, $arguments = array(), $controllerName = NULL, $extensionName = NULL, $pluginName = NULL, $pageType = 0, $noCache = FALSE, $useCacheHash = TRUE, $section = '', $linkAccessRestrictedPages = FALSE, array $additionalParams = array()) {
-		if (TYPO3_MODE === 'FE') {
-			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
-		} else { // TYPO3_MODE === 'BE'
-			if ($pageUid === NULL) {
-				$pageUid = 'mod.php';
-			}
-			if ($pluginName === NULL) {
-				$pluginName = $this->request->getPluginName();
-			}
-			$additionalParams['M'] = $pluginName;
-			
-			return $this->URIBuilder->UriFor($pageUid, $actionName, $arguments, $controllerName, $extensionName, $pluginName, $pageType, $noCache, $useCacheHash, $section, $linkAccessRestrictedPages, $additionalParams);
-		}
-	}
-	
-	/**
 	 * Outputs JS code to the page.
 	 * 
 	 * @param boolean $compressed
@@ -455,7 +434,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$title = $this->request->getPluginName();
 			
 				// Store current controller/action url
-			$this->settingsExtJS->assign('selfUrl', $this->UriFor());
+			$this->uriBuilder->reset();
+			$this->settingsExtJS->assign('selfUrl', $this->uriBuilder->uriFor());
 			
 			$this->doc->form = '';
 			$this->doc->JScode = '
