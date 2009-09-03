@@ -2,7 +2,7 @@ Index: t3lib/class.t3lib_pagerender.php
 ===================================================================
 --- t3lib/class.t3lib_pagerender.php	(revision 0)
 +++ t3lib/class.t3lib_pagerender.php	(revision 0)
-@@ -0,0 +1,1248 @@
+@@ -0,0 +1,1250 @@
 +<?php
 +/***************************************************************
 + *  Copyright notice
@@ -43,27 +43,27 @@ Index: t3lib/class.t3lib_pagerender.php
 +	
 +	protected $compressJavascript = FALSE;
 +	protected $compressCss = FALSE;
-+	protected $removeEmptyLinesFromTemplate = TRUE;
-+	
++	protected $removeAllLineBreaksFromTemplate = FALSE;
++
 +	protected $concatenateFiles = FALSE;
-+	
++
 +	protected $moveJsFromHeaderToFooter = FALSE;
-+	
++
 +	protected $csConvObj;
 +	protected $lang;
-+	
++
 +	// static array containing associative array for the included files
 +	protected static $jsFiles = array ();
 +	protected static $jsFooterFiles = array ();
 +	protected static $jsLibs = array ();
 +	protected static $jsFooterLibs = array ();
 +	protected static $cssFiles = array ();
-+	
++
 +	protected $title;
 +	protected $charSet;
 +	protected $favIcon;
 +	protected $baseUrl;
-+	
++
 +	// static header blocks
 +	protected $xmlPrologAndDocType = '';
 +	protected $metaTags = array ();
@@ -78,22 +78,22 @@ Index: t3lib/class.t3lib_pagerender.php
 +	protected $iconMimeType = '';
 +	protected $shortcutTag = '<link rel="shortcut icon" href="%1$s"%2$s />
 +<link rel="icon" href="%1$s"%2$s />';
-+	
++
 +	// static inline code blocks
 +	protected $jsInline = array ();
 +	protected $extOnReadyCode = array ();
 +	protected $cssInline = array ();
-+	
++
 +	protected $bodyContent;
-+	
++
 +	protected $templateFile;
-+	
++
 +	protected $jsLibraryNames = array ('prototype', 'scriptaculous', 'extjs');
-+	
++
 +	const PART_COMPLETE = 0;
 +	const PART_HEADER = 1;
 +	const PART_FOOTER = 2;
-+	
++
 +	// internal flags for JS-libraries
 +	protected $addPrototype = FALSE;
 +	protected $addScriptaculous = FALSE;
@@ -101,25 +101,25 @@ Index: t3lib/class.t3lib_pagerender.php
 +	protected $addExtJS = FALSE;
 +	protected $addExtCore = FALSE;
 +	protected $extJSadapter = 'ext/ext-base.js';
-+	
++
 +	protected $enableExtJsDebug = FALSE;
 +	protected $enableExtCoreDebug = FALSE;
-+	
++
 +	// available adapters for extJs
 +	const EXTJS_ADAPTER_JQUERY = 'jquery';
 +	const EXTJS_ADAPTER_PROTOTYPE = 'prototype';
 +	const EXTJS_ADAPTER_YUI = 'yui';
-+	
++
 +	protected $enableExtJSQuickTips = false;
-+	
++
 +	protected $inlineLanguageLabels = array ();
 +	protected $inlineSettings = array ();
-+	
++
 +	protected $inlineJavascriptWrap = array ();
-+	
++
 +	// used by BE modules
 +	public $backPath;
-+	
++
 +	/**
 +	 * Constructor
 +	 *
@@ -128,9 +128,9 @@ Index: t3lib/class.t3lib_pagerender.php
 +	 * @return void
 +	 */
 +	public function __construct($templateFile = '', $backPath = '') {
-+		
++
 +		$this->reset();
-+		
++
 +		if (strlen($templateFile)) {
 +			$this->templateFile = $templateFile;
 +		}
@@ -144,11 +144,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			'<style type="text/css">' . chr(10) . '/*<![CDATA[*/' . chr(10) . '<!-- ' . chr(10),
 +			'-->' . chr(10) . '/*]]>*/' . chr(10) . '</style>' . chr(10)
 +		);
-+		
-+		#$this->csConvObj = TYPO3_MODE == 'BE' ? $GLOBAL['LANG']->csConvObj : $GLOBALS['TSFE']->csConvObj;
-+		#$this->lang = TYPO3_MODE == 'BE' ? $GLOBALS['BE_USER']->uc['lang'] : $GLOBALS['TSFE']->lang;
-+		
-+		
++
 +	}
 +	
 +	/**
@@ -167,7 +163,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	/*                                                   */
 +	/*                                                   */
 +	/*****************************************************/
-+	
++
 +	/**
 +	 * Sets the title
 +	 *
@@ -177,7 +173,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setTitle($title) {
 +		$this->title = $title;
 +	}
-+	
++
 +	/**
 +	 * Sets xml prolog and docType
 +	 *
@@ -187,7 +183,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setXmlPrologAndDocType($xmlPrologAndDocType) {
 +		$this->xmlPrologAndDocType = $xmlPrologAndDocType;
 +	}
-+	
++
 +	/**
 +	 * Sets meta charset
 +	 * @return void
@@ -197,7 +193,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setCharSet($charSet) {
 +		$this->charSet = $charSet;
 +	}
-+	
++
 +	/**
 +	 * Sets html tag
 +	 *
@@ -207,7 +203,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setHtmlTag($htmlTag) {
 +		$this->htmlTag = $htmlTag;
 +	}
-+	
++
 +	/**
 +	 * Sets head tag
 +	 *
@@ -217,7 +213,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setHeadTag($headTag) {
 +		$this->headTag = $headTag;
 +	}
-+	
++
 +	/**
 +	 * Sets favicon
 +	 *
@@ -227,7 +223,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setFavIcon($favIcon) {
 +		$this->favIcon = $favIcon;
 +	}
-+	
++
 +	/**
 +	 * Sets icon mime type
 +	 *
@@ -237,7 +233,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setIconMimeType($iconMimeType) {
 +		$this->iconMimeType = $iconMimeType;
 +	}
-+	
++
 +	/**
 +	 * Sets base url
 +	 *
@@ -247,7 +243,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setBaseUrl($baseUrl) {
 +		$this->baseUrl = $baseUrl;
 +	}
-+	
++
 +	/**
 +	 * Sets template file
 +	 *
@@ -257,7 +253,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setTemplateFile($file) {
 +		$this->templateFile = $file;
 +	}
-+	
++
 +	/**
 +	 * Sets MoveJsFromHeaderToFooter
 +	 *
@@ -267,7 +263,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setMoveJsFromHeaderToFooter() {
 +		$this->moveJsFromHeaderToFooter = TRUE;
 +	}
-+	
++
 +	/**
 +	 * Sets compression of javascript
 +	 *
@@ -277,7 +273,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setCompressJavascript() {
 +		$this->compressJavascript = TRUE;
 +	}
-+	
++
 +	/**
 +	 * Sets compression of css
 +	 *
@@ -287,17 +283,28 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setCompressCss() {
 +		$this->compressCss = TRUE;
 +	}
-+	
++
 +	/**
-+	 * Sets removal of empty lines in template
++	/**
++	 * Sets concatenation of js/css files
 +	 *
 +	 * @param void
 +	 * @return void
 +	 */
-+	public function setRemoveEmptyLinesFromTemplate() {
++	public function setConcatenateFiles() {
++		$this->concatenateFiles = TRUE;
++	}
++
++	/**
++	 * Sets removal of all line breaks in template
++	 *
++	 * @param void
++	 * @return void
++	 */
++	public function setRemoveAllLineBreaksFromTemplate() {
 +		$this->removeEmptyLinesFromTemplate = TRUE;
 +	}
-+	
++
 +	/**
 +	 * Sets Content for Body
 +	 *
@@ -307,14 +314,14 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function setBodyContent($content) {
 +		$this->bodyContent = $content;
 +	}
-+	
++
 +	/*****************************************************/
 +	/*                                                   */
 +	/*  Public Getters                                   */
 +	/*                                                   */
 +	/*                                                   */
 +	/*****************************************************/
-+	
++
 +	/**
 +	 * Gets the title
 +	 *
@@ -323,7 +330,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getTitle() {
 +		return $this->title;
 +	}
-+	
++
 +	/**
 +	 * Gets the charSet
 +	 *
@@ -332,7 +339,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getCharSet() {
 +		return $this->charSet;
 +	}
-+	
++
 +	/**
 +	 * Gets html tag
 +	 *
@@ -341,7 +348,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getHtmlTag() {
 +		return $this->htmlTag;
 +	}
-+	
++
 +	/**
 +	 * Gets head tag
 +	 *
@@ -350,7 +357,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getHeadTag() {
 +		return $this->headTag;
 +	}
-+	
++
 +	/**
 +	 * Gets favicon
 +	 *
@@ -359,7 +366,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getFavIcon() {
 +		return $this->favIcon;
 +	}
-+	
++
 +	/**
 +	 * Gets icon mime type
 +	 *
@@ -368,7 +375,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getIconMimeType() {
 +		return $this->iconMimeType;
 +	}
-+	
++
 +	/**
 +	 * Gets base url
 +	 *
@@ -377,7 +384,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getBaseUrl() {
 +		return $this->baseUrl;
 +	}
-+	
++
 +	/**
 +	 * Gets template file
 +	 *
@@ -386,7 +393,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getTemplateFile($file) {
 +		return $this->templateFile;
 +	}
-+	
++
 +	/**
 +	 * Gets MoveJsFromHeaderToFooter
 +	 *
@@ -395,7 +402,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getMoveJsFromHeaderToFooter() {
 +		return $this->moveJsFromHeaderToFooter;
 +	}
-+	
++
 +	/**
 +	 * Gets compress of javascript
 +	 *
@@ -404,7 +411,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getCompressJavascript() {
 +		return $this->compressJavascript;
 +	}
-+	
++
 +	/**
 +	 * Gets compress of css
 +	 *
@@ -413,7 +420,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getCompressCss() {
 +		return $this->compressCss;
 +	}
-+	
++
 +	/**
 +	 * Gets concatenate of files
 +	 *
@@ -422,16 +429,16 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getConcatenateFiles() {
 +		return $this->concatenateFiles;
 +	}
-+	
++
 +	/**
 +	 * Gets remove of empty lines from template
 +	 *
 +	 * @return boolean 
 +	 */
-+	public function getRemoveEmptyLinesFromTemplate() {
-+		return $this->removeEmptyLinesFromTemplate;
++	public function getRemoveAllLineBreaksFromTemplate() {
++		return $this->removeAllLineBreaksFromTemplate;
 +	}
-+	
++
 +	/**
 +	 * Gets content for body
 +	 *
@@ -440,7 +447,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function getBodyContent() {
 +		return $this->bodyContent;
 +	}
-+	
++
 +	/*****************************************************/
 +	/*                                                   */
 +	/*  Public Function to add Data                      */
@@ -459,7 +466,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->metaTags[] = $meta;
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds inline HTML comment
 +	 *
@@ -471,7 +478,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->inlineComments[] = $comment;
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds header data
 +	 *
@@ -483,7 +490,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->headerData[] = $data;
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds footer data
 +	 *
@@ -495,7 +502,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->footerData[] = $data;
 +		}
 +	}
-+	
++
 +	/* Javascript Files */
 +	
 +	/**
@@ -522,7 +529,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +		}
 +	
 +	}
-+	
++
 +	/**
 +	 * Adds JS Library to Footer. JS Library block is rendered on top of the Footer JS files.
 +	 *
@@ -547,7 +554,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +		}
 +	
 +	}
-+	
++
 +	/**
 +	 * Adds JS file
 +	 *
@@ -569,7 +576,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			);
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds JS file to footer
 +	 *
@@ -590,7 +597,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			);
 +		}
 +	}
-+	
++
 +	/*Javascript Inline Blocks */
 +	
 +	/**
@@ -612,7 +619,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			);
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds JS inline code to footer
 +	 *
@@ -632,7 +639,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			);
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds Ext.onready code, which will be wrapped in Ext.onReady(function() {...});
 +	 *
@@ -644,7 +651,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->extOnReadyCode[] = $block;
 +		}
 +	}
-+	
++
 +	/* CSS Files */
 +	
 +	/**
@@ -663,7 +670,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->cssFiles[$file] = array ('rel' => $rel, 'media' => $media, 'title' => $title, 'compressed' => $compressed, 'forceOnTop' => $forceOnTop, 'allWrap' => $allWrap);
 +		}
 +	}
-+	
++
 +	/*CSS Inline Blocks */
 +	
 +	/**
@@ -680,7 +687,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->cssInline[$name] = array ('code' => $block, 'compressed' => $compressed, 'forceOnTop' => $forceOnTop);
 +		}
 +	}
-+	
++
 +	/* JS Libraries */
 +	
 +	/**
@@ -691,7 +698,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function loadPrototype() {
 +		$this->addPrototype = TRUE;
 +	}
-+	
++
 +	/**
 +	 * call function if you need the Scriptaculous library
 +	 *
@@ -717,7 +724,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			}
 +		}
 +	}
-+	
++
 +	/**
 +	 * call this function if you need the extJS library
 +	 *
@@ -760,7 +767,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +		
 +		}
 +	}
-+	
++
 +	/**
 +	 * Enables ExtJs QuickTips
 +	 * Need extJs loaded
@@ -771,8 +778,8 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function enableExtJSQuickTips() {
 +		$this->enableExtJSQuickTips = TRUE;
 +	}
-+	
-+	
++
++
 +	/**
 +	 * call function if you need the ExtCore library
 +	 *
@@ -781,7 +788,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function loadExtCore() {
 +		$this->addExtCore = TRUE;
 +	}
-+	
++
 +	/**	
 +	 * call this function to load debug version of ExtJS. Use this for development only
 +	 *
@@ -789,7 +796,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function enableExtJsDebug() {
 +		$this->enableExtJsDebug = TRUE;
 +	}
-+	
++
 +	/**
 +	 * call this function to load debug version of ExtCore. Use this for development only
 +	 *
@@ -798,7 +805,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function enableExtCoreDebug() {
 +		$this->enableExtCoreDebug = TRUE;
 +	}
-+	
++
 +	/**
 +	 * Adds Javascript Inline Label. This will occur in TYPO3.lang - object
 +	 * The label can be used in scripts with TYPO3.lang.<key>
@@ -811,7 +818,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function addInlineLanguageLabel($key, $value) {
 +		$this->inlineLanguageLabels[$key] = $value;
 +	}
-+	
++
 +	/**
 +	 * Adds Javascript Inline Label Array. This will occur in TYPO3.lang - object
 +	 * The label can be used in scripts with TYPO3.lang.<key>
@@ -824,7 +831,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function addInlineLanguageLabelArray(array $array) {
 +		$this->inlineLanguageLabels = array_merge($this->inlineLanguageLabels, $array);
 +	}
-+	
++
 +	/**
 +	 * Adds Javascript Inline Setting. This will occur in TYPO3.settings - object
 +	 * The label can be used in scripts with TYPO3.setting.<key>
@@ -851,7 +858,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->inlineSettings[$key] = $value;
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds Javascript Inline Setting. This will occur in TYPO3.settings - object
 +	 * The label can be used in scripts with TYPO3.setting.<key>
@@ -878,7 +885,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$this->inlineSettings = array_merge($this->inlineSettings, $array);
 +		}
 +	}
-+	
++
 +	/**
 +	 * Adds content to body content
 +	 *
@@ -888,7 +895,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +	public function addBodyContent($content) {
 +		$this->bodyContent .= $content;
 +	}
-+	
++
 +	/*****************************************************/
 +	/*                                                   */
 +	/*  Render Functions                                 */
@@ -906,12 +913,9 @@ Index: t3lib/class.t3lib_pagerender.php
 +
 +		$jsFiles = $cssFiles = $cssInline = $jsInline = $jsFooterLibs = $jsFooterFiles = '';
 +		$noJS = FALSE;
-+		
-+		
++
 +		$jsLibs = $this->renderJsLibraries();
-+		
-+		
-+		
++
 +		if ($this->compressCss || $this->compressJavascript) {
 +			// do the file compression
 +			$this->doCompress();
@@ -920,9 +924,9 @@ Index: t3lib/class.t3lib_pagerender.php
 +			// do the file concatenation
 +			$this->doConcatenate();
 +		}
-+		
++
 +		$metaTags = implode(chr(10), $this->metaTags);
-+		
++
 +		if (count($this->cssFiles)) {
 +			foreach ($this->cssFiles as $file => $properties) {
 +				$tag = '<link rel="' . $properties['rel'] . '" type="text/css" href="' . $file . '" media="' . $properties['media'] . '"' . ($properties['title'] ? ' title="' . $properties['title'] . '"' : '') . ' />';
@@ -936,7 +940,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +				}
 +			}
 +		}
-+		
++
 +		if (count($this->cssInline)) {
 +			
 +			foreach ($this->cssInline as $name => $properties) {
@@ -947,9 +951,9 @@ Index: t3lib/class.t3lib_pagerender.php
 +				}
 +			}
 +			$cssInline = $this->inlineCssWrap[0] . $cssInline . $this->inlineCssWrap[1];
-+		
++
 +		}
-+		
++
 +		if (count($this->jsLibs)) {
 +			foreach ($this->jsLibs as $name => $properties) {
 +				$tag = '<script src="' . $properties['file'] . '" type="' . $properties['type'] . '"></script>';
@@ -960,7 +964,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +					if ($properties['section'] === self::PART_HEADER) {
 +						$jsLibs = $tag . chr(10) . $jsLibs;
 +					} else {
-+						$jsFooterLibs = $tag . chr(10) . $jsLibs;
++						$jsFooterLibs = $tag . chr(10) . $jsFooterLibs;
 +					}
 +				} else {
 +					if ($properties['section'] === self::PART_HEADER) {
@@ -994,7 +998,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +					}
 +			}
 +		}
-+		
++
 +		if (count($this->jsInline)) {
 +			foreach ($this->jsInline as $name => $properties) {
 +				if ($properties['forceOnTop']) {
@@ -1012,31 +1016,29 @@ Index: t3lib/class.t3lib_pagerender.php
 +				}
 +			}
 +		}
-+		
-+		
-+		
++
++
 +		if ($jsInline) {
 +			$jsInline = $this->inlineJavascriptWrap[0] . $jsInline . $this->inlineJavascriptWrap[1];
 +		}
-+		
++
 +		if ($jsFooterInline) {
 +			$jsFooterInline = $this->inlineJavascriptWrap[0] . $jsFooterInline . $this->inlineJavascriptWrap[1];
 +		}
-+		
-+		
-+		
++
++
 +		// get template
 +		$templateFile = t3lib_div::getFileAbsFileName($this->templateFile, TRUE);
 +		$template = t3lib_div::getURL($templateFile);
-+		
++
 +		if ($this->removeEmptyLinesFromTemplate) {
-+			$template = str_replace(chr(10), '', $template);
++			$template = strtr($template, array(chr(10) => '', chr(13) => ''));
 +		}
 +		if ($part != self::PART_COMPLETE) {
 +			$templatePart = explode('###BODY###', $template);
 +			$template = $templatePart[$part - 1];
 +		}
-+			
++
 +		if ($this->moveJsFromHeaderToFooter) {
 +			$jsFooterLibs = $jsLibs . chr(10) . $jsFooterLibs;
 +			$jsLibs = '';
@@ -1045,7 +1047,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$jsFooterInline = $jsInline . chr(10) . $jsFooterInline;
 +			$jsInline = '';
 +		}	
-+		
++
 +		$markerArray = array(
 +			'XMLPROLOG_DOCTYPE' => $this->xmlPrologAndDocType, 
 +			'HTMLTAG'           => $this->htmlTag, 
@@ -1068,13 +1070,13 @@ Index: t3lib/class.t3lib_pagerender.php
 +			'JS_INLINE_FOOTER'  => $jsFooterInline,
 +			'BODY'				=> $this->bodyContent, 
 +		);
-+		
++
 +		$markerArray = array_map('trim', $markerArray);
-+		
++
 +		$this->reset();
 +		return trim(t3lib_parsehtml::substituteMarkerArray($template, $markerArray, '###|###'));
 +	}
-+	
++
 +	/**
 +	 * helper function for render the javascript libraries
 +	 *
@@ -1082,12 +1084,12 @@ Index: t3lib/class.t3lib_pagerender.php
 +	 */
 +	protected function renderJsLibraries() {
 +		$out = '';
-+		
++
 +		if ($this->addPrototype) {
 +			$out .= '<script src="' . $this->backPath . 'contrib/prototype/prototype.js" type="text/javascript"></script>' . chr(10);
 +			unset($this->jsFiles[$this->backPath . 'contrib/prototype/prototype.js']);
 +		}
-+		
++
 +		if ($this->addScriptaculous) {
 +			$mods = array ();
 +			foreach ($this->addScriptaculousModules as $key => $value) {
@@ -1099,27 +1101,27 @@ Index: t3lib/class.t3lib_pagerender.php
 +			if (in_array('dragdrop', $mods) || in_array('controls', $mods)) {
 +				$mods = array_merge(array ('effects'), $mods);
 +			}
-+			
++
 +			if (count($mods)) {
 +				$moduleLoadString = '?load=' . implode(',', $mods);
 +			}
-+			
++
 +			$out .= '<script src="' . $this->backPath . 'contrib/scriptaculous/scriptaculous.js' . $moduleLoadString . '" type="text/javascript"></script>' . chr(10);
 +			unset($this->jsFiles[$this->backPath . 'contrib/scriptaculous/scriptaculous.js' . $moduleLoadString]);
 +		}
-+		
++
 +			// include extCore
 +		if ($this->addExtCore) {
 +			$out .= '<script src="' . $this->backPath . 'contrib/extjs/ext-core' . ($this->enableExtCoreDebug ? '-debug' : '') . '.js" type="text/javascript"></script>' . chr(10);
 +			unset($this->jsFiles[$this->backPath . 'contrib/extjs/ext-core' . ($this->enableExtCoreDebug ? '-debug' : '') . '.js']);
 +		}
-+		
++
 +			// include extJS
 +		if ($this->addExtJS) {
 +				// use the base adapter all the time
 +			$out .= '<script src="' . $this->backPath . 'contrib/extjs/adapter/' . $this->extJSadapter . '" type="text/javascript"></script>' . chr(10);
 +			$out .= '<script src="' . $this->backPath . 'contrib/extjs/ext-all' . ($this->enableExtJsDebug ? '-debug' : '') . '.js" type="text/javascript"></script>' . chr(10);
-+			
++
 +				// add extJS localization
 +			$localeMap = $this->csConvObj->isoArray; // load standard ISO mapping and modify for use with ExtJS
 +			$localeMap[''] = 'en';
@@ -1127,7 +1129,7 @@ Index: t3lib/class.t3lib_pagerender.php
 +			$localeMap['gr'] = 'el_GR'; // Greek
 +			$localeMap['no'] = 'no_BO'; // Norwegian Bokmaal
 +			$localeMap['se'] = 'se_SV'; // Swedish
-+			
++
 +
 +			$extJsLang = isset($localeMap[$this->lang]) ? $localeMap[$this->lang] : $this->lang;
 +				// TODO autoconvert file from UTF8 to current BE charset if necessary!!!!
@@ -1135,8 +1137,8 @@ Index: t3lib/class.t3lib_pagerender.php
 +			if (file_exists(PATH_typo3 . $extJsLocaleFile)) {
 +				$out .= '<script src="' . $this->backPath . $extJsLocaleFile . '" type="text/javascript"></script>' . chr(10);
 +			}
-+			
-+			
++
++
 +				// remove extjs from JScodeLibArray
 +			unset(
 +				$this->jsFiles[$this->backPath . 'contrib/extjs/ext-all.js'], $this->jsFiles[$this->backPath . 'contrib/extjs/ext-all-debug.js']
@@ -1148,9 +1150,9 @@ Index: t3lib/class.t3lib_pagerender.php
 +			if (count($this->extOnReadyCode)) {
 +				foreach ($this->extOnReadyCode as $block) {
 +					$code .= $block;
-+				}	
++				}
 +			}
-+			
++
 +			$out .= $this->inlineJavascriptWrap[0] . '
 +				Ext.ns("TYPO3");
 +				Ext.BLANK_IMAGE_URL = "' . htmlspecialchars(t3lib_div::locationHeaderUrl($this->backPath . 'gfx/clear.gif')) . '";' . chr(10) . 
@@ -1158,12 +1160,12 @@ Index: t3lib/class.t3lib_pagerender.php
 +				'Ext.onReady(function() {' .
 +				($this->enableExtJSQuickTips ? 'Ext.QuickTips.init();' . chr(10) : '') . $code .
 +				' });' . $this->inlineJavascriptWrap[1];
-+			unset ($this->extOnReadyCode);				
++			unset ($this->extOnReadyCode);
 +		}
-+		
++
 +		return $out;
 +	}
-+	
++
 +	/*****************************************************/
 +	/*                                                   */
 +	/*  Tools                                            */
@@ -1181,36 +1183,36 @@ Index: t3lib/class.t3lib_pagerender.php
 +	protected function doConcatenate() {
 +		// traverse the arrays, concatenate in one file
 +		// then remove concatenated files from array and add the concatenated file
-+		
++
 +
 +		// extern concatination
 +		if ($this->concatenateFiles && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['concatenateHandler']) {
 +			// use extern concatenate routine
 +			$params = array (
-+				'jsFiles'        => $this->jsFiles, 
-+				'jsFooterFiles'  => $this->jsFiles, 
-+				'cssFiles'       => $this->cssFiles,
++				'jsLibs'         => &$this->jsLibs, 
++				'jsFiles'        => &$this->jsFiles, 
++				'jsFooterFiles'  => &$this->jsFiles, 
++				'cssFiles'       => &$this->cssFiles,
 +			);
 +			t3lib_div::callUserFunction($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['concatenateHandler'], $params, $this);
 +		} else {
 +			// own method, nothing implemented atm
-+		
++
 +
 +		}
-+	
 +	}
-+	
++
 +	/**
 +	 * compress inline code
 +	 *
 +	 */
 +	protected function doCompress() {
-+		
++
 +		if ($this->compressJavascript && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['jsCompressHandler']) {
 +			// use extern compress routine
 +			$params = array (
-+				'jsInline'        => $this->jsInline, 
-+				'jsFooterInline'  => $this->jsFooterInline
++				'jsInline'        => &$this->jsInline, 
++				'jsFooterInline'  => &$this->jsFooterInline
 +			);
 +			t3lib_div::callUserFunction($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['jsCompressHandler'], $params, $this);
 +		} else {
@@ -1231,11 +1233,11 @@ Index: t3lib/class.t3lib_pagerender.php
 +				}
 +			}
 +		}
-+		
-+		if ($this->compressJavascript && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['cssCompressHandler']) {
++
++		if ($this->compressCss && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['cssCompressHandler']) {
 +			// use extern compress routine
 +			$params = array (
-+				'cssInline' => $this->cssInline
++				'cssInline' => &$this->cssInline
 +			);
 +			t3lib_div::callUserFunction($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['cssCompressHandler'], $params, $this);
 +		} else {
@@ -1254,19 +1256,19 @@ Index: t3lib/class.t3lib_pagerender.php
 \ No newline at end of file
 Index: t3lib/core_autoload.php
 ===================================================================
---- t3lib/core_autoload.php	(revision 5773)
+--- t3lib/core_autoload.php	(revision 5883)
 +++ t3lib/core_autoload.php	(working copy)
-@@ -39,6 +39,7 @@
+@@ -40,6 +40,7 @@
  	't3lib_matchcondition' => PATH_t3lib . 'class.t3lib_matchcondition.php',
  	't3lib_modsettings' => PATH_t3lib . 'class.t3lib_modsettings.php',
  	't3lib_pageselect' => PATH_t3lib . 'class.t3lib_page.php',
 +	't3lib_pagerender' => PATH_t3lib . 'class.t3lib_pagerender.php',
+ 	't3lib_pageselect_getpagehook' => PATH_t3lib . 'interfaces/interface.t3lib_pageselect_getpagehook.php',
  	't3lib_pagetree' => PATH_t3lib . 'class.t3lib_pagetree.php',
  	't3lib_parsehtml' => PATH_t3lib . 'class.t3lib_parsehtml.php',
- 	't3lib_parsehtml_proc' => PATH_t3lib . 'class.t3lib_parsehtml_proc.php',
 Index: typo3/sysext/cms/tslib/class.tslib_fe.php
 ===================================================================
---- typo3/sysext/cms/tslib/class.tslib_fe.php	(revision 5773)
+--- typo3/sysext/cms/tslib/class.tslib_fe.php	(revision 5883)
 +++ typo3/sysext/cms/tslib/class.tslib_fe.php	(working copy)
 @@ -190,7 +190,7 @@
   * @package TYPO3
@@ -1312,7 +1314,7 @@ Index: typo3/sysext/cms/tslib/class.tslib_fe.php
  			} else {
 Index: typo3/sysext/cms/tslib/class.tslib_pagegen.php
 ===================================================================
---- typo3/sysext/cms/tslib/class.tslib_pagegen.php	(revision 5773)
+--- typo3/sysext/cms/tslib/class.tslib_pagegen.php	(revision 5883)
 +++ typo3/sysext/cms/tslib/class.tslib_pagegen.php	(working copy)
 @@ -1,29 +1,29 @@
  <?php
@@ -2672,8 +2674,8 @@ Index: typo3/sysext/cms/tslib/class.tslib_pagegen.php
 +		if ($GLOBALS['TSFE']->config['config']['minifyJS']) {
 +			$GLOBALS['TSFE']->setCompressJavascript();
 +		}
-+		if ($GLOBALS['TSFE']->config['config']['concatenateJSandCSS']) {
-+			$GLOBALS['TSFE']->concatenateFiles = true;
++		if ($GLOBALS['TSFE']->config['config']['concatenateJsAndCss']) {
++			$GLOBALS['TSFE']->setConcatenateFiles();
 +		}
 +		
 +		// add header data block
@@ -2942,7 +2944,7 @@ Index: typo3/sysext/cms/tslib/class.tslib_pagegen.php
 \ No newline at end of file
 Index: typo3/template.php
 ===================================================================
---- typo3/template.php	(revision 5773)
+--- typo3/template.php	(revision 5883)
 +++ typo3/template.php	(working copy)
 @@ -156,7 +156,7 @@
   * @package TYPO3
@@ -2979,23 +2981,21 @@ Index: typo3/template.php
 +	var $hasDocheader = true;
  
 +    	// class for render the header / footer
-+    
-+    var $pageHeaderFooterTemplateFile = '';	// alternative template file
  
++    var $pageHeaderFooterTemplateFile = '';	// alternative template file
++
 +
  	/**
  	 * Constructor
  	 * Imports relevant parts from global $TBE_STYLES (colorscheme)
-@@ -231,7 +222,8 @@
+@@ -231,6 +222,7 @@
  	 */
  	function template()	{
  		global $TBE_STYLES;
--
 +		parent::__construct();
-+		
+ 
  			// Setting default scriptID:
  		if (($temp_M = (string) t3lib_div::_GET('M')) && $GLOBALS['TBE_MODULES']['_PATHS'][$temp_M]) {
- 			$this->scriptID = preg_replace('/^.*\/(sysext|ext)\//', 'ext/', $GLOBALS['TBE_MODULES']['_PATHS'][$temp_M] . 'index.php');
 @@ -269,6 +261,8 @@
  
  			// Background image
@@ -3085,7 +3085,7 @@ Index: typo3/template.php
  		if ($this->docType=='xhtml_frames')	{
  			return $str;
  		} else
-@@ -749,12 +757,11 @@
+@@ -749,13 +757,12 @@
  			$str .= ($this->divClass?'
  
  <!-- Wrapping DIV-section for whole page END -->
@@ -3096,10 +3096,11 @@ Index: typo3/template.php
  		}
  
 -		$str .= '</html>';
-+		
  
++
  			// Logging: Can't find better place to put it:
  		if (TYPO3_DLOG)	t3lib_div::devLog('END of BACKEND session', 'template', 0, array('_FLUSH' => true));
+ 
 @@ -955,30 +962,22 @@
  		$this->inDocStylesArray[] = $this->inDocStyles_TBEstyle;
  
@@ -3183,7 +3184,7 @@ Index: typo3/template.php
  
  	/**
  	 * Includes the necessary Javascript function for the clickmenu (context sensitive menus) in the document
-@@ -1994,160 +1975,9 @@
+@@ -2087,163 +2068,12 @@
  	}
  
  
@@ -3191,7 +3192,6 @@ Index: typo3/template.php
 -	 *  Following functions are help function for JS library include.
 -	 *  They enable loading the libraries prototype, scriptaculous and extJS from contrib-directory
 -	 */
-+	
  
  
 -	/**
@@ -3200,14 +3200,14 @@ Index: typo3/template.php
 -	 */
 -	protected function renderJSlibraries() {
 -		$libs = array();
--
+ 
 -			// include prototype
 -		if ($this->addPrototype) {
 -			$libs[] = 'contrib/prototype/prototype.js';
 -				// remove prototype from JScodeLibArray
 -			$this->removeJavascriptLib('prototype');
--		}
--
+ 		}
+ 
 -			// include scriptaculous
 -		if ($this->addScriptaculous) {
 -			$mods = array();
@@ -3220,7 +3220,7 @@ Index: typo3/template.php
 -			if (in_array('dragdrop', $mods) || in_array('controls', $mods)) {
 -				$mods = array_merge(array('effects'), $mods);
 -			}
--
+ 
 -			if (count($mods)) {
 -				$moduleLoadString = '?load=' . implode(',', $mods);
 -			}
@@ -3342,9 +3342,12 @@ Index: typo3/template.php
 -	}
 -
 -
- }
- 
- 
+-}
+-
+-
+ // ******************************
+ // Extension classes of the template class.
+ // These are meant to provide backend screens with different widths.
 Index: typo3/templates/pagerender.html
 ===================================================================
 --- typo3/templates/pagerender.html	(revision 0)
