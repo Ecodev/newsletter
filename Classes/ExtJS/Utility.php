@@ -198,10 +198,36 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 * @param $html
 	 * @return string
 	 */
-	public function encodeInlineHtml($html) {
+	public static function encodeInlineHtml($html) {
 		$html = str_replace(array('"', "\n"), array('\\"', '\\n'), $html);
 		
 		return '"' . $html . '"';
+	}
+	
+	/**
+	 * Returns an array of ExtJS form elements associated to an Extbase action.
+	 * 
+	 * @param Tx_Extbase_MVC_Request $request
+	 * @param string $action
+	 * @return array Array of Tx_MvcExtjs_ExtJS_FormElement
+	 */
+	public static function getExtbaseFormElements(Tx_Extbase_MVC_Request $request, $action) {
+		return array(
+			Tx_MvcExtjs_ExtJS_FormElement::create($request)
+				->setXType('hidden')
+				->setObjectModelField('__referer', 'extensionName')
+				->set('value', $request->getControllerExtensionName()),
+
+			Tx_MvcExtjs_ExtJS_FormElement::create($request)
+				->setXType('hidden')
+				->setObjectModelField('__referer', 'controllerName')
+				->set('value', $request->getControllerName()),
+
+			Tx_MvcExtjs_ExtJS_FormElement::create($request)
+				->setXType('hidden')	
+				->setObjectModelField('__referer', 'actionName')
+				->set('value', $action),
+		);
 	}
 	
 }

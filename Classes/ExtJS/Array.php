@@ -60,6 +60,19 @@ class Tx_MvcExtjs_ExtJS_Array {
 	}
 	
 	/**
+	 * Adds an array of items.
+	 * 
+	 * @param array $items
+	 * @return Tx_MvcExtjs_ExtJS_Array the current Array to allow method chaining
+	 */
+	public function addAll(array $items) {
+		foreach ($items as  $item) {
+			$this->items[] = $item;
+		}
+		return $this;
+	}
+	
+	/**
 	 * Builds the ExtJS array.
 	 * 
 	 * @return string The ExtJS code representing this array
