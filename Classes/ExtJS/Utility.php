@@ -192,5 +192,17 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		));
 	}
 	
+	/**
+	 * Encodes a html snippet in order to include it in an ExtJS declaration.
+	 *  
+	 * @param $html
+	 * @return string
+	 */
+	public function encodeInlineHtml($html) {
+		$html = str_replace(array('"', "\n"), array('\\"', '\\n'), $html);
+		
+		return '"' . $html . '"';
+	}
+	
 }
 ?>

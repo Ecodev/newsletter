@@ -389,18 +389,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		return implode('', $parts);
 	}
 	
-	/**
-	 * Encodes a html snippet in order to include it in an ExtJS declaration.
-	 *  
-	 * @param $html
-	 * @return string
-	 */
-	protected function encodeInlineHtml($html) {
-		$html = str_replace(array('"', "\n"), array('\\"', '\\n'), $html);
-		
-		return '"' . $html . '"';
-	}
-	
 	// ----------------------------------------------------------------
 	// BACKEND-ONLY METHODS
 	// ----------------------------------------------------------------
@@ -467,7 +455,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				
 				$this->addJsInlineCode('
 					var coreFlashMessages = new Ext.Panel({
-						html: ' . $this->encodeInlineHtml($html) . ',
+						html: ' . Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtm($html) . ',
 						border: false
 					});
 				');
@@ -561,7 +549,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
-				html: ' . $this->encodeInlineHtml($this->scBase->content) . ',
+				html: ' .  Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtm($this->scBase->content) . ',
 				preventBodyReset: true,
 				border: false
 			});
