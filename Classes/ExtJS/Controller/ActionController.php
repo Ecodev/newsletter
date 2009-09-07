@@ -119,33 +119,52 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * @return void 
 	 */
 	protected function initializeAction() {
-		if (TYPO3_MODE === 'FE') {
-			$this->pageRendererObject = $GLOBALS['TSFE'];
-			$this->pageRendererObject->backPath = TYPO3_mainDir;
-		} else { // TYPO3_MODE === 'BE'
-						
-				// Prepare the view
-			$this->masterView = t3lib_div::makeInstance('Tx_Fluid_View_TemplateView');
-			$controllerContext = $this->buildControllerContext();
-			$this->masterView->setControllerContext($controllerContext);
-			$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs') . 'Resources/Private/Templates/module.html');
-			
-			$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
-			$this->scBase->MCONF['name'] = $this->request->getPluginName();
-			$this->scBase->init();
-			
-				// Prepare template class
-			$this->doc = t3lib_div::makeInstance('template'); 
-			$this->doc->backPath = $GLOBALS['BACK_PATH'];
-			
-			$this->scBase->doc = $this->doc;
-			$this->pageRendererObject = $this->doc;
-			
-				// Prepare menu and merge other extension module functions
-			$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
-			$this->menuConfig();
+		if (TYPO3_MODE === 'BE') {
+			$this->initializeBackendAction();
+		} else {
+			$this->initializeFrontendAction();
 		}
+	}
+	
+	/**
+	 * Initializes the backend action.
+	 * 
+	 * @return void
+	 */
+	private function initializeBackendAction() {
+			// Prepare the view
+		$this->masterView = t3lib_div::makeInstance('Tx_Fluid_View_TemplateView');
+		$controllerContext = $this->buildControllerContext();
+		$this->masterView->setControllerContext($controllerContext);
+		$this->masterView->setTemplatePathAndFilename(t3lib_extMgm::extPath('mvc_extjs') . 'Resources/Private/Templates/module.html');
 		
+		$this->scBase = t3lib_div::makeInstance('t3lib_SCbase');
+		$this->scBase->MCONF['name'] = $this->request->getPluginName();
+		$this->scBase->init();
+		
+			// Prepare template class
+		$this->doc = t3lib_div::makeInstance('template'); 
+		$this->doc->backPath = $GLOBALS['BACK_PATH'];
+		
+		$this->scBase->doc = $this->doc;
+		$this->pageRendererObject = $this->doc;
+		
+			// Prepare menu and merge other extension module functions
+		$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
+		$this->menuConfig();
+			
+		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
+		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
+	}
+	
+	/**
+	 * Initializes the frontend action.
+	 * 
+	 * @return void
+	 */
+	private function initializeFrontendAction() {
+		$this->pageRendererObject = $GLOBALS['TSFE'];
+		$this->pageRendererObject->backPath = TYPO3_mainDir;
 		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
 		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
 	}
