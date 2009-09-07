@@ -1,9 +1,9 @@
 <?php
 
 ########################################################################
-# Extension Manager/Repository config file for ext: "demo"
+# Extension Manager/Repository config file for ext: "mvc_extjs"
 #
-# Auto generated 17-07-2009 12:26
+# Auto generated 07-09-2009 07:18
 #
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.1',
+	'version' => '0.1.0',
 	'constraints' => array(
 		'depends' => array(
 			'php' => '5.2.0-0.0.0',
@@ -43,7 +43,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'sms_firephp' => '0.0.0-0.0.0',
 		),
 	),
-	'_md5_values_when_last_written' => '',
+	'_md5_values_when_last_written' => 'a:16:{s:10:"README.txt";s:4:"1a6e";s:16:"ext_autoload.php";s:4:"26dd";s:12:"ext_icon.gif";s:4:"0c18";s:24:"ext_typoscript_setup.txt";s:4:"155d";s:23:"Classes/ExtJS/Array.php";s:4:"caaf";s:29:"Classes/ExtJS/FormElement.php";s:4:"37ab";s:24:"Classes/ExtJS/Object.php";s:4:"3781";s:33:"Classes/ExtJS/SettingsService.php";s:4:"af8c";s:25:"Classes/ExtJS/Utility.php";s:4:"706c";s:45:"Classes/ExtJS/Controller/ActionController.php";s:4:"1304";s:32:"Classes/ExtJS/Layout/Toolbar.php";s:4:"5629";s:38:"Classes/ViewHelpers/JsonViewHelper.php";s:4:"543a";s:38:"Classes/ViewHelpers/NullViewHelper.php";s:4:"3485";s:33:"Configuration/TypoScript/ajax.txt";s:4:"7a35";s:14:"doc/manual.sxw";s:4:"b8c2";s:39:"Resources/Private/Templates/module.html";s:4:"9bed";}',
 	'suggests' => array(
 	),
 );
