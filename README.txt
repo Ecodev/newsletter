@@ -1,1 +1,1 @@
-Make sure to read http://forge.typo3.org/news/show/169 before starting.
+Documentation is available in file doc/manual.sxw.

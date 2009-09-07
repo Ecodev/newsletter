@@ -164,7 +164,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		}
 		
 		if ($moveJsFromHeaderToFooter) {
-			$this->pageRenderObject->setMoveJsFromHeaderToFooter();
+			$this->pageRenderObject->enableMoveJsFromHeaderToFooter(TRUE);
 		}
 		
 		if ($useExtCore) {
@@ -455,7 +455,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 				
 				$this->addJsInlineCode('
 					var coreFlashMessages = new Ext.Panel({
-						html: ' . Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtm($html) . ',
+						html: ' . Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtml($html) . ',
 						border: false
 					});
 				');
@@ -549,7 +549,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		$this->addJsInlineCode('
 			var mod1 = new Ext.Panel({
-				html: ' .  Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtm($this->scBase->content) . ',
+				html: ' .  Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtml($this->scBase->content) . ',
 				preventBodyReset: true,
 				border: false
 			});
