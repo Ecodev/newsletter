@@ -92,7 +92,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	/**
 	 * @var object
 	 */
-	protected $pageRenderObject;
+	protected $pageRendererObject;
 	
 	// -- BE-only properties
 	
@@ -120,8 +120,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 */
 	protected function initializeAction() {
 		if (TYPO3_MODE === 'FE') {
-			$this->pageRenderObject = $GLOBALS['TSFE'];
-			$this->pageRenderObject->backPath = TYPO3_mainDir;
+			$this->pageRendererObject = $GLOBALS['TSFE'];
+			$this->pageRendererObject->backPath = TYPO3_mainDir;
 		} else { // TYPO3_MODE === 'BE'
 						
 				// Prepare the view
@@ -139,7 +139,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->doc->backPath = $GLOBALS['BACK_PATH'];
 			
 			$this->scBase->doc = $this->doc;
-			$this->pageRenderObject = $this->doc;
+			$this->pageRendererObject = $this->doc;
 			
 				// Prepare menu and merge other extension module functions
 			$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
@@ -164,15 +164,15 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		}
 		
 		if ($moveJsFromHeaderToFooter) {
-			$this->pageRenderObject->enableMoveJsFromHeaderToFooter(TRUE);
+			$this->pageRendererObject->enableMoveJsFromHeaderToFooter(TRUE);
 		}
 		
 		if ($useExtCore) {
 				// Load ExtCore library
-			$this->pageRenderObject->loadExtCore();		
+			$this->pageRendererObject->loadExtCore();		
 		} else {
 				// Load ExtJS libraries and stylesheets
-			$this->pageRenderObject->loadExtJS();
+			$this->pageRendererObject->loadExtJS();
 		}
 		
 			// Namespace will be registered in ExtJS when calling method outputJsCode
@@ -199,7 +199,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -211,7 +211,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			die('File "' . $this->extPath . $cssFile . '" not found!');
 		}
 		
-		$this->pageRenderObject->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
+		$this->pageRendererObject->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -230,7 +230,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -242,7 +242,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageRenderObject->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		$this->pageRendererObject->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -251,7 +251,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	* @param string $name
 	* @param string $file file to be included, relative to this extension's Javascript directory
 	* @param string $type
-	* @param int $section 	t3lib_pageRenderObject::PART_HEADER (0) or t3lib_pageRenderObject::PART_FOOTER (1)
+	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -263,7 +263,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			die('File "' . $this->extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageRenderObject->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		$this->pageRendererObject->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
 	}
 	
 	/**
@@ -303,12 +303,12 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 			// Start code when ExtJS is ready 
 		if ($this->enableExtJSQuickTips) {
-			$this->pageRenderObject->enableExtJSQuickTips();
+			$this->pageRendererObject->enableExtJSQuickTips();
 		}
-		$this->pageRenderObject->addExtOnReadyCode($block);
+		$this->pageRendererObject->addExtOnReadyCode($block);
 		
 		if (count($this->cssInline)) {
-			$this->pageRenderObject->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
+			$this->pageRendererObject->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
 		}
 		
 	}
