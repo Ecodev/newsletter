@@ -13,7 +13,7 @@
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'MVC + ExtJS',
 	'description' => 'Base and Helper classes to efficiently use Extbase and Fluid (MVC) combined with ExtJS',
-	'category' => 'fe',
+	'category' => 'misc',
 	'author' => 'Xavier Perseguers',
 	'author_email' => 'typo3@perseguers.ch',
 	'shy' => '',
