@@ -147,7 +147,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		
 		$this->scBase->doc = $this->doc;
-		$this->pageRendererObject = $this->doc;
+		$this->pageRendererObject = $this->doc->getPageRenderer();
 		
 			// Prepare menu and merge other extension module functions
 		$this->toolbar = t3lib_div::makeInstance('Tx_Mvcextjs_ExtJS_Layout_Toolbar', $this, $this->request->getPluginName(), $this->scBase);
@@ -163,8 +163,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * @return void
 	 */
 	private function initializeFrontendAction() {
-		$this->pageRendererObject = $GLOBALS['TSFE'];
-		$this->pageRendererObject->backPath = TYPO3_mainDir;
+		$GLOBALS['TSFE']->backPath = TYPO3_mainDir;
+		$this->pageRendererObject = $GLOBALS['TSFE']->getPageRenderer();
 		$this->extPath = t3lib_extMgm::extPath($this->request->getControllerExtensionKey());
 		$this->extRelPath = substr($this->extPath, strlen(PATH_site));
 	}
@@ -188,7 +188,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		if ($useExtCore) {
 				// Load ExtCore library
-			$this->pageRendererObject->loadExtCore();		
+			$this->getPageRendererObject->loadExtCore();		
 		} else {
 				// Load ExtJS libraries and stylesheets
 			$this->pageRendererObject->loadExtJS();
