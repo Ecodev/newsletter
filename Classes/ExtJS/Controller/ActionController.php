@@ -188,7 +188,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		if ($useExtCore) {
 				// Load ExtCore library
-			$this->getPageRendererObject->loadExtCore();		
+			$this->pageRendererObject->loadExtCore();		
 		} else {
 				// Load ExtJS libraries and stylesheets
 			$this->pageRendererObject->loadExtJS();
