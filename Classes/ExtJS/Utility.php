@@ -72,7 +72,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 			$propertyGetterName = 'get' . ucfirst($property->name);
 			
 			if (method_exists($object, $propertyGetterName)) {
-				$value = call_user_method($propertyGetterName, $object);
+				$value = call_user_func(array($object, $propertyGetterName));
 				if (is_array($value)) {
 					$value = self::encodeArrayForJSON($value);
 				} elseif (is_object($value)) {
