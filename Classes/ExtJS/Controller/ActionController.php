@@ -464,17 +464,11 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			$this->toolbar->prepareToolbarRendering($this->settingsExtJS->getExtJS('selfUrl'));
 			
 				// Prepare the panel for Flash messages
-			$flashMessages = $this->doc->popFlashMessages();
-			if (count($flashMessages)) {
-				$html = '';
-				foreach ($flashMessages as $flashMessage) {
-					/* @var $flashMessage t3lib_FlashMessage */
-					$html .= $flashMessage->render();
-				}
-				
+			$flashMessages = t3lib_FlashMessageQueue::renderFlashMessages();
+			if ($flashMessages) {
 				$this->addJsInlineCode('
 					var coreFlashMessages = new Ext.Panel({
-						html: ' . Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtml($html) . ',
+						html: ' . Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtml($flashMessages) . ',
 						border: false
 					});
 				');
@@ -516,7 +510,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			
 				// Prepare module content
 			if ($contentPanel) {
-				if (count($flashMessages)) {
+				if ($flashMessages) {
 					$content = 'items: [ coreFlashMessages,' . $contentPanel . ' ]';
 				} else {
 					$content = 'items: ' . $contentPanel;
@@ -576,17 +570,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		
 		$this->renderExtJSModule('mod1');
 	}
-	
-	/**
-	 * Adds a flash message to the queue. It will live until the next call to
-	 * popFlashMessages() in the current session.
-	 *
-	 * @param	t3lib_FlashMessage	A flash message object.
-	 * @return	void
-	 */
-	public function pushFlashMessage(t3lib_FlashMessage $message) {
-		$this->doc->pushFlashMessage($message);
-	}
-	
+
 }
 ?>
