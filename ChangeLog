@@ -2,6 +2,14 @@
 
 	* Fixed handling of Flash messages (to reflect changes in Core)
 
+2009-09-20  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Removed deprecated code (as of PHP5.3)
+
+2009-09-18  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Updated ActionController to reflect changes in EXT:extbase
+
 2009-09-07  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Released version 0.1.0 to TER
