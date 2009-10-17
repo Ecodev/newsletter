@@ -1,3 +1,7 @@
+2009-10-17  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Fixed handling of Flash messages (to reflect changes in Core)
+
 2009-09-07  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Released version 0.1.0 to TER
