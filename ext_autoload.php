@@ -9,6 +9,7 @@ return array(
 	'tx_mvcextjs_extjs_settingsservice' => $extensionClassesPath . 'ExtJS/SettingsService.php',
 	'tx_mvcextjs_extjs_utility' => $extensionClassesPath . 'ExtJS/Utility.php',
 	'tx_mvcextjs_extjs_controller_actioncontroller' => $extensionClassesPath . 'ExtJS/Controller/ActionController.php',
+	'tx_mvcextjs_extjs_controller_functionactioncontroller' => $extensionClassesPath . 'ExtJS/Controller/FunctionActionController.php',
 	'tx_mvcextjs_utility_module' => $extensionClassesPath . 'Utility/Module.php',
 	'tx_mvcextjs_viewhelpers_nullviewhelper' => $extensionClassesPath . 'ViewHelpers/NullViewHelper.php',
 );

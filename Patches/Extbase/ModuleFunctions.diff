@@ -1,0 +1,167 @@
+Index: Classes/Utility/Extension.php
+===================================================================
+--- Classes/Utility/Extension.php	(revision 1496)
++++ Classes/Utility/Extension.php	(working copy)
+@@ -315,6 +315,58 @@
+ 
+ 		t3lib_extMgm::addModule($main, $sub, $position);
+ 	}
++
++	/**
++	 * Registers a "Function menu module" ('third level module') to an existing function menu for some other backend module
++	 * The arguments values are generally determined by which function menu this is supposed to interact with.
++	 * FOR USE IN ext_tables.php FILES
++	 * 
++	 * @param string $extensionName The extension name (in UpperCamelCase) or the extension key (in lower_underscore)
++	 * @param string $moduleName The module name
++	 * @param array $controllerActions is an array of allowed combinations of controller and action stored in an array (controller name as key and a comma separated list of action names as value, the first controller and its first action is chosen as default)
++	 * @param array $config The configuration options of the module (icon, locallang.xml file)
++	 * @return void
++	 */
++	public static function registerModuleFunction($extensionName, $moduleName, array $controllerActions, $config = array()) {
++		if (empty($extensionName)) {
++			throw new InvalidArgumentException('The extension name was invalid (must not be empty and must match /[A-Za-z][_A-Za-z0-9]/)', 1239891989);
++		}
++		$extensionKey = $extensionName; // FIXME This will break if the $extensionName is given as BlogExample
++		$extensionName = str_replace(' ', '', ucwords(str_replace('_', ' ', $extensionName)));
++
++		$path = t3lib_extMgm::extPath($extensionKey, 'Classes/Controller/');
++
++		if (!is_array($config) || count($config) == 0) {
++			$config['title'] = 'Unknown title';
++			$config['workspaces'] = '';
++		}
++		if (!isset($config['menuKey']) || empty($config['menuKey'])) {
++			$config['menuKey'] = 'function';
++		}
++
++		$controllers = array_keys($controllerActions);
++		$defaultController = $controllers[0] . 'Controller';
++		$defaultControllerFullName = 'Tx_' . $extensionName . '_Controller_' . $defaultController;
++
++		t3lib_extMgm::insertModuleFunction(
++			$moduleName,
++			$defaultControllerFullName,
++			$path . $defaultController . '.php',
++			$config['title'],
++			$config['menuKey'],
++			$config['workspaces']
++		);
++
++			// Register additional Extbase information
++		$moduleConfig = array(
++			'name' => $moduleName,
++			'extensionKey' => $extensionKey,
++			'extensionName' => $extensionName,
++			'controllerActions' => $controllerActions,
++			'config' => $config,
++		);
++		$GLOBALS['TBE_MODULES'][$defaultControllerFullName] = $moduleConfig;
++	} 
+ 	
+ 	// TODO PHPdoc
+ 	public static function convertCamelCaseToLowerCaseUnderscored($string) {
+Index: Classes/MVC/Controller/FunctionActionController.php
+===================================================================
+--- Classes/MVC/Controller/FunctionActionController.php	(revision 0)
++++ Classes/MVC/Controller/FunctionActionController.php	(revision 0)
+@@ -0,0 +1,78 @@
++<?php
++/***************************************************************
++*  Copyright notice
++*
++*  (c) 2009 Xavier Perseguers <typo3@perseguers.ch>
++*  All rights reserved
++*
++*  This script is part of the TYPO3 project. The TYPO3 project is
++*  free software; you can redistribute it and/or modify
++*  it under the terms of the GNU General Public License as published by
++*  the Free Software Foundation; either version 2 of the License, or
++*  (at your option) any later version.
++*
++*  The GNU General Public License can be found at
++*  http://www.gnu.org/copyleft/gpl.html.
++*
++*  This script is distributed in the hope that it will be useful,
++*  but WITHOUT ANY WARRANTY; without even the implied warranty of
++*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++*  GNU General Public License for more details.
++*
++*  This copyright notice MUST APPEAR in all copies of the script!
++***************************************************************/
++
++/**
++ * A multi action controller for module functions. Based on t3lib_extobjbase.
++ *
++ * @package Extbase
++ * @subpackage MVC\Controller
++ * @version $Id$
++ */
++class Tx_Extbase_MVC_Controller_FunctionActionController extends Tx_Extbase_MVC_Controller_ActionController {
++
++	/**
++	 * @var Tx_Extbase_Dispatcher
++	 */
++	private $dispatcher;
++	
++	/**
++	 * Constructs the controller.
++	 */
++	public function __construct() {
++		$this->dispatcher = t3lib_div::makeInstance('Tx_Extbase_Dispatcher');
++		parent::__construct();
++	}
++
++	/**
++	 * Same as t3lib_SCbase::checkExtObj().
++	 *
++	 * @return	void
++	 * @see t3lib_SCbase::checkExtObj()
++	 */
++	public function checkExtObj() {
++		// TODO?
++	}
++
++	/**
++	 * Initializes the module function.
++	 * 
++	 * @param $pObj parent object
++	 * @param array $conf
++	 * @return void
++	 */
++	public function init($pObj, $conf) {
++		// TODO? 
++	}
++
++	/**
++	 * Dispatches the call to the Extbase controller.
++	 * 
++	 * @return HTML
++	 */
++	public function main() {
++		$this->dispatcher->callModule(get_class($this));
++	}
++
++}
++?>
+\ No newline at end of file
+
+Property changes on: Classes/MVC/Controller/FunctionActionController.php
+___________________________________________________________________
+Added: svn:keywords
+   + Date Author Revision Id HeadURL
+Added: svn:eol-style
+   + native
+
+Index: ext_autoload.php
+===================================================================
+--- ext_autoload.php	(revision 1496)
++++ ext_autoload.php	(working copy)
+@@ -36,6 +36,7 @@
+ 	'tx_extbase_mvc_responseinterface' => $extensionClassesPath . 'MVC/ResponseInterface.php',
+ 	'tx_extbase_mvc_controller_abstractcontroller' => $extensionClassesPath . 'MVC/Controller/AbstractController.php',
+ 	'tx_extbase_mvc_controller_actioncontroller' => $extensionClassesPath . 'MVC/Controller/ActionController.php',
++	'tx_extbase_mvc_controller_functionactioncontroller' => $extensionClassesPath . 'MVC/Controller/FunctionActionController.php',
+ 	'tx_extbase_mvc_controller_argument' => $extensionClassesPath . 'MVC/Controller/Argument.php',
+ 	'tx_extbase_mvc_controller_argumenterror' => $extensionClassesPath . 'MVC/Controller/ArgumentError.php',
+ 	'tx_extbase_mvc_controller_arguments' => $extensionClassesPath . 'MVC/Controller/Arguments.php',
