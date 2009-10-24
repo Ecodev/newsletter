@@ -61,11 +61,11 @@ Index: Classes/Utility/Extension.php
  	
  	// TODO PHPdoc
  	public static function convertCamelCaseToLowerCaseUnderscored($string) {
-Index: Classes/MVC/Controller/FunctionActionController.php
+Index: Classes/MVC/Controller/ExtensionObjectActionController.php
 ===================================================================
---- Classes/MVC/Controller/FunctionActionController.php	(revision 0)
-+++ Classes/MVC/Controller/FunctionActionController.php	(revision 0)
-@@ -0,0 +1,78 @@
+--- Classes/MVC/Controller/ExtensionObjectActionController.php	(revision 0)
++++ Classes/MVC/Controller/ExtensionObjectActionController.php	(revision 0)
+@@ -0,0 +1,80 @@
 +<?php
 +/***************************************************************
 +*  Copyright notice
@@ -91,13 +91,15 @@ Index: Classes/MVC/Controller/FunctionActionController.php
 +***************************************************************/
 +
 +/**
-+ * A multi action controller for module functions. Based on t3lib_extobjbase.
++ * A multi action controller for 'Extension Objects' in backend modules.
++ * used for 'submodules' to other modules. Also called 'Function menu modules' in t3lib_extMgm.
++ * Based on class t3lib_extobjbase.
 + *
 + * @package Extbase
 + * @subpackage MVC\Controller
 + * @version $Id$
 + */
-+class Tx_Extbase_MVC_Controller_FunctionActionController extends Tx_Extbase_MVC_Controller_ActionController {
++class Tx_Extbase_MVC_Controller_ExtensionObjectActionController extends Tx_Extbase_MVC_Controller_ActionController {
 +
 +	/**
 +	 * @var Tx_Extbase_Dispatcher
@@ -115,7 +117,7 @@ Index: Classes/MVC/Controller/FunctionActionController.php
 +	/**
 +	 * Same as t3lib_SCbase::checkExtObj().
 +	 *
-+	 * @return	void
++	 * @return void
 +	 * @see t3lib_SCbase::checkExtObj()
 +	 */
 +	public function checkExtObj() {
@@ -125,43 +127,79 @@ Index: Classes/MVC/Controller/FunctionActionController.php
 +	/**
 +	 * Initializes the module function.
 +	 * 
-+	 * @param $pObj parent object
++	 * @param t3lib_SCbase $pObj parent object
 +	 * @param array $conf
 +	 * @return void
 +	 */
-+	public function init($pObj, $conf) {
++	public function init(t3lib_SCbase $pObj, $conf) {
 +		// TODO? 
 +	}
 +
 +	/**
-+	 * Dispatches the call to the Extbase controller.
++	 * Dispatches the call to the Extbase controller and returns its output.
 +	 * 
-+	 * @return HTML
++	 * @return string The module's output
 +	 */
 +	public function main() {
-+		$this->dispatcher->callModule(get_class($this));
++		return $this->dispatcher->callModule(get_class($this), FALSE);
 +	}
 +
 +}
 +?>
 \ No newline at end of file
 
-Property changes on: Classes/MVC/Controller/FunctionActionController.php
+Property changes on: Classes/MVC/Controller/ExtensionObjectActionController.php
 ___________________________________________________________________
 Added: svn:keywords
    + Date Author Revision Id HeadURL
 Added: svn:eol-style
    + native
 
+Index: Classes/Dispatcher.php
+===================================================================
+--- Classes/Dispatcher.php	(revision 1496)
++++ Classes/Dispatcher.php	(working copy)
+@@ -295,9 +295,10 @@
+ 	 * Calls an Extbase Backend module.
+ 	 *
+ 	 * @param string $module The name of the module
+-	 * @return void
++	 * @param boolean $echoOutput if TRUE, the module's output will be echoed, otherwise will be returned
++	 * @return mixed FALSE if module could not be called, otherwise either TRUE or the module's output (if $echoOutput is set to FALSE)
+ 	 */
+-	public function callModule($module) {
++	public function callModule($module, $echoOutput = TRUE) {
+ 		if (isset($GLOBALS['TBE_MODULES'][$module])) {
+ 			$config = $GLOBALS['TBE_MODULES'][$module];
+ 
+@@ -316,9 +317,15 @@
+ 			// Resolve the controller/action to use
+ 			$controllerAction = $this->resolveControllerAction($module);
+ 
+-			// As for SCbase modules, output of the controller/action pair should be echoed
+-			echo $this->transfer($module, $controllerAction['controllerName'], $controllerAction['actionName']);
+-			return TRUE;
++			$output = $this->transfer($module, $controllerAction['controllerName'], $controllerAction['actionName']);
++			if ($echoOutput) {
++				// As for SCbase modules, output of the controller/action pair should be echoed
++				echo $output;
++				return TRUE;
++			} else {
++				// As for SCbase module functions, output of the controller/action pair should be returned
++				return $output;
++			}
+ 		} else {
+ 			return FALSE;
+ 		}
 Index: ext_autoload.php
 ===================================================================
 --- ext_autoload.php	(revision 1496)
 +++ ext_autoload.php	(working copy)
-@@ -36,6 +36,7 @@
- 	'tx_extbase_mvc_responseinterface' => $extensionClassesPath . 'MVC/ResponseInterface.php',
- 	'tx_extbase_mvc_controller_abstractcontroller' => $extensionClassesPath . 'MVC/Controller/AbstractController.php',
- 	'tx_extbase_mvc_controller_actioncontroller' => $extensionClassesPath . 'MVC/Controller/ActionController.php',
-+	'tx_extbase_mvc_controller_functionactioncontroller' => $extensionClassesPath . 'MVC/Controller/FunctionActionController.php',
- 	'tx_extbase_mvc_controller_argument' => $extensionClassesPath . 'MVC/Controller/Argument.php',
- 	'tx_extbase_mvc_controller_argumenterror' => $extensionClassesPath . 'MVC/Controller/ArgumentError.php',
- 	'tx_extbase_mvc_controller_arguments' => $extensionClassesPath . 'MVC/Controller/Arguments.php',
+@@ -42,6 +42,7 @@
+ 	'tx_extbase_mvc_controller_argumentsvalidator' => $extensionClassesPath . 'MVC/Controller/ArgumentsValidator.php',
+ 	'tx_extbase_mvc_controller_controllercontext' => $extensionClassesPath . 'MVC/Controller/ControllerContext.php',
+ 	'tx_extbase_mvc_controller_controllerinterface' => $extensionClassesPath . 'MVC/Controller/ControllerInterface.php',
++	'tx_extbase_mvc_controller_extensionobjectactioncontroller' => $extensionClassesPath . 'MVC/Controller/ExtensionObjectActionController.php',
+ 	'tx_extbase_mvc_controller_flashmessages' => $extensionClassesPath . 'MVC/Controller/FlashMessages.php',
+ 	'tx_extbase_mvc_exception_infiniteloop' => $extensionClassesPath . 'MVC/Exception/InfiniteLoop.php',
+ 	'tx_extbase_mvc_exception_invalidactionname' => $extensionClassesPath . 'MVC/Exception/InvalidActionName.php',

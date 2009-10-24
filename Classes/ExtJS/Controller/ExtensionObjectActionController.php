@@ -23,7 +23,8 @@
 ***************************************************************/
 
 /**
- * A multi action controller to use when using ExtJS.
+ * A multi action controller for 'Extension Objects' in backend modules to use when using ExtJS.
+ * used for 'submodules' to other modules. Also called 'Function menu modules' in t3lib_extMgm.
  *
  * @category    Controller
  * @package     TYPO3
@@ -32,7 +33,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ExtJS_Controller_FunctionActionController extends Tx_Extbase_MVC_Controller_FunctionActionController {
+class Tx_MvcExtjs_ExtJS_Controller_ExtensionObjectActionController extends Tx_Extbase_MVC_Controller_ExtensionObjectActionController {
 
 }
 ?>
