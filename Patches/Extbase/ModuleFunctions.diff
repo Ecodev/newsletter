@@ -131,7 +131,7 @@ Index: Classes/MVC/Controller/ExtensionObjectActionController.php
 +	 * @param array $conf
 +	 * @return void
 +	 */
-+	public function init(t3lib_SCbase $pObj, $conf) {
++	public function init(t3lib_SCbase $pObj, array $conf) {
 +		// TODO? 
 +	}
 +
@@ -180,7 +180,7 @@ Index: Classes/Dispatcher.php
 -			echo $this->transfer($module, $controllerAction['controllerName'], $controllerAction['actionName']);
 -			return TRUE;
 +			$output = $this->transfer($module, $controllerAction['controllerName'], $controllerAction['actionName']);
-+			if ($echoOutput) {
++			if ($echoOutput === TRUE) {
 +				// As for SCbase modules, output of the controller/action pair should be echoed
 +				echo $output;
 +				return TRUE;
