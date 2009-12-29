@@ -1,5 +1,6 @@
 2009-12-30  Xavier Perseguers  <typo3@perseguers.ch>
 
+	* Raised version to 0.2-dev and updated dependency version of Extbase and Fluid
 	* Fixed dispatch to an action from another controller (Thanks to Fabien Udriot)
 
 2009-10-17  Xavier Perseguers  <typo3@perseguers.ch>
