@@ -1,3 +1,7 @@
+2009-12-30  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Fixed dispatch to an action from another controller (Thanks to Fabien Udriot)
+
 2009-10-17  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Fixed handling of Flash messages (to reflect changes in Core)

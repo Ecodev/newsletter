@@ -273,7 +273,22 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 				readOnly: true,
 				listeners:{
 					select:function(combo, record, index) {
-						jumpToUrl(' . $selfUrl . ' + "&SET[function]=" + record.data.key);
+						var url = ' . $selfUrl . ';
+						var keyParts = record.data.key.split("->");
+
+						// Rewrite url if "key" looks like "ControllerName->actionName"
+						if (keyParts.length > 1) {
+							var targetControllerName = keyParts[0];
+							var urlParts = url.split("=");
+							var currentControllerName = urlParts[urlParts.length - 1];
+
+							if (currentControllerName != targetControllerName) {
+								urlParts[urlParts.length - 1] = targetControllerName;
+							}
+							url = urlParts.join("=");
+						}
+
+						jumpToUrl(url + "&SET[function]=" + record.data.key);
 					}
 				}
 			});
