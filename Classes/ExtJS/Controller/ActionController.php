@@ -430,9 +430,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * into a master view encapsulating standard TYPO3's module elements. 
 	 * 
 	 * @param string $contentPanel The ExtJS panel holding the module itself
+	 * @param string $layout The layout for the Panel, which contains the module content
 	 * @return void
 	 */
-	public function renderExtJSModule($contentPanel = NULL) {
+	public function renderExtJSModule($contentPanel = NULL, $layout = 'border') {
 		if (TYPO3_MODE !== 'BE') {
 			die('renderExtJSModule() may only be called by backend modules');
 		}
@@ -524,6 +525,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 					},{
 						region: "center",
 						xtype: "panel",
+						layout: "' . $layout . '",
 						' . $content . '
 					}]
 				});

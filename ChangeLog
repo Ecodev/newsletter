@@ -1,3 +1,7 @@
+2010-10-14  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Added feature #6022: Layout property for the module panel (Thanks to Dennis Ahrens)
+
 2009-12-30  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Raised version to 0.2-dev and updated dependency version of Extbase and Fluid
