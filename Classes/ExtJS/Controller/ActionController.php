@@ -433,7 +433,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * @param string $layout The layout for the Panel, which contains the module content
 	 * @return void
 	 */
-	public function renderExtJSModule($contentPanel = NULL, $layout = 'border') {
+	public function renderExtJSModule($contentPanel = NULL, $layout = 'fit') {
 		if (TYPO3_MODE !== 'BE') {
 			die('renderExtJSModule() may only be called by backend modules');
 		}
