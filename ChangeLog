@@ -1,3 +1,7 @@
+2010-10-15  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Added feature #6025: Extend addJsFile(), addJsLibrary() and addCssFile() to allow the inclusion from other EXTs (Thanks to Dennis Ahrens)
+
 2010-10-14  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Added feature #6022: Layout property for the module panel (Thanks to Dennis Ahrens)

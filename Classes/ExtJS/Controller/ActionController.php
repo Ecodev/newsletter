@@ -213,12 +213,11 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	* Adds a JavaScript library.
+	* Adds a CSS File.
 	* 
-	* @param string $name
-	* @param string $file file to be included, relative to this extension's Javascript directory
+	* @param string $file file to be included, relative to this extension's CSS directory
+	* @param string $extKey the name of the extension, the file is located, default means that the calling EXT is used
 	* @param string $type
-	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
 	* @return void	
@@ -226,11 +225,23 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	public function addCssFile($cssFile, $rel = 'stylesheet', $media = 'screen', $title = '', $compressed = FALSE, $forceOnTop = FALSE) {
 		$cssFile = 'Resources/Public/CSS/' . $cssFile;
 		
-		if (!@is_file($this->extPath . $cssFile)) {
-			die('File "' . $this->extPath . $cssFile . '" not found!');
+		$extRelPath = $this->extRelPath;
+		$extPath = $this->extPath;
+		
+		if ($extKey != NULL) {
+			$extPath = t3lib_extMgm::extPath($extKey);
+			$extRelPath = substr($extPath, strlen(PATH_site));
 		}
 		
-		$this->pageRendererObject->addCssFile( $this->extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
+		if (!@is_file($extPath . $cssFile)) {
+			die('File "' . $extPath . $cssFile . '" not found!');
+		}
+		
+		if (TYPO3_MODE === 'FE') {
+			$this->pageRendererObject->addCssFile( $extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
+		} else {
+			$this->pageRendererObject->addCssFile( '../' . $extRelPath . $cssFile, $rel, $media, $title, $compressed, $forceOnTop);
+		}
 	}
 	
 	/**
@@ -244,45 +255,68 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	}
 	
 	/**
-	* Adds a JavaScript library.
-	* 
-	* @param string $name
-	* @param string $file file to be included, relative to this extension's Javascript directory
-	* @param string $type
-	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
-	* @param boolean $compressed	flag if library is compressed
-	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
-	* @return void	
-	*/
-	public function addJsLibrary($name, $file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
+	 * Adds a JavaScript library.
+	 * 
+	 * @param string $name
+	 * @param string $file file to be included, relative to this extension's Javascript directory
+	 * @param string $type
+	 * @param string $extKey the name of the extension, the file is located, default means that the calling EXT is used
+	 * @param boolean $compressed	flag if library is compressed
+	 * @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
+	 * @return void	
+	 */
+	public function addJsLibrary($name, $file, $extKey = NULL, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
-		if (!@is_file($this->extPath . $jsFile)) {
-			die('File "' . $this->extPath . $jsFile . '" not found!');
+		$extRelPath = $this->extRelPath;
+		$extPath = $this->extPath;
+		
+		if ($extKey != NULL) {
+			$extPath = t3lib_extMgm::extPath($extKey);
+			$extRelPath = substr($extPath, strlen(PATH_site));
+		}
+			
+		if (!@is_file($extPath . $jsFile)) {
+			die('File "' . $extPath . $jsFile . '" not found!');
 		}
 		
-		$this->pageRendererObject->addJsLibrary($name, $this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		if (TYPO3_MODE === 'FE') {
+			$this->pageRendererObject->addJsLibrary($name, $extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		} else {
+			$this->pageRendererObject->addJsLibrary($name, '../' . $extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		}
 	}
 	
 	/**
-	* Adds a JavaScript file.
-	* 
-	* @param string $name
-	* @param string $file file to be included, relative to this extension's Javascript directory
-	* @param string $type
-	* @param int $section 	t3lib_pageRendererObject::PART_HEADER (0) or t3lib_pageRendererObject::PART_FOOTER (1)
-	* @param boolean $compressed	flag if library is compressed
-	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
-	* @return void	
-	*/
-	public function addJsFile($file, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
+	 * Adds a JavaScript file.
+	 * 
+	 * @param string $file file to be included, relative to this extension's Javascript directory
+	 * @param string $type
+	 * @param string $extKey	the name of the extension, the file is located, default means that the calling EXT is used
+	 * @param boolean $compressed	flag if library is compressed
+	 * @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
+	 * @return void	
+	 */
+	public function addJsFile($file, $extKey = NULL, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
 		
-		if (!@is_file($this->extPath . $jsFile)) {
-			die('File "' . $this->extPath . $jsFile . '" not found!');
+		$extRelPath = $this->extRelPath;
+		$extPath = $this->extPath;
+		
+		if ($extKey != NULL) {
+			$extPath = t3lib_extMgm::extPath($extKey);
+			$extRelPath = substr($extPath, strlen(PATH_site));
 		}
 		
-		$this->pageRendererObject->addJsFile($this->extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		if (!@is_file($extPath . $jsFile)) {
+			die('File "' . $extPath . $jsFile . '" not found!');
+		}
+		
+		if (TYPO3_MODE === 'FE') {
+			$this->pageRendererObject->addJsFile($extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		} else {
+			$this->pageRendererObject->addJsFile('../' . $extRelPath . $jsFile, $type, $compressed, $forceOnTop);
+		}
 	}
 	
 	/**
