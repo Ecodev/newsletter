@@ -80,6 +80,9 @@ class Tx_MvcExtjs_ExtJS_Object {
 	public function build() {
 		$extjsAttributes = array();
 		foreach ($this->attributes as $key => $value) {
+			if($value instanceof Tx_MvcExtjs_ExtJS_Array || $value instanceof Tx_MvcExtjs_ExtJS_Object) {
+				$value = $value->build();
+			}
 			$extjsAttributes[] = sprintf('%s : %s', $key, $value);
 		}
 		

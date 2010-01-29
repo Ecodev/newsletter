@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Xavier Perseguers <typo3@perseguers.ch>
+*  (c) 2009-2010 Xavier Perseguers <typo3@perseguers.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -140,7 +140,73 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		
 		return sprintf($jsonReader, implode(',', $fields));
 	}
-	
+
+	/**
+	 * Creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based
+	 * on the given $class.
+	 * EXPERIMENTAL
+	 * 
+	 * @param string $class the class u like to fetch the fieldsArray for
+	 * @param mixed $obj an instance of this class
+	 * @param array $columns the columns u like to fetch an empty array will fetch all available properties
+	 * @param array $additionalGetters use this array to fetch informations from methods that will not really work on properties f.e. data that is calculated on the base of two other properties
+	 * @return Tx_MvcExtjs_ExtJS_Array this object will produce your JS Code when calling build() on it.
+	 */
+	public static function getFieldsArray($class, $obj = NULL, array $columns = array(), array $additionalGetters = array()) {
+		$fields = Tx_MvcExtjs_ExtJS_Array::create();
+		$rc = new ReflectionClass($class);
+		if ($obj) {
+			if (!is_a($obj, $class)) {
+				throw new Tx_MvcExtjs_ExtJS_Exception('Object is not a ' . $class);
+			}
+			$object = $obj;
+		} else {
+			$object = t3lib_div::makeInstance($class);
+		}
+
+		$properties = $rc->getProperties();
+		foreach ($properties as $property) {
+			if (count($columns) > 0 && !in_array($property->name, $columns)) {
+					// Current property should not be returned
+				continue;
+			}
+
+			$propertyGetterName = 'get' . ucfirst($property->name);
+			$field = Tx_MvcExtjs_ExtJS_Object::create();
+
+			if (method_exists($object, $propertyGetterName)) {
+				$type = self::getMethodReturnType($object, $propertyGetterName);
+				if ($type === 'date') {
+					$field->set('name', $property->name)
+					      ->set('type', $type)
+					      ->set('dateFormat','timestamp');
+				} else if($type) {
+					$field->set('name', $property->name)
+					      ->set('type', $type);
+				} else {
+					$field->set('name', $property->name);
+				}
+				$fields->add($field);
+			}
+		}
+
+		foreach ($additionalGetters as $propertyGetterName) {
+			$field = Tx_MvcExtjs_ExtJS_Object::create();
+
+			if (method_exists($object, $propertyGetterName)) {
+				$type = self::getMethodReturnType($object, $propertyGetterName);
+				if ($type) {
+					$field->set('name', $property->name)
+					      ->set('type', $type);
+				} else {
+					$field->set('name', $property->name);
+				}
+				$fields->add($field);
+			}
+		}
+		return $fields;
+	}
+
 	/**
 	 * Returns the return type of an object method.
 	 * EXPERIMENTAL

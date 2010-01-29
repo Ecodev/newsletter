@@ -1,3 +1,7 @@
+2010-01-29  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Added code for feature #6133: Supporting Views in mvc_extjs (Thanks to Dennis Ahrens)
+
 2010-10-15  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Added feature #6025: Extend addJsFile(), addJsLibrary() and addCssFile() to allow the inclusion from other EXTs (Thanks to Dennis Ahrens)
