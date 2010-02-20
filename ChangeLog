@@ -1,13 +1,14 @@
 2010-02-20  Xavier Perseguers  <typo3@perseguers.ch>
 
+	* Applied clean-up of backported code
 	* Backported code from branch view (code from Dennis Ahrens)
 
-2010-01-31 Dennis Ahrens <dennis.ahrens@fh-hannover.de>
+2010-01-31  Dennis Ahrens  <dennis.ahrens@fh-hannover.de>
 	
-	* Introduction of the CodeGeneration Service
+	* Added a CodeGeneration service
 	* Refactored all ViewHelpers to use the new CodeGeneration Service
-	* add support for the usage of the ViewHelpers in FE
-	* splitted the StoreViewHelper into StoreViewHelper, JsonReaderViewHelper, JsonWriterViewHelper and HttpProxy to be more flexible
+	* Added support for the usage of the ViewHelpers in FE
+	* Split the StoreViewHelper into StoreViewHelper, JsonReaderViewHelper, JsonWriterViewHelper and HttpProxy to be more flexible
 
 2010-01-29  Xavier Perseguers  <typo3@perseguers.ch>
 
