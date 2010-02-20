@@ -43,30 +43,30 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
-	
+
 	/**
 	 * the variable as js object that represents the returned field class definition
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $extend;
-	
+
 	/**
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Array
 	 */
 	protected $multiSelects;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall
 	 */
 	protected $xTypeRegistration;
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#initialize()
 	 */
@@ -74,18 +74,20 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcE
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
 		$this->multiSelects = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
-		
+
 		$this->config->set('xtype','itemselector')
 					 ->set('imagePath','../typo3conf/ext/mvc_extjs/Resources/Public/Images/');
-		$this->extend = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('itemselectorvariablename',
-																					'Ext.ux.form.ItemSelector',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
-		$this->xTypeRegistration = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall('Ext.reg',array());
+		$this->extend = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'itemselectorvariablename',
+			'Ext.ux.form.ItemSelector',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
+		$this->xTypeRegistration = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall('Ext.reg', array());
 	}
-	
+
 	/**
 	 * Renders the JS code for a store, based on a domain model into the inline JS of your module
 	 * the store automatically loads its data via AJAX.
@@ -100,7 +102,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcE
 						   $extensionName = NULL,
 						   $fromMultiSelect = NULL,
 						   $toMultiSelect = NULL) {
-						  
+
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		}
@@ -112,27 +114,27 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcE
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-		
+
 		$this->xTypeRegistration->addParameter(new Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue($xTypeName));
 		$this->xTypeRegistration->addParameter(new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($this->extJsNamespace . '.' . $varName));
-		
+
 		$this->extend->setName($varName);
-		
+
 		$this->multiSelects->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($fromMultiSelect));
 		$this->multiSelects->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($toMultiSelect));
-		
+
 		$this->injectJsCode();
 	}
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	protected function injectJsCode() {
 		$this->renderChildren();
-		
-		$this->config->setRaw('multiselects',$this->multiSelects);
+
+		$this->config->setRaw('multiselects', $this->multiSelects);
 		$this->extend->setConfig($this->config);
-		
+
 		$this->jsCode->addSnippet($this->extend);
 		$this->jsCode->addSnippet($this->xTypeRegistration); 
 		parent::injectJsCode();

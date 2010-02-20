@@ -49,6 +49,6 @@ class Tx_MvcExtjs_ViewHelpers_JsonViewHelper extends Tx_Fluid_Core_ViewHelper_Ab
 		$arr = Tx_MvcExtjs_ExtJS_Utility::encodeArrayForJSON($items);
 		return Tx_MvcExtjs_ExtJS_Utility::getJSON($arr);
 	}
-	
+
 }
 ?>

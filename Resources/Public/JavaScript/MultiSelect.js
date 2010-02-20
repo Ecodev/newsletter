@@ -321,12 +321,10 @@ Ext.ux.form.MultiSelect = Ext.extend(Ext.form.Field,  {
     }
 });
 
-
 Ext.reg('multiselect', Ext.ux.form.MultiSelect);
 
 //backwards compat
 Ext.ux.Multiselect = Ext.ux.form.MultiSelect;
-
 
 Ext.ux.form.MultiSelect.DragZone = function(ms, config){
     this.ms = ms;
@@ -351,7 +349,7 @@ Ext.extend(Ext.ux.form.MultiSelect.DragZone, Ext.dd.DragZone, {
         this.onStartDrag(x, y);
         return true;
     },
-    
+
     // private
     collectSelection: function(data) {
         data.repairXY = Ext.fly(this.view.getSelectedNodes()[0]).getXY();

@@ -33,12 +33,12 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ExtJS_FormElement extends Tx_MvcExtjs_ExtJS_Object {
-	
+
 	/**
 	 * @var string
 	 */
 	protected $namespace;
-	
+
 	/**
 	 * Returns a new FormElement.
 	 * 
@@ -50,7 +50,7 @@ class Tx_MvcExtjs_ExtJS_FormElement extends Tx_MvcExtjs_ExtJS_Object {
 		$formElement->setRequest($request);
 		return $formElement;
 	}
-	
+
 	/**
 	 * Sets the controller.
 	 * 
@@ -61,7 +61,7 @@ class Tx_MvcExtjs_ExtJS_FormElement extends Tx_MvcExtjs_ExtJS_Object {
 		$this->namespace = strtolower('tx_' . $request->getControllerExtensionName() . '_' . $request->getControllerName());
 		return $this;
 	}
-	
+
 	/**
 	 * Sets the element's xtype.
 	 * 
@@ -71,7 +71,7 @@ class Tx_MvcExtjs_ExtJS_FormElement extends Tx_MvcExtjs_ExtJS_Object {
 	public function setXType($xtype) {
 		return $this->set('xtype', $xtype);
 	}
-	
+
 	/**
 	 * Sets the Extbase object model object's field associated to the FormElement.
 	 *  
@@ -82,6 +82,6 @@ class Tx_MvcExtjs_ExtJS_FormElement extends Tx_MvcExtjs_ExtJS_Object {
 	public function setObjectModelField($objectName, $field) {
 		return $this->set('name', sprintf('%s[%s][%s]', $this->namespace, $objectName, $field));
 	}
-	
+
 }
 ?>

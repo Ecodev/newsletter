@@ -35,42 +35,42 @@
 
 //http://cms.lionsbase.loc/typo3/sysext/t3skin/icons/gfx/savedok.gif
 class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
-	
+
 	/**
 	 * @var Tx_MvcExtjs_ExtJS_Controller_ActionController
 	 */
 	protected $controller;
-	
+
 	/**
 	 * @var string
 	 */
 	protected $pluginName;
-	
+
 	/**
 	 * @var t3lib_SCbase
 	 */
 	protected $scBase;
-	
+
 	/**
 	 * @var array
 	 */
 	protected $functionMenu = array();
-	
+
 	/**
 	 * @var array
 	 */
 	protected $toolbarItems = array();
-	
+
 	/**
 	 * @var array
 	 */
 	protected $buttons;
-	
+
 	/**
 	 * @var array
 	 */
 	protected $userItems = array();
-	
+
 	/**
 	 * Default constructor.
 	 *
@@ -83,7 +83,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		$this->controller = $controller;
 		$this->pluginName = $pluginName;
 		$this->scBase = $scBase;
-		
+
 		$this->buttons = array(
 			'VIEW' => array(
 				'callback' => '',
@@ -105,7 +105,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			),
 		);
 	}
-	
+
 	/**
 	 * Sets the function menu of a backend module.
 	 *
@@ -115,7 +115,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	public function setFunctionMenu(array $functionMenu) {
 		$this->functionMenu = $this->scBase->mergeExternalItems($this->pluginName, 'function', $functionMenu);
 	}
-	
+
 	/**
 	 * Sets a callback function when button 'VIEW' is clicked.
 	 *
@@ -130,7 +130,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		}
 		$this->buttons['VIEW']['text'] = $text;
 	}
-	
+
 	/**
 	 * Sets a callback function when button 'EDIT' is clicked.
 	 *
@@ -145,7 +145,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		}
 		$this->buttons['EDIT']['text'] = $text;
 	}
-	
+
 	/**
 	 * Sets a callback function when button 'SAVE' is clicked.
 	 *
@@ -160,7 +160,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		}
 		$this->buttons['SAVE']['text'] = $text;
 	}
-	
+
 	/**
 	 * Adds a button to the toolbar.
 	 *
@@ -180,7 +180,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		if (substr($text, 0, 4) === 'LLL:') {
 			$text = $GLOBALS['LANG']->sL($text);
 		}
-		
+
 		$key = 'USER_' . count($this->buttons);
 		$this->buttons[$key] = array(
 			'icon'     => $icon,
@@ -190,7 +190,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		);
 		$this->userItems[] = $key;
 	}
-	
+
 	/**
 	 * Adds a separator.
 	 *
@@ -199,7 +199,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	public function addSeparator() {
 		$this->addExtJSItem('{ xtype: "tbspacer" }');
 	}
-	
+
 	/**
 	 * Adds an arbitrary ExtJS toolbar item.
 	 *
@@ -209,7 +209,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	public function addExtJSItem($item) {
 		$this->userItems[] = $item;
 	}
-	
+
 	/**
 	 * Initializes all ExtJS elements that will be used when integrating the toolbar into a panel items collection.
 	 *
@@ -218,20 +218,20 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 */
 	public function prepareToolbarRendering($selfUrl) {
 		$this->prepareFunctionMenu($selfUrl);
-		
+
 		if (count($this->toolbarItems) > 0) {
 			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
 		}
-		
+
 		$this->prepareButtons();
-		
+
 		if (count($this->toolbarItems) > 0) {
 			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
 		}
-		
+
 		$this->prepareUserContent();
 	}
-	
+
 	/**
 	 * Return a comma-separated list of toolbar items.
 	 *
@@ -240,7 +240,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	public function getToolbarItemList() {
 		return implode(',', $this->toolbarItems);
 	}
-	
+
 	/**
 	 * Initializes the function menu combobox.
 	 *
@@ -252,14 +252,14 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 				// Early return
 			return;
 		}
-		
+
 		$menuEntries = array();
 		foreach ($this->functionMenu as $id => $title) {
 			$menuEntry = json_encode(array($id => $title));
 			$menuEntry = preg_replace('/^{(.*)":"(.*)}/', '[\1","\2]', $menuEntry);
 			$menuEntries[] = $menuEntry;
 		}
-		
+
 		$this->controller->addJsInlineCode('
 			var funcMenu = new Ext.form.ComboBox({
 				triggerAction: "all",
@@ -293,7 +293,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 				}
 			});
 		');
-		
+
 			// Select current function
 		$set = t3lib_div::_GP('SET');
 		if ($set) {
@@ -303,14 +303,14 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			$keys = array_keys($this->functionMenu);
 			$currentFunction = $this->functionMenu[$keys[0]];
 		}
-		
+
 		$this->controller->addJsInlineCode('
 			funcMenu.setValue("' . str_replace('"', '\\"', $currentFunction) . '");
 		');
-		
+
 		$this->toolbarItems[] = 'funcMenu';
 	}
-	
+
 	/**
 	 * Initializes the toolbar buttons.
 	 *
@@ -323,7 +323,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			}
 		}
 	}
-	
+
 	/**
 	 * Prepare user-defined items
 	 *
@@ -338,7 +338,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			}
 		}
 	}
-	
+
 	/**
 	 * Appends a button to the toolbar.
 	 *
@@ -373,6 +373,6 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			}
 		}
 	}
-	
+
 }
 ?>

@@ -47,14 +47,14 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreDataViewHelper extends Tx_MvcExtj
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Array
 	 */
 	protected $array;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
 	protected $arrayVariable;
-	
+
 	/**
-	 * Initializes ViewHelper
+	 * Initializes the ViewHelper.
 	 * 
 	 * @see Classes/ViewHelpers/Be/Tx_MvcExtjs_ViewHelpers_Be_AbstractJavaScriptCodeViewHelper#initialize()
 	 */
@@ -63,7 +63,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreDataViewHelper extends Tx_MvcExtj
 		$this->array = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
 		$this->arrayVariable = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable('name',NULL,false,$this->extJsNamespace);
 	}
-	
+
 	/**
 	 * Renders the js code for a store, based on a domain model into the inline JS of your module.
 	 * The store automatically loads its data via AJAX.
@@ -85,19 +85,19 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreDataViewHelper extends Tx_MvcExtj
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the for the JS store variable
+			// Vuild up and set the for the JS store variable
 		$varNameStore = $domainModel . 'ArrayData';
 		$this->arrayVariable->setName($varNameStore);
-	
+
 		$dataArray = array();
 		foreach ($data as $object) {
 			$dataArray[] = $this->convertObjectToArray($object);
 		}
 		$this->array->setElements($dataArray);
-		
+
 		$this->injectJsCode();
 	}
-	
+
 	/**
 	 * Converts the given object into an array that can be read by an Ext.data.ArrayStore that was created with 
 	 * the Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreViewHelper.
@@ -110,30 +110,32 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreDataViewHelper extends Tx_MvcExtj
 	protected function convertObjectToArray($object) {
 		$objectArray = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array;
 		$properties = $object->_getProperties();
+
 		foreach($properties as $name => $value) {
 			if (count($columns) > 0 && !in_array($name, $columns)) {
 					// Current property should not be returned
 				continue;
 			}
-			if($value instanceof DateTime)
+			if ($value instanceof DateTime) {
 				$value = $value->format('U');
+			}
+
 			$objectArray->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue($value));
 		}
 		return $objectArray;
 	}
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	protected function injectJsCode() {
 		$this->arrayVariable->setValue($this->array);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->arrayVariable);
 		parent::injectJsCode();
 	}
-	
 
 }
 ?>

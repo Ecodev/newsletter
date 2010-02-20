@@ -53,7 +53,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreViewHelper extends Tx_MvcExtjs_Vi
 		parent::initialize();
 		$this->store->setClass('Ext.data.ArrayStore');
 	}
-	
+
 	/**
 	 * Renders the js code for a array store, based on a domain model into the inline JS of your module.
 	 * This Store wants it's data as parameter - the parameter is a JS variable which must exist, when this code is added to the
@@ -86,18 +86,22 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreViewHelper extends Tx_MvcExtjs_Vi
 						   $batch = FALSE,
 						   $autoLoad = FALSE,
 						   $idProperty = 'uid') {
-		if ($extensionName === NULL)
+
+		if ($extensionName === NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
+		}
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
-			// build up and set the for the JS store variable
+			// Build up and set the for the JS store variable
 		$varNameReader = $domainModel . 'JsonReader';
-		
-		if ($idProperty != NULL) $this->config->set('idProperty',$idProperty);
-		
+
+		if ($idProperty != NULL) {
+			$this->config->set('idProperty',$idProperty);
+		}
+
 		$fields = Tx_MvcExtjs_ExtJS_Utility::getFieldsArray($domainClassName);
 		$this->config->setRaw('fields',$fields);
-		
-		parent::render($domainModel,$extensionName,$id,$name,NULL,$writer,$proxy,$data,$autoSave,$restful,$batch,$autoLoad);
+
+		parent::render($domainModel, $extensionName, $id, $name, NULL, $writer, $proxy, $data, $autoSave, $restful, $batch, $autoLoad);
 	}
 
 }

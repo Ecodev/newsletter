@@ -38,12 +38,12 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	 * @var string
 	 */
 	protected $extJSNamespace;
-	
+
 	/**
 	 * @var settings
 	 */
 	protected $settings = array();
-	
+
 	/**
 	 * Default constructor
 	 *
@@ -52,7 +52,7 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	public function __construct($extJSNamespace) {
 		$this->extJSNamespace = $extJSNamespace;
 	}
-	
+
 	/**
 	 * Returns an ExtJS setting.
 	 *
@@ -63,7 +63,7 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	public function getExtJS($name) {
 		return $this->extJSNamespace .  '.settings.' . $name;
 	}
-	
+
 	/**
 	 * Assigns a setting.
 	 *
@@ -74,7 +74,7 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	public function assign($name, $value) {
 		$this->settings[$name] = $value;
 	}
-	
+
 	/**
 	 * Returns the number of ExtJS settings.
 	 *
@@ -83,7 +83,7 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	public function count() {
 		return count($this->settings);
 	}
-	
+
 	/**
 	 * Serializes the settings to get an ExtJS code snippet.
 	 *
@@ -92,6 +92,6 @@ class Tx_MvcExtjs_ExtJS_SettingsService {
 	public function serialize() {
 		return $this->extJSNamespace . '.settings = ' . json_encode($this->settings) . ';';
 	}
-	
+
 }
 ?>

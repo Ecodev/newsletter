@@ -41,34 +41,34 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_Be_DefaultExtOnReadyViewportViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
 	protected $startup;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall
 	 */
 	protected $viewport;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $viewportConfig;
-	
+
 	/**
 	 * @see Classes/ViewHelpers/Be/Tx_MvcExtjs_ViewHelpers_Be_AbstractJavaScriptCodeViewHelper#initialize()
 	 */
 	public function initialize() {
 		parent::initialize();
 		$this->extOnReady = TRUE;
-		$this->startup = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable('main',NULL,false,$this->extJsNamespace);
-		$this->viewportConfig = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->viewport = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor('viewport','Ext.Viewport',$this->viewportConfig,array(),FALSE);
-		$this->startupCall = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall($this->extJsNamespace . '.main.init');
+		$this->startup = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Variable', 'main', NULL, FALSE, $this->extJsNamespace);
+		$this->viewportConfig = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config');
+		$this->viewport = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor', 'viewport', 'Ext.Viewport', $this->viewportConfig, array(), FALSE);
+		$this->startupCall = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall', $this->extJsNamespace . '.main.init');
 	}
-	
+
 	/**
 	 * The render method of the viewhelper.
 	 * It checks the parameters for correctness and adds Ext.onReady() Code into your header.
@@ -98,7 +98,8 @@ class Tx_MvcExtjs_ViewHelpers_Be_DefaultExtOnReadyViewportViewHelper extends Tx_
 			default:
 				throw new Tx_MvcExtjs_ExtJS_Exception('The given layout (' . $layout . ') is not supported by extjs',1264270609 );
 		}
-			// prepare itemArray for the Viewport
+
+			// Prepare itemArray for the Viewport
 		$itemArray = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
 		foreach ($items as $item)
 			$itemArray->addElement($item);
@@ -106,29 +107,29 @@ class Tx_MvcExtjs_ViewHelpers_Be_DefaultExtOnReadyViewportViewHelper extends Tx_
 		$this->viewportConfig->set('layout',$layout)
 							 ->setRaw('renderTo','Ext.getBody()')
 							 ->setRaw('items',$itemArray);
-		
-			// build up the need JS Code Contexts
+
+			// Build up the need JS Code Contexts
 		$this->startUp();
-		
+
 		$this->jsCode->addSnippet($this->startup);
 		$this->jsCode->addSnippet($this->startupCall);
 		$this->injectJsCode();
 	}
-	
+
 	/**
-	 * Sets up the startup variable
+	 * Sets up the startup variable.
 	 * 
 	 * @param $snippet
 	 * @return void
 	 */
 	protected function startUp() {
 		$this->viewport->setConfig($this->viewportConfig);
-		$returnStatement = new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet('return ');
-		$objectDefinition = new Tx_MvcExtjs_CodeGeneration_JavaScript_Object();
-		$objectInitFunction = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration(array(),array($this->viewport),TRUE);
-		$objectInitElement = new Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement('init',$objectInitFunction);
+		$returnStatement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet', 'return ');
+		$objectDefinition = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Object');
+		$objectInitFunction = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration', array(), array($this->viewport), TRUE);
+		$objectInitElement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement', 'init', $objectInitFunction);
 		$objectDefinition->addElement($objectInitElement);
-		$value = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration(array(),array($returnStatement,$objectDefinition),FALSE,TRUE);
+		$value = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration', array(), array($returnStatement, $objectDefinition), FALSE, TRUE);
 		$this->startup->setValue($value);
 	}
 

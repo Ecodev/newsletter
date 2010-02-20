@@ -51,10 +51,10 @@ class Tx_MvcExtjs_ViewHelpers_IncludeCssFileViewHelper extends Tx_MvcExtjs_ViewH
 	 * @return string the link 
 	 */
 	public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/Styles/') {
-		if ($extKey == NULL) {
+		if ($extKey === NULL) {
 			$extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
 		}
-		
+
 		if (TYPO3_MODE === 'FE') {
 			$extPath = t3lib_extMgm::extPath($extKey);
 			$extRelPath = substr($extPath, strlen(PATH_site));

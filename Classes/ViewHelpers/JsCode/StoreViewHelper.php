@@ -47,13 +47,12 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $store;
-	
+
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
 	 * Initializes the ViewHelper
 	 * 
@@ -62,14 +61,16 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 	public function initialize() {
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->store = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('defaultStoreName',
-																				   'Ext.data.Store',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
+		$this->store = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'defaultStoreName',
+			'Ext.data.Store',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
 	}
-	
+
 	/**
 	 * Renders the js code for a store, based on a domain model into the inline JS of your module.
 	 * The store automatically loads its data via AJAX.
@@ -110,55 +111,39 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the name for the JS store variable
+			// Build up and set the name for the JS store variable
 		$varNameStore = $domainModel . 'Store';
 		if ($name === NULL) {
 			$this->store->setName($varNameStore);
 		} else {
 			$this->store->setName($name);
 		}
-			// read the given config parameters into the Extjs Config Object
-		if($id !== NULL) $this->config->set('storeId',$id);
-		if($reader !== NULL) $this->config->setRaw('reader',$reader);
-		if($writer !== NULL) $this->config->setRaw('writer',$writer);
-		if($proxy !== NULL) $this->config->setRaw('proxy',$proxy);
-		if($data !== NULL) $this->config->setRaw('data',$data);
-		if ($autoSave) {
-			$this->config->setRaw('autoSave','true');
-		} else {
-			$this->config->setRaw('autoSave','false');
-		}
-		if ($restful) {
-			$this->config->setRaw('restful','true');
-		} else {
-			$this->config->setRaw('restful','false');
-		}
-		if ($batch) {
-			$this->config->setRaw('batch','true');
-		} else {
-			$this->config->setRaw('batch','false');
-		}
-		if ($autoLoad) {
-			$this->config->setRaw('autoLoad','true');
-		} else {
-			$this->config->setRaw('autoLoad','false');
-		}
-			// apply the configuration again
+			// Read the given config parameters into the Extjs Config Object
+		if ($id !== NULL) $this->config->set('storeId', $id);
+		if ($reader !== NULL) $this->config->setRaw('reader', $reader);
+		if ($writer !== NULL) $this->config->setRaw('writer', $writer);
+		if ($proxy !== NULL) $this->config->setRaw('proxy', $proxy);
+		if ($data !== NULL) $this->config->setRaw('data', $data);
+		$this->config->setRaw('autoSave', $autoSave ? 'true' : 'false');
+		$this->config->setRaw('restful', $restful ? 'true' : 'false');
+		$this->config->setRaw('batch', $batch ? 'true' : 'false');
+		$this->config->setRaw('autoLoad', $autoLoad ? 'true' : 'false');
+
+			// Apply the configuration again
 		$this->injectJsCode();
 	}
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	protected function injectJsCode() {
 		$this->store->setConfig($this->config);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->store);
 		parent::injectJsCode();
 	}
-	
 
 }
 ?>

@@ -44,17 +44,15 @@
 class Tx_MvcExtjs_ViewHelpers_JsCode_JsonWriterViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
 
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $writer;
-	
+
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
 	 * Initializes the ViewHelper
 	 * 
@@ -63,14 +61,16 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonWriterViewHelper extends Tx_MvcExtjs_Vi
 	public function initialize() {
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->writer = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('defaultJsonReaderName',
-																				   'Ext.data.JsonWriter',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
+		$this->writer = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'defaultJsonReaderName',
+			'Ext.data.JsonWriter',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
 	}
-	
+
 	/**
 	 * Renders the Code for a JsonReader build up on the data given by the domainModel
 	 * 
@@ -86,22 +86,25 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonWriterViewHelper extends Tx_MvcExtjs_Vi
 						   $id = NULL,
 						   $encode = TRUE,
 						   $writeAllFields = FALSE) {
-		if ($extensionName === NULL)
+
+		if ($extensionName === NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
+		}
+
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
 			// Check if the given domain model class exists
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the for the JS store variable
+			// Build up and set the for the JS store variable
 		$varNameReader = $domainModel . 'JsonWriter';
 		$this->writer->setName($varNameReader);
-			// read the given config parameters into the Extjs Config Object
-		($id === NULL) ? $this->config->set('id',$varNameReader) : $this->config->set('id',$id);
-		($encode) ? $this->config->setRaw('encode','true') : $this->config->setRaw('encode','false');
-		($writeAllFields) ? $this->config->setRaw('writeAllFields','true') : $this->config->setRaw('writeAllFields','false');
-		
-		// add a addional function to the writer
+			// Read the given config parameters into the Extjs Config Object
+		$this->config->set('id', ($id === NULL) ? $varNameReader : $id);
+		$this->config->setRaw('encode', $encode ? 'true' : 'false');
+		$this->config->setRaw('writeAllFields', $writeAllFields ? 'true' : 'false');
+
+		// Add a addional function to the writer
 		// target should be that the param on update f.e. is not named like the root of the store
 		// we want the controller parameter scheme to be matched
 		/*$updateCode = '
@@ -125,20 +128,20 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonWriterViewHelper extends Tx_MvcExtjs_Vi
         }
         return params;';
 		$this->writer->addFunction('update',array('rs'),$updateCode);*/
-		
+
 		$this->injectJsCode();
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	public function injectJsCode() {
-		// apply the configuration again
+			// Apply the configuration again
 		$this->writer->setConfig($this->config);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->writer);
 		parent::injectJsCode();
 	}

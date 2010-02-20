@@ -42,14 +42,14 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 */
 	public static function encodeArrayForJSON(array $objects) {
 		$arr = array();
-		
+
 		foreach ($objects as $object) {
 			$arr[] = self::encodeObjectForJSON($object);
 		}
-		
+
 		return $arr;
 	}
-	
+
 	/**
 	 * Encodes an object to be used by JSON later on.
 	 *
@@ -62,15 +62,15 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		} elseif (!($object instanceof Tx_Extbase_DomainObject_AbstractEntity)) {
 			return $object;
 		}
-		
+
 		$arr = array();
-		
+
 		$rc = new ReflectionClass(get_class($object));
 		$properties = $rc->getProperties();
-		
+
 		foreach ($properties as $property) {
 			$propertyGetterName = 'get' . ucfirst($property->name);
-			
+
 			if (method_exists($object, $propertyGetterName)) {
 				$value = call_user_func(array($object, $propertyGetterName));
 				if (is_array($value)) {
@@ -81,10 +81,10 @@ class Tx_MvcExtjs_ExtJS_Utility {
 				$arr[$property->name] = $value;
 			}
 		}
-		
+
 		return $arr;
 	}
-	
+
 	/**
 	 * Returns an Ext.data.JsonReader for objects of
 	 * class $class.
@@ -101,14 +101,14 @@ class Tx_MvcExtjs_ExtJS_Utility {
 			totalProperty: "totalItems",
 			id: "uid"
 		})';
-		
+
 			// uid should always be returned
 		if (count($columns) > 0 && !in_array('uid', $columns)) {
 			$columns[] = 'uid';
 		}
-		
+
 		$fields = array();
-		
+
 		$rc = new ReflectionClass($class);
 		if ($obj) {
 			if (!is_a($obj, $class)) {
@@ -119,15 +119,15 @@ class Tx_MvcExtjs_ExtJS_Utility {
 			$object = t3lib_div::makeInstance($class);
 		}
 		$properties = $rc->getProperties();
-		
+
 		foreach ($properties as $property) {
 			if (count($columns) > 0 && !in_array($property->name, $columns)) {
 					// Current property should not be returned
 				continue;
 			}
-			
+
 			$propertyGetterName = 'get' . ucfirst($property->name);
-			
+
 			if (method_exists($object, $propertyGetterName)) {
 				$type = self::getMethodReturnType($object, $propertyGetterName);
 				if ($type) {
@@ -137,7 +137,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 				}
 			}
 		}
-		
+
 		return sprintf($jsonReader, implode(',', $fields));
 	}
 
@@ -168,10 +168,10 @@ class Tx_MvcExtjs_ExtJS_Utility {
 					// Current property should not be returned
 				continue;
 			}
-			
+
 			$propertyGetterName = 'get' . ucfirst($property->name);
 			$field = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config;
-			
+
 			if (method_exists($object, $propertyGetterName)) {
 				$type = self::getMethodReturnType($object, $propertyGetterName);
 				if ($type == 'date') {
@@ -189,7 +189,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		}
 		foreach ($additionalGetters as $propertyGetterName) {
 			$field = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config;
-			
+
 			if (method_exists($object, $propertyGetterName)) {
 				$type = self::getMethodReturnType($object, $propertyGetterName);
 				if ($type) {
@@ -203,7 +203,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		}
 		return $fields;
 	}
-	
+
 	/**
 	 * Returns the return type of an object method.
 	 * EXPERIMENTAL
@@ -215,7 +215,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	private static function getMethodReturnType($object, $methodName) {
 		$method = new ReflectionMethod($object, $methodName);
 		$phpDoc = $method->getDocComment();
-		
+
 		$type = '';
 		if (preg_match('/@return\\s+(\\w+)/', $phpDoc, $matches)) {
 			switch ($matches[1]) {
@@ -238,10 +238,10 @@ class Tx_MvcExtjs_ExtJS_Utility {
 					break;
 			}
 		}
-		
+
 		return $type;
 	}
-	
+
 	/**
 	 * Returns a JSON-encoded array to be consumed by ExtJS.
 	 *
@@ -254,7 +254,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 			'results' => $a,
 		));
 	}
-	
+
 	/**
 	 * Encodes a html snippet in order to include it in an ExtJS declaration.
 	 *  
@@ -263,10 +263,10 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 */
 	public static function encodeInlineHtml($html) {
 		$html = str_replace(array('"', "\n"), array('\\"', '\\n'), $html);
-		
+
 		return '"' . $html . '"';
 	}
-	
+
 	/**
 	 * Returns an array of ExtJS form elements associated to an Extbase action.
 	 * 
@@ -292,6 +292,6 @@ class Tx_MvcExtjs_ExtJS_Utility {
 				->set('value', $action),
 		);
 	}
-	
+
 }
 ?>

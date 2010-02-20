@@ -33,9 +33,9 @@
  * @version     SVN: $Id:
  */
 class Tx_MvcExtjs_ViewHelpers_Json_StoreUpdateResponseViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
-	
+
 	/**
-	 * Renders a json response for a extjs CRUD store read request
+	 * Renders a JSON response for a ExtJS CRUD store read request.
 	 * 
 	 * @param array $data
 	 * @param string $message
@@ -43,22 +43,17 @@ class Tx_MvcExtjs_ViewHelpers_Json_StoreUpdateResponseViewHelper extends Tx_Flui
 	 * @param array columns
 	 * @return string
 	 */
-	public function render(array $data = array(), $message = 'default message', $success = true, array $columns = array()) {
+	public function render(array $data = array(), $message = 'default message', $success = TRUE, array $columns = array()) {
 		$this->columns = $columns;
 		$responseArray = array();
 		$responseArray['message'] = $message;
 		$responseArray['total'] = count($objects);
-		
-		if ($success) {
-			$responseArray['success'] = true;
-		} else {
-			$responseArray['success'] = false;
-		}
-		
+		$responseArray['success'] = $success;
+
 		$responseArray['data'] = $data;
-		
+
 		return json_encode($responseArray);
 	}
-	
+
 }
 ?>

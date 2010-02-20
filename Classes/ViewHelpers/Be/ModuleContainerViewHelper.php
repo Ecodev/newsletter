@@ -83,7 +83,7 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 						   $enableExtJSQuickTips = TRUE) {
 
 		$doc = $this->getDocInstance();
-						   	
+
 		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		$controllerName = $this->controllerContext->getRequest()->getControllerName();
 		$this->extJsNamespace = $extensionName . '.' . $controllerName;

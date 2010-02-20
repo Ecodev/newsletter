@@ -33,7 +33,7 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_Exception extends Exception {
-	
+
 }
 
 ?>

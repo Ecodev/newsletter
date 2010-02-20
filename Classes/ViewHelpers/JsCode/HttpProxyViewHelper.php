@@ -44,33 +44,34 @@
 class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
 
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $proxy;
-	
+
 	/**
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
-	 * override this method to change the StoreType f.e.
+	 * Overrides this method to change the StoreType f.e.
 	 * 
 	 * @see Classes/ViewHelpers/Be/Tx_MvcExtjs_ViewHelpers_Be_AbstractJavaScriptCodeViewHelper#initialize()
 	 */
 	public function initialize() {
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->proxy = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('defaultProxyName',
-																				   'Ext.data.HttpProxy',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
+		$this->proxy = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'defaultProxyName',
+			'Ext.data.HttpProxy',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
 	}
-	
+
 	/**
 	 * Renders the js code for a store, based on a domain model into the inline JS of your module.
 	 * The store automatically loads its data via AJAX.
@@ -87,21 +88,26 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 						   $id = NULL,
 						   $controller = NULL,
 						   $api = array()) {
-		if ($extensionName === NULL)
+
+		if ($extensionName === NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
+		}
+
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
 			// Check if the given domain model class exists
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the for the JS store variable
+			// Build up and set the for the JS store variable
 		$varNameProxy = $domainModel . 'HttpProxy';
 		$this->proxy->setName($varNameProxy);
+
 			// read the given config parameters into the Extjs Config Object
-		($id === NULL) ? $this->config->set('id',$varNameProxy) : $this->config->set('id',$id);
-		
+		$this->config->set('id', ($id === NULL) ? $varNameProxy : $id);
+
 		$apiObject = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
 		$uriBuilder = $this->controllerContext->getUriBuilder();
+
 		foreach ($api as $apiCall => $action) {
 			switch ($apiCall) {
 				case 'read':
@@ -111,16 +117,16 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 					// TODO: move the "hack" that allow ajax communication in FE to a better location
 					$uri = $uriBuilder->reset()->uriFor($action,array('format' => 'json'), $controller) . '&type=1249117332';
 					$apiActionObject = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-					$apiActionObject->set('url',$uri);
-					$apiActionObject->set('method','POST');
+					$apiActionObject->set('url', $uri);
+					$apiActionObject->set('method', 'POST');
 					$apiObject->setRaw($apiCall, $apiActionObject);
 					break;
 				default:
-					throw new Tx_Fluid_Exception('The extjs HttpProxy-API only knows about read, new, update and destroy, your value: ' . $apiCall . ' is not supported',1264095568);
+					throw new Tx_Fluid_Exception('The extjs HttpProxy-API only knows about read, new, update and destroy, your value: ' . $apiCall . ' is not supported', 1264095568);
 			}
 		}
-		$this->config->setRaw('api',$apiObject);
-		
+		$this->config->setRaw('api', $apiObject);
+
 		$this->injectJsCode();
 	}
 
@@ -129,11 +135,11 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	protected function injectJsCode() {
-			// apply the configuration again
+			// Apply the configuration again
 		$this->proxy->setConfig($this->config);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->proxy);
 		parent::injectJsCode();
 	}

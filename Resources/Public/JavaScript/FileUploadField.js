@@ -83,7 +83,7 @@ Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
         this.bindListeners();
         this.resizeEl = this.positionEl = this.wrap;
     },
-    
+
     bindListeners: function(){
         this.fileInput.on({
             scope: this,
@@ -106,7 +106,7 @@ Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
             }
         }); 
     },
-    
+
     createFileInput : function() {
         this.fileInput = this.wrap.createChild({
             id: this.getFileInputId(),
@@ -117,7 +117,7 @@ Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
             size: 1
         });
     },
-    
+
     reset : function(){
     	if (this.fileInput) {
     		this.fileInput.remove();
@@ -149,24 +149,23 @@ Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
         Ext.ux.form.FileUploadField.superclass.onDestroy.call(this);
         Ext.destroy(this.fileInput, this.button, this.wrap);
     },
-    
+
     onDisable: function(){
         Ext.ux.form.FileUploadField.superclass.onDisable.call(this);
         this.doDisable(true);
     },
-    
+
     onEnable: function(){
         Ext.ux.form.FileUploadField.superclass.onEnable.call(this);
         this.doDisable(false);
 
     },
-    
+
     // private
     doDisable: function(disabled){
         this.fileInput.dom.disabled = disabled;
         this.button.setDisabled(disabled);
     },
-
 
     // private
     preFocus : Ext.emptyFn,

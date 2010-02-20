@@ -135,7 +135,7 @@ Ext.ux.form.ItemSelector = Ext.extend(Ext.form.Field,  {
         var hiddenTag = {tag: "input", type: "hidden", value: "", name: this.name};
         this.hiddenField = this.el.createChild(hiddenTag);
     },
-    
+
     doLayout: function(){
         if(this.rendered){
             this.fromMultiselect.fs.doLayout();

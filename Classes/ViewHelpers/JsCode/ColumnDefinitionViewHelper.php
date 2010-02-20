@@ -43,14 +43,14 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
-	
+
 	/**
 	 * The variable as js object that represents the returned column definition
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
 	protected $columnVariable;
-	
+
 	/**
 	 * Renders the JS code for a store, based on a domain model into the inline JS of your module
 	 * 
@@ -64,6 +64,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcEx
 						   array $columns = array(),
 						   array $hiddenColumns = array(),
 						   array $specialRenderer = array()) {
+
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		}
@@ -75,12 +76,12 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcEx
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// create the js object
+			// Create the js object
 		$columnArray = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
 
 		$rClass = t3lib_div::makeInstance('Tx_Extbase_Reflection_ClassReflection', $domainClassName);
 		$rProperties = $rClass->getProperties();
-		
+
 		foreach ($rProperties as $rProperty) {
 			$columnDef = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
 			// TODO: fetch label from TCA?
@@ -88,22 +89,21 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcEx
 					  ->set('dataIndex', $rProperty->getName())
 					  ->setRaw('sortable', 'true');
 			if (isset($specialRenderer[$rProperty->getName()])) { 
-				$columnDef->setRaw('renderer',$specialRenderer[$rProperty->getName()]);
+				$columnDef->setRaw('renderer', $specialRenderer[$rProperty->getName()]);
 			}
-			if (in_array($rProperty->getName(),$hiddenColumns)) {
-				$columnDef->setRaw('hidden','true');
+			if (in_array($rProperty->getName(), $hiddenColumns)) {
+				$columnDef->setRaw('hidden', 'true');
 			} else {
-				$columnDef->setRaw('hidden','false');
+				$columnDef->setRaw('hidden', 'false');
 			}
 			$columnArray->addElement($columnDef);
 		}
-		
-		$this->columnVariable = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable($this->extJsNamespace . '.' . $varName,$columnArray);
-		
+
+		$this->columnVariable = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Variable', $this->extJsNamespace . '.' . $varName, $columnArray);
+
 		$this->jsCode->addSnippet($this->columnVariable); 
 		$this->injectJsCode();
 	}
 
 }
-
 ?>

@@ -48,13 +48,13 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonReaderViewHelper extends Tx_MvcExtjs_Vi
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $reader;
-	
+
 	/**
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
 	 * Initializes the ViewHelper - prepares JS code objects
 	 * 
@@ -63,14 +63,16 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonReaderViewHelper extends Tx_MvcExtjs_Vi
 	public function initialize() {
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->reader = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('defaultJsonReaderName',
-																				   'Ext.data.JsonReader',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
+		$this->reader = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'defaultJsonReaderName',
+			'Ext.data.JsonReader',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
 	}
-	
+
 	/**
 	 * Renders the Code for a JsonReader build up on the data given by the domainModel
 	 * 
@@ -90,28 +92,33 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonReaderViewHelper extends Tx_MvcExtjs_Vi
 						   $idProperty = 'uid',
 						   $root = 'data',
 						   $fields = NULL) {
-		if ($extensionName === NULL)
+
+		if ($extensionName === NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
+		}
+
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
 			// Check if the given domain model class exists
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the for the JS store variable
+			// Build up and set the for the JS store variable
 		$varNameReader = $domainModel . 'JsonReader';
 		$this->reader->setName($varNameReader);
 		$fields = Tx_MvcExtjs_ExtJS_Utility::getFieldsArray($domainClassName);
-			// read the given config parameters into the Extjs Config Object
-		$this->config->set('totalProperty',$totalProperty)
-					 ->set('successProperty',$successProperty)
-					 ->set('idProperty',$idProperty)
-					 ->set('root',$root)
-					 ->setRaw('fields',$fields);
-			// apply the configuration again
+
+			// Read the given config parameters into the Extjs Config Object
+		$this->config->set('totalProperty', $totalProperty)
+					 ->set('successProperty', $successProperty)
+					 ->set('idProperty', $idProperty)
+					 ->set('root', $root)
+					 ->setRaw('fields', $fields);
+
+			// Apply the configuration again
 		$this->reader->setConfig($this->config);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->reader);
 		$this->injectJsCode();
 	}

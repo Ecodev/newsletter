@@ -52,9 +52,8 @@
  */
 class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
-
 	/**
-	 * Renders the module into a given div container
+	 * Renders the module into a given div container.
 	 *
 	 * @param string $divContainerId title tag of the module. Not required by default, as BE modules are shown in a frame
 	 * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to TRUE
@@ -77,7 +76,7 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		$controllerName = $this->controllerContext->getRequest()->getControllerName();
 		$this->extJsNamespace = $extensionName . '.' . $controllerName;
-		
+
 		if ($loadPrototype) {
 			$this->pageRenderer->loadPrototype();
 		}
@@ -90,7 +89,7 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 				$this->pageRenderer->enableExtJsDebug();
 			}
 		}
-		
+
 		$jsNS  = "\n" . 'Ext.ns(\'' . $this->extJsNamespace . '\');' . "\n";
 
 		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Plugin',$jsNS);

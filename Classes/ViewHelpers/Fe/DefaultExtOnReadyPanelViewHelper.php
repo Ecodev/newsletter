@@ -41,25 +41,23 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_Fe_DefaultExtOnReadyPanelViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
-	
+
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
 	protected $startup;
-	
+
 	/**
-	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall
 	 */
 	protected $panel;
-	
+
 	/**
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $panelConfig;
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see Classes/ViewHelpers/Be/Tx_MvcExtjs_ViewHelpers_Be_AbstractJavaScriptCodeViewHelper#initialize()
@@ -67,12 +65,12 @@ class Tx_MvcExtjs_ViewHelpers_Fe_DefaultExtOnReadyPanelViewHelper extends Tx_Mvc
 	public function initialize() {
 		parent::initialize();
 		$this->extOnReady = TRUE;
-		$this->startup = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable('plugin',NULL,false,$this->extJsNamespace);
-		$this->panelConfig = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		$this->panel = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor('panel','Ext.Panel',$this->panelConfig,array(),FALSE);
-		$this->startupCall = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall($this->extJsNamespace . '.plugin.init');
+		$this->startup = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Variable', 'plugin', NULL, FALSE, $this->extJsNamespace);
+		$this->panelConfig = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config');
+		$this->panel = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor', 'panel', 'Ext.Panel', $this->panelConfig, array(), FALSE);
+		$this->startupCall = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall', $this->extJsNamespace . '.plugin.init');
 	}
-	
+
 	/**
 	 * The render method of the viewhelper.
 	 * It checks the parameters for correctness and adds Ext.onReady() Code into your header.
@@ -101,42 +99,44 @@ class Tx_MvcExtjs_ViewHelpers_Fe_DefaultExtOnReadyPanelViewHelper extends Tx_Mvc
 			case 'auto':
 				break;
 			default:
-				throw new Tx_MvcExtjs_ExtJS_Exception('The given layout (' . $layout . ') is not supported by extjs',1264270609 );
+				throw new Tx_MvcExtjs_ExtJS_Exception('The given layout (' . $layout . ') is not supported by extjs', 1264270609);
 		}
-			// prepare itemArray for the Panel
+
+			// Prepare itemArray for the Panel
 		$itemArray = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
-		foreach ($items as $item)
+		foreach ($items as $item) {
 			$itemArray->addElement($item);
-		
+		}
+
 		$this->renderTo = $renderTo;
-		$this->panelConfig->set('layout',$layout)
-						  ->set('renderTo',$renderTo)
-						  ->setRaw('items',$itemArray)
-						  ->setRaw('width','500')
-						  ->setRaw('height','600');
-		
-			// build up the need JS Code Contexts
+		$this->panelConfig->set('layout', $layout)
+						  ->set('renderTo', $renderTo)
+						  ->setRaw('items', $itemArray)
+						  ->setRaw('width', '500')
+						  ->setRaw('height', '600');
+
+			// Build up the need JS Code Contexts
 		$this->startUp();
-		
+
 		$this->jsCode->addSnippet($this->startup);
 		$this->jsCode->addSnippet($this->startupCall);
 		$this->injectJsCode();
 	}
-	
+
 	/**
-	 * Sets up the startup variable
+	 * Sets up the startup variable.
 	 * 
 	 * @param $snippet
 	 * @return void
 	 */
 	protected function startUp() {
 		$this->panel->setConfig($this->panelConfig);
-		$returnStatement = new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet('return ');
-		$objectDefinition = new Tx_MvcExtjs_CodeGeneration_JavaScript_Object();
-		$objectInitFunction = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration(array(),array($this->panel/*,$panelRenderCall*/),TRUE);
-		$objectInitElement = new Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement('init',$objectInitFunction);
+		$returnStatement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet', 'return ');
+		$objectDefinition = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Object');
+		$objectInitFunction = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration', array(), array($this->panel /*,$panelRenderCall*/), TRUE);
+		$objectInitElement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement', 'init', $objectInitFunction);
 		$objectDefinition->addElement($objectInitElement);
-		$value = new Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration(array(),array($returnStatement,$objectDefinition),FALSE,TRUE);
+		$value = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration', array(), array($returnStatement, $objectDefinition), FALSE, TRUE);
 		$this->startup->setValue($value);
 	}
 

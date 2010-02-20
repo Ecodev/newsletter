@@ -43,33 +43,35 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_JsCode_MultiSelectFieldViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
-	
+
 	/**
 	 * The variable as js object that represents the returned field class definition
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass
 	 */
 	protected $extend;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	public function initialize() {
 		parent::initialize();
 		$this->config = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-		
-		$this->extend = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass('multiselectvariablename',
-																					'Ext.ux.form.MultiSelect',
-																					array(),
-																					$this->config,
-																					new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
-																					$this->extJsNamespace);
+
+		$this->extend = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_ExtendClass(
+			'multiselectvariablename',
+			'Ext.ux.form.MultiSelect',
+			array(),
+			$this->config,
+			new Tx_MvcExtjs_CodeGeneration_JavaScript_Object(),
+			$this->extJsNamespace
+		);
 	}
-	
+
 	/**
-	 * Renders the JS code for a MultiSelect Field, based on a domain model into the inline JS of your module
+	 * Renders the JS code for a MultiSelect Field, based on a domain model into the inline JS of your module.
 	 * 
 	 * @param string $name is used as variable name AND storeId for the generated store
 	 * @param string $extensionName
@@ -99,7 +101,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_MultiSelectFieldViewHelper extends Tx_MvcEx
 						   $maxSelections = NULL,
 						   $minSelectionsText = NULL,
 						   $maxSelectionsText = NULL) {
-						  
+
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		}
@@ -110,32 +112,32 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_MultiSelectFieldViewHelper extends Tx_MvcEx
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-		
+
 		if ($name !== NULL) {
 			$this->extend->setName($name);
 		} else {
 			$this->extend->setName($varName);
 		}
-		
+
 		if ($store == NULL) {
 			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a multiselect field needs a store',1265886143);
 		} else {
 			$this->config->setRaw('store',$store);
 		}
-		
-		if ($width !== NULL) $this->config->setRaw('width',$width);
-		if ($height !== NULL) $this->config->setRaw('height',$height);
-		if ($displayField !== NULL) $this->config->set('displayField',$displayField);
-		if ($valueField !== NULL) $this->config->set('valueField',$valueField);
-		if ($legend !== NULL) $this->config->set('legend',$legend);
-		if ($minSelections !== NULL) $this->config->setRaw('minSelections',$minSelections);
-		if ($maxSelections !== NULL) $this->config->setRaw('maxSelections',$maxSelections);
-		if ($minSelectionsText !== NULL) $this->config->set('minSelectionsText',$minSelectionsText);
-		if ($maxSelectionsText !== NULL) $this->config->set('maxSelectionsText',$maxSelectionsText);
-		
+
+		if ($width !== NULL) $this->config->setRaw('width', $width);
+		if ($height !== NULL) $this->config->setRaw('height', $height);
+		if ($displayField !== NULL) $this->config->set('displayField', $displayField);
+		if ($valueField !== NULL) $this->config->set('valueField', $valueField);
+		if ($legend !== NULL) $this->config->set('legend', $legend);
+		if ($minSelections !== NULL) $this->config->setRaw('minSelections', $minSelections);
+		if ($maxSelections !== NULL) $this->config->setRaw('maxSelections', $maxSelections);
+		if ($minSelectionsText !== NULL) $this->config->set('minSelectionsText', $minSelectionsText);
+		if ($maxSelectionsText !== NULL) $this->config->set('maxSelectionsText', $maxSelectionsText);
+
 		$this->injectJsCode();
 	}
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */

@@ -47,12 +47,12 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreDataViewHelper extends Tx_MvcExtjs_Vie
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet
 	 */
 	protected $answer;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
 	protected $arrayVariable;
-	
+
 	/**
 	 * Initializes the ViewHelper
 	 * 
@@ -63,7 +63,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreDataViewHelper extends Tx_MvcExtjs_Vie
 		$this->arrayVariable = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable('dataArray',NULL,false,$this->extJsNamespace);
 		$this->answer = new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet();
 	}
-	
+
 	/**
 	 * Renders the js code for a store, based on a domain model into the inline JS of your module.
 	 * TODO: internal use of the json store read response view helper?
@@ -78,37 +78,37 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreDataViewHelper extends Tx_MvcExtjs_Vie
 						   array $data = array(),
 						   array $columns = array()) {
 
-		if ($extensionName == NULL)
+		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
+		}
 
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
 			// Check if the given domain model class exists
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-			// build up and set the for the JS store variable
+			// Build up and set the for the JS store variable
 		$varNameStore = $domainModel . 'Data';
 		$this->arrayVariable->setName($varNameStore);
-		
+
 		$responseArray = array();
 		$responseArray['message'] = 'Objects loaded';
 		$responseArray['total'] = count($data);
 		$responseArray['success'] = true;
-	
+
 		$dataArray = array();
 		foreach ($data as $object) {
-			
 			$dataArray[] = $this->convertObjectToArray($object);
 		}
 		$responseArray['data'] = $dataArray;
-		
+
 		$this->answer->setCode(json_encode($responseArray));
-		
+
 		$this->injectJsCode();
 	}
-	
+
 	/**
-	 * Converts from object to property array
+	 * Converts from object to property array.
 	 * 
 	 * @param $object
 	 * @return array
@@ -116,30 +116,31 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreDataViewHelper extends Tx_MvcExtjs_Vie
 	protected function convertObjectToArray($object) {
 		$objectArray = array();
 		$properties = $object->_getProperties();
+
 		foreach($properties as $name => $value) {
 			if (count($columns) > 0 && !in_array($name, $columns)) {
 					// Current property should not be returned
 				continue;
 			}
-			if($value instanceof DateTime)
+			if ($value instanceof DateTime) {
 				$value = $value->format('U');
+			}
 			$objectArray[$name] = $value;
 		}
 		return $objectArray;
 	}
-	
+
 	/**
 	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
 	 */
 	protected function injectJsCode() {
 		$this->arrayVariable->setValue($this->answer);
-			// allow objects to be declared inside this viewhelper; they are rendered above
+			// Allow objects to be declared inside this viewhelper; they are rendered above
 		$this->renderChildren();
-			// add the code and write it into the inline section in your HTML head
+			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->arrayVariable);
 		parent::injectJsCode();
 	}
-	
 
 }
 ?>

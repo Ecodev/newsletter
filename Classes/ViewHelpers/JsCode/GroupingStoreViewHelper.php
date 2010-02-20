@@ -44,7 +44,7 @@
 class Tx_MvcExtjs_ViewHelpers_JsCode_GroupingStoreViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper {
 
 	/**
-	 * Initializes the ViewHelper
+	 * Initializes the ViewHelper.
 	 * 
 	 * @see Classes/ViewHelpers/Be/Tx_MvcExtjs_ViewHelpers_Be_AbstractJavaScriptCodeViewHelper#initialize()
 	 */
@@ -52,7 +52,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_GroupingStoreViewHelper extends Tx_MvcExtjs
 		parent::initialize();
 		$this->store->setClass('Ext.data.GroupingStore');
 	}
-	
+
 	/**
 	 * Renders the js code for a store, based on a domain model into the inline JS of your module.
 	 * The store automatically loads its data via AJAX.
@@ -85,10 +85,11 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_GroupingStoreViewHelper extends Tx_MvcExtjs
 						   $batch = FALSE,
 						   $autoLoad = FALSE,
 						   $groupField = NULL) {
+
 		if ($groupField != NULL) {
-			$this->config->set('groupField',$groupField);
+			$this->config->set('groupField', $groupField);
 		}
-		parent::render($domainModel,$extensionName,$id,$name,$reader,$writer,$proxy,$data,$autoSave,$restful,$batch,$autoLoad);
+		parent::render($domainModel, $extensionName, $id, $name, $reader, $writer, $proxy, $data, $autoSave, $restful, $batch, $autoLoad);
 	}
 
 }

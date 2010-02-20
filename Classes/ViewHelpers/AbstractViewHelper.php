@@ -38,28 +38,29 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 	 * @var t3lib_PageRenderer
 	 */
 	protected $pageRenderer;
-	
+
 	/**
 	 * @see typo3/sysext/fluid/Classes/Core/ViewHelper/Tx_Fluid_Core_ViewHelper_AbstractViewHelper#initialize()
 	 */
 	public function initialize() {
-		if (TYPO3_MODE === 'BE')
+		if (TYPO3_MODE === 'BE') {
 			$this->initializeBackend();
-		else
+		} else {
 			$this->initializeFrontend();
+		}
 	}
-	
+
 	/**
-	 * Fetches the pageRenderer from the BE Context
+	 * Fetches the pageRenderer from the BE Context.
 	 * 
 	 * @return void
 	 */
 	protected function initializeBackend() {
 		$this->pageRenderer = $this->getDocInstance()->getPageRenderer();
 	}
-	
+
 	/**
-	 * Fetches the pageRenderer from the FE Context
+	 * Fetches the pageRenderer from the FE Context.
 	 * (not tested)
 	 * 
 	 * @return void
@@ -68,7 +69,7 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 		$GLOBALS['TSFE']->backPath = TYPO3_mainDir;
 		$this->pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
 	}
-	
+
 	/**
 	 * Gets instance of template if exists or create a new one.
 	 * Saves instance in viewHelperVariableContainer
@@ -82,7 +83,7 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 		}
 		return $GLOBALS['SOBE']->doc;
 	}
-	
+
 }
 
 ?>

@@ -33,12 +33,12 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ExtJS_Array {
-	
+
 	/** 
 	 * @var array
 	 */
 	protected $items = array();
-	
+
 	/**
 	 * Returns a new Array.
 	 * 
@@ -47,7 +47,7 @@ class Tx_MvcExtjs_ExtJS_Array {
 	public static function create() {
 		return t3lib_div::makeInstance('Tx_MvcExtjs_ExtJS_Array');
 	}
-	
+
 	/**
 	 * Adds an item.
 	 * 
@@ -58,7 +58,7 @@ class Tx_MvcExtjs_ExtJS_Array {
 		$this->items[] = $item;
 		return $this;
 	}
-	
+
 	/**
 	 * Adds an array of items.
 	 * 
@@ -71,7 +71,7 @@ class Tx_MvcExtjs_ExtJS_Array {
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * Builds the ExtJS array.
 	 * 
@@ -82,9 +82,9 @@ class Tx_MvcExtjs_ExtJS_Array {
 		foreach ($this->items as $item) {
 			$extjsItems[] = ($item instanceof Tx_MvcExtjs_ExtJS_Object) ? $item->build() : $item;
 		}
-		
+
 		return sprintf('[ %s ]', implode(",\n", $extjsItems));
 	}
-	
+
 }
 ?>

@@ -30,7 +30,7 @@ Ext.override( Ext.ux.form.ItemSelector, {
             }
         }
     },
-    
+
     valueChanged: function(store) {
         var record = null;
         var values = [];
@@ -41,11 +41,11 @@ Ext.override( Ext.ux.form.ItemSelector, {
         this.hiddenField.value = values;
         this.fireEvent('change', this, this.getValue(), this.hiddenField.value);
     },
-    
+
     getValue : function() {
         return this.hiddenField.value;
     },
-    
+
     getValueFieldFromObject: function(valueField,object) {
     	var call = 'object.' + valueField;
     	return eval(call);

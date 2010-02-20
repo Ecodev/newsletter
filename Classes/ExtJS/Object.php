@@ -33,12 +33,12 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ExtJS_Object {
-	
+
 	/** 
 	 * @var array
 	 */
 	protected $attributes = array();
-	
+
 	/**
 	 * Returns a new Object.
 	 * 
@@ -47,7 +47,7 @@ class Tx_MvcExtjs_ExtJS_Object {
 	public static function create() {
 		return t3lib_div::makeInstance('Tx_MvcExtjs_ExtJS_Object');
 	}
-	
+
 	/**
 	 * Sets a value attribute to this object and takes care to properly quote the value.
 	 * 
@@ -59,7 +59,7 @@ class Tx_MvcExtjs_ExtJS_Object {
 		$this->attributes[$attribute] = is_numeric($value) ? $value : Tx_MvcExtjs_ExtJS_Utility::encodeInlineHtml($value);
 		return $this;
 	}
-	
+
 	/**
 	 * Sets a raw value attribute to this object.
 	 * 
@@ -71,7 +71,7 @@ class Tx_MvcExtjs_ExtJS_Object {
 		$this->attributes[$attribute] = $value;
 		return $this;
 	}
-	
+
 	/**
 	 * Builds the ExtJS object.
 	 * 
@@ -85,9 +85,9 @@ class Tx_MvcExtjs_ExtJS_Object {
 			}
 			$extjsAttributes[] = sprintf('%s : %s', $key, $value);
 		}
-		
+
 		return sprintf('{ %s }', implode(', ', $extjsAttributes));
 	}
-	
+
 }
 ?>

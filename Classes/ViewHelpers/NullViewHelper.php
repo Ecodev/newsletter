@@ -37,7 +37,7 @@
 class Tx_MvcExtjs_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	protected $objectAccessorPostProcessorEnabled = FALSE;
-	
+
 	/**
 	 * Render without processing
 	 *
