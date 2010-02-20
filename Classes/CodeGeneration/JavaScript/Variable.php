@@ -34,32 +34,32 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * @var string
 	 */
 	protected $name;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface
 	 */
 	protected $value;
-	
+
 	/**
 	 * @var mixed string or FALSE
 	 */
 	protected $namespace;
-	
+
 	/**
 	 * Should we use the statement var in front of the name? 
-	 * Further informations: http://www.w3schools.com/js/js_variables.asp
+	 * @see http://www.w3schools.com/js/js_variables.asp
 	 * 
 	 * @var boolean
 	 */
 	protected $var;
-	
+
 	/**
-	 * Default Constructor
+	 * Default Constructor.
 	 * 
 	 * @param string $name
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface $value
@@ -71,9 +71,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 		$this->var = $var;
 		$this->namespace = $namespace;
 	}
-	
+
 	/**
-	 * Sets the name
+	 * Sets the name.
 	 * 
 	 * @param string $name
 	 * @return void
@@ -81,18 +81,18 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 	public function setName($name) {
 		$this->name = $name;
 	}
-	
+
 	/**
-	 * Gets the name
+	 * Gets the name.
 	 * 
 	 * @return string
 	 */
 	public function getName() {
 		return $this->name;	
 	}
-	
+
 	/**
-	 * Sets the value
+	 * Sets the value.
 	 * 
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface $value
 	 * @return void
@@ -100,46 +100,46 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 	public function setValue($value) {
 		$this->value = $value;
 	}
-	
+
 	/**
-	 * Gets the value
+	 * Gets the value.
 	 * 
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface
 	 */
 	public function getValue() {
 		return $this->value;
 	}
-	
+
 	/**
-	 * Sets the namespace
+	 * Sets the namespace.
 	 * 
-	 * @param string $value
+	 * @param string $namespace
 	 * @return void
 	 */
-	public function setNamespace($value) {
-		$this->namespace = $value;
+	public function setNamespace($namespace) {
+		$this->namespace = $namespace;
 	}
-	
+
 	/**
-	 * Resets the namespace - no namespace will be used
+	 * Resets the namespace - no namespace will be used.
 	 * 
 	 * @return void
 	 */
 	public function resetNamespace() {
 		$this->namespace = FALSE;
 	}
-	
+
 	/**
-	 * Gets the namespace
+	 * Gets the namespace.
 	 * 
 	 * @return string
 	 */
 	public function getNamespace() {
 		return $this->namespace;
 	}
-	
+
 	/**
-	 * Sets if you want the keyword var
+	 * Sets whether you want the keyword var.
 	 * 
 	 * @param boolean $var
 	 * @return void
@@ -147,26 +147,26 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 	public function setVar($var) {
 		$this->var = $var;	
 	}
-	
+
 	/**
-	 * Gets if this variable will be assigned with using the keyword var
+	 * Gets whether this variable will be assigned using the keyword var.
 	 * 
 	 * @return boolean
 	 */
 	public function getVar() {
 		return $this->var;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
 	public function build() {
 		if (!is_string($this->name) || $this->name == '') {
-			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('building a variable without a name will cause errors in javascript - use another snippet if u just want the stuff on the right side of the "="',1264952776);
+			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('Building a variable without a name will cause errors in javascript - use another snippet if you just want the stuff on the right side of the "="', 1264952776);
 		}
 		$js = '';
 		if ($this->namespace) {
-			$this->var = false;
+			$this->var = FALSE;
 			$js .= $this->namespace . '.';
 		}
 		if ($this->var) {
@@ -175,7 +175,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 		$js .= $this->name . ' = ' . $this->value->build() . "\n";
 		return $js;
 	}
-	
+
 	/**
 	 * Wrap build() as __toString()
 	 * 
@@ -184,7 +184,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Variable implements Tx_MvcExtjs_Code
 	public function __toString() {
 		return $this->build();
 	}
-	
+
 }
 
 ?>

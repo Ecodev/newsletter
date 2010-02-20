@@ -36,28 +36,28 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_Object implements Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * @var array
 	 */
 	protected $elements;
-	
+
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 * 
 	 * @param array $elements
 	 */
 	public function __construct(array $elements = array()) {
 		foreach ($elements as $element) {
 			if (!$element instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface; given element is of type: ' . get_class($element),1264859989);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('An element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface; given element is of type: ' . get_class($element), 1264859989);
 			}
 		}
 		$this->elements = $elements;
 	}
-	
+
 	/**
-	 * Sets the elements
+	 * Sets the elements.
 	 * 
 	 * @param array $elements
 	 * @return void
@@ -65,14 +65,14 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Object implements Tx_MvcExtjs_CodeGe
 	public function setElements($elements) {
 		foreach ($elements as $element) {
 			if (!$element instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('An element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface', 1264859988);
 			}
 		}
 		$this->elements = $elements;
 	}
-	
+
 	/**
-	 * Adds an element to the object
+	 * Adds an element to the object.
 	 * 
 	 * @param $element
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_Object
@@ -81,16 +81,16 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Object implements Tx_MvcExtjs_CodeGe
 		$this->elements[] = $element;
 		return $this;
 	}
-	
+
 	/**
-	 * Gets the elements
+	 * Gets the elements.
 	 * 
 	 * @return array
 	 */
 	public function getElements() {
 		return $this->elements;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
@@ -105,7 +105,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Object implements Tx_MvcExtjs_CodeGe
 		$js .= '}';
 		return $js;
 	}
-	
+
 	/**
 	 * Wraps build() as __toString()
 	 * 
@@ -114,7 +114,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Object implements Tx_MvcExtjs_CodeGe
 	public function __toString() {
 		return $this->build();
 	}
-	
+
 }
 
 ?>

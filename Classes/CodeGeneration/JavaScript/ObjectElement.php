@@ -39,19 +39,19 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement implements Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * @var string
 	 */
 	protected $name;
-	
+
 	/**
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface
 	 */
 	protected $value;
-	
+
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 * 
 	 * @param string $name
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface $value
@@ -60,9 +60,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement implements Tx_MvcExtjs
 		$this->name = $name;
 		$this->value = $value;
 	}
-	
+
 	/**
-	 * Sets the name
+	 * Sets the name.
 	 * 
 	 * @param $name
 	 * @return void
@@ -70,18 +70,18 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement implements Tx_MvcExtjs
 	public function setName($name) {
 		$this->name = $name;
 	}
-	
+
 	/**
-	 * Gets the name
+	 * Gets the name.
 	 * 
 	 * @return string
 	 */
 	public function getName() {
 		return $this->name;	
 	}
-	
+
 	/**
-	 * Sets the value
+	 * Sets the value.
 	 * 
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface $value
 	 * @return void
@@ -89,28 +89,28 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement implements Tx_MvcExtjs
 	public function setValue($value) {
 		$this->value = $value;
 	}
-	
+
 	/**
-	 * Gets the value
+	 * Gets the value.
 	 * 
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface
 	 */
 	public function getValue() {
 		return $this->value;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
 	public function build() {
 		if (!is_string($this->name) || $this->name == '') {
-			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('building a object element without a name will cause errors in javascript',1264954481);
+			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('Building a object element without a name will cause errors in javascript', 1264954481);
 		}
 		$js = '';
 		$js .= $this->name . ': ' . $this->value->build();
 		return $js;
 	}
-	
+
 	/**
 	 * Wraps build() as __toString()
 	 * 
@@ -119,8 +119,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement implements Tx_MvcExtjs
 	public function __toString() {
 		return $this->build();
 	}
-	
-	
+
 }
 
 ?>

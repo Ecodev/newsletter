@@ -35,23 +35,23 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet implements Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * @var string
 	 */
 	protected $code;
-	
+
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 * 
 	 * @param string $code
 	 */
 	public function __construct($code) {
 		$this->code = $code;
 	}
-	
+
 	/**
-	 * Sets the code snippet
+	 * Sets the code snippet.
 	 * 
 	 * @param string $code
 	 * @return void
@@ -59,32 +59,32 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet implements Tx_MvcExtjs_CodeG
 	public function setCode($code) {
 		$this->code = $code;
 	}
-	
+
 	/**
-	 * Gets the code snippet
+	 * Gets the code snippet.
 	 * 
 	 * @return string
 	 */
 	public function getCode() {
 		return $this->code;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
 	public function build() {
 		return $this->code;
 	}
-	
+
 	/**
 	 * Does the same like build()
 	 *  
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->code;
+		return $this->build();
 	}
-	
+
 }
 
 ?>

@@ -34,14 +34,14 @@
  * @version     SVN: $Id$
  */
 interface Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * Builds JS code represented by the snippet
 	 * 
 	 * @return string
 	 */
 	public function build();
-	
+
 }
 
 ?>

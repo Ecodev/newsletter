@@ -113,7 +113,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall implements Tx_MvcExtjs_
 	public function getParameters() {
 		return $this->parameters;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */

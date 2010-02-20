@@ -45,9 +45,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	 * @var array
 	 */
 	protected $parameters;
-	
+
 	/**
-	 * The js code inside the function
+	 * The JS code inside the function
 	 * 
 	 * @var array
 	 */
@@ -85,9 +85,12 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 		}
 
 		$this->parameters = $parameters;
-		foreach ($content as $snippet)
-			if (!$snippet instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface)
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a content element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
+		foreach ($content as $snippet) {
+			if (!$snippet instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('A content element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface', 1264859988);
+			}
+		}
+
 		$this->content = $content;
 		$this->inline = $inline;
 		$this->brackets = $brackets;
@@ -100,16 +103,18 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	 * @return void
 	 */
 	public function setParameters($parameters) {
+		$i = 1;
 		foreach ($parameters as $parameter) {
 			if (!is_string($parameter)) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a parameter has to be of type string',1264859988);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception(sprintf('Parameter #%s has to be of type string', $i), 1264859988);
 			}
+			$i++;
 		}
 		$this->parameters = $parameters;
 	}
 
 	/**
-	 * Adds a parameter to the function
+	 * Adds a parameter to the function.
 	 * 
 	 * @param string $parameter
 	 * @return void
@@ -117,9 +122,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	public function addParameter($parameter) {
 		$this->parameters[] = $parameter;
 	}
-	
+
 	/**
-	 * Gets an array with all parameters
+	 * Gets an array with all parameters.
 	 * 
 	 * @return array
 	 */
@@ -136,14 +141,14 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	public function setContent($content) {
 		foreach ($content as $snippet) {
 			if (!$snippet instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a content element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('A content element has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface', 1264859988);
 			}
 		}
 		$this->content = $content;
 	}
-	
+
 	/**
-	 * Adds a parameter to the function
+	 * Adds a parameter to the function.
 	 * 
 	 * @param string $parameter
 	 * @return void
@@ -151,16 +156,16 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	public function addSnippet($snippet) {
 		$this->content[] = $snippet;
 	}
-	
+
 	/**
-	 * Gets an array with all parameters
+	 * Gets an array with all parameters.
 	 * 
 	 * @return array
 	 */
 	public function getContent() {
 		return $this->content;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
@@ -177,11 +182,12 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 			$js .= $snippet->build();
 		}
 		$js .= '}';
-		if ($this->brackets) $js .= '()';
-		if (!$this->inline) $js .= ';';
+		$js .= ($this->brackets) ? '()' : '';
+		$js .= (!$this->inline) ? ';' : '';
+
 		return $js;
 	}
-	
+
 	/**
 	 * Wraps build() as __toString()
 	 * 
@@ -190,7 +196,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionDeclaration implements Tx_Mv
 	public function __toString() {
 		return $this->build();
 	}
-	
+
 }
 
 ?>

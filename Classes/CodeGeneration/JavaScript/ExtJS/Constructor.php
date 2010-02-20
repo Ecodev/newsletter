@@ -36,21 +36,21 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtjs_CodeGeneration_JavaScript_Variable {
-	
+
 	/**
-	 * The extjs Class that should be instanciated
+	 * The ExtJS class that should be instanciated
 	 * 
 	 * @var string
 	 */
 	protected $class;
-	
+
 	/**
-	 * The extjs config array
+	 * The ExtJS config array
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	protected $config;
-	
+
 	/**
 	 * Parameters for the constructor, additional to the config object.
 	 * The config object will always be the first parameter
@@ -58,16 +58,16 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 	 * @var array
 	 */
 	protected $parameters;
-	
+
 	/**
-	 * Internal used variable that will be filled up with class, config and parameters when build the js code
+	 * Internally used variable that will be filled up with class, config and parameters when build the js code
 	 * 
 	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall
 	 */
 	private $constructorCall;
-	
+
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 * 
 	 * @param string $name
 	 * @param string $class
@@ -81,23 +81,23 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 								Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config $config,
 								array $parameters,
 								$namespace = FALSE) {
-		
+
 		foreach ($parameters as $snippet) {
 			if (!$snippet instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
 				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a parameter for a constrcutor has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
 			}
 		}
-		
+
 		$this->class = $class;
 		$this->config = $config;
 		$this->parameters = $parameters;
-		$this->constructorCall = new Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall($name);
-		
-		parent::__construct($name,NULL,FALSE,$namespace);
+		$this->constructorCall = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall', $name);
+
+		parent::__construct($name, NULL, FALSE, $namespace);
 	}
-	
+
 	/**
-	 * Sets the class that should be extended
+	 * Sets the class that should be extended.
 	 * 
 	 * @param string $class
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor
@@ -106,9 +106,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 		$this->class = $class;
 		return $this;
 	}
-	
+
 	/**
-	 * Adds a config parameter to the constructor of the object that should be extended
+	 * Adds a config parameter to the constructor of the object that should be extended.
 	 * 
 	 * @param string $name
 	 * @param string $value
@@ -118,9 +118,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 		$this->config->set($name,$value);
 		return $this;
 	}
-	
+
 	/**
-	 * Adds a config parameter to to configuration of the extjs object
+	 * Adds a config parameter to to configuration of the extjs object.
 	 * The given parameter is outputted raw (not quoted)
 	 * 
 	 * @param string $name
@@ -131,9 +131,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 		$this->config->setRaw($name,$value);
 		return $this;
 	}
-	
+
 	/**
-	 * Sets the config for the Constructor
+	 * Sets the config for the Constructor.
 	 * 
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config $config
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor
@@ -142,9 +142,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 		$this->config = $config;
 		return $this;
 	}
-	
+
 	/**
-	 * Adds a parameter to the constructor
+	 * Adds a parameter to the constructor.
 	 * 
 	 * @param Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface $parameter
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor
@@ -153,18 +153,18 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 		$this->parameters[] = $parameter;
 		return $this;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_Variable#build()
 	 */
 	public function build() {
-		$this->value = new Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall($this->class,array($this->config));
+		$this->value = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ConstructorCall', $this->class, array($this->config));
 		foreach ($this->parameters as $snippet) {
 			$this->value->addParameter($snippet);
 		}
 		return parent::build();
 	}
-	
+
 	/**
 	 * Wraps build() as __toString()
 	 * 
@@ -173,7 +173,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 	public function __toString() {
 		return $this->build();
 	}
-	
+
 }
 
 ?>

@@ -34,31 +34,31 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue implements Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface {
-	
+
 	/**
 	 * @var string
 	 */
 	protected $value;
-	
+
 	/**
-	 * Should the output be quoted with " instead of '
+	 * Whether the output should be quoted with " instead of '
 	 * @var boolean
 	 */
-	protected $double;
-	
+	protected $doubleQuote;
+
 	/**
-	 * Default constrcutor
+	 * Default constructor.
 	 * 
 	 * @param string $value
-	 * @param boolean $double
+	 * @param boolean $doubleQuote
 	 */
-	public function __construct($value,$double = FALSE) {
+	public function __construct($value, $doubleQuote = FALSE) {
 		$this->value = $value;
-		$this->double = $double;
+		$this->doubleQuote = $doubleQuote;
 	}
-	
+
 	/**
-	 * Sets the value
+	 * Sets the value.
 	 * 
 	 * @param string $value
 	 * @return void
@@ -66,27 +66,27 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue implements Tx_MvcExtjs_C
 	public function setValue($value) {
 		$this->value = $value;
 	}
-	
+
 	/**
-	 * Gets the value
+	 * Gets the value.
 	 * 
 	 * @return string
 	 */
 	public function getValue() {
 		return $this->value;
 	}
-	
+
 	/**
 	 * @see Classes/CodeGeneration/JavaScript/Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface#build()
 	 */
 	public function build() {
-		if (!$this->double) {
+		if (!$this->doubleQuote) {
 			return '\'' . $this->value . '\'';
 		} else {
 			return '"' . $this->value . '"';
 		}
 	}
-	
+
 	/**
 	 * Wraps build() as __toString()
 	 * 
@@ -95,7 +95,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue implements Tx_MvcExtjs_C
 	public function __toString() {
 		return $this->build();
 	}
-	
+
 }
 
 ?>

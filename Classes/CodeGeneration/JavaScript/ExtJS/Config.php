@@ -25,7 +25,7 @@
 /**
  * JavaScript Code Snippet
  * Representing a config object for Extjs
- * Just a more handable version of the JavaScript Object Class
+ * Just a more handy version of the JavaScript Object class
  *
  * @category    CodeGeneration_JavaScript
  * @package     TYPO3
@@ -35,9 +35,9 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config extends Tx_MvcExtjs_CodeGeneration_JavaScript_Object {
-	
+
 	/**
-	 * Adds a config parameter
+	 * Adds a config parameter.
 	 * The given value will be single quoted
 	 * Returns itself to allow method-chaining
 	 * 
@@ -46,13 +46,14 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config extends Tx_MvcExtjs_Cod
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config
 	 */
 	public function set($name,$value) {
-		$configElement = new Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement($name,new Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue($value));
+		$quotedValue = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue', $value);
+		$configElement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement', $name, $quotedValue);
 		$this->addElement($configElement);
 		return $this;
 	}
-	
+
 	/**
-	 * Adds a raw config parameter
+	 * Adds a raw config parameter.
 	 * The given value will be used raw - without quoting
 	 * It's possible to set every object implementing Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface as value
 	 * Returns itself to allow method-chaining
@@ -63,12 +64,12 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config extends Tx_MvcExtjs_Cod
 	 */
 	public function setRaw($name,$value) {
 		if (!is_string($value) && !$value instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('only string or a object of type Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface are allowed as RawConfig',1264872938);
+			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('Only string or a object of type Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface are allowed as RawConfig', 1264872938);
 		}
 		if (is_string($value)) {
-			$value = new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($value);
+			$value = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet', $value);
 		}
-		$configElement = new Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement($name,$value);
+		$configElement = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_ObjectElement', $name, $value);
 		$this->addElement($configElement);
 		return $this;
 	}
