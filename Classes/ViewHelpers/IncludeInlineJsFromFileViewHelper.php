@@ -38,7 +38,7 @@
  * @subpackage  tx_mvcextjs
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id: IncludeExtOnReadyFromFileViewHelper.php 29470 2010-01-29 14:25:17Z xperseguers $
+ * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_ViewHelpers_IncludeInlineJsFromFileViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
