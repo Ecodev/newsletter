@@ -73,7 +73,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config extends Tx_MvcExtjs_Cod
 		$this->addElement($configElement);
 		return $this;
 	}
-	
+
 }
 
 ?>

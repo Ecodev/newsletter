@@ -80,7 +80,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_Array implements Tx_MvcExtjs_CodeGen
 			throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('only string or a object of type Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface are allowed as RawConfig',1264872938);
 		}
 		if (is_string($element)) {
-			$element = new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($element);
+			$element = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet', $element);
 		}
 		$this->elements[] = $element;
 		return $this;

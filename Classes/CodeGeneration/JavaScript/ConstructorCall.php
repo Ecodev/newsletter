@@ -24,7 +24,7 @@
 
 /**
  * JavaScript Code Snippet
- * Representing a Constructor call; a function call with a "new " in front of it
+ * Representing a Constructor call; a function call with a "new" in front of it
  *
  * @category    CodeGeneration_JavaScript
  * @package     TYPO3

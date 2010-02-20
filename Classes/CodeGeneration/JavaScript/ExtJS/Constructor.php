@@ -84,7 +84,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Constructor extends Tx_MvcExtj
 
 		foreach ($parameters as $snippet) {
 			if (!$snippet instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a parameter for a constrcutor has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('A parameter for a constrcutor has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface', 1264859988);
 			}
 		}
 

@@ -55,7 +55,7 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_FunctionCall implements Tx_MvcExtjs_
 		$this->name = $name;
 		foreach ($parameters as $parameter) {
 			if (!$parameter instanceof Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface) {
-				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('a parameter has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface',1264859988);
+				throw new Tx_MvcExtjs_CodeGeneration_JavaScript_Exception('A parameter has to implement Tx_MvcExtjs_CodeGeneration_JavaScript_SnippetInterface', 1264859988);
 			}
 		}
 		$this->parameters = $parameters;
