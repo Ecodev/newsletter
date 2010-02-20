@@ -32,7 +32,7 @@
  * = Examples =
  *
  * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:Be.IncludeColumnDefinition />
+ * 	<mvcextjs:includeColumnDefinition />
  * </mvcextjs:be.moduleContainer>
  *
  * @category    ViewHelpers
@@ -40,65 +40,68 @@
  * @subpackage  tx_mvcextjs
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
+ * @version     SVN: $Id: ColumnDefinitionViewHelper.php 29470 2010-01-29 14:25:17Z xperseguers $
  */
-class Tx_MvcExtjs_ViewHelpers_Be_ColumnDefinitionViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
-
+class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper {
+	
 	/**
-	 * The namespace used in the JS code
-	 * @var string
+	 * The variable as js object that represents the returned column definition
+	 * 
+	 * @var Tx_MvcExtjs_CodeGeneration_JavaScript_Variable
 	 */
-	protected $extJsNamespace;
-
+	protected $columnVariable;
+	
 	/**
 	 * Renders the JS code for a store, based on a domain model into the inline JS of your module
-	 * the store automatically loads its data via AJAX.
 	 * 
 	 * @param string $name is used as variable name AND storeId for the generated store
 	 * @param string $extensionName
-	 * @param string $varName choose a name for the created variable; default is domainmodel . 'Columns'
 	 * @param array $columns
 	 * @return void
 	 */
-	public function render($domainModel = NULL, $extensionName = NULL, $varName = NULL, array $columns = array()) {
-		$doc = $this->getDocInstance();
-		$pagerenderer = $doc->getPageRenderer();
-
+	public function render($domainModel = NULL,
+						   $extensionName = NULL,
+						   array $columns = array(),
+						   array $hiddenColumns = array(),
+						   array $specialRenderer = array()) {
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		}
 
-		$controllerName = $this->controllerContext->getRequest()->getControllerName();
-		$this->extJsNamespace = $extensionName . '.' . $controllerName;
-
 		$domainClassName = 'Tx_' . $extensionName . '_Domain_Model_' . $domainModel;
-		if ($varName == NULL) {
-			$varName = $domainModel . 'Columns';
-		}
-
-		$jsOut = $this->extJsNamespace . '.' . $varName . ' = ';
+		$varName = $domainModel . 'Columns';
 
 			// Check if the given domain model class exists
 		if (!class_exists($domainClassName)) {
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
-		$columnArray = Tx_MvcExtjs_ExtJS_Array::create();
+			// create the js object
+		$columnArray = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
 
 		$rClass = t3lib_div::makeInstance('Tx_Extbase_Reflection_ClassReflection', $domainClassName);
 		$rProperties = $rClass->getProperties();
-
+		
 		foreach ($rProperties as $rProperty) {
-			$columnDef = Tx_MvcExtjs_ExtJS_Object::create();
+			$columnDef = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
 			// TODO: fetch label from TCA?
 			$columnDef->set('header', $rProperty->getName())
 					  ->set('dataIndex', $rProperty->getName())
 					  ->setRaw('sortable', 'true');
-			$columnArray->add($columnDef);
+			if (isset($specialRenderer[$rProperty->getName()])) { 
+				$columnDef->setRaw('renderer',$specialRenderer[$rProperty->getName()]);
+			}
+			if (in_array($rProperty->getName(),$hiddenColumns)) {
+				$columnDef->setRaw('hidden','true');
+			} else {
+				$columnDef->setRaw('hidden','false');
+			}
+			$columnArray->addElement($columnDef);
 		}
-
-		$jsOut .= $columnArray->build(); 
-
-		$pagerenderer->addJsInlineCode($domainClassName, $jsOut);
+		
+		$this->columnVariable = new Tx_MvcExtjs_CodeGeneration_JavaScript_Variable($this->extJsNamespace . '.' . $varName,$columnArray);
+		
+		$this->jsCode->addSnippet($this->columnVariable); 
+		$this->injectJsCode();
 	}
 
 }

@@ -25,12 +25,12 @@
 /**
  * View helper which allows you to include a JS File.
  * Note: This feature is experimental!
- * Note: You MUST wrap this Helper with <mvcextjs:be.moduleContainer>-Tags
+ * Note: You MUST wrap this Helper with <mvcextjs:Be.moduleContainer>-Tags or <mvcextjs:Fe.pluginContainer>-Tags
  *
  * = Examples =
  *
  * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:Be.IncludeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ * 	<mvcextjs:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </mvcextjs:be.moduleContainer>
  *
  * @category    ViewHelpers
@@ -38,9 +38,9 @@
  * @subpackage  tx_mvcextjs
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
+ * @version     SVN: $Id: IncludeJsFileViewHelper.php 29470 2010-01-29 14:25:17Z xperseguers $
  */
-class Tx_MvcExtjs_ViewHelpers_Be_IncludeJsFileViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class Tx_MvcExtjs_ViewHelpers_IncludeJsFileViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Calls addJsFile on the Instance of t3lib_pagerenderer.
@@ -51,15 +51,16 @@ class Tx_MvcExtjs_ViewHelpers_Be_IncludeJsFileViewHelper extends Tx_Fluid_ViewHe
 	 * @return string the link 
 	 */
 	public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/') {
-		$doc = $this->getDocInstance();
-		$pagerenderer = $doc->getPageRenderer();
-
 		if ($extKey == NULL) {
 			$extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
 		}
-		$extPath = t3lib_extMgm::extRelPath($extKey);
-
-		$pagerenderer->addJsFile($extPath . $pathInsideExt . $name);
+		if (TYPO3_MODE === 'FE') {
+			$extPath = t3lib_extMgm::extPath($extKey);
+			$extRelPath = substr($extPath, strlen(PATH_site));
+		} else {
+			$extRelPath = t3lib_extMgm::extRelPath($extKey);
+		}
+		$this->pageRenderer->addJsFile($extRelPath . $pathInsideExt . $name);
 	}
 
 }

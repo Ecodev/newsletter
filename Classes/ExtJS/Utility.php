@@ -142,18 +142,17 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	}
 
 	/**
-	 * Creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based
-	 * on the given $class.
+	 * creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based on the given $class
 	 * EXPERIMENTAL
 	 * 
 	 * @param string $class the class u like to fetch the fieldsArray for
 	 * @param mixed $obj an instance of this class
 	 * @param array $columns the columns u like to fetch an empty array will fetch all available properties
 	 * @param array $additionalGetters use this array to fetch informations from methods that will not really work on properties f.e. data that is calculated on the base of two other properties
-	 * @return Tx_MvcExtjs_ExtJS_Array this object will produce your JS Code when calling build() on it.
+	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_Array this object will produce your JS Code when calling build() on it.
 	 */
 	public static function getFieldsArray($class, $obj = NULL, array $columns = array(), array $additionalGetters = array()) {
-		$fields = Tx_MvcExtjs_ExtJS_Array::create();
+		$fields = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();
 		$rc = new ReflectionClass($class);
 		if ($obj) {
 			if (!is_a($obj, $class)) {
@@ -163,36 +162,34 @@ class Tx_MvcExtjs_ExtJS_Utility {
 		} else {
 			$object = t3lib_div::makeInstance($class);
 		}
-
 		$properties = $rc->getProperties();
 		foreach ($properties as $property) {
 			if (count($columns) > 0 && !in_array($property->name, $columns)) {
 					// Current property should not be returned
 				continue;
 			}
-
+			
 			$propertyGetterName = 'get' . ucfirst($property->name);
-			$field = Tx_MvcExtjs_ExtJS_Object::create();
-
+			$field = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config;
+			
 			if (method_exists($object, $propertyGetterName)) {
 				$type = self::getMethodReturnType($object, $propertyGetterName);
-				if ($type === 'date') {
+				if ($type == 'date') {
 					$field->set('name', $property->name)
 					      ->set('type', $type)
-					      ->set('dateFormat','timestamp');
+					      ->set('dateFormat','c');
 				} else if($type) {
 					$field->set('name', $property->name)
 					      ->set('type', $type);
 				} else {
 					$field->set('name', $property->name);
 				}
-				$fields->add($field);
+				$fields->addElement($field);
 			}
 		}
-
 		foreach ($additionalGetters as $propertyGetterName) {
-			$field = Tx_MvcExtjs_ExtJS_Object::create();
-
+			$field = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config;
+			
 			if (method_exists($object, $propertyGetterName)) {
 				$type = self::getMethodReturnType($object, $propertyGetterName);
 				if ($type) {
@@ -201,12 +198,12 @@ class Tx_MvcExtjs_ExtJS_Utility {
 				} else {
 					$field->set('name', $property->name);
 				}
-				$fields->add($field);
+				$fields->addElement($field);
 			}
 		}
 		return $fields;
 	}
-
+	
 	/**
 	 * Returns the return type of an object method.
 	 * EXPERIMENTAL

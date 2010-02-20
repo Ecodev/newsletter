@@ -1,3 +1,14 @@
+2010-02-20  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Backported code from branch view (code from Dennis Ahrens)
+
+2010-01-31 Dennis Ahrens <dennis.ahrens@fh-hannover.de>
+	
+	* Introduction of the CodeGeneration Service
+	* Refactored all ViewHelpers to use the new CodeGeneration Service
+	* add support for the usage of the ViewHelpers in FE
+	* splitted the StoreViewHelper into StoreViewHelper, JsonReaderViewHelper, JsonWriterViewHelper and HttpProxy to be more flexible
+
 2010-01-29  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Added code for feature #6133: Supporting Views in mvc_extjs (Thanks to Dennis Ahrens)

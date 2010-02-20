@@ -30,7 +30,7 @@
  * = Examples =
  *
  * <code title="Simple">
- * <f:be.container>your additional viewhelpers inside</f:be.container>
+ * <mvcextjs:fe.pluginContainer> your additional viewhelpers inside </mvcextjs:fe.pluginContainer>
  * </code>
  *
  * Output:
@@ -39,7 +39,7 @@
  *
  * <code title="All options">
  * {namespace mvcextjs=Tx_MvcExtjs_ViewHelpers}
- * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true">your module content</f:be.container>
+ * <mvcextjs:fe.pluginContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true">your module content</mvcextjs:fe.pluginContainer>
  * </code>
  *
  * @category    ViewHelpers
@@ -50,14 +50,13 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+
 
 	/**
-	 * Renders start page with template.php and pageTitle.
+	 * Renders the module into a given div container
 	 *
-	 * @param string  $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
-	 * @param boolean $enableJumpToUrl If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
-	 * @param boolean $enableClickMenu If TRUE, loads clickmenu.js required by BE context menus. Defaults to TRUE
+	 * @param string $divContainerId title tag of the module. Not required by default, as BE modules are shown in a frame
 	 * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to TRUE
 	 * @param boolean $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
 	 * @param string  $scriptaculousModule additionales modules for scriptaculous
@@ -65,43 +64,20 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 	 * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to FALSE
 	 * @param string  $extJsAdapter load alternative adapter (ext-base is default adapter)
 	 * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only
-	 * @param boolean $enableExtJSQuickTips
-	 * @return string
-	 * @see template
 	 * @see t3lib_PageRenderer
 	 */
-	public function render($pageTitle = '',
-						   $enableJumpToUrl = TRUE,
-						   $enableClickMenu = TRUE,
-						   $loadPrototype = FALSE,
+	public function render($divContainerId = 'plugin',
+						   $loadPrototype = TRUE,
 						   $loadScriptaculous = FALSE,
 						   $scriptaculousModule = '',
 						   $loadExtJs = TRUE,
 						   $loadExtJsTheme = TRUE,
 						   $extJsAdapter = 'prototype',
-						   $enableExtJsDebug = FALSE,
-						   $enableExtJSQuickTips = TRUE) {
-
-		$doc = $this->getDocInstance();
-						   	
+						   $enableExtJsDebug = FALSE) {
 		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		$controllerName = $this->controllerContext->getRequest()->getControllerName();
 		$this->extJsNamespace = $extensionName . '.' . $controllerName;
-
-		if ($enableJumpToUrl) {
-			$doc->JScode .= '
-				<script language="javascript" type="text/javascript">
-					script_ended = 0;
-					function jumpToUrl(URL)	{
-						document.location = URL;
-					}
-					' . $doc->redirectUrls() . '
-				</script>
-			';
-		}
-		if ($enableClickMenu) {
-			$doc->loadJavascriptLib('js/clickmenu.js');
-		}
+		
 		if ($loadPrototype) {
 			$this->pageRenderer->loadPrototype();
 		}
@@ -114,20 +90,14 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 				$this->pageRenderer->enableExtJsDebug();
 			}
 		}
-		if ($enableExtJSQuickTips) {
-			$this->pageRenderer->enableExtJSQuickTips();
-		}
-
-		$this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
-
+		
 		$jsNS  = "\n" . 'Ext.ns(\'' . $this->extJsNamespace . '\');' . "\n";
 
-		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Module',$jsNS);
+		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Plugin',$jsNS);
 
 		$this->renderChildren();
 
-		$output = $doc->startPage($pageTitle);
-		$output .= $doc->endPage();
+		$output .= '<div id="' . $divContainerId . '"></div>';
 		return $output;
 	}
 }

@@ -25,12 +25,12 @@
 /**
  * View helper which allows you to include inline JS code into a module Container.
  * Note: This feature is experimental!
- * Note: You MUST wrap this Helper with <mvcextjs:be.moduleContainer>-Tags
+ * Note: You MUST wrap this Helper with <mvcextjs:Be.moduleContainer>-Tags or <mvcextjs:Fe.pluginContainer>-Tags
  *
  * = Examples =
  *
  * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:Be.IncludeExtOnReadyCode file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ * 	<mvcextjs:includeExtOnReadyCode file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </mvcextjs:be.moduleContainer>
  *
  * @category    ViewHelpers
@@ -38,9 +38,9 @@
  * @subpackage  tx_mvcextjs
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
+ * @version     SVN: $Id: IncludeExtOnReadyFromFileViewHelper.php 29470 2010-01-29 14:25:17Z xperseguers $
  */
-class Tx_MvcExtjs_ViewHelpers_Be_IncludeExtOnReadyFromFileViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class Tx_MvcExtjs_ViewHelpers_IncludeInlineJsFromFileViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Calls addJsFile on the Instance of t3lib_pagerenderer.
@@ -50,10 +50,7 @@ class Tx_MvcExtjs_ViewHelpers_Be_IncludeExtOnReadyFromFileViewHelper extends Tx_
 	 * @param string $pathInsideExt the path to the file relative to the ext-folder
 	 * @return void
 	 */
-	public function render($name = 'extOnReady.js', $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/') {
-		$doc = $this->getDocInstance();
-		$pagerenderer = $doc->getPageRenderer();
-
+	public function render($name = 'inline.js', $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/') {
 		if ($extKey == NULL) {
 			$extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
 		}
@@ -62,12 +59,12 @@ class Tx_MvcExtjs_ViewHelpers_Be_IncludeExtOnReadyFromFileViewHelper extends Tx_
 		$filePath = $extPath . $pathInsideExt . $name;
 
 		if (!file_exists($filePath)) {
-			throw new Tx_Fluid_Exception('File not found: ' . $filePath, 1264197781);
+			throw new Tx_MvcExtjs_ExtJS_Exception('File not found: ' . $filePath, 1264197781);
 		}
 
 		$fileContent = file_get_contents($extPath . $pathInsideExt . $name);
 
-		$pagerenderer->addExtOnReadyCode($fileContent);
+		$this->pageRenderer->addJsInlineCode($extPath . $pathInsideExt . $name,$fileContent);
 	}
 
 }
