@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pages.directmailtype">Directmail</label>
+			<label index="pages.tx_tcdirectmail_senttime">Directmail send time:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Do not repeat</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">One day</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">One week</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">Two weeks</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">One month</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Three months</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Six months</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">One year</label>
+			<label index="pages.tx_tcdirectmail_repeat">Directmail repeat:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Attach files to directmail:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Real receivers:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Directmail do test send:</label>
+			<label index="pages.tx_tcdirectmail_test_target">Test receivers:</label>
+			<label index="pages.tx_tcdirectmail_sendername">Sender name:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Sender email:</label>
+			<label index="pages.tx_tcdirectmail_bounceaccount">Bounce account</label>
+			<label index="pages.tx_tcdirectmail_spy">Attempt to detect opened emails:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Use BCC-header to send mails:</label>
+			<label index="pages.tx_tcdirectmail_register_clicks">Register clicked links:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">Plain text template (&amp;type=99)</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Lynx cli-browser</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Build-in html converter</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.3">Chuggnutt's html2text</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Plain text method:</label>
+			<label index="tx_tcdirectmail_targets">Directmail receivers</label>
+			<label index="tx_tcdirectmail_targets.title">Receivers title:</label>
+			<label index="tx_tcdirectmail_targets.plain_only">Receive as plaintext only:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Actual receivers:</label>
+			<label index="tx_tcdirectmail_targets.beusers">BE-users:</label>
+			<label index="tx_tcdirectmail_targets.fegroups">FE-groups:</label>
+			<label index="tx_tcdirectmail_targets.fepages">Pages with FE-users:</label>
+			<label index="tx_tcdirectmail_targets.ttaddress">Pages with tt_address-records</label>
+			<label index="tx_tcdirectmail_targets.rawsql">Raw SQL:</label>
+			<label index="tx_tcdirectmail_targets.sepchar">Separator character:</label>
+			<label index="tx_tcdirectmail_targets.csvfields">CSV fields:</label>
+			<label index="tx_tcdirectmail_targets.csvdata">CSV data:</label>
+			<label index="tx_tcdirectmail_targets.csvfile">CSV file:</label>
+			<label index="tx_tcdirectmail_targets.csvurl">CSV url:</label>
+			<label index="tx_tcdirectmail_targets.type">Type:</label>
+			<label index="tx_tcdirectmail_targets.htmlurl">HTML url:</label>
+			<label index="tx_tcdirectmail_targets.htmlfetch">HTML fetch type:</label>
+			<label index="tx_tcdirectmail_targets.direct_mail_compat">direct_mail compatible html-allow flag:</label>
+			<label index="tx_tcdirectmail_targets.confirmed_receivers">Registered mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optalreadymailed">Already mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optconfirmed">Confirmed addresses</label>
+			<label index="tx_tcdirectmail_targets.optnotconfirmed">Non-confirmed addresses</label>
+			<label index="tx_tcdirectmail_targets.optalladdresses">All mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optbeusers">BE-users</label>
+			<label index="tx_tcdirectmail_targets.optfegroups">FE-groups with FE-users</label>
+			<label index="tx_tcdirectmail_targets.optfepages">Pages with FE-users</label>
+			<label index="tx_tcdirectmail_targets.optttaddress">Pages with tt_address-records</label>
+			<label index="tx_tcdirectmail_targets.optrawsql">Raw SQL</label>
+			<label index="tx_tcdirectmail_targets.optcsvfile">CSV file</label>
+			<label index="tx_tcdirectmail_targets.optcsvlist">CSV list</label>
+			<label index="tx_tcdirectmail_targets.optcsvurl">CSV url</label>
+			<label index="tx_tcdirectmail_targets.opthtml">HTML</label>
+			<label index="tx_tcdirectmail_targets.optmailto">Anchor tags with mailto:</label>
+			<label index="tx_tcdirectmail_targets.optregex">Match email addresses</label>
+			<label index="tx_tcdirectmail_bounceaccount">Bounce account</label>
+			<label index="tx_tcdirectmail_bounceaccount.servertype">Server type:</label>
+			<label index="tx_tcdirectmail_bounceaccount.server">Server:</label>
+			<label index="tx_tcdirectmail_bounceaccount.username">Username:</label>
+			<label index="tx_tcdirectmail_bounceaccount.passwd">Password:</label>
+			<label index="fe_users.tx_tcdirectmail_bounce">Directmail bounce level</label>
+			<label index="tt_address.tx_tcdirectmail_bounce">Directmail bounce level</label>
+			<label index="be_users.tx_tcdirectmail_bounce">Directmail bounce level</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+			<label index="pages.directmailtype">Nyhedsbrev</label>
+			<label index="pages.tx_tcdirectmail_senttime">Nyhedsbrev udsendelsestid:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Gentag ikke</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">En dag</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">En uge</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">To uger</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">En måned</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Tre måneder</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Seks måneder</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">Et år</label>
+			<label index="pages.tx_tcdirectmail_repeat">Nyhedsbrevs gentagelse:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Vedhæft filer til nyhedsbrev:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Rigtige modtagere:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Nyhedsbrev testudsendelse:</label>
+			<label index="pages.tx_tcdirectmail_test_target">Testmodtagere:</label>
+			<label index="pages.tx_tcdirectmail_sendername">Afsendernavn:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Afsenderemail:</label>
+			<label index="pages.tx_tcdirectmail_bounceaccount">Emailkonto for returnerede mails:</label>
+			<label index="pages.tx_tcdirectmail_spy">Forsøg at detektere åbnede emails:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Brug BCC-header til at sende mails:</label>
+			<label index="pages.tx_tcdirectmail_register_clicks">Registrer benyttede links:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">Plaintekst-template (&amp;type=99)</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Lynx cli-browser</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Indbygget htmlkonvertering</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.3">Chuggnutt's html2text</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Plaintekst metode:</label>
+			<label index="tx_tcdirectmail_targets">Nyhedsbrevsmodtagere</label>
+			<label index="tx_tcdirectmail_targets.title">Titel for modtagere:</label>
+			<label index="tx_tcdirectmail_targets.plain_only">Modtager kun plain-tekst:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Faktiske modtagere:</label>
+			<label index="tx_tcdirectmail_targets.beusers">Backendbrugere:</label>
+			<label index="tx_tcdirectmail_targets.fegroups">Frontend brugergrupper:</label>
+			<label index="tx_tcdirectmail_targets.fepages">Frontend brugere fra sider:</label>
+			<label index="tx_tcdirectmail_targets.ttaddress">Sider med tt_address-records:</label>
+			<label index="tx_tcdirectmail_targets.rawsql">Rå SQL:</label>
+			<label index="tx_tcdirectmail_targets.sepchar">Adskillelsestegn:</label>
+			<label index="tx_tcdirectmail_targets.csvfields">CSV-felter:</label>
+			<label index="tx_tcdirectmail_targets.csvdata">CSV-data:</label>
+			<label index="tx_tcdirectmail_targets.csvfile">CSV-fil:</label>
+			<label index="tx_tcdirectmail_targets.csvurl">CSV-url:</label>
+			<label index="tx_tcdirectmail_targets.type">Type:</label>
+			<label index="tx_tcdirectmail_targets.htmlurl">HTML-url:</label>
+			<label index="tx_tcdirectmail_targets.htmlfetch">HTML-læsemetode:</label>
+			<label index="tx_tcdirectmail_targets.direct_mail_compat">direct_mail kompatibelt html-allow flag:</label>
+			<label index="tx_tcdirectmail_targets.confirmed_receivers">Registerede mailadresser</label>
+			<label index="tx_tcdirectmail_targets.optalreadymailed">Allerede mailede adresser</label>
+			<label index="tx_tcdirectmail_targets.optconfirmed">Bekræftede adresser</label>
+			<label index="tx_tcdirectmail_targets.optnotconfirmed">Ikke-bekræftede adresser</label>
+			<label index="tx_tcdirectmail_targets.optalladdresses">Alle mailede adresser</label>
+			<label index="tx_tcdirectmail_targets.optbeusers">Backendbrugere</label>
+			<label index="tx_tcdirectmail_targets.optfegroups">Frontend brugergrupper</label>
+			<label index="tx_tcdirectmail_targets.optfepages">Sider med frontendbrugere</label>
+			<label index="tx_tcdirectmail_targets.optttaddress">Sider med tt_address-records</label>
+			<label index="tx_tcdirectmail_targets.optrawsql">Rå SQL</label>
+			<label index="tx_tcdirectmail_targets.optcsvfile">CSV-fil</label>
+			<label index="tx_tcdirectmail_targets.optcsvlist">CSV-list</label>
+			<label index="tx_tcdirectmail_targets.optcsvurl">CSV-url</label>
+			<label index="tx_tcdirectmail_targets.opthtml">HTML</label>
+			<label index="tx_tcdirectmail_targets.optmailto">mailto:-links</label>
+			<label index="tx_tcdirectmail_targets.optregex">Mønstergenkend emailadresser</label>
+			<label index="tx_tcdirectmail_bounceaccount">Emailkonto for returnede mails</label>
+			<label index="tx_tcdirectmail_bounceaccount.servertype">Servertype:</label>
+			<label index="tx_tcdirectmail_bounceaccount.server">Server:</label>
+			<label index="tx_tcdirectmail_bounceaccount.username">Brugernavn:</label>
+			<label index="tx_tcdirectmail_bounceaccount.passwd">Adgangskode:</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="pages.directmailtype">Newsletter</label>
+			<label index="pages.tx_tcdirectmail_senttime">Sendezeit für Newsletter:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Nicht wiederholen</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">Ein Tag</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">Eine Woche</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">Zwei Wochen</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">Ein Monat</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Drei Monate</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Sechs Monate</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">Ein Jahr</label>
+			<label index="pages.tx_tcdirectmail_repeat">Wiederholungsintervall für Newsletter:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Dateien an directmail anhängen:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Ziel für reguläre Empfänger:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Versende Testmail:</label>
+			<label index="pages.tx_tcdirectmail_test_target">Ziel für Testempfänger:</label>
+			<label index="pages.tx_tcdirectmail_sendername">Name des Absenders:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Emailadresse des Absenders:</label>
+			<label index="pages.tx_tcdirectmail_spy">Versuche geöffnete Mails zu erkennen:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Verwende BCC zum versenden von Emails:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">&amp;type=99</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Lynx-Textbrowser</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Eingebauter HTML-Kponverter</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Methode für &quot;nur Text&quot;:</label>
+			<label index="tx_tcdirectmail_sentlog">Newsletter-Logeintrag</label>
+			<label index="tx_tcdirectmail_sentlog.begintime">Startzeit:</label>
+			<label index="tx_tcdirectmail_sentlog.sendtime">Sendezeit:</label>
+			<label index="tx_tcdirectmail_sentlog.receiver">Empfänger:</label>
+			<label index="tx_tcdirectmail_targets">Ziel für Newsletter</label>
+			<label index="tx_tcdirectmail_targets.title">Titel des Ziels:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Empfänger:</label>
+		</languageKey>
+		<languageKey index="no"></languageKey>
+		<languageKey index="it" type="array">
+			<label index="pages.directmailtype">Directmail (Newsletter)</label>
+			<label index="pages.tx_tcdirectmail_senttime">Ora di spedizione:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Non ripetere</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">Fra un giorno</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">Fra una settimana</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">Fra due settimane</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">Fra un mese</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Fra tre mesi</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Fra sei mesi</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">Un anno</label>
+			<label index="pages.tx_tcdirectmail_repeat">Ripeti spedizione:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Allega files alla directmail (newsletter):</label>
+			<label index="pages.tx_tcdirectmail_sendername">Nome mittente:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Email mittente:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Indirizzo per i destinatari reali:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Directmail, esegui il test</label>
+			<label index="pages.tx_tcdirectmail_test_target">Indirizzo per i destinatari del test:</label>
+			<label index="tx_tcdirectmail_targets">Destinatario directmail:</label>
+			<label index="tx_tcdirectmail_targets.title">Titolo destinatario:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Destinatari effettivi:</label>
+			<label index="pages.tx_tcdirectmail_spy">Prove per conteggiare le email aperte:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Utilizza lo header BCC (CCN) per spedire le email:</label>
+			<label index="pages.tx_tcdirectmail_register_clicks">Registra i link cliccati:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">Template puro testo (&amp;type=99)</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Browser a riga di comando Lynx</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Convertitore html integrato</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Metodo puro testo:</label>
+		</languageKey>
+		<languageKey index="fr"></languageKey>
+		<languageKey index="es"></languageKey>
+		<languageKey index="nl" type="array">
+			<label index="pages.directmailtype">Nieuwsbrief</label>
+			<label index="pages.tx_tcdirectmail_senttime">Nieuwsbrief verzonden op:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Niet herhalen</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">Een dag</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">Een week</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">Twee weken</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">Een maand</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Drie maanden</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Zes maanden</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">Een jaar</label>
+			<label index="pages.tx_tcdirectmail_repeat">Verzenden nieuwsbrief herhalen:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Annex voor nieuwsbrief:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Addressenbestand voor ontvangers:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Verstuur een test-nieuwsbrief:</label>
+			<label index="pages.tx_tcdirectmail_test_target">Addressenbestand test-ontvangers:</label>
+			<label index="pages.tx_tcdirectmail_sendername">Naam afzender:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Email afzender:</label>
+			<label index="pages.tx_tcdirectmail_spy">Probeer het openen van emails te registreren:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Gebruik BCC-kop voor het versturen van nieuwsbrieven:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">template voor tekst-versie (&amp;type=99)</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Lynx-browser</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Ingebouwde html-converter</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Platte tekst methode:</label>
+			<label index="tx_tcdirectmail_targets">Nieuwsbrief addressenbestand</label>
+			<label index="tx_tcdirectmail_targets.title">Titel addressenbestand:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Huidige ontvangers:</label>
+		</languageKey>
+		<languageKey index="cz"></languageKey>
+		<languageKey index="pl"></languageKey>
+		<languageKey index="si"></languageKey>
+		<languageKey index="fi"></languageKey>
+		<languageKey index="tr"></languageKey>
+		<languageKey index="se"></languageKey>
+		<languageKey index="pt"></languageKey>
+		<languageKey index="ru"></languageKey>
+		<languageKey index="ro"></languageKey>
+		<languageKey index="ch"></languageKey>
+		<languageKey index="sk"></languageKey>
+		<languageKey index="lt"></languageKey>
+		<languageKey index="is"></languageKey>
+		<languageKey index="hr"></languageKey>
+		<languageKey index="hu"></languageKey>
+		<languageKey index="gl"></languageKey>
+		<languageKey index="th"></languageKey>
+		<languageKey index="gr"></languageKey>
+		<languageKey index="hk"></languageKey>
+		<languageKey index="eu"></languageKey>
+		<languageKey index="bg"></languageKey>
+		<languageKey index="br"></languageKey>
+		<languageKey index="et"></languageKey>
+		<languageKey index="ar"></languageKey>
+		<languageKey index="he"></languageKey>
+		<languageKey index="ua"></languageKey>
+		<languageKey index="lv"></languageKey>
+		<languageKey index="jp"></languageKey>
+		<languageKey index="vn"></languageKey>
+		<languageKey index="ca"></languageKey>
+		<languageKey index="ba"></languageKey>
+		<languageKey index="kr"></languageKey>
+		<languageKey index="eo"></languageKey>
+		<languageKey index="my"></languageKey>
+		<languageKey index="hi"></languageKey>
+		<languageKey index="fo"></languageKey>
+		<languageKey index="fa"></languageKey>
+		<languageKey index="sr"></languageKey>
+	</data>
+	<meta type="array">
+	</meta>
+	<orig_hash type="array">
+		<languageKey index="dk" type="array">
+			<label index="pages.directmailtype" type="integer">132251442</label>
+			<label index="pages.tx_tcdirectmail_senttime" type="integer">103531403</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0" type="integer">248611784</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1" type="integer">34582365</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2" type="integer">227755754</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3" type="integer">184812142</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4" type="integer">158636124</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5" type="integer">69545385</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6" type="integer">146677935</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7" type="integer">14968501</label>
+			<label index="pages.tx_tcdirectmail_repeat" type="integer">27257066</label>
+			<label index="pages.tx_tcdirectmail_attachfiles" type="integer">93471628</label>
+			<label index="pages.tx_tcdirectmail_real_target" type="integer">187328602</label>
+			<label index="pages.tx_tcdirectmail_dotestsend" type="integer">117963175</label>
+			<label index="pages.tx_tcdirectmail_test_target" type="integer">69116831</label>
+			<label index="pages.tx_tcdirectmail_sendername" type="integer">18129872</label>
+			<label index="pages.tx_tcdirectmail_senderemail" type="integer">18377364</label>
+			<label index="pages.tx_tcdirectmail_bounceaccount" type="integer">64299205</label>
+			<label index="pages.tx_tcdirectmail_spy" type="integer">19729638</label>
+			<label index="pages.tx_tcdirectmail_usebcc" type="integer">250750350</label>
+			<label index="pages.tx_tcdirectmail_register_clicks" type="integer">61880152</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0" type="integer">19594602</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1" type="integer">66030997</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2" type="integer">151938852</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.3" type="integer">143476130</label>
+			<label index="pages.tx_tcdirectmail_plainconvert" type="integer">238740684</label>
+			<label index="tx_tcdirectmail_targets" type="integer">253354655</label>
+			<label index="tx_tcdirectmail_targets.title" type="integer">208620723</label>
+			<label index="tx_tcdirectmail_targets.plain_only" type="integer">49497671</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers" type="integer">67292257</label>
+			<label index="tx_tcdirectmail_targets.beusers" type="integer">63719504</label>
+			<label index="tx_tcdirectmail_targets.fegroups" type="integer">111446607</label>
+			<label index="tx_tcdirectmail_targets.fepages" type="integer">247641408</label>
+			<label index="tx_tcdirectmail_targets.ttaddress" type="integer">108806629</label>
+			<label index="tx_tcdirectmail_targets.rawsql" type="integer">54820714</label>
+			<label index="tx_tcdirectmail_targets.sepchar" type="integer">193745953</label>
+			<label index="tx_tcdirectmail_targets.csvfields" type="integer">213675557</label>
+			<label index="tx_tcdirectmail_targets.csvdata" type="integer">24242654</label>
+			<label index="tx_tcdirectmail_targets.csvfile" type="integer">93427265</label>
+			<label index="tx_tcdirectmail_targets.csvurl" type="integer">21318307</label>
+			<label index="tx_tcdirectmail_targets.type" type="integer">241539922</label>
+			<label index="tx_tcdirectmail_targets.htmlurl" type="integer">68400128</label>
+			<label index="tx_tcdirectmail_targets.htmlfetch" type="integer">88581794</label>
+			<label index="tx_tcdirectmail_targets.direct_mail_compat" type="integer">36420867</label>
+			<label index="tx_tcdirectmail_targets.confirmed_receivers" type="integer">261585550</label>
+			<label index="tx_tcdirectmail_targets.optalreadymailed" type="integer">40302516</label>
+			<label index="tx_tcdirectmail_targets.optconfirmed" type="integer">171112652</label>
+			<label index="tx_tcdirectmail_targets.optnotconfirmed" type="integer">107365177</label>
+			<label index="tx_tcdirectmail_targets.optalladdresses" type="integer">25462018</label>
+			<label index="tx_tcdirectmail_targets.optbeusers" type="integer">180369015</label>
+			<label index="tx_tcdirectmail_targets.optfegroups" type="integer">150610862</label>
+			<label index="tx_tcdirectmail_targets.optfepages" type="integer">98787373</label>
+			<label index="tx_tcdirectmail_targets.optttaddress" type="integer">108806629</label>
+			<label index="tx_tcdirectmail_targets.optrawsql" type="integer">142772327</label>
+			<label index="tx_tcdirectmail_targets.optcsvfile" type="integer">470206</label>
+			<label index="tx_tcdirectmail_targets.optcsvlist" type="integer">258947844</label>
+			<label index="tx_tcdirectmail_targets.optcsvurl" type="integer">206757671</label>
+			<label index="tx_tcdirectmail_targets.opthtml" type="integer">79998303</label>
+			<label index="tx_tcdirectmail_targets.optmailto" type="integer">201217680</label>
+			<label index="tx_tcdirectmail_targets.optregex" type="integer">64221731</label>
+			<label index="tx_tcdirectmail_bounceaccount" type="integer">64299205</label>
+			<label index="tx_tcdirectmail_bounceaccount.servertype" type="integer">89878156</label>
+			<label index="tx_tcdirectmail_bounceaccount.server" type="integer">84270674</label>
+			<label index="tx_tcdirectmail_bounceaccount.username" type="integer">212632006</label>
+			<label index="tx_tcdirectmail_bounceaccount.passwd" type="integer">187963993</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="dk" type="array">
+			<label index="pages.directmailtype">Directmail</label>
+			<label index="pages.tx_tcdirectmail_senttime">Directmail send time:</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.0">Do not repeat</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.1">One day</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.2">One week</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.3">Two weeks</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.4">One month</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.5">Three months</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.6">Six months</label>
+			<label index="pages.tx_tcdirectmail_repeat.I.7">One year</label>
+			<label index="pages.tx_tcdirectmail_repeat">Directmail repeat:</label>
+			<label index="pages.tx_tcdirectmail_attachfiles">Attach files to directmail:</label>
+			<label index="pages.tx_tcdirectmail_real_target">Real receivers:</label>
+			<label index="pages.tx_tcdirectmail_dotestsend">Directmail do test send:</label>
+			<label index="pages.tx_tcdirectmail_test_target">Test receivers:</label>
+			<label index="pages.tx_tcdirectmail_sendername">Sender name:</label>
+			<label index="pages.tx_tcdirectmail_senderemail">Sender email:</label>
+			<label index="pages.tx_tcdirectmail_bounceaccount">Bounce account</label>
+			<label index="pages.tx_tcdirectmail_spy">Attempt to detect opened emails:</label>
+			<label index="pages.tx_tcdirectmail_usebcc">Use BCC-header to send mails:</label>
+			<label index="pages.tx_tcdirectmail_register_clicks">Register clicked links:</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.0">Plain text template (&amp;type=99)</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.1">Lynx cli-browser</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.2">Build-in html converter</label>
+			<label index="pages.tx_tcdirectmail_plainconvert.I.3">Chuggnutt's html2text</label>
+			<label index="pages.tx_tcdirectmail_plainconvert">Plain text method:</label>
+			<label index="tx_tcdirectmail_targets">Directmail receivers</label>
+			<label index="tx_tcdirectmail_targets.title">Receivers title:</label>
+			<label index="tx_tcdirectmail_targets.plain_only">Receive as plaintext only:</label>
+			<label index="tx_tcdirectmail_targets.actual_receivers">Actual receivers:</label>
+			<label index="tx_tcdirectmail_targets.beusers">BE-users:</label>
+			<label index="tx_tcdirectmail_targets.fegroups">FE-groups:</label>
+			<label index="tx_tcdirectmail_targets.fepages">Pages with FE-users:</label>
+			<label index="tx_tcdirectmail_targets.ttaddress">Pages with tt_address-records</label>
+			<label index="tx_tcdirectmail_targets.rawsql">Raw SQL:</label>
+			<label index="tx_tcdirectmail_targets.sepchar">Separator character:</label>
+			<label index="tx_tcdirectmail_targets.csvfields">CSV fields:</label>
+			<label index="tx_tcdirectmail_targets.csvdata">CSV data:</label>
+			<label index="tx_tcdirectmail_targets.csvfile">CSV file:</label>
+			<label index="tx_tcdirectmail_targets.csvurl">CSV url:</label>
+			<label index="tx_tcdirectmail_targets.type">Type:</label>
+			<label index="tx_tcdirectmail_targets.htmlurl">HTML url:</label>
+			<label index="tx_tcdirectmail_targets.htmlfetch">HTML fetch type:</label>
+			<label index="tx_tcdirectmail_targets.direct_mail_compat">direct_mail compatible html-allow flag:</label>
+			<label index="tx_tcdirectmail_targets.confirmed_receivers">Registered mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optalreadymailed">Already mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optconfirmed">Confirmed addresses</label>
+			<label index="tx_tcdirectmail_targets.optnotconfirmed">Non-confirmed addresses</label>
+			<label index="tx_tcdirectmail_targets.optalladdresses">All mailed addresses</label>
+			<label index="tx_tcdirectmail_targets.optbeusers">BE-users</label>
+			<label index="tx_tcdirectmail_targets.optfegroups">FE-groups with FE-users</label>
+			<label index="tx_tcdirectmail_targets.optfepages">Pages with FE-users</label>
+			<label index="tx_tcdirectmail_targets.optttaddress">Pages with tt_address-records</label>
+			<label index="tx_tcdirectmail_targets.optrawsql">Raw SQL</label>
+			<label index="tx_tcdirectmail_targets.optcsvfile">CSV file</label>
+			<label index="tx_tcdirectmail_targets.optcsvlist">CSV list</label>
+			<label index="tx_tcdirectmail_targets.optcsvurl">CSV url</label>
+			<label index="tx_tcdirectmail_targets.opthtml">HTML</label>
+			<label index="tx_tcdirectmail_targets.optmailto">Anchor tags with mailto:</label>
+			<label index="tx_tcdirectmail_targets.optregex">Match email addresses</label>
+			<label index="tx_tcdirectmail_bounceaccount">Bounce account</label>
+			<label index="tx_tcdirectmail_bounceaccount.servertype">Server type:</label>
+			<label index="tx_tcdirectmail_bounceaccount.server">Server:</label>
+			<label index="tx_tcdirectmail_bounceaccount.username">Username:</label>
+			<label index="tx_tcdirectmail_bounceaccount.passwd">Password:</label>
+		</languageKey>
+	</orig_text>
+</T3locallang>
