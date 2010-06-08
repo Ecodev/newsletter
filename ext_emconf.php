@@ -11,12 +11,12 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'TC Directmail',
-	'description' => 'Directmail extension with simple to setup and use mailer, and a very extensible recipient configuration.',
+	'title' => 'Directmail',
+	'description' => 'Directmail extension with simple to setup and use mailer',
 	'category' => 'module',
 	'shy' => '',
 	'version' => '2.0.3',
-	'dependencies' => 'tt_address',
+	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
 	'loadOrder' => '',
@@ -24,12 +24,12 @@ $EM_CONF[$_EXTKEY] = array(
 	'state' => 'stable',
 	'uploadfolder' => 1,
 	'createDirs' => '',
-	'modify_tables' => 'pages,tt_address,be_users,fe_users',
+	'modify_tables' => '',
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
-	'author' => 'Daniel Schledermann',
-	'author_email' => 'info@tcdirectmail.dk',
-	'author_company' => 'Casalogic A/S',
+	'author' => 'Adrien Crivelli, Fabien Udriot, Daniel Schledermann',
+	'author_email' => 'adrien.crivelli@ecodev.ch, fabien.udriot@ecodev.ch, info@tcdirectmail.dk',
+	'author_company' => 'Ecodev, Casalogic A/S',
 	'CGLcompliance' => '',
 	'CGLcompliance_note' => '',
 	'constraints' => array(
