@@ -70,7 +70,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$this->pageRendererObject = $this->doc->getPageRenderer();
 
 		// Defines javascript resource file
-		$this->javascriptPath = t3lib_extMgm::extRelPath('devlog') . 'Resources/Public/javascripts/';
+		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/javascripts/';
 
 	}
 
@@ -103,6 +103,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		//global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 		global $LANG;
 
+		$this->loadJavascript();
+		
 		$this->content .= $this->doc->startPage($LANG->getLL('title'));
 		$markers = array();
 
@@ -186,6 +188,84 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //		 $this->content.=$this->doc->spacer(5);
 //		 $this->content.=$this->doc->spacer(10);
 //	  }
+	}
+
+	/**
+	 * Load Javascript files onto the BE Module
+	 *
+	 * @return void
+	 */
+	protected function loadJavascript() {
+
+		// *********************************** //
+		// Load ExtCore library
+		$this->pageRendererObject->loadExtJS();
+		$this->pageRendererObject->enableExtJsDebug();
+
+		// *********************************** //
+		// Defines what files should be loaded and loads them
+		$files = array();
+		$files[] = 'Util.js';
+		$files[] = 'Application.js';
+//		$files[] = 'Application/MenuRegistry.js';
+		$files[] = 'Application/AbstractBootstrap.js';
+//		$files[] = 'Store/Bootstrap.js';
+//		$files[] = 'Store/LogStore.js';
+		$files[] = 'UserInterface/Bootstrap.js';
+		$files[] = 'UserInterface/Layout.js';
+//		$files[] = 'UserInterface/LogPanel.js';
+		foreach ($files as $file) {
+			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
+		}
+
+		// FIX ME: temporary paramter for development only
+		$debugParameter = '&no_cache=1';
+		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Backend.Newsletter' . $debugParameter, 'text/javascript', FALSE);
+
+			// *********************************** //
+			// Defines onready Javascript
+		$this->readyJavascript = array();
+		$this->readyJavascript[] .= <<< EOF
+
+//		for (var api in Ext.app.ExtDirectAPI) {
+//			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
+//		}
+//
+//		TYPO3.Backend.Newsletter.Remote.testMe("Hellooo", "World!", function(result) {
+//			if (typeof console == "object") {
+//				console.log(result);
+//			} else {
+//				alert(result);
+//			}
+//		});
+
+EOF;
+
+		$this->pageRendererObject->addExtOnReadyCode(PHP_EOL . implode("\n", $this->readyJavascript) . PHP_EOL);
+//
+//			// *********************************** //
+//			// Defines contextual variables
+//			// Define function for switching visibility of extra data field on or off
+//		$imageExpand = t3lib_iconWorks::skinImg($BACK_PATH, 'gfx/plusbullet_list.gif','width="18" height="12"');
+//		$imageCollapse = t3lib_iconWorks::skinImg($BACK_PATH, 'gfx/minusbullet_list.gif','width="18" height="12"');
+//
+//
+//		if (!isset($this->extConf['refreshFrequency'])) {
+//			throw new tx_devlog_exception('Missing setting "refreshFrequency". Try to re-set settings in the Extension Manager.', 1275573201);
+//		}
+//
+//		$autoRefresh = $this->MOD_SETTINGS['autorefresh'] ? $this->extConf['refreshFrequency'] : '0';
+//		$this->inlineJavascript[] .= <<< EOF
+//Ext.ns("{$this->extensionName}");
+//devlog = {
+//	imageExpand: '<img $imageExpand alt="+" />',
+//	imageCollapse: '<img $imageCollapse alt="-" />',
+//	show_extra_data: '{$GLOBALS['LANG']->getLL('show_extra_data')}',
+//	hide_extra_data: '{$GLOBALS['LANG']->getLL('hide_extra_data')}',
+//	autorefresh: $autoRefresh,
+//}
+//EOF;
+//		$this->pageRendererObject->addJsInlineCode('devlog', implode("\n", $this->inlineJavascript));
 	}
 
 	/**
