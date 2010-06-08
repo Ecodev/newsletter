@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/advanced_connect.php');
-require_once(t3lib_extMgm::extPath('tcdirectmail')."class.tx_tcdirectmail_mailer.php");
-require_once(t3lib_extMgm::extPath('tcdirectmail')."class.tx_tcdirectmail_tools.php");
+require_once(t3lib_extMgm::extPath('newsletter')."class.tx_tcdirectmail_mailer.php");
+require_once(t3lib_extMgm::extPath('newsletter')."class.tx_tcdirectmail_tools.php");
 
 /* Load the page */
 $rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', 'uid = '.intval($_REQUEST['uid']));

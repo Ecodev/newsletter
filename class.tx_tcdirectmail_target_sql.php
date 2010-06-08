@@ -1,5 +1,5 @@
 <?php
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target.php');
 
 /**
  * This is the basic SQL related directmail target. Methods implemented with DB calls.

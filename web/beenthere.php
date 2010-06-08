@@ -7,8 +7,8 @@ $authcode = addslashes($_REQUEST['c']);
 $sendid = intval($_REQUEST['s']); 
 
 require ('browserrun.php');
-require (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target.php');
-require (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
+require (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target.php');
+require (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
 
 
 /* Talk talk talk :) */

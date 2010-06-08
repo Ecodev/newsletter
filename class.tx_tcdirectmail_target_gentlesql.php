@@ -1,5 +1,5 @@
 <?php
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target_sql.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
 
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_tcdirectmail_bounce

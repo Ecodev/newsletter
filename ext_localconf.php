@@ -1,6 +1,6 @@
 <?php
 
-$tempFilePath = t3lib_extMgm::extPath('tcdirectmail');
+$tempFilePath = t3lib_extMgm::extPath('newsletter');
 $TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['includeClassFiles'] = array(
     $tempFilePath.'class.tx_tcdirectmail_target_beusers.php',
     $tempFilePath.'class.tx_tcdirectmail_target_csvfile.php',

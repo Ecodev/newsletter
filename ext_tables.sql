@@ -19,13 +19,13 @@ CREATE TABLE pages (
 	KEY tx_tcdirectmail_dotestsend (tx_tcdirectmail_dotestsend)
 );
 
-CREATE TABLE fe_users (
-	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
-);
-
-CREATE TABLE be_users (
-	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
-);
+#CREATE TABLE fe_users (
+#	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
+#);
+#
+#CREATE TABLE be_users (
+#	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
+#);
 
 
 

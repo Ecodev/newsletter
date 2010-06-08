@@ -26,7 +26,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
- * @author	Kasper Skårhøj <kasperYYYY@typo3.com>
+ * @author	Kasper Skï¿½rhï¿½j <kasperYYYY@typo3.com>
  * @author	Daniel Schledermann <daniel@schledermann.net>
  * Copied and modified for specific fit to extending tcdirectmail targets
  */
@@ -738,7 +738,7 @@ class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
 		
 		
 		$targetSource = "
-require_once(t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target_sql.php');
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
 	
 class $targetName extends tx_tcdirectmail_target_sql {
 	var \$tableName = \"$tableName\";
@@ -1363,7 +1363,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 								debug($pObj);
 	*/
 									// Adding an item!
-								$params["items"][]=Array($pObj->sL("Added label by PHP function|Tilføjet Dansk tekst med PHP funktion"), 999);
+								$params["items"][]=Array($pObj->sL("Added label by PHP function|Tilfï¿½jet Dansk tekst med PHP funktion"), 999);
 
 								// No return - the $params and $pObj variables are passed by reference, so just change content in then and it is passed back automatically...
 							}

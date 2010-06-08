@@ -74,7 +74,7 @@
 *  @since PHP 4.0.2
 */
 
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_plain.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_plain.php');
 
 class tx_tcdirectmail_plain_html2text extends tx_tcdirectmail_plain
 {

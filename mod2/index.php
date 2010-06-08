@@ -22,32 +22,21 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /** 
- * Module 'Directmail' for the 'tcdirectmail' extension.
+ * Module 'Directmail' for the 'newsletter' extension.
  *
  * @author   Daniel Schledermann <daniel@schledermann.net>
  */
 
 
-
-
-
    // DEFAULT initialization of a module [BEGIN]
-unset($MCONF);   
-require_once ("conf.php");
-require_once ($BACK_PATH."init.php");
-require_once ($BACK_PATH."template.php");
-require_once (PATH_typo3conf.'/localconf.php');
-$LANG->includeLLFile("EXT:tcdirectmail/mod1/locallang.xml");
-#include ("locallang.php");
+$LANG->includeLLFile("EXT:newsletter/mod2/locallang.xml");
 require_once (PATH_t3lib."class.t3lib_scbase.php");
 $BE_USER->modAccess($MCONF,1);   // This checks permissions and exits if the users has no permission for entry.
    // DEFAULT initialization of a module [END]
    
 $ICON_PATH = $BACK_PATH.'gfx/';   
-
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_mailer.php');
-
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_mailer.php');
 
 class tx_tcdirectmail_module1 extends t3lib_SCbase {
    var $pageinfo;
@@ -708,7 +697,7 @@ class tx_tcdirectmail_module1 extends t3lib_SCbase {
 
 	function previewLink($type, $email) {
 	    return '<a target="_new" href="'.$GLOBALS['BACK_PATH']
-			.t3lib_extMgm::extRelPath('tcdirectmail')
+			.t3lib_extMgm::extRelPath('newsletter')
 			.'web/preview.php?email='.rawurlencode($email).'&type='.$type.'&uid='.$_REQUEST['id'].'">'
 			.$GLOBALS['LANG']->getLL("preview_$type")
 			.'</a>';
@@ -724,7 +713,7 @@ class tx_tcdirectmail_module1 extends t3lib_SCbase {
 	    $out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
 	    $out .= '&edit[tx_tcdirectmail_targets]['.$uid.']=edit">';
 	    $out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
-	    $out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('tcdirectmail').'mailtargets.gif" />';
+	    $out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'mailtargets.gif" />';
 	    $out .= "$title ($uid)";
 	    
 	    return $out;
@@ -1049,8 +1038,8 @@ class tx_tcdirectmail_module1 extends t3lib_SCbase {
 
 
 
-if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/tcdirectmail/mod1/index.php"])   {
-   include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/tcdirectmail/mod1/index.php"]);
+if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/tcdirectmail/mod2/index.php"])   {
+   include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/tcdirectmail/mod2/index.php"]);
 }
 
 

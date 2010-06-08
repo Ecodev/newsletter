@@ -23,7 +23,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
 require('clirun.php');
-require_once(t3lib_extMgm::extPath('tcdirectmail')."class.tx_tcdirectmail_tools.php");
+require_once(t3lib_extMgm::extPath('newsletter')."class.tx_tcdirectmail_tools.php");
 
 /* Get all test pages */
 $rs = $TYPO3_DB->sql_query("SELECT * 

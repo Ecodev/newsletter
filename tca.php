@@ -340,7 +340,7 @@ if (!function_exists('user_displayfieldtitle')) {
 
 if (!function_exists('user_showreceivers')) {
     function user_showreceivers($PA, $fObj) {
-	require_once(t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
+	require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
 	global $TYPO3_DB;
     
 	if (intval($PA['row']['uid']) == 0) {
@@ -389,15 +389,15 @@ if (!function_exists('user_showreceivers')) {
 	
     
 	return '<div style="height: 240px; width:430px; overflow: scroll; background-color: white;">'
-	      .'<p>Download: <a href="'.t3lib_extMgm::extRelPath('tcdirectmail')."web/xmldownload.php?authCode=$authCode&uid=$uid\">XML</a>&nbsp;"
-	      .'<a href="'.t3lib_extMgm::extRelPath('tcdirectmail')."web/csvdownload.php?authCode=$authCode&uid=$uid\">CSV</a></p>"
+	      .'<p>Download: <a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=$uid\">XML</a>&nbsp;"
+	      .'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=$uid\">CSV</a></p>"
 	      .'<table>'.$out.'</table></div>';
     }
 }
 
 if (!function_exists('user_showalreadymailed')) {
    function user_showalreadymailed($PA, $fObj) {
-      require_once(t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
+      require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
       $target = tx_tcdirectmail_target::getTarget($PA['row']['uid']);
       list($description, $sql) = unserialize($this->fields['alreadymailed']);
       return '<div style="height: 120px; width:430px; overflow: scroll; background-color: white;"><p>'.$description.'</p></div>';

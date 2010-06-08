@@ -24,6 +24,6 @@
 ***************************************************************/
 require ("clirun.php");
 
-require_once(t3lib_extMgm::extPath('tcdirectmail')."class.tx_tcdirectmail_tools.php");
+require_once(t3lib_extMgm::extPath('newsletter')."class.tx_tcdirectmail_tools.php");
 tx_tcdirectmail_tools::runSpool();
 ?>

@@ -3,8 +3,8 @@
  * This is the click link script that identifies and registers the user, and provides the correct link
  */
 require ('browserrun.php');
-require (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target.php');
-require (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
+require (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target.php');
+require (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
 
 $authcode = addslashes($_REQUEST['c']);
 $linkid = intval($_REQUEST['l']);

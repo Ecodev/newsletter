@@ -1,8 +1,8 @@
 #! /usr/bin/php -q
 <?php
 require ("clirun.php");
-require_once(t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_bouncehandler.php');
-require_once(t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_tools.php');
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_bouncehandler.php');
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_tools.php');
 
 $fd = fopen('php://stdin', 'r');
 while ($buffer = fread($fd, 8096)) {

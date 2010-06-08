@@ -1,6 +1,6 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('tcdirectmail').'class.tx_tcdirectmail_target_sql.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
 class tx_tcdirectmail_target_rawsql extends tx_tcdirectmail_target_sql { 
 	function init() {
 		if ($this->fields['rawsql'] == '') {
