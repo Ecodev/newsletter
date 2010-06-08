@@ -17,8 +17,8 @@
    inkscape:version="0.47 r22583"
    sodipodi:docname="newsletter_0_default_view.svg"
    inkscape:export-filename="/var/www/typo3/typo3conf/ext/tcdirectmail/doc/gui mockup/untitled folder/newsletter_0_default_view.png"
-   inkscape:export-xdpi="71.772705"
-   inkscape:export-ydpi="71.772705">
+   inkscape:export-xdpi="100.01707"
+   inkscape:export-ydpi="100.01707">
   <defs
      id="defs4">
     <marker
@@ -266,8 +266,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.76"
-     inkscape:cx="564.01929"
-     inkscape:cy="602.024"
+     inkscape:cx="526.56605"
+     inkscape:cy="595.95901"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -295,11 +295,11 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/tcdirectmail/doc/gui mockup/background.png"
        xlink:href="background.png"
-       width="1188"
-       height="678.85712"
-       id="image2907"
+       y="95.790749"
        x="-231.14287"
-       y="95.790749" />
+       id="image2907"
+       height="678.85712"
+       width="1188" />
     <rect
        style="fill:#f8f8f8;fill-opacity:1;stroke:none"
        id="rect5478"
