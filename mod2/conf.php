@@ -1,7 +1,7 @@
 <?php
 
 	// DO NOT REMOVE OR CHANGE THESE 3 LINES:
-$MCONF["name"]="web_newsletterM1";
+$MCONF["name"]="web_newsletterM2";
 
 	
 $MCONF["access"]="user,group";

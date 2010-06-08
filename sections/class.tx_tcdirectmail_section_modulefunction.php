@@ -59,7 +59,7 @@ class tx_tcdirectmail_section_modulefunction extends tx_kickstarter_section_modu
 				'web_func_wizards' => 'Web>Func, Wizards',
 				'web_info' => 'Web>Info',
 				'web_ts' => 'Web>Template',
-				'web_newsletterM1' => 'Web>Directmail',
+				'web_newsletterM2' => 'Web>Directmail',
 				'user_task' => 'User>Task Center',
 			);
 			
@@ -194,7 +194,7 @@ class tx_tcdirectmail_section_modulefunction extends tx_kickstarter_section_modu
 			',
 			0);
 			break;
-		    case 'web_newsletterM1':
+		    case 'web_newsletterM2':
 			$indexRequire = $this->sPS('
 				require_once(PATH_t3lib.\'class.t3lib_extobjbase.php\');
 			');
