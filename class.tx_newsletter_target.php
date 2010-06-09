@@ -63,7 +63,7 @@ class tx_newsletter_target {
 	 * @param     integer     Uid of a tx_directmail_target from the database.
 	 * @return    object      Of directmail_target type.
 	 */
-	function loadTarget ($uid) {
+	public static function loadTarget ($uid) {
 		$object = tx_newsletter_target::getTarget($uid);
 		$object->init();
 		return $object;

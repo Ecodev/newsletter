@@ -206,14 +206,14 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		// *********************************** //
 		// Defines what files should be loaded and loads them
 		$files = array();
-		$files[] = 'Util.js';
+		$files[] = 'Utils.js';
 		$files[] = 'Application.js';
-//		$files[] = 'Application/MenuRegistry.js';
 		$files[] = 'Application/AbstractBootstrap.js';
 //		$files[] = 'Store/Bootstrap.js';
 //		$files[] = 'Store/LogStore.js';
 		$files[] = 'UserInterface/Bootstrap.js';
 		$files[] = 'UserInterface/Layout.js';
+		$files[] = 'UserInterface/FormNewsletter.js';
 		$files[] = 'UserInterface/TestingPanel.js';
 		$files[] = 'UserInterface/TestingButton.js';
 		foreach ($files as $file) {

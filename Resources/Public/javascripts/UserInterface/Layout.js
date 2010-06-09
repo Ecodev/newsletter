@@ -7,13 +7,12 @@ TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 			renderTo: 't3-testing',
 			items: [
 			{
-				xtype: 'TYPO3.Newsletter.UserInterface.TestingPanel',
-//				ref: 'logPanel',
-//				flex: 0
+				xtype: 'TYPO3.Newsletter.UserInterface.FormNewsletter',
 			},
 			]
 		};
 		Ext.apply(this, config);
+
 		TYPO3.Newsletter.UserInterface.Layout.superclass.initComponent.call(this);
 	}
 });
