@@ -34,72 +34,167 @@
 class ext_update {
 
 	/**
+	 *
+	 * @var array
+	 */
+	private $tablesToCheck = array('pages', 'fe_users', 'be_users');
+
+	/**
 	 * Main function, returning the HTML content of the module
 	 *
 	 * @return	string	HTML to display
 	 */
 	function main() {
-		$update = t3lib_div::_GP('submitButton');
-			// The update button was clicked
-		if (!empty($update)) {
-			$updateList = t3lib_div::_GP('correctedConfiguration');
-			$tceData = array('tx_newsletter_filters' => array());
-			foreach ($updateList as $uid => $newConfiguration) {
-				$tceData['tx_newsletter_filters'][$uid] = array('configuration' => $newConfiguration);
-			}
-			$tce = t3lib_div::makeInstance('t3lib_TCEmain');
-			$tce->stripslashes_values = 0;
-			$tce->start($tceData, array());
-			$tce->process_datamap();
-		}
-		$content = '<h2>Check for old special values syntax</h2>';
-			// Get all records with a non-empty configuration field
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, title, configuration', 'tx_newsletter_filters', "configuration <> ''");
-			// There are none
-		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0) {
-			$content .= '<p>No filters are used.</p>';
+		global $TYPO3_DB;
 
-			// The additional SQL field is not empty for some records, propose update
-		} else {
-			$updates = array();
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-				$configuration = $row['configuration'];
-				$matches = array();
-				$result = preg_match_all('/(\\\?(empty|null|clear_cache))/', $configuration, $matches, PREG_OFFSET_CAPTURE);
-				if (!empty($result)) {
-						// If at least one match doesn't start with a backslash, an update is needed
-					foreach ($matches[0] as $aMatch) {
-						if (strpos($aMatch[0], '\\') !== 0) {
-							$updates[] = $row;
-							break;
-						}
-					}
+		// Action! Makes the necessary update
+		$update = t3lib_div::_GP('submitButton');
+		// The update button was clicked
+		if (!empty($update)) {
+
+			// Rename tables
+			$tablesToRename = $this->getTablesToRename();
+			foreach ($tablesToRename as $tableName) {
+				$targetName = $this->getTargetName($tableName);
+
+				if ($targetName) {
+					$request = 'RENAME TABLE ' . $tableName . ' TO ' . $targetName;
+					#$TYPO3_DB->sql_query($request);
 				}
 			}
-			if (count($updates) == 0) {
-				$content .= '<p>No changes needed</p>';
-			} else {
-				$content .= '<p>The following records use an old value syntax. They should be updated. Correct the value in each field and press the update button</p>';
-				$content .= '<form name="updateForm" action="" method ="post">';
-				$content .= '<table cellpadding="4" cellspacing="0" border="1">';
-				$content .= '<thead><tr><th>Record</th><th>Configuration</th><th>Replacement</th></tr></thead>';
-				$content .= '<tbody>';
-				foreach ($updates as $row) {
-					$uidList .= $row['uid'];
-					$content .= '<tr valign="top">';
-					$content .= '<td>' . $row['title'] . ' [' . $row['uid'] . ']</td>';
-					$content .= '<td>' . nl2br($row['configuration']) . '</td>';
-					$content .= '<td><textarea name="correctedConfiguration[' . $row['uid'] . ']" cols="100" rows="5">' . $row['configuration'] . '</textarea></td>';
-					$content .= '</tr>';
+
+			// Rename fields
+			$this->tablesToCheck = array('pages', 'fe_users', 'be_users');
+			foreach ($this->tablesToCheck as $tableName) {
+				$fieldsToRename = $this->getFieldsToRename($tableName);
+				$fields = $TYPO3_DB->admin_get_fields($tableName);
+
+				foreach ($fieldsToRename as $fieldName) {
+					$targetField = str_replace('tcdirectmail', 'newsletter', $fieldName);
+					$type = $fields[$fieldName]['Type'];
+					$request = 'ALTER TABLE ' . $tableName . ' CHANGE ' . $fieldName . ' ' . $targetField . ' ' . $type;
+					$TYPO3_DB->sql_query($request);
 				}
-				$content .= '</tbody>';
-				$content .= '</table>';
-					// Display update form, if the update button was not already clicked
-				$content .= '<p><input type="submit" name="submitButton" value ="Update"></p>';
-				$content .= '</form>';
+			}
+
+//			$tceData = array('tx_newsletter_filters' => array());
+//			foreach ($updateList as $uid => $newConfiguration) {
+//				$tceData['tx_newsletter_filters'][$uid] = array('configuration' => $newConfiguration);
+//			}
+//			$tce = t3lib_div::makeInstance('t3lib_TCEmain');
+//			$tce->stripslashes_values = 0;
+//			$tce->start($tceData, array());
+//			$tce->process_datamap();
+		}
+
+		// Defines the content to be displayed on the EM interface
+		$content = '<h2>Check for old tables names</h2>';
+		$hasUpdate = FALSE;
+		/////////////////////////////////////
+		// Get all tables of the database to be checked against tx_directmail's name
+		$tablesToRename = $this->getTablesToRename();
+
+		if (!empty($tablesToRename)) {
+			$content .= '<p>The following tables need to be renamed.</p>';
+			$content .= '<ul><li>' . implode('</li><li>', $tablesToRename) . '</li></ul>';
+			$hasUpdate = TRUE;
+		}
+
+		/////////////////////////////////////
+		// Get all fields of certain tables to be checked against tx_directmail's name
+		$this->tablesToCheck = array('pages', 'fe_users', 'be_users');
+		foreach ($this->tablesToCheck as $tableName) {
+			$fieldsToRename = $this->getFieldsToRename($tableName);
+
+			if (!empty($fieldsToRename)) {
+				$content .= '<p>The following fields need to be renamed in table "' . $tableName . '".</p>';
+				$content .= '<ul><li>' . implode('</li><li>', $fieldsToRename) . '</li></ul>';
+				$hasUpdate = TRUE;
+			}
+
+		}
+
+		if (!$hasUpdate) {
+			$content .= '<p>No tables / fields need to be changed</p>';
+		}
+		else {
+			// Display update form, if the update button was not already clicked
+			$content .= '<form name="updateForm" action="" method ="post">';
+			$content .= '<p><input type="submit" name="submitButton" value ="Update"></p>';
+			$content .= '</form>';
+
+		}
+
+		return $content;
+		#$res = $TYPO3_DB->exec_SELECTquery('uid, title, configuration', 'tx_newsletter_filters', "configuration <> ''");
+//		while ($row = $TYPO3_DB->sql_fetch_assoc($res)) {
+
+	}
+
+	/**
+	 * Returns the tables to be renamed
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return array
+	 */
+	private function getTablesToRename() {
+		global $TYPO3_DB;
+		$tables = $TYPO3_DB->admin_get_tables();
+		$tablesToRename = array();
+		foreach ($tables as $tableName => $tableInfo) {
+			if (strpos($tableName, 'tx_tcdirectmail') !== FALSE) {
+				$tablesToRename[] = $tableName;
 			}
 		}
-		return $content;
+		return $tablesToRename;
+	}
+
+	/**
+	 * Returns the tables to be renamed
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return array
+	 */
+	private function getFieldsToRename($tableName) {
+		global $TYPO3_DB;
+		$fields = $TYPO3_DB->admin_get_fields($tableName);
+		$fieldsToRename = array();
+		foreach ($fields as $fieldName => $fieldInfo) {
+			if (strpos($fieldName, 'tx_tcdirectmail') !== FALSE) {
+				$fieldsToRename[] = $fieldName;
+			}
+		}
+		return $fieldsToRename;
+	}
+
+	/**
+	 * Returns the new name of the target
+	 *
+	 * @return string
+	 */
+	private function getTargetName($tableName) {
+		$targetName = '';
+		switch ($tableName) {
+			case 'tx_tcdirectmail_bounceaccount':
+				$targetName = 'tx_newsletter_domain_model_bounceaccount';
+				break;
+			case 'tx_tcdirectmail_clicklinks':
+				$targetName = 'tx_newsletter_domain_model_clicklink';
+				break;
+				break;
+			case 'tx_tcdirectmail_sentlog':
+				$targetName = 'tx_newsletter_domain_model_email_queue';
+				break;
+				break;
+			case 'tx_tcdirectmail_targets':
+				$targetName = 'tx_newsletter_domain_model_recipientlist';
+				break;
+				break;
+			case 'tx_tcdirectmail_lock':
+				$targetName = 'tx_newsletter_domain_model_lock';
+				break;
+		}
+		return $targetName;
 	}
 
 	/**
@@ -112,7 +207,7 @@ class ext_update {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dataquery/class.ext_update.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dataquery/class.ext_update.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/class.ext_update.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/class.ext_update.php']);
 }
 ?>
