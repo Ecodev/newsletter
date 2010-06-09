@@ -1,8 +1,8 @@
-Ext.ns("TYPO3.Backend.Newsletter");
+Ext.ns("TYPO3.Newsletter");
 
 /**
- * @class TYPO3.Backend.Newsletter.Application
- * @namespace TYPO3.Backend.Newsletter
+ * @class TYPO3.Newsletter.Application
+ * @namespace TYPO3.Newsletter
  * @extends Ext.util.Observable
  *
  * The main entry point which controls the lifecycle of the application.
@@ -16,9 +16,9 @@ Ext.ns("TYPO3.Backend.Newsletter");
  *
  * @singleton
  */
-TYPO3.Backend.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
+TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	/**
-	 * @event TYPO3.Backend.Newsletter.Application.afterBootstrap
+	 * @event TYPO3.Newsletter.Application.afterBootstrap
 	 * After bootstrap event. Should be used for main initialization.
 	 */
 
@@ -37,7 +37,7 @@ TYPO3.Backend.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 
 		Ext.QuickTips.init();
 
-		this.fireEvent('TYPO3.Backend.Newsletter.Application.afterBootstrap');
+		this.fireEvent('TYPO3.Newsletter.Application.afterBootstrap');
 		
 		this._initializeHistoryManager();
 	},
@@ -45,8 +45,8 @@ TYPO3.Backend.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	/**
 	 * Registers a new bootstrap class.
 	 *
-	 * Every bootstrap class needs to extend TYPO3.Backend.Newsletter.Application.AbstractBootstrap.
-	 * @param {TYPO3.Backend.Newsletter.Application.AbstractBootstrap} bootstrap The bootstrap class to be registered.
+	 * Every bootstrap class needs to extend TYPO3.Newsletter.Application.AbstractBootstrap.
+	 * @param {TYPO3.Newsletter.Application.AbstractBootstrap} bootstrap The bootstrap class to be registered.
 	 * @api
 	 */
 	registerBootstrap: function(bootstrap) {
@@ -82,7 +82,7 @@ TYPO3.Backend.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 
 	_initializeHistoryManager: function() {
 		Ext.History.on('change', function(token) {
-			this.fireEvent('TYPO3.Backend.Newsletter.Application.navigate', token);
+			this.fireEvent('TYPO3.Newsletter.Application.navigate', token);
 		}, this);
 		// Handle initial token (on page load)
 		Ext.History.init(function(history) {
@@ -103,4 +103,4 @@ TYPO3.Backend.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 
 });
 
-Ext.onReady(TYPO3.Backend.Newsletter.Application.bootstrap, TYPO3.Backend.Newsletter.Application);
+Ext.onReady(TYPO3.Newsletter.Application.bootstrap, TYPO3.Newsletter.Application);

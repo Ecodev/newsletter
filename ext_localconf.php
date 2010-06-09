@@ -1,7 +1,7 @@
 <?php
 
 // ExtDirect API
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Backend.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
 
 $tempFilePath = t3lib_extMgm::extPath('newsletter');
 $TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(

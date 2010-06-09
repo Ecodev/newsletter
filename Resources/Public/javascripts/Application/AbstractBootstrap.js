@@ -1,20 +1,20 @@
-Ext.ns("TYPO3.Backend.Newsletter.Application");
+Ext.ns("TYPO3.Newsletter.Application");
 
 /**
- * @class TYPO3.Backend.Newsletter.Application.AbstractBootstrap
- * @namespace TYPO3.Backend.Newsletter.Application
+ * @class TYPO3.Newsletter.Application.AbstractBootstrap
+ * @namespace TYPO3.Newsletter.Application
  * @extends Ext.util.Observable
  *
  * Base class for all bootstrappers. This class provides convenience methods for extending the user interface.
  */
-TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable, {
+TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable, {
 
 	/**
 	 * This method is called by the main application, and inside, you should
 	 * register event listeners as needed.
 	 *
 	 * Example:
-	 * <pre>TYPO3.Backend.Newsletter.Application.on([name of event], [callback], [scope]);</pre>
+	 * <pre>TYPO3.Newsletter.Application.on([name of event], [callback], [scope]);</pre>
 	 *
 	 * @method initialize
 	 */
@@ -27,7 +27,7 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	 * @param {Array} The items to add
 	 */
 	addToMenu: function(path, items) {
-		TYPO3.Backend.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
+		TYPO3.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
 	},
 
 	/**
@@ -38,14 +38,14 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	addModuleDialog: function(path, moduleDialogConfig, contentDialogConfig) {
 		this.handleButtonPress(path, function(button) {
 			var moduleDialog;
-			moduleDialog = button.findParentByType(TYPO3.Backend.Newsletter.UserInterface.ModuleMenu).showModuleDialog(moduleDialogConfig, contentDialogConfig);
+			moduleDialog = button.findParentByType(TYPO3.Newsletter.UserInterface.ModuleMenu).showModuleDialog(moduleDialogConfig, contentDialogConfig);
 			// Untoggle button on module dialog destroy
 			moduleDialog.on('destroy', function() {
 				button.toggle(false);
 			});
 		});
 		this.handleButtonUnpress(path, function(button) {
-			button.findParentByType(TYPO3.Backend.Newsletter.UserInterface.ModuleMenu).removeModuleDialog();
+			button.findParentByType(TYPO3.Newsletter.UserInterface.ModuleMenu).removeModuleDialog();
 		});
 	},
 
@@ -58,7 +58,7 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	 */
 	handleButtonPress: function(path, callback, scope) {
 		var joinedPath = path.join('-');
-		TYPO3.Backend.Newsletter.Application.MenuRegistry.on('TYPO3.Backend.Newsletter.UserInterface.RootlineMenu.buttonPressed', function(button) {
+		TYPO3.Newsletter.Application.MenuRegistry.on('TYPO3.Newsletter.UserInterface.RootlineMenu.buttonPressed', function(button) {
 			if (button.getFullPath() === joinedPath) {
 				callback.call(scope, button);
 			}
@@ -74,7 +74,7 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	 */
 	handleButtonUnpress: function(path, callback, scope) {
 		var joinedPath = path.join('-');
-		TYPO3.Backend.Newsletter.Application.MenuRegistry.on('TYPO3.Backend.Newsletter.UserInterface.RootlineMenu.buttonUnpressed', function(button) {
+		TYPO3.Newsletter.Application.MenuRegistry.on('TYPO3.Newsletter.UserInterface.RootlineMenu.buttonUnpressed', function(button) {
 			if (button.getFullPath() === joinedPath) {
 				callback.call(scope, button);
 			}
@@ -87,7 +87,7 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	 * TODO: parameters
 	 */
 	addContentArea: function(sectionId, itemId, config) {
-		TYPO3.Backend.Newsletter.Application.on('TYPO3.Backend.Newsletter.UserInterface.ContentArea.afterInit', function(contentArea) {
+		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.UserInterface.ContentArea.afterInit', function(contentArea) {
 			if (sectionId + '-contentArea' === contentArea.itemId) {
 				contentArea.add(Ext.apply(config, {
 					itemId: itemId
@@ -105,7 +105,7 @@ TYPO3.Backend.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Obs
 	 */
 	handleNavigationToken: function(regexp, callback, scope) {
 		scope = scope || this;
-		TYPO3.Backend.Newsletter.Application.on('TYPO3.Backend.Newsletter.Application.navigate', function(token) {
+		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.navigate', function(token) {
 			var matches = token && token.match(regexp);
 			if (matches) {
 				callback.createDelegate(this, matches).call();

@@ -1,20 +1,19 @@
-Ext.ns("TYPO3.Backend.Newsletter.UserInterface");
+Ext.ns("TYPO3.Newsletter.UserInterface");
 
-TYPO3.Backend.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
+TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
 			renderTo: 't3-testing',
 			items: [
 			{
-				xtype: 'panel',
-				title: 'testing panel. Cool it works!',
-				ref: 'logPanel',
-				flex: 0
+				xtype: 'TYPO3.Newsletter.UserInterface.TestingPanel',
+//				ref: 'logPanel',
+//				flex: 0
 			},
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Backend.Newsletter.UserInterface.Layout.superclass.initComponent.call(this);
+		TYPO3.Newsletter.UserInterface.Layout.superclass.initComponent.call(this);
 	}
 });

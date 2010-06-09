@@ -214,14 +214,15 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //		$files[] = 'Store/LogStore.js';
 		$files[] = 'UserInterface/Bootstrap.js';
 		$files[] = 'UserInterface/Layout.js';
-//		$files[] = 'UserInterface/LogPanel.js';
+		$files[] = 'UserInterface/TestingPanel.js';
+		$files[] = 'UserInterface/TestingButton.js';
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
 		}
 
 		// FIX ME: temporary paramter for development only
 		$debugParameter = '&no_cache=1';
-		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Backend.Newsletter' . $debugParameter, 'text/javascript', FALSE);
+		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter' . $debugParameter, 'text/javascript', FALSE);
 
 			// *********************************** //
 			// Defines onready Javascript
@@ -232,7 +233,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
 //		}
 //
-//		TYPO3.Backend.Newsletter.Remote.testMe("Hellooo", "World!", function(result) {
+//		TYPO3.Newsletter.Remote.testMe("Hellooo", "World!", function(result) {
 //			if (typeof console == "object") {
 //				console.log(result);
 //			} else {

@@ -1,6 +1,6 @@
-Ext.ns('TYPO3.Backend.Newsletter');
+Ext.ns('TYPO3.Newsletter');
 
-TYPO3.Backend.Newsletter.Utils = {};
+TYPO3.Newsletter.Utils = {};
 
 /**
  * Clone Function
@@ -9,7 +9,7 @@ TYPO3.Backend.Newsletter.Utils = {};
  * @return {Object/Array} Deep clone of an object or an array
  * @author Ing. Jozef Sakáloš
  */
-TYPO3.Backend.Newsletter.Utils.clone = function(o) {
+TYPO3.Newsletter.Utils.clone = function(o) {
 	if (!o || 'object' !== typeof o) {
 		return o;
 	}
@@ -22,7 +22,7 @@ TYPO3.Backend.Newsletter.Utils.clone = function(o) {
 		if (o.hasOwnProperty(p)) {
 			v = o[p];
 			if (v && 'object' === typeof v) {
-				c[p] = TYPO3.Backend.Newsletter.Utils.clone(v);
+				c[p] = TYPO3.Newsletter.Utils.clone(v);
 			} else {
 				c[p] = v;
 			}

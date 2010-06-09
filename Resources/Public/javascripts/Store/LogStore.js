@@ -1,13 +1,13 @@
-Ext.ns("TYPO3.Backend.Newsletter.Store");
+Ext.ns("TYPO3.Newsletter.Store");
 
 
-TYPO3.Backend.Newsletter.initLogStore = function() {
+TYPO3.Newsletter.initLogStore = function() {
 	return new Ext.data.DirectStore({
 		paramsAsHash: true,
 		autoLoad: true,
 	//	idProperty: 'source',
 		root: 'data',
-		directFn: TYPO3.Backend.Newsletter.Remote.getLogs,
+		directFn: TYPO3.Newsletter.Remote.getLogs,
 		fields: [
 			{name: 'source'},
 			{name: 'description'},
@@ -19,9 +19,9 @@ TYPO3.Backend.Newsletter.initLogStore = function() {
 
 /**
  * Button of the rootline menu
- * @class TYPO3.Backend.Newsletter.Store.LogPanel
+ * @class TYPO3.Newsletter.Store.LogPanel
  * @extends Ext.LogPanel
  */
 
 
-Ext.reg('TYPO3.Backend.Newsletter.Store.LogPanel', TYPO3.Backend.Newsletter.Store.LogPanel);
+Ext.reg('TYPO3.Newsletter.Store.LogPanel', TYPO3.Newsletter.Store.LogPanel);
