@@ -1,8 +1,8 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_plain.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_plain.php');
 
-class tx_tcdirectmail_plain_simple extends tx_tcdirectmail_plain {
+class tx_newsletter_plain_simple extends tx_newsletter_plain {
 	var $fetchMethod = 'src';
 
 	function setHtml($html) {

@@ -29,7 +29,7 @@
  * @abstract
  */
 
-class tx_tcdirectmail_target {
+class tx_newsletter_target {
 	var $fields;
 	var $data;
    
@@ -44,14 +44,14 @@ class tx_tcdirectmail_target {
 	function getTarget($uid) {
 		global $TYPO3_DB;
        
-		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_tcdirectmail_targets WHERE uid = $uid");
+		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_targets WHERE uid = $uid");
 		$fields = $TYPO3_DB->sql_fetch_assoc($rs);
 		$object = new $fields['targettype'];
-		if (is_subclass_of($object, 'tx_tcdirectmail_target')) {
+		if (is_subclass_of($object, 'tx_newsletter_target')) {
 			$object->fields = $fields;
 			return $object;
 		} else {
-			die ("Ooops..   $fields[targettype] is not a tx_tcdirectmail_target child class");
+			die ("Ooops..   $fields[targettype] is not a tx_newsletter_target child class");
 		}   
 	}
    
@@ -64,7 +64,7 @@ class tx_tcdirectmail_target {
 	 * @return    object      Of directmail_target type.
 	 */
 	function loadTarget ($uid) {
-		$object = tx_tcdirectmail_target::getTarget($uid);
+		$object = tx_newsletter_target::getTarget($uid);
 		$object->init();
 		return $object;
 	}
@@ -143,12 +143,12 @@ class tx_tcdirectmail_target {
 	/**
 	 * Here you can define an action when an address bounces. This can either be database operations such a a deletion. 
 	 * For external data-sources, you might consider collecting the addresses for later removal from the foreign system. 
-	 * The tx_tcdirectmail_target_sql implements a sesible default. Bounces can only be expected to work if the record 
+	 * The tx_newsletter_target_sql implements a sesible default. Bounces can only be expected to work if the record 
 	 * contains "uid" and "authCode" fields. "tableName" should also be included for compatibility reasons.
 	 * It is not mandatory to do anything, but bounce handling cannot work without it.
 	 *
 	 * @param   integer    Uid of the address that has failed.
-	 * @param   integer    Status of the bounce expect: TCDIRECTMAIL_HARDBOUNCE or TCDIRECTMAIL_SOFTBOUNCE 
+	 * @param   integer    Status of the bounce expect: NEWSLETTER_HARDBOUNCE or NEWSLETTER_SOFTBOUNCE 
 	 * @return  bool       Status of the success of the removal.
 	 */
 	function disableReceiver($uid, $bounce_type) {

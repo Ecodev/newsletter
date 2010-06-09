@@ -2,37 +2,37 @@
 # Table structure for table 'pages'
 #
 CREATE TABLE pages (
-	tx_tcdirectmail_senttime int(11) NOT NULL,
-	tx_tcdirectmail_repeat int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_tcdirectmail_plainconvert varchar(255) DEFAULT 'tx_tcdirectmail_plain_simple' NOT NULL,
-	tx_tcdirectmail_test_target int(10) unsigned DEFAULT '0' NOT NULL,
-	tx_tcdirectmail_real_target text NOT NULL,	
-	tx_tcdirectmail_dotestsend tinyint(2) DEFAULT '0' NOT NULL,
-	tx_tcdirectmail_attachfiles mediumtext NOT NULL,
-	tx_tcdirectmail_sendername tinytext NOT NULL,
-	tx_tcdirectmail_senderemail tinytext NOT NULL,
-	tx_tcdirectmail_bounceaccount int(10) unsigned DEFAULT '0' NOT NULL,
-	tx_tcdirectmail_spy tinyint(2) DEFAULT '0' NOT NULL,
-	tx_tcdirectmail_register_clicks tinyint(2) DEFAULT '0' NOT NULL,
+	tx_newsletter_senttime int(11) NOT NULL,
+	tx_newsletter_repeat int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_newsletter_plainconvert varchar(255) DEFAULT 'tx_newsletter_plain_simple' NOT NULL,
+	tx_newsletter_test_target int(10) unsigned DEFAULT '0' NOT NULL,
+	tx_newsletter_real_target text NOT NULL,	
+	tx_newsletter_dotestsend tinyint(2) DEFAULT '0' NOT NULL,
+	tx_newsletter_attachfiles mediumtext NOT NULL,
+	tx_newsletter_sendername tinytext NOT NULL,
+	tx_newsletter_senderemail tinytext NOT NULL,
+	tx_newsletter_bounceaccount int(10) unsigned DEFAULT '0' NOT NULL,
+	tx_newsletter_spy tinyint(2) DEFAULT '0' NOT NULL,
+	tx_newsletter_register_clicks tinyint(2) DEFAULT '0' NOT NULL,
 
-	KEY tx_tcdirectmail_senttime (tx_tcdirectmail_senttime),
-	KEY tx_tcdirectmail_dotestsend (tx_tcdirectmail_dotestsend)
+	KEY tx_newsletter_senttime (tx_newsletter_senttime),
+	KEY tx_newsletter_dotestsend (tx_newsletter_dotestsend)
 );
 
 #CREATE TABLE fe_users (
-#	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
+#	tx_newsletter_bounce int(11) DEFAULT '0' NOT NULL
 #);
 #
 #CREATE TABLE be_users (
-#	tx_tcdirectmail_bounce int(11) DEFAULT '0' NOT NULL
+#	tx_newsletter_bounce int(11) DEFAULT '0' NOT NULL
 #);
 
 
 
 #
-# Table structure for table 'tx_tcdirectmail_sentlog'
+# Table structure for table 'tx_newsletter_sentlog'
 #
-CREATE TABLE tx_tcdirectmail_sentlog (
+CREATE TABLE tx_newsletter_sentlog (
 	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT 0 NOT NULL,
 	begintime int(10) unsigned DEFAULT 0 NOT NULL,
@@ -55,9 +55,9 @@ CREATE TABLE tx_tcdirectmail_sentlog (
 
 
 #
-# Table structure for table 'tx_tcdirectmail_lock'
+# Table structure for table 'tx_newsletter_lock'
 #
-CREATE TABLE tx_tcdirectmail_lock (
+CREATE TABLE tx_newsletter_lock (
 	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	begintime int(11) unsigned DEFAULT '0' NOT NULL,
@@ -71,9 +71,9 @@ CREATE TABLE tx_tcdirectmail_lock (
 
 
 #
-# Table structure for table 'tx_tcdirectmail_targets'
+# Table structure for table 'tx_newsletter_targets'
 #
-CREATE TABLE tx_tcdirectmail_targets (
+CREATE TABLE tx_newsletter_targets (
     uid int(11) unsigned NOT NULL auto_increment,
     pid int(11) unsigned DEFAULT '0' NOT NULL,
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -106,10 +106,10 @@ CREATE TABLE tx_tcdirectmail_targets (
 
 
 #
-# Table structure for table 'tx_tcdirectmail_clicklinks'
+# Table structure for table 'tx_newsletter_clicklinks'
 #
 
-CREATE TABLE tx_tcdirectmail_clicklinks (
+CREATE TABLE tx_newsletter_clicklinks (
   sentlog int(11) unsigned NOT NULL default '0',
   linkid int(11) unsigned NOT NULL default '0',
   linktype varchar(6) NOT NULL default '',
@@ -123,10 +123,10 @@ CREATE TABLE tx_tcdirectmail_clicklinks (
 
 
 #
-# Table structure for table 'tx_tcdirectmail_bounceaccount'
+# Table structure for table 'tx_newsletter_bounceaccount'
 #
 
-CREATE TABLE tx_tcdirectmail_bounceaccount (
+CREATE TABLE tx_newsletter_bounceaccount (
     uid int(11) unsigned NOT NULL auto_increment,
     pid int(11) unsigned DEFAULT '0' NOT NULL,
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,

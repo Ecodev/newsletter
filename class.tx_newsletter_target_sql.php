@@ -1,5 +1,5 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php');
 
 /**
  * This is the basic SQL related directmail target. Methods implemented with DB calls.
@@ -8,7 +8,7 @@ require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target.
  * @abstract
  */
 
-class tx_tcdirectmail_target_sql extends tx_tcdirectmail_target {
+class tx_newsletter_target_sql extends tx_newsletter_target {
 	var $tableName = 'undefinedtable';
 	
 	/**
@@ -60,7 +60,7 @@ class tx_tcdirectmail_target_sql extends tx_tcdirectmail_target {
 	 * Here you can implement database operation done when an email address has failed. 
 	 * It is not mandatory to do anything, but here is a sensible default provided for database-provided receivers. 
 	 * IF YOU DO NOT WANT TO DELETE YOUR RECORDS, PLEASE, PLEASE OVERRIDE THIS METHOD WITH SOMETHING MORE GENTLE. 
-	 * DONT BLAME ME FOR LOST DATA. Alternatively you can inherit from the tx_tcdirectmail_target:gentlesql class
+	 * DONT BLAME ME FOR LOST DATA. Alternatively you can inherit from the tx_newsletter_target:gentlesql class
 	 * instead.
 	 *
 	 * @param   integer    Uid of the address that has failed.

@@ -24,22 +24,22 @@
 
 
 /**
- * This is the holy inner core of tcdirectmail. 
+ * This is the holy inner core of newsletter. 
  * It is normally used in an instance per language to compile MIME 1.0 compatible mails
  */
-class tx_tcdirectmail_mailer {
+class tx_newsletter_mailer {
 	/* Vars that might need to be overridden */
 	var $senderName = "Test Testermann";
 	var $senderEmail = "test@test.net";
 	var $bounceAddress = 'bounce@test.test';
 	var $siteUrl = "http://www.test.test/";
-	var $homeUrl = "www.test.test/typo3conf/ext/tcdirectmail/";
+	var $homeUrl = "www.test.test/typo3conf/ext/newsletter/";
 
 	/**
 	 * Constructor that set up basic internal datastructures. Do not call directly
 	 *
 	 */
-	function tx_tcdirectmail_mailer () {
+	function tx_newsletter_mailer () {
 		global $TYPO3_CONF_VARS;
     
 		/* Determine the supposed hostname */
@@ -50,7 +50,7 @@ class tx_tcdirectmail_mailer {
 		}
         
 		/* Read some basic settings */
-		$this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['tcdirectmail']);
+		$this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
 		$this->realPath = PATH_site;
 		$this->inlinefiles = array();
 		$this->inlinemimes = array();
@@ -77,8 +77,8 @@ class tx_tcdirectmail_mailer {
 		$this->boundaries[2] = '----'.$this->boundaries[2].'--'.$boundary_hash;
 	      
 		/* Set up mail replacement hooks */
-		if (is_array($TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['mailReplacementHook'])) {
-			foreach ($TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['mailReplacementHook'] as $_classRef) {
+		if (is_array($TYPO3_CONF_VARS['EXTCONF']['newsletter']['mailReplacementHook'])) {
+			foreach ($TYPO3_CONF_VARS['EXTCONF']['newsletter']['mailReplacementHook'] as $_classRef) {
 				$this->mailReplacers[] = & t3lib_div::getUserObj($_classRef);
 			}
 		}
@@ -345,15 +345,15 @@ class tx_tcdirectmail_mailer {
 		/* For each marker, only substitute if the field is registered as a marker. This approach has shown to 
 		 speed up things quite a bit.  */
 		if (in_array($name, $this->htmlAdvancedMarkers)) {
-			$this->html = tx_tcdirectmail_mailer::advancedSubstituteMarker($this->html, $name, $value);
+			$this->html = tx_newsletter_mailer::advancedSubstituteMarker($this->html, $name, $value);
 		}
 
 		if (in_array($name, $this->plainAdvancedMarkers)) {
-			$this->plain = tx_tcdirectmail_mailer::advancedSubstituteMarker($this->plain, $name, $value);
+			$this->plain = tx_newsletter_mailer::advancedSubstituteMarker($this->plain, $name, $value);
 		}
 
 		if (in_array($name, $this->titleAdvancedMarkers)) {
-			$this->title = tx_tcdirectmail_mailer::advancedSubstituteMarker($this->title, $name, $value);
+			$this->title = tx_newsletter_mailer::advancedSubstituteMarker($this->title, $name, $value);
 		}
 
 		if (in_array($name, $this->htmlMarkers)) {
@@ -407,8 +407,8 @@ class tx_tcdirectmail_mailer {
 	 * @return   void
 	 */
 	function substituteMarkers ($record) {
-		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tcdirectmail']['substituteMarkersHook'])) {
-			foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tcdirectmail']['substituteMarkersHook'] as $_classRef) {
+		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
+			foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
 				$_procObj = & t3lib_div::getUserObj($_classRef);
 				$this->html = $_procObj->substituteMarkersHook($this->html, 'html', $record);
 				$this->plain = $_procObj->substituteMarkersHook($this->plain, 'plain', $record);
@@ -513,7 +513,7 @@ class tx_tcdirectmail_mailer {
 			$sendmail_params .= $this->extConf['sendmail_params']; 
 		}
 
-		foreach ($TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['extraMailHeaders'] as $header => $value) {
+		foreach ($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders'] as $header => $value) {
 			$headers[] = "$header: $value";
 		}
 

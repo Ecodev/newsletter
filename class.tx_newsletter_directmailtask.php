@@ -24,15 +24,15 @@
 
 
 /**
- * Class "tx_tcdirectmail_DirectmailTask" provides Scheduler integration
+ * Class "tx_newsletter_DirectmailTask" provides Scheduler integration
  *
  * @author		Fabien Udriot <fabien.udriot@ecodev.ch>
  * @package		TYPO3
- * @subpackage	tx_tcdirectmail
+ * @subpackage	tx_newsletter
  *
  * $Id: $
  */
-class tx_tcdirectmail_DirectmailTask extends tx_scheduler_Task {
+class tx_newsletter_DirectmailTask extends tx_scheduler_Task {
 
 	/**
 	 * Function executed from the Scheduler.
@@ -44,7 +44,7 @@ class tx_tcdirectmail_DirectmailTask extends tx_scheduler_Task {
 		$success = TRUE;
 		
 		// Send email
-		$command = '/usr/bin/php ' . dirname(PATH_thisScript) . 'conf/ext/tcdirectmail/cli/mailer.php';
+		$command = '/usr/bin/php ' . dirname(PATH_thisScript) . 'conf/ext/newsletter/cli/mailer.php';
 		$resultMailer = exec($command);
 		
 		if ($resultMailer != '') {
@@ -56,8 +56,8 @@ class tx_tcdirectmail_DirectmailTask extends tx_scheduler_Task {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_tcdirectmail_directmailtask.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_tcdirectmail_directmailtask.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_directmailtask.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_directmailtask.php']);
 }
 
 ?>

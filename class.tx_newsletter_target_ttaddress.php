@@ -1,7 +1,7 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_gentlesql.php');
-class tx_tcdirectmail_target_ttaddress extends tx_tcdirectmail_target_gentlesql { 
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_gentlesql.php');
+class tx_newsletter_target_ttaddress extends tx_newsletter_target_gentlesql { 
 	var $tableName = 'tt_address';
 
 	function init() {
@@ -19,7 +19,7 @@ class tx_tcdirectmail_target_ttaddress extends tx_tcdirectmail_target_gentlesql 
 				AND pages.hidden = 0 
 				AND tt_address.deleted = 0
 				AND tt_address.hidden = 0
-				AND tx_tcdirectmail_bounce < 10");
+				AND tx_newsletter_bounce < 10");
 	}
 }
 

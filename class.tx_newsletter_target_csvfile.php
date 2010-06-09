@@ -1,11 +1,11 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_array.php');
-class tx_tcdirectmail_target_csvfile extends tx_tcdirectmail_target_array {
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
+class tx_newsletter_target_csvfile extends tx_newsletter_target_array {
     function init() {
    $this->data = array();
    if ($this->fields['csvfilename'] && $this->fields['csvseparator'] && $this->fields['csvfields']) {
-       $csvdata = t3lib_div::getURL(PATH_site.'uploads/tx_tcdirectmail/'.$this->fields['csvfilename']);
+       $csvdata = t3lib_div::getURL(PATH_site.'uploads/tx_newsletter/'.$this->fields['csvfilename']);
        $sepchar = $this->fields['csvseparator']?$this->fields['csvseparator']:',';
        $fields = array_map ('trim', explode ($sepchar, $this->fields['csvfields']));
        $lines = explode ("\n", $csvdata);

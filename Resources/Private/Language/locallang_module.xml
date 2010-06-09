@@ -2,9 +2,9 @@
 <T3locallang>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="mlang_labels_tablabel">Directmail</label>
-			<label index="mlang_tabs_tab">Directmail</label>
-			<label index="mlang_labels_tabdescr">Directmail control module. This module allows you to control the newsletter settings.</label>
+			<label index="mlang_labels_tablabel">Newsletter</label>
+			<label index="mlang_tabs_tab">Newsletter</label>
+			<label index="mlang_labels_tabdescr">Newsletter control module. This module allows you to control the newsletter settings.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="mlang_labels_tablabel">Nyhedsbrev</label>
@@ -18,16 +18,16 @@
 		</languageKey>
 		<languageKey index="no"></languageKey>
 		<languageKey index="it" type="array">
-			<label index="mlang_labels_tablabel">Directmail (Newsletter)</label>
-			<label index="mlang_tabs_tab">Directmail (Newsletter)</label>
-			<label index="mlang_labels_tabdescr">Modulo di controllo Directmail (Newsletter)</label>
+			<label index="mlang_labels_tablabel">Newsletter</label>
+			<label index="mlang_tabs_tab">Newsletter</label>
+			<label index="mlang_labels_tabdescr">Modulo di controllo Newsletter</label>
 		</languageKey>
 		<languageKey index="fr"></languageKey>
 		<languageKey index="es"></languageKey>
 		<languageKey index="nl" type="array">
 			<label index="mlang_labels_tablabel">Nieuwsbrief</label>
 			<label index="mlang_tabs_tab">Nieuwsbrief</label>
-			<label index="mlang_labels_tabdescr">Directmail nieuwsmodule</label>
+			<label index="mlang_labels_tabdescr">Nieuwsmodule</label>
 		</languageKey>
 		<languageKey index="cz"></languageKey>
 		<languageKey index="pl"></languageKey>

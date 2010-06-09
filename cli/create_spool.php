@@ -24,11 +24,11 @@
 ***************************************************************/
 
 require ('clirun.php');
-require_once(t3lib_extMgm::extPath('newsletter')."class.tx_tcdirectmail_tools.php");
+require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_tools.php");
 
 /***************** Send script ********************/
 /* List pages NOT to send */
-$rs = $TYPO3_DB->sql_query("SELECT pid FROM tx_tcdirectmail_lock  
+$rs = $TYPO3_DB->sql_query("SELECT pid FROM tx_newsletter_lock  
                                WHERE stoptime = 0");
 $pids[] = -1;
 while (list($pid) = $TYPO3_DB->sql_fetch_row($rs)) {
@@ -39,8 +39,8 @@ $pids = implode(',',$pids);
 /* Get a ready-to-send page */
 $rs = $TYPO3_DB->sql_query("SELECT * 
                               FROM pages 
-                              WHERE tx_tcdirectmail_senttime <= UNIX_TIMESTAMP() 
-                              AND tx_tcdirectmail_senttime <> 0 
+                              WHERE tx_newsletter_senttime <= UNIX_TIMESTAMP() 
+                              AND tx_newsletter_senttime <> 0 
                               AND doktype = 189 
                               AND uid NOT IN ($pids)
                               AND deleted = 0
@@ -51,14 +51,14 @@ $rs = $TYPO3_DB->sql_query("SELECT *
 if ($page = $TYPO3_DB->sql_fetch_assoc($rs)) {
     /* Lock the page */
     $begintime = time();
-    $TYPO3_DB->exec_INSERTquery('tx_tcdirectmail_lock', array('pid' => $page['uid'], 'begintime' => $begintime, 'stoptime' => 0));
+    $TYPO3_DB->exec_INSERTquery('tx_newsletter_lock', array('pid' => $page['uid'], 'begintime' => $begintime, 'stoptime' => 0));
     $lockid = $TYPO3_DB->sql_insert_id();
 
-    tx_tcdirectmail_tools::createSpool($page, $begintime);
+    tx_newsletter_tools::createSpool($page, $begintime);
 
     /* Unlock the page */
-    tx_tcdirectmail_tools::setScheduleAfterSending ($page);
-    $TYPO3_DB->exec_UPDATEquery('tx_tcdirectmail_lock', "uid = $lockid", array('stoptime' => time()));
+    tx_newsletter_tools::setScheduleAfterSending ($page);
+    $TYPO3_DB->exec_UPDATEquery('tx_newsletter_lock', "uid = $lockid", array('stoptime' => time()));
 }
                             
 ?>

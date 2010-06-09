@@ -29,7 +29,7 @@
  * @abstract
  */
 
-class tx_tcdirectmail_plain {
+class tx_newsletter_plain {
 	/**
 	 * Indicate how the class handles html-content. Can be either "src" og "url"
 	 * "src" indicates that you wish to supply the html-code in the parameter.
@@ -47,15 +47,15 @@ class tx_tcdirectmail_plain {
 	 * @return   object      plain text object to use.
 	 */
 	function loadPlain($pageRecord, $baseUrl) {
-		$obj = new $pageRecord['tx_tcdirectmail_plainconvert'];
+		$obj = new $pageRecord['tx_newsletter_plainconvert'];
 
-		if (is_subclass_of($obj, 'tx_tcdirectmail_plain')) {
+		if (is_subclass_of($obj, 'tx_newsletter_plain')) {
 			$obj->record = $pageRecord;
 			$obj->baseUrl = $baseUrl;
 
 			return $obj;
 		} else {
-			die ("$class is not a subclass of tx_tcdirectmail_plain");
+			die ("$class is not a subclass of tx_newsletter_plain");
 		}
 	}
 

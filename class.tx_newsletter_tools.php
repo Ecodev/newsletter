@@ -24,30 +24,30 @@
  
 require_once(PATH_t3lib.'class.t3lib_extmgm.php');
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_mailer.php'); 
-foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tcdirectmail']['includeClassFiles'] as $file) {
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_mailer.php'); 
+foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['includeClassFiles'] as $file) {
 	require_once($file);
 }
  
 /**
- * Toolbox for tcdirectmail and dependant extensions.
+ * Toolbox for newsletter and dependant extensions.
  *
  * @static
  */ 
 
-class tx_tcdirectmail_tools {
+class tx_newsletter_tools {
 	/**
-	  * Get a tcdirectmail-conf-template parameter
+	  * Get a newsletter-conf-template parameter
 	  *
 	  * @param    string   Parameter key
 	  * @return   mixed    Parameter value
 	  */
 	function confParam($key) {
-		if (!is_array($GLOBALS['TCDIRECTMAIL_CONF'])) {
-			$GLOBALS['TCDIRECTMAIL_CONF'] = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['tcdirectmail']);
+		if (!is_array($GLOBALS['NEWSLETTER_CONF'])) {
+			$GLOBALS['NEWSLETTER_CONF'] = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
 		}
        
-		return $GLOBALS['TCDIRECTMAIL_CONF'][$key];
+		return $GLOBALS['NEWSLETTER_CONF'][$key];
 	}
     
 	/**
@@ -88,7 +88,7 @@ class tx_tcdirectmail_tools {
 	}
 
 	/**
-	* Function to fetch the proper domain from with to fetch content for tcdirectmail.
+	* Function to fetch the proper domain from with to fetch content for newsletter.
 	* This is either a sys_domain record from the page tree or the fetch_path property.
 	*
 	* @param    array       Record of page to get the correct domain for.
@@ -98,7 +98,7 @@ class tx_tcdirectmail_tools {
 		global $TYPO3_DB;
 
 		/* Is anything hardcoded from TYPO3_CONF_VARS? */
-		if ($fetchPath = tx_tcdirectmail_tools::confParam('fetch_path')) {
+		if ($fetchPath = tx_newsletter_tools::confParam('fetch_path')) {
 			return $fetchPath;
 		}
 
@@ -127,10 +127,10 @@ class tx_tcdirectmail_tools {
 	}
 
 	/**
-	* Gets the correct sendername for a tcdirectmail.
+	* Gets the correct sendername for a newsletter.
 	* This is either:
 	* The sender name defined on the page record.
-	* or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['senderName']
+	* or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
 	* or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
 	*
 	* @param    array       Record of the directmail page
@@ -140,12 +140,12 @@ class tx_tcdirectmail_tools {
 		global $TYPO3_DB;
 
 		/* The sender defined on the page? */
-		if ($p['tx_tcdirectmail_sendername']) {
-			return $p['tx_tcdirectmail_sendername'];
+		if ($p['tx_newsletter_sendername']) {
+			return $p['tx_newsletter_sendername'];
 		}
 
 		/* Anything in typo3_conf_vars? */
-		$sender = tx_tcdirectmail_tools::confParam('sender_name');
+		$sender = tx_newsletter_tools::confParam('sender_name');
 		if ($sender == 'user') {
 			/* Use the page-owner as user */
 			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName 
@@ -169,7 +169,7 @@ class tx_tcdirectmail_tools {
 	}
 
 	/**
-	* Gets the correct sender email address for a tcdirectmail.
+	* Gets the correct sender email address for a newsletter.
 	* This is either:
 	* The sender email address defined on the page record.
 	* or the email address (if any) of the be_user owning the page.
@@ -184,12 +184,12 @@ class tx_tcdirectmail_tools {
 		global $TYPO3_DB;
 
 		/* The sender defined on the page? */
-		if (t3lib_div::validEmail($p['tx_tcdirectmail_senderemail'])) {
-			return $p['tx_tcdirectmail_senderemail'];
+		if (t3lib_div::validEmail($p['tx_newsletter_senderemail'])) {
+			return $p['tx_newsletter_senderemail'];
 		}
 
 		/* Anything in typo3_conf_vars? */
-		$email = tx_tcdirectmail_tools::confParam('sender_email');        
+		$email = tx_newsletter_tools::confParam('sender_email');        
 		if ($email == 'user') {
 			/* Use the page-owner as user */
 			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email 
@@ -225,7 +225,7 @@ class tx_tcdirectmail_tools {
 	function getBounceAddressForPage($page) {
 		global $TYPO3_DB;
 
-		$rs = $TYPO3_DB->exec_SELECTquery('email', 'tx_tcdirectmail_bounceaccount', "uid = $page[tx_tcdirectmail_bounceaccount]");
+		$rs = $TYPO3_DB->exec_SELECTquery('email', 'tx_newsletter_bounceaccount', "uid = $page[tx_newsletter_bounceaccount]");
 		if (list($address) =$TYPO3_DB->sql_fetch_row($rs)) {
 			return $address;
 		} else {
@@ -242,9 +242,9 @@ class tx_tcdirectmail_tools {
 	function setScheduleAfterSending ($page) {
 		global $TYPO3_DB;
 
-		$senttime = $page['tx_tcdirectmail_senttime'];
+		$senttime = $page['tx_newsletter_senttime'];
 
-		switch ($page['tx_tcdirectmail_repeat']) {
+		switch ($page['tx_newsletter_repeat']) {
 			case 0: $newtime = 0; break;
 			case 1: $newtime = 86400 + $senttime; break;
 			case 2: $newtime = 7 * 86400 + $senttime; break;
@@ -267,7 +267,7 @@ class tx_tcdirectmail_tools {
 				break;
 		}
 
-		$TYPO3_DB->exec_UPDATEquery('pages', "uid = $page[uid]", array('tx_tcdirectmail_senttime' => $newtime));
+		$TYPO3_DB->exec_UPDATEquery('pages', "uid = $page[uid]", array('tx_newsletter_senttime' => $newtime));
 	}
 
        
@@ -276,10 +276,10 @@ class tx_tcdirectmail_tools {
 	* This mailer will have both plain and html content applied as well as files attached.
 	*
 	* @param    array       Page record.
-	* @return   object      tx_tcdirectmail_mailer object preconfigured for sending.
+	* @return   object      tx_newsletter_mailer object preconfigured for sending.
 	*/
 	function getConfiguredMailer ($page, $lang = '') {
-		$append_url = tx_tcdirectmail_tools::confParam('append_url');
+		$append_url = tx_newsletter_tools::confParam('append_url');
 
 		/* Any language defined? */
 		
@@ -293,19 +293,19 @@ class tx_tcdirectmail_tools {
 		}
 		
 		/* Configure the mailer */
-		$mailer = new tx_tcdirectmail_mailer();
-		$domain = tx_tcdirectmail_tools::getDomainForPage($page);
+		$mailer = new tx_newsletter_mailer();
+		$domain = tx_newsletter_tools::getDomainForPage($page);
 		$mailer->siteUrl = "http://$domain/";
-		$mailer->homeUrl = "http://$domain/".t3lib_extMgm::siteRelPath('tcdirectmail');
-		$mailer->senderName = tx_tcdirectmail_tools::getSenderForPage($page);
-		$mailer->senderEmail = tx_tcdirectmail_tools::getEmailForPage($page);
-		$mailer->bounceAddress = tx_tcdirectmail_tools::getBounceAddressForPage($page);
+		$mailer->homeUrl = "http://$domain/".t3lib_extMgm::siteRelPath('newsletter');
+		$mailer->senderName = tx_newsletter_tools::getSenderForPage($page);
+		$mailer->senderEmail = tx_newsletter_tools::getEmailForPage($page);
+		$mailer->bounceAddress = tx_newsletter_tools::getBounceAddressForPage($page);
 		$mailer->setTitle($page['title']);
 		$url = "http://$domain/index.php?id=$page[uid]&no_cache=1$lang$append_url";
-		$mailer->setHtml(tx_tcdirectmail_tools::getURL($url));
+		$mailer->setHtml(tx_newsletter_tools::getURL($url));
 
 		/* Construct plaintext */
-		$plain = tx_tcdirectmail_plain::loadPlain($page, $mailer->domain);
+		$plain = tx_newsletter_plain::loadPlain($page, $mailer->domain);
 		switch ($plain->fetchMethod) {
 			case 'src' :  $plain->setHtml($mailer->html); break;
 			case 'url' :  $plain->setHtml($url); break;
@@ -313,17 +313,17 @@ class tx_tcdirectmail_tools {
 		$mailer->setPlain($plain->getPlaintext());
 
 		/* Attaching files */
-		$files = explode (',', $page['tx_tcdirectmail_attachfiles']);
+		$files = explode (',', $page['tx_newsletter_attachfiles']);
 		foreach ($files as $file) {
 			if (trim($file) != '') {
-				$file = PATH_site."uploads/tx_tcdirectmail/$file";
+				$file = PATH_site."uploads/tx_newsletter/$file";
 				$mailer->addAttachment($file);
 			}
 		}
 
 		/* hook for modifing the mailer before finish preconfiguring */
-		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tcdirectmail']['getConfiguredMailerHook'])) {
-			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tcdirectmail']['getConfiguredMailerHook'] as $_classRef) {
+		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
+			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
 				$_procObj = & t3lib_div::getUserObj($_classRef);
 				$mailer = $_procObj->getConfiguredMailerHook($mailer, $page);
 			}
@@ -345,7 +345,7 @@ class tx_tcdirectmail_tools {
 		$mailers = array();
 
 		/* Find the users */
-		$target = tx_tcdirectmail_target::loadTarget($page['tx_tcdirectmail_test_target']);
+		$target = tx_newsletter_target::loadTarget($page['tx_newsletter_test_target']);
 
 		/* Only the provided users? */
 		/* Hmm  this needs to be resolved. We now only send out to selected users */ 
@@ -358,7 +358,7 @@ class tx_tcdirectmail_tools {
 				}
 			}
 
-			$target = new tx_tcdirectmail_target_array();
+			$target = new tx_newsletter_target_array();
 			$target->data = $targetdata;
 			$target->resetTarget();
 		}
@@ -368,16 +368,16 @@ class tx_tcdirectmail_tools {
 				/* We need to use a mailer with the correct language */
 				$L = $receiver['L'];
 				if (! is_object($mailers[$L])) {
-					$mailers[$L] = &tx_tcdirectmail_tools::getConfiguredMailer($page, $L);
+					$mailers[$L] = &tx_newsletter_tools::getConfiguredMailer($page, $L);
 				}	
 
 				/* a TEST-version of the spy-image. Makes same warning in MUA, but with no serverside stats */
-				if ($page['tx_tcdirectmail_spy']) {
+				if ($page['tx_newsletter_spy']) {
 					$mailers[$L]->testSpy();
 				}
 
 				/* a TEST-version of the click-links. Makes funny-URLs like real clicklinks, but no stats */
-				if ($page['tx_tcdirectmail_register_clicks']) {
+				if ($page['tx_newsletter_register_clicks']) {
 					$mailers[$L]->substituteMarkers($receiver);
 					$mailers[$L]->testClickLinks();
 					$mailers[$L]->raw_send($receiver);   
@@ -400,13 +400,13 @@ class tx_tcdirectmail_tools {
 		global $TYPO3_DB;
 
 		/* Find the receivers */
-		$targets = explode(',',$page['tx_tcdirectmail_real_target']);
+		$targets = explode(',',$page['tx_newsletter_real_target']);
 
 		/* Get the servers */
-		$hosts = array_map('trim', explode(',', tx_tcdirectmail_tools::confParam('lb_hosts')));
+		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
 
 		foreach ($targets as $target_uid) {
-			$target = tx_tcdirectmail_target::loadTarget($target_uid);
+			$target = tx_newsletter_target::loadTarget($target_uid);
 			$target->startReal();
       
 			while ($receiver = $target->getRecord()) {
@@ -418,7 +418,7 @@ class tx_tcdirectmail_tools {
           
 				/* Register the receiver */
 				if (t3lib_div::validEmail($receiver['email'])) {
-					$TYPO3_DB->exec_INSERTquery('tx_tcdirectmail_sentlog', array(   
+					$TYPO3_DB->exec_INSERTquery('tx_newsletter_sentlog', array(   
 						'receiver' => $receiver['email'],
 						'user_uid' => $receiver['uid'], 
 						'begintime' => $begintime,
@@ -454,7 +454,7 @@ class tx_tcdirectmail_tools {
 		   If there is no records for the last 15 seconds, previous spool session is assumed to have ended.  
 		   If there are newer records, then stop here, and assume the running mailer will take care of it.
 		 */
-		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_tcdirectmail_sentlog WHERE sendtime > '.(time() - 15)
+		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_sentlog WHERE sendtime > '.(time() - 15)
                 	                     ." AND (host = '$hostname' OR host = '')");
                                      
 		list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
@@ -463,20 +463,20 @@ class tx_tcdirectmail_tools {
 		}
        
 		/* Do we any limit to this session? */
-		if ($mails_per_round = tx_tcdirectmail_tools::confParam('mails_per_round')) {
+		if ($mails_per_round = tx_newsletter_tools::confParam('mails_per_round')) {
 			$limit = " LIMIT 0, $mails_per_round ";
 		}
 
 		/* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
 		$rs = $TYPO3_DB->sql_query("SELECT userdata, target, pid, uid 
-						FROM tx_tcdirectmail_sentlog 
+						FROM tx_newsletter_sentlog 
 						WHERE (host = '$hostname' OR host = '')
 						AND sendtime = 0
 						ORDER BY pid ".$limit); 
 
 		/* Do it, if there is any records */
 		if ($numRows = $TYPO3_DB->sql_num_rows($rs)) {
-			tx_tcdirectmail_tools::_runSpool($rs);
+			tx_newsletter_tools::_runSpool($rs);
 		}
 
 		return $numRows;
@@ -493,13 +493,13 @@ class tx_tcdirectmail_tools {
 		$id = intval($_REQUEST['id']);
        
 		/* Do we any limit to this session? */
-		if ($mails_per_round = tx_tcdirectmail_tools::confParam('mails_per_round')) {
+		if ($mails_per_round = tx_newsletter_tools::confParam('mails_per_round')) {
 			$limit = " LIMIT 0, $mails_per_round ";
 		}
 
 		/* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
 		$rs = $TYPO3_DB->sql_query("SELECT userdata, target, pid, uid 
-						FROM tx_tcdirectmail_sentlog 
+						FROM tx_newsletter_sentlog 
 						WHERE host = ''
 						AND pid = $id
 						AND sendtime = 0
@@ -507,7 +507,7 @@ class tx_tcdirectmail_tools {
 
 		/* Do it, if there is any records */
 		if ($numRows = $TYPO3_DB->sql_num_rows($rs)) {
-			tx_tcdirectmail_tools::_runSpool($rs);
+			tx_newsletter_tools::_runSpool($rs);
 		}
 
 		return $numRows;
@@ -516,14 +516,14 @@ class tx_tcdirectmail_tools {
 	/** 
 	 * Method that accually runs the spool
 	 *
-	 * @param   resource      SQL-resultset from a select from tx_tcdirectmail_sentlog
+	 * @param   resource      SQL-resultset from a select from tx_newsletter_sentlog
 	 * @return  void
 	 */
 	function _runSpool ($rs) {
 		global $TYPO3_DB;
 
-		/* We will log tcdirectmails progress to the syslog daemon */
-		openlog ('tcdirectmail', LOG_ODELAY, LOG_MAIL);
+		/* We will log newsletters progress to the syslog daemon */
+		openlog ('newsletter', LOG_ODELAY, LOG_MAIL);
 		$numberOfMails = 0;
 		$mailers = array();
 
@@ -542,26 +542,26 @@ class tx_tcdirectmail_tools {
 
 			/* Was a language with this page defined, if not create one */ 
 			if (!is_object($mailers[$L])) {
-				$mailers[$L] = &tx_tcdirectmail_tools::getConfiguredMailer($page, $L); 
+				$mailers[$L] = &tx_newsletter_tools::getConfiguredMailer($page, $L); 
 			}
 
 			/* Mark it as send already */
-			$TYPO3_DB->exec_UPDATEquery('tx_tcdirectmail_sentlog', "uid = $sendid", array('sendtime' => time()));
+			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_sentlog', "uid = $sendid", array('sendtime' => time()));
            
 			/* Give it the stamp */
 			if ($receiver['uid'] && $receiver['authCode']) {
-				$infoHeaders = array('X-tcdirectmail-info' => "//$pid/$target/$receiver[uid]/$receiver[authCode]/$sendid//");
+				$infoHeaders = array('X-newsletter-info' => "//$pid/$target/$receiver[uid]/$receiver[authCode]/$sendid//");
 			} else {
 				$infoHeaders = array();
 			}		
 
 			/* Spy included? */
-			if ($page['tx_tcdirectmail_spy']) {                                                       
+			if ($page['tx_newsletter_spy']) {                                                       
 				$mailers[$L]->insertSpy($receiver['authCode'], $sendid);
 			}
             
 			/* Should we register what links have been clicked? */
-			if ($page['tx_tcdirectmail_register_clicks']) {
+			if ($page['tx_newsletter_register_clicks']) {
 				$mailers[$L]->substituteMarkers($receiver);
 				$links = $mailers[$L]->makeClickLinks($receiver['authCode'], $sendid);
 				$mailers[$L]->raw_send($receiver, $infoHeaders);
@@ -570,7 +570,7 @@ class tx_tcdirectmail_tools {
 				/* Write to the DB the links that have been registered */
 				foreach ($links as $type => $sublinks) {
 					foreach ($sublinks as $linkid => $url) {
-						$TYPO3_DB->exec_INSERTquery('tx_tcdirectmail_clicklinks', array(
+						$TYPO3_DB->exec_INSERTquery('tx_newsletter_clicklinks', array(
 											'sentlog' => $sendid,
 											'linktype' => $type,
 											'linkid' => $linkid,

@@ -1,7 +1,7 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_array.php');
-class tx_tcdirectmail_target_csvurl extends tx_tcdirectmail_target_array {
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
+class tx_newsletter_target_csvurl extends tx_newsletter_target_array {
     function init() {
    $this->data = array();    
    if ($this->fields['csvurl'] && $this->fields['csvseparator'] && $this->fields['csvfields']) {

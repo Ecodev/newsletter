@@ -1,12 +1,12 @@
 <?php
-define ('TCDIRECTMAIL_NOT_A_BOUNCE', 1);
-define ('TCDIRECTMAIL_BOUNCE_UNREMOVABLE', 2);
-define ('TCDIRECTMAIL_HARDBOUNCE', 3);
-define ('TCDIRECTMAIL_SOFTBOUNCE', 4);
+define ('NEWSLETTER_NOT_A_BOUNCE', 1);
+define ('NEWSLETTER_BOUNCE_UNREMOVABLE', 2);
+define ('NEWSLETTER_HARDBOUNCE', 3);
+define ('NEWSLETTER_SOFTBOUNCE', 4);
 
-class tx_tcdirectmail_bouncehandler {
+class tx_newsletter_bouncehandler {
    /* Statusvalue for the mail */
-   var $status = TCDIRECTMAIL_NOT_A_BOUNCE;
+   var $status = NEWSLETTER_NOT_A_BOUNCE;
 
    /* Receivers uid, will be populated upon process-invocation */
    var $uid;
@@ -55,7 +55,7 @@ class tx_tcdirectmail_bouncehandler {
         '/Subject:\s*Delivery Status Notification[\s\S]+Failed/ix',
    );
 
-   function tx_tcdirectmail_bouncehandler($mailsource) {
+   function tx_newsletter_bouncehandler($mailsource) {
       /* Calculate the bounce-score */
       $this->score = 0;
       
@@ -63,7 +63,7 @@ class tx_tcdirectmail_bouncehandler {
       foreach ($this->soft as $reg) {
          if (preg_match($reg, $mailsource)) {
             $this->score++;
-            $this->status = TCDIRECTMAIL_SOFTBOUNCE;
+            $this->status = NEWSLETTER_SOFTBOUNCE;
          }
       }
       
@@ -71,19 +71,19 @@ class tx_tcdirectmail_bouncehandler {
       foreach ($this->hard as $reg) {
          if (preg_match($reg, $mailsource)) {
             $this->score++;
-            $this->status = TCDIRECTMAIL_HARDBOUNCE;
+            $this->status = NEWSLETTER_HARDBOUNCE;
          } 
       }      
       
       /* If nothing scored, it must be a non-bounce mail. Just stop now */
       if ($this->score == 0) {
-         $this->status = TCDIRECTMAIL_NOT_A_BOUNCE;
+         $this->status = NEWSLETTER_NOT_A_BOUNCE;
          return;
       }
       
-      /* If we got this far, it is a bounce mail. Get the X-tcdirectmail-info header value to see who we we a dealing with.
+      /* If we got this far, it is a bounce mail. Get the X-newsletter-info header value to see who we we a dealing with.
          If we can get the values and the authcode checks out, return with success, else report unremovable. */
-      if (preg_match('|X-tcdirectmail-info: //(.*)//|', $mailsource, $match)) {
+      if (preg_match('|X-newsletter-info: //(.*)//|', $mailsource, $match)) {
          list($pageUid, $targetUid, $uid, $authCode, $sendid) = explode('/', $match[1]);
          $this->pageUid = intval($pageUid);
          $this->targetUid = intval($targetUid);
@@ -92,10 +92,10 @@ class tx_tcdirectmail_bouncehandler {
          $this->authCode = addslashes($authCode);
          
          if ($this->authCode != t3lib_div::stdAuthCode($this->uid)) {
-            $this->status = TCDIRECTMAIL_BOUNCE_UNREMOVABLE;
+            $this->status = NEWSLETTER_BOUNCE_UNREMOVABLE;
          }           
       } else {
-         $this->status = TCDIRECTMAIL_BOUNCE_UNREMOVABLE;
+         $this->status = NEWSLETTER_BOUNCE_UNREMOVABLE;
       }
    }
 }

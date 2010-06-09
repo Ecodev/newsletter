@@ -1,13 +1,13 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
 
 /**
- * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_tcdirectmail_bounce
+ * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
  * on the $this->tableName table.
  *
  * @abstract
  */
-class tx_tcdirectmail_target_gentlesql extends tx_tcdirectmail_target_sql {
+class tx_newsletter_target_gentlesql extends tx_newsletter_target_sql {
 	/**
 	 * This increases the bounce-counter each time a mail has bounced.
 	 * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled. 
@@ -21,16 +21,16 @@ class tx_tcdirectmail_target_gentlesql extends tx_tcdirectmail_target_sql {
 		global $TYPO3_DB;
 
 		switch ($bounce_level) {
-			case	TCDIRECTMAIL_HARDBOUNCE:
+			case	NEWSLETTER_HARDBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
-							SET tx_tcdirectmail_bounce = tx_tcdirectmail_bounce + 5
+							SET tx_newsletter_bounce = tx_newsletter_bounce + 5
 							WHERE uid = $uid");
 
 				return $TYPO3_DB->sql_affected_rows();
 
-			case	TCDIRECTMAIL_SOFTBOUNCE:
+			case	NEWSLETTER_SOFTBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
-							SET tx_tcdirectmail_bounce = tx_tcdirectmail_bounce + 1
+							SET tx_newsletter_bounce = tx_newsletter_bounce + 1
 							WHERE uid = $uid");
 				return $TYPO3_DB->sql_affected_rows();
 
@@ -48,7 +48,7 @@ class tx_tcdirectmail_target_gentlesql extends tx_tcdirectmail_target_sql {
 	 */
 	function registerClick($uid) {
 		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
-							SET tx_tcdirectmail_bounce = 0
+							SET tx_newsletter_bounce = 0
 							WHERE uid = $uid");
 	}
 
@@ -59,7 +59,7 @@ class tx_tcdirectmail_target_gentlesql extends tx_tcdirectmail_target_sql {
 	 */
 	function registerOpen($uid) {
 		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
-							SET tx_tcdirectmail_bounce = 0
+							SET tx_newsletter_bounce = 0
 							WHERE uid = $uid");
 	}
 }

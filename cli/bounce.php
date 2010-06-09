@@ -25,11 +25,11 @@
 require ('clirun.php');
 
 /* Write a new fetchmailrc */
-$fetchmailhome = PATH_site.'uploads/tx_tcdirectmail';
+$fetchmailhome = PATH_site.'uploads/tx_newsletter';
 $fetchmailfile = "$fetchmailhome/fetchmailrc";
 $servers = array();
 $fd = fopen($fetchmailfile, 'w');
-$rs = $TYPO3_DB->sql_query("SELECT servertype, server, username, passwd FROM tx_tcdirectmail_bounceaccount
+$rs = $TYPO3_DB->sql_query("SELECT servertype, server, username, passwd FROM tx_newsletter_bounceaccount
                                 WHERE hidden = 0 
                                 AND deleted = 0");
                                      
@@ -44,7 +44,7 @@ chmod($fetchmailfile, 0600);
 
 putenv("FETCHMAILHOME=$fetchmailhome");
 
-$theconf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['tcdirectmail']);
+$theconf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
 $fetchmail = $theconf['path_to_fetchmail'];
 
 /* Keep messages on server */

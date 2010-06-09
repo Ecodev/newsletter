@@ -28,13 +28,13 @@
 /**
  * @author	Kasper Sk�rh�j <kasperYYYY@typo3.com>
  * @author	Daniel Schledermann <daniel@schledermann.net>
- * Copied and modified for specific fit to extending tcdirectmail targets
+ * Copied and modified for specific fit to extending newsletter targets
  */
 
 require_once(t3lib_extMgm::extPath('kickstarter').'class.tx_kickstarter_sectionbase.php');
 
-class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
-  var $sectionID = 'tx_tcdirectmail_targets';
+class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
+  var $sectionID = 'tx_newsletter_targets';
 
 	/**
 	 * Renders the form in the kickstarter; this was add_cat_fields()
@@ -103,7 +103,7 @@ class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
 				while(list($k,$v)=each($piConf['fields']))	{
 					$c[]=$k;
 					$subContent=$this->renderField($ffPrefix.'[fields]['.$k.']',$v);
-					$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>FIELD ADDED TO tc_tcdirectmail_targets:</strong> <em>'.$v['fieldname'].'</em>').'</td></tr>';
+					$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>FIELD ADDED TO tc_newsletter_targets:</strong> <em>'.$v['fieldname'].'</em>').'</td></tr>';
 					$lines[]='<tr'.$this->bgCol(3).'><td>'.$this->fw($subContent).'</td></tr>';
 				}
 			}
@@ -112,7 +112,7 @@ class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
 				// New field:
 			$k=max($c)+1;
 			$v=array();
-			$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>NEW FIELD TO ADD TO tx_tcdirectmail_targets:</strong>').'</td></tr>';
+			$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>NEW FIELD TO ADD TO tx_newsletter_targets:</strong>').'</td></tr>';
 			$subContent=$this->renderField($ffPrefix.'[fields]['.$k.']',$v,1);
 			$lines[]='<tr'.$this->bgCol(3).'><td>'.$this->fw($subContent).'</td></tr>';
 
@@ -687,9 +687,9 @@ class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
 		if (count($DBfields)) {
 		    $createTable = $this->wrapBody('
 			#
-			# Table structure for table tc_tcdirectmail_targets
+			# Table structure for table tc_newsletter_targets
 			#
-			CREATE TABLE tx_tcdirectmail_targets (
+			CREATE TABLE tx_newsletter_targets (
 		', ereg_replace(',[[:space:]]*$','',implode(chr(10),$DBfields)), '
 
 			);
@@ -722,25 +722,25 @@ class tx_tcdirectmail_section_targets extends tx_kickstarter_sectionbase {
 
 		$targetName = 'tx_'.$extKey.'_target'.$this->numTarget;
 		$labelDefault = 'Receivers from '.$tableName;
-		$labelName = 'tx_tcdirectmail_targets.opt'.$extKey.'_target'.$this->numTarget;
+		$labelName = 'tx_newsletter_targets.opt'.$extKey.'_target'.$this->numTarget;
 		$sl_config = array($labelName => array($labelDefault));
 		$this->wizard->ext_locallang_db['default'][$labelName] = array($labelDefault);
 		
 		
 		$this->wizard->ext_tables[]=$this->sPS('
-			t3lib_div::loadTCA("tx_tcdirectmail_targets");
-			t3lib_extMgm::addTCAcolumns("tx_tcdirectmail_targets",$tempColumns,1);
-			$TCA["tx_tcdirectmail_targets"]["types"]["'.$targetName.'"]["showitem"] = "hidden;;1;;1-1-1, title, plain_only, targettype, '.implode(', ', array_keys($columns)).', ;;;;2-2-2, calculated_receivers;;;;1-1-1";
-			$TCA["tx_tcdirectmail_targets"]["columns"]["targettype"]["config"]["items"][] = array("LLL:EXT:'.$extKey.'/locallang_db.xml:'.
+			t3lib_div::loadTCA("tx_newsletter_targets");
+			t3lib_extMgm::addTCAcolumns("tx_newsletter_targets",$tempColumns,1);
+			$TCA["tx_newsletter_targets"]["types"]["'.$targetName.'"]["showitem"] = "hidden;;1;;1-1-1, title, plain_only, targettype, '.implode(', ', array_keys($columns)).', ;;;;2-2-2, calculated_receivers;;;;1-1-1";
+			$TCA["tx_newsletter_targets"]["columns"]["targettype"]["config"]["items"][] = array("LLL:EXT:'.$extKey.'/locallang_db.xml:'.
 			$labelName.'", "'.$targetName.'");
 			
 		');
 		
 		
 		$targetSource = "
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
 	
-class $targetName extends tx_tcdirectmail_target_sql {
+class $targetName extends tx_newsletter_target_sql {
 	var \$tableName = \"$tableName\";
 
 	/* This is the mandatory init functions. This selects your receivers */
@@ -752,7 +752,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 		\$this->data = \$TYPO3_DB->sql_query('SELECT * FROM $tableName');
 	}
 
-	/* This is extra, optional functions called by tcdirectmail on different occations.. */
+	/* This is extra, optional functions called by newsletter on different occations.. */
 
 	/* This is called whenever the mailtarget enters a real, live send out
 	function startReal() {}
@@ -763,7 +763,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 	*/
 
 	/* This is called when ever a bounce is received.
-	   See tx_tcdirectmail_target_sql and tx_tcdirectmail_target_gentlesql for suggestions on what to do.
+	   See tx_newsletter_target_sql and tx_newsletter_target_gentlesql for suggestions on what to do.
 	*/
 	function disableReceiver(\$uid, \$bounce_type) {
 		return false;
@@ -779,7 +779,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 
 }
 
-/* Note: XCLASS'ing is NOT supported for tx_tcdirectmail_targets, nor will it ever be. So dont complain to me. */";
+/* Note: XCLASS'ing is NOT supported for tx_newsletter_targets, nor will it ever be. So dont complain to me. */";
 		$targetSource = $this->PHPclassFile($extKey, $filename, $targetSource, "Directmail target$this->numTarget for $extKey");
 		$targetSource = preg_replace('/if[\w\W].*XCLASS[\w\W]*}/', '', $targetSource);
 		
@@ -787,7 +787,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 		$this->addFileToFileArray($filename, $targetSource);
 		
 		$this->wizard->ext_localconf[] = 
-		    "\$TYPO3_CONF_VARS['EXTCONF']['tcdirectmail']['includeClassFiles'][] =".
+		    "\$TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'][] =".
 		    " t3lib_extMgm::extPath('$extKey').'class.$targetName.php';";
 	}
 
@@ -1317,7 +1317,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 					$aMax = intval($fConf["conf_numberBoxes"]);
 					for($a=0;$a<$aMax;$a++)	{
 //						$cItems[]='Array("'.($fConf["conf_boxLabel_".$a]?str_replace("\\'","'",addslashes($this->getSplitLabels($fConf,"conf_boxLabel_".$a))):'English Label '.($a+1).'|Danish Label '.($a+1).'|German Label '.($a+1).'| etc...').'", ""),';
-						$cItems[]='Array("'.addslashes($this->getSplitLabels_reference($fConf,"conf_boxLabel_".$a,"tx_tcdirectmail_targets.".$fConf["fieldname"].".I.".$a)).'", ""),';
+						$cItems[]='Array("'.addslashes($this->getSplitLabels_reference($fConf,"conf_boxLabel_".$a,"tx_newsletter_targets.".$fConf["fieldname"].".I.".$a)).'", ""),';
 					}
 					$configL[]=trim($this->wrapBody('
 						"items" => Array (
@@ -1587,7 +1587,7 @@ class $targetName extends tx_tcdirectmail_target_sql {
 			$columns[$fConf["fieldname"]] = trim($this->wrapBody('
 				"'.$fConf["fieldname"].'" => Array (		'.$this->WOPcomment('WOP:'.$WOP.'[fieldname]').'
 					"exclude" => '.($fConf["excludeField"]?1:0).',		'.$this->WOPcomment('WOP:'.$WOP.'[excludeField]').'
-					"label" => "'.addslashes($this->getSplitLabels_reference($fConf,"title","tx_tcdirectmail_targets.".$fConf["fieldname"])).'",		'.$this->WOPcomment('WOP:'.$WOP.'[title]').'
+					"label" => "'.addslashes($this->getSplitLabels_reference($fConf,"title","tx_newsletter_targets.".$fConf["fieldname"])).'",		'.$this->WOPcomment('WOP:'.$WOP.'[title]').'
 					"config" => Array (
 						',implode(chr(10),$configL),'
 					)
@@ -1610,8 +1610,8 @@ class $targetName extends tx_tcdirectmail_target_sql {
 }
 
 // Include ux_class extension?
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tcdirectmail/sections/class.tx_tcdirectmail_section_targets.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tcdirectmail/sections/class.tx_tcdirectmail_section_targets.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/sections/class.tx_newsletter_section_targets.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/sections/class.tx_newsletter_section_targets.php']);
 }
 
 

@@ -1,7 +1,7 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_gentlesql.php');
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_gentlesql.php');
 
-class tx_tcdirectmail_target_beusers extends tx_tcdirectmail_target_gentlesql { 
+class tx_newsletter_target_beusers extends tx_newsletter_target_gentlesql { 
 	var $tableName = 'be_users';
 
 	function init() {
@@ -14,7 +14,7 @@ class tx_tcdirectmail_target_beusers extends tx_tcdirectmail_target_gentlesql {
 				WHERE uid IN (".implode(',',$config).") 
 				AND email <> '' 
 				AND disable = 0
-				AND tx_tcdirectmail_bounce < 10");
+				AND tx_newsletter_bounce < 10");
 	}
 }
    

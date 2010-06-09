@@ -1,7 +1,7 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_tcdirectmail_target_sql.php');
-class tx_tcdirectmail_target_fepages extends tx_tcdirectmail_target_sql { 
+require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
+class tx_newsletter_target_fepages extends tx_newsletter_target_sql { 
 	var $tableName = 'fe_users';
 
 	function init () {
@@ -19,7 +19,7 @@ class tx_tcdirectmail_target_fepages extends tx_tcdirectmail_target_sql {
 				AND pages.hidden = 0 
 				AND fe_users.disable = 0
 				AND fe_users.deleted = 0
-				AND tx_tcdirectmail_bounce < 10");
+				AND tx_newsletter_bounce < 10");
 	}
 }
 

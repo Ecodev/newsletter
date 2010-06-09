@@ -31,7 +31,7 @@
 
 require_once(t3lib_extMgm::extPath('kickstarter').'sections/class.tx_kickstarter_section_modulefunction.php');
 
-class tx_tcdirectmail_section_modulefunction extends tx_kickstarter_section_modulefunction {
+class tx_newsletter_section_modulefunction extends tx_kickstarter_section_modulefunction {
   var $sectionID = 'modulefunction';
 	/**
 	 * Renders the form in the kickstarter; this was add_cat_modulefunction()

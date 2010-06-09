@@ -10,9 +10,9 @@ if (TYPO3_MODE=="BE")	{
 }
 
 $tempColumns = Array (
-	"tx_tcdirectmail_senttime" => Array (		
+	"tx_newsletter_senttime" => Array (		
 		"exclude" => 1,		
-		"label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_senttime",		
+		"label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_senttime",		
 		"config" => Array (
 			"type" => "input",
 			"size" => "12",
@@ -22,106 +22,106 @@ $tempColumns = Array (
 			"default" => "0"
 		)
 	),
-	"tx_tcdirectmail_repeat" => Array (		
+	"tx_newsletter_repeat" => Array (		
 		"exclude" => 1,		
-		"label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat",		
+		"label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat",		
 		"config" => Array (
 			"type" => "select",
 			"items" => Array (
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.0", "0"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.1", "1"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.2", "2"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.3", "3"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.4", "4"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.5", "5"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.6", "6"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_repeat.I.7", "7"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.0", "0"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.1", "1"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.2", "2"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.3", "3"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.4", "4"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.5", "5"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.6", "6"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_repeat.I.7", "7"),
 			),
 			"size" => 1,	
 			"maxitems" => 1,
 		)
 	),
 	
-	"tx_tcdirectmail_plainconvert" => Array (		
+	"tx_newsletter_plainconvert" => Array (		
 		"exclude" => 1,		
-		"label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_plainconvert",		
+		"label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_plainconvert",		
 		"config" => Array (
 			"type" => "select",
 			"items" => Array (
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_plainconvert.I.2", "tx_tcdirectmail_plain_simple"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_plainconvert.I.0", "tx_tcdirectmail_plain_template"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_plainconvert.I.1", "tx_tcdirectmail_plain_lynx"),
-				Array("LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_plainconvert.I.3", "tx_tcdirectmail_plain_html2text"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_plainconvert.I.2", "tx_newsletter_plain_simple"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_plainconvert.I.0", "tx_newsletter_plain_template"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_plainconvert.I.1", "tx_newsletter_plain_lynx"),
+				Array("LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_plainconvert.I.3", "tx_newsletter_plain_html2text"),
 			),
 			"size" => 1,	
 			"maxitems" => 1,
 		)
 	),
 	
-        "tx_tcdirectmail_attachfiles" => Array (        
+        "tx_newsletter_attachfiles" => Array (        
                 "exclude" => 1,        
-	        "label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_attachfiles",        
+	        "label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_attachfiles",        
         	"config" => Array (
 	        	"type" => "group",
         		"internal_type" => "file",
             		"allowed" => "",    
             		"disallowed" => "php,php3",    
             		"max_size" => 500,    
-            		"uploadfolder" => "uploads/tx_tcdirectmail",
+            		"uploadfolder" => "uploads/tx_newsletter",
            		"size" => 3,    
             		"minitems" => 0,
             		"maxitems" => 10,
         	)
     	),
-    "tx_tcdirectmail_real_target" => Array (        
+    "tx_newsletter_real_target" => Array (        
         "exclude" => 1,        
-        "label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_real_target",        
+        "label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_real_target",        
         "config" => Array (
             "type" => "group",    
             "internal_type" => "db",    
-            "allowed" => "tx_tcdirectmail_targets",    
+            "allowed" => "tx_newsletter_targets",    
             "size" => 5,    
             "minitems" => 0,
             "maxitems" => 20,
         )
     ),
-    "tx_tcdirectmail_test_target" => Array (        
+    "tx_newsletter_test_target" => Array (        
         "exclude" => 1,        
-        "label" => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_test_target",        
+        "label" => "LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_test_target",        
         "config" => Array (
             "type" => "group",    
             "internal_type" => "db",    
-            "allowed" => "tx_tcdirectmail_targets",    
+            "allowed" => "tx_newsletter_targets",    
             "size" => 1,    
             "minitems" => 0,
             "maxitems" => 1,
         )
     ),
-    'tx_tcdirectmail_sendername' => Array (
+    'tx_newsletter_sendername' => Array (
 	'exclude' => 1,
-	'label' => 'LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_sendername',
+	'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_sendername',
 	'config' => Array (
 	    'type' => 'input',
 	    'size' => 30,
 	)
     ),
     
-    'tx_tcdirectmail_senderemail' => Array (
+    'tx_newsletter_senderemail' => Array (
 	'exclude' => 1,
-	'label' => 'LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_senderemail',
+	'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_senderemail',
 	'config' => Array (
 	    'type' => 'input',
 	    'size' => 30,
 	)
     ),    
 
-    'tx_tcdirectmail_bounceaccount' => Array (
+    'tx_newsletter_bounceaccount' => Array (
        'exclude' => 1,
-       'label' => 'LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_bounceaccount',
+       'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_bounceaccount',
        'config' => Array (
            "type" => "select",
-           "foreign_table" => "tx_tcdirectmail_bounceaccount",
-           "foreign_table_where" => "ORDER BY tx_tcdirectmail_bounceaccount.uid",
+           "foreign_table" => "tx_newsletter_bounceaccount",
+           "foreign_table_where" => "ORDER BY tx_newsletter_bounceaccount.uid",
            "size" => 1,
            "minitems" => 0,
            "maxitems" => 1,
@@ -130,17 +130,17 @@ $tempColumns = Array (
 
 
     
-    'tx_tcdirectmail_spy' => Array (
+    'tx_newsletter_spy' => Array (
 	'exclude' => 1,
-	'label' => 'LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_spy',
+	'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_spy',
 	'config' => Array(
 	    'type' => 'check',
 	),
     ),
     
-    'tx_tcdirectmail_register_clicks' => Array (
+    'tx_newsletter_register_clicks' => Array (
 	'exclude' => 1,
-	'label' => 'LLL:EXT:tcdirectmail/locallang_db.xml:pages.tx_tcdirectmail_register_clicks',
+	'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_register_clicks',
 	'config' => Array(
 	    'type' => 'check',
 	),
@@ -160,20 +160,20 @@ $PAGES_TYPES[189] = Array(
       
 
 array_splice ($TCA["pages"]["columns"]["doktype"]["config"]["items"], 3, 0, array(array(  
-	0 => "LLL:EXT:tcdirectmail/locallang_db.xml:pages.directmailtype",
+	0 => "LLL:EXT:newsletter/locallang_db.xml:pages.directmailtype",
 	1 => 189,
 	2 => t3lib_extMgm::extRelPath('newsletter')."mail.gif"
     ))
 );
 
 $TCA['pages']['types']['189'] = array (
-    'showitem' => "hidden;;;;1-1-1, doktype, title;;;;2-2-2, storage_pid, content_from_pid,;;;;3-3-3, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, tx_tcdirectmail_bounceaccount, tx_tcdirectmail_plainconvert, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_usebcc,;;;;4-4-4, tx_tcdirectmail_senttime, tx_tcdirectmail_repeat, tx_tcdirectmail_real_target,tx_tcdirectmail_test_target,;;;;6-6-6, tx_tcdirectmail_attachfiles,",
+    'showitem' => "hidden;;;;1-1-1, doktype, title;;;;2-2-2, storage_pid, content_from_pid,;;;;3-3-3, tx_newsletter_sendername, tx_newsletter_senderemail, tx_newsletter_bounceaccount, tx_newsletter_plainconvert, tx_newsletter_spy, tx_newsletter_register_clicks, tx_newsletter_usebcc,;;;;4-4-4, tx_newsletter_senttime, tx_newsletter_repeat, tx_newsletter_real_target,tx_newsletter_test_target,;;;;6-6-6, tx_newsletter_attachfiles,",
 );
 
-t3lib_extMgm::allowTableOnStandardPages("tx_tcdirectmail_targets");
-$TCA["tx_tcdirectmail_targets"] = Array (
+t3lib_extMgm::allowTableOnStandardPages("tx_newsletter_targets");
+$TCA["tx_newsletter_targets"] = Array (
     "ctrl" => Array (
-        "title" => "LLL:EXT:tcdirectmail/locallang_db.xml:tx_tcdirectmail_targets",        
+        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_targets",        
         "label" => "title",    
         "tstamp" => "tstamp",
         "crdate" => "crdate",
@@ -192,9 +192,9 @@ $TCA["tx_tcdirectmail_targets"] = Array (
     )
 );
 
-$TCA["tx_tcdirectmail_bounceaccount"] = Array (
+$TCA["tx_newsletter_bounceaccount"] = Array (
     "ctrl" => Array (
-        "title" => "LLL:EXT:tcdirectmail/locallang_db.xml:tx_tcdirectmail_bounceaccount",        
+        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_bounceaccount",        
         "label" => "email",    
         "tstamp" => "tstamp",
         "crdate" => "crdate",
@@ -214,9 +214,9 @@ $TCA["tx_tcdirectmail_bounceaccount"] = Array (
 
 
 $tempColumns = Array (
-    "tx_tcdirectmail_bounce" => Array (        
+    "tx_newsletter_bounce" => Array (        
         "exclude" => 1,        
-        "label" => "LLL:EXT:tcdirectmail/locallang_db.xml:fe_users.tx_tcdirectmail_bounce",        
+        "label" => "LLL:EXT:newsletter/locallang_db.xml:fe_users.tx_newsletter_bounce",        
         "config" => Array (
             "type" => "input",
             "size" => "4",
@@ -235,15 +235,15 @@ $tempColumns = Array (
 
 //t3lib_div::loadTCA("fe_users");
 //t3lib_extMgm::addTCAcolumns("fe_users",$tempColumns,1);
-//t3lib_extMgm::addToAllTCAtypes("fe_users","tx_tcdirectmail_bounce;;;;1-1-1");
+//t3lib_extMgm::addToAllTCAtypes("fe_users","tx_newsletter_bounce;;;;1-1-1");
 //
 //t3lib_div::loadTCA("tt_address");
 //t3lib_extMgm::addTCAcolumns("tt_address",$tempColumns,1);
-//t3lib_extMgm::addToAllTCAtypes("tt_address","tx_tcdirectmail_bounce;;;;1-1-1");
+//t3lib_extMgm::addToAllTCAtypes("tt_address","tx_newsletter_bounce;;;;1-1-1");
 //
 //t3lib_div::loadTCA("be_users");
 //t3lib_extMgm::addTCAcolumns("be_users",$tempColumns,1);
-//t3lib_extMgm::addToAllTCAtypes("be_users","tx_tcdirectmail_bounce;;;;1-1-1");
+//t3lib_extMgm::addToAllTCAtypes("be_users","tx_newsletter_bounce;;;;1-1-1");
 //
 
 
