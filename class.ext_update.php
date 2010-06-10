@@ -59,7 +59,7 @@ class ext_update {
 
 				if ($targetName) {
 					$request = 'RENAME TABLE ' . $tableName . ' TO ' . $targetName;
-					#$TYPO3_DB->sql_query($request);
+					$TYPO3_DB->sql_query($request);
 				}
 			}
 
