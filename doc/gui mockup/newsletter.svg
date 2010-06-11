@@ -10,8 +10,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="6318.2925"
-   height="2626.7102"
+   width="6334.2148"
+   height="2659.1125"
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
@@ -327,6 +327,13 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3248"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -335,11 +342,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.40422314"
-     inkscape:cx="4872.309"
-     inkscape:cy="2729.8159"
+     inkscape:zoom="0.28373535"
+     inkscape:cx="4196.7435"
+     inkscape:cy="1803.2188"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="721"
@@ -364,7 +371,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(3354.7896,595.96393)">
+     transform="translate(3355.771,588.36627)">
     <image
        y="-479.25369"
        x="-122.99541"
@@ -422,7 +429,7 @@
        id="rect4243"
        style="fill:#cacaca;fill-opacity:1;stroke:none" />
     <image
-       y="1262.7462"
+       y="1302.7462"
        x="-122.99541"
        id="image3181"
        height="768"
@@ -434,7 +441,7 @@
        width="874.32422"
        height="675.99414"
        x="365.0755"
-       y="1329.8096"
+       y="1369.8096"
        rx="2.0935388"
        ry="2.5970023"
        inkscape:export-filename="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/newsletter_variante2_stats_2.svg.png"
@@ -446,7 +453,7 @@
        width="914.0625"
        height="65.625"
        x="349.73993"
-       y="1314.7997"
+       y="1354.7997"
        rx="3.2381034"
        ry="3.2381034" />
     <image
@@ -481,22 +488,14 @@
        inkscape:export-ydpi="71.772705"
        inkscape:export-xdpi="71.772705"
        inkscape:export-filename="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/newsletter_variante2_diagnostic.svg.png"
-       ry="3.2381034"
-       rx="3.2381029"
-       y="-545.27521"
-       x="1611.1746"
-       height="842.87134"
-       width="1352.3284"
+       ry="2.4338734"
+       rx="2.3280852"
+       y="-420.66846"
+       x="1831.7285"
+       height="633.53198"
+       width="972.27777"
        id="rect3694"
        style="fill:#f8f8f8;fill-opacity:1;stroke:none" />
-    <image
-       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/background_modernskin_usertools.png"
-       xlink:href="background_modernskin_usertools.png"
-       width="1174"
-       height="661"
-       id="image3696"
-       x="1685.6172"
-       y="-432.33951" />
     <rect
        ry="3.2381034"
        rx="3.2381034"
@@ -522,26 +521,45 @@
        y="-411.668"
        rx="3.2381034"
        ry="3.2381034" />
+    <image
+       y="-473.71771"
+       x="1612.444"
+       id="image3250"
+       height="768"
+       width="1366"
+       xlink:href="file:///var/www/typo3/typo3conf/ext/newsletter/doc/gui%20mockup/background_usertools.png" />
+    <rect
+       ry="3.2381034"
+       rx="3.2381034"
+       y="-417.20047"
+       x="1834.9999"
+       height="65.625"
+       width="914.0625"
+       id="rect3267"
+       style="fill:#cacaca;fill-opacity:1;stroke:none" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer"
-     transform="translate(3354.7896,595.96393)">
+     transform="translate(3355.771,588.36627)">
     <text
        sodipodi:linespacing="125%"
        id="text4814"
-       y="1244.35"
-       x="359.23993"
+       y="1260.35"
+       x="-144.76007"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="1244.35"
-         x="359.23993"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+         y="1260.35"
+         x="-144.76007"
          id="tspan4816"
-         sodipodi:role="line"><tspan
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan4818">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Sent emails&quot;</tspan></tspan></text>
+         sodipodi:role="line">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Sent emails&quot;</tspan><tspan
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+         y="1297.85"
+         x="-144.76007"
+         sodipodi:role="line"
+         id="tspan3238">Each page (from the tree) can have its own statistics</tspan></text>
     <rect
        style="fill:#7e7e7e;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:1"
        id="rect3724"
@@ -783,17 +801,20 @@
     <text
        sodipodi:linespacing="125%"
        id="text3098"
-       y="-531.10602"
-       x="387.18622"
+       y="-556.02734"
+       x="-91.303688"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="-531.10602"
-         x="387.18622"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+         y="-556.02734"
+         x="-91.303688"
          id="tspan3100"
-         sodipodi:role="line"><tspan
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan3102">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Overview&quot;</tspan></tspan></text>
+         sodipodi:role="line">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Overview&quot;</tspan><tspan
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+         y="-518.52734"
+         x="-91.303688"
+         sodipodi:role="line"
+         id="tspan3234">Each page (from the tree) can have its own statistics</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -805,7 +826,7 @@
          id="tspan3106"
          x="398.49994"
          y="-487.65018"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans">Each page (from the tree) can have its own statistics</tspan></text>
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans" /></text>
     <text
        sodipodi:linespacing="125%"
        id="text3110"
@@ -852,30 +873,30 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/stats-general.png"
        xlink:href="stats-general.png"
-       width="322"
-       height="188"
-       id="image3245"
+       y="-227.21353"
        x="406.88763"
-       y="-227.21353" />
+       id="image3245"
+       height="188"
+       width="322" />
     <g
        id="g3430"
        transform="translate(323.26345,-277.56293)">
       <image
          sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/stats-general-graph.png"
          xlink:href="stats-general-graph.png"
-         y="291.86218"
-         x="91.5"
-         id="image3355"
+         width="689"
          height="161"
-         width="689" />
+         id="image3355"
+         x="91.5"
+         y="291.86218" />
       <image
          sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/stats-general-graph-header.png"
          xlink:href="stats-general-graph-header.png"
-         y="259.36218"
-         x="91.5"
-         id="image3426"
+         width="167"
          height="32"
-         width="167" />
+         id="image3426"
+         x="91.5"
+         y="259.36218" />
     </g>
     <rect
        ry="3.2381034"
@@ -937,17 +958,20 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="398.49994"
-       y="401.28745"
+       x="-105.50006"
+       y="377.28745"
        id="text4305"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4307"
-         x="398.49994"
-         y="401.28745"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"><tspan
-           id="tspan4309"
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Clicked links&quot;</tspan></tspan></text>
+         x="-105.50006"
+         y="377.28745"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Statistics&quot; &gt; &quot;Clicked links&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="-105.50006"
+         y="414.78745"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+         id="tspan3236">Each page (from the tree) can have its own statistics</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4311"
@@ -959,7 +983,7 @@
          y="419.28745"
          x="398.49994"
          id="tspan4313"
-         sodipodi:role="line">Each page (from the tree) can have its own statistics</tspan></text>
+         sodipodi:role="line" /></text>
     <path
        sodipodi:nodetypes="ccccccc"
        id="path4321"
@@ -1034,12 +1058,12 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/stats-click-graph.png"
        xlink:href="stats-click-graph.png"
-       width="690"
-       height="172"
-       id="image4462"
-       x="405.92853"
+       style="fill:#e2dbdb"
        y="837.84332"
-       style="fill:#e2dbdb" />
+       x="405.92853"
+       id="image4462"
+       height="172"
+       width="690" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect4466"
@@ -1091,11 +1115,11 @@
       <image
          sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         width="16"
-         height="16"
-         id="image4754"
+         y="208.32672"
          x="862.51239"
-         y="208.32672" />
+         id="image4754"
+         height="16"
+         width="16" />
       <text
          xml:space="preserve"
          style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1122,29 +1146,29 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="412.55109"
-       y="1545.4734"
+       y="1585.4734"
        id="text4774"><tspan
          id="tspan4782"
          sodipodi:role="line"
          x="412.55109"
-         y="1545.4734">Fabien Udriot (fabien@ecodev.ch)                     4 clicks        </tspan><tspan
+         y="1585.4734">Fabien Udriot (fabien@ecodev.ch)                     4 clicks        </tspan><tspan
          sodipodi:role="line"
          x="412.55109"
-         y="1560.4734"
+         y="1600.4734"
          id="tspan5018">Adrien Crivelli (adrien@ecodev.ch)                    2 clicks        </tspan><tspan
          sodipodi:role="line"
          x="412.55109"
-         y="1575.4734"
+         y="1615.4734"
          id="tspan5020">Mathieu Despont (mathieu@ecodev.ch)            3 clicks        </tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4784"
-       y="1499.4248"
+       y="1539.4248"
        x="398.55109"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="1499.4248"
+         y="1539.4248"
          x="398.55109"
          id="tspan4786"
          sodipodi:role="line"><tspan
@@ -1154,15 +1178,15 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="410.55109"
-       y="1521.4734"
+       y="1561.4734"
        id="text4790"><tspan
          id="tspan4792"
          sodipodi:role="line"
          x="410.55109"
-         y="1521.4734">Subscriber                                                          Clinks          Preview</tspan></text>
+         y="1561.4734">Subscriber                                                          Clinks          Preview</tspan></text>
     <path
        style="fill:#000000;fill-opacity:1;stroke:none"
-       d="m 481.83085,1513.8035 11.7096,0 c 0.5058,0.4961 0.5058,1.295 0,1.7912 l -4.9417,4.8469 c -0.5059,0.4962 -1.3204,0.4962 -1.8262,0 l -4.9417,-4.8469 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7912 z"
+       d="m 481.83085,1553.8035 11.7096,0 c 0.5058,0.4961 0.5058,1.295 0,1.7912 l -4.9417,4.8469 c -0.5059,0.4962 -1.3204,0.4962 -1.8262,0 l -4.9417,-4.8469 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7912 z"
        id="path4794"
        sodipodi:nodetypes="ccccccc" />
     <rect
@@ -1171,37 +1195,37 @@
        width="92.558762"
        height="23"
        x="531.99994"
-       y="1335.7886"
+       y="1375.7886"
        rx="3.2381034"
        ry="3.2381034" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="540.23993"
-       y="1351.7886"
+       y="1391.7886"
        id="text4798"><tspan
          sodipodi:role="line"
          id="tspan4800"
          x="540.23993"
-         y="1351.7886">Statistics (2)</tspan></text>
+         y="1391.7886">Statistics (2)</tspan></text>
     <rect
        style="opacity:0.4;fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect4802"
        width="846"
        height="463.82336"
        x="379.65411"
-       y="1468.9357"
+       y="1508.9357"
        rx="3.2381034"
        ry="3.2381032" />
     <path
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
-       d="m 694.09635,1468.6976 0,-29.5238 c 0,-1.7939 1.9037,-3.2381 4.2684,-3.2381 l 123.2829,0 c 2.3647,0 4.2685,1.4442 4.2685,3.2381 l 0,29.5238 m -131.8198,0"
+       d="m 694.09635,1508.6976 0,-29.5238 c 0,-1.7939 1.9037,-3.2381 4.2684,-3.2381 l 123.2829,0 c 2.3647,0 4.2685,1.4442 4.2685,3.2381 l 0,29.5238 m -131.8198,0"
        id="path4804"
        sodipodi:nodetypes="ccccccc" />
     <path
        sodipodi:nodetypes="ccccccc"
        id="path4806"
-       d="m 385.07555,1468.1118 0,-29.5238 c 0,-1.7939 2.1692,-3.2381 4.8637,-3.2381 l 140.477,0 c 2.6946,0 4.8638,1.4442 4.8638,3.2381 l 0,29.5238 m -150.2045,0"
+       d="m 385.07555,1508.1118 0,-29.5238 c 0,-1.7939 2.1692,-3.2381 4.8637,-3.2381 l 140.477,0 c 2.6946,0 4.8638,1.4442 4.8638,3.2381 l 0,29.5238 m -150.2045,0"
        style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:1;stroke-opacity:1"
@@ -1209,19 +1233,19 @@
        width="139.24001"
        height="23"
        x="379.23993"
-       y="1336.3622"
+       y="1376.3622"
        rx="3.2381034"
        ry="3.2381034" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="392.47992"
-       y="1350.3622"
+       y="1390.3622"
        id="text4810"><tspan
          sodipodi:role="line"
          id="tspan4812"
          x="392.47992"
-         y="1350.3622">Create newsletter</tspan></text>
+         y="1390.3622">Create newsletter</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1233,21 +1257,21 @@
          id="tspan4822"
          x="359.23993"
          y="1260.35"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans">Each page (from the tree) can have its own statistics</tspan></text>
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
-       d="m 539.33895,1469.4047 0,-29.5238 c 0,-1.7939 2.1692,-3.2381 4.8638,-3.2381 l 140.477,0 c 2.6945,0 4.8638,1.4442 4.8638,3.2381 l 0,29.5238 m -150.2046,0"
+       d="m 539.33895,1509.4047 0,-29.5238 c 0,-1.7939 2.1692,-3.2381 4.8638,-3.2381 l 140.477,0 c 2.6945,0 4.8638,1.4442 4.8638,3.2381 l 0,29.5238 m -150.2046,0"
        id="path4824"
        sodipodi:nodetypes="ccccccc" />
     <path
        sodipodi:nodetypes="ccccccc"
        id="path4826"
-       d="m 594.94255,1406.9155 11.7095,0 c 0.5059,0.4962 0.5059,1.2951 0,1.7913 l -4.9416,4.8468 c -0.5059,0.4962 -1.3204,0.4962 -1.8263,0 l -4.9416,-4.8468 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7913 z"
+       d="m 594.94255,1446.9155 11.7095,0 c 0.5059,0.4962 0.5059,1.2951 0,1.7913 l -4.9416,4.8468 c -0.5059,0.4962 -1.3204,0.4962 -1.8263,0 l -4.9416,-4.8468 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7913 z"
        style="fill:#000000;fill-opacity:1;stroke:none" />
     <rect
        ry="3.2381034"
        rx="3.2381034"
-       y="1399.3622"
+       y="1439.3622"
        x="380.99994"
        height="23"
        width="235.24002"
@@ -1255,23 +1279,23 @@
        style="fill:none;stroke:#000000;stroke-width:1;stroke-opacity:1" />
     <text
        id="text4830"
-       y="1415.3622"
+       y="1455.3622"
        x="389.23993"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         y="1415.3622"
+         y="1455.3622"
          x="389.23993"
          id="tspan4832"
          sodipodi:role="line">Mailing 21.05.10 - 100 recievers</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4834"
-       y="1456.2573"
+       y="1496.2573"
        x="419.45319"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="1456.2573"
+         y="1496.2573"
          x="419.45319"
          id="tspan4836"
          sodipodi:role="line"><tspan
@@ -1281,25 +1305,25 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="713.21759"
-       y="1456.2573"
+       y="1496.2573"
        id="text4841"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4843"
          x="713.21759"
-         y="1456.2573"
+         y="1496.2573"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"><tspan
            id="tspan4845"
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">Sent emails </tspan></tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4847"
-       y="1456.2573"
+       y="1496.2573"
        x="557.60956"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="1456.2573"
+         y="1496.2573"
          x="557.60956"
          id="tspan4849"
          sodipodi:role="line"><tspan
@@ -1308,15 +1332,15 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/stats-click-graph.png"
        xlink:href="stats-click-graph.png"
-       width="690"
-       height="172"
-       id="image4853"
+       y="1722.9059"
        x="396.66852"
-       y="1682.9059" />
+       id="image4853"
+       height="172"
+       width="690" />
     <rect
        ry="3.2381032"
        rx="3.2381032"
-       y="1507.9357"
+       y="1547.9357"
        x="392.65411"
        height="140.9655"
        width="794"
@@ -1328,31 +1352,31 @@
        width="15.999996"
        height="109.82336"
        x="1163.6542"
-       y="1514.9357"
+       y="1554.9357"
        rx="3.2381029"
        ry="3.2381032" />
     <text
        transform="matrix(0.81109218,-0.58491835,0.58491835,0.81109218,0,0)"
        id="text4859"
-       y="1798.9199"
-       x="-227.01753"
+       y="1831.3635"
+       x="-250.41426"
        style="font-size:12px;font-style:normal;font-weight:normal;opacity:0.65486725;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan4861"
-         y="1798.9199"
-         x="-227.01753"
+         y="1831.3635"
+         x="-250.41426"
          sodipodi:role="line">Selectable rows</tspan></text>
     <path
        id="path4863"
-       d="m 393.75565,1549.427 754.48295,0"
+       d="m 393.75565,1589.427 754.48295,0"
        style="fill:none;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.39999998, 2.79999995;stroke-dashoffset:0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.39999998, 2.79999995;stroke-dashoffset:0"
-       d="m 393.75565,1565.427 754.48295,0"
+       d="m 393.75565,1605.427 754.48295,0"
        id="path4865" />
     <path
        id="path4867"
-       d="m 393.75565,1581.427 754.48295,0"
+       d="m 393.75565,1621.427 754.48295,0"
        style="fill:none;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.39999998, 2.79999995;stroke-dashoffset:0" />
     <g
        transform="translate(285.75735,-472.02563)"
@@ -1360,11 +1384,11 @@
       <image
          sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         y="208.32672"
-         x="862.51239"
-         id="image4883"
+         width="16"
          height="16"
-         width="16" />
+         id="image4883"
+         x="862.51239"
+         y="208.32672" />
       <text
          sodipodi:linespacing="125%"
          id="text4885"
@@ -1388,16 +1412,16 @@
          ry="3.2381034" />
     </g>
     <g
-       transform="translate(276.64465,1268.8712)"
+       transform="translate(276.64465,1308.8712)"
        id="g4891">
       <image
          sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         y="208.32672"
-         x="862.51239"
-         id="image4893"
+         width="16"
          height="16"
-         width="16" />
+         id="image4893"
+         x="862.51239"
+         y="208.32672" />
       <text
          sodipodi:linespacing="125%"
          id="text4895"
@@ -1423,15 +1447,15 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/eye.png"
        xlink:href="eye.png"
-       width="16"
-       height="16"
-       id="image4968"
+       y="1572.2015"
        x="781.862"
-       y="1532.2015" />
+       id="image4968"
+       height="16"
+       width="16" />
     <path
        sodipodi:nodetypes="ccccccc"
        id="path5022"
-       d="m 741.33905,1513.8035 11.7095,0 c 0.5059,0.4961 0.5059,1.295 0,1.7912 l -4.9416,4.8469 c -0.5059,0.4962 -1.3204,0.4962 -1.8263,0 l -4.9416,-4.8469 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7912 z"
+       d="m 741.33905,1553.8035 11.7095,0 c 0.5059,0.4961 0.5059,1.295 0,1.7912 l -4.9416,4.8469 c -0.5059,0.4962 -1.3204,0.4962 -1.8263,0 l -4.9416,-4.8469 c -0.5059,-0.4962 -0.5059,-1.2951 0,-1.7912 z"
        style="fill:#000000;fill-opacity:1;stroke:none" />
     <path
        sodipodi:type="arc"
@@ -1442,63 +1466,63 @@
        sodipodi:rx="8.8388348"
        sodipodi:ry="8.8388348"
        d="m 194.45436,483.49478 c 0,4.88156 -3.95728,8.83884 -8.83884,8.83884 -4.88155,0 -8.83883,-3.95728 -8.83883,-8.83884 0,-4.88155 3.95728,-8.83883 8.83883,-8.83883 4.88156,0 8.83884,3.95728 8.83884,8.83883 z"
-       transform="matrix(0.72,0,0,0.72,344.40555,1408.46)" />
-    <image
-       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/eye.png"
-       xlink:href="eye.png"
-       y="1549.1721"
-       x="781.862"
-       id="image5026"
-       height="16"
-       width="16" />
+       transform="matrix(0.72,0,0,0.72,344.40555,1448.46)" />
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/eye.png"
        xlink:href="eye.png"
        width="16"
        height="16"
-       id="image5028"
+       id="image5026"
        x="781.862"
-       y="1566.1426" />
+       y="1589.1721" />
+    <image
+       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/eye.png"
+       xlink:href="eye.png"
+       y="1606.1426"
+       x="781.862"
+       id="image5028"
+       height="16"
+       width="16" />
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/bullet_toggle_minus.png"
        xlink:href="bullet_toggle_minus.png"
-       width="16"
-       height="16"
+       y="1604.0214"
+       x="397.21674"
        id="image5139"
-       x="397.21674"
-       y="1564.0214" />
-    <image
-       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
-       xlink:href="bullet_toggle_plus.png"
-       width="16"
-       height="16"
-       id="image5228"
-       x="397.21674"
-       y="1549.1721" />
-    <image
-       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
-       xlink:href="bullet_toggle_plus.png"
-       y="1533.6157"
-       x="397.21674"
-       id="image5232"
        height="16"
        width="16" />
+    <image
+       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
+       xlink:href="bullet_toggle_plus.png"
+       y="1589.1721"
+       x="397.21674"
+       id="image5228"
+       height="16"
+       width="16" />
+    <image
+       sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
+       xlink:href="bullet_toggle_plus.png"
+       width="16"
+       height="16"
+       id="image5232"
+       x="397.21674"
+       y="1573.6157" />
     <text
        id="text5234"
-       y="1611.2343"
+       y="1651.2343"
        x="418.9151"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        xml:space="preserve"
        sodipodi:linespacing="125%"><tspan
          id="tspan5240"
-         y="1611.2343"
+         y="1651.2343"
          x="418.9151"
          sodipodi:role="line">http://domain.tld/mylink1 </tspan><tspan
-         y="1623.7343"
+         y="1663.7343"
          x="418.9151"
          sodipodi:role="line"
          id="tspan5247">http://domain.tld/mylink2</tspan><tspan
-         y="1636.2343"
+         y="1676.2343"
          x="418.9151"
          sodipodi:role="line"
          id="tspan5249">...</tspan></text>
@@ -1507,16 +1531,16 @@
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
        x="418.20795"
-       y="1598.5063"
+       y="1638.5063"
        id="text5251"><tspan
          sodipodi:role="line"
          id="tspan5259"
          x="418.20795"
-         y="1598.5063">Clicked links</tspan><tspan
+         y="1638.5063">Clicked links</tspan><tspan
          sodipodi:role="line"
          id="tspan5261"
          x="418.20795"
-         y="1611.0063" /></text>
+         y="1651.0063" /></text>
     <g
        id="g5269"
        transform="translate(291.99995,1260)">
@@ -1564,7 +1588,7 @@
            sodipodi:role="line">Diagnostic</tspan></text>
     </g>
     <g
-       transform="translate(281.99995,3004)"
+       transform="translate(281.99995,3044)"
        id="g5282">
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-opacity:1"
@@ -1650,29 +1674,15 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="-1099.75"
-       y="-496.11771"
+       x="-1662.9724"
+       y="-545.96039"
        id="text5334"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5336"
-         x="-1099.75"
-         y="-496.11771"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"><tspan
-           id="tspan5338"
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Diagnostic&quot;</tspan></tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text5340"
-       y="-478.11771"
-       x="-1099.75"
-       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-         y="-478.11771"
-         x="-1099.75"
-         id="tspan5342"
-         sodipodi:role="line">Each page (from the tree) can have its own statistics</tspan></text>
+         x="-1662.9724"
+         y="-545.96039"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;Web&quot; &gt; &quot;Newsletter&quot;  &gt; &quot;Diagnostic&quot;</tspan></text>
     <rect
        style="fill:#7e7e7e;fill-opacity:1;stroke:#000000;stroke-width:0.99999994;stroke-opacity:1"
        id="rect5430"
@@ -1695,11 +1705,11 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/diagnostic.png"
        xlink:href="diagnostic.png"
-       y="-285.3837"
-       x="-1112.478"
-       id="image3290"
+       width="772"
        height="274"
-       width="772" />
+       id="image3290"
+       x="-1112.478"
+       y="-285.3837" />
     <text
        sodipodi:linespacing="125%"
        id="text3294"
@@ -1726,25 +1736,23 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/diagnostic-linkcheck.png"
        xlink:href="diagnostic-linkcheck.png"
-       y="52.547329"
-       x="-1109.4099"
-       id="image3389"
+       width="550"
        height="62"
-       width="550" />
+       id="image3389"
+       x="-1109.4099"
+       y="52.547329" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="1963.4364"
-       y="-449.65677"
+       x="1651.5532"
+       y="-540.57812"
        id="text3700"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3702"
-         x="1963.4364"
-         y="-449.65677"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"><tspan
-           id="tspan3704"
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;User Tools&quot; &gt; &quot;Newsletter General&quot;</tspan></tspan></text>
+         x="1651.5532"
+         y="-540.57812"
+         style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">This screenshot shows the module &quot;User Tools&quot; &gt; &quot;Newsletter General&quot;</tspan></text>
     <rect
        ry="3.2381034"
        rx="3.2381034"
@@ -1786,11 +1794,11 @@
     <image
        sodipodi:absref="/var/www/typo3/typo3conf/ext/newsletter/doc/gui mockup/general-stats.png"
        xlink:href="general-stats.png"
-       width="940"
-       height="485"
-       id="image3718"
+       y="-315.12637"
        x="1828.0731"
-       y="-315.12637" />
+       id="image3718"
+       height="485"
+       width="940" />
     <rect
        style="fill:#cacaca;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:1"
        id="rect3250"
@@ -2590,6 +2598,7 @@
          sodipodi:role="line"
          id="tspan5320-6"
          x="-3358.7153"
-         y="-565.5733">Default view (some blocks are collapsed by default)</tspan></text>
+         y="-565.5733"
+         style="font-size:30px">Default view (some blocks are collapsed by default)</tspan></text>
   </g>
 </svg>
