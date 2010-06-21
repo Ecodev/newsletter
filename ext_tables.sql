@@ -2,7 +2,7 @@
 # Table structure for table 'pages'
 #
 CREATE TABLE pages (
-	tx_newsletter_senttime int(11) NOT NULL,
+	tx_newsletter_senttime int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_newsletter_repeat int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_newsletter_plainconvert varchar(255) DEFAULT 'tx_newsletter_plain_simple' NOT NULL,
 	tx_newsletter_test_target int(10) unsigned DEFAULT '0' NOT NULL,
@@ -34,22 +34,22 @@ CREATE TABLE be_users (
 #
 CREATE TABLE tx_newsletter_sentlog (
 	uid int(11) unsigned NOT NULL auto_increment,
-	pid int(11) unsigned DEFAULT 0 NOT NULL,
-	begintime int(10) unsigned DEFAULT 0 NOT NULL,
-	sendtime int(10) unsigned DEFAULT 0 NOT NULL,
+	pid int(11) unsigned DEFAULT '0' NOT NULL,
+	begintime int(10) unsigned DEFAULT '0' NOT NULL,
+	sendtime int(10) unsigned DEFAULT '0' NOT NULL,
 	receiver varchar(40) NOT NULL default '',
-	user_uid int(10) unsigned DEFAULT 0 NOT NULL,
-	beenthere tinyint(4) unsigned DEFAULT 0 NOT NULL,
-	bounced tinyint(4) unsigned DEFAULT 0 NOT NULL,
+	user_uid int(10) unsigned DEFAULT '0' NOT NULL,
+	beenthere tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	bounced tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	userdata mediumtext NOT NULL,
 	authcode varchar(9) NOT NULL default '',
 	host varchar(15) NOT NULL default '',	
-	target int(11) unsigned DEFAULT 0 NOT NULL,
+	target int(11) unsigned DEFAULT '0' NOT NULL,
     
     PRIMARY KEY (uid),
     KEY parent (pid),
     KEY normal_stat (pid,begintime),
-    KEY authcode (authcode(9))
+    KEY authcode (authcode)
 );
 
 
