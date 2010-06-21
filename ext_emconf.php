@@ -11,8 +11,8 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Directmail',
-	'description' => 'Directmail extension with simple to setup and use mailer',
+	'title' => 'Newsletter',
+	'description' => 'Newsletter extension with simple to setup and use mailer',
 	'category' => 'module',
 	'shy' => '',
 	'version' => '2.0.3',
