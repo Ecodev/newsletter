@@ -58,6 +58,15 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	 */
 	public $javascriptPath;
 
+
+	/**
+	 * the page info
+	 *
+	 * @var array
+	 */
+	public $pageinfo;
+
+
 	/**
 	 * Initialize the module
 	 */
@@ -72,6 +81,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		// Defines javascript resource file
 		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/javascripts/';
 
+		// Get page info
+		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 	}
 
 	/**
@@ -104,26 +115,23 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		global $LANG;
 
 		$this->loadJavascript();
-		
-		$this->content .= $this->doc->startPage($LANG->getLL('title'));
+
+		$docHeaderButtons = $this->getDocHeaderButtons();
+
 		$markers = array();
-		$markers['###CONTENT###'] = "hello world:::";
+		$markers['CSH'] = '';
+		$markers['FUNC_MENU'] = '';
+		$markers['CONTENT'] = '<div id="t3-testing"></div>';
 
-		$backendTemplateFile = t3lib_div::getFileAbsFileName('EXT:newsletter/Resources/Private/Templates/index.html');
-		$this->content .= t3lib_parsehtml::substituteMarkerArray(file_get_contents($backendTemplateFile), $markers);
+		// Configures the page
+		$this->doc->setModuleTemplate('EXT:newsletter/Resources/Private/Templates/index.html');
+		$this->doc->getContextMenuCode(); // Setting up the context sensitive menu:
 
-//	  // Access check!
-//	  // The page will show only if there is a valid page and if this page may be viewed by the user
-//	  $this->pageinfo = t3lib_BEfunc::readPageAccess($this->id,$this->perms_clause);
-//	  $access = is_array($this->pageinfo) ? 1 : 0;
-//
-//	  if (($this->id && $access) || ($BE_USER->user["admin"] && !$this->id))   {
-//
-//			// Draw the header.
-//		 $this->doc = t3lib_div::makeInstance("bigDoc");
-//		 $this->doc->backPath = $BACK_PATH;
-//		 $this->doc->form='<form name="newsletterform" action="" method="POST">';
-//
+		// Generates the HTML
+		$this->content = $this->doc->startPage($LANG->getLL('title'));
+		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
+		$this->content .= $this->doc->endPage();
+
 //			// JavaScript
 //		 $this->doc->JScode = '
 //			<script language="javascript" type="text/javascript">
@@ -147,9 +155,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //			   if (top.fsMod) top.fsMod.recentIds["web"] = '.intval($this->id).';
 //			</script>
 //		 ';
-//
-//		 $headerSection = $this->doc->getHeader("pages",$this->pageinfo,$this->pageinfo["_thePath"])."<br>".$LANG->sL("LLL:EXT:lang/locallang_core.php:labels.path").": ".t3lib_div::fixed_lgd_pre($this->pageinfo["_thePath"],50);
-//
 //		 // Filter out functions defined as disallowed in the user-ts.
 //		 if (is_array($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'])) {
 //			foreach ($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'] as $func => $disallowed) {
@@ -161,34 +166,30 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //			  }
 //			}
 //		 }
-//
-//		 $this->content.=$this->doc->startPage($LANG->getLL("title"));
-//		 $this->content.=$this->doc->header($LANG->getLL("title"));
-//		 $this->content.=$this->doc->spacer(5);
-//		 $this->content.=$this->doc->section("",$this->doc->funcMenu($headerSection,t3lib_BEfunc::getFuncMenu($this->id,"SET[function]",$this->MOD_SETTINGS["function"],$this->MOD_MENU["function"])));
-//		 $this->content.=$this->doc->divider(5);
-//
-//		 // Render content:
-//		 $this->moduleContent();
-//
-//
-//		 // ShortCut
-//		 if ($BE_USER->mayMakeShortcut())   {
-//			$this->content.=$this->doc->spacer(20).$this->doc->section("",$this->doc->makeShortcutIcon("id",implode(",",array_keys($this->MOD_MENU)),$this->MCONF["name"]));
-//		 }
-//
-//		 $this->content.=$this->doc->spacer(10);
-//	  } else {
-//			// If no access or if ID == zero
-//
-//		 $this->doc = t3lib_div::makeInstance("mediumDoc");
-//		 $this->doc->backPath = $BACK_PATH;
-//
-//		 $this->content.=$this->doc->startPage($LANG->getLL("title"));
-//		 $this->content.=$this->doc->header($LANG->getLL("title"));
-//		 $this->content.=$this->doc->spacer(5);
-//		 $this->content.=$this->doc->spacer(10);
 //	  }
+	}
+
+	/**
+	 * get doc header buttons
+	 *
+	 * @global Language $LANG
+	 * @return array
+	 */
+	protected function getDocHeaderButtons() {
+		global $LANG;
+
+		// reload icon
+		$reloadLanguage = $LANG->sL('LLL:EXT:lang/locallang_core.php:labels.reload', TRUE);
+		$spriteIcon = t3lib_iconWorks::getSpriteIcon('actions-system-refresh');
+		$markers['reload'] = '<a href="' . $GLOBALS['_SERVER']['REQUEST_URI'] . '" title="' . $reloadLanguage . '">' . $spriteIcon . '</a>';
+
+		// shortcut icon
+		$markers['shortcut'] = '';
+		if ($GLOBALS['BE_USER']->mayMakeShortcut())	{
+			$markers['shortcut'] = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->MOD_MENU)), 'web_list');
+		}
+
+		return $markers;
 	}
 
 	/**
@@ -274,8 +275,7 @@ EOF;
 	/**
 	 * Prints out the module HTML
 	 */
-	function printContent() {
-		$this->content .= $this->doc->endPage();
+	public function printContent() {
 		echo $this->content;
 	}
 
@@ -1142,11 +1142,9 @@ EOF;
 }
 
 
-
 if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]);
 }
-
 
 
 try {
