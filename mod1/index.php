@@ -83,6 +83,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		// Get page info
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+
 	}
 
 	/**
@@ -113,24 +114,31 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	function main() {
 		//global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 		global $LANG;
+			
+			$this->loadJavascript();
 
-		$this->loadJavascript();
+			$docHeaderButtons = $this->getDocHeaderButtons();
 
-		$docHeaderButtons = $this->getDocHeaderButtons();
+			$markers = array();
+			$markers['CSH'] = '';
+			$markers['FUNC_MENU'] = '';
+			
+			// Access check!
+			if ($this->id)   {
+				$markers['CONTENT'] = '<div id="t3-newsletter-application"></div>';
+			}
+			else {
+				$markers['CONTENT'] = $LANG->getLL('select_page');
+			}
 
-		$markers = array();
-		$markers['CSH'] = '';
-		$markers['FUNC_MENU'] = '';
-		$markers['CONTENT'] = '<div id="t3-testing"></div>';
+			// Configures the page
+			$this->doc->setModuleTemplate('EXT:newsletter/Resources/Private/Templates/index.html');
+			$this->doc->getContextMenuCode(); // Setting up the context sensitive menu:
 
-		// Configures the page
-		$this->doc->setModuleTemplate('EXT:newsletter/Resources/Private/Templates/index.html');
-		$this->doc->getContextMenuCode(); // Setting up the context sensitive menu:
-
-		// Generates the HTML
-		$this->content = $this->doc->startPage($LANG->getLL('title'));
-		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
-		$this->content .= $this->doc->endPage();
+			// Generates the HTML
+			$this->content = $this->doc->startPage($LANG->getLL('title'));
+			$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
+			$this->content .= $this->doc->endPage();
 
 //			// JavaScript
 //		 $this->doc->JScode = '
@@ -1131,7 +1139,6 @@ EOF;
 //		  return $out;
 	}
 
-
 	function viewSums ($sum, $total) {
 //		  if ($total < 1) {
 //			  return "</td><td align=\"right\"><b>$sum</b>";
@@ -1141,12 +1148,12 @@ EOF;
 	}
 }
 
-
+// Potential XCLASS
 if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]);
 }
 
-
+// Launch the application
 try {
 	// Make instance:
 	/* @var $SOBE tx_newsletter_module1 */
@@ -1154,14 +1161,9 @@ try {
 	$SOBE->init();
 	$SOBE->main();
 	$SOBE->printContent();
-
-	// Include files?
-	#foreach($SOBE->include_once as $INC_FILE)   include_once($INC_FILE);
-
 }
 catch(Exception $e) {
 	print $e->getMessage();
-
 }
 
 ?>

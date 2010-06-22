@@ -4,7 +4,7 @@ TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
-			renderTo: 't3-testing',
+			renderTo: 't3-newsletter-application',
 			height: 700,
 			items: [
 			{

@@ -105,6 +105,7 @@
 			<label index="has_opened_link">Has activated this link</label>
 			<label index="confirm_text">Are you sure you will send the mails now?</label>
 			<label index="toggleAll">Check all</label>
+			<label index="select_page">No content can be displayed. Please, select a page from the tree.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Nyhedsbrev</label>
@@ -339,7 +340,9 @@
 			<label index="delete">Cancella</label>
 			<label index="delete_old_stats">Cancella le vecchie statistiche</label>
 		</languageKey>
-		<languageKey index="fr"></languageKey>
+		<languageKey index="fr">
+			<label index="select_page">Veuillez sélectionner une page.</label>
+		</languageKey>
 		<languageKey index="es"></languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Nieuwsmodule</label>
