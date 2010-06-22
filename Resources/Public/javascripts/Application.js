@@ -68,7 +68,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	 * Sets the blank image URL
 	 */
 	_configureExtJs: function() {
-		Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+//		Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
 	},
 
 	/**
