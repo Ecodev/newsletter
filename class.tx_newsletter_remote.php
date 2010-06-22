@@ -40,7 +40,7 @@ class tx_newsletter_remote {
 	 * @param	t3lib_tceform	$fobj: reference to calling TCEforms object
 	 * @return	string	The HTML for the form field
 	 */
-	public function concatenateStrings($string1, $string2) {
+	public function conateStrings($string1, $string2) {
 		return $string1 . ' ' . $string2;
 	}
 
@@ -62,6 +62,15 @@ class tx_newsletter_remote {
 
 		);
 		return $datasource;
+	}
+	
+	/**
+	 * Enter description here ...
+	 * @formHandler
+	 */
+	public function getFormData()	{
+	
+		return "ads";
 	}
 }
 

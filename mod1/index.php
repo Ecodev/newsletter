@@ -229,17 +229,18 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
 
-//		for (var api in Ext.app.ExtDirectAPI) {
-//			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
-//		}
-//
-//		TYPO3.Newsletter.Remote.testMe("Hellooo", "World!", function(result) {
-//			if (typeof console == "object") {
-//				console.log(result);
-//			} else {
-//				alert(result);
-//			}
-//		});
+		// Enable our remote calls
+		for (var api in Ext.app.ExtDirectAPI) {
+			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
+		}
+
+		TYPO3.Newsletter.Remote.testMe("Hellooo", "World!", function(result) {
+			if (typeof console == "object") {
+				console.log(result);
+			} else {
+				alert(result);
+			}
+		});
 
 EOF;
 
