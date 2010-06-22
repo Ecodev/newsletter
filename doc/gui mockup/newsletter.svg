@@ -405,11 +405,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.14225965"
-     inkscape:cx="3276.9813"
-     inkscape:cy="2087.1541"
+     inkscape:zoom="0.2845193"
+     inkscape:cx="3006.3203"
+     inkscape:cy="2322.0533"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1436"
      inkscape:window-height="856"
@@ -438,11 +438,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       width="1366"
-       height="768"
-       id="image3175"
+       y="-479.25369"
        x="-122.99541"
-       y="-479.25369" />
+       id="image3175"
+       height="768"
+       width="1366" />
     <rect
        style="fill:#f8f8f8;fill-opacity:1;stroke:none"
        id="rect5478"
@@ -467,11 +467,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       y="422.74625"
-       x="-122.99541"
-       id="image3179"
+       width="1366"
        height="768"
-       width="1366" />
+       id="image3179"
+       x="-122.99541"
+       y="422.74625" />
     <rect
        inkscape:export-ydpi="71.772705"
        inkscape:export-xdpi="71.772705"
@@ -496,11 +496,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       width="1366"
-       height="768"
-       id="image3181"
+       y="1302.7462"
        x="-122.99541"
-       y="1302.7462" />
+       id="image3181"
+       height="768"
+       width="1366" />
     <rect
        style="fill:#f8f8f8;fill-opacity:1;stroke:none"
        id="rect4768"
@@ -525,11 +525,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       y="-481.25372"
-       x="-1942.9954"
-       id="image3183"
+       width="1366"
        height="768"
-       width="1366" />
+       id="image3183"
+       x="-1942.9954"
+       y="-481.25372" />
     <rect
        inkscape:export-ydpi="71.772705"
        inkscape:export-xdpi="71.772705"
@@ -575,11 +575,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       width="1366"
-       height="768"
-       id="image3185"
+       y="418.74634"
        x="-1924.9951"
-       y="418.74634" />
+       id="image3185"
+       height="768"
+       width="1366" />
     <rect
        style="fill:#cacaca;fill-opacity:1;stroke:none"
        id="rect3242"
@@ -592,11 +592,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background_usertools.png"
        xlink:href="background_usertools.png"
-       width="1366"
-       height="768"
-       id="image3250"
+       y="-473.71771"
        x="1612.444"
-       y="-473.71771" />
+       id="image3250"
+       height="768"
+       width="1366" />
     <rect
        ry="3.2381034"
        rx="3.2381034"
@@ -609,11 +609,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/background.png"
        xlink:href="background.png"
-       y="1318.7463"
-       x="-1924.9951"
-       id="image3736"
+       width="1366"
        height="768"
-       width="1366" />
+       id="image3736"
+       x="-1924.9951"
+       y="1318.7463" />
     <rect
        ry="3.2381034"
        rx="3.2381034"
@@ -959,30 +959,30 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/stats-general.png"
        xlink:href="stats-general.png"
-       width="322"
-       height="188"
-       id="image3245"
+       y="-227.21353"
        x="406.88763"
-       y="-227.21353" />
+       id="image3245"
+       height="188"
+       width="322" />
     <g
        id="g3430"
        transform="translate(323.26345,-277.56293)">
       <image
          sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/stats-general-graph.png"
          xlink:href="stats-general-graph.png"
-         y="291.86218"
-         x="91.5"
-         id="image3355"
+         width="689"
          height="161"
-         width="689" />
+         id="image3355"
+         x="91.5"
+         y="291.86218" />
       <image
          sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/stats-general-graph-header.png"
          xlink:href="stats-general-graph-header.png"
-         y="259.36218"
-         x="91.5"
-         id="image3426"
+         width="167"
          height="32"
-         width="167" />
+         id="image3426"
+         x="91.5"
+         y="259.36218" />
     </g>
     <rect
        ry="3.2381034"
@@ -1144,12 +1144,12 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/stats-click-graph.png"
        xlink:href="stats-click-graph.png"
-       width="690"
-       height="172"
-       id="image4462"
-       x="405.92853"
+       style="fill:#e2dbdb"
        y="837.84332"
-       style="fill:#e2dbdb" />
+       x="405.92853"
+       id="image4462"
+       height="172"
+       width="690" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect4466"
@@ -1201,11 +1201,11 @@
       <image
          sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         width="16"
-         height="16"
-         id="image4754"
+         y="208.32672"
          x="862.51239"
-         y="208.32672" />
+         id="image4754"
+         height="16"
+         width="16" />
       <text
          xml:space="preserve"
          style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1418,11 +1418,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/stats-click-graph.png"
        xlink:href="stats-click-graph.png"
-       width="690"
-       height="172"
-       id="image4853"
+       y="1722.9059"
        x="396.66852"
-       y="1722.9059" />
+       id="image4853"
+       height="172"
+       width="690" />
     <rect
        ry="3.2381032"
        rx="3.2381032"
@@ -1470,11 +1470,11 @@
       <image
          sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         y="208.32672"
-         x="862.51239"
-         id="image4883"
+         width="16"
          height="16"
-         width="16" />
+         id="image4883"
+         x="862.51239"
+         y="208.32672" />
       <text
          sodipodi:linespacing="125%"
          id="text4885"
@@ -1503,11 +1503,11 @@
       <image
          sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/chart_bar.png"
          xlink:href="chart_bar.png"
-         y="208.32672"
-         x="862.51239"
-         id="image4893"
+         width="16"
          height="16"
-         width="16" />
+         id="image4893"
+         x="862.51239"
+         y="208.32672" />
       <text
          sodipodi:linespacing="125%"
          id="text4895"
@@ -1533,11 +1533,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/eye.png"
        xlink:href="eye.png"
-       width="16"
-       height="16"
-       id="image4968"
+       y="1572.2015"
        x="781.862"
-       y="1572.2015" />
+       id="image4968"
+       height="16"
+       width="16" />
     <path
        sodipodi:nodetypes="ccccccc"
        id="path5022"
@@ -1556,43 +1556,43 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/eye.png"
        xlink:href="eye.png"
-       y="1589.1721"
-       x="781.862"
-       id="image5026"
+       width="16"
        height="16"
-       width="16" />
+       id="image5026"
+       x="781.862"
+       y="1589.1721" />
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/eye.png"
        xlink:href="eye.png"
-       width="16"
-       height="16"
-       id="image5028"
+       y="1606.1426"
        x="781.862"
-       y="1606.1426" />
+       id="image5028"
+       height="16"
+       width="16" />
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/bullet_toggle_minus.png"
        xlink:href="bullet_toggle_minus.png"
-       width="16"
-       height="16"
+       y="1604.0214"
+       x="397.21674"
        id="image5139"
-       x="397.21674"
-       y="1604.0214" />
-    <image
-       sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
-       xlink:href="bullet_toggle_plus.png"
-       width="16"
-       height="16"
-       id="image5228"
-       x="397.21674"
-       y="1589.1721" />
-    <image
-       sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
-       xlink:href="bullet_toggle_plus.png"
-       y="1573.6157"
-       x="397.21674"
-       id="image5232"
        height="16"
        width="16" />
+    <image
+       sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
+       xlink:href="bullet_toggle_plus.png"
+       y="1589.1721"
+       x="397.21674"
+       id="image5228"
+       height="16"
+       width="16" />
+    <image
+       sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/bullet_toggle_plus.png"
+       xlink:href="bullet_toggle_plus.png"
+       width="16"
+       height="16"
+       id="image5232"
+       x="397.21674"
+       y="1573.6157" />
     <text
        id="text5234"
        y="1651.2343"
@@ -1672,11 +1672,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/diagnostic.png"
        xlink:href="diagnostic.png"
-       y="49.009399"
-       x="-1404.7153"
-       id="image3290"
+       width="772"
        height="274"
-       width="772" />
+       id="image3290"
+       x="-1404.7153"
+       y="49.009399" />
     <text
        sodipodi:linespacing="125%"
        id="text3294"
@@ -1703,11 +1703,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/diagnostic-linkcheck.png"
        xlink:href="diagnostic-linkcheck.png"
-       y="-99.059334"
-       x="-1401.6472"
-       id="image3389"
+       width="550"
        height="62"
-       width="550" />
+       id="image3389"
+       x="-1401.6472"
+       y="-99.059334" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1761,11 +1761,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/general-stats.png"
        xlink:href="general-stats.png"
-       width="940"
-       height="485"
-       id="image3718"
+       y="-315.12637"
        x="1828.0731"
-       y="-315.12637" />
+       id="image3718"
+       height="485"
+       width="940" />
     <rect
        style="fill:#cacaca;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:1"
        id="rect3250"
@@ -2344,11 +2344,11 @@
     <image
        sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/piechart.png"
        xlink:href="piechart.png"
-       width="173.80385"
-       height="129.03619"
-       id="image3256"
+       y="-205.33974"
        x="572.35052"
-       y="-205.33974" />
+       id="image3256"
+       height="129.03619"
+       width="173.80385" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.97962761;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect4702-2"
@@ -2903,12 +2903,13 @@
        id="path3116-9-7-9-0"
        sodipodi:nodetypes="ccccccc" />
     <image
-       y="1747.11"
-       x="-1395.4437"
-       id="image4322"
-       height="144"
+       sodipodi:absref="/Users/fudriot/Sites/t3ext/newsletter/doc/gui mockup/calendar.png"
+       xlink:href="calendar.png"
        width="260"
-       xlink:href="file:///var/www/typo3/typo3conf/ext/newsletter/doc/gui%20mockup/calendar.png" />
+       height="144"
+       id="image4322"
+       x="-1395.4437"
+       y="1747.11" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
