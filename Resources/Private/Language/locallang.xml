@@ -105,7 +105,12 @@
 			<label index="has_opened_link">Has activated this link</label>
 			<label index="confirm_text">Are you sure you will send the mails now?</label>
 			<label index="toggleAll">Check all</label>
+
+			<!-- Labels added folowing newsletter refactoring -->
 			<label index="select_page">No content can be displayed. Please, select a page from the tree.</label>
+			<label index="newsletter_button">Newsletter</label>
+			<label index="statistics_button">Statistics</label>
+
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Nyhedsbrev</label>
@@ -220,7 +225,7 @@
 			<label index="toggleAll">Vælg alle</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="title">TC Newsletter</label>
+			<label index="title">Newsletter</label>
 			<label index="status">Status</label>
 			<label index="stats">Statistiken</label>
 			<label index="reciep">Empfänger</label>

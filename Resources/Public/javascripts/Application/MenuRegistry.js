@@ -21,29 +21,15 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 	 * @param {TYPO3.Newsletter.UserInterface.RootlineMenu.Button} button the button being released
 	 * Called if a button is unpressed.
 	 */
-	
 	items: {
 		mainMenu: [{
 			// tabMargin: 50,
-			tabCls: 'F3-TYPO3-UserInterface-SectionMenu-ContentTab',
+			tabCls: 'TYPO3-UserInterface-SectionMenu-ContentTab',
 			title: 'Content',
 			itemId: 'content'
 		}, {
 			title: 'Management',
 			itemId: 'management'
-		}, {
-			title: 'Report',
-			itemId: 'report'
-		}, {
-			title: 'Layout',
-			itemId: 'layout'
-		}, {
-			title: 'System',
-			itemId: 'system'
-		}, {
-			tabCls: 'F3-TYPO3-UserInterface-SectionMenu-DashboardTab',
-			title: 'Dashboard',
-			itemId: 'dashboard'
 		}]
 	},
 

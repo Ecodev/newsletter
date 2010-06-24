@@ -30,7 +30,6 @@
  */
 
 // DEFAULT initialization of a module [BEGIN]
-$LANG->includeLLFile("EXT:newsletter/Resources/Private/Language/locallang.xml");
 $BE_USER->modAccess($MCONF,1);   // This checks permissions and exits if the users has no permission for entry.
 
 class tx_newsletter_module1 extends t3lib_SCbase {
@@ -58,6 +57,13 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	 */
 	public $javascriptPath;
 
+	/**
+	 * the relative stylesheet path
+	 *
+	 * @var string
+	 */
+	public $stylesheetsPath;
+
 
 	/**
 	 * the page info
@@ -71,19 +77,23 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	 * Initialize the module
 	 */
 	function init() {
+		global $LANG;
 		parent::init();
 
+		// Language inclusion
+		$LANG->includeLLFile("EXT:newsletter/Resources/Private/Language/locallang.xml");
+		
 		// Initilize properties
 		$this->doc = t3lib_div::makeInstance('template');
 		$this->doc->backPath = $BACK_PATH;
 		$this->pageRendererObject = $this->doc->getPageRenderer();
 
-		// Defines javascript resource file
+		// Defines CSS + Javascript resource file
 		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/javascripts/';
+		$this->stylesheetsPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/stylesheets/';
 
 		// Get page info
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
-
 	}
 
 	/**
@@ -115,30 +125,32 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		//global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
 		global $LANG;
 			
-			$this->loadJavascript();
+		$this->loadStylesheets();
+		$this->loadJavascript();
 
-			$docHeaderButtons = $this->getDocHeaderButtons();
+		$docHeaderButtons = $this->getDocHeaderButtons();
 
-			$markers = array();
-			$markers['CSH'] = '';
-			$markers['FUNC_MENU'] = '';
-			
-			// Access check!
-			if ($this->id)   {
-				$markers['CONTENT'] = '<div id="t3-newsletter-application"></div>';
-			}
-			else {
-				$markers['CONTENT'] = $LANG->getLL('select_page');
-			}
+		$markers = array();
+		$markers['CSH'] = '';
+		$markers['FUNC_MENU'] = '';
 
-			// Configures the page
-			$this->doc->setModuleTemplate('EXT:newsletter/Resources/Private/Templates/index.html');
-			$this->doc->getContextMenuCode(); // Setting up the context sensitive menu:
+		// Access check!
+		if ($this->id)   {
+			$markers['FUNC_MENU'] = '<div id="t3-newsletter-menu"></div>';
+			$markers['CONTENT'] = '<div id="t3-newsletter-application"></div>';
+		}
+		else {
+			$markers['CONTENT'] = $LANG->getLL('select_page');
+		}
 
-			// Generates the HTML
-			$this->content = $this->doc->startPage($LANG->getLL('title'));
-			$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
-			$this->content .= $this->doc->endPage();
+		// Configures the page
+		$this->doc->setModuleTemplate('EXT:newsletter/Resources/Private/Templates/index.html');
+		$this->doc->getContextMenuCode(); // Setting up the context sensitive menu:
+
+		// Generates the HTML
+		$this->content = $this->doc->startPage($LANG->getLL('title'));
+		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
+		$this->content .= $this->doc->endPage();
 
 //			// JavaScript
 //		 $this->doc->JScode = '
@@ -156,13 +168,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 //	 				}
 //   				}
 //			</script>
-//		 ';
-//		 $this->doc->postCode='
-//			<script language="javascript" type="text/javascript">
-//			   script_ended = 1;
-//			   if (top.fsMod) top.fsMod.recentIds["web"] = '.intval($this->id).';
-//			</script>
-//		 ';
 //		 // Filter out functions defined as disallowed in the user-ts.
 //		 if (is_array($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'])) {
 //			foreach ($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'] as $func => $disallowed) {
@@ -201,6 +206,36 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	}
 
 	/**
+	 * Return labels in the form of an array
+	 *
+	 * @global Language $LANG
+	 * @global array $LANG_LANG
+	 * @return array
+	 */
+	protected function getLabels() {
+		global $LANG;
+		global $LOCAL_LANG;
+
+		if (isset($LOCAL_LANG[$LANG->lang]) && !empty($LOCAL_LANG[$LANG->lang])) {
+			$markers = $LOCAL_LANG[$LANG->lang];
+			//$markers = $LANG->includeLLFile('EXT:devlog/Resources/Private/Language/locallang.xml', 0);
+		}
+		else {
+			throw new tx_devlog_exception('No language file has been found', 1276451853);
+		}
+		return $markers;
+	}
+
+	/**
+	 * Load Javascript files onto the BE Module
+	 *
+	 * @return void
+	 */
+	protected function loadStylesheets() {
+		$this->pageRendererObject->addCssFile($this->stylesheetsPath . 'newsletter.css');
+	}
+
+	/**
 	 * Load Javascript files onto the BE Module
 	 *
 	 * @return void
@@ -216,20 +251,37 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		// Defines what files should be loaded and loads them
 		$files = array();
 		$files[] = 'Utils.js';
+
+		// Application
 		$files[] = 'Application.js';
+		$files[] = 'Application/MenuRegistry.js';
 		$files[] = 'Application/AbstractBootstrap.js';
+
+		// Store
 //		$files[] = 'Store/Bootstrap.js';
 //		$files[] = 'Store/LogStore.js';
+
+		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';
 		$files[] = 'UserInterface/Layout.js';
+		$files[] = 'UserInterface/TopBar.js';
+		$files[] = 'UserInterface/SectionMenu.js';
 		$files[] = 'UserInterface/FormNewsletter.js';
 		$files[] = 'UserInterface/TestingPanel.js';
 		$files[] = 'UserInterface/TestingButton.js';
+
+
+		// Statistics
+		
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
 		}
 
-		// FIX ME: temporary paramter for development only
+
+		// label / preference datasoure
+		$labels = json_encode($this->getLabels());
+
+		// FIX ME: temporary parameter for development only
 		$debugParameter = '&no_cache=1';
 		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter' . $debugParameter, 'text/javascript', FALSE);
 
@@ -237,6 +289,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			// Defines onready Javascript
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
+		
+		Ext.ns("TYPO3.Newsletter");
+		TYPO3.Newsletter.Language = $labels;
 
 		// Enable our remote calls
 		for (var api in Ext.app.ExtDirectAPI) {
@@ -250,7 +305,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				alert(result);
 			}
 		});
-
 EOF;
 
 		$this->pageRendererObject->addExtOnReadyCode(PHP_EOL . implode("\n", $this->readyJavascript) . PHP_EOL);

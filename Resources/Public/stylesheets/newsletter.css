@@ -1,0 +1,17 @@
+/* - - - - - - - - - - - - - - - - - - - - -
+Newsletter style
+
+$Id$
+- - - - - - - - - - - - - - - - - - - - - */
+
+#t3-newsletter-menu .x-btn {
+	padding-right: 20px;
+}
+
+.t3-newsletter-button-newsletter {
+	background-image: url(../images/icons/ext_icon.png) !important;
+}
+
+.t3-newsletter-button-statistics {
+	background-image: url(../images/icons/chart_bar.png) !important;
+}
