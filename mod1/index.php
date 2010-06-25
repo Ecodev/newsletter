@@ -270,6 +270,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'UserInterface/TestingPanel.js';
 		$files[] = 'UserInterface/TestingButton.js';
 
+		// Newsletter Planner
+		$files[] = 'Planner/Bootstrap.js';
+		
 		// Statistics
 		$files[] = 'Statistics/Bootstrap.js';
 		

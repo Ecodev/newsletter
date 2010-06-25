@@ -6,25 +6,29 @@ TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.A
 //			html: 'Management'
 //		});
 
-		this.handleNavigationToken(/statistics/, function(e) {
-
-			if (!TYPO3.Newsletter.UserInterface.mainContainer.formNewsletter) {
-				var element = Ext.ComponentMgr.create({
-//					xtype: 'TYPO3.Newsletter.UserInterface.StatisticsPanel',
-					xtype: 'panel',
-					title: 'There is more to come',
-					ref: 'statisticsPanel'
+		/**
+		 * Handle a navigation token.
+		 *
+		 * @param {RegExp} regexp the callback is called if the regexp matches
+		 * @param {function} callback Callback to be called
+		 * @param scope
+		 */
+		this.handleNavigationToken(/planner/, function(e) {
+			var component = TYPO3.Newsletter.UserInterface.mainContainer.formNewsletter || null;
+			if (!component) {
+				component = Ext.ComponentMgr.create({
+					xtype: 'TYPO3.Newsletter.UserInterface.FormNewsletter',
+					ref: 'formNewsletter'
 				});
 
-				TYPO3.Newsletter.UserInterface.mainContainer.add(element);
+				TYPO3.Newsletter.UserInterface.mainContainer.add(component);
 				TYPO3.Newsletter.UserInterface.mainContainer.doLayout();
 			}
-			else {
-				TYPO3.Newsletter.UserInterface.mainContainer.formNewsletter.setVisible(true);
-			}
 
-//			TYPO3.Newsletter.UserInterface.Bootstrap.initMainContainer();
-//			TYPO3.Newsletter.UserInterface.Layout.sectionMenu.setActiveTab('management');
+			Ext.iterate(TYPO3.Newsletter.UserInterface.mainContainer.items.items, function (element) {
+				element.setVisible(false)
+			});
+			component.setVisible(true);
 		});
 
 		// TODO refactor to helper method

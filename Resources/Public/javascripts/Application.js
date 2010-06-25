@@ -138,7 +138,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	 */
 	_initStateDefaultValue : function() {
 		if (!Ext.state.Manager.get('token')) {
-			Ext.state.Manager.set('token', 'newsletter');
+			Ext.state.Manager.set('token', 'planner');
 		}
 	}
 
