@@ -108,6 +108,8 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.navigate', function(token) {
 			var matches = token && token.match(regexp);
 			if (matches) {
+				// @todo: understand what is the difference with the 2 lines bellow as it seems to be both working solution.
+				// callback.call(this, matches); 
 				callback.createDelegate(this, matches).call();
 			}
 		}, scope);

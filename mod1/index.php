@@ -270,8 +270,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'UserInterface/TestingPanel.js';
 		$files[] = 'UserInterface/TestingButton.js';
 
-
 		// Statistics
+		$files[] = 'Statistics/Bootstrap.js';
 		
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);

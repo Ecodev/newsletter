@@ -19,6 +19,13 @@ TYPO3.Newsletter.UserInterface.TopBar = Ext.extend(Ext.Panel, {
 					xtype: 'button',
 					text: TYPO3.Newsletter.Language.newsletter_button,
 					iconCls: 't3-newsletter-button-newsletter',
+					handler: function(){
+//						console.log(TYPO3.Newsletter.UserInterface.Bootstrap);
+//						TYPO3.Newsletter.UserInterface.Bootstrap.initMainContainer();
+						//TYPO3.Newsletter.UserInterface.mainContainer();
+						Ext.state.Manager.set('token', 'newsletter');
+						Ext.History.add('newsletter');
+					},
 					flex: 0
 				},
 				{
@@ -26,6 +33,14 @@ TYPO3.Newsletter.UserInterface.TopBar = Ext.extend(Ext.Panel, {
 					text: TYPO3.Newsletter.Language.statistics_button,
 					iconCls: 't3-newsletter-button-statistics',
 					flex: 0,
+					handler: function(){
+//						console.log(TYPO3.Newsletter.UserInterface.Bootstrap);
+//						TYPO3.Newsletter.UserInterface.Bootstrap.initMainContainer();
+						//TYPO3.Newsletter.UserInterface.mainContainer();
+
+						Ext.state.Manager.set('token', 'statistics');
+						Ext.History.add('statistics');
+					}
 				}
 //				{
 //					xtype: 'box',

@@ -30,10 +30,12 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	 * This method is called automatically.
 	 */
 	bootstrap: function() {
-		this._configureExtJs();
-//		this._initializeExtDirect();
+		//this._configureExtJs();
+		//this._initializeExtDirect();
 		this._registerEventDebugging();
 		this._invokeBootstrappers();
+		this._initStateProvider();
+		this._initStateDefaultValue();
 
 		Ext.QuickTips.init();
 
@@ -54,25 +56,11 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	},
 
 
-	// pirvate
-	/**
-	 * Initialize Ext.Direct Provider
-	 */
-//	_initializeExtDirect: function() {
-//		Ext.app.ExtDirectAPI.enableBuffer = 100;
-//		Ext.Direct.addProvider(Ext.app.ExtDirectAPI);
-//	},
-
-	// private
-	/**
-	 * Sets the blank image URL
-	 */
-	_configureExtJs: function() {
-//		Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
-	},
-
 	/**
 	 * Invoke the registered bootstrappers.
+	 *
+	 * @access private
+	 * @return void
 	 */
 	_invokeBootstrappers: function() {
 		Ext.each(this.bootstrappers, function(bootstrapper) {
@@ -80,16 +68,32 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 		});
 	},
 
+	/**
+	 * Initialize History Manager
+	 *
+	 * @access private
+	 * @return void
+	 */
 	_initializeHistoryManager: function() {
 		Ext.History.on('change', function(token) {
 			this.fireEvent('TYPO3.Newsletter.Application.navigate', token);
 		}, this);
+		
 		// Handle initial token (on page load)
 		Ext.History.init(function(history) {
 			history.fireEvent('change', history.getToken());
 		}, this);
+
+		Ext.History.add(Ext.state.Manager.get('token'));
 	},
 
+
+	/**
+	 * Register Event Debugging
+	 *
+	 * @access private
+	 * @return void
+	 */
 	_registerEventDebugging: function() {
 		Ext.util.Observable.capture(
 			this,
@@ -99,6 +103,43 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 				}
 			}
 		);
+	},
+
+	/**
+	 * Initilize state provider
+	 *
+	 * @access private
+	 * @return void
+	 */
+	_initStateProvider : function() {
+		 // set days to be however long you think cookies should last
+		var days = 0;		// 0 = expires when browser closes
+		var date = null;
+		if(days){
+			date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			//exptime = "; expires=" + 'Sat, 26 Jun 2010 11:12:28 GMT';
+		} 
+		
+		// register provider with state manager.
+		Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
+			path: '/',
+			expires: date,
+			domain: null,
+			secure: false
+		}));
+	},
+
+	/**
+	 * Define state default value
+	 *
+	 * @access private
+	 * @return void
+	 */
+	_initStateDefaultValue : function() {
+		if (!Ext.state.Manager.get('token')) {
+			Ext.state.Manager.set('token', 'newsletter');
+		}
 	}
 
 });

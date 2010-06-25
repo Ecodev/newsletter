@@ -6,17 +6,9 @@ TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 		var config = {
 			renderTo: 't3-newsletter-application',
 			height: 700,
-			items: [
-//				{
-//				xtype: 'TYPO3.Devlog.UserInterface.SectionMenu',
-//				ref: 'sectionMenu',
-//				flex: 0
-//			},
-			{
-				xtype: 'TYPO3.Newsletter.UserInterface.FormNewsletter',
-				ref: 'formNewsletter'
-			},
-			]
+			// items are set dynamically through method handleNavigationToken() located in every bootstrapper
+			// this method is called whenever event TYPO3.Newsletter.Application.navigate is fired (at least once when application is loaded)
+			items: []
 		};
 		Ext.apply(this, config);
 		TYPO3.Newsletter.UserInterface.Layout.superclass.initComponent.call(this);
