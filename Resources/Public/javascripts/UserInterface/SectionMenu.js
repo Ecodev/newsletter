@@ -1,74 +1,54 @@
-Ext.ns("TYPO3.Newsletter.UserInterface");
+Ext.ns('TYPO3.Newsletter.UserInterface');
 
-TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.TabPanel, {
+TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
+
 	initComponent: function() {
 		var config = {
 			renderTo: 't3-newsletter-menu',
+//			title: 'asdf',
+			layout: 'hbox',
+			width: 300,
+//			layoutConfig: {
+//				padding: '5px',
+//				width: '200px'
+//			},
 			border: false,
-			style: {
-				width: '300px',
-				marginBottom: '10px'
-	        },
-			bodyStyle: {
-				color: 'red',
-				backgroundCol: '10px',
-				marginBottom: '10px',
-	        },
-
-			cls: 'TYPO3-Newsletter-UserInterface-SectionMenu',
+			bodyStyle: 'background-color: #DADADA',
 			items: this._getSectionMenuItems()
-//			items: [
-//				{
-//					xtype: 'button',
-//					text: 'asdf'
-//				}
-//			]
 		};
+		console.log(this._getSectionMenuItems());
 		Ext.apply(this, config);
 		TYPO3.Newsletter.UserInterface.SectionMenu.superclass.initComponent.call(this);
-
-//		this.on('tabchange', function(tabPanel, tab) {
-//			TYPO3.Application.fireEvent('TYPO3.Newsletter.UserInterface.SectionMenu.activated', tab.itemId);
-//		});
 	},
 
-//	getBubbleTarget: function() {
-//		return TYPO3.Application.MenuRegistry;
-//	},
-
+	/**
+	 * Returns the section menu
+	 *
+	 * @access private
+	 * @return array
+	 */
 	_getSectionMenuItems: function() {
 		var modules = [];
-		// TODO unset children properties and use only first level of array
-		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
-			console.log(menuItem);
-			modules.push({
-//				xtype: 'button',
-//				text: 'asdf',
 
-				xtype: 'container',
-				layout: 'vbox',
-				layoutConfig: {
-					align: 'stretch'
-				},
-				itemId: menuItem.itemId,
-				title: menuItem.title,
-				tabCls: menuItem.tabCls,
-//				items: [{
-//					xtype: 'TYPO3.Newsletter.UserInterface.ModuleMenu',
-//					ref: 'moduleMenu',
-//					menuId: 'mainMenu',
+		var mainMenu = TYPO3.Newsletter.Application.MenuRegistry.getMainMenu();
+
+		Ext.each(mainMenu, function(menuItem) {
+			modules.push(
+				{
+					xtype: 'button',
 //					itemId: menuItem.itemId,
-//					menuConfig: menuItem.children,
-//					flex: 0
-//				}, {
-//					xtype: 'TYPO3.Newsletter.UserInterface.ContentArea',
-//					itemId: menuItem.itemId + '-contentArea',
-//					ref: 'contentArea',
-//					flex: 1
-//				}]
-			});
+					text: menuItem.text,
+					iconCls: 't3-newsletter-button-' + menuItem.itemId,
+					handler: function(){
+						var token = menuItem.itemId;
+						Ext.state.Manager.set('token', token);
+						Ext.History.add(token);
+					}
+				}
+			);
 		});
 		return modules;
 	}
+
 });
 Ext.reg('TYPO3.Newsletter.UserInterface.SectionMenu', TYPO3.Newsletter.UserInterface.SectionMenu);

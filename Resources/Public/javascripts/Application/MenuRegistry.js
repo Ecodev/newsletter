@@ -11,6 +11,25 @@ Ext.ns("TYPO3.Newsletter.Application");
 TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 
 	/**
+	 * Returns the main menu configuration
+	 *
+	 * @access public
+	 * @return array
+	 */
+	getMainMenu: function() {
+		return [
+			{
+				text: TYPO3.Newsletter.Language.newsletter_button,
+				itemId: 'planner'
+			},
+			{
+				text: TYPO3.Newsletter.Language.statistics_button,
+				itemId: 'statistics'
+			}
+		]
+	},
+
+	/**
 	 * @event TYPO3.Newsletter.UserInterface.RootlineMenu.buttonPressed
 	 * @param {TYPO3.Newsletter.UserInterface.RootlineMenu.Button} button the button being pressed
 	 * Called if a button is pressed.
@@ -21,19 +40,7 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 	 * @param {TYPO3.Newsletter.UserInterface.RootlineMenu.Button} button the button being released
 	 * Called if a button is unpressed.
 	 */
-	items: {
-		mainMenu: [{
-			// tabMargin: 50,
-			tabCls: 'TYPO3-UserInterface-SectionMenu-ContentTab',
-			title: 'Content',
-			itemId: 'content'
-		}, {
-			title: 'Management',
-			itemId: 'management'
-		}]
-	},
 
-	// private
 	// FIXME Only a quick implementation
 	addMenuItems: function(path, items) {
 		var menuName = path.shift();
