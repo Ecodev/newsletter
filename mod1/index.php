@@ -94,6 +94,11 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		// Get page info
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+
+		// Set default value for javascript purpose
+		if (!$this->id) {
+			$this->id = 0;
+		}
 	}
 
 	/**
@@ -258,8 +263,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'Application/AbstractBootstrap.js';
 
 		// Store
-//		$files[] = 'Store/Bootstrap.js';
-//		$files[] = 'Store/LogStore.js';
+		$files[] = 'Store/Bootstrap.js';
+		$files[] = 'Store/StatisticsStore.js';
 
 		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';
@@ -282,21 +287,23 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
 		}
 
+		// Add ExtJS API
+		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter', 'text/javascript', FALSE);
 
-		// label / preference datasoure
+		// label / preference datasource
 		$labels = json_encode($this->getLabels());
+		$parameters = json_encode(array('pid' => $this->id));
 
-		// FIX ME: temporary parameter for development only
-		$debugParameter = '&no_cache=1';
-		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter' . $debugParameter, 'text/javascript', FALSE);
-
-			// *********************************** //
-			// Defines onready Javascript
+		// *********************************** //
+		// Defines onready Javascript
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
 		
 		Ext.ns("TYPO3.Newsletter");
 		TYPO3.Newsletter.Language = $labels;
+
+		Ext.ns("TYPO3.Devlog.Data");
+		TYPO3.Devlog.Data.Parameters = $parameters;
 
 		// Enable our remote calls
 		for (var api in Ext.app.ExtDirectAPI) {

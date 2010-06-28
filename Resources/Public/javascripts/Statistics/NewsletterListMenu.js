@@ -12,28 +12,19 @@ Ext.ns("TYPO3.Newsletter.Statistics");
 TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 
 	initComponent: function() {
+		
 		var config = {
 			id: 'newsletterListMenu',
-			store: [
-			['AL', 'Alabama', 'The Heart of Dixie'],
-			['AK', 'Alaska', 'The Land of the Midnight Sun'],
-			['AZ', 'Arizona', 'The Grand Canyon State'],
-			['AR', 'Arkansas', 'The Natural State'],
-			['CA', 'California', 'The Golden State'],
-			['CO', 'Colorado', 'The Mountain State'],
-			['CT', 'Connecticut', 'The Constitution State'],
-			['DE', 'Delaware', 'The First State'],
-			['DC', 'District of Columbia', "The Nation's Capital"],
-			['FL', 'Florida', 'The Sunshine State'],
-			['GA', 'Georgia', 'The Peach State']
-			],
-			displayField:'state',
+			store: TYPO3.Newsletter.Store.ListOfNewsletters,
+			displayField: 'newsletter_formatted',
+			valueField: 'uid',
 			typeAhead: false,
+			width: 300,
 			mode: 'local',
 			forceSelection: true,
 			editable: false,
 			triggerAction: 'all',
-			selectOnFocus:true
+			selectOnFocus: true
 		};
 		Ext.apply(this, config);
 		TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
@@ -60,7 +51,10 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 * @return void
 	 */
 	onafterrender: function() {
-//		this.setValue();
+		
+//		if (TYPO3.Newsletter.Store.ListOfNewsletters.getAt(0).id) {
+//			this.setValue(TYPO3.Newsletter.Store.ListOfNewsletters.getAt(0).id);
+//		}
 	},
 
 	/**
@@ -75,7 +69,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 //		TYPO3.Devlog.LogStore.baseParams.limit = value;
 //		TYPO3.Devlog.UserInterface.container.gridPanel.pagebrowser.pageSize = value
 //		TYPO3.Devlog.LogStore.load();
-		console.log(123);
+		console.log(this.getValue());
 	}
 });
 

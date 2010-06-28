@@ -3,6 +3,9 @@
 // ExtDirect API
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
 
+# Register Ajax function
+$TYPO3_CONF_VARS['BE']['AJAX']['NewsletterController::getListOfNewsletter'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote->getListOfNewsletter';
+
 $tempFilePath = t3lib_extMgm::extPath('newsletter');
 $TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(
     $tempFilePath.'class.tx_newsletter_target_beusers.php',

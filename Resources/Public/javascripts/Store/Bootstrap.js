@@ -1,9 +1,16 @@
 Ext.ns("TYPO3.Newsletter.Store");
 
-// TODO: DOKU FOR TYPO3.Newsletter.Store.viewport;
-
+/**
+ * @class TYPO3.Newsletter.Store.Bootstrap
+ * @namespace TYPO3.Newsletter.Store
+ * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ *
+ * Bootrap store
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
-	initialize: function() { // TODO: Call like object lifecycle method in FLOW3!
+	initialize: function() {
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initStore, this);
 	},
 	initStore: function() {
@@ -11,9 +18,7 @@ TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.Ab
 			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
 		}
 
-		TYPO3.Newsletter.LogStore = TYPO3.Newsletter.initLogStore()
-//		TYPO3.Newsletter.LogStore.load();
-		console.log(TYPO3.Newsletter.LogStore.data);
+		TYPO3.Newsletter.Store.ListOfNewsletters = TYPO3.Newsletter.Store.initListOfNewsletters()
 
 //		TYPO3.Newsletter.LogStore2.doRequest();
 	}

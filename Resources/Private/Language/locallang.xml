@@ -113,6 +113,7 @@
 			<label index="overview_panel">Overview</label>
 			<label index="clickedlinks_panel">Clicked links</label>
 			<label index="sentemails_panel">Sent emails</label>
+			<label index="recipients">recipients</label>
 
 		</languageKey>
 		<languageKey index="dk" type="array">
