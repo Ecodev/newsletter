@@ -263,7 +263,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';
-		$files[] = 'UserInterface/Layout.js';
+		$files[] = 'UserInterface/ContentArea.js';
 		$files[] = 'UserInterface/SectionMenu.js';
 		$files[] = 'UserInterface/FormNewsletter.js';
 		$files[] = 'UserInterface/TestingPanel.js';

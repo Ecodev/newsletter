@@ -110,7 +110,7 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 			if (matches) {
 
 				// As a first step, hides every panel.
-				Ext.iterate(TYPO3.Newsletter.UserInterface.mainContainer.items.items, function (element) {
+				Ext.iterate(TYPO3.Newsletter.UserInterface.contentArea.items.items, function (element) {
 					element.setVisible(false)
 				});
 				

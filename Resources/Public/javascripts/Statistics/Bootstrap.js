@@ -23,15 +23,15 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 		 * @param scope
 		 */
 		this.handleNavigationToken(/statistics/, function(e) {
-			var component = TYPO3.Newsletter.UserInterface.mainContainer.statisticsPanel || null;
+			var component = TYPO3.Newsletter.UserInterface.contentArea.statisticsPanel || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
 					xtype: 'TYPO3.Newsletter.Statistics.ModuleContainer',
 					ref: 'moduleContainer'
 				});
 				
-				TYPO3.Newsletter.UserInterface.mainContainer.add(component);
-				TYPO3.Newsletter.UserInterface.mainContainer.doLayout();
+				TYPO3.Newsletter.UserInterface.contentArea.add(component);
+				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
 			}
 
 			// Shows up the latter panel

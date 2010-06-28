@@ -1,7 +1,7 @@
 Ext.ns("TYPO3.Newsletter.UserInterface");
 
 /**
- * @class TYPO3.Newsletter.UserInterface.Layout
+ * @class TYPO3.Newsletter.UserInterface.ContentArea
  * @namespace TYPO3.Newsletter.UserInterface
  * @extends Ext.Container
  *
@@ -9,7 +9,7 @@ Ext.ns("TYPO3.Newsletter.UserInterface");
  *
  * $Id$
  */
-TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
+TYPO3.Newsletter.UserInterface.ContentArea = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -20,6 +20,6 @@ TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 			items: []
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.UserInterface.Layout.superclass.initComponent.call(this);
+		TYPO3.Newsletter.UserInterface.ContentArea.superclass.initComponent.call(this);
 	}
 });
