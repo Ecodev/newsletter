@@ -1,15 +1,15 @@
-Ext.ns("TYPO3.Newsletter.Planer");
+Ext.ns("TYPO3.Newsletter.Planner");
 
 /**
- * @class TYPO3.Newsletter.Planer.Bootstrap
- * @namespace TYPO3.Newsletter.Planer
+ * @class TYPO3.Newsletter.Planner.Bootstrap
+ * @namespace TYPO3.Newsletter.Planner
  * @extends TYPO3.Newsletter.Application.AbstractBootstrap
  *
  * Bootrap module planner
  *
  * $Id$
  */
-TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
+TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
 //		this.addContentArea('management', 'F3-TYPO3-Management', {
 //			html: 'Management'
@@ -23,15 +23,15 @@ TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.A
 		 * @param scope
 		 */
 		this.handleNavigationToken(/planner/, function(e) {
-			var component = TYPO3.Newsletter.UserInterface.mainContainer.formNewsletter || null;
+			var component = TYPO3.Newsletter.UserInterface.contentArea.formNewsletter || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
 					xtype: 'TYPO3.Newsletter.UserInterface.FormNewsletter',
 					ref: 'formNewsletter'
 				});
 
-				TYPO3.Newsletter.UserInterface.mainContainer.add(component);
-				TYPO3.Newsletter.UserInterface.mainContainer.doLayout();
+				TYPO3.Newsletter.UserInterface.contentArea.add(component);
+				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
 			}
 			
 			// Shows up the latter panel
@@ -48,4 +48,4 @@ TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.A
 	}
 });
 
-TYPO3.Newsletter.Application.registerBootstrap(TYPO3.Newsletter.Planer.Bootstrap);
+TYPO3.Newsletter.Application.registerBootstrap(TYPO3.Newsletter.Planner.Bootstrap);
