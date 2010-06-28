@@ -14,9 +14,8 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 //			},
 			border: false,
 			bodyStyle: 'background-color: #DADADA',
-			items: this._getSectionMenuItems()
+			items: this._getItems()
 		};
-		console.log(this._getSectionMenuItems());
 		Ext.apply(this, config);
 		TYPO3.Newsletter.UserInterface.SectionMenu.superclass.initComponent.call(this);
 	},
@@ -27,11 +26,11 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 	 * @access private
 	 * @return array
 	 */
-	_getSectionMenuItems: function() {
+	_getItems: function() {
 		var modules = [];
 
+		// Get menus
 		var mainMenu = TYPO3.Newsletter.Application.MenuRegistry.getMainMenu();
-
 		Ext.each(mainMenu, function(menuItem) {
 			modules.push(
 				{
