@@ -17,10 +17,8 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 			var component = TYPO3.Newsletter.UserInterface.mainContainer.statisticsPanel || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
-//					xtype: 'TYPO3.Newsletter.UserInterface.StatisticsPanel',
-					xtype: 'panel',
-					title: 'There is more to come',
-					ref: 'statisticsPanel'
+					xtype: 'TYPO3.Newsletter.Statistics.ModuleContainer',
+					ref: 'moduleContainer'
 				});
 				
 				TYPO3.Newsletter.UserInterface.mainContainer.add(component);

@@ -15,3 +15,7 @@ $Id$
 .t3-newsletter-button-statistics {
 	background-image: url(../images/icons/chart_bar.png) !important;
 }
+
+#newsletterListMenu {
+	margin-bottom: 10px;
+}
