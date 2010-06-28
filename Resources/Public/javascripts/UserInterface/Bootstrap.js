@@ -1,5 +1,14 @@
 Ext.ns("TYPO3.Newsletter.UserInterface");
 
+/**
+ * @class TYPO3.Newsletter.UserInterface.Bootstrap
+ * @namespace TYPO3.Newsletter.UserInterface
+ * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ *
+ * Bootrap application
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.UserInterface.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initMainContainer, this);

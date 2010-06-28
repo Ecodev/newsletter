@@ -1,5 +1,14 @@
 Ext.ns("TYPO3.Newsletter.Planer");
 
+/**
+ * @class TYPO3.Newsletter.Planer.Bootstrap
+ * @namespace TYPO3.Newsletter.Planer
+ * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ *
+ * Bootrap module planner
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
 //		this.addContentArea('management', 'F3-TYPO3-Management', {

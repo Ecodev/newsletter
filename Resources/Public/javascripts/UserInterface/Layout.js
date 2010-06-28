@@ -1,5 +1,14 @@
 Ext.ns("TYPO3.Newsletter.UserInterface");
 
+/**
+ * @class TYPO3.Newsletter.UserInterface.Layout
+ * @namespace TYPO3.Newsletter.UserInterface
+ * @extends Ext.Container
+ *
+ * Class for the main content
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.UserInterface.Layout = Ext.extend(Ext.Container, {
 
 	initComponent: function() {

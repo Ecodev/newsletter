@@ -1,5 +1,14 @@
 Ext.ns('TYPO3.Newsletter.UserInterface');
 
+/**
+ * @class TYPO3.Newsletter.UserInterface.SectionMenu
+ * @namespace TYPO3.Newsletter.UserInterface
+ * @extends Ext.Panel
+ *
+ * Class for the main menu
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 
 	initComponent: function() {

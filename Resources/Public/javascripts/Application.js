@@ -15,6 +15,8 @@ Ext.ns("TYPO3.Newsletter");
  * <li>History Manager</li></ul>
  *
  * @singleton
+ *
+ * $Id$
  */
 TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	/**

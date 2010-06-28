@@ -1,5 +1,15 @@
 Ext.ns('TYPO3.Newsletter');
 
+/**
+ * @class TYPO3.Newsletter.Utils
+ * @namespace TYPO3.Newsletter
+ *
+ * Utility class
+ * 
+ * @singleton
+ *
+ * $Id$
+ */
 TYPO3.Newsletter.Utils = {};
 
 /**
