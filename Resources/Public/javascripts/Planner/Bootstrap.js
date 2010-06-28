@@ -24,10 +24,8 @@ TYPO3.Newsletter.Planer.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.A
 				TYPO3.Newsletter.UserInterface.mainContainer.add(component);
 				TYPO3.Newsletter.UserInterface.mainContainer.doLayout();
 			}
-
-			Ext.iterate(TYPO3.Newsletter.UserInterface.mainContainer.items.items, function (element) {
-				element.setVisible(false)
-			});
+			
+			// Shows up the latter panel
 			component.setVisible(true);
 		});
 

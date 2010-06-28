@@ -27,9 +27,7 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 				TYPO3.Newsletter.UserInterface.mainContainer.doLayout();
 			}
 
-			Ext.iterate(TYPO3.Newsletter.UserInterface.mainContainer.items.items, function (element) {
-				element.setVisible(false)
-			});
+			// Shows up the latter panel
 			component.setVisible(true);
 		});
 
