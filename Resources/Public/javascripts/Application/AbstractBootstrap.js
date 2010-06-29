@@ -26,9 +26,9 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 	 * @param {Array} path The path where the menu items should be added. The first element is the menu-ID, the other elements are the itemIDs of the menu items.
 	 * @param {Array} The items to add
 	 */
-//	addToMenu: function(path, items) {
-//		TYPO3.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
-//	},
+	addToMenu: function(path, items) {
+		TYPO3.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
+	},
 
 	/**
 	 * Add a module dialog to a menu. A module dialog will be displayed in the header, and pushes the content area down.

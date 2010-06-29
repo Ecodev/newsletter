@@ -11,23 +11,10 @@ Ext.ns("TYPO3.Newsletter.Application");
 TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 
 	/**
-	 * Returns the main menu configuration
+	 * Contains the menu architecture
 	 *
-	 * @access public
-	 * @return array
 	 */
-	getMainMenu: function() {
-		return [
-			{
-				text: TYPO3.Newsletter.Language.newsletter_button,
-				itemId: 'planner'
-			},
-			{
-				text: TYPO3.Newsletter.Language.statistics_button,
-				itemId: 'statistics'
-			}
-		]
-	}
+	items: {},
 
 	/**
 	 * @event TYPO3.Newsletter.UserInterface.RootlineMenu.buttonUnpressed
@@ -35,15 +22,15 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 	 * Called if a button is unpressed.
 	 */
 
-	// FIXME Only a quick implementation
-//	addMenuItems: function(path, items) {
-//		var menuName = path.shift();
-//		if (typeof this.items[menuName] == 'undefined') {
-//			this.items[menuName] = {};
-//		}
-//		if (path.length == 0) {
-//			this.items[menuName] = items;
-//		} else {
+	addMenuItems: function(path, items) {
+		var menuName = path.shift();
+		if (typeof this.items[menuName] == 'undefined') {
+			this.items[menuName] = {};
+		}
+		if (path.length == 0) {
+			this.items[menuName] = items;
+		}
+//		else {
 //			var menuItems = this.items[menuName], t;
 //			Ext.each(path, function(pathEntry) {
 //				var found = false;
@@ -66,5 +53,5 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 //
 //			menuItems.push.apply(menuItems, items);
 //		}
-//	}
+	}
 });

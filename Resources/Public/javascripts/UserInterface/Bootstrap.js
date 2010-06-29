@@ -11,6 +11,18 @@ Ext.ns("TYPO3.Newsletter.UserInterface");
  */
 TYPO3.Newsletter.UserInterface.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
+
+		this.addToMenu(['mainMenu'], [
+			{
+				text: TYPO3.Newsletter.Language.newsletter_button,
+				itemId: 'planner'
+			},
+			{
+				text: TYPO3.Newsletter.Language.statistics_button,
+				itemId: 'statistics'
+			}
+		]);
+		
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initContentArea, this);
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initSectionMenu, this);
 	},

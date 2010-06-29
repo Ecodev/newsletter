@@ -110,9 +110,9 @@
 			<label index="select_page">No content can be displayed. Please, select a page from the tree.</label>
 			<label index="newsletter_button">Newsletter</label>
 			<label index="statistics_button">Statistics</label>
-			<label index="overview_panel">Overview</label>
-			<label index="clickedlinks_panel">Clicked links</label>
-			<label index="sentemails_panel">Sent emails</label>
+			<label index="overview_tab">Overview</label>
+			<label index="clickedlinks_tab">Clicked links</label>
+			<label index="sentemails_tab">Sent emails</label>
 			<label index="recipients">recipients</label>
 
 		</languageKey>

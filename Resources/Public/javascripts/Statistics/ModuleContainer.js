@@ -19,8 +19,8 @@ TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 					ref: 'newsletterListMenu'
 				},
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.ModuleTabPanel',
-					ref: 'moduleTabPanel'
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel',
+					ref: 'statisticsPanel'
 				}
 			]
 		};

@@ -280,8 +280,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		// Statistics
 		$files[] = 'Statistics/Bootstrap.js';
 		$files[] = 'Statistics/ModuleContainer.js';
-		$files[] = 'Statistics/ModuleTabPanel.js';
+		$files[] = 'Statistics/StatisticsPanel.js';
 		$files[] = 'Statistics/NewsletterListMenu.js';
+		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
 		
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
@@ -290,21 +291,12 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		// Add ExtJS API
 		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter', 'text/javascript', FALSE);
 
-		// label / preference datasource
-		$labels = json_encode($this->getLabels());
-		$parameters = json_encode(array('pid' => $this->id));
 
 		// *********************************** //
 		// Defines onready Javascript
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
 		
-		Ext.ns("TYPO3.Newsletter");
-		TYPO3.Newsletter.Language = $labels;
-
-		Ext.ns("TYPO3.Devlog.Data");
-		TYPO3.Devlog.Data.Parameters = $parameters;
-
 		// Enable our remote calls
 		for (var api in Ext.app.ExtDirectAPI) {
 			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
@@ -320,30 +312,22 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 EOF;
 
 		$this->pageRendererObject->addExtOnReadyCode(PHP_EOL . implode("\n", $this->readyJavascript) . PHP_EOL);
-//
-//			// *********************************** //
-//			// Defines contextual variables
-//			// Define function for switching visibility of extra data field on or off
-//		$imageExpand = t3lib_iconWorks::skinImg($BACK_PATH, 'gfx/plusbullet_list.gif','width="18" height="12"');
-//		$imageCollapse = t3lib_iconWorks::skinImg($BACK_PATH, 'gfx/minusbullet_list.gif','width="18" height="12"');
-//
-//
-//		if (!isset($this->extConf['refreshFrequency'])) {
-//			throw new tx_devlog_exception('Missing setting "refreshFrequency". Try to re-set settings in the Extension Manager.', 1275573201);
-//		}
-//
-//		$autoRefresh = $this->MOD_SETTINGS['autorefresh'] ? $this->extConf['refreshFrequency'] : '0';
-//		$this->inlineJavascript[] .= <<< EOF
-//Ext.ns("{$this->extensionName}");
-//devlog = {
-//	imageExpand: '<img $imageExpand alt="+" />',
-//	imageCollapse: '<img $imageCollapse alt="-" />',
-//	show_extra_data: '{$GLOBALS['LANG']->getLL('show_extra_data')}',
-//	hide_extra_data: '{$GLOBALS['LANG']->getLL('hide_extra_data')}',
-//	autorefresh: $autoRefresh,
-//}
-//EOF;
-//		$this->pageRendererObject->addJsInlineCode('devlog', implode("\n", $this->inlineJavascript));
+
+		// *********************************** //
+		// Defines contextual variables
+		$labels = json_encode($this->getLabels());
+		$parameters = json_encode(array('pid' => $this->id));
+
+		$this->inlineJavascript[] .= <<< EOF
+
+		Ext.ns("TYPO3.Newsletter");
+		TYPO3.Newsletter.Language = $labels;
+
+		Ext.ns("TYPO3.Devlog.Data");
+		TYPO3.Devlog.Data.Parameters = $parameters;
+
+EOF;
+		$this->pageRendererObject->addJsInlineCode('newsletter', implode("\n", $this->inlineJavascript));
 	}
 
 	/**

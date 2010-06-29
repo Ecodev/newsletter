@@ -39,8 +39,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 		var modules = [];
 
 		// Get menus
-		var mainMenu = TYPO3.Newsletter.Application.MenuRegistry.getMainMenu();
-		Ext.each(mainMenu, function(menuItem) {
+		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
 			modules.push(
 				{
 					xtype: 'button',
