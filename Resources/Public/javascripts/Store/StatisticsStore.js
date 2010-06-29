@@ -15,10 +15,17 @@ TYPO3.Newsletter.Store.initListOfNewsletters = function() {
 		}),
 
 		listeners : {
+
+			/**
+			 * Called when store is loaded
+			 *
+			 * @event TYPO3.Newsletter.Store.ListOfNewsletters.afterload
+			 * @param {Ext.data.JsonStore} store
+			 * @param {Array} data
+			 */
 			load: function (store, data) {
 				if (store.getCount() > 0) {
-					var newsletterListMenu = TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu;
-					newsletterListMenu.setValue(data[0].id);
+					this.fireEvent('TYPO3.Newsletter.Store.ListOfNewsletters.afterload', data);
 				}
 			}
 		}

@@ -28,33 +28,21 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 		};
 		Ext.apply(this, config);
 		TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
-
+		
 		// Defines listener
-		this.on(
-			'afterrender',
-			this.onafterrender,
-			this
-		);
-
 		this.on(
 			'select',
 			this.onselect,
 			this
 		);
-	},
 
-	/**
-	 * Defines default value
-	 *
-	 * @access public
-	 * @method onafterrender
-	 * @return void
-	 */
-	onafterrender: function() {
-		
-//		if (TYPO3.Newsletter.Store.ListOfNewsletters.getAt(0).id) {
-//			this.setValue(TYPO3.Newsletter.Store.ListOfNewsletters.getAt(0).id);
-//		}
+		TYPO3.Newsletter.Store.ListOfNewsletters.on(
+			'TYPO3.Newsletter.Store.ListOfNewsletters.afterload',
+			function(data) {
+				this.setValue(data[0].id)
+			},
+			this
+		);
 	},
 
 	/**

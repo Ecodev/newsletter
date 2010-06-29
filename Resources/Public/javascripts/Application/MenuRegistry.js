@@ -27,13 +27,7 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 				itemId: 'statistics'
 			}
 		]
-	},
-
-	/**
-	 * @event TYPO3.Newsletter.UserInterface.RootlineMenu.buttonPressed
-	 * @param {TYPO3.Newsletter.UserInterface.RootlineMenu.Button} button the button being pressed
-	 * Called if a button is pressed.
-	 */
+	}
 
 	/**
 	 * @event TYPO3.Newsletter.UserInterface.RootlineMenu.buttonUnpressed
@@ -42,35 +36,35 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 	 */
 
 	// FIXME Only a quick implementation
-	addMenuItems: function(path, items) {
-		var menuName = path.shift();
-		if (typeof this.items[menuName] == 'undefined') {
-			this.items[menuName] = {};
-		}
-		if (path.length == 0) {
-			this.items[menuName] = items;
-		} else {
-			var menuItems = this.items[menuName], t;
-			Ext.each(path, function(pathEntry) {
-				var found = false;
-				Ext.each(menuItems, function(menuItem) {
-					if (menuItem.itemId === pathEntry) {
-						menuItem.children = menuItem.children || [];
-						menuItems = menuItem.children;
-						found = true;
-					}
-				});
-				if (!found) {
-					t = [];
-					menuItems.push({
-						itemId: pathEntry,
-						children: t
-					});
-					menuItems = t;
-				}
-			}, this);
-
-			menuItems.push.apply(menuItems, items);
-		}
-	}
+//	addMenuItems: function(path, items) {
+//		var menuName = path.shift();
+//		if (typeof this.items[menuName] == 'undefined') {
+//			this.items[menuName] = {};
+//		}
+//		if (path.length == 0) {
+//			this.items[menuName] = items;
+//		} else {
+//			var menuItems = this.items[menuName], t;
+//			Ext.each(path, function(pathEntry) {
+//				var found = false;
+//				Ext.each(menuItems, function(menuItem) {
+//					if (menuItem.itemId === pathEntry) {
+//						menuItem.children = menuItem.children || [];
+//						menuItems = menuItem.children;
+//						found = true;
+//					}
+//				});
+//				if (!found) {
+//					t = [];
+//					menuItems.push({
+//						itemId: pathEntry,
+//						children: t
+//					});
+//					menuItems = t;
+//				}
+//			}, this);
+//
+//			menuItems.push.apply(menuItems, items);
+//		}
+//	}
 });
