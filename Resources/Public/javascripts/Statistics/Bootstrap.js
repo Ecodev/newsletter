@@ -12,11 +12,19 @@ Ext.ns("TYPO3.Newsletter.Statistics");
 TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
 
+		// xtypeName will be as follows: TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
 		this.addToMenu(['mainMenu', 'statistics'], [
 			{
-				iconCls: 'TYPO3-Newsletter-Statistics-icon-overviewtab',
-				text: TYPO3.Newsletter.Language.overview_tab,
+				title: TYPO3.Newsletter.Language.overview_tab,
 				itemId: 'overviewTab'
+			},
+			{
+				title: TYPO3.Newsletter.Language.links_tab,
+				itemId: 'linksTab'
+			},
+			{
+				title: TYPO3.Newsletter.Language.emails_tab,
+				itemId: 'emailsTab'
 			}
 		]);
 

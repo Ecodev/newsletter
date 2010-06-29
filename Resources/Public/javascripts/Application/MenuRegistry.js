@@ -36,8 +36,8 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 				var found = false;
 				Ext.each(menuItems, function(menuItem) {
 					if (menuItem.itemId === pathEntry) {
-						menuItem.children = menuItem.children || [];
-						menuItems = menuItem.children;
+						menuItem.items = menuItem.items || []; // items replaced children
+						menuItems = menuItem.items; // items replaced children
 						found = true;
 					}
 				});
@@ -45,7 +45,7 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 					t = [];
 					menuItems.push({
 						itemId: pathEntry,
-						children: t
+						items: t // items replaced children
 					});
 					menuItems = t;
 				}

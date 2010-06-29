@@ -111,8 +111,8 @@
 			<label index="newsletter_button">Newsletter</label>
 			<label index="statistics_button">Statistics</label>
 			<label index="overview_tab">Overview</label>
-			<label index="clickedlinks_tab">Clicked links</label>
-			<label index="sentemails_tab">Sent emails</label>
+			<label index="links_tab">Clicked links</label>
+			<label index="emails_tab">Sent emails</label>
 			<label index="recipients">recipients</label>
 
 		</languageKey>

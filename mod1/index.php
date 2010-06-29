@@ -283,6 +283,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'Statistics/StatisticsPanel.js';
 		$files[] = 'Statistics/NewsletterListMenu.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
+		$files[] = 'Statistics/StatisticsPanel/LinksTab.js';
+		$files[] = 'Statistics/StatisticsPanel/EmailsTab.js';
 		
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);

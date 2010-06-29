@@ -12,22 +12,7 @@ Ext.ns("TYPO3.Newsletter.Statistics");
 TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 
 	initComponent: function() {
-
-		this.on('afterrender', function(menu) {
-			console.log(123);
-//			menu.items.each(function(menuItem, i) {
-//				menuItem.addListener('afterrender',	function() {
-//					var task = new Ext.util.DelayedTask(function () {
-//						this.el.fadeIn({
-//							duration: .2
-//						});
-//					}, this);
-//					task.delay(200 * i);
-//				});
-			},
-			this
-		);
-			
+		
 		var config = {
 			activeTab: 0,
 //			hideBorders: true,
@@ -37,29 +22,44 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 			defaults: {
 				autoHeight: true
 			},
-			items: [
-				{
-					title: TYPO3.Newsletter.Language.overview_tab,
-					items: [
-						{
-							xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab',
-							ref: 'overviewTab'
-						}
-					]
-				},
-				{
-					title: TYPO3.Newsletter.Language.clickedlinks_tab,
-					html: 'Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>'
-				},
-				{
-					title: TYPO3.Newsletter.Language.sentemails_tab,
-					html: 'Another one'
-				}
-			]
-
+			items: this._getMenuItems()
 		};
 		Ext.apply(this, config);
 		TYPO3.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
+	},
+
+	/**
+	 * Returns the section menu
+	 *
+	 * @access private
+	 * @return array
+	 */
+	_getMenuItems: function() {
+		var modules = [];
+
+		// traverses menus
+		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
+			if (menuItem.itemId == 'statistics') {
+				Ext.each(menuItem.items, function (subMenuItem) {
+					var xtypeName = subMenuItem.itemId.slice(0,1).toUpperCase() + subMenuItem.itemId.slice(1);
+					modules.push(
+						{
+							title: subMenuItem.title,
+		//					itemId: menuItem.itemId,
+//							iconCls: 't3-newsletter-button-' + subMenuItem.itemId,
+							items: [
+								{
+									xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.' + xtypeName,
+									ref: subMenuItem.itemId
+								}
+							]
+						}
+					);
+				});
+
+			}
+		});
+		return modules;
 	}
 });
 

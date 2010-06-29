@@ -23,7 +23,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 //			},
 			border: false,
 			bodyStyle: 'background-color: #DADADA',
-			items: this._getItems()
+			items: this._getMenuItems()
 		};
 		Ext.apply(this, config);
 		TYPO3.Newsletter.UserInterface.SectionMenu.superclass.initComponent.call(this);
@@ -35,7 +35,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 	 * @access private
 	 * @return array
 	 */
-	_getItems: function() {
+	_getMenuItems: function() {
 		var modules = [];
 
 		// Get menus
