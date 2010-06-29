@@ -30,28 +30,28 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 		if (path.length == 0) {
 			this.items[menuName] = items;
 		}
-//		else {
-//			var menuItems = this.items[menuName], t;
-//			Ext.each(path, function(pathEntry) {
-//				var found = false;
-//				Ext.each(menuItems, function(menuItem) {
-//					if (menuItem.itemId === pathEntry) {
-//						menuItem.children = menuItem.children || [];
-//						menuItems = menuItem.children;
-//						found = true;
-//					}
-//				});
-//				if (!found) {
-//					t = [];
-//					menuItems.push({
-//						itemId: pathEntry,
-//						children: t
-//					});
-//					menuItems = t;
-//				}
-//			}, this);
-//
-//			menuItems.push.apply(menuItems, items);
-//		}
+		else {
+			var menuItems = this.items[menuName], t;
+			Ext.each(path, function(pathEntry) {
+				var found = false;
+				Ext.each(menuItems, function(menuItem) {
+					if (menuItem.itemId === pathEntry) {
+						menuItem.children = menuItem.children || [];
+						menuItems = menuItem.children;
+						found = true;
+					}
+				});
+				if (!found) {
+					t = [];
+					menuItems.push({
+						itemId: pathEntry,
+						children: t
+					});
+					menuItems = t;
+				}
+			}, this);
+
+			menuItems.push.apply(menuItems, items);
+		}
 	}
 });

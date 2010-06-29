@@ -11,14 +11,14 @@ Ext.ns("TYPO3.Newsletter.Statistics");
  */
 TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
 	initialize: function() {
-//
-//		this.addToMenu(['mainMenu', 'statistics'], [
-//			{
-//				iconCls: 'TYPO3-Newsletter-Statistics-icon-overviewtab',
-//				text: TYPO3.Newsletter.Language.overview_tab,
-//				itemId: 'overviewTab'
-//			}
-//		]);
+
+		this.addToMenu(['mainMenu', 'statistics'], [
+			{
+				iconCls: 'TYPO3-Newsletter-Statistics-icon-overviewtab',
+				text: TYPO3.Newsletter.Language.overview_tab,
+				itemId: 'overviewTab'
+			}
+		]);
 
 		/**
 		 * Handle a navigation token.
