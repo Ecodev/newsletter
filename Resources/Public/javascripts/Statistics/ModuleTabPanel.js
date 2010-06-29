@@ -18,14 +18,28 @@ TYPO3.Newsletter.Statistics.ModuleTabPanel = Ext.extend(Ext.TabPanel, {
 //			hideLabel: true,
 //			bodyBorder: false,
 			border: false,
+			defaults: {
+				autoHeight: true
+			},
 			items: [
 				{
 					title: TYPO3.Newsletter.Language.overview_panel,
-					html: 'A simple tab'
+					html: 'Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>',
+					items: [
+						{
+							xtype: 'button',
+							text: 'asdf',
+						},
+						{
+							xtype: 'button',
+							text: 'asdf'
+						},
+						
+					]
 				},
 				{
 					title: TYPO3.Newsletter.Language.clickedlinks_panel,
-					html: 'Another one'
+					html: 'Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>Another one<br>'
 				},
 				{
 					title: TYPO3.Newsletter.Language.sentemails_panel,
