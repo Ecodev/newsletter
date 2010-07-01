@@ -285,6 +285,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
 		$files[] = 'Statistics/StatisticsPanel/LinksTab.js';
 		$files[] = 'Statistics/StatisticsPanel/EmailsTab.js';
+		$files[] = 'Statistics/StatisticsPanel/OverviewTab/General.js';
+		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Graph.js';
+		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Time.js';
 		
 		foreach ($files as $file) {
 			$this->pageRendererObject->addJsFile($this->javascriptPath . $file, 'text/javascript', FALSE);
@@ -321,6 +324,8 @@ EOF;
 		$parameters = json_encode(array('pid' => $this->id));
 
 		$this->inlineJavascript[] .= <<< EOF
+
+		Ext.chart.Chart.CHART_URL = 'http://newsletter.local/typo3/contrib/extjs/resources/charts.swf';
 
 		Ext.ns("TYPO3.Newsletter");
 		TYPO3.Newsletter.Language = $labels;

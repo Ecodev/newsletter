@@ -13,19 +13,25 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.Contain
 
 	initComponent: function() {
 		var config = {
+			layout:'table',
+			layoutConfig: {
+				columns: 2
+			},
 			items: [
 				{
-					xtype: 'button',
-					text: 'asdf'
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General',
+					ref: 'general'
 				},
 				{
-					xtype: 'button',
-					text: 'asdf'
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Time',
+					ref: 'general'
 				},
 				{
-					xtype: 'button',
-					text: 'asdf'
-				}
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph',
+					ref: 'general',
+					colspan: 2
+				},
+//				{html:'2,2', },
 			]
 		};
 		Ext.apply(this, config);
