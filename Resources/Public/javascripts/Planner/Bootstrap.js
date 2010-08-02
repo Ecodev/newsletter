@@ -20,11 +20,11 @@ TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.
 		 * @param scope
 		 */
 		this.handleNavigationToken(/planner/, function(e) {
-			var component = TYPO3.Newsletter.UserInterface.contentArea.formNewsletter || null;
+			var component = TYPO3.Newsletter.UserInterface.contentArea.plannerForm || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
-					xtype: 'TYPO3.Newsletter.UserInterface.FormNewsletter',
-					ref: 'formNewsletter'
+					xtype: 'TYPO3.Newsletter.UserInterface.PlannerForm',
+					ref: 'plannerForm'
 				});
 
 				TYPO3.Newsletter.UserInterface.contentArea.add(component);

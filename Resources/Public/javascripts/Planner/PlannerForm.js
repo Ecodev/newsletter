@@ -1,6 +1,6 @@
 Ext.ns("TYPO3.Newsletter.UserInterface");
 
-TYPO3.Newsletter.UserInterface.FormNewsletter = Ext.extend(Ext.form.FormPanel, {
+TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
 	var config = {
@@ -196,7 +196,7 @@ TYPO3.Newsletter.UserInterface.FormNewsletter = Ext.extend(Ext.form.FormPanel, {
 	};
 
 	Ext.apply(this, config);
-	TYPO3.Newsletter.UserInterface.FormNewsletter.superclass.initComponent.call(this);
+	TYPO3.Newsletter.UserInterface.PlannerForm.superclass.initComponent.call(this);
 },
 
 
@@ -214,7 +214,7 @@ submit:function() {
 }, // eo function submit
 
 onRender: function() {		
-	TYPO3.Newsletter.UserInterface.FormNewsletter.superclass.onRender.apply(this, arguments);
+	TYPO3.Newsletter.UserInterface.PlannerForm.superclass.onRender.apply(this, arguments);
 
 	Ext.apply(this.getForm(),{
 		api: {
@@ -227,4 +227,4 @@ onRender: function() {
 //	this.form.load();
 }
 });
-Ext.reg('TYPO3.Newsletter.UserInterface.FormNewsletter', TYPO3.Newsletter.UserInterface.FormNewsletter);
+Ext.reg('TYPO3.Newsletter.UserInterface.PlannerForm', TYPO3.Newsletter.UserInterface.PlannerForm);
