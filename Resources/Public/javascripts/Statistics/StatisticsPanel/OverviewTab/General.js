@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
 
 /**
@@ -23,7 +25,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 					height: 300,
 					layout:'hbox',
 					layoutConfig: {
-						align : 'stretch',
+						align : 'stretch'
 //						pack  : 'start',
 					},
 					items: [
@@ -72,9 +74,9 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 									}
 								}
 							}
-						},
+						}
 					]
-				},
+				}
 			]
 		};
 		Ext.apply(this, config);

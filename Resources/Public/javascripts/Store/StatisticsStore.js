@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Store");
 
 TYPO3.Newsletter.Store.initListOfNewsletters = function() {

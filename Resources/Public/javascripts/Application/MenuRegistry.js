@@ -8,7 +8,7 @@ Ext.ns("TYPO3.Newsletter.Application");
  * 
  * @singleton
  */
-TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
+TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable(), {
 
 	/**
 	 * Contains the menu architecture
@@ -27,7 +27,7 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable, {
 		if (typeof this.items[menuName] == 'undefined') {
 			this.items[menuName] = {};
 		}
-		if (path.length == 0) {
+		if (path.length === 0) {
 			this.items[menuName] = items;
 		}
 		else {

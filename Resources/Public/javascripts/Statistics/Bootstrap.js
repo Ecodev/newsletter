@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Statistics");
 
 /**
@@ -9,7 +11,7 @@ Ext.ns("TYPO3.Newsletter.Statistics");
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
+TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap(), {
 	initialize: function() {
 
 		// xtypeName will be as follows: TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab

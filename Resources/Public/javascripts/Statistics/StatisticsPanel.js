@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Statistics");
 
 /**
@@ -39,7 +41,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 
 		// traverses menus
 		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
-			if (menuItem.itemId == 'statistics') {
+			if (menuItem.itemId === 'statistics') {
 				Ext.each(menuItem.items, function (subMenuItem) {
 					var xtypeName = subMenuItem.itemId.slice(0,1).toUpperCase() + subMenuItem.itemId.slice(1);
 					modules.push(

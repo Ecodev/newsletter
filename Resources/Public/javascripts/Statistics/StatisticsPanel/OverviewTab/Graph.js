@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
 
 /**
@@ -19,7 +21,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph = Ext.extend(Ext.C
 				{
 					xtype: 'button',
 					text: 'asdf'
-				},
+				}
 			]
 		};
 		Ext.apply(this, config);

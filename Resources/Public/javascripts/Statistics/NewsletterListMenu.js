@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Statistics");
 
 /**
@@ -39,7 +41,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 		TYPO3.Newsletter.Store.ListOfNewsletters.on(
 			'TYPO3.Newsletter.Store.ListOfNewsletters.afterload',
 			function(data) {
-				this.setValue(data[0].id)
+				this.setValue(data[0].id);
 			},
 			this
 		);
