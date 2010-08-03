@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter");
 
 /**
@@ -18,7 +20,8 @@ Ext.ns("TYPO3.Newsletter");
  *
  * $Id$
  */
-TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
+
+TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	/**
 	 * @event TYPO3.Newsletter.Application.afterBootstrap
 	 * After bootstrap event. Should be used for main initialization.
@@ -42,7 +45,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 		Ext.QuickTips.init();
 
 		this.fireEvent('TYPO3.Newsletter.Application.afterBootstrap');
-		
+
 		this._initializeHistoryManager();
 	},
 
@@ -56,7 +59,6 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	registerBootstrap: function(bootstrap) {
 		this.bootstrappers.push(bootstrap);
 	},
-
 
 	/**
 	 * Invoke the registered bootstrappers.
@@ -80,7 +82,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 		Ext.History.on('change', function(token) {
 			this.fireEvent('TYPO3.Newsletter.Application.navigate', token);
 		}, this);
-		
+
 		// Handle initial token (on page load)
 		Ext.History.init(function(history) {
 			history.fireEvent('change', history.getToken());
@@ -115,14 +117,14 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable, {
 	 */
 	_initStateProvider : function() {
 		 // set days to be however long you think cookies should last
-		var days = 0;		// 0 = expires when browser closes
-		var date = null;
-		if(days){
+		var days,date;
+		days = 0;		// 0 = expires when browser closes
+		if (days) {
 			date = new Date();
-			date.setTime(date.getTime() + (days*24*60*60*1000));
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 			//exptime = "; expires=" + 'Sat, 26 Jun 2010 11:12:28 GMT';
-		} 
-		
+		}
+
 		// register provider with state manager.
 		Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
 			path: '/',

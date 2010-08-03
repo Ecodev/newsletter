@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns('TYPO3.Newsletter');
 
 /**
@@ -26,8 +28,8 @@ TYPO3.Newsletter.Utils.clone = function(o) {
 	if ('function' === typeof o.clone) {
 		return o.clone();
 	}
-	var c = '[object Array]' === Object.prototype.toString.call(o) ? [] : {};
-	var p, v;
+	var c,p,v;
+	c = '[object Array]' === Object.prototype.toString.call(o) ? [] : {};
 	for (p in o) {
 		if (o.hasOwnProperty(p)) {
 			v = o[p];
