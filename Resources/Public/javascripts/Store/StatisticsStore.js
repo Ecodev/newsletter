@@ -32,4 +32,4 @@ TYPO3.Newsletter.Store.initListOfNewsletters = function() {
 			}
 		}
 	});
-}
+};

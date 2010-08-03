@@ -11,16 +11,19 @@ Ext.ns("TYPO3.Newsletter.Store");
  *
  * $Id$
  */
-TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
+TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap(), {
 	initialize: function() {
 		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initStore, this);
 	},
 	initStore: function() {
-		for (var api in Ext.app.ExtDirectAPI) {
-			Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
+		var api;
+		for (api in Ext.app.ExtDirectAPI) {
+			if (Ext.app.ExtDirectAPI[api]) {
+				Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
+			}
 		}
 
-		TYPO3.Newsletter.Store.ListOfNewsletters = TYPO3.Newsletter.Store.initListOfNewsletters()
+		TYPO3.Newsletter.Store.ListOfNewsletters = TYPO3.Newsletter.Store.initListOfNewsletters();
 
 //		TYPO3.Newsletter.LogStore2.doRequest();
 	}
