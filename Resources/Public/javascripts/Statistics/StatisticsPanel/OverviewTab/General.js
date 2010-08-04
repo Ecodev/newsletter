@@ -25,8 +25,8 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 					height: 300,
 					layout:'hbox',
 					layoutConfig: {
-						align : 'stretch'
-//						pack  : 'start',
+						align: 'stretch'
+//						pack: 'start',
 					},
 					items: [
 //						{

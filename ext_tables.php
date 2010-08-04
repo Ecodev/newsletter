@@ -1,14 +1,6 @@
 <?php
 if (!defined ("TYPO3_MODE")) 	die ("Access denied.");
 
-if (TYPO3_MODE=="BE")	{
-	t3lib_extMgm::addModule("web","newsletterM1","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod1/");
-
-	// temporary line
-	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
-
-}
-
 $tempColumns = Array (
 	"tx_newsletter_senttime" => Array (		
 		"exclude" => 1,		
@@ -232,6 +224,28 @@ $tempColumns = Array (
     ),
 );
 
+
+// Loads BE modules
+if (TYPO3_MODE=="BE")	{
+	// temporary line
+	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
+
+	Tx_Extbase_Utility_Extension::registerModule(
+		$_EXTKEY,
+		'web',// Make newsletter module a submodule of 'user'
+		'tx_newsletter_m1',  // Submodule key
+		'before:info',           // Position
+		array(
+			'Newsletter' => 'index',
+			'Statistic' => 'index',
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:newsletter/Resources/Public/images/icons/ext_icon.png',
+			'labels' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_module.xml',
+		)
+	);
+}
 
 //t3lib_div::loadTCA("fe_users");
 //t3lib_extMgm::addTCAcolumns("fe_users",$tempColumns,1);
