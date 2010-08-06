@@ -1,0 +1,24 @@
+plugin.tx_newsletter {
+	view {
+		 # cat=plugin.tx_newsletter/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:newsletter/Resources/Private/Templates/
+		 # cat=plugin.tx_newsletter/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:newsletter/Resources/Private/Partials/
+		 # cat=plugin.tx_newsletter/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:newsletter/Resources/Private/Layouts/
+	}
+	persistence {
+		 # cat=plugin.tx_newsletter//a; type=int+; label=Default storage PID
+		storagePid =
+	}
+}
+module.tx_newsletter {
+	view {
+		 # cat=module.tx_newsletter/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:newsletter/Resources/Private/Backend/Templates/
+		 # cat=plugin.tx_newsletter/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:newsletter/Resources/Private/Partials/
+		 # cat=plugin.tx_newsletter/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:newsletter/Resources/Private/Backend/Layouts/
+	}
+}

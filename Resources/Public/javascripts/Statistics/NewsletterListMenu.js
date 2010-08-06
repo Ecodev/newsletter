@@ -18,7 +18,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 		var config = {
 			id: 'newsletterListMenu',
 			store: TYPO3.Newsletter.Store.ListOfNewsletters,
-			displayField: 'newsletter_formatted',
+			displayField: 'newsletter_label_formatted',
 			valueField: 'uid',
 			typeAhead: false,
 			width: 300,

@@ -1,0 +1,30 @@
+config.tx_extbase {
+	persistence {
+		classes {
+			Tx_Newsletter_Domain_Model_Statistic {
+				mapping {
+					tableName = tx_newsletter_lock
+					#recordType = Tx_Newsletter_Domain_Model_Statistic
+					#columns {
+					#	begintime.mapOnProperty = begintime
+					#}
+				}
+			}
+		}
+	}
+#	persistence{
+#		enableAutomaticCacheClearing = 1
+#		updateReferenceIndex = 0
+#		classes {
+#			Tx_Extbase_Domain_Model_FrontendUser {
+#				mapping {
+#					tableName = fe_users
+#					recordType = Tx_Extbase_Domain_Model_FrontendUser
+#					columns {
+#						lockToDomain.mapOnProperty = lockToDomain
+#					}
+#				}
+#			}
+#		}
+#	}
+}

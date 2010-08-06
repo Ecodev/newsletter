@@ -4,7 +4,7 @@
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
 
 # Register Ajax function
-$TYPO3_CONF_VARS['BE']['AJAX']['NewsletterController::getListOfNewsletter'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote->getListOfNewsletter';
+#$TYPO3_CONF_VARS['BE']['AJAX']['NewsletterController::getListOfNewsletter'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote->getListOfNewsletter';
 
 $tempFilePath = t3lib_extMgm::extPath('newsletter');
 $TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(
@@ -43,6 +43,20 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_D
         'extension'        => $_EXTKEY,
         'title'            => 'Run TC Directmail Bounce',
         'description'      => 'Fetch bounce statistic',
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'TxNewsletterM1', // old value Pi1
+	array(
+		'Newsletter' => 'index, show, new, create, edit, update, delete',
+		'Statistics' => 'index, show, new, create, edit, update, delete',
+	),
+	array(
+		// change this to 'create, update, delete'
+		'Newsletter' => 'index, show, new, create, edit, update, delete',
+		'Statistics' => 'index, show, new, create, edit, update, delete',
+	)
 );
 
 ?>

@@ -32,29 +32,90 @@
 class Tx_Newsletter_Domain_Model_Statistic extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
-	 * The statistic's name
+	 * The statistic's uid
 	 *
 	 * @var string
 	 */
-	protected $name = '';
-	
+//	protected $uid = '';
+
 	/**
-	 * Sets this statistic's name.
+	 * The statistic's uid
 	 *
-	 * @param string $name The statistic's name
+	 * @var int
+	 */
+	protected $pid = '';
+
+	/**
+	 * The statistic's begintime
+	 *
+	 * @var int
+	 */
+	protected $begintime = '';
+//
+//	/**
+//	 * Sets this statistic's uid.
+//	 *
+//	 * @param string $uid The statistic's uid
+//	 * @return void
+//	 */
+//	public function setUid($uid) {
+//		$this->uid = $uid;
+//	}
+//
+//	/**
+//	 * Returns the statistic's uid.
+//	 *
+//	 * @return string The statistic's uid
+//	 */
+//	public function getUid() {
+//		return $this->uid;
+//	}
+
+	/**
+	 * Constructs a new Blog
+	 *
+	 */
+	public function __construct() {
+		#$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+	}
+
+
+	/**
+	 * Sets this statistic's pid.
+	 *
+	 * @param string $pid The statistic's pid
 	 * @return void
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setPid($pid) {
+		$this->pid = $pid;
 	}
 
 	/**
-	 * Returns the statistic's name.
+	 * Returns the statistic's pid.
 	 *
-	 * @return string The statistic's name
+	 * @return string The statistic's pid
 	 */
-	public function getName() {
-		return $this->name;
+	public function getPid() {
+		return $this->pid;
+	}
+
+	/**
+	 * Sets this statistic's begintime.
+	 *
+	 * @param string $begintime The statistic's begintime
+	 * @return void
+	 */
+	public function setBegintime($begintime) {
+		$this->begintime = $begintime;
+	}
+
+	/**
+	 * Returns the statistic's begintime.
+	 *
+	 * @return string The statistic's begintime
+	 */
+	public function getBegintime() {
+		return $this->begintime;
 	}
 		
 }
