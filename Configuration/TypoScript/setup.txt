@@ -1,8 +1,7 @@
-plugin.tx_newsletter. test = TEXT
 plugin.tx_newsletter {
 	settings {
-		 # maximum number of posts to display at once
-		maxPosts = 3
+		# maximum number of posts to display at once
+		# maxPosts = 3
 	}
 	persistence {
 		classes {

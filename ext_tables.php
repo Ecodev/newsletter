@@ -225,7 +225,7 @@ $tempColumns = Array (
 );
 
 # Adds configuration
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/setup.txt', 'Newsletter configuration');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'Newsletter configuration');
 
 // Loads BE modules
 if (TYPO3_MODE=="BE")	{
