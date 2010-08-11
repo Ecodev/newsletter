@@ -35,7 +35,27 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 ////							flex:1
 //						},
 						{
+							xtype: 'dataview',
+							store: new Ext.data.SimpleStore({
+								fields: [
+								   {name: 'name'},
+								   {name: 'url'},
+								   {name: 'vorname'},
+								   {name: 'alter'}
+								],
+								data: [["xx", "aa", "fff", "cco"]]
+							}),
+
 							html:'panel 2',
+							emptyText: 'No images to display',
+							tpl: new Ext.XTemplate(
+								'<tpl for=".">',
+									'<div class="thumb-wrap" id="{name}">',
+									'<span>Name: {name} {vorname}, {alter} Jahre',
+									'<input type="button" name="addButton" value="Add"/>',
+									'</div>',
+								'</tpl>'
+							),
 							border: false,
 							width:150
 						},

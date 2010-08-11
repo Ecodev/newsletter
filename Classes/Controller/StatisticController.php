@@ -49,7 +49,7 @@ class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Contro
 		#$arguments = $this->request->getArguments();
 		$pid = filter_var(t3lib_div::_GET('pid'), FILTER_VALIDATE_INT, array("min_range"=> 0));
 		if ($pid) {
-			$statistic->setPid(133);
+			$statistic->setPid($pid);
 		}
 		
 		// Retrieve all statistics from repository

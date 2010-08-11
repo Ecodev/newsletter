@@ -23,7 +23,7 @@ TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.Ab
 			}
 		}
 
-		TYPO3.Newsletter.Store.ListOfNewsletters = TYPO3.Newsletter.Store.initListOfNewsletters();
+		TYPO3.Newsletter.Store.NewsletterList = TYPO3.Newsletter.Store.initNewsletterList();
 
 //		TYPO3.Newsletter.LogStore2.doRequest();
 	}
