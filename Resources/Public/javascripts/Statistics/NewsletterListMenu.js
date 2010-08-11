@@ -40,11 +40,20 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 
 		TYPO3.Newsletter.Store.ListOfNewsletters.on(
 			'TYPO3.Newsletter.Store.ListOfNewsletters.afterload',
-			function(data) {
-				this.setValue(data[0].id);
-			},
+			this.onafterload,
 			this
 		);
+	},
+
+	/**
+	 * Defines behaviour on change value
+	 *
+	 * @access public
+	 * @method onafterrender
+	 * @return void
+	 */
+	onafterload: function(data) {
+		this.setValue(data[0].id);
 	},
 
 	/**
