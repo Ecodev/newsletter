@@ -33,31 +33,54 @@
  * @version     SVN: $Id$
  */
 class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Controller_ActionController {
-	
+
 	/**
-	 * Returns a list of statistics as JSON.
+	 * @var Tx_Newsletter_Domain_Repository_StatisticRepository
+	 */
+	protected $statisticRepository;
+
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		$this->statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
+	}
+
+	/**
+	 * Returns a list of statistics.
 	 * 
+	 * @param int $pid: the pid where newsletter are stored
 	 * @return string The rendered view
 	 */
-	public function indexAction() {
-
-		/* @var $statisticRepository Tx_MvcExtjsSamples_Domain_Repository_GenreRepository */
-		$statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
+	public function indexAction($pid) {
 
 		$statistic = new Tx_Newsletter_Domain_Model_Statistic();
+		$statistic->setPid($pid);
 
 		#$arguments = $this->request->getArguments();
-		$pid = filter_var(t3lib_div::_GET('pid'), FILTER_VALIDATE_INT, array("min_range"=> 0));
-		if ($pid) {
-			$statistic->setPid($pid);
-		}
+		#$pid = filter_var(t3lib_div::_GET('pid'), FILTER_VALIDATE_INT, array("min_range"=> 0));
 		
 		// Retrieve all statistics from repository
-		$statistics = $statisticRepository->findByPid($statistic);
+		$statistics = $this->statisticRepository->findAllByPid($statistic);
 		$this->view->assign('statistics', $statistics);
-		$this->view->assign('metaData', $statisticRepository->getMetaData());
+		$this->view->assign('metaData', $this->statisticRepository->getMetaData());
 		#$this->request->getPluginName();
 	}
-	
+
+	/**
+	 * Returns statistics for one newsletter.
+	 *
+	 * @param int $uid: the newsletter's id
+	 * @return string The rendered view
+	 */
+	public function showAction($uid) {
+
+		// Retrieve all statistics from repository
+		$statistic = $this->statisticRepository->findByUid($uid);
+		$this->view->assign('statistic', $statistic);
+		$this->view->assign('metaData', $this->statisticRepository->getMetaData());
+	}
 }
 ?>

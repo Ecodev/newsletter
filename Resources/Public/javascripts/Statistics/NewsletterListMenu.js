@@ -18,7 +18,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 		var config = {
 			id: 'newsletterListMenu',
 			store: TYPO3.Newsletter.Store.NewsletterList,
-			displayField: 'newsletter_label_formatted',
+			displayField: 'statistic_label_formatted',
 			valueField: 'uid',
 			typeAhead: false,
 			width: 300,
@@ -54,7 +54,14 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 */
 	onafterload: function(data) {
 		this.setValue(data[0].id);
-		console.log(data[0].id);
+		TYPO3.Newsletter.Store.Statistics.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]',data[0].id);
+		TYPO3.Newsletter.Store.Statistics.load();
+//		this.fireEvent('TYPO3.Newsletter.Store.NewsletterList.onselect', data[0].id);
+//		TYPO3.Newsletter.Store.Statistics.on(
+//			'TYPO3.Newsletter.Store.NewsletterList.afterload',
+//			this.onafterload,
+//			this
+//		);
 	},
 
 	/**

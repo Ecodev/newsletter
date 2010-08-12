@@ -114,7 +114,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-
 		global $LANG;
 
 		$this->loadStylesheets();

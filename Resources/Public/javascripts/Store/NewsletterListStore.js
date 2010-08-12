@@ -12,7 +12,8 @@ TYPO3.Newsletter.Store.initNewsletterList = function() {
 			M: 'web_NewsletterTxNewsletterM1',
 			'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
 			'tx_newsletter_web_newslettertxnewsletterm1[action]': 'index',
-			'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json'
+			'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
+			'tx_newsletter_web_newslettertxnewsletterm1[pid]': TYPO3.Devlog.Data.Parameters.pid
 		},
 		proxy: new Ext.data.HttpProxy({
 			method: 'GET',

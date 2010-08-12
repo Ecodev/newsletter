@@ -41,13 +41,11 @@ class Tx_Newsletter_ViewHelpers_JsonStoreViewHelper extends Tx_Fluid_Core_ViewHe
 	/**
 	 * Render a json-encoded string.
 	 *
-	 * @param string $tableName: the model name to be given, will be used
-	 *							 for fetching information about the fields' type (int, string, etc...)
 	 * @param array $metaData: give a list of fields as well as information about the field type like int, string, date ...
 	 * @param boolean $indent: should the output be well formatted
 	 * @return string 
 	 */
-	public function render($tableName = '', $metaData = array(), $indent = FALSE) {
+	public function render($metaData = array(), $indent = FALSE) {
 		$items = $this->renderChildren();
 
 		// Finds out keys finishing by "_formatted"...

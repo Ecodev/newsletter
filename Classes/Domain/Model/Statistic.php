@@ -39,7 +39,7 @@ class Tx_Newsletter_Domain_Model_Statistic extends Tx_Extbase_DomainObject_Abstr
 //	protected $uid = '';
 
 	/**
-	 * The statistic's uid
+	 * The statistic's pid
 	 *
 	 * @var int
 	 */
@@ -116,6 +116,32 @@ class Tx_Newsletter_Domain_Model_Statistic extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getBegintime() {
 		return $this->begintime;
+	}
+
+	/**
+	 * The statistic's numberOfRecipients
+	 *
+	 * @var int
+	 */
+	protected $numberOfRecipients = '';
+
+	/**
+	 * Sets this statistic's numberOfRecipients.
+	 *
+	 * @param string $numberOfRecipients The statistic's numberOfRecipients
+	 * @return void
+	 */
+	public function setNumberOfRecipients($numberOfRecipients) {
+		$this->numberOfRecipients = $numberOfRecipients;
+	}
+
+	/**
+	 * Returns the statistic's numberOfRecipients.
+	 *
+	 * @return string The statistic's numberOfRecipients
+	 */
+	public function getNumberOfRecipients() {
+		return $this->numberOfRecipients;
 	}
 		
 }

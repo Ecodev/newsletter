@@ -28,27 +28,60 @@
  */
 class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Persistence_Repository {
 
+
+	/**
+	 * Constructs a new Repository
+	 *
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		$this->additionalFields = array(
+			array('name' => 'number_of_sent', 'type' => 'int'),
+			array('name' => 'number_of_opened', 'type' => 'int'),
+			array('name' => 'number_of_bounce', 'type' => 'int'),
+			array('name' => 'number_of_recipients', 'type' => 'int'),
+			array('name' => 'statistic_label_formatted', 'type' => 'string'),
+		);
+	}
+
+	/**
+	 * Returns all objects of this repository
+	 *
+	 * @param int $uid
+	 * @return array An array of objects, empty if no objects found
+	 */
+	public function findByUid($uid) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		$records = $query->matching($query->equals('uid', $uid))
+				->execute();
+
+		foreach ($records as &$record) {
+			$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
+			$record['number_of_sent'] = $record['number_of_recipients'];
+			$record['number_of_opened'] = $this->getNumberOfOpened($record['pid'], $record['begintime']);
+			$record['number_of_bounce'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
+		}
+		return $records;
+	}
+
 	/**
 	 * Returns all objects of this repository
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Statistic $statistic
 	 * @return array An array of objects, empty if no objects found
 	 */
-	public function findByPid(Tx_Newsletter_Domain_Model_Statistic $statistic) {
+	public function findAllByPid(Tx_Newsletter_Domain_Model_Statistic $statistic) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 		$records = $query->matching($query->equals('pid', $statistic->getPid()))
 				->execute();
-
-		$this->additionalFields = array(
-			array('name' => 'number_of_recipients', 'type' => 'int'),
-			array('name' => 'newsletter_label_formatted', 'type' => 'string'),
-		);
 		
 		// Adds custom fields
 		foreach ($records as &$record) {
 			$record['number_of_recipients'] = $this->getNumberOfRecipients($statistic->getPid(), $record['begintime']);
-			$record['newsletter_label_formatted'] = '';
+			$record['statistic_label_formatted'] = '';
 		}
 		return $records;
 	}
@@ -73,12 +106,58 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	}
 
 	/**
-	 * Get datasource's meta data
+	 * Get the number of opened email.
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param int $pid: page id where newsletter is stored
+	 * @param int $begintime: the time when the newsletter was sent
+	 * @return int $numberOfOpened
+	 */
+	protected function getNumberOfOpened($pid, $begintime) {
+		global $TYPO3_DB;
+		
+		$sql = "SELECT COUNT(uid)
+				FROM tx_newsletter_sentlog
+				WHERE begintime = $begintime
+				AND beenthere = 1
+				AND pid = $pid";
+
+		$rs = $TYPO3_DB->sql_query($sql);
+		list($numberOfOpened) = $TYPO3_DB->sql_fetch_row($rs);
+		return $numberOfOpened;
+	}
+
+	/**
+	 * Get the number of bounce email.
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param int $pid: page id where newsletter is stored
+	 * @param int $begintime: the time when the newsletter was sent
+	 * @return int $numberOfBounce
+	 */
+	protected function getNumberOfBounce($pid, $begintime) {
+		global $TYPO3_DB;
+
+		$sql = "SELECT SUM(bounced)
+				FROM tx_newsletter_sentlog
+				WHERE begintime = $begintime
+				AND pid = $pid";
+
+		$rs = $TYPO3_DB->sql_query($sql);
+		list($numberOfBounce) = $TYPO3_DB->sql_fetch_row($rs);
+		return $numberOfBounce;
+	}
+
+	/**
+	 * Get datasource's meta data for all statistics.
+	 * The method will return an array containing information for a JsonStore
+	 * ExtJS api: http://www.extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader
 	 *
 	 * @return array $metaData
 	 */
 	public function getMetaData() {
-		// ExtJS api: http://www.extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader
 //		metaData: {
 //        // used by store to set its sortInfo
 //        "sortInfo":{
@@ -101,7 +180,9 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	}
 
 	/**
-	 * Get MetaData for fields
+	 * Get MetaData for fields.
+	 * Implementation: queries the database and retrieve the fields' type.
+	 * This implementation is temporary and should go towards quering the model
 	 *
 	 * @global t3lib_DB $TYPO3_DB
 	 * @param string $tableName: the name of the table to look for

@@ -22,10 +22,10 @@ TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.Ab
 				Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
 			}
 		}
+//		TYPO3.Newsletter.LogStore2.doRequest();
 
 		TYPO3.Newsletter.Store.NewsletterList = TYPO3.Newsletter.Store.initNewsletterList();
-
-//		TYPO3.Newsletter.LogStore2.doRequest();
+		TYPO3.Newsletter.Store.Statistics = TYPO3.Newsletter.Store.initStatistics();
 	}
 });
 

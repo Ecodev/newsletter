@@ -27,7 +27,7 @@
  *
  * = Examples =
  * 
- * <f:format.newsletterLabel record="{record}"/>
+ * <f:format.statisticLabel record="{record}"/>
  * 
  * @category    ViewHelpers
  * @package     TYPO3
@@ -36,7 +36,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_Newsletter_ViewHelpers_Format_NewsletterLabelViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_Format_StatisticLabelViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * This method formats the newsletter list

@@ -239,7 +239,7 @@ if (TYPO3_MODE=="BE")	{
 		'before:info',           // Position
 		array(
 			'Newsletter' => 'index',
-			'Statistic' => 'index',
+			'Statistic' => 'index,show',
 		),
 		array(
 			'access' => 'user,group',
