@@ -114,7 +114,15 @@
 			<label index="links_tab">Clicked links</label>
 			<label index="emails_tab">Sent emails</label>
 			<label index="recipients">recipients</label>
-
+			<label index="opened">Opened</label>
+			<label index="not_opened">Not opened</label>
+			<label index="bounced">Bounced</label>
+		</languageKey>
+		<languageKey index="fr">
+			<label index="select_page">Veuillez sélectionner une page.</label>
+			<label index="opened">Ouvert</label>
+			<label index="not_opened">Non ouvert</label>
+			<label index="bounced">Bounced</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Nyhedsbrev</label>
@@ -348,9 +356,6 @@
 			<label index="stats_ok">Dati di log validi</label>
 			<label index="delete">Cancella</label>
 			<label index="delete_old_stats">Cancella le vecchie statistiche</label>
-		</languageKey>
-		<languageKey index="fr">
-			<label index="select_page">Veuillez sélectionner une page.</label>
 		</languageKey>
 		<languageKey index="es"></languageKey>
 		<languageKey index="nl" type="array">

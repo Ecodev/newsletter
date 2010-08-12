@@ -39,7 +39,8 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$this->additionalFields = array(
 			array('name' => 'number_of_sent', 'type' => 'int'),
 			array('name' => 'number_of_opened', 'type' => 'int'),
-			array('name' => 'number_of_bounce', 'type' => 'int'),
+			array('name' => 'number_of_not_opened', 'type' => 'int'),
+			array('name' => 'number_of_bounced', 'type' => 'int'),
 			array('name' => 'number_of_recipients', 'type' => 'int'),
 			array('name' => 'statistic_label_formatted', 'type' => 'string'),
 		);
@@ -61,7 +62,8 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 			$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
 			$record['number_of_sent'] = $record['number_of_recipients'];
 			$record['number_of_opened'] = $this->getNumberOfOpened($record['pid'], $record['begintime']);
-			$record['number_of_bounce'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
+			$record['number_of_not_opened'] = $record['number_of_sent'] - $record['number_of_opened'];
+			$record['number_of_bounced'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
 		}
 		return $records;
 	}

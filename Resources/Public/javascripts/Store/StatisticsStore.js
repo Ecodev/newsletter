@@ -29,10 +29,14 @@ TYPO3.Newsletter.Store.initStatistics = function() {
 			 * @param {Array} data
 			 */
 			load: function (store, data) {
-				console.log(789);
-//				if (store.getCount() > 0) {
-//					this.fireEvent('TYPO3.Newsletter.Store.Statistics.afterload', data);
-//				}
+				if (store.getCount() > 0) {
+					this.fireEvent('TYPO3.Newsletter.Store.Statistics.afterload', data);
+				}
+			},
+
+			'TYPO3.Newsletter.Store.Statistics.load': function(uid) {
+				this.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]', uid);
+				this.load();
 			}
 		}
 	});

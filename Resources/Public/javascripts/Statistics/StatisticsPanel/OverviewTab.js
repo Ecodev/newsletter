@@ -24,15 +24,15 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.Contain
 					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General',
 					ref: 'general'
 				},
-				{
-					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Time',
-					ref: 'general'
-				},
-				{
-					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph',
-					ref: 'general',
-					colspan: 2
-				}
+//				{
+//					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Time',
+//					ref: 'general'
+//				}
+//				{
+//					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph',
+//					ref: 'general',
+//					colspan: 2
+//				}
 //				{html:'2,2', },
 			]
 		};

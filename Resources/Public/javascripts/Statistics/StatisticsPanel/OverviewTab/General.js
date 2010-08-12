@@ -17,7 +17,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 		var config = {
 //			width: 400,
 //			height: 300,
-			style: "background-color: red",
+//			style: "background-color: red",
 			items: [
 				{
 					xtype: 'container',
@@ -46,13 +46,11 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 								data: [["xx", "aa", "fff", "cco"]]
 							}),
 
-							html:'panel 2',
-							emptyText: 'No images to display',
+							emptyText: 'No text to display',
 							tpl: new Ext.XTemplate(
 								'<tpl for=".">',
 									'<div class="thumb-wrap" id="{name}">',
-									'<span>Name: {name} {vorname}, {alter} Jahre',
-									'<input type="button" name="addButton" value="Add"/>',
+										'<span>Name: {name} {vorname}, {alter} Jahre',
 									'</div>',
 								'</tpl>'
 							),
@@ -60,26 +58,11 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 							width:150
 						},
 						{
-							flex:1,
-							store: new Ext.data.JsonStore({
-								fields: ['season', 'total'],
-								data: [{
-									season: 'Summer',
-									total: 150
-								},{
-									season: 'Fall',
-									total: 245
-								},{
-									season: 'Winter',
-									total: 117
-								},{
-									season: 'Spring',
-									total: 184
-								}]
-							}),
 							xtype: 'piechart',
+							store: TYPO3.Newsletter.Store.OverviewPieChart,
 							dataField: 'total',
-							categoryField: 'season',
+							categoryField: 'label',
+							flex:1,
 							//extra styles get applied to the chart defaults
 							extraStyle:
 							{
@@ -90,7 +73,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 									font:
 									{
 										family: 'Tahoma',
-										size: 13
+										size: 10
 									}
 								}
 							}

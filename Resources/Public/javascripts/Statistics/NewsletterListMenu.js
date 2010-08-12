@@ -54,8 +54,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 */
 	onafterload: function(data) {
 		this.setValue(data[0].id);
-		TYPO3.Newsletter.Store.Statistics.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]',data[0].id);
-		TYPO3.Newsletter.Store.Statistics.load();
+		TYPO3.Newsletter.Store.Statistics.fireEvent('TYPO3.Newsletter.Store.Statistics.load', data[0].id);
 //		this.fireEvent('TYPO3.Newsletter.Store.NewsletterList.onselect', data[0].id);
 //		TYPO3.Newsletter.Store.Statistics.on(
 //			'TYPO3.Newsletter.Store.NewsletterList.afterload',
@@ -72,11 +71,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 * @return void
 	 */
 	onselect: function() {
-//		var value = this.value - 0; // makes sure it is a number
-//		TYPO3.Devlog.LogStore.baseParams.limit = value;
-//		TYPO3.Devlog.UserInterface.container.gridPanel.pagebrowser.pageSize = value
-//		TYPO3.Devlog.LogStore.load();
-		console.log(this.getValue());
+		TYPO3.Newsletter.Store.Statistics.fireEvent('TYPO3.Newsletter.Store.Statistics.load', this.getValue());
 	}
 });
 
