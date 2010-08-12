@@ -19,3 +19,30 @@ $Id$
 #newsletterListMenu {
 	margin-bottom: 10px;
 }
+
+.t3-newsletter-span-statistic {
+	font-size: 120%;
+	margin-bottom: 10px;
+}
+
+.t3-newsletter-span-statistic span{
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.t3-newsletter-span-statistic-sent {
+	/*color: #83CAFF;*/
+	color: #000;
+}
+
+.t3-newsletter-span-statistic-opened {
+	color: #078207;
+}
+
+.t3-newsletter-span-statistic-not-opened {
+	color: #25CDF2;
+}
+
+.t3-newsletter-span-statistic-bounced {
+	color: #FFAA3C;
+}

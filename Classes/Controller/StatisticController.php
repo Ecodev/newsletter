@@ -65,7 +65,7 @@ class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Contro
 		// Retrieve all statistics from repository
 		$statistics = $this->statisticRepository->findAllByPid($statistic);
 		$this->view->assign('statistics', $statistics);
-		$this->view->assign('metaData', $this->statisticRepository->getMetaData());
+		$this->view->assign('metaData', $this->statisticRepository->getMetaDataForMultipleRecords());
 		#$this->request->getPluginName();
 	}
 
@@ -80,7 +80,7 @@ class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Contro
 		// Retrieve all statistics from repository
 		$statistic = $this->statisticRepository->findByUid($uid);
 		$this->view->assign('statistic', $statistic);
-		$this->view->assign('metaData', $this->statisticRepository->getMetaData());
+		$this->view->assign('metaData', $this->statisticRepository->getMetaDataForSingleRecord());
 	}
 }
 ?>

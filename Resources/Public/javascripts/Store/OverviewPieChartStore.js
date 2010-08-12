@@ -13,6 +13,9 @@ TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 		data: []
 	});
 
+	// Add method to listener TYPO3.Newsletter.Store.Statistics.afterload
+	// Basically the code bellow empties the data and replaces new ones
+	// for the piechart's graph
 	TYPO3.Newsletter.Store.Statistics.on(
 		'TYPO3.Newsletter.Store.Statistics.afterload',
 		function (records) {

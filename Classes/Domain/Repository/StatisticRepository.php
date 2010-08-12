@@ -42,6 +42,11 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 			array('name' => 'number_of_not_opened', 'type' => 'int'),
 			array('name' => 'number_of_bounced', 'type' => 'int'),
 			array('name' => 'number_of_recipients', 'type' => 'int'),
+			array('name' => 'percent_of_opened', 'type' => 'int'),
+			array('name' => 'percent_of_not_opened', 'type' => 'int'),
+			array('name' => 'percent_of_bounced', 'type' => 'int'),
+			array('name' => 'begintime_formatted', 'type' => 'string'),
+			array('name' => 'stoptime_formatted', 'type' => 'string'),
 			array('name' => 'statistic_label_formatted', 'type' => 'string'),
 		);
 	}
@@ -58,14 +63,20 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$records = $query->matching($query->equals('uid', $uid))
 				->execute();
 
-		foreach ($records as &$record) {
-			$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
-			$record['number_of_sent'] = $record['number_of_recipients'];
-			$record['number_of_opened'] = $this->getNumberOfOpened($record['pid'], $record['begintime']);
-			$record['number_of_not_opened'] = $record['number_of_sent'] - $record['number_of_opened'];
-			$record['number_of_bounced'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
+		$record = $records[0];
+		$record['begintime_formatted'] = $record['stoptime_formatted'] = '';
+		$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
+		$record['number_of_sent'] = $record['number_of_recipients'];
+		$record['number_of_opened'] = $this->getNumberOfOpened($record['pid'], $record['begintime']);
+		$record['number_of_not_opened'] = $record['number_of_sent'] - $record['number_of_opened'];
+		$record['number_of_bounced'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
+		$record['percent_of_opened'] = $record['percent_of_not_opened'] = $record['percent_of_bounced'] = 0;
+		if ($record['number_of_sent'] != 0) {
+			$record['percent_of_opened'] = round($record['number_of_opened'] * 100 / $record['number_of_sent'], 2);
+			$record['percent_of_not_opened'] = round($record['number_of_not_opened'] * 100 / $record['number_of_sent'], 2);
+			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_sent'], 2);
 		}
-		return $records;
+		return $record;
 	}
 
 	/**
@@ -104,7 +115,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 
 		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_sentlog', implode(' AND ', $condition));
 
-		return $numberOfRecipients;
+		return (int)$numberOfRecipients;
 	}
 
 	/**
@@ -127,7 +138,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 
 		$rs = $TYPO3_DB->sql_query($sql);
 		list($numberOfOpened) = $TYPO3_DB->sql_fetch_row($rs);
-		return $numberOfOpened;
+		return (int)$numberOfOpened;
 	}
 
 	/**
@@ -149,7 +160,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 
 		$rs = $TYPO3_DB->sql_query($sql);
 		list($numberOfBounce) = $TYPO3_DB->sql_fetch_row($rs);
-		return $numberOfBounce;
+		return (int)$numberOfBounce;
 	}
 
 	/**
@@ -159,7 +170,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	 *
 	 * @return array $metaData
 	 */
-	public function getMetaData() {
+	public function getMetaDataForMultipleRecords() {
 //		metaData: {
 //        // used by store to set its sortInfo
 //        "sortInfo":{
@@ -180,6 +191,22 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$metaData['fields'] = array_merge($this->getFieldMetaData($tableName), $this->additionalFields);
 		return $metaData;
 	}
+	/**
+	 * Get datasource's meta data for all statistics.
+	 * The method will return an array containing information for a JsonStore
+	 * ExtJS api: http://www.extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader
+	 *
+	 * @return array $metaData
+	 */
+	public function getMetaDataForSingleRecord() {
+		$tableName = 'tx_newsletter_lock';
+		$metaData['idProperty'] = 'uid';
+		$metaData['root'] = 'data';
+		$metaData['totalProperty'] = 'total';
+		$metaData['successProperty'] = 'success';
+		$metaData['fields'] = array_merge($this->getFieldMetaData($tableName), $this->additionalFields);
+		return $metaData;
+	}
 
 	/**
 	 * Get MetaData for fields.
@@ -195,7 +222,10 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$fieldsInTable = $TYPO3_DB->admin_get_fields($tableName);
 		$fieldsMetaData = array();
 		foreach ($fieldsInTable as $fieldName) {
-			if ($fieldName == 'crdate' || $fieldName == 'tstamp' || $fieldName == 'begintime' || $fieldName == 'stoptime') {
+			if ($fieldName['Field'] == 'crdate' ||
+					$fieldName['Field'] == 'tstamp' ||
+					$fieldName['Field'] == 'begintime' ||
+					$fieldName['Field'] == 'stoptime') {
 				$fieldsMetaData[] = array('name' => $fieldName['Field'], 'type' => 'date', 'dateFormat' => 'timestamp');
 			}
 			$fieldType = $fieldName['Type'];

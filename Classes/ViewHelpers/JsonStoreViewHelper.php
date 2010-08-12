@@ -52,34 +52,49 @@ class Tx_Newsletter_ViewHelpers_JsonStoreViewHelper extends Tx_Fluid_Core_ViewHe
 		// and deduct the view helper name
 		$viewHelpers = array();
 		if (count($items) > 0) {
-			$keys = array_keys($items[0]);
-			foreach ($keys as $key) {
-				if (strpos($key, '_formatted')) {
-					$viewHelper = str_replace('_formatted', '', $key);
+			foreach ($metaData['fields'] as $field) {
+				if (strpos($field['name'], '_formatted')) {
+					$viewHelper = str_replace('_formatted', '', $field['name']);
 					$viewHelperParts = explode('_', $viewHelper);
 					$viewHelperParts = array_map('ucfirst', $viewHelperParts);
-					$viewHelpers[$key] = 'Tx_Newsletter_ViewHelpers_Format_' . implode('', $viewHelperParts) . 'ViewHelper';
+					$viewHelpers[$field['name']] = 'Tx_Newsletter_ViewHelpers_Format_' . implode('', $viewHelperParts) . 'ViewHelper';
 				}
 			}
 		}
-
+		
 		// Loop around the found viewhelpers...
 		// and calls the right view helper
 		if (count($viewHelpers) > 0) {
 			foreach ($viewHelpers as $keyName => $viewHelperName) {
 				$objectHelper = t3lib_div::makeInstance($viewHelperName);
-				foreach ($items as &$item) {
-					$item[$keyName] = $objectHelper->render($item);
+
+				// It can be a multiple records or a single record
+				if ($metaData['root'] == 'data') {
+					$items[$keyName] = $objectHelper->render($items);
+				}
+				else {
+					foreach ($items as &$item) {
+						$item[$keyName] = $objectHelper->render($item);
+					}
 				}
 			}
 		}
 
 		// Defines list of fields
 		$datasource['metaData'] = $metaData;
-		$datasource['total'] = count($items);
-		$datasource['records'] = $items;
 		$datasource['success'] = TRUE;
-		$viewHelperName = 'debug';
+
+		// It can be a multiple records or a single record
+		// data means the data source will have only one record
+		if ($metaData['root'] == 'data') {
+			$datasource['total'] = 1;
+			$datasource['data'] = $items;
+		}
+		else {
+			$datasource['total'] = count($items);
+			$datasource['records'] = $items;
+		}
+		
 		$json = json_encode($datasource);
 		if ($indent) {
 			$json = $this->indentJSON($json);

@@ -117,6 +117,12 @@
 			<label index="opened">Opened</label>
 			<label index="not_opened">Not opened</label>
 			<label index="bounced">Bounced</label>
+			<label index="emails_sent">emails sent</label>
+			<label index="emails_opened">emails opened</label>
+			<label index="emails_not_opened">emails not opened</label>
+			<label index="emails_bounced">emails bounced</label>
+			<label index="started">Started on</label>
+			<label index="ended">Ended on</label>
 		</languageKey>
 		<languageKey index="fr">
 			<label index="select_page">Veuillez sélectionner une page.</label>
