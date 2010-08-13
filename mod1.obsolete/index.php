@@ -215,7 +215,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		// Store
 		$files[] = 'Store/Bootstrap.js';
-		$files[] = 'Store/StatisticsStore.js';
+		$files[] = 'Store/StatisticStore.js';
 
 		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';

@@ -2,9 +2,9 @@
 
 Ext.ns("TYPO3.Newsletter.Store");
 
-TYPO3.Newsletter.Store.initStatistics = function() {
+TYPO3.Newsletter.Store.initStatistic = function() {
 	 return new Ext.data.JsonStore({
-		storeId: 'statistics',
+		storeId: 'statistic',
 		autoLoad: false,
 		remoteSort: true,
 		baseParams: {
@@ -24,17 +24,17 @@ TYPO3.Newsletter.Store.initStatistics = function() {
 			/**
 			 * Called when store is loaded
 			 *
-			 * @event TYPO3.Newsletter.Store.Statistics.afterload
+			 * @event TYPO3.Newsletter.Store.Statistic.afterload
 			 * @param {Ext.data.JsonStore} store
 			 * @param {Array} data
 			 */
 			load: function (store, data) {
 				if (store.getCount() > 0) {
-					this.fireEvent('TYPO3.Newsletter.Store.Statistics.afterload', data);
+					this.fireEvent('TYPO3.Newsletter.Store.Statistic.afterload', data);
 				}
 			},
 
-			'TYPO3.Newsletter.Store.Statistics.load': function(uid) {
+			'TYPO3.Newsletter.Store.Statistic.load': function(uid) {
 				this.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]', uid);
 				this.load();
 			}

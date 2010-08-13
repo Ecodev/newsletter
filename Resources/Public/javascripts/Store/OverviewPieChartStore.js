@@ -10,14 +10,14 @@ TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 //		autoLoad: false,
 		remoteSort: false,
 		fields: ['label', 'total'],
-		data: []
+		data: {}
 	});
 
-	// Add method to listener TYPO3.Newsletter.Store.Statistics.afterload
+	// Add method to listener TYPO3.Newsletter.Store.Statistic.afterload
 	// Basically the code bellow empties the data and replaces new ones
 	// for the piechart's graph
-	TYPO3.Newsletter.Store.Statistics.on(
-		'TYPO3.Newsletter.Store.Statistics.afterload',
+	TYPO3.Newsletter.Store.Statistic.on(
+		'TYPO3.Newsletter.Store.Statistic.afterload',
 		function (records) {
 			var record;
 			record = records[0];
@@ -40,5 +40,6 @@ TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 		},
 		store
 	);
+		
 	return store;
 };

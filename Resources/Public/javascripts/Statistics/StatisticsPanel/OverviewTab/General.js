@@ -31,7 +31,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 					items: [
 						{
 							xtype: 'dataview',
-							store: TYPO3.Newsletter.Store.Statistics,
+							store: TYPO3.Newsletter.Store.Statistic,
 							emptyText: 'No text to display',
 							tpl: new Ext.XTemplate(
 								'<tpl for=".">',

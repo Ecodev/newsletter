@@ -231,9 +231,10 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 
 		// Store
 		$files[] = 'Store/Bootstrap.js';
-		$files[] = 'Store/StatisticsStore.js';
+		$files[] = 'Store/StatisticStore.js';
 		$files[] = 'Store/NewsletterListStore.js';
 		$files[] = 'Store/OverviewPieChartStore.js';
+		$files[] = 'Store/ClickedLinksStore.js';
 
 		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';
