@@ -24,7 +24,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGraph = Ext.extend(Ext.C
 				}
 			]
 		};
-		Ext.apply(this, config);
+		Ext.apply(this, config); 
 		TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGraph.superclass.initComponent.call(this);
 	}
 });
