@@ -254,6 +254,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$files[] = 'Statistics/NewsletterListMenu.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
 		$files[] = 'Statistics/StatisticsPanel/LinkTab.js';
+		$files[] = 'Statistics/StatisticsPanel/LinkTab/LinkGrid.js';
+		$files[] = 'Statistics/StatisticsPanel/LinkTab/LinkGraph.js';
 		$files[] = 'Statistics/StatisticsPanel/EmailTab.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab/General.js';
 //		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Graph.js';

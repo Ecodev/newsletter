@@ -3,7 +3,7 @@
 Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph
+ * @class TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph
  * @namespace TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
  * @extends Ext.Container
  *
@@ -11,7 +11,7 @@ Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph = Ext.extend(Ext.Container, {
+TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -25,8 +25,8 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph = Ext.extend(Ext.C
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph.superclass.initComponent.call(this);
+		TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph', TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph);
+Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph', TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph);

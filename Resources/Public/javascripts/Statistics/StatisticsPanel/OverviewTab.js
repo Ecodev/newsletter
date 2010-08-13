@@ -29,7 +29,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.Contain
 //					ref: 'general'
 //				}
 //				{
-//					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.Graph',
+//					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.OverviewGraph',
 //					ref: 'general',
 //					colspan: 2
 //				}

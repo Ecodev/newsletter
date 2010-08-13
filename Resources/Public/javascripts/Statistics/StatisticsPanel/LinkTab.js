@@ -21,7 +21,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Container, 
 			},
 			items: [
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.General',
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid',
 					ref: 'general'
 				},
 			]
