@@ -29,11 +29,6 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 //						pack: 'start',
 					},
 					items: [
-//						{
-//							xtype: 'button',
-//							text: 'asdf',
-////							flex:1
-//						},
 						{
 							xtype: 'dataview',
 							store: TYPO3.Newsletter.Store.Statistics,

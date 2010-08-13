@@ -3,7 +3,7 @@
 Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab
+ * @class TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab
  * @namespace TYPO3.Newsletter.Statistics.StatisticsPanel
  * @extends Ext.Container
  *
@@ -11,7 +11,7 @@ Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel");
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab = Ext.extend(Ext.Container, {
+TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -31,8 +31,8 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab = Ext.extend(Ext.Container
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab.superclass.initComponent.call(this);
+		TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab', TYPO3.Newsletter.Statistics.StatisticsPanel.EmailsTab);
+Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab', TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab);

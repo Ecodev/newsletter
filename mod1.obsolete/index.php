@@ -235,8 +235,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$files[] = 'Statistics/StatisticsPanel.js';
 		$files[] = 'Statistics/NewsletterListMenu.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
-		$files[] = 'Statistics/StatisticsPanel/LinksTab.js';
-		$files[] = 'Statistics/StatisticsPanel/EmailsTab.js';
+		$files[] = 'Statistics/StatisticsPanel/LinkTab.js';
+		$files[] = 'Statistics/StatisticsPanel/EmailTab.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab/General.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Graph.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Time.js';

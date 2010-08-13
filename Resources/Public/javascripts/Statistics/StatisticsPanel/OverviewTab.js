@@ -33,7 +33,6 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.Contain
 //					ref: 'general',
 //					colspan: 2
 //				}
-//				{html:'2,2', },
 			]
 		};
 		Ext.apply(this, config);

@@ -16,7 +16,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		
 		var config = {
-			activeTab: 0,
+			activeTab: 1,
 //			hideBorders: true,
 //			hideLabel: true,
 //			bodyBorder: false,

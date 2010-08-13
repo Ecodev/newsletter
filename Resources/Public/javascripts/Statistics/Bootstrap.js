@@ -22,11 +22,11 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 			},
 			{
 				title: TYPO3.Newsletter.Language.links_tab,
-				itemId: 'linksTab'
+				itemId: 'linkTab'
 			},
 			{
 				title: TYPO3.Newsletter.Language.emails_tab,
-				itemId: 'emailsTab'
+				itemId: 'emailTab'
 			}
 		]);
 
