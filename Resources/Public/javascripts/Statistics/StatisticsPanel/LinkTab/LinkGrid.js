@@ -14,16 +14,17 @@ Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab");
 TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
-		var config = {
-			width: 400,
-			style: "background-color: blue",
-			items: [
-				{
-					xtype: 'button',
-					text: 'asdf'
-				}
-			]
-		};
+//		var config = {
+//			width: 400,
+//			style: "background-color: blue",
+//			items: [
+//				{
+//					xtype: 'button',
+//					text: 'asdf'
+//				}
+//			]
+//		};
+
 		Ext.apply(this, config);
 		TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid.superclass.initComponent.call(this);
 	}
