@@ -15,19 +15,16 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.Container,
 
 	initComponent: function() {
 		var config = {
+			layout:'table',
+			width: 'auto',
+			layoutConfig: {
+				columns: 1
+			},
 			items: [
 				{
-					xtype: 'button',
-					text: 'asdf'
+					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid',
+					ref: 'emailGrid'
 				},
-				{
-					xtype: 'button',
-					text: 'asdf'
-				},
-				{
-					xtype: 'button',
-					text: 'asdf'
-				}
 			]
 		};
 		Ext.apply(this, config);

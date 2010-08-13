@@ -28,6 +28,7 @@ TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.Ab
 		TYPO3.Newsletter.Store.Statistic = TYPO3.Newsletter.Store.initStatistic();
 		TYPO3.Newsletter.Store.OverviewPieChart = TYPO3.Newsletter.Store.initOverviewPieChart();
 		TYPO3.Newsletter.Store.ClickedLink = TYPO3.Newsletter.Store.initClickedLink();
+		TYPO3.Newsletter.Store.SentEmail = TYPO3.Newsletter.Store.initSentEmail();
 	}
 });
 

@@ -235,6 +235,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$files[] = 'Store/NewsletterListStore.js';
 		$files[] = 'Store/OverviewPieChartStore.js';
 		$files[] = 'Store/ClickedLinkStore.js';
+		$files[] = 'Store/SentEmailStore.js';
 
 		// User interfaces
 		$files[] = 'UserInterface/Bootstrap.js';
@@ -258,6 +259,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$files[] = 'Statistics/StatisticsPanel/LinkTab/LinkGrid.js';
 		$files[] = 'Statistics/StatisticsPanel/LinkTab/LinkGraph.js';
 		$files[] = 'Statistics/StatisticsPanel/EmailTab.js';
+		$files[] = 'Statistics/StatisticsPanel/EmailTab/EmailGrid.js';
+		$files[] = 'Statistics/StatisticsPanel/EmailTab/EmailGraph.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab/General.js';
 //		$files[] = 'Statistics/StatisticsPanel/OverviewTab/Graph.js';
 
