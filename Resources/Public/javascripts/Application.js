@@ -103,7 +103,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 			this,
 			function(e) {
 				if (window.console && window.console.log) {
-					console.log(e, arguments);
+//					console.log(e, arguments);
 				}
 			}
 		);

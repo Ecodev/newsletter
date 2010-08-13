@@ -16,6 +16,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Container, 
 	initComponent: function() {
 		var config = {
 			layout:'table',
+			width: 'auto',
 			layoutConfig: {
 				columns: 1
 			},

@@ -48,6 +48,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 			array('name' => 'begintime_formatted', 'type' => 'string'),
 			array('name' => 'stoptime_formatted', 'type' => 'string'),
 			array('name' => 'statistic_label_formatted', 'type' => 'string'),
+			array('name' => 'clicked_links'),
 		);
 	}
 
@@ -76,7 +77,43 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 			$record['percent_of_not_opened'] = round($record['number_of_not_opened'] * 100 / $record['number_of_sent'], 2);
 			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_sent'], 2);
 		}
+		$record['clicked_links'] = $this->getClickedLinks($record['begintime'], $record['number_of_opened']);
 		return $record;
+	}
+
+	/**
+	 * Get the number of recipient for a newsletter
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param int $begintime: the time when the newsletter was sent
+	 * @param int $numberOfOpened
+	 * @return int $fieldsMetaData: list of metadata for the given $fields
+	 */
+	protected function getClickedLinks($begintime, $numberOfOpened) {
+		global $TYPO3_DB;
+
+		$sql = "SELECT linkid AS link_id, SUM(opened) AS number_of_opened, MIN(url) AS url
+                       FROM tx_newsletter_sentlog
+                       INNER JOIN tx_newsletter_clicklinks ON sentlog = uid
+                       WHERE begintime = $begintime
+                       AND linktype = 'html'
+                       AND opened = 1
+                       GROUP BY 1
+                       ORDER BY 1";
+
+
+		$records = array();
+		$res = $TYPO3_DB->sql_query($sql);
+		while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
+			$row['percentage_of_opened'] = 0;
+			if ($numberOfOpened != 0) {
+				$row['percentage_of_opened'] = round($row['number_of_opened'] * 100 / $numberOfOpened, 2);
+			}
+			$row['total_number_of_opened'] = $numberOfOpened;
+			$records[] = $row;
+		}
+		return $records;
 	}
 
 	/**
@@ -101,6 +138,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 
 	/**
 	 * Get the number of recipient for a newsletter
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
 	 *
 	 * @global t3lib_DB $TYPO3_DB
 	 * @param int $pid: page id where newsletter is stored

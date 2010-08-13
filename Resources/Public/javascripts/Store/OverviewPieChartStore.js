@@ -21,7 +21,11 @@ TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 		function (records) {
 			var record;
 			record = records[0];
+
+			// Empties records firstly
 			this.removeAll();
+
+			//  Adds records
 			this.add(new Ext.data.Record({
 					label: TYPO3.Newsletter.Language.opened,
 					total: record.json.number_of_opened
