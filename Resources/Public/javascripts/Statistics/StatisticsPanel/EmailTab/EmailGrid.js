@@ -52,7 +52,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 			],
 
 			height: 300
-		}; // eo config object
+		};
 
 		Ext.apply(this, config);
 		TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid.superclass.initComponent.call(this);
