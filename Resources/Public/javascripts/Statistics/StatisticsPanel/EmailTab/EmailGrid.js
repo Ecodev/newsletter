@@ -17,7 +17,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 
 		var config = {
 			// store
-			store: TYPO3.Newsletter.Store.EmailSent, 
+			store: TYPO3.Newsletter.Store.EmailSent,
 
 			// column model
 			columns:[
