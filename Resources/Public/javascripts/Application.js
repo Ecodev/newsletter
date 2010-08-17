@@ -41,12 +41,70 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 		this._invokeBootstrappers();
 		this._initStateProvider();
 		this._initStateDefaultValue();
+		this._registerEventBeforeLoading();
+		this._registerEventAfterLoading();
 
 		Ext.QuickTips.init();
 
 		this.fireEvent('TYPO3.Newsletter.Application.afterBootstrap');
 
 		this._initializeHistoryManager();
+	},
+
+	/**
+	 * Hides the loading message of the application
+	 *
+	 */
+	_registerEventBeforeLoading: function() {
+		this.on(
+			'TYPO3.Newsletter.Application.beforeload',
+			function() {
+				Ext.get('loading-mask').setStyle({
+					visibility: 'visible',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					opacity: 0.4
+				});
+				Ext.get('loading').setStyle({
+					visibility: 'visible',
+					opacity: 1
+				});
+			},
+			this
+		)
+	},
+	/**
+	 * Hides the loading message of the application
+	 *
+	 */
+	_registerEventAfterLoading: function() {
+		this.on(
+			'TYPO3.Newsletter.Application.afterload',
+			function() {
+				var loading;
+				loading = Ext.get('loading');
+
+				//  Hide loading message
+				loading.fadeOut({
+					duration: 0.2,
+					remove: false
+				});
+
+				//  Hide loading mask
+				Ext.get('loading-mask').shift({
+					xy: loading.getXY(),
+					width: loading.getWidth(),
+					height: loading.getHeight(),
+					remove: false,
+					duration: 0.35,
+					opacity: 0,
+					easing: 'easeOut'
+				});
+			},
+			this
+		)
 	},
 
 	/**

@@ -1,3 +1,5 @@
+"use strict";
+
 Ext.ns("TYPO3.Newsletter.Application");
 
 /**
@@ -10,24 +12,29 @@ Ext.ns("TYPO3.Newsletter.Application");
 TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable, {
 
 	/**
-	 * This method is called by the main application, and inside, you should
-	 * register event listeners as needed.
-	 *
-	 * Example:
-	 * <pre>TYPO3.Newsletter.Application.on([name of event], [callback], [scope]);</pre>
-	 *
-	 * @method initialize
-	 */
-
-	/**
 	 * Add items to a menu.
 	 *
-	 * TODO: Examples
 	 * @param {Array} path The path where the menu items should be added. The first element is the menu-ID, the other elements are the itemIDs of the menu items.
-	 * @param {Array} The items to add
+	 * @param {Array} items The items to add
 	 */
 	addToMenu: function(path, items) {
 		TYPO3.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
+	},
+
+	/**
+	 * Returns an item menu corresponding to the passing item's name.
+	 *
+	 * @param {string} itemName the name of the item that will be retrieved from the array
+	 * @return object: the found menu item
+	 */
+	getMenuItem: function(itemName) {
+		var result = {};
+		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
+			if (menuItem.itemId == itemName) {
+				result = menuItem;
+			}
+		});
+		return result;
 	},
 
 	/**
@@ -114,7 +121,7 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 					element.setVisible(false)
 				});
 				
-				// @todo: understand what is the difference with the 2 lines bellow as it seems to be both working solution.
+				// @understand what is the difference with the two lines bellow as it seems to be both working solution.
 				// callback.call(this, matches); 
 				callback.createDelegate(this, matches).call();
 			}

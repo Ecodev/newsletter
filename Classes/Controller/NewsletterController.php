@@ -123,6 +123,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$markers = array();
 		$markers['CSH'] = '';
 		$markers['FUNC_MENU'] = '';
+		$markers['LOADING'] = $LANG->getLL('loading');
 
 		// Access check!
 		if ($this->id)   {
@@ -142,17 +143,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
 		$this->content .= $this->doc->endPage();
 		echo $this->content;
-
-
-		#$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_newsletterRepository');
-		/* @var $newsletterRepository Tx_Newsletter_Domain_Repository_newsletterRepository */
-		
-			// Retrieve all newsletters from repository
-		#$newsletters = $newsletterRepository->findAll();
-		
-		#$this->view->assign('newsletters', $newsletters);
 	}
-
 
 	/**
 	 * get doc header buttons

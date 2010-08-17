@@ -23,7 +23,7 @@ TYPO3.Newsletter.Store.initNewsletterList = function() {
 		listeners : {
 
 			/**
-			 * Called when store is loaded
+			 * Called after store is loaded
 			 *
 			 * @event TYPO3.Newsletter.Store.NewsletterList.afterload
 			 * @param {Ext.data.JsonStore} store

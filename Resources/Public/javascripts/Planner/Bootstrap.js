@@ -10,6 +10,10 @@ Ext.ns("TYPO3.Newsletter.Planner");
  * $Id$
  */
 TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
+
+	// Properties
+	moduleName: 'planner',
+
 	initialize: function() {
 
 		/**
@@ -30,6 +34,12 @@ TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.
 				TYPO3.Newsletter.UserInterface.contentArea.add(component);
 				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
 			}
+
+			// temporary line: makes the loading message disappear
+			TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterload');
+
+			// Defines the menu as loaded
+			this.getMenuItem(this.moduleName).isLoaded = true;
 			
 			// Shows up the latter panel
 			component.setVisible(true);

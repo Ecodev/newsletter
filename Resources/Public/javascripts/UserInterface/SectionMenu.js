@@ -14,7 +14,6 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var config = {
 			renderTo: 't3-newsletter-menu',
-//			title: 'asdf',
 			layout: 'hbox',
 			width: 300,
 //			layoutConfig: {
@@ -50,6 +49,10 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 						var token = menuItem.itemId;
 						Ext.state.Manager.set('token', token);
 						Ext.History.add(token);
+						if (! menuItem.isLoaded) {
+							TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforeload');
+							menuItem.isLoaded = true;
+						}
 					}
 				}
 			);

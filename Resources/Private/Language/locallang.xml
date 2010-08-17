@@ -126,12 +126,14 @@
 			<label index="percentage_of_opened">% of opened</label>
 			<label index="number_of_opened"># of opened</label>
 			<label index="link_id">#</label>
+			<label index="loading">Loading. Please wait...</label>
 		</languageKey>
 		<languageKey index="fr">
 			<label index="select_page">Veuillez sélectionner une page.</label>
 			<label index="opened">Ouvert</label>
 			<label index="not_opened">Non ouvert</label>
 			<label index="bounced">Bounced</label>
+			<label index="loading">Chargement. Veuillez patienter...</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Nyhedsbrev</label>

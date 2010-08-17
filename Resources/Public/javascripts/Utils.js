@@ -19,7 +19,6 @@ TYPO3.Newsletter.Utils = {};
  *
  * @param {Object/Array} o Object or array to clone
  * @return {Object/Array} Deep clone of an object or an array
- * @author Ing. Jozef Sakáloš
  */
 TYPO3.Newsletter.Utils.clone = function(o) {
 	if (!o || 'object' !== typeof o) {
