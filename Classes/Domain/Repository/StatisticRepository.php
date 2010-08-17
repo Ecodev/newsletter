@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * A repository for Statistics
+ * A repository for Statistic
  */
 class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Persistence_Repository {
 
@@ -79,7 +79,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_sent'], 2);
 		}
 		$record['clicked_links'] = $this->getClickedLinks($record['begintime'], $record['number_of_opened']);
-		$record['sent_emails'] = $this->getSentEmails($record['begintime'], $record['number_of_opened']);
+		$record['sent_emails'] = $this->getSentEmails($record['begintime']);
 		return $record;
 	}
 
@@ -95,27 +95,31 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	protected function getSentEmails($begintime, $numberOfOpened) {
 		global $TYPO3_DB;
 
-		$sql = "SELECT linkid AS link_id, SUM(opened) AS number_of_opened, MIN(url) AS url
-                       FROM tx_newsletter_sentlog
-                       INNER JOIN tx_newsletter_clicklinks ON sentlog = uid
-                       WHERE begintime = $begintime
-                       AND linktype = 'html'
-                       AND opened = 1
-                       GROUP BY 1
-                       ORDER BY 1";
+		/* Get list of receivers */
+		$pid = t3lib_div::_GET('pid');
+	    $rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = $pid");
+	    $page = $TYPO3_DB->sql_fetch_assoc($rs);
+		$targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
 
-
-		$records = array();
-		$res = $TYPO3_DB->sql_query($sql);
-		while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
-			$row['percentage_of_opened'] = 0;
-			if ($numberOfOpened != 0) {
-				$row['percentage_of_opened'] = round($row['number_of_opened'] * 100 / $numberOfOpened, 2);
-			}
-			$row['total_number_of_opened'] = $numberOfOpened;
-			$records[] = $row;
+	    foreach ($targets as $tid) {
+			$recipients = $this->getRecipients($tid);
 		}
-		return $records;
+		return $recipients;
+	}
+
+	/**
+	 * This is the object factory, without init(), for all directmail targets.
+	 *
+	 * @param     integer     Uid of a tx_directmail_target from the database.
+	 * @return    object      Of directmail_target type.
+	 */
+	protected function getRecipients($uid) {
+		global $TYPO3_DB;
+
+		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_targets WHERE uid = $uid");
+		$record = $TYPO3_DB->sql_fetch_assoc($rs);
+		$repository = new Tx_Newsletter_Domain_Repository_RecipientRepository();
+		return $repository->findAllByRecipientType($record);
 	}
 
 	/**
@@ -239,7 +243,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	}
 
 	/**
-	 * Get datasource's meta data for all statistics.
+	 * Get datasource's meta data for statistic.
 	 * The method will return an array containing information for a JsonStore
 	 * ExtJS api: http://www.extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader
 	 *
@@ -267,7 +271,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		return $metaData;
 	}
 	/**
-	 * Get datasource's meta data for all statistics.
+	 * Get datasource's meta data for statistic.
 	 * The method will return an array containing information for a JsonStore
 	 * ExtJS api: http://www.extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader
 	 *
