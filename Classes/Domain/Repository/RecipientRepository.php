@@ -57,7 +57,9 @@
 		$request = $record['rawsql'];
 		if (! preg_match('/UPDATE|DELETE|INSERT|pwd|password/isU', $request)) {
 			$res = $TYPO3_DB->sql_query($record['rawsql']);
+			$loop = 0;
 			while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
+				$row['recipient_id'] = ++$loop;
 				$records[] = $row;
 			}
 		}
