@@ -57,7 +57,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 	 */
 	_renderEmail: function(value, parent, record) {
 		return String.format('<a href="mailto:{0}">{0}</a>', value);
-	},
+	}
 
 });
 

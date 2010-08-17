@@ -229,6 +229,9 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$files[] = 'Application/MenuRegistry.js';
 		$files[] = 'Application/AbstractBootstrap.js';
 
+		// Override
+		$files[] = 'Override/Chart.js';
+
 		// Store
 		$files[] = 'Store/Bootstrap.js';
 		$files[] = 'Store/StatisticStore.js';

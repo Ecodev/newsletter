@@ -16,7 +16,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		
 		var config = {
-			activeTab: 2,
+			activeTab: 0,
 //			hideBorders: true,
 //			hideLabel: true,
 //			bodyBorder: false,
@@ -47,8 +47,6 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 					modules.push(
 						{
 							title: subMenuItem.title,
-		//					itemId: menuItem.itemId,
-//							iconCls: 't3-newsletter-button-' + subMenuItem.itemId,
 							items: [
 								{
 									xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.' + xtypeName,
