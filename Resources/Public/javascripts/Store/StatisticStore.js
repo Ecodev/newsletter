@@ -32,7 +32,7 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 			load: function (store, data) {
 				if (store.getCount() > 0) {
 					this.fireEvent('TYPO3.Newsletter.Store.Statistic.afterload', data);
-					TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterload');
+					TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
 				}
 			},
 
@@ -44,7 +44,7 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 			 * @param {int} uid: the uid of the newsletter to load
 			 */
 			'TYPO3.Newsletter.Store.Statistic.beforeload': function(uid) {
-				TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforeload');
+				TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforebusy');
 				this.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]', uid);
 				this.load();
 			}

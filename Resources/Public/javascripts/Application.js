@@ -57,7 +57,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_registerEventBeforeLoading: function() {
 		this.on(
-			'TYPO3.Newsletter.Application.beforeload',
+			'TYPO3.Newsletter.Application.beforebusy',
 			function() {
 				Ext.get('loading-mask').setStyle({
 					visibility: 'visible',
@@ -81,7 +81,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_registerEventAfterLoading: function() {
 		this.on(
-			'TYPO3.Newsletter.Application.afterload',
+			'TYPO3.Newsletter.Application.afterbusy',
 			function() {
 				var loading;
 				loading = Ext.get('loading');

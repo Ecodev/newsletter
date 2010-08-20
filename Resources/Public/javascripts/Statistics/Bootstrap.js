@@ -53,6 +53,9 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
 			}
 
+			console.log(123);
+			return;
+
 			// Loads the first newsletter's statistics when clicking on the module button
 			// Makes sense when the page was not loaded with the current module enabled (not anchor #statistics)
 			var menu, store;

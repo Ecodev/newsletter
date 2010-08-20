@@ -36,7 +36,7 @@ TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.
 			}
 
 			// temporary line: makes the loading message disappear
-			TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterload');
+			TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
 
 			// Defines the menu as loaded
 			this.getMenuItem(this.moduleName).isLoaded = true;

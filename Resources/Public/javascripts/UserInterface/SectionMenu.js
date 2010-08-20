@@ -50,7 +50,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 						Ext.state.Manager.set('token', token);
 						Ext.History.add(token);
 						if (! menuItem.isLoaded) {
-							TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforeload');
+							TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforebusy');
 							menuItem.isLoaded = true;
 						}
 					}
