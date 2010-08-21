@@ -70,3 +70,17 @@ $Id$
      padding: 5px 30px;
      display: block;
 }
+
+.t3-newsletter-div-no-statistics {
+	margin-top: 30px;
+	font-size: 12pt;
+}
+
+.t3-newsletter-img-no-statistics {
+	margin-top: 30px;
+	margin-left: 80px;
+}
+
+.t3-newsletter-hidden {
+	display: none;
+}

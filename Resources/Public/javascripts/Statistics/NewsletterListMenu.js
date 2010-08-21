@@ -46,7 +46,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	},
 
 	/**
-	 * Defines behaviour on change value
+	 * Defines behaviour after component is loaded
 	 *
 	 * @access public
 	 * @method onafterrender
@@ -54,7 +54,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 */
 	onafterload: function(data) {
 		this.setValue(data[0].id);
-		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.beforeload', data[0].id);
+		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.load', data[0].id);
 	},
 
 	/**
@@ -65,7 +65,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 * @return void
 	 */
 	onselect: function() {
-		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.beforeload', this.getValue());
+		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.load', this.getValue());
 	}
 });
 

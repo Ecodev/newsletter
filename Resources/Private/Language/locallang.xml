@@ -127,6 +127,7 @@
 			<label index="number_of_opened"># of opened</label>
 			<label index="link_id">#</label>
 			<label index="loading">Loading. Please wait...</label>
+			<label index="no_statistics">No statistics available for this page.</label>
 		</languageKey>
 		<languageKey index="fr">
 			<label index="select_page">Veuillez sélectionner une page.</label>

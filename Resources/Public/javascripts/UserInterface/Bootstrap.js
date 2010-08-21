@@ -20,7 +20,7 @@ TYPO3.Newsletter.UserInterface.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applic
 				itemId: 'planner'
 			},
 			{
-				text: TYPO3.Newsletter.Language.statistics_button,
+				text: TYPO3.Newsletter.Language.statistics_button + ' (' + TYPO3.Newsletter.Data.numberOfStatistics + ')',
 				itemId: 'statistics'
 			}
 		]);

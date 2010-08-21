@@ -56,14 +56,14 @@ class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Contro
 	 */
 	public function indexAction($pid) {
 
-		$statistic = new Tx_Newsletter_Domain_Model_Statistic();
-		$statistic->setPid($pid);
+//		$statistic = new Tx_Newsletter_Domain_Model_Statistic();
+//		$statistic->setPid($pid);
 
 		#$arguments = $this->request->getArguments();
 		#$pid = filter_var(t3lib_div::_GET('pid'), FILTER_VALIDATE_INT, array("min_range"=> 0));
 		
 		// Retrieve all statistics from repository
-		$statistics = $this->statisticRepository->findAllByPid($statistic);
+		$statistics = $this->statisticRepository->findAllByPid($pid);
 		$this->view->assign('statistics', $statistics);
 		$this->view->assign('metaData', $this->statisticRepository->getMetaDataForMultipleRecords());
 		#$this->request->getPluginName();

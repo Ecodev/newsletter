@@ -53,25 +53,51 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
 			}
 
-			console.log(123);
-			return;
-
-			// Loads the first newsletter's statistics when clicking on the module button
-			// Makes sense when the page was not loaded with the current module enabled (not anchor #statistics)
-			var menu, store;
-			menu = TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu;
-			store = TYPO3.Newsletter.Store.NewsletterList;
-			if (menu.getValue() == '' && store.getAt(0)) {
-				menu.setValue(store.getAt(0).json.uid);
-				menu.fireEvent('select');
-			}
-			
-			// Defines the menu as loaded
+			// Defines the current module as loaded
 			this.getMenuItem(this.moduleName).isLoaded = true;
 
-			// Shows up the latter panel
+			// Shows up the panel
 			component.setVisible(true);
+
+			// Check wheter there are staticis for the page.
+			// If not load a special panel for that case.
+			if (TYPO3.Newsletter.Data.numberOfStatistics == 0) {
+				this._loadNoStatisticsPanel();
+			}
+			else {
+				this._loadStatisticsInCaseNotAlreadyLoaded();
+			}
+
+			
 		});
+	},
+
+	/**
+	 * Loade the no statistics panel and hide not wanted components
+	 *
+	 * @return void
+	 */
+	_loadNoStatisticsPanel: function() {
+		TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
+		TYPO3.Newsletter.UserInterface.contentArea.statistics.noStatisticsPanel.removeClass('t3-newsletter-hidden');
+		TYPO3.Newsletter.UserInterface.contentArea.statistics.statisticsPanel.hide();
+		TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu.hide();
+	},
+
+	/**
+	 * Loads the first newsletter's statistics when clicking on the module button
+	 * This will prevent a bug when the page was not loaded firstly (not anchor #statistics)
+	 *
+	 * @return void
+	 */
+	_loadStatisticsInCaseNotAlreadyLoaded: function() {
+		var menu, store;
+		menu = TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu;
+		store = TYPO3.Newsletter.Store.NewsletterList;
+		if (menu.getValue() == '' && store.getAt(0)) {
+			menu.setValue(store.getAt(0).json.uid);
+			menu.fireEvent('select');
+		}
 	}
 });
 

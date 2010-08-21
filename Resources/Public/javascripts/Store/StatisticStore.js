@@ -23,7 +23,7 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 
 			/**
 			 * Fired after the store is loaded.
-			 * The event's name is a bit missleading as the event is fired after load.
+			 * The event's name is a bit missleading as the event is fired after loading.
 			 *
 			 * @event load
 			 * @param {Ext.data.JsonStore} store
@@ -40,11 +40,11 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 			 * Fired when User has changed the newsletter in drop down menu.
 			 * The function will load the statistics for a newsletter.
 			 *
-			 * @event TYPO3.Newsletter.Store.Statistic.beforeload
+			 * @event TYPO3.Newsletter.Store.Statistic.load
 			 * @param {int} uid: the uid of the newsletter to load
 			 */
-			'TYPO3.Newsletter.Store.Statistic.beforeload': function(uid) {
-				TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.beforebusy');
+			'TYPO3.Newsletter.Store.Statistic.load': function(uid) {
+				TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.busy');
 				this.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]', uid);
 				this.load();
 			}

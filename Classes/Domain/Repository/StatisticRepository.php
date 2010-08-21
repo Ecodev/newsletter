@@ -54,6 +54,20 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	}
 
 	/**
+	 * Returns the number of statistics for a give pid
+	 *
+	 * @param int $pid the page uid
+	 * @return boolean
+	 */
+	public function countStatistics($pid) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		$numberOfRecords = $query->matching($query->equals('pid', $pid))
+				->count();
+		return $numberOfRecords;
+	}
+
+	/**
 	 * Returns all objects of this repository
 	 *
 	 * @param int $uid
@@ -64,7 +78,6 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 		$records = $query->matching($query->equals('uid', $uid))
 				->execute();
-
 		$record = $records[0];
 		$record['begintime_formatted'] = $record['stoptime_formatted'] = '';
 		$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
@@ -160,18 +173,18 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	/**
 	 * Returns all objects of this repository
 	 *
-	 * @param Tx_Newsletter_Domain_Model_Statistic $statistic
+	 * @param int $pid
 	 * @return array An array of objects, empty if no objects found
 	 */
-	public function findAllByPid(Tx_Newsletter_Domain_Model_Statistic $statistic) {
+	public function findAllByPid($pid) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$records = $query->matching($query->equals('pid', $statistic->getPid()))
+		$records = $query->matching($query->equals('pid', $pid))
 				->execute();
 		
 		// Adds custom fields
 		foreach ($records as &$record) {
-			$record['number_of_recipients'] = $this->getNumberOfRecipients($statistic->getPid(), $record['begintime']);
+			$record['number_of_recipients'] = $this->getNumberOfRecipients($pid, $record['begintime']);
 			$record['statistic_label_formatted'] = '';
 		}
 		return $records;

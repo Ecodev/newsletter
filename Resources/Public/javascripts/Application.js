@@ -57,7 +57,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_registerEventBeforeLoading: function() {
 		this.on(
-			'TYPO3.Newsletter.Application.beforebusy',
+			'TYPO3.Newsletter.Application.busy',
 			function() {
 				Ext.get('loading-mask').setStyle({
 					visibility: 'visible',

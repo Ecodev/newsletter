@@ -73,6 +73,13 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 	public $pageinfo;
 
 	/**
+	 * the page info
+	 *
+	 * @var Tx_Newsletter_Domain_Repository_StatisticRepository
+	 */
+	public $statisticRepository;
+
+	/**
 	 * Initializes the current action
 	 *
 	 * @return void
@@ -82,6 +89,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 
 		// Needs to be done for compatibility issues
 		$GLOBALS['SOBE']->doc = t3lib_div::makeInstance('template');
+		
+		$this->statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
 
 		#$this->blogRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_BlogRepository');
 		#$this->administratorRepository = t3lib_div::makeInstance('Tx_BlogExample_Domain_Repository_AdministratorRepository');
@@ -97,6 +106,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		// Defines CSS + Javascript resource file
 		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/javascripts/';
 		$this->stylesheetsPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/stylesheets/';
+		$this->imagePath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/images/';
 
 		// Get page info
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
@@ -184,7 +194,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 			//$markers = $LANG->includeLLFile('EXT:devlog/Resources/Private/Language/locallang.xml', 0);
 		}
 		else {
-			throw new tx_devlog_exception('No language file has been found', 1276451853);
+			throw new Exception('No language file has been found', 1276451853);
 		}
 		return $markers;
 	}
@@ -239,13 +249,14 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		// Newsletter Planner
 		$files[] = 'Planner/Bootstrap.js';
 		$files[] = 'Planner/PlannerForm.js';
-		$files[] = 'Planner/PlannerForm/PlannerTab.js';
-		$files[] = 'Planner/PlannerForm/SettingsTab.js';
-		$files[] = 'Planner/PlannerForm/StatusTab.js';
+		#$files[] = 'Planner/PlannerForm/PlannerTab.js';
+		#$files[] = 'Planner/PlannerForm/SettingsTab.js';
+		#$files[] = 'Planner/PlannerForm/StatusTab.js';
 
 		// Statistics
 		$files[] = 'Statistics/Bootstrap.js';
 		$files[] = 'Statistics/ModuleContainer.js';
+		$files[] = 'Statistics/NoStatisticsPanel.js';
 		$files[] = 'Statistics/StatisticsPanel.js';
 		$files[] = 'Statistics/NewsletterListMenu.js';
 		$files[] = 'Statistics/StatisticsPanel/OverviewTab.js';
@@ -265,11 +276,16 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		// Add ExtJS API
 		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter', 'text/javascript', FALSE);
 
-
+		$numberOfStatistics = json_encode($this->statisticRepository->countStatistics($this->id));
+		
 		// *********************************** //
 		// Defines onready Javascript
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
+
+			Ext.ns("TYPO3.Newsletter.Data");
+			TYPO3.Newsletter.Data.numberOfStatistics = $numberOfStatistics;
+			TYPO3.Newsletter.Data.imagePath = '$this->imagePath';
 
 		// Enable our remote calls
 		for (var api in Ext.app.ExtDirectAPI) {

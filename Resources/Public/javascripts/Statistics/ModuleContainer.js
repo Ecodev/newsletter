@@ -17,6 +17,10 @@ TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 		var config = {
 			items: [
 				{
+					xtype: 'TYPO3.Newsletter.Statistics.NoStatisticsPanel',
+					ref: 'noStatisticsPanel'
+				},
+				{
 					xtype: 'TYPO3.Newsletter.Statistics.NewsletterListMenu',
 					ref: 'newsletterListMenu'
 				},
