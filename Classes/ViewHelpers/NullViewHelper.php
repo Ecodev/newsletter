@@ -31,21 +31,22 @@
  * @subpackage  tx_mvcextjs
  * @author Steffen Kamper <info@sk-typo3.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id: 
- * 
+ * @version     SVN: $Id:
+ *
  */
 class Tx_MvcExtjs_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	protected $objectAccessorPostProcessorEnabled = FALSE;
+	protected $escapingInterceptorEnabled = FALSE;
 
 	/**
 	 * Render without processing
 	 *
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function render() {
-		return $this->renderChildren(); 
+		return $this->renderChildren();
 	}
 }
 ?>
