@@ -220,13 +220,13 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		$this->prepareFunctionMenu($selfUrl);
 
 		if (count($this->toolbarItems) > 0) {
-			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
+			$this->toolbarItems[] = '{ xtype: "tbspacer" }';
 		}
 
 		$this->prepareButtons();
 
 		if (count($this->toolbarItems) > 0) {
-			$this->toolbarItems[] = '{ xtype: "tbspacer" }'; 
+			$this->toolbarItems[] = '{ xtype: "tbspacer" }';
 		}
 
 		$this->prepareUserContent();
@@ -265,12 +265,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 				triggerAction: "all",
 				mode: "local",
 				store: new Ext.data.ArrayStore({
-					autoDestroy: true,
 					fields: ["key", "title"],
 					data: [' . implode(',', $menuEntries) . ']
 				}),
+				valueField: "key",
 				displayField: "title",
-				readOnly: true,
+				editable: false,
 				listeners:{
 					select:function(combo, record, index) {
 						var url = ' . $selfUrl . ';
