@@ -300,8 +300,8 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			$currentFunction = $this->functionMenu[$set['function']];
 		}
 		if (!$currentFunction) {
-			$keys = array_keys($this->functionMenu);
-			$currentFunction = $this->functionMenu[$keys[0]];
+			$defaultFunctionMenu = $this->getDefaultFunctionMenu();
+			$currentFunction = $defaultFunctionMenu['title'];
 		}
 
 		$this->controller->addJsInlineCode('
@@ -309,6 +309,20 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 		');
 
 		$this->toolbarItems[] = 'funcMenu';
+	}
+
+	/**
+	 * Returns the default function menu.
+	 *
+	 * @return array
+	 */
+	public function getDefaultFunctionMenu() {
+		$keys = array_keys($this->functionMenu);
+
+		return array(
+			'key'   => $keys[0],
+			'title' => $this->functionMenu[$keys[0]],
+		);
 	}
 
 	/**

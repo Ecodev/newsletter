@@ -113,10 +113,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Initializes the action.
-	 * 
+	 *
 	 * Beware: make sure to call parent::initializeAction if you need to do something in your child class
-	 * 
-	 * @return void 
+	 *
+	 * @return void
 	 */
 	protected function initializeAction() {
 		if (TYPO3_MODE === 'BE') {
@@ -128,7 +128,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Initializes the backend action.
-	 * 
+	 *
 	 * @return void
 	 */
 	private function initializeBackendAction() {
@@ -143,7 +143,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		$this->scBase->init();
 
 			// Prepare template class
-		$this->doc = t3lib_div::makeInstance('template'); 
+		$this->doc = t3lib_div::makeInstance('template');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 
 		$this->scBase->doc = $this->doc;
@@ -159,7 +159,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Initializes the frontend action.
-	 * 
+	 *
 	 * @return void
 	 */
 	private function initializeFrontendAction() {
@@ -171,15 +171,15 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * USAGE: Should be called in an action method, before doing anything else.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function initializeExtJSAction($useExtCore = FALSE, $moveJsFromHeaderToFooter = FALSE) {
 		$this->useExtCore = $useExtCore;
 
 		if (TYPO3_MODE === 'FE' && !$useExtCore) {
-				// temporary fix for t3style		
-			$GLOBALS['TBE_STYLES']['extJS']['theme'] = '../' . TYPO3_mainDir . 'sysext/t3skin/extjs/xtheme-t3skin.css';	
+				// temporary fix for t3style
+			$GLOBALS['TBE_STYLES']['extJS']['theme'] = '../' . TYPO3_mainDir . 'sysext/t3skin/extjs/xtheme-t3skin.css';
 		}
 
 		if ($moveJsFromHeaderToFooter) {
@@ -188,7 +188,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 		if ($useExtCore) {
 				// Load ExtCore library
-			$this->pageRendererObject->loadExtCore();		
+			$this->pageRendererObject->loadExtCore();
 		} else {
 				// Load ExtJS libraries and stylesheets
 			$this->pageRendererObject->loadExtJS();
@@ -198,13 +198,13 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			// TODO: add id of controller for multiple usage
 		$this->extJSNamespace = $this->extensionName . '.' . $this->request->getControllerName();
 
-			// Initialize the ExtJS settings service 
+			// Initialize the ExtJS settings service
 		$this->settingsExtJS = t3lib_div::makeInstance('Tx_MvcExtjs_ExtJS_SettingsService', $this->extJSNamespace);
 	}
 
 	/**
 	 * Adds JavaScript inline code.
-	 * 
+	 *
 	 * @param string $block
 	 * @return void
 	 */
@@ -214,13 +214,13 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	* Adds a CSS File.
-	* 
+	*
 	* @param string $file file to be included, relative to this extension's CSS directory
 	* @param string $extKey the name of the extension, the file is located, default means that the calling EXT is used
 	* @param string $type
 	* @param boolean $compressed	flag if library is compressed
 	* @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
-	* @return void	
+	* @return void
 	*/
 	public function addCssFile($cssFile, $rel = 'stylesheet', $media = 'screen', $title = '', $compressed = FALSE, $forceOnTop = FALSE) {
 		$cssFile = 'Resources/Public/CSS/' . $cssFile;
@@ -246,7 +246,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Adds JS inline code.
-	 * 
+	 *
 	 * @param string $block
 	 * @return void
 	 */
@@ -256,14 +256,14 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Adds a JavaScript library.
-	 * 
+	 *
 	 * @param string $name
 	 * @param string $file file to be included, relative to this extension's Javascript directory
 	 * @param string $type
 	 * @param string $extKey the name of the extension, the file is located, default means that the calling EXT is used
 	 * @param boolean $compressed	flag if library is compressed
 	 * @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
-	 * @return void	
+	 * @return void
 	 */
 	public function addJsLibrary($name, $file, $extKey = NULL, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
@@ -289,13 +289,13 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Adds a JavaScript file.
-	 * 
+	 *
 	 * @param string $file file to be included, relative to this extension's Javascript directory
 	 * @param string $type
 	 * @param string $extKey	the name of the extension, the file is located, default means that the calling EXT is used
 	 * @param boolean $compressed	flag if library is compressed
 	 * @param boolean $forceOnTop	flag if added library should be inserted at begin of this block
-	 * @return void	
+	 * @return void
 	 */
 	public function addJsFile($file, $extKey = NULL, $type = 'text/javascript', $compressed = TRUE, $forceOnTop = FALSE) {
 		$jsFile = 'Resources/Public/JavaScript/' . $file;
@@ -321,7 +321,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Outputs JS code to the page.
-	 * 
+	 *
 	 * @param boolean $compressed
 	 * @param boolean $forceOnTop
 	 * @return void
@@ -352,9 +352,9 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			}();
 		';
 
-		$block .= $this->extJSNamespace . '.plugin.init();';   
+		$block .= $this->extJSNamespace . '.plugin.init();';
 
-			// Start code when ExtJS is ready 
+			// Start code when ExtJS is ready
 		if ($this->enableExtJSQuickTips) {
 			$this->pageRendererObject->enableExtJSQuickTips();
 		}
@@ -363,7 +363,6 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 		if (count($this->cssInline)) {
 			$this->pageRendererObject->addCssInlineBlock($this->extJSNamespace, implode('', $this->cssInline));
 		}
-
 	}
 
 	/**
@@ -375,7 +374,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	protected function getExtJSLabelKey($langKey) {
 		$action = $this->request->getControllerActionName();
 
-		return $this->extJSNamespace . '.lang.' . $this->getExtJSKey(substr($langKey, strlen($action) + 1)); 
+		return $this->extJSNamespace . '.lang.' . $this->getExtJSKey(substr($langKey, strlen($action) + 1));
 	}
 
 	/**
@@ -429,7 +428,7 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Returns a key to be used in ExtJS.
-	 * 
+	 *
 	 * @param string $key The key as found in a TYPO3 XML file (locallang.xml, ...)
 	 * @return string
 	 */
@@ -450,10 +449,10 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 	 * Initializes the internal menu array setting and unsetting items based on various conditions. It also merges in external menu
 	 * items from the global array TBE_MODULES_EXT (see mergeExternalItems())
 	 * Then MOD_SETTINGS array is cleaned up (see t3lib_BEfunc::getModuleData()) so it contains only valid values. It's also updated
-	 * with any SET[] values submitted. 
-	 * 
+	 * with any SET[] values submitted.
+	 *
 	 * Override this method to set the menu entries you need for your own module (see Tx_Mvcextjs_ExtJS_Layout_Toolbar::setFunctionMenu()).
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function menuConfig() {
@@ -461,8 +460,8 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 
 	/**
 	 * Renders a ExtJS module by incorporating the controller's view
-	 * into a master view encapsulating standard TYPO3's module elements. 
-	 * 
+	 * into a master view encapsulating standard TYPO3's module elements.
+	 *
 	 * @param string $contentPanel The ExtJS panel holding the module itself
 	 * @param string $layout The layout for the Panel, which contains the module content
 	 * @return void
@@ -490,7 +489,21 @@ class Tx_MvcExtjs_ExtJS_Controller_ActionController extends Tx_Extbase_MVC_Contr
 			';
 
 			if ($GLOBALS['BE_USER']->mayMakeShortcut()) {
-				$shortcut = $this->doc->makeShortcutIcon('id', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
+				$SET = t3lib_div::_GP('SET');
+				if (!(isset($SET['function']) && $SET['function'])) {
+						// First function menu selected
+					$defaultFunctionMenu = $this->toolbar->getDefaultFunctionMenu();
+					$SET['function'] = $defaultFunctionMenu['key'];
+				}
+				$GLOBALS['SOBE']->MOD_SETTINGS = t3lib_BEfunc::getModuleData(
+					$this->scBase->MOD_MENU,
+					$SET,
+					$this->scBase->MCONF['name'],
+					'',
+					'function'
+				);
+
+				$shortcut = $this->doc->makeShortcutIcon('M', implode(',', array_keys($this->scBase->MOD_MENU)), $this->scBase->MCONF['name']);
 			} else {
 				$shortcut = '';
 			}
