@@ -168,7 +168,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $callback
 	 * @param string $tooltip
 	 * @param array $additionalAttributes
-	 * @return string Name of the new button
+	 * @return void
 	 */
 	public function addButton($icon, $callback, $tooltip = '', $text = '', array $additionalAttributes = array()) {
 		if (substr($icon, 0, 4) === 'EXT:') {
@@ -191,8 +191,6 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 			'additionalAttributes' => $additionalAttributes,
 		);
 		$this->userItems[] = $key;
-
-		return $key;
 	}
 
 	/**
@@ -337,7 +335,7 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	protected function prepareButtons() {
 		foreach ($this->buttons as $key => $button) {
 			if (substr($key, 0, 5) !== 'USER_') {
-				$this->appendButton($button);
+				$this->appendButton($button, $key);
 			}
 		}
 	}

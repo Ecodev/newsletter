@@ -36,7 +36,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 
 	/**
 	 * Encodes an array of objects to be used by JSON later on.
-	 * 
+	 *
 	 * @param array $objects
 	 * @return array
 	 */
@@ -91,7 +91,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 *
 	 * @param string $class
 	 * @param object $obj
-	 * @param array $columns array of columns/properties to be returned from the class $class 
+	 * @param array $columns array of columns/properties to be returned from the class $class
 	 * @return string
 	 */
 	public static function getJSONReader($class, $obj = NULL, $columns = array()) {
@@ -144,7 +144,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	/**
 	 * creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based on the given $class
 	 * EXPERIMENTAL
-	 * 
+	 *
 	 * @param string $class the class u like to fetch the fieldsArray for
 	 * @param mixed $obj an instance of this class
 	 * @param array $columns the columns u like to fetch an empty array will fetch all available properties
@@ -207,7 +207,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	/**
 	 * Returns the return type of an object method.
 	 * EXPERIMENTAL
-	 * 
+	 *
 	 * @param object $object
 	 * @param string $methodName
 	 * @return string Empty string if type could not be determined
@@ -257,7 +257,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 
 	/**
 	 * Encodes a html snippet in order to include it in an ExtJS declaration.
-	 *  
+	 *
 	 * @param $html
 	 * @return string
 	 */
@@ -269,7 +269,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 
 	/**
 	 * Returns an array of ExtJS form elements associated to an Extbase action.
-	 * 
+	 *
 	 * @param Tx_Extbase_MVC_Request $request
 	 * @param string $action
 	 * @return array Array of Tx_MvcExtjs_ExtJS_FormElement
@@ -287,7 +287,7 @@ class Tx_MvcExtjs_ExtJS_Utility {
 				->set('value', $request->getControllerName()),
 
 			Tx_MvcExtjs_ExtJS_FormElement::create($request)
-				->setXType('hidden')	
+				->setXType('hidden')
 				->setObjectModelField('__referer', 'actionName')
 				->set('value', $action),
 		);
