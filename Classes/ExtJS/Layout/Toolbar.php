@@ -167,9 +167,10 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 * @param string $icon
 	 * @param string $callback
 	 * @param string $tooltip
-	 * @return void
+	 * @param array $additionalAttributes
+	 * @return string Name of the new button
 	 */
-	public function addButton($icon, $callback, $tooltip = '', $text = '') {
+	public function addButton($icon, $callback, $tooltip = '', $text = '', array $additionalAttributes = array()) {
 		if (substr($icon, 0, 4) === 'EXT:') {
 			list($extKey, $local) = explode('/', substr($icon, 4), 2);
 			$icon = t3lib_extMgm::extRelPath($extKey) . $local;
@@ -183,12 +184,15 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 
 		$key = 'USER_' . count($this->buttons);
 		$this->buttons[$key] = array(
-			'icon'     => $icon,
-			'callback' => $callback,
-			'tooltip'  => $tooltip,
-			'text'     => $text,
+			'icon'                 => $icon,
+			'callback'             => $callback,
+			'tooltip'              => $tooltip,
+			'text'                 => $text,
+			'additionalAttributes' => $additionalAttributes,
 		);
 		$this->userItems[] = $key;
+
+		return $key;
 	}
 
 	/**
@@ -361,6 +365,12 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 	 */
 	protected function appendButton($button) {
 		if ($button['callback']) {
+			$additionalAttributes = '';
+			if ($button['additionalAttributes']) {
+				foreach ($button['additionalAttributes'] as $key => $value) {
+					$additionalAttributes .= $key . ':' . $value . ',';
+				}
+			}
 			if ($button['text']) {
 				$this->toolbarItems[] = '
 					{
@@ -369,7 +379,8 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 						icon: "'. $button['icon'] . '",
 						text: "' . str_replace('"', '\\"', $button['text']) . '",
 						tooltip: "' . str_replace('"', '\\"', $button['tooltip']) . '",
-						tooltipType: "title",
+						tooltipType: "title",'
+						. $additionalAttributes . '
 						handler: function() { ' . $button['callback'] . ' }
 					}
 				';
@@ -380,7 +391,8 @@ class Tx_Mvcextjs_ExtJS_Layout_Toolbar {
 						cls: "x-btn-icon",
 						icon: "'. $button['icon'] . '",
 						tooltip: "' . str_replace('"', '\\"', $button['tooltip']) . '",
-						tooltipType: "title",
+						tooltipType: "title",'
+						. $additionalAttributes . '
 						handler: function() { ' . $button['callback'] . ' }
 					}
 				';

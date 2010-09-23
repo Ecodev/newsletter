@@ -1,5 +1,6 @@
 2010-09-23  Xavier Perseguers  <typo3@perseguers.ch>
 
+	* Added option to specify arbitrary attributes for toolbar buttons
 	* Fixed generation of shortcut link
 	* Fixed function menu in toolbar
 
