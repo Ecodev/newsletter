@@ -29,19 +29,19 @@ if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Prov
 $TYPO3_CONF_VARS['EXTCONF']['kickstarter']['sections']['tx_newsletter_targets'] = array(
     'classname' => 'tx_newsletter_section_targets',
     'filepath' => 'EXT:newsletter/sections/class.tx_newsletter_section_targets.php',
-    'title' => 'Make a new directmail target',
-    'description' => 'Create additional directmail targets, based on your own tables.',
+    'title' => 'Make a new newsletter target',
+    'description' => 'Create additional newsletter targets, based on your own tables.',
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_DirectmailTask'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_NewsletterTask'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run TC Directmail',
+        'title'            => 'Run TC Newsletter',
         'description'      => 'Send email',
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_DirectmailbounceTask'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_NewsletterbounceTask'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run TC Directmail Bounce',
+        'title'            => 'Run TC Newsletter Bounce',
         'description'      => 'Fetch bounce statistic',
 );
 

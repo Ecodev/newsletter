@@ -46,7 +46,7 @@ class ext_update {
 	 */
 	function main() {
 		global $TYPO3_DB;
-
+ 
 		// Action! Makes the necessary update
 		$update = t3lib_div::_GP('submitButton');
 		// The update button was clicked
@@ -124,7 +124,7 @@ class ext_update {
 			$content .= '</form>';
 
 		}
-
+//w($content);
 		return $content;
 		#$res = $TYPO3_DB->exec_SELECTquery('uid, title, configuration', 'tx_newsletter_filters', "configuration <> ''");
 //		while ($row = $TYPO3_DB->sql_fetch_assoc($res)) {
@@ -181,14 +181,11 @@ class ext_update {
 			case 'tx_tcdirectmail_clicklinks':
 				$targetName = 'tx_newsletter_domain_model_clicklink';
 				break;
-				break;
 			case 'tx_tcdirectmail_sentlog':
 				$targetName = 'tx_newsletter_domain_model_email_queue';
 				break;
-				break;
 			case 'tx_tcdirectmail_targets':
 				$targetName = 'tx_newsletter_domain_model_recipientlist';
-				break;
 				break;
 			case 'tx_tcdirectmail_lock':
 				$targetName = 'tx_newsletter_domain_model_lock';

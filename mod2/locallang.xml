@@ -2,7 +2,7 @@
 <T3locallang>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="title">Directmail</label>
+			<label index="title">Newsletter</label>
 			<label index="status">Status</label>
 			<label index="statistics">Statistics</label>
 			<label index="validity">Mail validity</label>
@@ -10,7 +10,7 @@
 			<label index="reciep">Recipients</label>
 			<label index="ext_configs">Extension configurations</label>
 			<label index="name">Name</label>
-			<label index="current_sending">Current sending directmail</label>
+			<label index="current_sending">Current sending newsletter</label>
 			<label index="no_current_sending">Not currently sending this page to anyone</label>
 			<label index="send_test">Send a testmail now.</label>
 			<label index="send_test_cron">Send a testmail with cronjob.</label>
@@ -34,7 +34,7 @@
 			<label index="scheduled_test">Scheduled test send.</label>
 			<label index="not_currently_sending">Not currently sending</label>
 			<label index="no_test_receivers">No test receivers defined.</label>
-			<label index="not_a_directmail">This page is not a directmail.</label>
+			<label index="not_a_newsletter">This page is not a newsletter.</label>
 			<label index="date">Date</label>
 			<label index="totime">To</label>
 			<label index="fromtime">From</label>
@@ -43,7 +43,7 @@
 			<label index="setup_value">Setup field</label>
 			<label index="install">Install</label>
 			<label index="example_made">Example made</label>
-			<label index="exampleText">The ###TITLE### mailtarget template has been inserted. Go to the &quot;List&quot; module, and edit the directmail target to fit you.</label>
+			<label index="exampleText">The ###TITLE### mailtarget template has been inserted. Go to the &quot;List&quot; module, and edit the newsletter target to fit you.</label>
 			<label index="mailer_php">Mailer.php</label>
 			<label index="domain_name">Domain name</label>
 			<label index="domain_ok">The domain &lt;b&gt;###DOMAIN###&lt;/b&gt; is defined.</label>
@@ -138,7 +138,7 @@
 			<label index="scheduled_test">Testudsendelse sat i værk.</label>
 			<label index="not_currently_sending">Ingen udsendelse.</label>
 			<label index="no_test_receivers">Ingen testmodtagere angivet.</label>
-			<label index="not_a_directmail">Denne side er ikke et nyhedsbrev.</label>
+			<label index="not_a_newsletter">Denne side er ikke et nyhedsbrev.</label>
 			<label index="date">Dato</label>
 			<label index="totime">Til</label>
 			<label index="fromtime">Fra</label>
@@ -151,7 +151,7 @@
 			<label index="mailer_php">Mailer.php</label>
 			<label index="domain_name">Domænenavn</label>
 			<label index="domain_ok">Domænet ###DOMAIN### er defineret.</label>
-			<label index="domain_notok">Der er intet domæne defineret i sidetræet. Lav en domænerecord i sidetræet, så tcdirectmail kan finde siderne via http.</label>
+			<label index="domain_notok">Der er intet domæne defineret i sidetræet. Lav en domænerecord i sidetræet, så newsletter kan finde siderne via http.</label>
 			<label index="sender_name">Afsender navn</label>
 			<label index="sender_for_page">&lt;b&gt;###SENDER###&lt;/b&gt; vil blive brugt som afsendernavn for nyhedsbrevet.</label>
 			<label index="sender_email">Afsender email</label>
@@ -179,7 +179,7 @@
 			<label index="stats_ok">Logdata er i orden.</label>
 			<label index="delete">Slet</label>
 			<label index="delete_old_stats">Slet gammel statistik</label>
-			<label index="mail_contains_javascript">Din mail ser ud til at indeholde JavaScript. Dette betrages som dårlig stil, og de fleste emailklienter og spamfiltre til også reagere negativt over for det. tcdirectmail fjerner JavaScript-koden i den endelige mail. Så kontroller at layoutet er i orden i test mailen.</label>
+			<label index="mail_contains_javascript">Din mail ser ud til at indeholde JavaScript. Dette betrages som dårlig stil, og de fleste emailklienter og spamfiltre til også reagere negativt over for det. newsletter fjerner JavaScript-koden i den endelige mail. Så kontroller at layoutet er i orden i test mailen.</label>
 			<label index="mail_contains_linked_styles">CSS-koden i din mail ligger i en ekstern fil. Dette er et problem for de fleste email-programmer. Derfor er koden blevet inkluderet i mailen. Kontroller at dette ikke gør mailen meget stor.</label>
 			<label index="mail_contains_css_images">Du linker til billeder fra CSS. Dette virker ikke i nogen emailprogrammer.</label>
 			<label index="mail_contains_css_classes">Din CSS er opbygget med klasser. Dette virker fint i email-programmer som Outlook Express eller Thunderbird, men virker ikke i de fleste webmail-klienter.</label>
@@ -248,7 +248,7 @@
 			<label index="scheduled_test">Geplanter Testversand.</label>
 			<label index="not_currently_sending">Momentan kein senden</label>
 			<label index="no_test_receivers">Keine Testempfänger eingetragen.</label>
-			<label index="not_a_directmail">Diese Seite ist keine Newsletterseite.</label>
+			<label index="not_a_newsletter">Diese Seite ist keine Newsletterseite.</label>
 			<label index="date">Datum</label>
 			<label index="totime">An</label>
 			<label index="fromtime">Absender</label>
@@ -268,13 +268,13 @@
 		</languageKey>
 		<languageKey index="no"></languageKey>
 		<languageKey index="it" type="array">
-			<label index="title">Directmail (Newsletter)</label>
+			<label index="title">Newsletter (Newsletter)</label>
 			<label index="status">Stato</label>
 			<label index="stats">Statistiche</label>
 			<label index="reciep">Destinatari</label>
 			<label index="ext_configs">Configurazioni Estensioni</label>
 			<label index="name">Nome</label>
-			<label index="current_sending">Directmail (newsletter) in spedizione</label>
+			<label index="current_sending">Newsletter (newsletter) in spedizione</label>
 			<label index="no_current_sending">Nessuna spedizione in corso per questa pagina</label>
 			<label index="send_now">Spedisci ora.</label>
 			<label index="queued">Ora nella coda di spedizione.</label>
@@ -289,7 +289,7 @@
 			<label index="currently_sending">In spedizione al momento &lt;strong&gt;###STATUS###&lt;/strong&gt;</label>
 			<label index="scheduled_info">In spedizione alle ore &lt;strong&gt;###TIME_TO_SEND###&lt;/strong&gt; a &lt;strong&gt;####NUMBERS_TO_SEND###&lt;/strong&gt; destinatari.&lt;/p&gt;</label>
 			<label index="not_scheduled">Al momento nessuna newsletter in spedizione.</label>
-			<label index="not_a_directmail">Questa pagina non e` una directmail (newsletter).</label>
+			<label index="not_a_newsletter">Questa pagina non e` una newsletter (newsletter).</label>
 			<label index="date">Data</label>
 			<label index="totime">A</label>
 			<label index="fromtime">Da</label>
@@ -309,7 +309,7 @@
 			<label index="setup_value">Campo setup</label>
 			<label index="install">Installazione</label>
 			<label index="example_made">Esempio eseguito.</label>
-			<label index="exampleText">Il template destinatari email ###TITLE### e` stato inserito, Vai al modulo &quot;Lista&quot; e modifica i destinatari directmail per adattarli alle tue esigenze.</label>
+			<label index="exampleText">Il template destinatari email ###TITLE### e` stato inserito, Vai al modulo &quot;Lista&quot; e modifica i destinatari newsletter per adattarli alle tue esigenze.</label>
 			<label index="mailer_exe_ok">&lt;b&gt;mailer.php&lt;/b&gt; e` eseguibile.</label>
 			<label index="mailer_exe_notok">&lt;b&gt;mailer.php&lt;/b&gt; non e` eseguibile.</label>
 			<label index="domain_ok">Il dominio &lt;b&gt;###DOMAIN###&lt;/b&gt; e` definito</label>
@@ -371,7 +371,7 @@
 			<label index="scheduled_test">Verzenden naar test-adresenbestand staat gereed.</label>
 			<label index="not_currently_sending">Op dit moment zijn er geen nieuwsbrieven te verzenden.</label>
 			<label index="no_test_receivers">Geen adressenbestand opgegeven voor test-brief.</label>
-			<label index="not_a_directmail">Deze pagina is geen nieuwsbrief-pagina.</label>
+			<label index="not_a_newsletter">Deze pagina is geen nieuwsbrief-pagina.</label>
 			<label index="date">Datum</label>
 			<label index="totime">Aan</label>
 			<label index="fromtime">Van</label>
@@ -471,7 +471,7 @@
 			<label index="scheduled_test" type="integer">190127703</label>
 			<label index="not_currently_sending" type="integer">111936780</label>
 			<label index="no_test_receivers" type="integer">253262642</label>
-			<label index="not_a_directmail" type="integer">117033074</label>
+			<label index="not_a_newsletter" type="integer">117033074</label>
 			<label index="date" type="integer">71780721</label>
 			<label index="totime" type="integer">236066426</label>
 			<label index="fromtime" type="integer">98197902</label>
@@ -546,14 +546,14 @@
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="dk" type="array">
-			<label index="title">Directmail</label>
+			<label index="title">Newsletter</label>
 			<label index="status">Status</label>
 			<label index="statistics">Statistics</label>
 			<label index="validity">Mail validity</label>
 			<label index="reciep">Recipients</label>
 			<label index="ext_configs">Extension configurations</label>
 			<label index="name">Name</label>
-			<label index="current_sending">Current sending directmail</label>
+			<label index="current_sending">Current sending newsletter</label>
 			<label index="no_current_sending">Not currently sending this page to anyone</label>
 			<label index="send_test">Send a testmail now.</label>
 			<label index="send_test_cron">Send a testmail with cronjob.</label>
@@ -577,7 +577,7 @@
 			<label index="scheduled_test">Scheduled test send.</label>
 			<label index="not_currently_sending">Not currently sending</label>
 			<label index="no_test_receivers">No test receivers defined.</label>
-			<label index="not_a_directmail">This page is not a directmail.</label>
+			<label index="not_a_newsletter">This page is not a newsletter.</label>
 			<label index="date">Date</label>
 			<label index="totime">To</label>
 			<label index="fromtime">From</label>
@@ -586,7 +586,7 @@
 			<label index="setup_value">Setup field</label>
 			<label index="install">Install</label>
 			<label index="example_made">Example made</label>
-			<label index="exampleText">The ###TITLE### mailtarget template has been inserted. Go to the &quot;List&quot; module, and edit the directmail target to fit you.</label>
+			<label index="exampleText">The ###TITLE### mailtarget template has been inserted. Go to the &quot;List&quot; module, and edit the newsletter target to fit you.</label>
 			<label index="mailer_php">Mailer.php</label>
 			<label index="domain_name">Domain name</label>
 			<label index="mailer_exe_ok">&lt;b&gt;mailer.php&lt;/b&gt; is executable.</label>

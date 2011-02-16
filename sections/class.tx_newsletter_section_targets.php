@@ -81,7 +81,7 @@ class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
 
 			$subContent = '<strong>Source table:<br /></strong>'.
 					$this->renderSelectBox($ffPrefix.'[which_table]',$piConf['which_table'],$optValues).
-					$this->whatIsThis('Select the table that will act as source for your directmail receiver type.');
+					$this->whatIsThis('Select the table that will act as source for your newsletter receiver type.');
 			$lines[]='<tr'.$this->bgCol(3).'><td>'.$this->fw($subContent).
 				'<input type="hidden" name="' . $this->piFieldName('wizArray_upd') . $ffPrefix . '[title]" value="' . ($piConf['which_table']?$optValues[$piConf['which_table']]:'') . '" /></td></tr>';
 
@@ -780,7 +780,7 @@ class $targetName extends tx_newsletter_target_sql {
 }
 
 /* Note: XCLASS'ing is NOT supported for tx_newsletter_targets, nor will it ever be. So dont complain to me. */";
-		$targetSource = $this->PHPclassFile($extKey, $filename, $targetSource, "Directmail target$this->numTarget for $extKey");
+		$targetSource = $this->PHPclassFile($extKey, $filename, $targetSource, "Newsletter target$this->numTarget for $extKey");
 		$targetSource = preg_replace('/if[\w\W].*XCLASS[\w\W]*}/', '', $targetSource);
 		
 		$filename = 'class.'.$targetName.'.php';

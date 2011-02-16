@@ -146,13 +146,13 @@ t3lib_extMgm::addTCAcolumns("pages",$tempColumns,1);
 
 global $PAGES_TYPES;
 $PAGES_TYPES[189] = Array(
-    "type" => "Directmail",
+    "type" => "Newsletter",
     "icon" => t3lib_extMgm::extRelPath('newsletter')."mail.gif",
 );
       
 
 array_splice ($TCA["pages"]["columns"]["doktype"]["config"]["items"], 3, 0, array(array(  
-	0 => "LLL:EXT:newsletter/locallang_db.xml:pages.directmailtype",
+	0 => "LLL:EXT:newsletter/locallang_db.xml:pages.newslettertype",
 	1 => 189,
 	2 => t3lib_extMgm::extRelPath('newsletter')."mail.gif"
     ))

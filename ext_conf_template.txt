@@ -1,7 +1,7 @@
   # cat=basic; type=string; label=Path to fetchmail program. This a the standard unix mail-retrieval program. It is used to collect bounce mails with.
 path_to_fetchmail = /usr/local/bin/fetchmail
 
-  # cat=basic; type=string; label=Path to Lynx CLI browser. This program is not required, but can be used by TC Directmail to produce an acceptable plaintext conversion with no efford at all.
+  # cat=basic; type=string; label=Path to Lynx CLI browser. This program is not required, but can be used by TC Newsletter to produce an acceptable plaintext conversion with no efford at all.
 path_to_lynx = /usr/local/bin/lynx
 
   # cat=basic; type=string; label=Extra parameters to the sendmail program. Do not specify -f parameter here. This is passed directly to PHP's mail() function.
@@ -22,16 +22,16 @@ attach_images = 1
   # cat=basic; type=boolean; label=Encode HTML as BASE64. Check this to encode the html-mime-part in base64-encoding. This makes the mails larger than with qouted printable and has a bigger possibility of being tagged as spam, but handles exotic charsets better.
 html_base64 = 0
 
-  # cat=basic; type=string; label=String to append to URL's when fetching content. For example use &type=<num> allows you to implement your directmail with a special template.
+  # cat=basic; type=string; label=String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template.
 append_url =  
 
   # cat=basic; type=string; label=Domain or domain + path from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path = 
 
-  # cat=basic; type=integer; label=Number of mailer per round. This can be used to limit the rate on which TC Directmail will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
+  # cat=basic; type=integer; label=Number of mailer per round. This can be used to limit the rate on which TC Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
 mails_per_round = 100
 
-  # cat=basic; type=string; label=Host tags for use on a load balanced servers, seperate with ",". This allows you to send out directmails from several loadbalanced servers. Consult the manuals "Advanced" section on what this is, and how to use it. 
+  # cat=basic; type=string; label=Host tags for use on a load balanced servers, seperate with ",". This allows you to send out newsletters from several loadbalanced servers. Consult the manuals "Advanced" section on what this is, and how to use it. 
 lb_hosts = 
 
   # cat=basic; type=boolean; label=Should we display the "Invoke mailer" button in the backend? It is recommended to switch this off, if you set up cron. If you use loadbalanced servers this button must *not* be activated. 

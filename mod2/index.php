@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /** 
- * Module 'Directmail' for the 'newsletter' extension.
+ * Module 'Newsletter' for the 'newsletter' extension.
  *
  * @author   Daniel Schledermann <daniel@schledermann.net>
  */
@@ -183,12 +183,12 @@ class tx_newsletter_module1 extends t3lib_SCbase {
       /* Must have an id */
       if (!$_REQUEST['id']) return;
 
-      /* Must be a directmail page */
+      /* Must be a newsletter page */
       $rs = $TYPO3_DB->sql_query('SELECT doktype FROM pages WHERE uid = '.intval($_REQUEST['id']));
       list($doktype) = $TYPO3_DB->sql_fetch_row($rs);
 
       if ($doktype != 189) {
-          $content = $this->notADirectmailPage();
+          $content = $this->notANewsletterPage();
           $this->content.=$this->doc->section($LANG->getLL("error"),$content,0,1);
           return;
       }
@@ -539,8 +539,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
    
    
-   function notADirectmailPage() {
-       return '<p>'.$GLOBALS['LANG']->getLL('not_a_directmail').'</p>';
+   function notANewsletterPage() {
+       return '<p>'.$GLOBALS['LANG']->getLL('not_a_newsletter').'</p>';
    }
    
    function doMaintenance () {
@@ -725,14 +725,14 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		global $TYPO3_DB;
 		global $LANG;
 
-		/* Check if the page is a directmail */
+		/* Check if the page is a newsletter */
 		$sql = "SELECT doktype FROM pages WHERE uid = $_REQUEST[id]";
 		$rs = $TYPO3_DB->sql_query($sql);
 		list ($doktype) = $TYPO3_DB->sql_fetch_row($rs);
 
-		/* We do not want to show statistics for non-directmail pages */
+		/* We do not want to show statistics for non-newsletter pages */
 		if ($doktype != 189) {
-			return $this->notADirectmailPage();
+			return $this->notANewsletterPage();
 		}
 
 		/* Is a detailed view requested? */

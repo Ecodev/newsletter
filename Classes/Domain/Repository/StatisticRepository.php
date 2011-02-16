@@ -121,10 +121,10 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	}
 
 	/**
-	 * This is the object factory, without init(), for all directmail targets.
+	 * This is the object factory, without init(), for all newsletter targets.
 	 *
-	 * @param     integer     Uid of a tx_directmail_target from the database.
-	 * @return    object      Of directmail_target type.
+	 * @param     integer     Uid of a tx_newsletter_target from the database.
+	 * @return    object      Of newsletter_target type.
 	 */
 	protected function getRecipients($uid) {
 		global $TYPO3_DB;

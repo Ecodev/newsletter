@@ -24,7 +24,7 @@
 
 
 /**
- * Class "tx_newsletter_DirectmailbounceTask" provides Scheduler integration
+ * Class "tx_newsletter_NewsletterTask" provides Scheduler integration
  *
  * @author		Fabien Udriot <fabien.udriot@ecodev.ch>
  * @package		TYPO3
@@ -32,7 +32,7 @@
  *
  * $Id: $
  */
-class tx_newsletter_DirectmailbounceTask extends tx_scheduler_Task {
+class tx_newsletter_NewsletterTask extends tx_scheduler_Task {
 
 	/**
 	 * Function executed from the Scheduler.
@@ -43,23 +43,21 @@ class tx_newsletter_DirectmailbounceTask extends tx_scheduler_Task {
 	public function execute() {
 		$success = TRUE;
 		
-		// Check bounce
-		$command = '/usr/bin/php ' . dirname(PATH_thisScript) . 'conf/ext/newsletter/cli/bounce.php';
-		$resultBounce = exec($command);
+		// Send email
+		$command = '/usr/bin/php ' . dirname(PATH_thisScript) . 'conf/ext/newsletter/cli/mailer.php';
+		$resultMailer = exec($command);
 		
-#		$command = 'echo  "' . date("H:i:s") . '" > /tmp/tcdiremail.log';
-#		exec($command);
-		
-		if ($resultBounce == '') {
-			$success = TRUE;
+		if ($resultMailer != '') {
+			$command = 'echo  "' . $resultMailer . '" >> /tmp/tcdiremail.log';
+			exec($command);
 		}
 		
-		return TRUE;
+		return $success;
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_directmailbouncetask.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_directmailbouncetask.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_newslettertask.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_newslettertask.php']);
 }
 
 ?>

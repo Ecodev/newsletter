@@ -34,7 +34,7 @@
 			<label index="scheduled_test">Scheduled test send.</label>
 			<label index="not_currently_sending">Not currently sending</label>
 			<label index="no_test_receivers">No test receivers defined.</label>
-			<label index="not_a_directmail">This page is not a newsletter.</label>
+			<label index="not_a_newsletter">This page is not a newsletter.</label>
 			<label index="date">Date</label>
 			<label index="totime">To</label>
 			<label index="fromtime">From</label>
@@ -168,7 +168,7 @@
 			<label index="scheduled_test">Testudsendelse sat i værk.</label>
 			<label index="not_currently_sending">Ingen udsendelse.</label>
 			<label index="no_test_receivers">Ingen testmodtagere angivet.</label>
-			<label index="not_a_directmail">Denne side er ikke et nyhedsbrev.</label>
+			<label index="not_a_newsletter">Denne side er ikke et nyhedsbrev.</label>
 			<label index="date">Dato</label>
 			<label index="totime">Til</label>
 			<label index="fromtime">Fra</label>
@@ -278,7 +278,7 @@
 			<label index="scheduled_test">Geplanter Testversand.</label>
 			<label index="not_currently_sending">Momentan kein senden</label>
 			<label index="no_test_receivers">Keine Testempfänger eingetragen.</label>
-			<label index="not_a_directmail">Diese Seite ist keine Newsletterseite.</label>
+			<label index="not_a_newsletter">Diese Seite ist keine Newsletterseite.</label>
 			<label index="date">Datum</label>
 			<label index="totime">An</label>
 			<label index="fromtime">Absender</label>
@@ -319,7 +319,7 @@
 			<label index="currently_sending">In spedizione al momento &lt;strong&gt;###STATUS###&lt;/strong&gt;</label>
 			<label index="scheduled_info">In spedizione alle ore &lt;strong&gt;###TIME_TO_SEND###&lt;/strong&gt; a &lt;strong&gt;####NUMBERS_TO_SEND###&lt;/strong&gt; destinatari.&lt;/p&gt;</label>
 			<label index="not_scheduled">Al momento nessuna newsletter in spedizione.</label>
-			<label index="not_a_directmail">Questa pagina non e` una newsletter.</label>
+			<label index="not_a_newsletter">Questa pagina non e` una newsletter.</label>
 			<label index="date">Data</label>
 			<label index="totime">A</label>
 			<label index="fromtime">Da</label>
@@ -400,7 +400,7 @@
 			<label index="scheduled_test">Verzenden naar test-adresenbestand staat gereed.</label>
 			<label index="not_currently_sending">Op dit moment zijn er geen nieuwsbrieven te verzenden.</label>
 			<label index="no_test_receivers">Geen adressenbestand opgegeven voor test-brief.</label>
-			<label index="not_a_directmail">Deze pagina is geen nieuwsbrief-pagina.</label>
+			<label index="not_a_newsletter">Deze pagina is geen nieuwsbrief-pagina.</label>
 			<label index="date">Datum</label>
 			<label index="totime">Aan</label>
 			<label index="fromtime">Van</label>
@@ -500,7 +500,7 @@
 			<label index="scheduled_test" type="integer">190127703</label>
 			<label index="not_currently_sending" type="integer">111936780</label>
 			<label index="no_test_receivers" type="integer">253262642</label>
-			<label index="not_a_directmail" type="integer">117033074</label>
+			<label index="not_a_newsletter" type="integer">117033074</label>
 			<label index="date" type="integer">71780721</label>
 			<label index="totime" type="integer">236066426</label>
 			<label index="fromtime" type="integer">98197902</label>
@@ -606,7 +606,7 @@
 			<label index="scheduled_test">Scheduled test send.</label>
 			<label index="not_currently_sending">Not currently sending</label>
 			<label index="no_test_receivers">No test receivers defined.</label>
-			<label index="not_a_directmail">This page is not a newsletter.</label>
+			<label index="not_a_newsletter">This page is not a newsletter.</label>
 			<label index="date">Date</label>
 			<label index="totime">To</label>
 			<label index="fromtime">From</label>

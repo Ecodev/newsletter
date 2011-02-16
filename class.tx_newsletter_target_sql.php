@@ -2,8 +2,8 @@
 require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php');
 
 /**
- * This is the basic SQL related directmail target. Methods implemented with DB calls.
- * Extend this class to create directmail targets which extracts records from the database.
+ * This is the basic SQL related newsletter target. Methods implemented with DB calls.
+ * Extend this class to create newsletter targets which extracts records from the database.
  *
  * @abstract
  */

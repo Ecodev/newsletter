@@ -31,13 +31,13 @@
 	/**
 	 * Returns all objects of this repository
 	 *
-	 * @param string $record, this can be tx_tcdirectmail_target_rawsql
+	 * @param string $record, this can be tx_newsletter_target_rawsql
 	 * @return array An array of element, empty if no records found
 	 */
 	public function findAllByRecipientType($record) {
 		$result = array();
 		switch ($record['targettype']) {
-			case 'tx_tcdirectmail_target_rawsql':
+			case 'tx_newsletter_target_rawsql':
 				$result = $this->getRecipientSql($record);
 				break;
 		}
@@ -47,7 +47,7 @@
 	/**
 	 * Returns all objects of this repository
 	 *
-	 * @param string $type, this can be tx_tcdirectmail_target_rawsql
+	 * @param string $type, this can be tx_newsletter_target_rawsql
 	 * @return array An array of element, empty if no records found
 	 */
 	public function getRecipientSql($record) {

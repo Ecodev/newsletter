@@ -59,7 +59,7 @@ class tx_newsletter_section_modulefunction extends tx_kickstarter_section_module
 				'web_func_wizards' => 'Web>Func, Wizards',
 				'web_info' => 'Web>Info',
 				'web_ts' => 'Web>Template',
-				'web_newsletterM2' => 'Web>Directmail',
+				'web_newsletterM2' => 'Web>Newsletter',
 				'user_task' => 'User>Task Center',
 			);
 			

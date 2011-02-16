@@ -23,8 +23,8 @@
 ***************************************************************/
 
 /**
- * This is the tx_directmail_target's super class. 
- * All directmail targets must inherit from this class though some inheritance path.
+ * This is the tx_newsletter_target's super class. 
+ * All newsletter targets must inherit from this class though some inheritance path.
  *
  * @abstract
  */
@@ -34,12 +34,12 @@ class tx_newsletter_target {
 	var $data;
    
 	/**
-	 * This is the object factory, without init(), for all directmail targets.
+	 * This is the object factory, without init(), for all newsletter targets.
 	 *
 	 * @final
 	 * @static
-	 * @param     integer     Uid of a tx_directmail_target from the database.
-	 * @return    object      Of directmail_target type.
+	 * @param     integer     Uid of a tx_newsletter_target from the database.
+	 * @return    object      Of newsletter_target type.
 	 */
 	function getTarget($uid) {
 		global $TYPO3_DB;
@@ -56,12 +56,12 @@ class tx_newsletter_target {
 	}
    
 	/**
-	 * This is the object factory, with init(), for all directmail targets.
+	 * This is the object factory, with init(), for all newsletter targets.
 	 *
 	 * @final
 	 * @static
-	 * @param     integer     Uid of a tx_directmail_target from the database.
-	 * @return    object      Of directmail_target type.
+	 * @param     integer     Uid of a tx_newsletter_target from the database.
+	 * @return    object      Of newsletter_target type.
 	 */
 	public static function loadTarget ($uid) {
 		$object = tx_newsletter_target::getTarget($uid);
@@ -70,7 +70,7 @@ class tx_newsletter_target {
 	}
    
 	/**
-	 * This is the method called when a directmail_target is produced in the loadTarget factory
+	 * This is the method called when a newsletter_target is produced in the loadTarget factory
 	 *
 	 * @abstract
 	 * @return    void
@@ -80,7 +80,7 @@ class tx_newsletter_target {
 	}
 
 	/**
-	 * Fetch one receiver record from the directmail target. 
+	 * Fetch one receiver record from the newsletter target. 
 	 * The record MUST contain an "email"-field. Without this one this mailtarget is useless.
 	 * In order for registered links to work, it should also contain an "authCode"-field.
 	 * To collect bounces you will need to have both fields "authCode" and "uid".
@@ -94,7 +94,7 @@ class tx_newsletter_target {
 	}
 
 	/**
-	 * Reset the directmail target, so the next record being fetched will be the first. 
+	 * Reset the newsletter target, so the next record being fetched will be the first. 
 	 * Not currently in use by any known extension
 	 *
 	 * @abstract
@@ -105,7 +105,7 @@ class tx_newsletter_target {
 	}   
    
 	/**
-	 * Get the number of receivers in this directmail target
+	 * Get the number of receivers in this newsletter target
 	 *
 	 * @abstract
 	 * @return   integer      Numbers of receivers.
@@ -115,7 +115,7 @@ class tx_newsletter_target {
 	}
    
 	/**
-	 * Get error text if the fetching of the directmail target has somehow failed.
+	 * Get error text if the fetching of the newsletter target has somehow failed.
 	 *
 	 * @abstract
 	 * @return   string      Error text or empty string.

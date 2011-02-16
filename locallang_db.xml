@@ -2,8 +2,8 @@
 <T3locallang>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="pages.directmailtype">Directmail</label>
-			<label index="pages.tx_newsletter_senttime">Directmail send time:</label>
+			<label index="pages.newslettertype">Newsletter</label>
+			<label index="pages.tx_newsletter_senttime">Newsletter send time:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Do not repeat</label>
 			<label index="pages.tx_newsletter_repeat.I.1">One day</label>
 			<label index="pages.tx_newsletter_repeat.I.2">One week</label>
@@ -12,10 +12,10 @@
 			<label index="pages.tx_newsletter_repeat.I.5">Three months</label>
 			<label index="pages.tx_newsletter_repeat.I.6">Six months</label>
 			<label index="pages.tx_newsletter_repeat.I.7">One year</label>
-			<label index="pages.tx_newsletter_repeat">Directmail repeat:</label>
-			<label index="pages.tx_newsletter_attachfiles">Attach files to directmail:</label>
+			<label index="pages.tx_newsletter_repeat">Newsletter repeat:</label>
+			<label index="pages.tx_newsletter_attachfiles">Attach files to newsletter:</label>
 			<label index="pages.tx_newsletter_real_target">Real receivers:</label>
-			<label index="pages.tx_newsletter_dotestsend">Directmail do test send:</label>
+			<label index="pages.tx_newsletter_dotestsend">Newsletter do test send:</label>
 			<label index="pages.tx_newsletter_test_target">Test receivers:</label>
 			<label index="pages.tx_newsletter_sendername">Sender name:</label>
 			<label index="pages.tx_newsletter_senderemail">Sender email:</label>
@@ -28,7 +28,7 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2">Build-in html converter</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
 			<label index="pages.tx_newsletter_plainconvert">Plain text method:</label>
-			<label index="tx_newsletter_targets">Directmail receivers</label>
+			<label index="tx_newsletter_targets">Newsletter receivers</label>
 			<label index="tx_newsletter_targets.title">Receivers title:</label>
 			<label index="tx_newsletter_targets.plain_only">Receive as plaintext only:</label>
 			<label index="tx_newsletter_targets.actual_receivers">Actual receivers:</label>
@@ -67,12 +67,12 @@
 			<label index="tx_newsletter_bounceaccount.server">Server:</label>
 			<label index="tx_newsletter_bounceaccount.username">Username:</label>
 			<label index="tx_newsletter_bounceaccount.passwd">Password:</label>
-			<label index="fe_users.tx_newsletter_bounce">Directmail bounce level</label>
-			<label index="tt_address.tx_newsletter_bounce">Directmail bounce level</label>
-			<label index="be_users.tx_newsletter_bounce">Directmail bounce level</label>
+			<label index="fe_users.tx_newsletter_bounce">Newsletter bounce level</label>
+			<label index="tt_address.tx_newsletter_bounce">Newsletter bounce level</label>
+			<label index="be_users.tx_newsletter_bounce">Newsletter bounce level</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
-			<label index="pages.directmailtype">Nyhedsbrev</label>
+			<label index="pages.newslettertype">Nyhedsbrev</label>
 			<label index="pages.tx_newsletter_senttime">Nyhedsbrev udsendelsestid:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Gentag ikke</label>
 			<label index="pages.tx_newsletter_repeat.I.1">En dag</label>
@@ -139,7 +139,7 @@
 			<label index="tx_newsletter_bounceaccount.passwd">Adgangskode:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="pages.directmailtype">Newsletter</label>
+			<label index="pages.newslettertype">Newsletter</label>
 			<label index="pages.tx_newsletter_senttime">Sendezeit für Newsletter:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Nicht wiederholen</label>
 			<label index="pages.tx_newsletter_repeat.I.1">Ein Tag</label>
@@ -150,7 +150,7 @@
 			<label index="pages.tx_newsletter_repeat.I.6">Sechs Monate</label>
 			<label index="pages.tx_newsletter_repeat.I.7">Ein Jahr</label>
 			<label index="pages.tx_newsletter_repeat">Wiederholungsintervall für Newsletter:</label>
-			<label index="pages.tx_newsletter_attachfiles">Dateien an directmail anhängen:</label>
+			<label index="pages.tx_newsletter_attachfiles">Dateien an newsletter anhängen:</label>
 			<label index="pages.tx_newsletter_real_target">Ziel für reguläre Empfänger:</label>
 			<label index="pages.tx_newsletter_dotestsend">Versende Testmail:</label>
 			<label index="pages.tx_newsletter_test_target">Ziel für Testempfänger:</label>
@@ -172,7 +172,7 @@
 		</languageKey>
 		<languageKey index="no"></languageKey>
 		<languageKey index="it" type="array">
-			<label index="pages.directmailtype">Directmail (Newsletter)</label>
+			<label index="pages.newslettertype">Newsletter (Newsletter)</label>
 			<label index="pages.tx_newsletter_senttime">Ora di spedizione:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Non ripetere</label>
 			<label index="pages.tx_newsletter_repeat.I.1">Fra un giorno</label>
@@ -183,13 +183,13 @@
 			<label index="pages.tx_newsletter_repeat.I.6">Fra sei mesi</label>
 			<label index="pages.tx_newsletter_repeat.I.7">Un anno</label>
 			<label index="pages.tx_newsletter_repeat">Ripeti spedizione:</label>
-			<label index="pages.tx_newsletter_attachfiles">Allega files alla directmail (newsletter):</label>
+			<label index="pages.tx_newsletter_attachfiles">Allega files alla newsletter (newsletter):</label>
 			<label index="pages.tx_newsletter_sendername">Nome mittente:</label>
 			<label index="pages.tx_newsletter_senderemail">Email mittente:</label>
 			<label index="pages.tx_newsletter_real_target">Indirizzo per i destinatari reali:</label>
-			<label index="pages.tx_newsletter_dotestsend">Directmail, esegui il test</label>
+			<label index="pages.tx_newsletter_dotestsend">Newsletter, esegui il test</label>
 			<label index="pages.tx_newsletter_test_target">Indirizzo per i destinatari del test:</label>
-			<label index="tx_newsletter_targets">Destinatario directmail:</label>
+			<label index="tx_newsletter_targets">Destinatario newsletter:</label>
 			<label index="tx_newsletter_targets.title">Titolo destinatario:</label>
 			<label index="tx_newsletter_targets.actual_receivers">Destinatari effettivi:</label>
 			<label index="pages.tx_newsletter_spy">Prove per conteggiare le email aperte:</label>
@@ -203,7 +203,7 @@
 		<languageKey index="fr"></languageKey>
 		<languageKey index="es"></languageKey>
 		<languageKey index="nl" type="array">
-			<label index="pages.directmailtype">Nieuwsbrief</label>
+			<label index="pages.newslettertype">Nieuwsbrief</label>
 			<label index="pages.tx_newsletter_senttime">Nieuwsbrief verzonden op:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Niet herhalen</label>
 			<label index="pages.tx_newsletter_repeat.I.1">Een dag</label>
@@ -273,7 +273,7 @@
 	</meta>
 	<orig_hash type="array">
 		<languageKey index="dk" type="array">
-			<label index="pages.directmailtype" type="integer">132251442</label>
+			<label index="pages.newslettertype" type="integer">132251442</label>
 			<label index="pages.tx_newsletter_senttime" type="integer">103531403</label>
 			<label index="pages.tx_newsletter_repeat.I.0" type="integer">248611784</label>
 			<label index="pages.tx_newsletter_repeat.I.1" type="integer">34582365</label>
@@ -342,8 +342,8 @@
 	</orig_hash>
 	<orig_text type="array">
 		<languageKey index="dk" type="array">
-			<label index="pages.directmailtype">Directmail</label>
-			<label index="pages.tx_newsletter_senttime">Directmail send time:</label>
+			<label index="pages.newslettertype">Newsletter</label>
+			<label index="pages.tx_newsletter_senttime">Newsletter send time:</label>
 			<label index="pages.tx_newsletter_repeat.I.0">Do not repeat</label>
 			<label index="pages.tx_newsletter_repeat.I.1">One day</label>
 			<label index="pages.tx_newsletter_repeat.I.2">One week</label>
@@ -352,10 +352,10 @@
 			<label index="pages.tx_newsletter_repeat.I.5">Three months</label>
 			<label index="pages.tx_newsletter_repeat.I.6">Six months</label>
 			<label index="pages.tx_newsletter_repeat.I.7">One year</label>
-			<label index="pages.tx_newsletter_repeat">Directmail repeat:</label>
-			<label index="pages.tx_newsletter_attachfiles">Attach files to directmail:</label>
+			<label index="pages.tx_newsletter_repeat">Newsletter repeat:</label>
+			<label index="pages.tx_newsletter_attachfiles">Attach files to newsletter:</label>
 			<label index="pages.tx_newsletter_real_target">Real receivers:</label>
-			<label index="pages.tx_newsletter_dotestsend">Directmail do test send:</label>
+			<label index="pages.tx_newsletter_dotestsend">Newsletter do test send:</label>
 			<label index="pages.tx_newsletter_test_target">Test receivers:</label>
 			<label index="pages.tx_newsletter_sendername">Sender name:</label>
 			<label index="pages.tx_newsletter_senderemail">Sender email:</label>
@@ -368,7 +368,7 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2">Build-in html converter</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
 			<label index="pages.tx_newsletter_plainconvert">Plain text method:</label>
-			<label index="tx_newsletter_targets">Directmail receivers</label>
+			<label index="tx_newsletter_targets">Newsletter receivers</label>
 			<label index="tx_newsletter_targets.title">Receivers title:</label>
 			<label index="tx_newsletter_targets.plain_only">Receive as plaintext only:</label>
 			<label index="tx_newsletter_targets.actual_receivers">Actual receivers:</label>

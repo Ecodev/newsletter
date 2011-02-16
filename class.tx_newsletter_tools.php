@@ -66,22 +66,22 @@ class tx_newsletter_tools {
        
 		/* Content should be more that just a few characters. Apache error propably occured */
 		if (strlen($content) < 200) {
-			die ("TC Directmail failure ($url): Content too short. The content must be at least 200 chars long to be considered valid.");
+			die ("TC Newsletter failure ($url): Content too short. The content must be at least 200 chars long to be considered valid.");
 		}		
 	       
 		/* Content should not contain PHP-Warnings */
 		if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-			die ("TC Directmail failure ($url): Content contains PHP Warnings. This must not reach the receivers.");
+			die ("TC Newsletter failure ($url): Content contains PHP Warnings. This must not reach the receivers.");
 		}
        
 		/* Content should not contain PHP-Warnings */
 		if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-			die ("TC Directmail failure ($url): Content contains PHP Fatal errors. This must not reach the receivers.");
+			die ("TC Newsletter failure ($url): Content contains PHP Fatal errors. This must not reach the receivers.");
 		}
        
 		/* If the page contains a "Pages is being generared" text... this is bad too */
 		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-			die ("TC Directmail failure ($url): Content contains \"wait\" signatures. This must not reach the receivers."); 
+			die ("TC Newsletter failure ($url): Content contains \"wait\" signatures. This must not reach the receivers."); 
 		}
        
 		return $content;
@@ -133,7 +133,7 @@ class tx_newsletter_tools {
 	* or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
 	* or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
 	*
-	* @param    array       Record of the directmail page
+	* @param    array       Record of the newsletter page
 	* @return   string      The sender name
 	*/
 	function getSenderForPage ($p) {
@@ -177,7 +177,7 @@ class tx_newsletter_tools {
 	* or the guessed email address of the user running the this process.
 	* or the no-reply@$_SERVER['HTTP_HOST'].
 	*
-	* @param    array       Record of the directmail page
+	* @param    array       Record of the newsletter page
 	* @return   string      The sender email
 	*/
 	function getEmailForPage ($p) {
@@ -234,7 +234,7 @@ class tx_newsletter_tools {
 	}
 
 	/**
-	* Update a directmail with a new schedule.
+	* Update a newsletter with a new schedule.
 	*
 	* @param    array      Page record.
 	* @return   void
@@ -272,7 +272,7 @@ class tx_newsletter_tools {
 
        
 	/**
-	* Create a configured mailer from a directmail page record.
+	* Create a configured mailer from a newsletter page record.
 	* This mailer will have both plain and html content applied as well as files attached.
 	*
 	* @param    array       Page record.
@@ -334,7 +334,7 @@ class tx_newsletter_tools {
 	}
 
 	/**
-	* Send a directmail page out to the test receivers.
+	* Send a newsletter page out to the test receivers.
 	* 
 	* @param    array      Page record.
 	* @param    array      List with receivers. If this is provided only the receivers in the list will be mailed.
@@ -390,7 +390,7 @@ class tx_newsletter_tools {
 	}
 
 	/**
-	 * Spool a directmail page out to the real receivers.
+	 * Spool a newsletter page out to the real receivers.
 	 * 
 	 * @param   array        Page record.
 	 * @param   integer      Actual begin time. 

@@ -23,7 +23,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /** 
- * Module 'Directmail' for the 'newsletter' extension.
+ * Module 'Newsletter' for the 'newsletter' extension.
  *
  * @author Fabien Udriot <fabien.udriot@ecodev.ch>
  * @author Adrien Crivelli <adrien.crivelli@ecodev.ch>
