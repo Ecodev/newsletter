@@ -40,7 +40,7 @@ class ext_update {
 	private $fieldsQueries = array(
 		"UPDATE pages SET tx_newsletter_senttime = tx_tcdirectmail_senttime WHERE tx_newsletter_senttime = 0;",
 		"UPDATE pages SET tx_newsletter_repeat = tx_tcdirectmail_repeat WHERE tx_newsletter_repeat = 0;",
-		"UPDATE pages SET tx_newsletter_plainconvert = REPLACE(tx_tcdirectmail_plainconvert, 'directmail', 'newsletter') WHERE tx_newsletter_plainconvert = 'tx_newsletter_plain_simple';",
+		"UPDATE pages SET tx_newsletter_plainconvert = REPLACE(tx_tcdirectmail_plainconvert, 'tcdirectmail', 'newsletter') WHERE tx_newsletter_plainconvert = 'tx_newsletter_plain_simple';",
 		"UPDATE pages SET tx_newsletter_test_target = tx_tcdirectmail_test_target WHERE tx_newsletter_test_target = 0;",
 		"UPDATE pages SET tx_newsletter_real_target = tx_tcdirectmail_real_target WHERE tx_newsletter_real_target = '';",
 		"UPDATE pages SET tx_newsletter_dotestsend = tx_tcdirectmail_dotestsend WHERE tx_newsletter_dotestsend = 0;",
@@ -61,9 +61,10 @@ class ext_update {
 	private $tablesQueries = array(
 		"INSERT INTO tx_newsletter_domain_model_bounceaccount SELECT * FROM tx_tcdirectmail_bounceaccount;",
 		"INSERT INTO tx_newsletter_domain_model_clicklink SELECT * FROM tx_tcdirectmail_clicklinks;",
-		"INSERT INTO tx_newsletter_domain_model_email_queue SELECT * FROM tx_tcdirectmail_sentlog;",
+		"INSERT INTO tx_newsletter_domain_model_emailqueue SELECT * FROM tx_tcdirectmail_sentlog;",
 		"INSERT INTO tx_newsletter_domain_model_recipientlist SELECT * FROM tx_tcdirectmail_targets;",
 		"INSERT INTO tx_newsletter_domain_model_lock SELECT * FROM tx_tcdirectmail_lock;",
+		"UPDATE tx_newsletter_domain_model_recipientlist SET targettype = REPLACE(targettype, 'tcdirectmail', 'newsletter');",
 	);
 
 	/**
@@ -101,6 +102,7 @@ class ext_update {
 		}
 		//http://www.ecoparc.local/typo3/mod.php?id=0&M=tools_em&CMD[showExt]=newsletter&SET[singleDetails]=info&CMD[showExt]=newsletter&CMD[remove]=1
 		$this->deactivateTcdirectmail();
+		
 		
 		return $content;
 	}
@@ -141,7 +143,7 @@ class ext_update {
 		$emptyTables = array(
 			'tx_newsletter_domain_model_bounceaccount',
 			'tx_newsletter_domain_model_clicklink',
-			'tx_newsletter_domain_model_email_queue',
+			'tx_newsletter_domain_model_emailqueue',
 			'tx_newsletter_domain_model_recipientlist',
 			'tx_newsletter_domain_model_lock',
 		);
@@ -153,8 +155,7 @@ class ext_update {
 			if ($row[0] != 0)
 				return false;
 		}
-		
-		return true;
+				return true;
 	}
 
 	/**
@@ -164,13 +165,19 @@ class ext_update {
 	{
 		global $TYPO3_DB;
 		
-		$queries = array_merge($this->fieldsQueries, $this->tablesQueries);
-		
+		$queries = array_merge($this->fieldsQueries, $this->tablesQueries);		
 		$recordCount = 0;
 		foreach ($queries as $query)
 		{
 			$res = $TYPO3_DB->sql_query($query);
 			$recordCount += $TYPO3_DB->sql_affected_rows($res);
+		}
+	
+		// Copy uploaded files from tcdirectmail directory to newsletter directory
+		foreach (glob(PATH_site."uploads/tx_tcdirectmail/*") as $filename)
+		{
+			$dest = str_replace('uploads/tx_tcdirectmail/', 'uploads/tx_newsletter/', $filename);
+			copy($filename, $dest);
 		}
 		
 		return $recordCount;

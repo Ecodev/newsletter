@@ -162,10 +162,10 @@
 			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx-Textbrowser</label>
 			<label index="pages.tx_newsletter_plainconvert.I.2">Eingebauter HTML-Kponverter</label>
 			<label index="pages.tx_newsletter_plainconvert">Methode für &quot;nur Text&quot;:</label>
-			<label index="tx_newsletter_domain_model_email_queue">Newsletter-Logeintrag</label>
-			<label index="tx_newsletter_domain_model_email_queue.begintime">Startzeit:</label>
-			<label index="tx_newsletter_domain_model_email_queue.sendtime">Sendezeit:</label>
-			<label index="tx_newsletter_domain_model_email_queue.receiver">Empfänger:</label>
+			<label index="tx_newsletter_domain_model_emailqueue">Newsletter-Logeintrag</label>
+			<label index="tx_newsletter_domain_model_emailqueue.begintime">Startzeit:</label>
+			<label index="tx_newsletter_domain_model_emailqueue.sendtime">Sendezeit:</label>
+			<label index="tx_newsletter_domain_model_emailqueue.receiver">Empfänger:</label>
 			<label index="tx_newsletter_domain_model_recipientlist">Ziel für Newsletter</label>
 			<label index="tx_newsletter_domain_model_recipientlist.title">Titel des Ziels:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Empfänger:</label>

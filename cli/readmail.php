@@ -21,7 +21,7 @@ switch ($bounce->status) {
 	
 
 	case NEWSLETTER_BOUNCE_UNREMOVABLE:
-	$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_email_queue', 
+	$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_emailqueue', 
 					"authcode = '$bounce->authCode' AND uid = '$bounce->sendid'", 
 					array('bounced' => 1));
 		break;

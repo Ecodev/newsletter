@@ -240,7 +240,7 @@ class tx_newsletter_remote {
 		$condition[] = 'pid = ' . $pid;
 		$condition[] = 'begintime = ' . $begintime;
 
-		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_domain_model_email_queue', implode(' AND ', $condition));
+		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_domain_model_emailqueue', implode(' AND ', $condition));
 
 		return $numberOfRecipients;
 	}
