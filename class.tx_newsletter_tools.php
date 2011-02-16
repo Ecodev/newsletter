@@ -225,7 +225,7 @@ class tx_newsletter_tools {
 	function getBounceAddressForPage($page) {
 		global $TYPO3_DB;
 
-		$rs = $TYPO3_DB->exec_SELECTquery('email', 'tx_newsletter_bounceaccount', "uid = $page[tx_newsletter_bounceaccount]");
+		$rs = $TYPO3_DB->exec_SELECTquery('email', 'tx_newsletter_domain_model_bounceaccount', "uid = $page[tx_newsletter_bounceaccount]");
 		if (list($address) =$TYPO3_DB->sql_fetch_row($rs)) {
 			return $address;
 		} else {
@@ -418,7 +418,7 @@ class tx_newsletter_tools {
           
 				/* Register the receiver */
 				if (t3lib_div::validEmail($receiver['email'])) {
-					$TYPO3_DB->exec_INSERTquery('tx_newsletter_sentlog', array(   
+					$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email_queue', array(   
 						'receiver' => $receiver['email'],
 						'user_uid' => $receiver['uid'], 
 						'begintime' => $begintime,
@@ -454,7 +454,7 @@ class tx_newsletter_tools {
 		   If there is no records for the last 15 seconds, previous spool session is assumed to have ended.  
 		   If there are newer records, then stop here, and assume the running mailer will take care of it.
 		 */
-		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_sentlog WHERE sendtime > '.(time() - 15)
+		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email_queue WHERE sendtime > '.(time() - 15)
                 	                     ." AND (host = '$hostname' OR host = '')");
                                      
 		list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
@@ -469,7 +469,7 @@ class tx_newsletter_tools {
 
 		/* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
 		$rs = $TYPO3_DB->sql_query("SELECT userdata, target, pid, uid 
-						FROM tx_newsletter_sentlog 
+						FROM tx_newsletter_domain_model_email_queue 
 						WHERE (host = '$hostname' OR host = '')
 						AND sendtime = 0
 						ORDER BY pid ".$limit); 
@@ -499,7 +499,7 @@ class tx_newsletter_tools {
 
 		/* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
 		$rs = $TYPO3_DB->sql_query("SELECT userdata, target, pid, uid 
-						FROM tx_newsletter_sentlog 
+						FROM tx_newsletter_domain_model_email_queue 
 						WHERE host = ''
 						AND pid = $id
 						AND sendtime = 0
@@ -516,7 +516,7 @@ class tx_newsletter_tools {
 	/** 
 	 * Method that accually runs the spool
 	 *
-	 * @param   resource      SQL-resultset from a select from tx_newsletter_sentlog
+	 * @param   resource      SQL-resultset from a select from tx_newsletter_domain_model_email_queue
 	 * @return  void
 	 */
 	function _runSpool ($rs) {
@@ -546,7 +546,7 @@ class tx_newsletter_tools {
 			}
 
 			/* Mark it as send already */
-			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_sentlog', "uid = $sendid", array('sendtime' => time()));
+			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_email_queue', "uid = $sendid", array('sendtime' => time()));
            
 			/* Give it the stamp */
 			if ($receiver['uid'] && $receiver['authCode']) {
@@ -570,7 +570,7 @@ class tx_newsletter_tools {
 				/* Write to the DB the links that have been registered */
 				foreach ($links as $type => $sublinks) {
 					foreach ($sublinks as $linkid => $url) {
-						$TYPO3_DB->exec_INSERTquery('tx_newsletter_clicklinks', array(
+						$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_clicklink', array(
 											'sentlog' => $sendid,
 											'linktype' => $type,
 											'linkid' => $linkid,

@@ -129,7 +129,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	protected function getRecipients($uid) {
 		global $TYPO3_DB;
 
-		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_targets WHERE uid = $uid");
+		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_domain_model_recipientlist WHERE uid = $uid");
 		$record = $TYPO3_DB->sql_fetch_assoc($rs);
 		$repository = new Tx_Newsletter_Domain_Repository_RecipientRepository();
 		return $repository->findAllByRecipientType($record);
@@ -148,8 +148,8 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		global $TYPO3_DB;
 
 		$sql = "SELECT linkid AS link_id, SUM(opened) AS number_of_opened, MIN(url) AS url
-                       FROM tx_newsletter_sentlog
-                       INNER JOIN tx_newsletter_clicklinks ON sentlog = uid
+                       FROM tx_newsletter_domain_model_email_queue
+                       INNER JOIN tx_newsletter_domain_model_clicklink ON sentlog = uid
                        WHERE begintime = $begintime
                        AND linktype = 'html'
                        AND opened = 1
@@ -205,7 +205,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		$condition[] = 'pid = ' . $pid;
 		$condition[] = 'begintime = ' . $begintime;
 
-		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_sentlog', implode(' AND ', $condition));
+		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_domain_model_email_queue', implode(' AND ', $condition));
 
 		return (int)$numberOfRecipients;
 	}
@@ -223,7 +223,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		global $TYPO3_DB;
 		
 		$sql = "SELECT COUNT(uid)
-				FROM tx_newsletter_sentlog
+				FROM tx_newsletter_domain_model_email_queue
 				WHERE begintime = $begintime
 				AND beenthere = 1
 				AND pid = $pid";
@@ -246,7 +246,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 		global $TYPO3_DB;
 
 		$sql = "SELECT SUM(bounced)
-				FROM tx_newsletter_sentlog
+				FROM tx_newsletter_domain_model_email_queue
 				WHERE begintime = $begintime
 				AND pid = $pid";
 
@@ -275,7 +275,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 //        // custom property
 //        "foo": "bar"
 //    },
-		$tableName = 'tx_newsletter_lock';
+		$tableName = 'tx_newsletter_domain_model_lock';
 		$metaData['idProperty'] = 'uid';
 		$metaData['root'] = 'records';
 		$metaData['totalProperty'] = 'total';
@@ -291,7 +291,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Extbase_Per
 	 * @return array $metaData
 	 */
 	public function getMetaDataForSingleRecord() {
-		$tableName = 'tx_newsletter_lock';
+		$tableName = 'tx_newsletter_domain_model_lock';
 		$metaData['idProperty'] = 'uid';
 		$metaData['root'] = 'data';
 		$metaData['totalProperty'] = 'total';

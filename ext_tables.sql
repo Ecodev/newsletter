@@ -1,6 +1,3 @@
-#
-# Table structure for table 'pages'
-#
 CREATE TABLE pages (
 	tx_newsletter_senttime int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_newsletter_repeat int(11) unsigned DEFAULT '0' NOT NULL,
@@ -27,12 +24,7 @@ CREATE TABLE be_users (
 	tx_newsletter_bounce int(11) DEFAULT '0' NOT NULL
 );
 
-
-
-#
-# Table structure for table 'tx_newsletter_sentlog'
-#
-CREATE TABLE tx_newsletter_sentlog (
+CREATE TABLE tx_newsletter_domain_model_email_queue (
 	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	begintime int(10) unsigned DEFAULT '0' NOT NULL,
@@ -52,12 +44,7 @@ CREATE TABLE tx_newsletter_sentlog (
     KEY authcode (authcode)
 );
 
-
-
-#
-# Table structure for table 'tx_newsletter_lock'
-#
-CREATE TABLE tx_newsletter_lock (
+CREATE TABLE tx_newsletter_domain_model_lock (
 	uid int(11) unsigned NOT NULL auto_increment,
 	pid int(11) unsigned DEFAULT '0' NOT NULL,
 	begintime int(11) unsigned DEFAULT '0' NOT NULL,
@@ -69,11 +56,7 @@ CREATE TABLE tx_newsletter_lock (
 	KEY stopping (stoptime)
 );
 
-
-#
-# Table structure for table 'tx_newsletter_targets'
-#
-CREATE TABLE tx_newsletter_targets (
+CREATE TABLE tx_newsletter_domain_model_recipientlist (
     uid int(11) unsigned NOT NULL auto_increment,
     pid int(11) unsigned DEFAULT '0' NOT NULL,
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -104,12 +87,7 @@ CREATE TABLE tx_newsletter_targets (
     KEY parent (pid)
 );
 
-
-#
-# Table structure for table 'tx_newsletter_clicklinks'
-#
-
-CREATE TABLE tx_newsletter_clicklinks (
+CREATE TABLE tx_newsletter_domain_model_clicklink (
   sentlog int(11) unsigned NOT NULL default '0',
   linkid int(11) unsigned NOT NULL default '0',
   linktype varchar(6) NOT NULL default '',
@@ -121,12 +99,7 @@ CREATE TABLE tx_newsletter_clicklinks (
   KEY used_links (linktype,opened,sentlog)  
 );
 
-
-#
-# Table structure for table 'tx_newsletter_bounceaccount'
-#
-
-CREATE TABLE tx_newsletter_bounceaccount (
+CREATE TABLE tx_newsletter_domain_model_bounceaccount (
     uid int(11) unsigned NOT NULL auto_increment,
     pid int(11) unsigned DEFAULT '0' NOT NULL,
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,

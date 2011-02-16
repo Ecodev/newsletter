@@ -44,7 +44,7 @@ class tx_newsletter_target {
 	function getTarget($uid) {
 		global $TYPO3_DB;
        
-		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_targets WHERE uid = $uid");
+		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_domain_model_recipientlist WHERE uid = $uid");
 		$fields = $TYPO3_DB->sql_fetch_assoc($rs);
 		$object = new $fields['targettype'];
 		if (is_subclass_of($object, 'tx_newsletter_target')) {

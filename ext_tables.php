@@ -71,7 +71,7 @@ $tempColumns = Array (
         "config" => Array (
             "type" => "group",    
             "internal_type" => "db",    
-            "allowed" => "tx_newsletter_targets",    
+            "allowed" => "tx_newsletter_domain_model_recipientlist",    
             "size" => 5,    
             "minitems" => 0,
             "maxitems" => 20,
@@ -83,7 +83,7 @@ $tempColumns = Array (
         "config" => Array (
             "type" => "group",    
             "internal_type" => "db",    
-            "allowed" => "tx_newsletter_targets",    
+            "allowed" => "tx_newsletter_domain_model_recipientlist",    
             "size" => 1,    
             "minitems" => 0,
             "maxitems" => 1,
@@ -112,8 +112,8 @@ $tempColumns = Array (
        'label' => 'LLL:EXT:newsletter/locallang_db.xml:pages.tx_newsletter_bounceaccount',
        'config' => Array (
            "type" => "select",
-           "foreign_table" => "tx_newsletter_bounceaccount",
-           "foreign_table_where" => "ORDER BY tx_newsletter_bounceaccount.uid",
+           "foreign_table" => "tx_newsletter_domain_model_bounceaccount",
+           "foreign_table_where" => "ORDER BY tx_newsletter_domain_model_bounceaccount.uid",
            "size" => 1,
            "minitems" => 0,
            "maxitems" => 1,
@@ -162,10 +162,10 @@ $TCA['pages']['types']['189'] = array (
     'showitem' => "hidden;;;;1-1-1, doktype, title;;;;2-2-2, storage_pid, content_from_pid,;;;;3-3-3, tx_newsletter_sendername, tx_newsletter_senderemail, tx_newsletter_bounceaccount, tx_newsletter_plainconvert, tx_newsletter_spy, tx_newsletter_register_clicks, tx_newsletter_usebcc,;;;;4-4-4, tx_newsletter_senttime, tx_newsletter_repeat, tx_newsletter_real_target,tx_newsletter_test_target,;;;;6-6-6, tx_newsletter_attachfiles,",
 );
 
-t3lib_extMgm::allowTableOnStandardPages("tx_newsletter_targets");
-$TCA["tx_newsletter_targets"] = Array (
+t3lib_extMgm::allowTableOnStandardPages("tx_newsletter_domain_model_recipientlist");
+$TCA["tx_newsletter_domain_model_recipientlist"] = Array (
     "ctrl" => Array (
-        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_targets",        
+        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_domain_model_recipientlist",        
         "label" => "title",    
         "tstamp" => "tstamp",
         "crdate" => "crdate",
@@ -184,9 +184,9 @@ $TCA["tx_newsletter_targets"] = Array (
     )
 );
 
-$TCA["tx_newsletter_bounceaccount"] = Array (
+$TCA["tx_newsletter_domain_model_bounceaccount"] = Array (
     "ctrl" => Array (
-        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_bounceaccount",        
+        "title" => "LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_domain_model_bounceaccount",        
         "label" => "email",    
         "tstamp" => "tstamp",
         "crdate" => "crdate",

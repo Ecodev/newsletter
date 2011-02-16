@@ -172,7 +172,7 @@ class tx_newsletter_remote {
 
 		// Defines list of fields
 		$fields = array('uid', 'pid', 'begintime', 'stoptime');
-		$tableName = 'tx_newsletter_lock';
+		$tableName = 'tx_newsletter_domain_model_lock';
 
 		$datasource['metaData'] = $this->getMetaData($fields, $tableName);
 		$datasource['total'] = 0;
@@ -240,7 +240,7 @@ class tx_newsletter_remote {
 		$condition[] = 'pid = ' . $pid;
 		$condition[] = 'begintime = ' . $begintime;
 
-		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_sentlog', implode(' AND ', $condition));
+		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_domain_model_email_queue', implode(' AND ', $condition));
 
 		return $numberOfRecipients;
 	}

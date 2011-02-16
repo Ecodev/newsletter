@@ -7,7 +7,7 @@ plugin.tx_newsletter {
 		classes {
 			Tx_Newsletter_Domain_Model_Statistic {
 				mapping {
-					tableName = tx_newsletter_lock
+					tableName = tx_newsletter_domain_model_lock
 					#recordType = Tx_Newsletter_Domain_Model_Statistic
 					#columns {
 					#	begintime.mapOnProperty = begintime

@@ -34,7 +34,7 @@
 require_once(t3lib_extMgm::extPath('kickstarter').'class.tx_kickstarter_sectionbase.php');
 
 class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
-  var $sectionID = 'tx_newsletter_targets';
+  var $sectionID = 'tx_newsletter_domain_model_recipientlist';
 
 	/**
 	 * Renders the form in the kickstarter; this was add_cat_fields()
@@ -112,7 +112,7 @@ class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
 				// New field:
 			$k=max($c)+1;
 			$v=array();
-			$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>NEW FIELD TO ADD TO tx_newsletter_targets:</strong>').'</td></tr>';
+			$lines[]='<tr'.$this->bgCol(2).'><td>'.$this->fw('<strong>NEW FIELD TO ADD TO tx_newsletter_domain_model_recipientlist:</strong>').'</td></tr>';
 			$subContent=$this->renderField($ffPrefix.'[fields]['.$k.']',$v,1);
 			$lines[]='<tr'.$this->bgCol(3).'><td>'.$this->fw($subContent).'</td></tr>';
 
@@ -689,7 +689,7 @@ class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
 			#
 			# Table structure for table tc_newsletter_targets
 			#
-			CREATE TABLE tx_newsletter_targets (
+			CREATE TABLE tx_newsletter_domain_model_recipientlist (
 		', ereg_replace(',[[:space:]]*$','',implode(chr(10),$DBfields)), '
 
 			);
@@ -722,16 +722,16 @@ class tx_newsletter_section_targets extends tx_kickstarter_sectionbase {
 
 		$targetName = 'tx_'.$extKey.'_target'.$this->numTarget;
 		$labelDefault = 'Receivers from '.$tableName;
-		$labelName = 'tx_newsletter_targets.opt'.$extKey.'_target'.$this->numTarget;
+		$labelName = 'tx_newsletter_domain_model_recipientlist.opt'.$extKey.'_target'.$this->numTarget;
 		$sl_config = array($labelName => array($labelDefault));
 		$this->wizard->ext_locallang_db['default'][$labelName] = array($labelDefault);
 		
 		
 		$this->wizard->ext_tables[]=$this->sPS('
-			t3lib_div::loadTCA("tx_newsletter_targets");
-			t3lib_extMgm::addTCAcolumns("tx_newsletter_targets",$tempColumns,1);
-			$TCA["tx_newsletter_targets"]["types"]["'.$targetName.'"]["showitem"] = "hidden;;1;;1-1-1, title, plain_only, targettype, '.implode(', ', array_keys($columns)).', ;;;;2-2-2, calculated_receivers;;;;1-1-1";
-			$TCA["tx_newsletter_targets"]["columns"]["targettype"]["config"]["items"][] = array("LLL:EXT:'.$extKey.'/locallang_db.xml:'.
+			t3lib_div::loadTCA("tx_newsletter_domain_model_recipientlist");
+			t3lib_extMgm::addTCAcolumns("tx_newsletter_domain_model_recipientlist",$tempColumns,1);
+			$TCA["tx_newsletter_domain_model_recipientlist"]["types"]["'.$targetName.'"]["showitem"] = "hidden;;1;;1-1-1, title, plain_only, targettype, '.implode(', ', array_keys($columns)).', ;;;;2-2-2, calculated_receivers;;;;1-1-1";
+			$TCA["tx_newsletter_domain_model_recipientlist"]["columns"]["targettype"]["config"]["items"][] = array("LLL:EXT:'.$extKey.'/locallang_db.xml:'.
 			$labelName.'", "'.$targetName.'");
 			
 		');
@@ -779,7 +779,7 @@ class $targetName extends tx_newsletter_target_sql {
 
 }
 
-/* Note: XCLASS'ing is NOT supported for tx_newsletter_targets, nor will it ever be. So dont complain to me. */";
+/* Note: XCLASS'ing is NOT supported for tx_newsletter_domain_model_recipientlist, nor will it ever be. So dont complain to me. */";
 		$targetSource = $this->PHPclassFile($extKey, $filename, $targetSource, "Newsletter target$this->numTarget for $extKey");
 		$targetSource = preg_replace('/if[\w\W].*XCLASS[\w\W]*}/', '', $targetSource);
 		
@@ -1317,7 +1317,7 @@ class $targetName extends tx_newsletter_target_sql {
 					$aMax = intval($fConf["conf_numberBoxes"]);
 					for($a=0;$a<$aMax;$a++)	{
 //						$cItems[]='Array("'.($fConf["conf_boxLabel_".$a]?str_replace("\\'","'",addslashes($this->getSplitLabels($fConf,"conf_boxLabel_".$a))):'English Label '.($a+1).'|Danish Label '.($a+1).'|German Label '.($a+1).'| etc...').'", ""),';
-						$cItems[]='Array("'.addslashes($this->getSplitLabels_reference($fConf,"conf_boxLabel_".$a,"tx_newsletter_targets.".$fConf["fieldname"].".I.".$a)).'", ""),';
+						$cItems[]='Array("'.addslashes($this->getSplitLabels_reference($fConf,"conf_boxLabel_".$a,"tx_newsletter_domain_model_recipientlist.".$fConf["fieldname"].".I.".$a)).'", ""),';
 					}
 					$configL[]=trim($this->wrapBody('
 						"items" => Array (
@@ -1587,7 +1587,7 @@ class $targetName extends tx_newsletter_target_sql {
 			$columns[$fConf["fieldname"]] = trim($this->wrapBody('
 				"'.$fConf["fieldname"].'" => Array (		'.$this->WOPcomment('WOP:'.$WOP.'[fieldname]').'
 					"exclude" => '.($fConf["excludeField"]?1:0).',		'.$this->WOPcomment('WOP:'.$WOP.'[excludeField]').'
-					"label" => "'.addslashes($this->getSplitLabels_reference($fConf,"title","tx_newsletter_targets.".$fConf["fieldname"])).'",		'.$this->WOPcomment('WOP:'.$WOP.'[title]').'
+					"label" => "'.addslashes($this->getSplitLabels_reference($fConf,"title","tx_newsletter_domain_model_recipientlist.".$fConf["fieldname"])).'",		'.$this->WOPcomment('WOP:'.$WOP.'[title]').'
 					"config" => Array (
 						',implode(chr(10),$configL),'
 					)

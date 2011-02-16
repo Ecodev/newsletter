@@ -12,9 +12,9 @@ require (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
 
 
 /* Talk talk talk :) */
-$TYPO3_DB->sql_query("UPDATE tx_newsletter_sentlog SET beenthere = 1 WHERE authcode = '$authcode' AND uid = $sendid");
+$TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email_queue SET beenthere = 1 WHERE authcode = '$authcode' AND uid = $sendid");
 
-$rs = $TYPO3_DB->sql_query("SELECT target, user_uid FROM tx_newsletter_sentlog WHERE authcode = '$authcode' AND uid = $sendid");
+$rs = $TYPO3_DB->sql_query("SELECT target, user_uid FROM tx_newsletter_domain_model_email_queue WHERE authcode = '$authcode' AND uid = $sendid");
 if (list($targetUid, $userUid) = $TYPO3_DB->sql_fetch_row($rs)) {
 	$target = tx_newsletter_target::getTarget($targetUid);
 	$target->registerOpen($userUid);

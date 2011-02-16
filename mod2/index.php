@@ -291,7 +291,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 
 		/* Get starttime for lock-records */
-		$rs = $TYPO3_DB->exec_SELECTquery('begintime', 'tx_newsletter_lock', "stoptime = 0 AND pid = $_REQUEST[id]");
+		$rs = $TYPO3_DB->exec_SELECTquery('begintime', 'tx_newsletter_domain_model_lock', "stoptime = 0 AND pid = $_REQUEST[id]");
 		list ($begintime) = $TYPO3_DB->sql_fetch_row($rs);
 
 		$output .= '<form>';
@@ -311,7 +311,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 			if ($begintime) {      
 				$rs = $TYPO3_DB->exec_SELECTquery('COUNT(uid)',
-								'tx_newsletter_sentlog',
+								'tx_newsletter_domain_model_email_queue',
 								"begintime = '$begintime' AND pid = $_REQUEST[id]");
 
 				list ($already_sent) = $TYPO3_DB->sql_fetch_row($rs);
@@ -404,7 +404,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		global $TYPO3_DB;
 
 		/* Find out if the mail has already been spooled */
-		$rs = $TYPO3_DB->sql_query("SELECT COUNT(uid) FROM tx_newsletter_lock  
+		$rs = $TYPO3_DB->sql_query("SELECT COUNT(uid) FROM tx_newsletter_domain_model_lock  
 						WHERE stoptime = 0
 						AND pid = $_REQUEST[id]");
 		     
@@ -414,7 +414,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		if (!$already_spooled) {
 			$begintime = time();
 			/* Lock the page */
-			$TYPO3_DB->exec_INSERTquery('tx_newsletter_lock', 
+			$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_lock', 
 							array('pid' => $this->pageinfo['uid'], 
 									'begintime' => $begintime, 
 									'stoptime' => 0));
@@ -424,7 +424,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 			/* Unlock the page */
 			tx_newsletter_tools::setScheduleAfterSending ($this->pageinfo);
-			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_lock', "uid = $lockid", array('stoptime' => time()));         
+			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_lock', "uid = $lockid", array('stoptime' => time()));         
 		}
 
 		/* Go on and run the queue */
@@ -551,30 +551,30 @@ class tx_newsletter_module1 extends t3lib_SCbase {
    
        /* Clear invalid stats? */
        if ($_REQUEST['clear_invalid']) {
-          $sql = "DELETE FROM tx_newsletter_sentlog WHERE begintime = 0 AND pid = $id";
+          $sql = "DELETE FROM tx_newsletter_domain_model_email_queue WHERE begintime = 0 AND pid = $id";
           $TYPO3_DB->sql_query($sql);
-          $sql = "DELETE FROM tx_newsletter_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id";
+          $sql = "DELETE FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id";
           $TYPO3_DB->sql_query($sql);
        }
        
        if ($_REQUEST['delete_begintime']) {
-         $sql = "DELETE tx_newsletter_lock, tx_newsletter_sentlog, tx_newsletter_clicklinks FROM tx_newsletter_lock
-                 LEFT JOIN tx_newsletter_sentlog ON tx_newsletter_lock.begintime = tx_newsletter_sentlog.begintime
-                 LEFT JOIN tx_newsletter_clicklinks ON tx_newsletter_sentlog.uid = tx_newsletter_clicklinks.sentlog
-                 WHERE tx_newsletter_lock.pid = $id
-                 AND tx_newsletter_lock.begintime = ".intval($_REQUEST[delete_begintime]);
+         $sql = "DELETE tx_newsletter_domain_model_lock, tx_newsletter_domain_model_email_queue, tx_newsletter_domain_model_clicklink FROM tx_newsletter_domain_model_lock
+                 LEFT JOIN tx_newsletter_domain_model_email_queue ON tx_newsletter_domain_model_lock.begintime = tx_newsletter_domain_model_email_queue.begintime
+                 LEFT JOIN tx_newsletter_domain_model_clicklink ON tx_newsletter_domain_model_email_queue.uid = tx_newsletter_domain_model_clicklink.sentlog
+                 WHERE tx_newsletter_domain_model_lock.pid = $id
+                 AND tx_newsletter_domain_model_lock.begintime = ".intval($_REQUEST[delete_begintime]);
           $TYPO3_DB->sql_query($sql);         
        }
    
    
        /* Invalid-stats form */
        $out .= "<form action=\"index.php?id=$_REQUEST[id]\">";
-       $sql = "SELECT uid FROM tx_newsletter_sentlog WHERE begintime = 0 AND pid = $id LIMIT 1";
+       $sql = "SELECT uid FROM tx_newsletter_domain_model_email_queue WHERE begintime = 0 AND pid = $id LIMIT 1";
 
        $rs = $TYPO3_DB->sql_query($sql);
        $invalid_log = $TYPO3_DB->sql_fetch_row($rs);
        
-       $sql = "SELECT uid FROM tx_newsletter_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id LIMIT 1";
+       $sql = "SELECT uid FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id LIMIT 1";
        $rs = $TYPO3_DB->sql_query($sql);
        $invalid_lock = $TYPO3_DB->sql_fetch_row($rs);
        
@@ -590,8 +590,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
        /* Old-stats form */
        /* Get numbers for each session */
        $sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
-          FROM tx_newsletter_lock lck
-          LEFT JOIN tx_newsletter_sentlog lg ON lck.begintime = lg.begintime
+          FROM tx_newsletter_domain_model_lock lck
+          LEFT JOIN tx_newsletter_domain_model_email_queue lg ON lck.begintime = lg.begintime
           WHERE lck.pid = $id
           AND lg.pid = $id
           GROUP BY 1,2";
@@ -707,11 +707,11 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	    global $TYPO3_DB;
 	    global $BACK_PATH;
 	    
-	    $rs = $TYPO3_DB->exec_SELECTquery('title', 'tx_newsletter_targets', "uid = $uid");
+	    $rs = $TYPO3_DB->exec_SELECTquery('title', 'tx_newsletter_domain_model_recipientlist', "uid = $uid");
 	    list($title) = $TYPO3_DB->sql_fetch_row($rs);
 	
 	    $out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
-	    $out .= '&edit[tx_newsletter_targets]['.$uid.']=edit">';
+	    $out .= '&edit[tx_newsletter_domain_model_recipientlist]['.$uid.']=edit">';
 	    $out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
 	    $out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'mailtargets.gif" />';
 	    $out .= "$title ($uid)";
@@ -742,8 +742,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		/* Get numbers for each session */
 		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver) 
-				FROM tx_newsletter_lock lck 
-				LEFT JOIN tx_newsletter_sentlog lg ON lck.begintime = lg.begintime 
+				FROM tx_newsletter_domain_model_lock lck 
+				LEFT JOIN tx_newsletter_domain_model_email_queue lg ON lck.begintime = lg.begintime 
 				WHERE lck.pid = $_REQUEST[id] 
 				AND lg.pid = $_REQUEST[id] 
 				GROUP BY 1,2";
@@ -798,8 +798,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
           
 		/* total activated links */
 		$sql = "SELECT linktype, linkid, SUM(opened)
-			FROM tx_newsletter_sentlog 
-			INNER JOIN tx_newsletter_clicklinks ON sentlog = uid 
+			FROM tx_newsletter_domain_model_email_queue 
+			INNER JOIN tx_newsletter_domain_model_clicklink ON sentlog = uid 
 			WHERE begintime = $_REQUEST[detail_begintime] 
 			AND pid = $_REQUEST[id]
 			GROUP BY 1,2
@@ -854,8 +854,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		if ($_REQUEST['opened_link']) {
 			list($linktype, $linkid) = explode('|', $_REQUEST['opened_link']);
 			$sql = "SELECT COUNT(uid) 
-				FROM tx_newsletter_sentlog 
-				INNER JOIN tx_newsletter_clicklinks ON uid = sentlog
+				FROM tx_newsletter_domain_model_email_queue 
+				INNER JOIN tx_newsletter_domain_model_clicklink ON uid = sentlog
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]
@@ -872,7 +872,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			/* Or just confirmed addresses in general */
 		} elseif ($_REQUEST['beenthere'] == 'yes') {
 			$sql = "SELECT COUNT(uid)
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND beenthere = 1
@@ -887,7 +887,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		} elseif ($_REQUEST['beenthere'] == 'no') {
 			/* Get total numbers of recients */
 			$sql = "SELECT COUNT(uid) 
-			FROM tx_newsletter_sentlog 
+			FROM tx_newsletter_domain_model_email_queue 
 			WHERE begintime = $_REQUEST[detail_begintime] 
 			$receiver_option
 			AND pid = $_REQUEST[id]";
@@ -897,7 +897,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
           
 			/* Count opened emails */
 			$sql = "SELECT COUNT(uid) 
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND beenthere = 0
@@ -911,7 +911,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
                      
 			/* Count bounced emails */
 			$sql = "SELECT SUM(bounced) 
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
@@ -925,7 +925,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		} else  {
 			/* Get total numbers of recients */
 			$sql = "SELECT COUNT(uid) 
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
@@ -935,7 +935,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
           
 			/* Count opened emails */
 			$sql = "SELECT SUM(beenthere) 
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND beenthere = 1
@@ -952,7 +952,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
                      
 			/* Count bounced emails */
 			$sql = "SELECT SUM(bounced) 
-				FROM tx_newsletter_sentlog 
+				FROM tx_newsletter_domain_model_email_queue 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
@@ -976,9 +976,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
           
              if ($_REQUEST['opened_link']) {
                $sql = "SELECT otherlinks.linkid, SUM(otherlinks.opened), MIN(otherlinks.url) 
-                       FROM tx_newsletter_sentlog 
-                       INNER JOIN tx_newsletter_clicklinks thelink ON thelink.sentlog = uid 
-                       INNER JOIN tx_newsletter_clicklinks otherlinks ON otherlinks.sentlog = uid 
+                       FROM tx_newsletter_domain_model_email_queue 
+                       INNER JOIN tx_newsletter_domain_model_clicklink thelink ON thelink.sentlog = uid 
+                       INNER JOIN tx_newsletter_domain_model_clicklink otherlinks ON otherlinks.sentlog = uid 
                        WHERE begintime = $_REQUEST[detail_begintime] 
                        $receiver_option
                        AND otherlinks.linktype = '###TYPE###' 
@@ -990,8 +990,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
                        ORDER BY 1";
              } else {
                $sql = "SELECT linkid, SUM(opened), MIN(url) 
-                       FROM tx_newsletter_sentlog 
-                       INNER JOIN tx_newsletter_clicklinks ON sentlog = uid 
+                       FROM tx_newsletter_domain_model_email_queue 
+                       INNER JOIN tx_newsletter_domain_model_clicklink ON sentlog = uid 
                        WHERE begintime = $_REQUEST[detail_begintime] 
                        $receiver_option
                        AND linktype = '###TYPE###' 

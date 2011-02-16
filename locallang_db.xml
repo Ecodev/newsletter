@@ -28,45 +28,45 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2">Build-in html converter</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
 			<label index="pages.tx_newsletter_plainconvert">Plain text method:</label>
-			<label index="tx_newsletter_targets">Newsletter receivers</label>
-			<label index="tx_newsletter_targets.title">Receivers title:</label>
-			<label index="tx_newsletter_targets.plain_only">Receive as plaintext only:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Actual receivers:</label>
-			<label index="tx_newsletter_targets.beusers">BE-users:</label>
-			<label index="tx_newsletter_targets.fegroups">FE-groups:</label>
-			<label index="tx_newsletter_targets.fepages">Pages with FE-users:</label>
-			<label index="tx_newsletter_targets.ttaddress">Pages with tt_address-records</label>
-			<label index="tx_newsletter_targets.rawsql">Raw SQL:</label>
-			<label index="tx_newsletter_targets.sepchar">Separator character:</label>
-			<label index="tx_newsletter_targets.csvfields">CSV fields:</label>
-			<label index="tx_newsletter_targets.csvdata">CSV data:</label>
-			<label index="tx_newsletter_targets.csvfile">CSV file:</label>
-			<label index="tx_newsletter_targets.csvurl">CSV url:</label>
-			<label index="tx_newsletter_targets.type">Type:</label>
-			<label index="tx_newsletter_targets.htmlurl">HTML url:</label>
-			<label index="tx_newsletter_targets.htmlfetch">HTML fetch type:</label>
-			<label index="tx_newsletter_targets.direct_mail_compat">direct_mail compatible html-allow flag:</label>
-			<label index="tx_newsletter_targets.confirmed_receivers">Registered mailed addresses</label>
-			<label index="tx_newsletter_targets.optalreadymailed">Already mailed addresses</label>
-			<label index="tx_newsletter_targets.optconfirmed">Confirmed addresses</label>
-			<label index="tx_newsletter_targets.optnotconfirmed">Non-confirmed addresses</label>
-			<label index="tx_newsletter_targets.optalladdresses">All mailed addresses</label>
-			<label index="tx_newsletter_targets.optbeusers">BE-users</label>
-			<label index="tx_newsletter_targets.optfegroups">FE-groups with FE-users</label>
-			<label index="tx_newsletter_targets.optfepages">Pages with FE-users</label>
-			<label index="tx_newsletter_targets.optttaddress">Pages with tt_address-records</label>
-			<label index="tx_newsletter_targets.optrawsql">Raw SQL</label>
-			<label index="tx_newsletter_targets.optcsvfile">CSV file</label>
-			<label index="tx_newsletter_targets.optcsvlist">CSV list</label>
-			<label index="tx_newsletter_targets.optcsvurl">CSV url</label>
-			<label index="tx_newsletter_targets.opthtml">HTML</label>
-			<label index="tx_newsletter_targets.optmailto">Anchor tags with mailto:</label>
-			<label index="tx_newsletter_targets.optregex">Match email addresses</label>
-			<label index="tx_newsletter_bounceaccount">Bounce account</label>
-			<label index="tx_newsletter_bounceaccount.servertype">Server type:</label>
-			<label index="tx_newsletter_bounceaccount.server">Server:</label>
-			<label index="tx_newsletter_bounceaccount.username">Username:</label>
-			<label index="tx_newsletter_bounceaccount.passwd">Password:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Newsletter receivers</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Receivers title:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Receive as plaintext only:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Actual receivers:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.beusers">BE-users:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fegroups">FE-groups:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fepages">Pages with FE-users:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.ttaddress">Pages with tt_address-records</label>
+			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Raw SQL:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Separator character:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV fields:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV data:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfile">CSV file:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvurl">CSV url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type">Type:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlurl">HTML url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlfetch">HTML fetch type:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.direct_mail_compat">direct_mail compatible html-allow flag:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.confirmed_receivers">Registered mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalreadymailed">Already mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optconfirmed">Confirmed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optnotconfirmed">Non-confirmed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalladdresses">All mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">BE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">FE-groups with FE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Pages with FE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optttaddress">Pages with tt_address-records</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Raw SQL</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV file</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV list</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV url</label>
+			<label index="tx_newsletter_domain_model_recipientlist.opthtml">HTML</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optmailto">Anchor tags with mailto:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optregex">Match email addresses</label>
+			<label index="tx_newsletter_domain_model_bounceaccount">Bounce account</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.servertype">Server type:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.server">Server:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.username">Username:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.passwd">Password:</label>
 			<label index="fe_users.tx_newsletter_bounce">Newsletter bounce level</label>
 			<label index="tt_address.tx_newsletter_bounce">Newsletter bounce level</label>
 			<label index="be_users.tx_newsletter_bounce">Newsletter bounce level</label>
@@ -98,45 +98,45 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2">Indbygget htmlkonvertering</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
 			<label index="pages.tx_newsletter_plainconvert">Plaintekst metode:</label>
-			<label index="tx_newsletter_targets">Nyhedsbrevsmodtagere</label>
-			<label index="tx_newsletter_targets.title">Titel for modtagere:</label>
-			<label index="tx_newsletter_targets.plain_only">Modtager kun plain-tekst:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Faktiske modtagere:</label>
-			<label index="tx_newsletter_targets.beusers">Backendbrugere:</label>
-			<label index="tx_newsletter_targets.fegroups">Frontend brugergrupper:</label>
-			<label index="tx_newsletter_targets.fepages">Frontend brugere fra sider:</label>
-			<label index="tx_newsletter_targets.ttaddress">Sider med tt_address-records:</label>
-			<label index="tx_newsletter_targets.rawsql">Rå SQL:</label>
-			<label index="tx_newsletter_targets.sepchar">Adskillelsestegn:</label>
-			<label index="tx_newsletter_targets.csvfields">CSV-felter:</label>
-			<label index="tx_newsletter_targets.csvdata">CSV-data:</label>
-			<label index="tx_newsletter_targets.csvfile">CSV-fil:</label>
-			<label index="tx_newsletter_targets.csvurl">CSV-url:</label>
-			<label index="tx_newsletter_targets.type">Type:</label>
-			<label index="tx_newsletter_targets.htmlurl">HTML-url:</label>
-			<label index="tx_newsletter_targets.htmlfetch">HTML-læsemetode:</label>
-			<label index="tx_newsletter_targets.direct_mail_compat">direct_mail kompatibelt html-allow flag:</label>
-			<label index="tx_newsletter_targets.confirmed_receivers">Registerede mailadresser</label>
-			<label index="tx_newsletter_targets.optalreadymailed">Allerede mailede adresser</label>
-			<label index="tx_newsletter_targets.optconfirmed">Bekræftede adresser</label>
-			<label index="tx_newsletter_targets.optnotconfirmed">Ikke-bekræftede adresser</label>
-			<label index="tx_newsletter_targets.optalladdresses">Alle mailede adresser</label>
-			<label index="tx_newsletter_targets.optbeusers">Backendbrugere</label>
-			<label index="tx_newsletter_targets.optfegroups">Frontend brugergrupper</label>
-			<label index="tx_newsletter_targets.optfepages">Sider med frontendbrugere</label>
-			<label index="tx_newsletter_targets.optttaddress">Sider med tt_address-records</label>
-			<label index="tx_newsletter_targets.optrawsql">Rå SQL</label>
-			<label index="tx_newsletter_targets.optcsvfile">CSV-fil</label>
-			<label index="tx_newsletter_targets.optcsvlist">CSV-list</label>
-			<label index="tx_newsletter_targets.optcsvurl">CSV-url</label>
-			<label index="tx_newsletter_targets.opthtml">HTML</label>
-			<label index="tx_newsletter_targets.optmailto">mailto:-links</label>
-			<label index="tx_newsletter_targets.optregex">Mønstergenkend emailadresser</label>
-			<label index="tx_newsletter_bounceaccount">Emailkonto for returnede mails</label>
-			<label index="tx_newsletter_bounceaccount.servertype">Servertype:</label>
-			<label index="tx_newsletter_bounceaccount.server">Server:</label>
-			<label index="tx_newsletter_bounceaccount.username">Brugernavn:</label>
-			<label index="tx_newsletter_bounceaccount.passwd">Adgangskode:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Nyhedsbrevsmodtagere</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Titel for modtagere:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Modtager kun plain-tekst:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Faktiske modtagere:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.beusers">Backendbrugere:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fegroups">Frontend brugergrupper:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fepages">Frontend brugere fra sider:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.ttaddress">Sider med tt_address-records:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Rå SQL:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Adskillelsestegn:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV-felter:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV-data:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfile">CSV-fil:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvurl">CSV-url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type">Type:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlurl">HTML-url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlfetch">HTML-læsemetode:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.direct_mail_compat">direct_mail kompatibelt html-allow flag:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.confirmed_receivers">Registerede mailadresser</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalreadymailed">Allerede mailede adresser</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optconfirmed">Bekræftede adresser</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optnotconfirmed">Ikke-bekræftede adresser</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalladdresses">Alle mailede adresser</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">Backendbrugere</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">Frontend brugergrupper</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Sider med frontendbrugere</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optttaddress">Sider med tt_address-records</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Rå SQL</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV-fil</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV-list</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV-url</label>
+			<label index="tx_newsletter_domain_model_recipientlist.opthtml">HTML</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optmailto">mailto:-links</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optregex">Mønstergenkend emailadresser</label>
+			<label index="tx_newsletter_domain_model_bounceaccount">Emailkonto for returnede mails</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.servertype">Servertype:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.server">Server:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.username">Brugernavn:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.passwd">Adgangskode:</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pages.newslettertype">Newsletter</label>
@@ -162,13 +162,13 @@
 			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx-Textbrowser</label>
 			<label index="pages.tx_newsletter_plainconvert.I.2">Eingebauter HTML-Kponverter</label>
 			<label index="pages.tx_newsletter_plainconvert">Methode für &quot;nur Text&quot;:</label>
-			<label index="tx_newsletter_sentlog">Newsletter-Logeintrag</label>
-			<label index="tx_newsletter_sentlog.begintime">Startzeit:</label>
-			<label index="tx_newsletter_sentlog.sendtime">Sendezeit:</label>
-			<label index="tx_newsletter_sentlog.receiver">Empfänger:</label>
-			<label index="tx_newsletter_targets">Ziel für Newsletter</label>
-			<label index="tx_newsletter_targets.title">Titel des Ziels:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Empfänger:</label>
+			<label index="tx_newsletter_domain_model_email_queue">Newsletter-Logeintrag</label>
+			<label index="tx_newsletter_domain_model_email_queue.begintime">Startzeit:</label>
+			<label index="tx_newsletter_domain_model_email_queue.sendtime">Sendezeit:</label>
+			<label index="tx_newsletter_domain_model_email_queue.receiver">Empfänger:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Ziel für Newsletter</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Titel des Ziels:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Empfänger:</label>
 		</languageKey>
 		<languageKey index="no"></languageKey>
 		<languageKey index="it" type="array">
@@ -189,9 +189,9 @@
 			<label index="pages.tx_newsletter_real_target">Indirizzo per i destinatari reali:</label>
 			<label index="pages.tx_newsletter_dotestsend">Newsletter, esegui il test</label>
 			<label index="pages.tx_newsletter_test_target">Indirizzo per i destinatari del test:</label>
-			<label index="tx_newsletter_targets">Destinatario newsletter:</label>
-			<label index="tx_newsletter_targets.title">Titolo destinatario:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Destinatari effettivi:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Destinatario newsletter:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Titolo destinatario:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Destinatari effettivi:</label>
 			<label index="pages.tx_newsletter_spy">Prove per conteggiare le email aperte:</label>
 			<label index="pages.tx_newsletter_usebcc">Utilizza lo header BCC (CCN) per spedire le email:</label>
 			<label index="pages.tx_newsletter_register_clicks">Registra i link cliccati:</label>
@@ -226,9 +226,9 @@
 			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx-browser</label>
 			<label index="pages.tx_newsletter_plainconvert.I.2">Ingebouwde html-converter</label>
 			<label index="pages.tx_newsletter_plainconvert">Platte tekst methode:</label>
-			<label index="tx_newsletter_targets">Nieuwsbrief addressenbestand</label>
-			<label index="tx_newsletter_targets.title">Titel addressenbestand:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Huidige ontvangers:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Nieuwsbrief addressenbestand</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Titel addressenbestand:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Huidige ontvangers:</label>
 		</languageKey>
 		<languageKey index="cz"></languageKey>
 		<languageKey index="pl"></languageKey>
@@ -299,45 +299,45 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2" type="integer">151938852</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3" type="integer">143476130</label>
 			<label index="pages.tx_newsletter_plainconvert" type="integer">238740684</label>
-			<label index="tx_newsletter_targets" type="integer">253354655</label>
-			<label index="tx_newsletter_targets.title" type="integer">208620723</label>
-			<label index="tx_newsletter_targets.plain_only" type="integer">49497671</label>
-			<label index="tx_newsletter_targets.actual_receivers" type="integer">67292257</label>
-			<label index="tx_newsletter_targets.beusers" type="integer">63719504</label>
-			<label index="tx_newsletter_targets.fegroups" type="integer">111446607</label>
-			<label index="tx_newsletter_targets.fepages" type="integer">247641408</label>
-			<label index="tx_newsletter_targets.ttaddress" type="integer">108806629</label>
-			<label index="tx_newsletter_targets.rawsql" type="integer">54820714</label>
-			<label index="tx_newsletter_targets.sepchar" type="integer">193745953</label>
-			<label index="tx_newsletter_targets.csvfields" type="integer">213675557</label>
-			<label index="tx_newsletter_targets.csvdata" type="integer">24242654</label>
-			<label index="tx_newsletter_targets.csvfile" type="integer">93427265</label>
-			<label index="tx_newsletter_targets.csvurl" type="integer">21318307</label>
-			<label index="tx_newsletter_targets.type" type="integer">241539922</label>
-			<label index="tx_newsletter_targets.htmlurl" type="integer">68400128</label>
-			<label index="tx_newsletter_targets.htmlfetch" type="integer">88581794</label>
-			<label index="tx_newsletter_targets.direct_mail_compat" type="integer">36420867</label>
-			<label index="tx_newsletter_targets.confirmed_receivers" type="integer">261585550</label>
-			<label index="tx_newsletter_targets.optalreadymailed" type="integer">40302516</label>
-			<label index="tx_newsletter_targets.optconfirmed" type="integer">171112652</label>
-			<label index="tx_newsletter_targets.optnotconfirmed" type="integer">107365177</label>
-			<label index="tx_newsletter_targets.optalladdresses" type="integer">25462018</label>
-			<label index="tx_newsletter_targets.optbeusers" type="integer">180369015</label>
-			<label index="tx_newsletter_targets.optfegroups" type="integer">150610862</label>
-			<label index="tx_newsletter_targets.optfepages" type="integer">98787373</label>
-			<label index="tx_newsletter_targets.optttaddress" type="integer">108806629</label>
-			<label index="tx_newsletter_targets.optrawsql" type="integer">142772327</label>
-			<label index="tx_newsletter_targets.optcsvfile" type="integer">470206</label>
-			<label index="tx_newsletter_targets.optcsvlist" type="integer">258947844</label>
-			<label index="tx_newsletter_targets.optcsvurl" type="integer">206757671</label>
-			<label index="tx_newsletter_targets.opthtml" type="integer">79998303</label>
-			<label index="tx_newsletter_targets.optmailto" type="integer">201217680</label>
-			<label index="tx_newsletter_targets.optregex" type="integer">64221731</label>
-			<label index="tx_newsletter_bounceaccount" type="integer">64299205</label>
-			<label index="tx_newsletter_bounceaccount.servertype" type="integer">89878156</label>
-			<label index="tx_newsletter_bounceaccount.server" type="integer">84270674</label>
-			<label index="tx_newsletter_bounceaccount.username" type="integer">212632006</label>
-			<label index="tx_newsletter_bounceaccount.passwd" type="integer">187963993</label>
+			<label index="tx_newsletter_domain_model_recipientlist" type="integer">253354655</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title" type="integer">208620723</label>
+			<label index="tx_newsletter_domain_model_recipientlist.plain_only" type="integer">49497671</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers" type="integer">67292257</label>
+			<label index="tx_newsletter_domain_model_recipientlist.beusers" type="integer">63719504</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fegroups" type="integer">111446607</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fepages" type="integer">247641408</label>
+			<label index="tx_newsletter_domain_model_recipientlist.ttaddress" type="integer">108806629</label>
+			<label index="tx_newsletter_domain_model_recipientlist.rawsql" type="integer">54820714</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sepchar" type="integer">193745953</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfields" type="integer">213675557</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvdata" type="integer">24242654</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfile" type="integer">93427265</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvurl" type="integer">21318307</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type" type="integer">241539922</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlurl" type="integer">68400128</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlfetch" type="integer">88581794</label>
+			<label index="tx_newsletter_domain_model_recipientlist.direct_mail_compat" type="integer">36420867</label>
+			<label index="tx_newsletter_domain_model_recipientlist.confirmed_receivers" type="integer">261585550</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalreadymailed" type="integer">40302516</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optconfirmed" type="integer">171112652</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optnotconfirmed" type="integer">107365177</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalladdresses" type="integer">25462018</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optbeusers" type="integer">180369015</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfegroups" type="integer">150610862</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfepages" type="integer">98787373</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optttaddress" type="integer">108806629</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optrawsql" type="integer">142772327</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile" type="integer">470206</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist" type="integer">258947844</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl" type="integer">206757671</label>
+			<label index="tx_newsletter_domain_model_recipientlist.opthtml" type="integer">79998303</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optmailto" type="integer">201217680</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optregex" type="integer">64221731</label>
+			<label index="tx_newsletter_domain_model_bounceaccount" type="integer">64299205</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.servertype" type="integer">89878156</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.server" type="integer">84270674</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.username" type="integer">212632006</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.passwd" type="integer">187963993</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -368,45 +368,45 @@
 			<label index="pages.tx_newsletter_plainconvert.I.2">Build-in html converter</label>
 			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
 			<label index="pages.tx_newsletter_plainconvert">Plain text method:</label>
-			<label index="tx_newsletter_targets">Newsletter receivers</label>
-			<label index="tx_newsletter_targets.title">Receivers title:</label>
-			<label index="tx_newsletter_targets.plain_only">Receive as plaintext only:</label>
-			<label index="tx_newsletter_targets.actual_receivers">Actual receivers:</label>
-			<label index="tx_newsletter_targets.beusers">BE-users:</label>
-			<label index="tx_newsletter_targets.fegroups">FE-groups:</label>
-			<label index="tx_newsletter_targets.fepages">Pages with FE-users:</label>
-			<label index="tx_newsletter_targets.ttaddress">Pages with tt_address-records</label>
-			<label index="tx_newsletter_targets.rawsql">Raw SQL:</label>
-			<label index="tx_newsletter_targets.sepchar">Separator character:</label>
-			<label index="tx_newsletter_targets.csvfields">CSV fields:</label>
-			<label index="tx_newsletter_targets.csvdata">CSV data:</label>
-			<label index="tx_newsletter_targets.csvfile">CSV file:</label>
-			<label index="tx_newsletter_targets.csvurl">CSV url:</label>
-			<label index="tx_newsletter_targets.type">Type:</label>
-			<label index="tx_newsletter_targets.htmlurl">HTML url:</label>
-			<label index="tx_newsletter_targets.htmlfetch">HTML fetch type:</label>
-			<label index="tx_newsletter_targets.direct_mail_compat">direct_mail compatible html-allow flag:</label>
-			<label index="tx_newsletter_targets.confirmed_receivers">Registered mailed addresses</label>
-			<label index="tx_newsletter_targets.optalreadymailed">Already mailed addresses</label>
-			<label index="tx_newsletter_targets.optconfirmed">Confirmed addresses</label>
-			<label index="tx_newsletter_targets.optnotconfirmed">Non-confirmed addresses</label>
-			<label index="tx_newsletter_targets.optalladdresses">All mailed addresses</label>
-			<label index="tx_newsletter_targets.optbeusers">BE-users</label>
-			<label index="tx_newsletter_targets.optfegroups">FE-groups with FE-users</label>
-			<label index="tx_newsletter_targets.optfepages">Pages with FE-users</label>
-			<label index="tx_newsletter_targets.optttaddress">Pages with tt_address-records</label>
-			<label index="tx_newsletter_targets.optrawsql">Raw SQL</label>
-			<label index="tx_newsletter_targets.optcsvfile">CSV file</label>
-			<label index="tx_newsletter_targets.optcsvlist">CSV list</label>
-			<label index="tx_newsletter_targets.optcsvurl">CSV url</label>
-			<label index="tx_newsletter_targets.opthtml">HTML</label>
-			<label index="tx_newsletter_targets.optmailto">Anchor tags with mailto:</label>
-			<label index="tx_newsletter_targets.optregex">Match email addresses</label>
-			<label index="tx_newsletter_bounceaccount">Bounce account</label>
-			<label index="tx_newsletter_bounceaccount.servertype">Server type:</label>
-			<label index="tx_newsletter_bounceaccount.server">Server:</label>
-			<label index="tx_newsletter_bounceaccount.username">Username:</label>
-			<label index="tx_newsletter_bounceaccount.passwd">Password:</label>
+			<label index="tx_newsletter_domain_model_recipientlist">Newsletter receivers</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">Receivers title:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Receive as plaintext only:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Actual receivers:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.beusers">BE-users:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fegroups">FE-groups:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fepages">Pages with FE-users:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.ttaddress">Pages with tt_address-records</label>
+			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Raw SQL:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Separator character:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV fields:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV data:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvfile">CSV file:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csvurl">CSV url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type">Type:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlurl">HTML url:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.htmlfetch">HTML fetch type:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.direct_mail_compat">direct_mail compatible html-allow flag:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.confirmed_receivers">Registered mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalreadymailed">Already mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optconfirmed">Confirmed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optnotconfirmed">Non-confirmed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optalladdresses">All mailed addresses</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">BE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">FE-groups with FE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Pages with FE-users</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optttaddress">Pages with tt_address-records</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Raw SQL</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV file</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV list</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV url</label>
+			<label index="tx_newsletter_domain_model_recipientlist.opthtml">HTML</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optmailto">Anchor tags with mailto:</label>
+			<label index="tx_newsletter_domain_model_recipientlist.optregex">Match email addresses</label>
+			<label index="tx_newsletter_domain_model_bounceaccount">Bounce account</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.servertype">Server type:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.server">Server:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.username">Username:</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.passwd">Password:</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

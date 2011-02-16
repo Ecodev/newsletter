@@ -26,7 +26,7 @@ $TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'] = 'TYPO3 CMS - newsletter extension';
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Precedence'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Precedence'] = 'bulk';
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Provided-by'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Sponsored-by'] = 'http://www.casalogic.dk/ - Open Source Experts.';
-$TYPO3_CONF_VARS['EXTCONF']['kickstarter']['sections']['tx_newsletter_targets'] = array(
+$TYPO3_CONF_VARS['EXTCONF']['kickstarter']['sections']['tx_newsletter_domain_model_recipientlist'] = array(
     'classname' => 'tx_newsletter_section_targets',
     'filepath' => 'EXT:newsletter/sections/class.tx_newsletter_section_targets.php',
     'title' => 'Make a new newsletter target',
@@ -60,4 +60,3 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-?>
