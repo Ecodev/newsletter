@@ -65,6 +65,12 @@ class ext_update {
 		"INSERT INTO tx_newsletter_domain_model_recipientlist SELECT * FROM tx_tcdirectmail_targets;",
 		"INSERT INTO tx_newsletter_domain_model_lock SELECT * FROM tx_tcdirectmail_lock;",
 		"UPDATE tx_newsletter_domain_model_recipientlist SET targettype = REPLACE(targettype, 'tcdirectmail', 'newsletter');",
+		"
+INSERT INTO be_users (
+pid, tstamp, username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
+) SELECT 
+pid, tstamp, REPLACE(username, 'tcdirectmail', 'newsletter') AS username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
+FROM be_users WHERE username = '_cli_tcdirectmail';",
 	);
 
 	/**
