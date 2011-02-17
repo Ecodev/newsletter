@@ -81,39 +81,40 @@ class ext_update {
 		$update = t3lib_div::_GP('importtcdirectmail');
 		
 		// The update button was clicked
-		if (!empty($update) && $this->canImportFromTcdirectmail()) {
-			$recordCount = $this->importFromTcdirectmail();
+		if (!empty($update) && $this->canImportFromTcdirectmail())
+		{
 			$content .= '<h2>Import successfull</h2>';
+			
+			// Attempt to deactivate tcdirectmail via a URL loaded within iframe
+			if (t3lib_div::_GP('deactivate'))
+			{
+				$content .= '<p>Deactivated TCDirectmail.</p>';
+				$content .= '<iframe style="border: none; height: 0; width: 0;" src="/typo3/mod.php?M=tools_em&CMD[showExt]=tcdirectmail&CMD[remove]=1" width="0" height="0"></iframe>';
+			}
+			
+			// Import data
+			$recordCount = $this->importFromTcdirectmail();
 			$content .= '<p>Modified records count: ' . $recordCount . '</p>';
 		}
-		
-		$content .= '<h2>Import from TCDirectMail</h2>';
-		
-		if ($this->canImportFromTcdirectmail())
+		else 
 		{
-			$content .= '<form name="importForm" action="" method ="post">';
-			$content .= '<p>Import all data from TCDirectmail, including newsletter sent, to be send and statistics.</p>';
-			$content .= '<p><input type="submit" name="importtcdirectmail" value ="Import" /></p>';
-			$content .= '</form>';
-		}
-		else
-		{
-			$content .= '<p>TCDirectmail not found, or Newsletter tables non-empty (already imported).</p>';
-		}
-		//http://www.ecoparc.local/typo3/mod.php?id=0&M=tools_em&CMD[showExt]=newsletter&SET[singleDetails]=info&CMD[showExt]=newsletter&CMD[remove]=1
-		$this->deactivateTcdirectmail();
-		
+			$content .= '<h2>Import from TCDirectMail</h2>';
+			
+			if ($this->canImportFromTcdirectmail())
+			{
+				$content .= '<form name="importForm" action="" method ="post">';
+				$content .= '<p>Import all data from TCDirectmail, including newsletter sent, to be send and statistics.</p>';
+				$content .= '<input type="checkbox" name="deactivate" id="deactivate" checked="checked" /><label for="deactivate">Attempt to deactivate TCDirectmail.</label>';
+				$content .= '<p><input type="submit" name="importtcdirectmail" value ="Import" /></p>';
+				$content .= '</form>';
+			}
+			else
+			{
+				$content .= '<p>TCDirectmail not found, or Newsletter tables non-empty (already imported).</p>';
+			}
+		}		
 		
 		return $content;
-	}
-
-	/**
-	 * Attempt to deactivate tcdirectmail via HTTP call
-	 */
-	private function deactivateTcdirectmail()
-	{
-		$url = 'http://' . $_SERVER['HTTP_HOST'] . '/typo3/mod.php?M=tools_em&CMD[showExt]=tcdirectmail&CMD[remove]=1';
-		file($url);
 	}
 	
 	/**
