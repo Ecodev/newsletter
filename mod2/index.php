@@ -659,7 +659,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		    $num_fields = count($record);
 		    
 		    /* Number of unsubstituted fields */
-		    $mailer->substituteMarkers($record);
+		    $mailer->prepare($record);
 		    preg_match_all('|###[a-z0-9_]+###|i', $mailer->html, $nonfields_html);
 		    preg_match_all('|###[a-z0-9_]+###|i', $mailer->plain, $nonfields_plain);
 		    $num_nonfields = max (count ($nonfields_html[0]), count ($nonfields_plain[0]));
@@ -687,7 +687,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		    $out .= "</tr>\n";
 		    
 		}
-		$mailer->resetMarkers();
 	    }
 	    
 	    $out .= '</table>';

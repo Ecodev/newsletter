@@ -23,7 +23,7 @@ foreach ($targets as $tid) {
      
         /* Got it */
         if ($record['email'] == $_REQUEST['email']) {
-	    $mailer->substituteMarkers($record);
+	    $mailer->prepare($record);
 	
 	    if ($_REQUEST['type'] == 'plain') {
 		print ('<html><head><title>'.$page['title'].'</title></head><body><pre>');

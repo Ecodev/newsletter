@@ -37,4 +37,4 @@ $rs = $TYPO3_DB->sql_query("SELECT url FROM tx_newsletter_domain_model_clicklink
                               
 list($url) = $TYPO3_DB->sql_fetch_row($rs);
 header ("Location: $url");
-?>
+

@@ -371,20 +371,10 @@ class tx_newsletter_tools {
 					$mailers[$L] = &tx_newsletter_tools::getConfiguredMailer($page, $L);
 				}	
 
-				/* a TEST-version of the spy-image. Makes same warning in MUA, but with no serverside stats */
-				if ($page['tx_newsletter_spy']) {
-					$mailers[$L]->testSpy();
-				}
-
-				/* a TEST-version of the click-links. Makes funny-URLs like real clicklinks, but no stats */
-				if ($page['tx_newsletter_register_clicks']) {
-					$mailers[$L]->substituteMarkers($receiver);
-					$mailers[$L]->testClickLinks();
-					$mailers[$L]->raw_send($receiver);   
-					$mailers[$L]->resetMarkers();
-				} else {
-					$mailers[$L]->send($receiver);
-				}
+				$mailers[$L]->send($receiver, array(
+					'testClickLinks' => $page['tx_newsletter_register_clicks'],
+					'testSpy' => $page['tx_newsletter_spy'],
+				));
 			}
 		}
 	}
@@ -553,30 +543,20 @@ class tx_newsletter_tools {
 				$infoHeaders = array('X-newsletter-info' => "//$pid/$target/$receiver[uid]/$receiver[authCode]/$sendid//");
 			} else {
 				$infoHeaders = array();
-			}		
-
-			/* Spy included? */
-			if ($page['tx_newsletter_spy']) {                                                       
-				$mailers[$L]->insertSpy($receiver['authCode'], $sendid);
 			}
             
 			/* Should we register what links have been clicked? */
-			if ($page['tx_newsletter_register_clicks']) {
-				$mailers[$L]->substituteMarkers($receiver);
-				$links = $mailers[$L]->makeClickLinks($receiver['authCode'], $sendid);
-				$mailers[$L]->raw_send($receiver, $infoHeaders);
-				$mailers[$L]->resetMarkers();
+			if ($page['tx_newsletter_register_clicks']) {				
+				$mailers[$L]->send($receiver, array(
+						'insertSpy' => $page['tx_newsletter_spy'],
+						'makeClickLinks' => true,
+						'authCode' => $receiver['authCode'],
+						'sendid' => $sendid,
+					)
+				);
+				
             
-				/* Write to the DB the links that have been registered */
-				foreach ($links as $type => $sublinks) {
-					foreach ($sublinks as $linkid => $url) {
-						$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_clicklink', array(
-											'sentlog' => $sendid,
-											'linktype' => $type,
-											'linkid' => $linkid,
-											'url' => $url));
-					}				
-				}
+				
 			} else {
 				/* Do the send */
 				$mailers[$L]->send ($receiver, $infoHeaders);
