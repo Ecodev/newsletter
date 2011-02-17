@@ -278,7 +278,7 @@ class tx_newsletter_tools {
 	* @param    array       Page record.
 	* @return   object      tx_newsletter_mailer object preconfigured for sending.
 	*/
-	function getConfiguredMailer ($page, $lang = '') {
+	public static function getConfiguredMailer($page, $lang = '') {
 		$append_url = tx_newsletter_tools::confParam('append_url');
 
 		/* Any language defined? */
