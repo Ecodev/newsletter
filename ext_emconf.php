@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'priority' => '',
 	'loadOrder' => '',
 	'module' => 'mod2,cli,web',
-	'state' => 'stable',
+	'state' => 'alpha',
 	'uploadfolder' => 1,
 	'createDirs' => '',
 	'modify_tables' => '',
@@ -34,8 +34,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'php' => '5.0.0-',
-			'typo3' => '4.0.0-',
+			'php' => '5.3.0-',
+			'typo3' => '4.5.0-',
 		),
 		'conflicts' => array(
 		),
