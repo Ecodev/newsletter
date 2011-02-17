@@ -1,6 +1,22 @@
 <?php
-
 require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
+
+/**
+ * Provides compatiblity with PHP 5.2.9 because 'str_getcsv' was only introduced in PHP 5.3.0 
+ */
+if (!function_exists('str_getcsv'))
+{
+	function str_getcsv($input, $delimiter = ',', $enclosure = '"', $notUsed = null)
+	{
+		$temp = fopen("php://memory", "rw");
+		fwrite($temp, $input);
+		fseek($temp, 0);
+		$r = fgetcsv($temp, 0, $delimiter, $enclosure);
+		fclose($temp);
+			
+		return $r;
+	} 
+}
 
 class tx_newsletter_target_csvfile extends tx_newsletter_target_array
 {
@@ -37,7 +53,7 @@ class tx_newsletter_target_csvfile extends tx_newsletter_target_array
 		
 		if ($csvdata && $sepchar && count($keys))
 		{
-			$lines = str_getcsv($csvdata, "\n");			
+			$lines = explode("\n", $csvdata);
 			foreach ($lines as $line)
 			{
 				$values = str_getcsv($line, $sepchar);
