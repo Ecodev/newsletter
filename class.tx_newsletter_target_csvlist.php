@@ -1,23 +1,11 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
-class tx_newsletter_target_csvlist extends tx_newsletter_target_array{
-   function init() {
-       $this->data = array();
-       if ($this->fields['csvfields'] && $this->fields['csvseparator'] && $this->fields['csvfields']) {
-      $sepchar = $this->fields['csvseparator']?$this->fields['csvseparator']:',';
-           $fields = array_map('trim', explode ($sepchar, $this->fields['csvfields']));
-           $lines = explode ("\n", $this->fields['csvvalues']);
-      foreach ($lines as $line) {
-          $row = array();
-              $values = explode($sepchar, $line);
-              foreach ($values as $i => $value) {
-              $row[$fields[$i]] = trim($value);
-          }
-              $this->data[] = $row;
-      }      
-       }
-   }
-}
+require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_csvfile.php');
 
-?>
+class tx_newsletter_target_csvlist extends tx_newsletter_target_csvfile
+{
+	function init()
+	{
+		$this->loadCsvFromData($this->fields['csvvalues']);
+	}
+}
