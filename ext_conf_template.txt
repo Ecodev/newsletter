@@ -2,10 +2,7 @@
 path_to_fetchmail = /usr/local/bin/fetchmail
 
   # cat=basic; type=string; label=Path to Lynx CLI browser. This program is not required, but can be used by TC Newsletter to produce an acceptable plaintext conversion with no efford at all.
-path_to_lynx = /usr/local/bin/lynx
-
-  # cat=basic; type=string; label=Extra parameters to the sendmail program. Do not specify -f parameter here. This is passed directly to PHP's mail() function.
-sendmail_params =
+path_to_lynx = /usr/bin/lynx
 
   # cat=basic; type=string; label=Sender email. Specify how the sender email is resolved, if it is not specified on the page record. "user" for the be_user owning the email or supply a valid emailaddress directly here. If everything is blank, the system will default to generic settings for the site or the system.
 sender_email = user

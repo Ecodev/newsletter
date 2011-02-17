@@ -537,33 +537,18 @@ class tx_newsletter_tools {
 
 			/* Mark it as send already */
 			$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_emailqueue', "uid = $sendid", array('sendtime' => time()));
-           
-			/* Give it the stamp */
-			if ($receiver['uid'] && $receiver['authCode']) {
-				$infoHeaders = array('X-newsletter-info' => "//$pid/$target/$receiver[uid]/$receiver[authCode]/$sendid//");
-			} else {
-				$infoHeaders = array();
-			}
             
-			/* Should we register what links have been clicked? */
-			if ($page['tx_newsletter_register_clicks']) {				
-				$mailers[$L]->send($receiver, array(
-						'insertSpy' => $page['tx_newsletter_spy'],
-						'makeClickLinks' => true,
-						'authCode' => $receiver['authCode'],
-						'sendid' => $sendid,
-					)
-				);
-				
-            
-				
-			} else {
-				/* Do the send */
-				$mailers[$L]->send ($receiver, $infoHeaders);
-			}
+		
+			$mailers[$L]->send($receiver, array(
+					'insertSpy' => $page['tx_newsletter_spy'],
+					'makeClickLinks' => $page['tx_newsletter_register_clicks'],
+					'authCode' => $receiver['authCode'],
+					'sendid' => $sendid,
+				)
+			);
 
 			$numberOfMails++;
-		}    
+		}
 
 		/* Log numbers to syslog */
 		syslog (LOG_INFO, "Sending $numberOfMails mails from ".$_SERVER['argv'][0]);
