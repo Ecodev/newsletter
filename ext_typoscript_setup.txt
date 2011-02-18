@@ -17,6 +17,11 @@ plugin.tx_newsletter {
 					}
 				}
 			}
+			Tx_Newsletter_Domain_Model_Statistic {
+				mapping {
+					tableName = tx_newsletter_domain_model_lock
+				}
+			}
 		}
 	}
 }

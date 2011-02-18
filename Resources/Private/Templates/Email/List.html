@@ -1,0 +1,51 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Listing for Email</h1>
+
+<f:flashMessages />
+
+<table  class="tx_newsletter" >
+	<tr>
+		<th><f:translate key="tx_newsletter_domain_model_email.start_time" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.end_time" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.recipient_address" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.recipient_data" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.auth_code" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.opened" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.bounced" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_email.host" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{emails}" as="email">
+		<tr>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.startTime}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.endTime}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.recipientAddress}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.recipientData}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.authCode}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.opened}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.bounced}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{email : email}"> {email.host}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{email : email}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{email : email}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Email</f:link.action>
+</f:section>

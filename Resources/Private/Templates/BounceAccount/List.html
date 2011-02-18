@@ -1,0 +1,45 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Listing for BounceAccount</h1>
+
+<f:flashMessages />
+
+<table  class="tx_newsletter" >
+	<tr>
+		<th><f:translate key="tx_newsletter_domain_model_bounceaccount.email" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_bounceaccount.server" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_bounceaccount.protocol" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_bounceaccount.username" /></th>
+		<th><f:translate key="tx_newsletter_domain_model_bounceaccount.password" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{bounceAccounts}" as="bounceAccount">
+		<tr>
+			<td><f:link.action action="show" arguments="{bounceAccount : bounceAccount}"> {bounceAccount.email}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{bounceAccount : bounceAccount}"> {bounceAccount.server}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{bounceAccount : bounceAccount}"> {bounceAccount.protocol}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{bounceAccount : bounceAccount}"> {bounceAccount.username}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{bounceAccount : bounceAccount}"> {bounceAccount.password}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{bounceAccount : bounceAccount}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{bounceAccount : bounceAccount}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New BounceAccount</f:link.action>
+</f:section>
