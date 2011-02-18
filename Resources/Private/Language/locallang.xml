@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Newsletter extension in the FRONTEND</description>
+	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="title">Newsletter</label>
@@ -128,6 +132,61 @@
 			<label index="link_id">#</label>
 			<label index="loading">Loading. Please wait...</label>
 			<label index="no_statistics">No statistics available for this page.</label>
+
+			<label index="tx_newsletter_domain_model_newsletter">Newsletter represents a page to be sent to a specific time to several recipients.</label>
+			<label index="tx_newsletter_domain_model_newsletter.planned_time">When the newsletter will start sending emails</label>
+			<label index="tx_newsletter_domain_model_newsletter.begin_time">beginTime</label>
+			<label index="tx_newsletter_domain_model_newsletter.end_time">endTime</label>
+			<label index="tx_newsletter_domain_model_newsletter.tx_newsletter_repeat">0-7 values to indicates when this newsletter will repeat</label>
+			<label index="tx_newsletter_domain_model_newsletter.plain_converter">Tool used to convert to plain text</label>
+			<label index="tx_newsletter_domain_model_newsletter.is_test">Whether this newsletter is for test purpose. If it is it will be ignored in statistics</label>
+			<label index="tx_newsletter_domain_model_newsletter.attachments">List of files to be attached (comma separated list</label>
+			<label index="tx_newsletter_domain_model_newsletter.sender_name">The name of the newsletter sender</label>
+			<label index="tx_newsletter_domain_model_newsletter.sender_email">The email of the newsletter sender</label>
+			<label index="tx_newsletter_domain_model_newsletter.inject_open_spy">injectOpenSpy</label>
+			<label index="tx_newsletter_domain_model_newsletter.inject_links_spy">injectLinksSpy</label>
+			<label index="tx_newsletter_domain_model_newsletter.bounce_account">bounceAccount</label>
+			<label index="tx_newsletter_domain_model_newsletter.recipient_list">recipientList</label>
+			<label index="tx_newsletter_domain_model_bounceaccount">BounceAccount</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.email">email</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.server">server</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.protocol">protocol</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.username">username</label>
+			<label index="tx_newsletter_domain_model_bounceaccount.password">password</label>
+			<label index="tx_newsletter_domain_model_recipientlist">RecipientList</label>
+			<label index="tx_newsletter_domain_model_recipientlist.title">title</label>
+			<label index="tx_newsletter_domain_model_recipientlist.plain_only">plainOnly</label>
+			<label index="tx_newsletter_domain_model_recipientlist.lang">lang</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type">type</label>
+			<label index="tx_newsletter_domain_model_recipientlist.be_users">beUsers</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fe_groups">feGroups</label>
+			<label index="tx_newsletter_domain_model_recipientlist.fe_pages">fePages</label>
+			<label index="tx_newsletter_domain_model_recipientlist.tt_address">ttAddress</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_url">csvUrl</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_separator">csvSeparator</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">csvFields</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">csvFilename</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_values">csvValues</label>
+			<label index="tx_newsletter_domain_model_recipientlist.tx_newsletter_sql">sql</label>
+			<label index="tx_newsletter_domain_model_recipientlist.html_file">htmlFile</label>
+			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">htmlFetchType</label>
+			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">calculatedRecipients</label>
+			<label index="tx_newsletter_domain_model_recipientlist.confirmed_recipients">confirmedRecipients</label>
+			<label index="tx_newsletter_domain_model_email">Email</label>
+			<label index="tx_newsletter_domain_model_email.start_time">startTime</label>
+			<label index="tx_newsletter_domain_model_email.end_time">endTime</label>
+			<label index="tx_newsletter_domain_model_email.recipient_address">recipientAddress</label>
+			<label index="tx_newsletter_domain_model_email.recipient_data">recipientData</label>
+			<label index="tx_newsletter_domain_model_email.auth_code">authCode</label>
+			<label index="tx_newsletter_domain_model_email.opened">opened</label>
+			<label index="tx_newsletter_domain_model_email.bounced">bounced</label>
+			<label index="tx_newsletter_domain_model_email.host">host</label>
+			<label index="tx_newsletter_domain_model_email.newsletter">newsletter</label>
+			<label index="tx_newsletter_domain_model_link">Link</label>
+			<label index="tx_newsletter_domain_model_link.type">type</label>
+			<label index="tx_newsletter_domain_model_link.url">url</label>
+			<label index="tx_newsletter_domain_model_link.opened">opened</label>
+			<label index="tx_newsletter_domain_model_link.email">email</label>
 		</languageKey>
 		<languageKey index="fr">
 			<label index="select_page">Veuillez sélectionner une page.</label>
@@ -465,218 +524,4 @@
 		<languageKey index="fa"></languageKey>
 		<languageKey index="sr"></languageKey>
 	</data>
-	<meta type="array">
-	</meta>
-	<orig_hash type="array">
-		<languageKey index="dk" type="array">
-			<label index="title" type="integer">132251442</label>
-			<label index="status" type="integer">247806604</label>
-			<label index="statistics" type="integer">204727300</label>
-			<label index="validity" type="integer">51073566</label>
-			<label index="reciep" type="integer">93691121</label>
-			<label index="ext_configs" type="integer">58483203</label>
-			<label index="name" type="integer">77521672</label>
-			<label index="current_sending" type="integer">102861512</label>
-			<label index="no_current_sending" type="integer">100252972</label>
-			<label index="send_test" type="integer">264140533</label>
-			<label index="send_test_cron" type="integer">96092573</label>
-			<label index="no_test" type="integer">27870075</label>
-			<label index="testsent" type="integer">135414520</label>
-			<label index="send_now" type="integer">112887020</label>
-			<label index="queued" type="integer">232762649</label>
-			<label index="unworkable_sql" type="integer">171826326</label>
-			<label index="thispage" type="integer">98872550</label>
-			<label index="no_recipients" type="integer">98716945</label>
-			<label index="many_recipients" type="integer">188964425</label>
-			<label index="show_recipients" type="integer">115569067</label>
-			<label index="total_receivers" type="integer">211367039</label>
-			<label index="total_confirmed" type="integer">20596008</label>
-			<label index="status_real_receivers" type="integer">37040787</label>
-			<label index="currently_sending" type="integer">25544724</label>
-			<label index="scheduled_info" type="integer">5681742</label>
-			<label index="not_scheduled" type="integer">168510007</label>
-			<label index="no_real_receivers" type="integer">237708549</label>
-			<label index="status_test_receivers" type="integer">50937411</label>
-			<label index="scheduled_test" type="integer">190127703</label>
-			<label index="not_currently_sending" type="integer">111936780</label>
-			<label index="no_test_receivers" type="integer">253262642</label>
-			<label index="not_a_newsletter" type="integer">117033074</label>
-			<label index="date" type="integer">71780721</label>
-			<label index="totime" type="integer">236066426</label>
-			<label index="fromtime" type="integer">98197902</label>
-			<label index="examples" type="integer">267895036</label>
-			<label index="description" type="integer">190479069</label>
-			<label index="setup_value" type="integer">32711132</label>
-			<label index="install" type="integer">55149455</label>
-			<label index="example_made" type="integer">222213036</label>
-			<label index="exampleText" type="integer">177372178</label>
-			<label index="mailer_php" type="integer">196460035</label>
-			<label index="domain_name" type="integer">252579672</label>
-			<label index="mailer_exe_ok" type="integer">41911042</label>
-			<label index="mailer_exe_notok" type="integer">68310093</label>
-			<label index="domain_ok" type="integer">20775789</label>
-			<label index="domain_notok" type="integer">108807919</label>
-			<label index="try_make_exe" type="integer">13454354</label>
-			<label index="set_domain" type="integer">248445538</label>
-			<label index="update" type="integer">6894342</label>
-			<label index="crontab_explain" type="integer">174979926</label>
-			<label index="total_recipients" type="integer">265644293</label>
-			<label index="lynx_browser" type="integer">246107079</label>
-			<label index="lynx_found" type="integer">176784180</label>
-			<label index="lynx_not_found" type="integer">152298955</label>
-			<label index="sys_status" type="integer">226141466</label>
-			<label index="numbers_spied_upon" type="integer">177764478</label>
-			<label index="html_links" type="integer">263353426</label>
-			<label index="plain_links" type="integer">84781524</label>
-			<label index="link_number" type="integer">159284378</label>
-			<label index="numbers_of_times_opened" type="integer">1692106</label>
-			<label index="url" type="integer">2767413</label>
-			<label index="testmail_sent" type="integer">242835943</label>
-			<label index="bcc_was_used" type="integer">173535539</label>
-			<label index="view_stats_for" type="integer">64241227</label>
-			<label index="all_receivers" type="integer">208111960</label>
-			<label index="maintenance" type="integer">17632738</label>
-			<label index="stats_status" type="integer">233337153</label>
-			<label index="invalid_stats_found" type="integer">72255839</label>
-			<label index="clear_invalid" type="integer">189747323</label>
-			<label index="stats_ok" type="integer">48475590</label>
-			<label index="delete" type="integer">254438473</label>
-			<label index="delete_old_stats" type="integer">112628730</label>
-			<label index="mail_contains_javascript" type="integer">244768289</label>
-			<label index="mail_contains_linked_styles" type="integer">107556244</label>
-			<label index="mail_contains_css_images" type="integer">265762325</label>
-			<label index="mail_contains_css_classes" type="integer">161846191</label>
-			<label index="mail_contains_css_some_property" type="integer">235272715</label>
-			<label index="mail_contains_serious_errors" type="integer">137658689</label>
-			<label index="mail_contains_no_serious_errors" type="integer">117679729</label>
-			<label index="mail_contains_warnings" type="integer">246155958</label>
-			<label index="mail_contains_no_warnings" type="integer">153762320</label>
-			<label index="mail_contains_notices" type="integer">235918808</label>
-			<label index="mail_contains_no_notices" type="integer">107019418</label>
-			<label index="receiver" type="integer">178063677</label>
-			<label index="preview_html" type="integer">51601216</label>
-			<label index="preview_plain" type="integer">80577555</label>
-			<label index="num_fields" type="integer">149818420</label>
-			<label index="missing_fields" type="integer">20837752</label>
-			<label index="preview" type="integer">52420219</label>
-			<label index="filter_form" type="integer">89619304</label>
-			<label index="update_view" type="integer">240133956</label>
-			<label index="mail_success" type="integer">187972113</label>
-			<label index="numbers_bounced" type="integer">107726116</label>
-			<label index="has_email_sword" type="integer">224461019</label>
-			<label index="has_beenthere" type="integer">27623573</label>
-			<label index="has_opened_link" type="integer">12982200</label>
-			<label index="numbers_not_spied_upon" type="integer">80040035</label>
-			<label index="beenthere" type="integer">171112652</label>
-			<label index="beenthere_yes" type="integer">137962593</label>
-			<label index="beenthere_no" type="integer">112064895</label>
-			<label index="has_notbeenthere" type="integer">258287681</label>
-		</languageKey>
-	</orig_hash>
-	<orig_text type="array">
-		<languageKey index="dk" type="array">
-			<label index="title">Newsletter</label>
-			<label index="status">Status</label>
-			<label index="statistics">Statistics</label>
-			<label index="validity">Mail validity</label>
-			<label index="reciep">Recipients</label>
-			<label index="ext_configs">Extension configurations</label>
-			<label index="name">Name</label>
-			<label index="current_sending">Current sending newsletter</label>
-			<label index="no_current_sending">Not currently sending this page to anyone</label>
-			<label index="send_test">Send a testmail now.</label>
-			<label index="send_test_cron">Send a testmail with cronjob.</label>
-			<label index="no_test">No test reciepients defined.</label>
-			<label index="testsent">Test mail being send.</label>
-			<label index="send_now">Send the mail now.</label>
-			<label index="queued">Now in sent queue.</label>
-			<label index="unworkable_sql">Database query unworkable</label>
-			<label index="thispage">This page</label>
-			<label index="no_recipients">There are no recipients.</label>
-			<label index="many_recipients">Too many recipients to show. Choose the view recipients function</label>
-			<label index="show_recipients">View recipients</label>
-			<label index="total_receivers">Total receivers</label>
-			<label index="total_confirmed">Total confirmed</label>
-			<label index="status_real_receivers">Real receivers</label>
-			<label index="currently_sending">Currently sending &lt;b&gt;###STATUS###&lt;/b&gt;</label>
-			<label index="scheduled_info">Scheduled send at &lt;strong&gt;###TIME_TO_SEND###&lt;/strong&gt; to receivers &lt;strong&gt;####NUMBERS_TO_SEND###&lt;/strong&gt;&lt;/p&gt;</label>
-			<label index="not_scheduled">Not currently sceduled or sending.</label>
-			<label index="no_real_receivers">No real receivers defined.</label>
-			<label index="status_test_receivers">Test receivers</label>
-			<label index="scheduled_test">Scheduled test send.</label>
-			<label index="not_currently_sending">Not currently sending</label>
-			<label index="no_test_receivers">No test receivers defined.</label>
-			<label index="not_a_newsletter">This page is not a newsletter.</label>
-			<label index="date">Date</label>
-			<label index="totime">To</label>
-			<label index="fromtime">From</label>
-			<label index="examples">Examples</label>
-			<label index="description">Description</label>
-			<label index="setup_value">Setup field</label>
-			<label index="install">Install</label>
-			<label index="example_made">Example made</label>
-			<label index="exampleText">The ###TITLE### mailtarget template has been inserted. Go to the &quot;List&quot; module, and edit the newletter target to fit you.</label>
-			<label index="mailer_php">Mailer.php</label>
-			<label index="domain_name">Domain name</label>
-			<label index="mailer_exe_ok">&lt;b&gt;mailer.php&lt;/b&gt; is executable.</label>
-			<label index="mailer_exe_notok">&lt;b&gt;mailer.php&lt;/b&gt; is &lt;b&gt;not&lt;/b&gt; executable.</label>
-			<label index="domain_ok">The domain &lt;b&gt;###DOMAIN###&lt;/b&gt; is defined.</label>
-			<label index="domain_notok">No domain defined in page tree. Make a domain record somewhere in the pagetree for this page.</label>
-			<label index="try_make_exe">Try to make executable</label>
-			<label index="set_domain">Set domain</label>
-			<label index="update">Update</label>
-			<label index="crontab_explain">If you have not already done so, please add the following line to root, apache or user crontab:&lt;br /&gt;&lt;b&gt;* * * * * ###MAILERPATH### &gt;/dev/null 2&gt;&amp;1&lt;/b&gt;</label>
-			<label index="total_recipients">Total recipients</label>
-			<label index="lynx_browser">Lynx CLI browser</label>
-			<label index="lynx_found">Lynx browser (&lt;b&gt;###LYNX_VERSION###&lt;/b&gt;) found on your system.</label>
-			<label index="lynx_not_found">No lynx browser found at ###LYNX_PATH###. If you want to use &quot;Lynx cli-browser&quot; as plaintext method, please corrent the Lynx-path in the install-tool.</label>
-			<label index="sys_status">System status</label>
-			<label index="numbers_spied_upon">Opened mails</label>
-			<label index="html_links">HTML links</label>
-			<label index="plain_links">Plain text links</label>
-			<label index="link_number">Link</label>
-			<label index="numbers_of_times_opened">Used</label>
-			<label index="url">Url</label>
-			<label index="testmail_sent">Test mail sent to:</label>
-			<label index="bcc_was_used">BCC method was used, so no further details can be viewed.</label>
-			<label index="view_stats_for">View stats for</label>
-			<label index="all_receivers">All receivers</label>
-			<label index="maintenance">Maintenance</label>
-			<label index="stats_status">Statistics status</label>
-			<label index="invalid_stats_found">Invalid log data found.</label>
-			<label index="clear_invalid">Clear invalid log data</label>
-			<label index="stats_ok">Log data valid</label>
-			<label index="delete">Delete</label>
-			<label index="delete_old_stats">Delete old statistics</label>
-			<label index="mail_contains_javascript">Your mail seems to contain JavaScript-code. This is generally considered bad style and will probably generate warnings either in your users MUAs or spamfilters. I have taken the liberty to try and remove the JavaScript-code from you mail.</label>
-			<label index="mail_contains_linked_styles">Your mail seem to link to an external style-sheet. Your style sheet will be included in the mail, since most MUAs does not cope well on external style-sheets.</label>
-			<label index="mail_contains_css_images">You have used images linked to by CSS in your mail. This will break your layout with most MUAs</label>
-			<label index="mail_contains_css_classes">The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</label>
-			<label index="mail_contains_css_some_property">Layout is done by the &quot;###PROPERTY###&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</label>
-			<label index="mail_contains_serious_errors">Your mail contains serious errors that will affect its appearance severely. You should really correct these.</label>
-			<label index="mail_contains_no_serious_errors">Your mail contains no serious errors.</label>
-			<label index="mail_contains_warnings">Your mail contains some warnings, that you should maybe look into.</label>
-			<label index="mail_contains_no_warnings">Your mail contains no warnings.</label>
-			<label index="mail_contains_notices">Your mail contains some minor issues. Verify that they are of no importance.</label>
-			<label index="mail_contains_no_notices">Your mail contains no notices.</label>
-			<label index="receiver">Receiver</label>
-			<label index="preview_html">Html</label>
-			<label index="preview_plain">Plain</label>
-			<label index="num_fields">Fields in record</label>
-			<label index="missing_fields">Missing fields</label>
-			<label index="preview">Preview</label>
-			<label index="filter_form">Filter options</label>
-			<label index="update_view">Update statistics view</label>
-			<label index="mail_success">General mail success</label>
-			<label index="numbers_bounced">Bounced mails</label>
-			<label index="has_email_sword">Email search word</label>
-			<label index="has_beenthere">Confirmed addresses only</label>
-			<label index="has_opened_link">Has activated this link</label>
-			<label index="numbers_not_spied_upon">Not opened mails</label>
-			<label index="beenthere">Confirmed addresses</label>
-			<label index="beenthere_yes">Only</label>
-			<label index="beenthere_no">None</label>
-			<label index="has_notbeenthere">Unconfirmed addresses only</label>
-		</languageKey>
-	</orig_text>
 </T3locallang>

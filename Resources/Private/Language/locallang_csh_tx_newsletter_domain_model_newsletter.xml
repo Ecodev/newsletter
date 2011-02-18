@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_newsletter_domain_model_newsletter</description>
+        <type>CSH</type>
+        <csh_table>tx_newsletter_domain_model_newsletter</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="planned_time.description">When the newsletter will start sending emails</label>
+			<label index="begin_time.description">beginTime</label>
+			<label index="end_time.description">endTime</label>
+			<label index="tx_newsletter_repeat.description">0-7 values to indicates when this newsletter will repeat</label>
+			<label index="plain_converter.description">Tool used to convert to plain text</label>
+			<label index="is_test.description">Whether this newsletter is for test purpose. If it is it will be ignored in statistics</label>
+			<label index="attachments.description">List of files to be attached (comma separated list</label>
+			<label index="sender_name.description">The name of the newsletter sender</label>
+			<label index="sender_email.description">The email of the newsletter sender</label>
+			<label index="inject_open_spy.description">injectOpenSpy</label>
+			<label index="inject_links_spy.description">injectLinksSpy</label>
+			<label index="bounce_account.description">bounceAccount</label>
+			<label index="recipient_list.description">recipientList</label>
+		</languageKey>
+    </data>
+</T3locallang>

@@ -1,4 +1,7 @@
 <?php
+if (!defined ('TYPO3_MODE')) {
+	die ('Access denied.');
+}
 
 // ExtDirect API
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
@@ -59,4 +62,3 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'Statistic' => 'index, show, new, create, edit, update, delete',
 	)
 );
-

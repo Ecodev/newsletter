@@ -1,76 +1,30 @@
 plugin.tx_newsletter {
-	settings {
-		# maximum number of posts to display at once
-		# maxPosts = 3
+	view {
+		templateRootPath = {$plugin.tx_newsletter.view.templateRootPath}
+		partialRootPath = {$plugin.tx_newsletter.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_newsletter.view.layoutRootPath}
 	}
 	persistence {
-		classes {
-			Tx_Newsletter_Domain_Model_Statistic {
-				mapping {
-					tableName = tx_newsletter_domain_model_lock
-					#recordType = Tx_Newsletter_Domain_Model_Statistic
-					#columns {
-					#	begintime.mapOnProperty = begintime
-					#}
-				}
-			}
-		}
+		storagePid = {$plugin.tx_newsletter.persistence.storagePid}
 	}
 }
 
-config.tx_extbase.persistence.classes.Tx_Newsletter_Domain_Model_Statistic < plugin.tx_newsletter.persistence.classes.Tx_Newsletter_Domain_Model_Statistic
+plugin.tx_newsletter._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
 
+	.tx-newsletter-pi1 table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
 
-# # Plugin configuration
-#plugin.tx_newsletter {
-#	settings {
-#		# maximum number of posts to display at once
-#		maxPosts = 3
-#	}
-#	persistence {
-#		storagePid = {$plugin.tx_newsletter.persistence.storagePid}
-#		classes {
-#			Tx_Newsletter_Domain_Model_FrontendUser {
-#				subclasses {
-#					Tx_newsletter_Domain_Model_Administrator = Tx_newsletter_Domain_Model_Administrator
-#				}
-#			}
-#			Tx_Newsletter_Domain_Model_Administrator {
-#				mapping {
-#					tableName = fe_users
-#					recordType = Tx_newsletter_Domain_Model_Administrator
-#				}
-#			}
-#		}
-#	}
-#	view {
-#		templateRootPath = {$plugin.tx_newsletter.view.templateRootPath}
-#		partialRootPath = {$plugin.tx_newsletter.view.partialRootPath}
-#		layoutRootPath = {$plugin.tx_newsletter.view.layoutRootPath}
-#	}
-#	# This is an example how to modify the translation
-#	_LOCAL_LANG {
-#		default {
-#			read_more = more >>
-#		}
-#	}
-#}
-#
-# # Module configuration
-#module.tx_newsletter {
-#	settings < plugin.tx_newsletter.settings
-#	persistence < plugin.tx_newsletter.persistence
-#	view < plugin.tx_newsletter.view
-#	view {
-#		templateRootPath = {$module.tx_newsletter.view.templateRootPath}
-#		partialRootPath = {$module.tx_newsletter.view.partialRootPath}
-#		layoutRootPath = {$module.tx_newsletter.view.layoutRootPath}
-#	}
-#}
-#
-#plugin.tx_newsletter._CSS_DEFAULT_STYLE (
-#	input.f3-form-error {
-#		background-color:#FF9F9F;
-#		border: 1px #FF0000 solid;
-#	}
-#)
+	.tx-newsletter-pi1 table th {
+		font-weight:bold;
+	}
+
+	.tx-newsletter-pi1 table td {
+		vertical-align:top;
+	}
+)
