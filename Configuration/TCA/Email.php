@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_email'] = array(
 	'ctrl' => $TCA['tx_newsletter_domain_model_email']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList'	=> 'start_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter',
+		'showRecordFieldList'	=> 'begin_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'start_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter'),
+		'1' => array('showitem'	=> 'begin_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
@@ -61,13 +61,13 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 				'type'	=> 'check',
 			)
 		),
-		'start_time' => array(
+		'begin_time' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.start_time',
+			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.begin_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
+				'size' => 4,
+				'eval' => 'int'
 			),
 		),
 		'end_time' => array(
@@ -75,8 +75,8 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.end_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
+				'size' => 4,
+				'eval' => 'int'
 			),
 		),
 		'recipient_address' => array(

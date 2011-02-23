@@ -7,7 +7,7 @@
     </meta>
     <data type="array">
         <languageKey index="default" type="array">
-			<label index="start_time.description">startTime</label>
+			<label index="begin_time.description">startTime</label>
 			<label index="end_time.description">endTime</label>
 			<label index="recipient_address.description">recipientAddress</label>
 			<label index="recipient_data.description">recipientData</label>

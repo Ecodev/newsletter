@@ -75,8 +75,8 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.begin_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
+				'size' => 4,
+				'eval' => 'int'
 			),
 		),
 		'end_time' => array(
@@ -84,8 +84,8 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.end_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
+				'size' => 4,
+				'eval' => 'int'
 			),
 		),
 		'repetition' => array(

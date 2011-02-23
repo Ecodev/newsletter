@@ -25,7 +25,6 @@
 
 /**
  * Abstract repository to workaround difficulties (or misunderstanding?) with extbase.
- * TODO: this class should be entirely destroyed once all extension code use extbase concepts
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -48,8 +47,12 @@ abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Ext
 		return $query;
 	}
 	
-	public function add($object) {
-		parent::add($object);
+	/**
+	 * Update the object immediately in DB. This is used for time-sensitive operation such as locks.
+	 * @param object $modifiedObject
+	 */
+	public function updateNow($modifiedObject) {
+		parent::update($modifiedObject);
 		$this->persistenceManager->persistAll();	
 	}
 	
@@ -60,8 +63,7 @@ abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Ext
 	 * @param object $modifiedObject
 	 */
 	public function update($modifiedObject) {
-		parent::update($modifiedObject);
-		$this->persistenceManager->persistAll();
+		return $this->updateNow($modifiedObject);
 	}
 }
 ?>

@@ -1,40 +1,40 @@
 <?php
 /***************************************************************
-*  Copyright notice
-*  
-*  (c) 2006 -2008 Daniel Schledermann (daniel@schledermann.net)
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is 
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-* 
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-* 
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
-/** 
+ *  Copyright notice
+ *
+ *  (c) 2006 -2008 Daniel Schledermann (daniel@schledermann.net)
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+/**
  * Module 'Newsletter' for the 'newsletter' extension.
  *
  * @author   Daniel Schledermann <daniel@schledermann.net>
  */
 
 
-   // DEFAULT initialization of a module [BEGIN]
+// DEFAULT initialization of a module [BEGIN]
 $LANG->includeLLFile("EXT:newsletter/mod2/locallang.xml");
 require_once (PATH_t3lib."class.t3lib_scbase.php");
 $BE_USER->modAccess($MCONF,1);   // This checks permissions and exits if the users has no permission for entry.
-   // DEFAULT initialization of a module [END]
-   
-$ICON_PATH = $BACK_PATH.'gfx/';   
+// DEFAULT initialization of a module [END]
+ 
+$ICON_PATH = $BACK_PATH.'gfx/';
 require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
 require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_mailer.php');
 
@@ -42,68 +42,68 @@ require_once (t3lib_extMgm::extPath('newsletter').'/Classes/Domain/Model/Newslet
 require_once (t3lib_extMgm::extPath('newsletter').'/Classes/Domain/Repository/NewsletterRepository.php');
 
 class tx_newsletter_module1 extends t3lib_SCbase {
-	
+
 	var $pageinfo;
 	private $newsletterRepository = null;
 	private $newsletter = null;
-	
-   /**
-    * 
-    */
-   function init()   {
-      global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
-      
-      parent::init();
-      
-      require(dirname(__FILE__).'/../debug.php');
-      
-      $this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-      $this->newsletter = $this->newsletterRepository->getLatest($_REQUEST['id']);
-  
-   }
 
-   /**
-    * Adds items to the ->MOD_MENU array. Used for the function menu selector.
-    */
-   function menuConfig()   {
-      global $LANG, $MODULE_PARTS;
-      
-      $this->MOD_MENU = Array (
+	/**
+	 *
+	 */
+	function init()   {
+		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
+
+		parent::init();
+
+		require(dirname(__FILE__).'/../debug.php');
+
+		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$this->newsletter = $this->newsletterRepository->getLatest($_REQUEST['id']);
+
+	}
+
+	/**
+	 * Adds items to the ->MOD_MENU array. Used for the function menu selector.
+	 */
+	function menuConfig()   {
+		global $LANG, $MODULE_PARTS;
+
+		$this->MOD_MENU = Array (
          "function" => Array (
             "status" => $LANG->getLL("status"),
             'statistics' => $LANG->getLL('statistics'),
             'maintanence' => $LANG->getLL('maintenance'),
             'validity' => $LANG->getLL('validity'),
             'preview' => $LANG->getLL('preview'),
-//	    'help' => $LANG->getLL('help'),
-         )
-      );
-      
-      parent::menuConfig();
-      
-   }
+		//	    'help' => $LANG->getLL('help'),
+		)
+		);
 
-      // If you chose "web" as main module, you will need to consider the $this->id parameter which will contain the uid-number of the page clicked in the page tree
-   /**
-    * Main function of the module. Write the content to $this->content
-    */
-   function main()   {
-      global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
+		parent::menuConfig();
 
-      // Access check!
-      // The page will show only if there is a valid page and if this page may be viewed by the user
-      $this->pageinfo = t3lib_BEfunc::readPageAccess($this->id,$this->perms_clause);
-      $access = is_array($this->pageinfo) ? 1 : 0;
-      
-      if (($this->id && $access) || ($BE_USER->user["admin"] && !$this->id))   {
-   
-            // Draw the header.
-         $this->doc = t3lib_div::makeInstance("bigDoc");
-         $this->doc->backPath = $BACK_PATH;
-         $this->doc->form='<form name="newsletterform" action="" method="POST">';
+	}
 
-            // JavaScript
-         $this->doc->JScode = '
+	// If you chose "web" as main module, you will need to consider the $this->id parameter which will contain the uid-number of the page clicked in the page tree
+	/**
+	 * Main function of the module. Write the content to $this->content
+	 */
+	function main()   {
+		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
+
+		// Access check!
+		// The page will show only if there is a valid page and if this page may be viewed by the user
+		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id,$this->perms_clause);
+		$access = is_array($this->pageinfo) ? 1 : 0;
+
+		if (($this->id && $access) || ($BE_USER->user["admin"] && !$this->id))   {
+			 
+			// Draw the header.
+			$this->doc = t3lib_div::makeInstance("bigDoc");
+			$this->doc->backPath = $BACK_PATH;
+			$this->doc->form='<form name="newsletterform" action="" method="POST">';
+
+			// JavaScript
+			$this->doc->JScode = '
             <script language="javascript" type="text/javascript">
                script_ended = 0;
                function jumpToUrl(URL)   {
@@ -119,127 +119,127 @@ class tx_newsletter_module1 extends t3lib_SCbase {
    				}
             </script>
          ';
-         $this->doc->postCode='
+			$this->doc->postCode='
             <script language="javascript" type="text/javascript">
                script_ended = 1;
                if (top.fsMod) top.fsMod.recentIds["web"] = '.intval($this->id).';
             </script>
          ';
 
-         $headerSection = $this->doc->getHeader("pages",$this->pageinfo,$this->pageinfo["_thePath"])."<br>".$LANG->sL("LLL:EXT:lang/locallang_core.php:labels.path").": ".t3lib_div::fixed_lgd_pre($this->pageinfo["_thePath"],50);
+			$headerSection = $this->doc->getHeader("pages",$this->pageinfo,$this->pageinfo["_thePath"])."<br>".$LANG->sL("LLL:EXT:lang/locallang_core.php:labels.path").": ".t3lib_div::fixed_lgd_pre($this->pageinfo["_thePath"],50);
 
-         // Filter out functions defined as disallowed in the user-ts.
-         if (is_array($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'])) {         
-            foreach ($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'] as $func => $disallowed) {
-              if ($disallowed) {
-                 if ($func == $this->MOD_SETTINGS['function']) {
-                    die ("Access denied");
-                }  
-                unset($this->MOD_MENU['function'][$func]);
-              }
-            }
-         }
-         
-         $this->content.=$this->doc->startPage($LANG->getLL("title"));
-         $this->content.=$this->doc->header($LANG->getLL("title"));
-         $this->content.=$this->doc->spacer(5);
-         $this->content.=$this->doc->section("",$this->doc->funcMenu($headerSection,t3lib_BEfunc::getFuncMenu($this->id,"SET[function]",$this->MOD_SETTINGS["function"],$this->MOD_MENU["function"])));
-         $this->content.=$this->doc->divider(5);
+			// Filter out functions defined as disallowed in the user-ts.
+			if (is_array($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'])) {
+				foreach ($GLOBALS['BE_USER']->userTS['newsletter.']['modfuncDisallow.'] as $func => $disallowed) {
+					if ($disallowed) {
+						if ($func == $this->MOD_SETTINGS['function']) {
+							die ("Access denied");
+						}
+						unset($this->MOD_MENU['function'][$func]);
+					}
+				}
+			}
+			 
+			$this->content.=$this->doc->startPage($LANG->getLL("title"));
+			$this->content.=$this->doc->header($LANG->getLL("title"));
+			$this->content.=$this->doc->spacer(5);
+			$this->content.=$this->doc->section("",$this->doc->funcMenu($headerSection,t3lib_BEfunc::getFuncMenu($this->id,"SET[function]",$this->MOD_SETTINGS["function"],$this->MOD_MENU["function"])));
+			$this->content.=$this->doc->divider(5);
 
-         // Render content:
-         $this->moduleContent();
+			// Render content:
+			$this->moduleContent();
 
-         
-         // ShortCut
-         if ($BE_USER->mayMakeShortcut())   {
-            $this->content.=$this->doc->spacer(20).$this->doc->section("",$this->doc->makeShortcutIcon("id",implode(",",array_keys($this->MOD_MENU)),$this->MCONF["name"]));
-         }
-      
-         $this->content.=$this->doc->spacer(10);
-      } else {
-            // If no access or if ID == zero
-      
-         $this->doc = t3lib_div::makeInstance("mediumDoc");
-         $this->doc->backPath = $BACK_PATH;
-      
-         $this->content.=$this->doc->startPage($LANG->getLL("title"));
-         $this->content.=$this->doc->header($LANG->getLL("title"));
-         $this->content.=$this->doc->spacer(5);
-         $this->content.=$this->doc->spacer(10);
-      }
-   }
+			 
+			// ShortCut
+			if ($BE_USER->mayMakeShortcut())   {
+				$this->content.=$this->doc->spacer(20).$this->doc->section("",$this->doc->makeShortcutIcon("id",implode(",",array_keys($this->MOD_MENU)),$this->MCONF["name"]));
+			}
 
-   /**
-    * Prints out the module HTML
-    */
-   function printContent()   {
+			$this->content.=$this->doc->spacer(10);
+		} else {
+			// If no access or if ID == zero
 
-      $this->content.=$this->doc->endPage();
-      echo $this->content;
-   }
-   
-   /**
-    * Generates the module content
-    */
-   function moduleContent()   {
-      global $LANG, $TYPO3_DB;
-      
-      /* Must have an id */
-      if (!$_REQUEST['id']) return;
+			$this->doc = t3lib_div::makeInstance("mediumDoc");
+			$this->doc->backPath = $BACK_PATH;
 
-      /* Must be a newsletter page */
-      $rs = $TYPO3_DB->sql_query('SELECT doktype FROM pages WHERE uid = '.intval($_REQUEST['id']));
-      list($doktype) = $TYPO3_DB->sql_fetch_row($rs);
+			$this->content.=$this->doc->startPage($LANG->getLL("title"));
+			$this->content.=$this->doc->header($LANG->getLL("title"));
+			$this->content.=$this->doc->spacer(5);
+			$this->content.=$this->doc->spacer(10);
+		}
+	}
 
-      if ($doktype != 189) {
-          $content = $this->notANewsletterPage();
-          $this->content.=$this->doc->section($LANG->getLL("error"),$content,0,1);
-          return;
-      }
+	/**
+	 * Prints out the module HTML
+	 */
+	function printContent()   {
 
-      switch((string)$this->MOD_SETTINGS["function"])   {
+		$this->content.=$this->doc->endPage();
+		echo $this->content;
+	}
+	 
+	/**
+	 * Generates the module content
+	 */
+	function moduleContent()   {
+		global $LANG, $TYPO3_DB;
 
-         case 'status':
-            $content = $this->viewStatus();
-            $this->content.=$this->doc->section($LANG->getLL("status"),$content,0,1);
-         break;
-         
-         case 'maintanence':
-            $content = $this->doMaintenance();
-            $this->content.=$this->doc->section($LANG->getLL("maintenance"),$content,0,1);
-         break;
-         
-         case 'preview':
-            $content = $this->viewPreview();
-            $this->content.=$this->doc->section($LANG->getLL("preview"),$content,0,1);
-         break;
-         
-         case 'validity':
-            $content = $this->checkMailValidity();
-            $this->content.=$this->doc->section($LANG->getLL("validity"),$content,0,1);
-         break;
-         
-         case 'statistics':
-            $content = $this->viewStatistics();
-            $this->content.=$this->doc->section($LANG->getLL("statistics"),$content,0,1);
-         break;
+		/* Must have an id */
+		if (!$_REQUEST['id']) return;
 
-	 case 'help':
-	 	$content = $this->showHelp();
-		$this->content.=$this->doc->section($LANG->getLL("help"),$content,0,1);
-		break;
+		/* Must be a newsletter page */
+		$rs = $TYPO3_DB->sql_query('SELECT doktype FROM pages WHERE uid = '.intval($_REQUEST['id']));
+		list($doktype) = $TYPO3_DB->sql_fetch_row($rs);
 
-         default :
-            $obj = t3lib_div::makeInstance((string)$this->MOD_SETTINGS["function"]);
-            $this->content.=$obj->main();
-         break;
-         
-      } 
-   }
-   
+		if ($doktype != 189) {
+			$content = $this->notANewsletterPage();
+			$this->content.=$this->doc->section($LANG->getLL("error"),$content,0,1);
+			return;
+		}
+
+		switch((string)$this->MOD_SETTINGS["function"])   {
+
+			case 'status':
+				$content = $this->viewStatus();
+				$this->content.=$this->doc->section($LANG->getLL("status"),$content,0,1);
+				break;
+				 
+			case 'maintanence':
+				$content = $this->doMaintenance();
+				$this->content.=$this->doc->section($LANG->getLL("maintenance"),$content,0,1);
+				break;
+				 
+			case 'preview':
+				$content = $this->viewPreview();
+				$this->content.=$this->doc->section($LANG->getLL("preview"),$content,0,1);
+				break;
+				 
+			case 'validity':
+				$content = $this->checkMailValidity();
+				$this->content.=$this->doc->section($LANG->getLL("validity"),$content,0,1);
+				break;
+				 
+			case 'statistics':
+				$content = $this->viewStatistics();
+				$this->content.=$this->doc->section($LANG->getLL("statistics"),$content,0,1);
+				break;
+
+			case 'help':
+				$content = $this->showHelp();
+				$this->content.=$this->doc->section($LANG->getLL("help"),$content,0,1);
+				break;
+
+			default :
+				$obj = t3lib_div::makeInstance((string)$this->MOD_SETTINGS["function"]);
+				$this->content.=$obj->main();
+				break;
+				 
+		}
+	}
+	 
 	/* View all sorts of stuff about the current page. */
 	function viewStatus() {
-		global $TYPO3_DB;   
+		global $TYPO3_DB;
 		global $LANG;
 		global $ICON_PATH;
 		global $BE_USER;
@@ -248,12 +248,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		/* Schedule a send? */
 		if ($_REQUEST['send_now']) {
 			$this->newsletter->setPlannedTime(time());
-			$this->newsletterRepository->update($this->newsletter);
-		}
-
-		/* Schedule a test send */
-		if ($_REQUEST['send_test_cron']) {
-			$this->newsletter->setIsTest(true);
 			$this->newsletterRepository->update($this->newsletter);
 		}
 
@@ -292,10 +286,10 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 
 		/* Get starttime for lock-records */
-		$newsletterBegan = $this->newsletter->getBeginTime();		
+		$newsletterBegan = $this->newsletter->getBeginTime();
 		/* Get current time.status */
 		$plannedTime = $this->newsletter->getPlannedTime();
-		
+
 		$output .= '<form>';
 
 
@@ -303,11 +297,11 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$output .= '<h3>'.$LANG->getLL('status_real_receivers').'</h3>';
 		$recipientList = $this->newsletter->getRecipientListConcreteInstance();
 		if ($recipientList) {
-			
+				
 			$total_to_send = $recipientList->getCount();
-			
+				
 			$output .= $this->listRecipients($recipientList);
-			
+				
 			if ($plannedTime > 0) {
 				$output .= '<p>'.str_replace('###TIME_TO_SEND###', strftime('%Y-%m-%d %H:%M', $plannedTime),
 				str_replace('###NUMBERS_TO_SEND###', $total_to_send, $LANG->getLL('scheduled_info'))) .'</p>';
@@ -319,21 +313,22 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				$output .= '<p><input onclick="return confirm(\''.$LANG->getLL('confirm_text').'\');" style="cursor:pointer;" type="submit" name="send_now" value="'.$LANG->getLL('send_now').'" /></p>';
 				$output .= '</p>';
 			}
-				
+
 
 			if ($newsletterBegan) {
 				$rs = $TYPO3_DB->exec_SELECTquery('COUNT(*)', 'tx_newsletter_domain_model_email', 'end_time > 0 AND newsletter = ' . $this->newsletter->getUid());
 				list ($already_sent) = $TYPO3_DB->sql_fetch_row($rs);
 
 				$output .= '<p>Actually started to send on <strong>'. strftime('%Y-%m-%d %H:%M', $newsletterBegan) .'</strong></p>';
-				$output .= "<p>Emails sent: <strong>$already_sent / $total_to_send</strong></p>";		
+				$output .= "<p>Emails sent: <strong>$already_sent / $total_to_send</strong></p>";
 			}
 				
-			if (tx_newsletter_tools::confParam('show_invoke_mailer') && $BE_USER->user['admin']) {
+			// If all emails were not send, we may offer a to invoke the mailer
+			if ($already_sent < $total_to_send && tx_newsletter_tools::confParam('show_invoke_mailer') && $BE_USER->user['admin']) {
 				$output .= '<br />';
 				$output .= '<input style="cursor:pointer;" type="submit" name="invoke_mailer" value="Invoke mailer engine" />';
 			}
-			
+				
 		} else {
 			$output .= '<p><strong>'.$LANG->getLL('no_real_receivers').'</strong></p>';
 		}
@@ -343,18 +338,18 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		return $output;
 	}
-	
+
 	private function listRecipients(Tx_Newsletter_Domain_Model_RecipientList $recipientList, $limit = 10)
 	{
 		global $LANG;
 		$output = '<table cellpadding="2" cellspacing="2">';
-		
+
 		/* List what users can be mailed */
-		 if($recipientList->getCount() > 1){
+		if($recipientList->getCount() > 1){
 			$output .= '<tr><td colspan="5">&nbsp;</td></tr>';
 			$output .= '<tr><td><input type="checkbox" name="selectAll_top" onClick="checkAll(this);" /></td><td colspan="4">'.$LANG->getLL('toggleAll').'</td></tr>';
 		}
- 
+
 		while ($record = $recipientList->getRecord()) {
 			if (!$tbl_headers_set) {
 				$output .= '<tr><td></td><td><strong>';
@@ -364,12 +359,12 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			}
 
 			$output .= '<tr><td>';
-			$output .= '<input type="checkbox" name="test_send_receivers[]" value="'.$record['email'].'" /></td><td>';  
+			$output .= '<input type="checkbox" name="test_send_receivers[]" value="'.$record['email'].'" /></td><td>';
 			$output .= implode ('</td><td>', $record);
 			$output .= '</td></tr>';
 		}
 		$output .= '</table>';
-		
+
 		return $output;
 	}
 
@@ -377,300 +372,300 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		// Fill the spool
 		tx_newsletter_tools::createSpool($this->newsletter);
-		
+
 		// Go on and run the queue
 		tx_newsletter_tools::runSpoolOne($this->newsletter);
 	}
 
-   function checkMailValidity() {
-       global $LANG;
-       global $ICON_PATH;
-       global $TYPO3_DB;
-   
-       $warn = array();
-       $fail = array();
-       $note = array();
-   
-       /* Get the page-contents */
-       $id = intval($_REQUEST['id']);
-       $rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = ".intval($_REQUEST[id]));
-       $page = $TYPO3_DB->sql_fetch_assoc($rs); 
-       $domain = tx_newsletter_tools::getDomainForPage($page);
-       $html_src = file_get_contents("http://$domain/index.php?id=$id&no_cache=1");
+	function checkMailValidity() {
+		global $LANG;
+		global $ICON_PATH;
+		global $TYPO3_DB;
+		 
+		$warn = array();
+		$fail = array();
+		$note = array();
+		 
+		/* Get the page-contents */
+		$id = intval($_REQUEST['id']);
+		$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = ".intval($_REQUEST[id]));
+		$page = $TYPO3_DB->sql_fetch_assoc($rs);
+		$domain = tx_newsletter_tools::getDomainForPage($page);
+		$html_src = file_get_contents("http://$domain/index.php?id=$id&no_cache=1");
 
-       /* Any linked CSS-files */
-       if (strpos($html_src, '<link rel="stylesheet" type="text/css" href="')) {
-          $note[] = $LANG->getLL('mail_contains_linked_styles');
-       }
+		/* Any linked CSS-files */
+		if (strpos($html_src, '<link rel="stylesheet" type="text/css" href="')) {
+			$note[] = $LANG->getLL('mail_contains_linked_styles');
+		}
 
-       /* Find linked css and convert into a style-tag */
-       preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $html_src, $urls);
-       foreach ($urls[1] as $i => $url) {
-           $get_url = str_replace("http://$domain/", '', $url);
-           $html_src = str_replace ($urls[0][$i],
+		/* Find linked css and convert into a style-tag */
+		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $html_src, $urls);
+		foreach ($urls[1] as $i => $url) {
+			$get_url = str_replace("http://$domain/", '', $url);
+			$html_src = str_replace ($urls[0][$i],
                    "<style type=\"text/css\">\n<!--\n"
                    .file_get_contents(PATH_site.str_replace("http://$domain/", '', $url))
                    ."\n-->\n</style>", $html_src);
-       }
-                                                
-       /* Any javascript */
-       if (strpos($html_src, '<script')) {
-      $fail[] = $LANG->getLL('mail_contains_javascript');
-       }
-       
-       
-       /* Images in CSS */
-       if (preg_match('|background-image: url\([^\)]+\)|', $html_src) || preg_match('|list-style-image: url\([^\)]+\)|', $html_src)) {
-      $fail[] = $LANG->getLL('mail_contains_css_images');
-       }
-       
-       /* CSS-classes */
-       if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $html_src)) {
-      $note[] = $LANG->getLL('mail_contains_css_classes');
-       }
-       
-       /* Positioning & element sizes in CSS */
-       if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $html_src, $matches)) {
-       
-      foreach ($matches[1] as $stylepart) {
-          if (strpos($stylepart, 'width') !== false) {
-            $warn[] = str_replace ('###PROPERTY###','width', $LANG->getLL('mail_contains_css_some_property'));
-          }
-      
-          if (strpos($stylepart, 'margin') !== false) {
-            $warn[] = str_replace ('###PROPERTY###','margin', $LANG->getLL('mail_contains_css_some_property'));
-          }
+		}
 
-          if (strpos($stylepart, 'height') !== false) {
-            $warn[] = str_replace ('###PROPERTY###','height', $LANG->getLL('mail_contains_css_some_property'));
-          }
+		/* Any javascript */
+		if (strpos($html_src, '<script')) {
+			$fail[] = $LANG->getLL('mail_contains_javascript');
+		}
+		 
+		 
+		/* Images in CSS */
+		if (preg_match('|background-image: url\([^\)]+\)|', $html_src) || preg_match('|list-style-image: url\([^\)]+\)|', $html_src)) {
+			$fail[] = $LANG->getLL('mail_contains_css_images');
+		}
+		 
+		/* CSS-classes */
+		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $html_src)) {
+			$note[] = $LANG->getLL('mail_contains_css_classes');
+		}
+		 
+		/* Positioning & element sizes in CSS */
+		if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $html_src, $matches)) {
+			 
+			foreach ($matches[1] as $stylepart) {
+				if (strpos($stylepart, 'width') !== false) {
+					$warn[] = str_replace ('###PROPERTY###','width', $LANG->getLL('mail_contains_css_some_property'));
+				}
 
-          if (strpos($stylepart, 'padding') !== false) {
-            $warn[] = str_replace ('###PROPERTY###','padding', $LANG->getLL('mail_contains_css_some_property'));
-          }
+				if (strpos($stylepart, 'margin') !== false) {
+					$warn[] = str_replace ('###PROPERTY###','margin', $LANG->getLL('mail_contains_css_some_property'));
+				}
 
-          if (strpos($stylepart, 'position') !== false) {
-            $warn[] = str_replace ('###PROPERTY###','position', $LANG->getLL('mail_contains_css_some_property'));
-          }
-      }
-      
-      $warn = array_unique($warn);
-       }
-       
-       if (count($fail)) {
-      $content .= '<h4>'.$LANG->getLL('mail_contains_serious_errors').'</h4>';
-      foreach ($fail as $failure) {
-          $content .= '<p><img src="'.$ICON_PATH.'icon_fatalerror.gif" />'.$failure.'</p>';
-      }
-       } else {
-      $content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_serious_errors').'</h4>';
-       }
-       
-       if (count($warn)) {
-      $content .= '<h4>'.$LANG->getLL('mail_contains_warnings').'</h4>';
-      foreach ($warn as $warning) {
-          $content .= '<p><img src="'.$ICON_PATH.'icon_warning.gif" />'.$warning.'</p>';
-      }
-       } else {
-      $content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_warnings').'</h4>';
-       }
-       
-       if (count($note)) {
-      $content .= '<h4>'.$LANG->getLL('mail_contains_notices').'</h4>';
-      foreach ($note as $notice) {
-          $content .= '<p><img src="'.$ICON_PATH.'icon_note.gif" />'.$notice.'</p>';
-      }
-       } else {
-      $content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_notices').'</h4>';
-       }
-       
-       
-       return $content;
-   }
+				if (strpos($stylepart, 'height') !== false) {
+					$warn[] = str_replace ('###PROPERTY###','height', $LANG->getLL('mail_contains_css_some_property'));
+				}
 
-   
-   
-   function notANewsletterPage() {
-       return '<p>'.$GLOBALS['LANG']->getLL('not_a_newsletter').'</p>';
-   }
-   
-   function doMaintenance () {
-       global $LANG;
-       global $TYPO3_DB;
-   
-       $id = intval($_REQUEST['id']);
-   
-       /* Clear invalid stats? */
-       if ($_REQUEST['clear_invalid']) {
-          $sql = "DELETE FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id";
-          $TYPO3_DB->sql_query($sql);
-          $sql = "DELETE FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id";
-          $TYPO3_DB->sql_query($sql);
-       }
-       
-       if ($_REQUEST['delete_begintime']) {
-         $sql = "DELETE tx_newsletter_domain_model_lock, tx_newsletter_domain_model_email, tx_newsletter_domain_model_clicklink FROM tx_newsletter_domain_model_lock
+				if (strpos($stylepart, 'padding') !== false) {
+					$warn[] = str_replace ('###PROPERTY###','padding', $LANG->getLL('mail_contains_css_some_property'));
+				}
+
+				if (strpos($stylepart, 'position') !== false) {
+					$warn[] = str_replace ('###PROPERTY###','position', $LANG->getLL('mail_contains_css_some_property'));
+				}
+			}
+
+			$warn = array_unique($warn);
+		}
+		 
+		if (count($fail)) {
+			$content .= '<h4>'.$LANG->getLL('mail_contains_serious_errors').'</h4>';
+			foreach ($fail as $failure) {
+				$content .= '<p><img src="'.$ICON_PATH.'icon_fatalerror.gif" />'.$failure.'</p>';
+			}
+		} else {
+			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_serious_errors').'</h4>';
+		}
+		 
+		if (count($warn)) {
+			$content .= '<h4>'.$LANG->getLL('mail_contains_warnings').'</h4>';
+			foreach ($warn as $warning) {
+				$content .= '<p><img src="'.$ICON_PATH.'icon_warning.gif" />'.$warning.'</p>';
+			}
+		} else {
+			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_warnings').'</h4>';
+		}
+		 
+		if (count($note)) {
+			$content .= '<h4>'.$LANG->getLL('mail_contains_notices').'</h4>';
+			foreach ($note as $notice) {
+				$content .= '<p><img src="'.$ICON_PATH.'icon_note.gif" />'.$notice.'</p>';
+			}
+		} else {
+			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_notices').'</h4>';
+		}
+		 
+		 
+		return $content;
+	}
+
+	 
+	 
+	function notANewsletterPage() {
+		return '<p>'.$GLOBALS['LANG']->getLL('not_a_newsletter').'</p>';
+	}
+	 
+	function doMaintenance () {
+		global $LANG;
+		global $TYPO3_DB;
+		 
+		$id = intval($_REQUEST['id']);
+		 
+		/* Clear invalid stats? */
+		if ($_REQUEST['clear_invalid']) {
+			$sql = "DELETE FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id";
+			$TYPO3_DB->sql_query($sql);
+			$sql = "DELETE FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id";
+			$TYPO3_DB->sql_query($sql);
+		}
+		 
+		if ($_REQUEST['delete_begintime']) {
+			$sql = "DELETE tx_newsletter_domain_model_lock, tx_newsletter_domain_model_email, tx_newsletter_domain_model_clicklink FROM tx_newsletter_domain_model_lock
                  LEFT JOIN tx_newsletter_domain_model_email ON tx_newsletter_domain_model_lock.begintime = tx_newsletter_domain_model_email.begintime
                  LEFT JOIN tx_newsletter_domain_model_clicklink ON tx_newsletter_domain_model_email.uid = tx_newsletter_domain_model_clicklink.sentlog
                  WHERE tx_newsletter_domain_model_lock.pid = $id
                  AND tx_newsletter_domain_model_lock.begintime = ".intval($_REQUEST[delete_begintime]);
-          $TYPO3_DB->sql_query($sql);         
-       }
-   
-   
-       /* Invalid-stats form */
-       $out .= "<form action=\"index.php?id=$_REQUEST[id]\">";
-       $sql = "SELECT uid FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id LIMIT 1";
+			$TYPO3_DB->sql_query($sql);
+		}
+		 
+		 
+		/* Invalid-stats form */
+		$out .= "<form action=\"index.php?id=$_REQUEST[id]\">";
+		$sql = "SELECT uid FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id LIMIT 1";
 
-       $rs = $TYPO3_DB->sql_query($sql);
-       $invalid_log = $TYPO3_DB->sql_fetch_row($rs);
-       
-       $sql = "SELECT uid FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id LIMIT 1";
-       $rs = $TYPO3_DB->sql_query($sql);
-       $invalid_lock = $TYPO3_DB->sql_fetch_row($rs);
-       
-       $out .= '<p><h3>'.$LANG->getLL('stats_status').'</h3></p>';
-       if ($invalid_lock || $invalid_log) {
-          $out .= '<p>'.$LANG->getLL('invalid_stats_found').'</p>';
-          $out .= '<p><input type="submit" name="clear_invalid" value="'.$LANG->getLL('clear_invalid').'" /></p>';
-       } else {
-          $out .= '<p>'.$LANG->getLL('stats_ok').'</p>';
-       }
-       
-       
-       /* Old-stats form */
-       /* Get numbers for each session */
-       $sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
+		$rs = $TYPO3_DB->sql_query($sql);
+		$invalid_log = $TYPO3_DB->sql_fetch_row($rs);
+		 
+		$sql = "SELECT uid FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id LIMIT 1";
+		$rs = $TYPO3_DB->sql_query($sql);
+		$invalid_lock = $TYPO3_DB->sql_fetch_row($rs);
+		 
+		$out .= '<p><h3>'.$LANG->getLL('stats_status').'</h3></p>';
+		if ($invalid_lock || $invalid_log) {
+			$out .= '<p>'.$LANG->getLL('invalid_stats_found').'</p>';
+			$out .= '<p><input type="submit" name="clear_invalid" value="'.$LANG->getLL('clear_invalid').'" /></p>';
+		} else {
+			$out .= '<p>'.$LANG->getLL('stats_ok').'</p>';
+		}
+		 
+		 
+		/* Old-stats form */
+		/* Get numbers for each session */
+		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
           FROM tx_newsletter_domain_model_lock lck
           LEFT JOIN tx_newsletter_domain_model_email lg ON lck.begintime = lg.begintime
           WHERE lck.pid = $id
           AND lg.pid = $id
           GROUP BY 1,2";
-                   
-       $rs = $TYPO3_DB->sql_query($sql);
+		 
+		$rs = $TYPO3_DB->sql_query($sql);
 
 
-       /* Display */
-       $out .= '<p><h3>'.$LANG->getLL('delete_old_stats').'</h3></p>';
-       $out .= '<table>';
-       $out .= '<tr><td></td><td>'.
-       $LANG->getLL('date').'</td><td>'.
-       $LANG->getLL('fromtime').'</td><td>'.
-       $LANG->getLL('totime').'</td><td>'.
-       $LANG->getLL('total_receivers').'</td></tr>';
-                   
-       while (list($begintime, $stoptime, $num_receivers) = $TYPO3_DB->sql_fetch_row($rs)) {
-          $out .= "<tr style=\"background-color: eeeeee;\">
+		/* Display */
+		$out .= '<p><h3>'.$LANG->getLL('delete_old_stats').'</h3></p>';
+		$out .= '<table>';
+		$out .= '<tr><td></td><td>'.
+		$LANG->getLL('date').'</td><td>'.
+		$LANG->getLL('fromtime').'</td><td>'.
+		$LANG->getLL('totime').'</td><td>'.
+		$LANG->getLL('total_receivers').'</td></tr>';
+		 
+		while (list($begintime, $stoptime, $num_receivers) = $TYPO3_DB->sql_fetch_row($rs)) {
+			$out .= "<tr style=\"background-color: eeeeee;\">
                 <td><a href=\"index.php?id=$id&delete_begintime=$begintime\"><strong>".
-                $LANG->getLL('delete')."</strong></td><td>".
-                strftime('%Y-%m-%d',$begintime)."</td>
+			$LANG->getLL('delete')."</strong></td><td>".
+			strftime('%Y-%m-%d',$begintime)."</td>
                 <td>".strftime('%H:%M',$begintime).'</td><td>'.strftime('%H:%M',$stoptime)."</td>
                 <td align=right>".$num_receivers."</td></tr>";
-       }
-       $out .= '</table>';
-       $out .= '</form>';
-       
-       return $out;
-   }
-   
-        /* View number of mails delivered in the past */
-        function viewPreview() {
-            global $TYPO3_DB;
-            global $LANG;
-	    global $BACK_PATH;
-	    
-	    /* Get list of receivers */
-	    $rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = $_REQUEST[id]");
-	    $page = $TYPO3_DB->sql_fetch_assoc($rs);
-	    
-	    $mailer = tx_newsletter_tools::getConfiguredMailer($page);
-	    $targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
-	    
-	    $out .= '<table>';
-	    $out .= '<tr>';
-	    $out .= '<td><b>'.$LANG->getLL('receiver').'</b></td>';
-	    $out .= '<td><b>'.$LANG->getLL('status').'</b></td>';
-	    $out .= '<td><b>'.$LANG->getLL('num_fields').'</b></td>';
-	    $out .= '<td><b>'.$LANG->getLL('missing_fields').'</b></td>';
-	    $out .= '<td><b>'.$LANG->getLL('preview').'</b></td>';
-	    $out .= '</tr>';
-
-	    
-	    foreach ($targets as $tid) {
-		$tobj = tx_newsletter_target::loadTarget($tid);
-		
-		$out .= '<tr><td colspan="5"><b>'.$this->editTarget($tid).'</b></td></tr>';
-		
-		while ($record = $tobj->getRecord()) {
-		    $out .= '<tr>';		
-		    $out .= "<td><a href=\"mailto:$record[email]\">$record[email]</td>";
-		    
-		
-		    /* Number of fields */
-		    $num_fields = count($record);
-		    
-		    /* Number of unsubstituted fields */
-		    $mailer->prepare($record);
-		    preg_match_all('|###[a-z0-9_]+###|i', $mailer->html, $nonfields_html);
-		    preg_match_all('|###[a-z0-9_]+###|i', $mailer->plain, $nonfields_plain);
-		    $num_nonfields = max (count ($nonfields_html[0]), count ($nonfields_plain[0]));
-		
-		
-		    /* Ok fields icon? */
-		    $status_url = $GLOBALS['BACK_PATH'].'gfx';
-		    if ($num_nonfields != 0) {
-			$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_fatalerror.gif" /></td>';
-		    } else {
-			$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_ok.gif" /></td>';
-		    }
-				    
-		    $out .= "<td>$num_fields</td>";
-		    $out .= "<td>$num_nonfields</td>";
-		    $out .= '<td>';
-		    
-		    if (!$record['plain_only']) {
-			$out .= $this->previewLink('html', $record['email']);
-		    } else {
-			$out .= $GLOBALS['LANG']->getLL('preview_html');
-		    }
-		    
-		    $out .= '&nbsp;'.$this->previewLink('plain', $record['email']).'</td>';
-		    $out .= "</tr>\n";
-		    
 		}
-	    }
-	    
-	    $out .= '</table>';
-	    
-	    return $out;
+		$out .= '</table>';
+		$out .= '</form>';
+		 
+		return $out;
+	}
+	 
+	/* View number of mails delivered in the past */
+	function viewPreview() {
+		global $TYPO3_DB;
+		global $LANG;
+		global $BACK_PATH;
+	  
+		/* Get list of receivers */
+		$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = $_REQUEST[id]");
+		$page = $TYPO3_DB->sql_fetch_assoc($rs);
+	  
+		$mailer = tx_newsletter_tools::getConfiguredMailer($page);
+		$targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
+	  
+		$out .= '<table>';
+		$out .= '<tr>';
+		$out .= '<td><b>'.$LANG->getLL('receiver').'</b></td>';
+		$out .= '<td><b>'.$LANG->getLL('status').'</b></td>';
+		$out .= '<td><b>'.$LANG->getLL('num_fields').'</b></td>';
+		$out .= '<td><b>'.$LANG->getLL('missing_fields').'</b></td>';
+		$out .= '<td><b>'.$LANG->getLL('preview').'</b></td>';
+		$out .= '</tr>';
+
+	  
+		foreach ($targets as $tid) {
+			$tobj = tx_newsletter_target::loadTarget($tid);
+
+			$out .= '<tr><td colspan="5"><b>'.$this->editTarget($tid).'</b></td></tr>';
+
+			while ($record = $tobj->getRecord()) {
+				$out .= '<tr>';
+				$out .= "<td><a href=\"mailto:$record[email]\">$record[email]</td>";
+
+
+				/* Number of fields */
+				$num_fields = count($record);
+
+				/* Number of unsubstituted fields */
+				$mailer->prepare($record);
+				preg_match_all('|###[a-z0-9_]+###|i', $mailer->html, $nonfields_html);
+				preg_match_all('|###[a-z0-9_]+###|i', $mailer->plain, $nonfields_plain);
+				$num_nonfields = max (count ($nonfields_html[0]), count ($nonfields_plain[0]));
+
+
+				/* Ok fields icon? */
+				$status_url = $GLOBALS['BACK_PATH'].'gfx';
+				if ($num_nonfields != 0) {
+					$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_fatalerror.gif" /></td>';
+				} else {
+					$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_ok.gif" /></td>';
+				}
+
+				$out .= "<td>$num_fields</td>";
+				$out .= "<td>$num_nonfields</td>";
+				$out .= '<td>';
+
+				if (!$record['plain_only']) {
+					$out .= $this->previewLink('html', $record['email']);
+				} else {
+					$out .= $GLOBALS['LANG']->getLL('preview_html');
+				}
+
+				$out .= '&nbsp;'.$this->previewLink('plain', $record['email']).'</td>';
+				$out .= "</tr>\n";
+
+			}
+		}
+	  
+		$out .= '</table>';
+	  
+		return $out;
 	}
 
 	function previewLink($type, $email) {
-	    return '<a target="_new" href="'.$GLOBALS['BACK_PATH']
-			.t3lib_extMgm::extRelPath('newsletter')
-			.'web/preview.php?email='.rawurlencode($email).'&type='.$type.'&uid='.$_REQUEST['id'].'">'
-			.$GLOBALS['LANG']->getLL("preview_$type")
-			.'</a>';
+		return '<a target="_new" href="'.$GLOBALS['BACK_PATH']
+		.t3lib_extMgm::extRelPath('newsletter')
+		.'web/preview.php?email='.rawurlencode($email).'&type='.$type.'&uid='.$_REQUEST['id'].'">'
+		.$GLOBALS['LANG']->getLL("preview_$type")
+		.'</a>';
 	}
 
 	function editTarget($uid) {
-	    global $TYPO3_DB;
-	    global $BACK_PATH;
-	    
-	    $rs = $TYPO3_DB->exec_SELECTquery('title', 'tx_newsletter_domain_model_recipientlist', "uid = $uid");
-	    list($title) = $TYPO3_DB->sql_fetch_row($rs);
-	
-	    $out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
-	    $out .= '&edit[tx_newsletter_domain_model_recipientlist]['.$uid.']=edit">';
-	    $out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
-	    $out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'mailtargets.gif" />';
-	    $out .= "$title ($uid)";
-	    
-	    return $out;
-	}   
-	
-	
-        /* View number of mails delivered in the past */
+		global $TYPO3_DB;
+		global $BACK_PATH;
+	  
+		$rs = $TYPO3_DB->exec_SELECTquery('title', 'tx_newsletter_domain_model_recipientlist', "uid = $uid");
+		list($title) = $TYPO3_DB->sql_fetch_row($rs);
+
+		$out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
+		$out .= '&edit[tx_newsletter_domain_model_recipientlist]['.$uid.']=edit">';
+		$out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
+		$out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'mailtargets.gif" />';
+		$out .= "$title ($uid)";
+	  
+		return $out;
+	}
+
+
+	/* View number of mails delivered in the past */
 	function viewStatistics() {
 		global $TYPO3_DB;
 		global $LANG;
@@ -691,7 +686,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		}
 
 		/* Get numbers for each session */
-		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver) 
+		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
 				FROM tx_newsletter_domain_model_lock lck 
 				LEFT JOIN tx_newsletter_domain_model_email lg ON lck.begintime = lg.begintime 
 				WHERE lck.pid = $_REQUEST[id] 
@@ -707,11 +702,11 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$LANG->getLL('fromtime').'</td><td>'.
 		$LANG->getLL('totime').'</td><td>'.
 		$LANG->getLL('total_receivers').'</td></tr>';
-	
+
 		while (list($begintime, $stoptime, $num_receivers) = $TYPO3_DB->sql_fetch_row($rs)) {
-			$output .= "<tr style=\"background-color: eeeeee;\"> 
+			$output .= "<tr style=\"background-color: eeeeee;\">
                                     <td><a href=\"index.php?id=$_REQUEST[id]&detail_begintime=$begintime\"><strong>".
-                                    strftime('%Y-%m-%d',$begintime)."</strong></a></td> 
+			strftime('%Y-%m-%d',$begintime)."</strong></a></td>
                                     <td>".strftime('%H:%M',$begintime).'</td><td>'.strftime('%H:%M',$stoptime)."</td> 
                                     <td align=right>".$num_receivers."</td></tr>";
 		}
@@ -736,7 +731,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		/******************************************/
 		/****** Save stats as receiver target *****/
 		/******************************************/
-          
+
 		// if ($_REQUEST['save_stats']) {
 		//  $this->saveCurrentStatsAsTarget();
 		//}
@@ -745,7 +740,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		/**********************/
 		/**** Filter  form ****/
 		/**********************/
-          
+
 		/* total activated links */
 		$sql = "SELECT linktype, linkid, SUM(opened)
 			FROM tx_newsletter_domain_model_email 
@@ -754,7 +749,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			AND pid = $_REQUEST[id]
 			GROUP BY 1,2
 			ORDER BY 1,2";
-                  
+
 		$rs = $TYPO3_DB->sql_query($sql);
 
 		/* Filter form */
@@ -764,35 +759,35 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$out .= '<table>';
 		$out .= '<tr><td colspan="2"><h3>'.$LANG->getLL('filter_form').'</h3></td></tr>';
 		$out .= '<tr style="background-color: eeeeee;"><td>'.$LANG->getLL('has_email_sword')
-			.':</td><td><input type="text" name="sword" value="'.$_REQUEST['sword'].'" /></td>';
+		.':</td><td><input type="text" name="sword" value="'.$_REQUEST['sword'].'" /></td>';
 		$out .= '<tr style="background-color: eeeeee;"><td>'.$LANG->getLL('beenthere')
-			.':</td><td><select name="beenthere"><option></option>';
-          
+		.':</td><td><select name="beenthere"><option></option>';
+
 		$out .= '<option value="yes"'.(($_REQUEST['beenthere'] == 'yes')?' selected':'').'>'.$LANG->getLL('beenthere_yes').'</option>';
 		$out .= '<option value="no"'.(($_REQUEST['beenthere'] == 'no')?' selected':'').'>'.$LANG->getLL('beenthere_no').'</option>';
 
-		$out .= '</select></td></tr>';          
+		$out .= '</select></td></tr>';
 		$out .= '<tr style="background-color: eeeeee;"><td>'.$LANG->getLL('has_opened_link')
-			.':</td><td><select name="opened_link"><option></option>';
-                  
+		.':</td><td><select name="opened_link"><option></option>';
+
 		while (list($type, $linkid, $in_use) = $TYPO3_DB->sql_fetch_row($rs)) {
 			if ($in_use) {
 				$out .= "<option value=\"$type|$linkid\"";
-				if ($_REQUEST['opened_link'] == "$type|$linkid") {            
+				if ($_REQUEST['opened_link'] == "$type|$linkid") {
 					$out .= ' selected';
 				}
-              
+
 				$out .= ">$type #$linkid</option>";
 			}
 		}
-       
+		 
 		$out .= '</select></td></tr>';
 		$out .= '<tr style="background-color: eeeeee;"><td colspan="2"><input type="submit" value="'.$LANG->getLL('update_view').'" /></td></tr>';
 		$out .= '</table>';
 		$out .= '</form>';
 
 
-          
+
 		/***********************/
 		/*** General success ***/
 		/***********************/
@@ -803,7 +798,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		/* If a specific link is requested */
 		if ($_REQUEST['opened_link']) {
 			list($linktype, $linkid) = explode('|', $_REQUEST['opened_link']);
-			$sql = "SELECT COUNT(uid) 
+			$sql = "SELECT COUNT(uid)
 				FROM tx_newsletter_domain_model_email 
 				INNER JOIN tx_newsletter_domain_model_clicklink ON uid = sentlog
 				WHERE begintime = $_REQUEST[detail_begintime] 
@@ -813,13 +808,13 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				AND linktype = '$linktype'
 				AND linkid = $linkid
 				AND opened = 1";
-                      
-			$rs = $TYPO3_DB->sql_query($sql);
-			list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);        
-			$out .= '<tr style="background-color: eeeeee;"><td>'
-					.$LANG->getLL('total_receivers').'</td><td align="right" colspan="2"><b>'.$total_receivers.'</b></td></tr>';                      
-                     
-			/* Or just confirmed addresses in general */
+
+				$rs = $TYPO3_DB->sql_query($sql);
+				list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
+				.$LANG->getLL('total_receivers').'</td><td align="right" colspan="2"><b>'.$total_receivers.'</b></td></tr>';
+				 
+				/* Or just confirmed addresses in general */
 		} elseif ($_REQUEST['beenthere'] == 'yes') {
 			$sql = "SELECT COUNT(uid)
 				FROM tx_newsletter_domain_model_email 
@@ -828,15 +823,15 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				AND beenthere = 1
 				AND pid = $_REQUEST[id]";
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);        
-			$out .= '<tr style="background-color: eeeeee;"><td>'
-					.$LANG->getLL('total_receivers').'</td><td align="right" colspan="2"><b>'.$total_receivers.'</b></td></tr>';             
-                     
-			/* Or unconfirmed addresses */
+				$rs = $TYPO3_DB->sql_query($sql);
+				list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
+				.$LANG->getLL('total_receivers').'</td><td align="right" colspan="2"><b>'.$total_receivers.'</b></td></tr>';
+				 
+				/* Or unconfirmed addresses */
 		} elseif ($_REQUEST['beenthere'] == 'no') {
 			/* Get total numbers of recients */
-			$sql = "SELECT COUNT(uid) 
+			$sql = "SELECT COUNT(uid)
 			FROM tx_newsletter_domain_model_email 
 			WHERE begintime = $_REQUEST[detail_begintime] 
 			$receiver_option
@@ -844,47 +839,47 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 			$rs = $TYPO3_DB->sql_query($sql);
 			list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);
-          
+
 			/* Count opened emails */
-			$sql = "SELECT COUNT(uid) 
+			$sql = "SELECT COUNT(uid)
 				FROM tx_newsletter_domain_model_email 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND beenthere = 0
 				AND pid = $_REQUEST[id]";
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list ($sumnotbeenthere) = $TYPO3_DB->sql_fetch_row($rs);
-			$out .= '<tr style="background-color: eeeeee;"><td>'
+				$rs = $TYPO3_DB->sql_query($sql);
+				list ($sumnotbeenthere) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
 				.$LANG->getLL('numbers_not_spied_upon').'</td><td align="right">'
 				.$this->viewSums($sumnotbeenthere,$total_receivers).'</td></tr>';
-                     
-			/* Count bounced emails */
-			$sql = "SELECT SUM(bounced) 
+				 
+				/* Count bounced emails */
+				$sql = "SELECT SUM(bounced)
 				FROM tx_newsletter_domain_model_email 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list ($sumbounced) = $TYPO3_DB->sql_fetch_row($rs);
-			$out .= '<tr style="background-color: eeeeee;"><td>'
+				$rs = $TYPO3_DB->sql_query($sql);
+				list ($sumbounced) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
 				.$LANG->getLL('numbers_bounced').'</td><td align="right">'
 				.$this->viewSums($sumbounced,$total_receivers).'</td></tr>';
-			/* Or everyone */
+				/* Or everyone */
 		} else  {
 			/* Get total numbers of recients */
-			$sql = "SELECT COUNT(uid) 
+			$sql = "SELECT COUNT(uid)
 				FROM tx_newsletter_domain_model_email 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);
-          
-			/* Count opened emails */
-			$sql = "SELECT SUM(beenthere) 
+				$rs = $TYPO3_DB->sql_query($sql);
+				list($total_receivers) = $TYPO3_DB->sql_fetch_row($rs);
+
+				/* Count opened emails */
+				$sql = "SELECT SUM(beenthere)
 				FROM tx_newsletter_domain_model_email 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
@@ -894,38 +889,38 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list ($sumbeenthere) = $TYPO3_DB->sql_fetch_row($rs);
-			$out .= '<tr style="background-color: eeeeee;"><td>'
+				$rs = $TYPO3_DB->sql_query($sql);
+				list ($sumbeenthere) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
 				.$LANG->getLL('numbers_spied_upon').'</td><td align="right">'
 				.$this->viewSums($sumbeenthere,$total_receivers).'</td></tr>';
-                     
-			/* Count bounced emails */
-			$sql = "SELECT SUM(bounced) 
+				 
+				/* Count bounced emails */
+				$sql = "SELECT SUM(bounced)
 				FROM tx_newsletter_domain_model_email 
 				WHERE begintime = $_REQUEST[detail_begintime] 
 				$receiver_option
 				AND pid = $_REQUEST[id]";
 
-			$rs = $TYPO3_DB->sql_query($sql);
-			list ($sumbounced) = $TYPO3_DB->sql_fetch_row($rs);
-			$out .= '<tr style="background-color: eeeeee;"><td>'
+				$rs = $TYPO3_DB->sql_query($sql);
+				list ($sumbounced) = $TYPO3_DB->sql_fetch_row($rs);
+				$out .= '<tr style="background-color: eeeeee;"><td>'
 				.$LANG->getLL('numbers_bounced').'</td><td align="right">'
 				.$this->viewSums($sumbounced,$total_receivers).'</td></tr>';
-		}          
-             
+		}
+		 
 		$out .= '</table>';
-          
-          
-          /**************************/
-          /***** Counting links *****/
-          /**************************/
-          
-          if ($_REQUEST['beenthere'] <> 'no') {
-             $out .= '<table>';
-          
-             if ($_REQUEST['opened_link']) {
-               $sql = "SELECT otherlinks.linkid, SUM(otherlinks.opened), MIN(otherlinks.url) 
+
+
+		/**************************/
+		/***** Counting links *****/
+		/**************************/
+
+		if ($_REQUEST['beenthere'] <> 'no') {
+			$out .= '<table>';
+
+			if ($_REQUEST['opened_link']) {
+				$sql = "SELECT otherlinks.linkid, SUM(otherlinks.opened), MIN(otherlinks.url)
                        FROM tx_newsletter_domain_model_email 
                        INNER JOIN tx_newsletter_domain_model_clicklink thelink ON thelink.sentlog = uid 
                        INNER JOIN tx_newsletter_domain_model_clicklink otherlinks ON otherlinks.sentlog = uid 
@@ -938,8 +933,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
                        AND thelink.opened = 1
                        GROUP BY 1 
                        ORDER BY 1";
-             } else {
-               $sql = "SELECT linkid, SUM(opened), MIN(url) 
+			} else {
+				$sql = "SELECT linkid, SUM(opened), MIN(url)
                        FROM tx_newsletter_domain_model_email 
                        INNER JOIN tx_newsletter_domain_model_clicklink ON sentlog = uid 
                        WHERE begintime = $_REQUEST[detail_begintime] 
@@ -948,48 +943,48 @@ class tx_newsletter_module1 extends t3lib_SCbase {
                        AND opened = 1
                        GROUP BY 1 
                        ORDER BY 1";
-             }
+			}
 
-             $opened_options .= "<option></option>";
-             /* Get all links for the sessions */
-             foreach (array('html','plain') as $type) {
-               $out .= '<tr><td colspan="4"><h3>'.$LANG->getLL($type.'_links').'</h3></td></tr>';
-               $out .= '<tr style="background-color: eeeeee;"><td><b>'.
-                       $LANG->getLL('link_number').'</b></td><td colspan="2"><b>'.
-                       $LANG->getLL('numbers_of_times_opened').'</b></td><td><b>'.
-                       $LANG->getLL('url').'</b></td></tr>';
-                    
-            
-               $rs = $TYPO3_DB->sql_query(str_replace('###TYPE###', $type, $sql));
-               while (list($linkid, $sum_opened, $url) = $TYPO3_DB->sql_fetch_row($rs)) {            
-                 $out .= "<tr style=\"background-color: eeeeee;\"> 
+			$opened_options .= "<option></option>";
+			/* Get all links for the sessions */
+			foreach (array('html','plain') as $type) {
+				$out .= '<tr><td colspan="4"><h3>'.$LANG->getLL($type.'_links').'</h3></td></tr>';
+				$out .= '<tr style="background-color: eeeeee;"><td><b>'.
+				$LANG->getLL('link_number').'</b></td><td colspan="2"><b>'.
+				$LANG->getLL('numbers_of_times_opened').'</b></td><td><b>'.
+				$LANG->getLL('url').'</b></td></tr>';
+
+
+				$rs = $TYPO3_DB->sql_query(str_replace('###TYPE###', $type, $sql));
+				while (list($linkid, $sum_opened, $url) = $TYPO3_DB->sql_fetch_row($rs)) {
+					$out .= "<tr style=\"background-color: eeeeee;\">
                    <td>#$linkid</td> 
                    <td align='right'>".$this->viewSums($sum_opened, $total_receivers)."</td> 
                    <td><a href=\"$url\" target=\"_blank\">$url</a></td> 
                  </tr>";
-               }
-             }
-          }
+				}
+			}
+		}
 
-          $out .= '</table>';
-          
-          return $out;
-        }
+		$out .= '</table>';
+
+		return $out;
+	}
 
 
-        function viewSums ($sum, $total) {
-          if ($total < 1) {
-              return "</td><td align=\"right\"><b>$sum</b>";
-          } else {
-              return '<b>'.number_format ($sum / $total * 100, 2)."%</b></td><td align=\"right\"> $sum/$total";
-          }
-        }	
+	function viewSums ($sum, $total) {
+		if ($total < 1) {
+			return "</td><td align=\"right\"><b>$sum</b>";
+		} else {
+			return '<b>'.number_format ($sum / $total * 100, 2)."%</b></td><td align=\"right\"> $sum/$total";
+		}
+	}
 }
 
 
 
 if (defined("TYPO3_MODE") && $TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"])   {
-   include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]);
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]["XCLASS"]["ext/newsletter/mod2/index.php"]);
 }
 
 

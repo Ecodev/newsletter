@@ -13,7 +13,6 @@
 			<label index="current_sending">Current sending newsletter</label>
 			<label index="no_current_sending">Not currently sending this page to anyone</label>
 			<label index="send_test">Send a testmail now.</label>
-			<label index="send_test_cron">Send a testmail with cronjob.</label>
 			<label index="no_test">No test reciepients defined.</label>
 			<label index="testsent">Test mail being send.</label>
 			<label index="send_now">Send the mail now.</label>
@@ -117,7 +116,6 @@
 			<label index="current_sending">Sender lige nu nyhedsbrev</label>
 			<label index="no_current_sending">Der bliver ikke udsendt nyhedsbrev i øjeblikket</label>
 			<label index="send_test">Send en testmail nu.</label>
-			<label index="send_test_cron">Send testmail via cronjob</label>
 			<label index="no_test">Der er ikke defineret nogle testmodtagere.</label>
 			<label index="testsent">Test mail bliver udsendt.</label>
 			<label index="send_now">Udsend mail nu.</label>
@@ -450,7 +448,6 @@
 			<label index="current_sending" type="integer">102861512</label>
 			<label index="no_current_sending" type="integer">100252972</label>
 			<label index="send_test" type="integer">264140533</label>
-			<label index="send_test_cron" type="integer">96092573</label>
 			<label index="no_test" type="integer">27870075</label>
 			<label index="testsent" type="integer">135414520</label>
 			<label index="send_now" type="integer">112887020</label>
@@ -556,7 +553,6 @@
 			<label index="current_sending">Current sending newsletter</label>
 			<label index="no_current_sending">Not currently sending this page to anyone</label>
 			<label index="send_test">Send a testmail now.</label>
-			<label index="send_test_cron">Send a testmail with cronjob.</label>
 			<label index="no_test">No test reciepients defined.</label>
 			<label index="testsent">Test mail being send.</label>
 			<label index="send_now">Send the mail now.</label>

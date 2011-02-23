@@ -46,7 +46,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">Calculated Recipients</label>
 			<label index="tx_newsletter_domain_model_recipientlist.confirmed_recipients">Confirmed Recipients</label>
 			<label index="tx_newsletter_domain_model_email">Email</label>
-			<label index="tx_newsletter_domain_model_email.start_time">Start Time</label>
+			<label index="tx_newsletter_domain_model_email.begin_time">Start Time</label>
 			<label index="tx_newsletter_domain_model_email.end_time">End Time</label>
 			<label index="tx_newsletter_domain_model_email.recipient_address">Recipient Address</label>
 			<label index="tx_newsletter_domain_model_email.recipient_data">Recipient Data</label>

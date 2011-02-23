@@ -198,7 +198,7 @@ abstract class tx_newsletter_tools {
 		// Lock the newsletter by setting its begin_time
 		$begintime = time();
 		$newsletter->setBeginTime($begintime);
-		$newsletterRepository->update($newsletter);
+		$newsletterRepository->updateNow($newsletter);
 
 		/* Get the servers */
 		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
@@ -215,9 +215,7 @@ abstract class tx_newsletter_tools {
 			// Register the receiver
 			if (t3lib_div::validEmail($receiver['email'])) {
 				$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
-					'pid' => $newsletter->getPid(),
-					'begin_time' => $begintime,
-					'end_time' => 0,   
+					'pid' => $newsletter->getPid(), 
 					'recipient_address' => $receiver['email'],
 					'recipient_data' => serialize($receiver),
 					'host' => $host,
@@ -233,7 +231,7 @@ abstract class tx_newsletter_tools {
 	    
 		// Unlock the newsletter by setting its end_time	    
 		$newsletter->setEndTime(time());
-		$newsletterRepository->update($newsletter);
+		$newsletterRepository->updateNow($newsletter);
 	}
     
 	/**
@@ -281,7 +279,7 @@ abstract class tx_newsletter_tools {
 						FROM tx_newsletter_domain_model_email 
 						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid) 
 						WHERE (host = '$hostname' OR host = '')
-						AND end_time = 0
+						AND tx_newsletter_domain_model_email.begin_time = 0
 						$onlyTest
 						ORDER BY tx_newsletter_domain_model_email.newsletter ".$limit); 
 
@@ -314,7 +312,7 @@ abstract class tx_newsletter_tools {
 						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid) 
 						WHERE host = ''
 						AND tx_newsletter_domain_model_newsletter.uid = " . $newsletter->getUid() . "
-						AND tx_newsletter_domain_model_email.end_time = 0
+						AND tx_newsletter_domain_model_email.begin_time = 0
 						ORDER BY tx_newsletter_domain_model_email.newsletter ".$limit);
 
 		/* Do it, if there is any records */
@@ -342,15 +340,14 @@ abstract class tx_newsletter_tools {
 		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		
-
 		$oldNewsletterUid = null;
 		while (list($newsletterUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
 			
 			$email = $emailRepository->findByUid($emailUid);
             
-            // Mark it as send already
-            $email->setEndTime(time());
-            $emailRepository->update($email);
+            // Mark it as started sending
+            $email->setBeginTime(time());
+            $emailRepository->updateNow($email);
             
 			/* For the page, this way we can support multiple pages in one spool session */   
 			if ($newsletterUid != $oldNewsletterUid) {
@@ -377,6 +374,10 @@ abstract class tx_newsletter_tools {
 				)
 			);
 
+            // Mark it as sent already
+            $email->setEndTime(time());
+            $emailRepository->updateNow($email);
+            
 			$numberOfMails++;
 		}
 

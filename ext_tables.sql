@@ -2,10 +2,9 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
-	
-	planned_time int(11) DEFAULT '0' NOT NULL,
-	begin_time varchar(255) DEFAULT '0' NOT NULL,
-	end_time varchar(255) DEFAULT '0' NOT NULL,
+	planned_time int(11) unsigned DEFAULT '0' NOT NULL,
+	begin_time int(11) unsigned DEFAULT '0' NOT NULL,
+	end_time int(11) unsigned DEFAULT '0' NOT NULL,
 	recipient_list int(11) unsigned DEFAULT '0',
 	is_test tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	repetition int(11) DEFAULT '0' NOT NULL,
@@ -83,8 +82,8 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	
-	begin_time varchar(255) DEFAULT '' NOT NULL,
-	end_time varchar(255) DEFAULT '' NOT NULL,
+	begin_time int(11) unsigned DEFAULT '0' NOT NULL,
+	end_time int(11) unsigned DEFAULT '0' NOT NULL,
 	recipient_address varchar(255) DEFAULT '' NOT NULL,
 	recipient_data varchar(255) DEFAULT '' NOT NULL,
 	opened tinyint(1) unsigned DEFAULT '0' NOT NULL,
