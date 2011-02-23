@@ -51,17 +51,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.optconfirmed">Confirmed addresses</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optnotconfirmed">Non-confirmed addresses</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optalladdresses">All mailed addresses</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">BE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">FE-groups with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Pages with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optttaddress">Pages with tt_address-records</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Raw SQL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV file</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV list</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV url</label>
-			<label index="tx_newsletter_domain_model_recipientlist.opthtml">HTML</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optmailto">Anchor tags with mailto:</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optregex">Match email addresses</label>
 			<label index="tx_newsletter_domain_model_bounceaccount">Bounce account</label>
 			<label index="tx_newsletter_domain_model_bounceaccount.servertype">Server type:</label>
 			<label index="tx_newsletter_domain_model_bounceaccount.server">Server:</label>

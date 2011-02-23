@@ -295,7 +295,7 @@ $TCA["tx_newsletter_domain_model_recipientlist"] = Array (
             'label' => 'LLL:EXT:newsletter/locallang_db.xml:tx_newsletter_domain_model_recipientlist.actual_receivers',
             'config' => array (
                 'type' => 'user',
-                'userFunc' => 'user_showreceivers',
+                'userFunc' => 'tx_newsletter_recipientlist_show_recipients',
             ),
         ),
     ),
@@ -316,92 +316,5 @@ $TCA["tx_newsletter_domain_model_recipientlist"] = Array (
     )
 );
 
-
-if (!function_exists('user_displayfieldtitle')) {
-	function user_displayfieldtitle ($fieldname) {
-		switch ($fieldname) {
-			case 'email':
-			case 'plain_only':
-			case 'authCode':
-			case 'uid':
-			case 'tableName':
-			case 'L':
-				return '<strong style="color: green;">'.$fieldname.'</strong>';
-
-			default:
-				if (preg_match ('/_[0-9]+$/', $fieldname)) {
-					return '<strong style="color: red;">'.$fieldname.'</strong>';
-				} else {
-					return "<strong>$fieldname</strong>";
-				}
-		}
-	}
-}
-
-if (!function_exists('user_showreceivers')) {
-    function user_showreceivers($PA, $fObj) {
-	require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
-	global $TYPO3_DB;
-    
-	if (intval($PA['row']['uid']) == 0) {
-	    return "";
-	}
-	
-	$uid = $PA['row']['uid'];
-	
-    
-	$target = tx_newsletter_target::loadTarget($uid);
-    
-
-	if ($target->getError()) {
-	    return "Error";
-	}
-    
-	$i = 0;
-	$rows = array();
-	while ($row = $target->getRecord()) {
-	    if ($i == 0) {
-		$rows[-1] = array_map ('user_displayfieldtitle', array_keys($row));
-	    }
-	
-	    $rows[] = $row;    	
-	
-	    if ($i == 30) {
-		$rows[] = array('<strong>...</strong>', '<strong>'.$target->getCount().'&nbsp;Total</strong>');
-		break;
-	    }
-	    $i++;	
-	}
-
-	if ($i < 30) {
-    	    $rows[] = array('<strong>'.$target->getCount().'&nbsp;Total</strong>');
-	} 
-    
-	foreach ($rows as $row) {
-	    $out .= '<tr>';
-    	    foreach ($row as $field) {
-		$out .= "<td>$field</td>";
-	    }
-    	    $out .= '</tr>';
-	}
-	
-	$authCode = t3lib_div::stdAuthCode($target->fields);
-	
-    
-	return '<div style="height: 240px; width:430px; overflow: scroll; background-color: white;">'
-	      .'<p>Download: <a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=$uid\">XML</a>&nbsp;"
-	      .'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=$uid\">CSV</a></p>"
-	      .'<table>'.$out.'</table></div>';
-    }
-}
-
-if (!function_exists('user_showalreadymailed')) {
-   function user_showalreadymailed($PA, $fObj) {
-      require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
-      $target = tx_newsletter_target::getTarget($PA['row']['uid']);
-      list($description, $sql) = unserialize($this->fields['alreadymailed']);
-      return '<div style="height: 120px; width:430px; overflow: scroll; background-color: white;"><p>'.$description.'</p></div>';
-   }
-}
 
 ?>

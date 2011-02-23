@@ -652,5 +652,81 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 */
 	function registerClick ($uid) {
 	}
+	
+	/**
+	 * Return HTML code showing an extract of recipients (first X recipients)
+	 */
+	public function getExtract($limit = 30)
+	{
+		if ($this->getError()) {
+			$out = "Error: " . $this->getError();
+		}
+		else
+		{
+			$i = 0;
+			while ($row = $this->getRecord())
+			{
+				// Dump formatted table header
+				if ($i == 0)
+				{
+					$out .= '<tr>';
+					foreach (array_keys($row) as $key) {
+						$out .= '<th style="padding-right: 1em;">' . $this->getFieldTitle($key). "</th>";
+					}
+					$out .= '</tr>';
+				}
+		
+				$out .= '<tr style="border: 1px grey solid; border-collapse: collapse;">';
+				foreach ($row as $field) {
+					$out .= '<td style="padding-right: 1em;">' . $field .'</td>';
+				}
+				$out .= '</tr>';
+		
+				if ($i++ == $limit) {
+					$out . '<tr><td><strong>...</strong></td></tr>';
+					break;
+				}
+			}
+			
+			
+			$authCode = t3lib_div::stdAuthCode($this->fields);
+			$out = '<table style="border: 1px grey solid; border-collapse: collapse;">'.$out.'</table>';
+			
+			$out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
+			(<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=$uid\">export XML</a>, "
+			.'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=$uid\">export CSV</a>"
+			.')</p>';
+		}
+		
+		$out = '<h4>' . $this->fields['title'] . '</h4>' . $out;
+		return $out;
+	}
+	
+	/**
+	 * Returns the fieldname style according to validation
+	 * Green => special field recognized
+	 * Red => field which cannot be used within newsletter with 'markers' features
+	 * normal => field which can be used within newsletter
+	 * @param string $fieldname
+	 */
+	private static function getFieldTitle($fieldname)
+	{
+		switch ($fieldname) {
+			case 'email':
+			case 'plain_only':
+			case 'authCode':
+			case 'uid':
+			case 'tableName':
+			case 'L':
+				return '<span style="color: green;">'.$fieldname.'</span>';
+
+			default:
+				if (preg_match ('/_[0-9]+$/', $fieldname)) {
+					return '<span style="color: red;">'.$fieldname.'</span>';
+				} else {
+					return $fieldname;
+				}
+		}
+	}
 }
 ?>

@@ -50,16 +50,12 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	/**
 	 *
 	 */
-	function init()   {
-		global $BE_USER,$LANG,$BACK_PATH,$TCA_DESCR,$TCA,$CLIENT,$TYPO3_CONF_VARS;
-
+	function init()
+	{
 		parent::init();
-
-		require(dirname(__FILE__).'/../debug.php');
 
 		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$this->newsletter = $this->newsletterRepository->getLatest($_REQUEST['id']);
-
 	}
 
 	/**
@@ -300,7 +296,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				
 			$total_to_send = $recipientList->getCount();
 				
-			$output .= $this->listRecipients($recipientList);
+			$output .= $recipientList->getExtract();
 				
 			if ($plannedTime > 0) {
 				$output .= '<p>'.str_replace('###TIME_TO_SEND###', strftime('%Y-%m-%d %H:%M', $plannedTime),
@@ -335,35 +331,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$output .= '<br />';
 
 		$output .= '</form>';
-
-		return $output;
-	}
-
-	private function listRecipients(Tx_Newsletter_Domain_Model_RecipientList $recipientList, $limit = 10)
-	{
-		global $LANG;
-		$output = '<table cellpadding="2" cellspacing="2">';
-
-		/* List what users can be mailed */
-		if($recipientList->getCount() > 1){
-			$output .= '<tr><td colspan="5">&nbsp;</td></tr>';
-			$output .= '<tr><td><input type="checkbox" name="selectAll_top" onClick="checkAll(this);" /></td><td colspan="4">'.$LANG->getLL('toggleAll').'</td></tr>';
-		}
-
-		while ($record = $recipientList->getRecord()) {
-			if (!$tbl_headers_set) {
-				$output .= '<tr><td></td><td><strong>';
-				$output .= implode('</strong></td><td><strong>', array_keys($record));
-				$output .= '</strong></td></tr>';
-				$tbl_headers_set = true;
-			}
-
-			$output .= '<tr><td>';
-			$output .= '<input type="checkbox" name="test_send_receivers[]" value="'.$record['email'].'" /></td><td>';
-			$output .= implode ('</td><td>', $record);
-			$output .= '</td></tr>';
-		}
-		$output .= '</table>';
 
 		return $output;
 	}

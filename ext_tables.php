@@ -53,6 +53,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',
 		'delete' 			=> 'deleted',
+		'type'				=> 'type',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
 			),

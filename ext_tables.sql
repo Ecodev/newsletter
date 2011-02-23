@@ -1,3 +1,11 @@
+CREATE TABLE fe_users (
+	tx_newsletter_bounce int(11) DEFAULT '0' NOT NULL
+);
+
+CREATE TABLE be_users (
+	tx_newsletter_bounce int(11) DEFAULT '0' NOT NULL
+);
+
 CREATE TABLE tx_newsletter_domain_model_newsletter (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -58,7 +66,7 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	fe_pages varchar(255) DEFAULT '' NOT NULL,
 	tt_address varchar(255) DEFAULT '' NOT NULL,
 	csv_url varchar(255) DEFAULT '' NOT NULL,
-	csv_separator varchar(255) DEFAULT '' NOT NULL,
+	csv_separator varchar(1) DEFAULT ',' NOT NULL,
 	csv_fields varchar(255) DEFAULT '' NOT NULL,
 	csv_filename varchar(255) DEFAULT '' NOT NULL,
 	csv_values varchar(255) DEFAULT '' NOT NULL,
