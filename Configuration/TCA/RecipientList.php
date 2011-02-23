@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_recipientlist'] = array(
 	'ctrl' => $TCA['tx_newsletter_domain_model_recipientlist']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList'	=> 'title,plain_only,lang,type,be_users,fe_groups,fe_pages,tt_address,csv_url,csv_separator,csv_fields,csv_filename,csv_values,tx_newsletter_sql,html_file,html_fetch_type,calculated_recipients,confirmed_recipients',
+		'showRecordFieldList'	=> 'title,plain_only,lang,type,be_users,fe_groups,fe_pages,tt_address,csv_url,csv_separator,csv_fields,csv_filename,csv_values,sql_statement,html_file,html_fetch_type,calculated_recipients,confirmed_recipients',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'title,plain_only,lang,type,be_users,fe_groups,fe_pages,tt_address,csv_url,csv_separator,csv_fields,csv_filename,csv_values,tx_newsletter_sql,html_file,html_fetch_type,calculated_recipients,confirmed_recipients'),
+		'1' => array('showitem'	=> 'title,plain_only,lang,type,be_users,fe_groups,fe_pages,tt_address,csv_url,csv_separator,csv_fields,csv_filename,csv_values,sql_statement,html_file,html_fetch_type,calculated_recipients,confirmed_recipients'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
@@ -177,9 +177,9 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
 				'eval' => 'trim'
 			),
 		),
-		'tx_newsletter_sql' => array(
+		'sql_statement' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.tx_newsletter_sql',
+			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.sql_statement',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,

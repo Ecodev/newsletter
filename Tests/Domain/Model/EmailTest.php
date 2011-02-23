@@ -125,18 +125,6 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setAuthCodeForStringSetsAuthCode() { 
-		$this->fixture->setAuthCode('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getAuthCode()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
 	public function getOpenedReturnsInitialValueForBoolean() { 
 		$this->assertSame(
 			TRUE,

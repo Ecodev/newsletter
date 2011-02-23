@@ -31,7 +31,22 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
  
-class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Extbase_Persistence_Repository {
-
+class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
+	
+	/**
+	 * Returns the latest newsletter for the given page
+	 * @param integer $pid
+	 */
+	public function getLatest($pid)
+	{
+		$query = $this->createQuery();
+		$query->setLimit(1);
+		$query->equals('pid', $pid);
+		$query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		//
+		
+		return $query->execute()->getFirst();
+	}
+	
 }
 ?>

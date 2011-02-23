@@ -1,7 +1,5 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php');
-
 /**
  * This is the basic class for extracting record from other data sources than the database.
  * Here the internal datastructure is an array.
@@ -10,7 +8,7 @@ require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php
  * @abstract
  */
 
-class tx_newsletter_target_array extends tx_newsletter_target {
+class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newsletter_Domain_Model_RecipientList {
 	function resetTarget() {
 		reset($this->data);
 	}
@@ -24,12 +22,6 @@ class tx_newsletter_target_array extends tx_newsletter_target {
 				$r['plain_only'] = $this->fields['plain_only'];
 			}
       
-			if (isset($r['uid'])) {
-				$r['authCode'] = t3lib_div::stdAuthCode($r['uid']);
-			} else {
-				$r['authCode'] = t3lib_div::stdAuthCode($r['email']);
-			}
-        
 			return $r;
 		} else {
 			return false;

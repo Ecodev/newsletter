@@ -23,42 +23,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
 
-require ('clirun.php');
-require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_tools.php");
+require_once('clirun.php');
 
 /***************** Send script ********************/
-/* List pages NOT to send */
-$rs = $TYPO3_DB->sql_query("SELECT pid FROM tx_newsletter_domain_model_lock  
-                               WHERE stoptime = 0");
-$pids[] = -1;
-while (list($pid) = $TYPO3_DB->sql_fetch_row($rs)) {
-   $pids[] = $pid;
-}
-$pids = implode(',',$pids);
 
-/* Get a ready-to-send page */
-$rs = $TYPO3_DB->sql_query("SELECT * 
-                              FROM pages 
-                              WHERE tx_newsletter_senttime <= UNIX_TIMESTAMP() 
-                              AND tx_newsletter_senttime <> 0 
-                              AND doktype = 189 
-                              AND uid NOT IN ($pids)
-                              AND deleted = 0
-                              AND hidden = 0
-                              LIMIT 1");
-
-
-if ($page = $TYPO3_DB->sql_fetch_assoc($rs)) {
-    /* Lock the page */
-    $begintime = time();
-    $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_lock', array('pid' => $page['uid'], 'begintime' => $begintime, 'stoptime' => 0));
-    $lockid = $TYPO3_DB->sql_insert_id();
-
-    tx_newsletter_tools::createSpool($page, $begintime);
-
-    /* Unlock the page */
-    tx_newsletter_tools::setScheduleAfterSending ($page);
-    $TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_lock', "uid = $lockid", array('stoptime' => time()));
-}
+tx_newsletter_tools::createAllSpool();
                             
-?>

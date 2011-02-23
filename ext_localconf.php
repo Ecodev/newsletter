@@ -11,15 +11,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'
 
 $tempFilePath = t3lib_extMgm::extPath('newsletter');
 $TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(
-    $tempFilePath.'class.tx_newsletter_target_beusers.php',
-    $tempFilePath.'class.tx_newsletter_target_csvfile.php',
-    $tempFilePath.'class.tx_newsletter_target_fegroups.php',
-    $tempFilePath.'class.tx_newsletter_target_fepages.php',
-    $tempFilePath.'class.tx_newsletter_target_html.php',
-    $tempFilePath.'class.tx_newsletter_target_csvlist.php',
-    $tempFilePath.'class.tx_newsletter_target_csvurl.php',
-    $tempFilePath.'class.tx_newsletter_target_rawsql.php',
-    $tempFilePath.'class.tx_newsletter_target_ttaddress.php',
     $tempFilePath.'class.tx_newsletter_plain_html2text.php',
     $tempFilePath.'class.tx_newsletter_plain_lynx.php',
     $tempFilePath.'class.tx_newsletter_plain_simple.php',

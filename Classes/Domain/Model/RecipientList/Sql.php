@@ -1,5 +1,4 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php');
 
 /**
  * This is the basic SQL related newsletter target. Methods implemented with DB calls.
@@ -8,12 +7,12 @@ require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.ph
  * @abstract
  */
 
-class tx_newsletter_target_sql extends tx_newsletter_target {
+class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
 	var $tableName = 'undefinedtable';
 	
 	/**
 	 * Fetch a record from the sql-record set. This also computes some commonly used values, 
-	 * such as authCode, plain_only and tableName.
+	 * such as plain_only and tableName.
 	 *
 	 * @return	array	Record with user data.
 	 */
@@ -30,12 +29,6 @@ class tx_newsletter_target_sql extends tx_newsletter_target {
       
 			if ($this->tableName <> 'undefinedtable') {
 				$r['tableName'] = $this->tableName;
-			}
-      
-			if (isset($r['uid'])) {
-				$r['authCode'] = t3lib_div::stdAuthCode($r['uid']);
-			} else {
-				$r['authCode'] = t3lib_div::stdAuthCode($r['email']);
 			}
         
 			return $r;

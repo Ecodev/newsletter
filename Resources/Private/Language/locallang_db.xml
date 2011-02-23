@@ -10,7 +10,7 @@
 			<label index="tx_newsletter_domain_model_newsletter.planned_time">Planned Time</label>
 			<label index="tx_newsletter_domain_model_newsletter.begin_time">Begin Time</label>
 			<label index="tx_newsletter_domain_model_newsletter.end_time">End Time</label>
-			<label index="tx_newsletter_domain_model_newsletter.tx_newsletter_repeat">Repeat</label>
+			<label index="tx_newsletter_domain_model_newsletter.repetition">Repetition</label>
 			<label index="tx_newsletter_domain_model_newsletter.plain_converter">Plain Converter</label>
 			<label index="tx_newsletter_domain_model_newsletter.is_test">Is Test</label>
 			<label index="tx_newsletter_domain_model_newsletter.attachments">Attachments</label>
@@ -40,7 +40,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">Csv Fields</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">Csv Filename</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_values">Csv Values</label>
-			<label index="tx_newsletter_domain_model_recipientlist.tx_newsletter_sql">Sql</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">Sql</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_file">Html File</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">Calculated Recipients</label>

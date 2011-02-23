@@ -1,7 +1,6 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
-class tx_newsletter_target_html extends tx_newsletter_target_array {
+class Tx_Newsletter_Domain_Model_RecipientList_Html extends Tx_Newsletter_Domain_Model_RecipientList_Array {
    function init() {
        $htmlfile = $this->fields['htmlfile'];
        $htmlfetchtype = $this->fields['htmlfetchtype'];

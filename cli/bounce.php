@@ -22,7 +22,7 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require ('clirun.php');
+require_once('clirun.php');
 
 /* Write a new fetchmailrc */
 $fetchmailhome = PATH_site.'uploads/tx_newsletter';

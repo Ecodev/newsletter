@@ -1,22 +1,6 @@
 plugin.tx_newsletter {
 	persistence {
 		classes {
-			Tx_Newsletter_Domain_Model_Newsletter {
-				mapping {
-					columns {
-						tx_newsletter_repeat.mapOnProperty = repeat
-					
-					}
-				}
-			}
-			Tx_Newsletter_Domain_Model_RecipientList {
-				mapping {
-					columns {
-						tx_newsletter_sql.mapOnProperty = sql
-					
-					}
-				}
-			}
 			Tx_Newsletter_Domain_Model_Statistic {
 				mapping {
 					tableName = tx_newsletter_domain_model_lock

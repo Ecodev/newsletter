@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_newsletter'] = array(
 	'ctrl' => $TCA['tx_newsletter_domain_model_newsletter']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList'	=> 'planned_time,begin_time,end_time,tx_newsletter_repeat,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
+		'showRecordFieldList'	=> 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'planned_time,begin_time,end_time,tx_newsletter_repeat,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list'),
+		'1' => array('showitem'	=> 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
@@ -88,9 +88,9 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 				'eval' => 'trim'
 			),
 		),
-		'tx_newsletter_repeat' => array(
+		'repetition' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.tx_newsletter_repeat',
+			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 4,

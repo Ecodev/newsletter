@@ -1,7 +1,6 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
-class tx_newsletter_target_fepages extends tx_newsletter_target_sql { 
+class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Domain_Model_RecipientList_Sql { 
 	var $tableName = 'fe_users';
 
 	function init () {

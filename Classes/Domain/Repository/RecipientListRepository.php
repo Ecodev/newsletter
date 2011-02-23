@@ -26,7 +26,7 @@
 /**
  * A repository for recipient
  */
-	class Tx_Newsletter_Domain_Repository_RecipientRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
 	/**
 	 * Returns all objects of this repository

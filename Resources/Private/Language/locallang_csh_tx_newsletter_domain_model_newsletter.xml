@@ -10,7 +10,7 @@
 			<label index="planned_time.description">When the newsletter will start sending emails</label>
 			<label index="begin_time.description">beginTime</label>
 			<label index="end_time.description">endTime</label>
-			<label index="tx_newsletter_repeat.description">0-7 values to indicates when this newsletter will repeat</label>
+			<label index="repetition.description">0-7 values to indicates when this newsletter will repeat</label>
 			<label index="plain_converter.description">Tool used to convert to plain text</label>
 			<label index="is_test.description">Whether this newsletter is for test purpose. If it is it will be ignored in statistics</label>
 			<label index="attachments.description">List of files to be attached (comma separated list</label>

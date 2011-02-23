@@ -39,7 +39,7 @@ class ext_update {
 	 */
 	private $fieldsQueries = array(
 		"UPDATE pages SET tx_newsletter_senttime = tx_tcdirectmail_senttime WHERE tx_newsletter_senttime = 0;",
-		"UPDATE pages SET tx_newsletter_repeat = tx_tcdirectmail_repeat WHERE tx_newsletter_repeat = 0;",
+		"UPDATE pages SET repetition = tx_tcdirectmail_repeat WHERE repetition = 0;",
 		"UPDATE pages SET tx_newsletter_plainconvert = REPLACE(tx_tcdirectmail_plainconvert, 'tcdirectmail', 'newsletter') WHERE tx_newsletter_plainconvert = 'tx_newsletter_plain_simple';",
 		"UPDATE pages SET tx_newsletter_test_target = tx_tcdirectmail_test_target WHERE tx_newsletter_test_target = 0;",
 		"UPDATE pages SET tx_newsletter_real_target = tx_tcdirectmail_real_target WHERE tx_newsletter_real_target = '';",
@@ -61,7 +61,7 @@ class ext_update {
 	private $tablesQueries = array(
 		"INSERT INTO tx_newsletter_domain_model_bounceaccount SELECT * FROM tx_tcdirectmail_bounceaccount;",
 		"INSERT INTO tx_newsletter_domain_model_clicklink SELECT * FROM tx_tcdirectmail_clicklinks;",
-		"INSERT INTO tx_newsletter_domain_model_emailqueue SELECT * FROM tx_tcdirectmail_sentlog;",
+		"INSERT INTO tx_newsletter_domain_model_email SELECT * FROM tx_tcdirectmail_sentlog;",
 		"INSERT INTO tx_newsletter_domain_model_recipientlist SELECT * FROM tx_tcdirectmail_targets;",
 		"INSERT INTO tx_newsletter_domain_model_lock SELECT * FROM tx_tcdirectmail_lock;",
 		"UPDATE tx_newsletter_domain_model_recipientlist SET targettype = REPLACE(targettype, 'tcdirectmail', 'newsletter');",
@@ -150,7 +150,7 @@ FROM be_users WHERE username = '_cli_tcdirectmail';",
 		$emptyTables = array(
 			'tx_newsletter_domain_model_bounceaccount',
 			'tx_newsletter_domain_model_clicklink',
-			'tx_newsletter_domain_model_emailqueue',
+			'tx_newsletter_domain_model_email',
 			'tx_newsletter_domain_model_recipientlist',
 			'tx_newsletter_domain_model_lock',
 		);
@@ -162,7 +162,8 @@ FROM be_users WHERE username = '_cli_tcdirectmail';",
 			if ($row[0] != 0)
 				return false;
 		}
-				return true;
+		
+		return true;
 	}
 
 	/**

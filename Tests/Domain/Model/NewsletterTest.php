@@ -108,22 +108,22 @@ class Tx_Newsletter_Domain_Model_NewsletterTest extends Tx_Extbase_Tests_Unit_Ba
 	/**
 	 * @test
 	 */
-	public function getRepeatReturnsInitialValueForInteger() { 
+	public function getRepetitionReturnsInitialValueForInteger() { 
 		$this->assertSame(
 			0,
-			$this->fixture->getRepeat()
+			$this->fixture->getRepetition()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setRepeatForIntegerSetsRepeat() { 
-		$this->fixture->setRepeat(12);
+	public function setRepetitionForIntegerSetsRepeat() { 
+		$this->fixture->setRepetition(12);
 
 		$this->assertSame(
 			12,
-			$this->fixture->getRepeat()
+			$this->fixture->getRepetition()
 		);
 	}
 	

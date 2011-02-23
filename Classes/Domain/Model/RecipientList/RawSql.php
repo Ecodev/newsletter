@@ -1,7 +1,6 @@
 <?php
 
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
-class tx_newsletter_target_rawsql extends tx_newsletter_target_sql { 
+class Tx_Newsletter_Domain_Model_RecipientList_RawSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql { 
 	function init() {
 		if ($this->fields['rawsql'] == '') {
 			$sql = 'SELECT * FROM tt_address WHERE uid = -1';

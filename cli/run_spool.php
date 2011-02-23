@@ -22,8 +22,7 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require ("clirun.php");
+require_once('clirun.php');
 
-require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_tools.php");
-tx_newsletter_tools::runSpool();
-?>
+tx_newsletter_tools::runSpoolOneAll();
+

@@ -1,5 +1,4 @@
 <?php
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_array.php');
 
 /**
  * Provides compatiblity with PHP 5.2.9 because 'str_getcsv' was only introduced in PHP 5.3.0 
@@ -18,11 +17,11 @@ if (!function_exists('str_getcsv'))
 	} 
 }
 
-class tx_newsletter_target_csvfile extends tx_newsletter_target_array
+class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Domain_Model_RecipientList_Array
 {
 	function init()
 	{
-		$this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->fields['csvfilename']);
+		$this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->fields['csv_filename']);
 	}
 
 	/**
@@ -30,7 +29,7 @@ class tx_newsletter_target_csvfile extends tx_newsletter_target_array
 	 * @param $filename path to the CSV file may be on disk or remote URL
 	 */
 	protected function loadCsvFromFile($filename)
-	{	
+	{
 		$csvdata = null;
 		if ($filename)
 		{
@@ -48,8 +47,8 @@ class tx_newsletter_target_csvfile extends tx_newsletter_target_array
 	{
 		$this->data = array();
 		
-		$sepchar = $this->fields['csvseparator'] ? $this->fields['csvseparator'] : ',';
-		$keys = array_map ('trim', explode($sepchar, $this->fields['csvfields']));
+		$sepchar = $this->fields['csv_separator'] ? $this->fields['csv_separator'] : ',';
+		$keys = array_map ('trim', explode($sepchar, $this->fields['csv_fields']));
 		
 		if ($csvdata && $sepchar && count($keys))
 		{
@@ -58,7 +57,7 @@ class tx_newsletter_target_csvfile extends tx_newsletter_target_array
 			{
 				$values = str_getcsv($line, $sepchar);
 				$row = array_combine($keys, $values);
-				
+
 				if ($row)
 				{
 					$this->data[] = $row;

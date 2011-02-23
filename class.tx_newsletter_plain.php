@@ -29,7 +29,7 @@
  * @abstract
  */
 
-class tx_newsletter_plain {
+abstract class tx_newsletter_plain {
 	/**
 	 * Indicate how the class handles html-content. Can be either "src" og "url"
 	 * "src" indicates that you wish to supply the html-code in the parameter.
@@ -46,16 +46,16 @@ class tx_newsletter_plain {
 	 * @param   string      Base url, if any, used in the plaintext.
 	 * @return   object      plain text object to use.
 	 */
-	function loadPlain($pageRecord, $baseUrl) {
-		$obj = new $pageRecord['tx_newsletter_plainconvert'];
+	public static function loadPlain(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $baseUrl) {
+		$class = $newsletter->getPlainConverter();
+		$obj = new $class;
 
-		if (is_subclass_of($obj, 'tx_newsletter_plain')) {
-			$obj->record = $pageRecord;
+		if (is_subclass_of($obj, 'tx_newsletter_plain'))
+		{
 			$obj->baseUrl = $baseUrl;
-
 			return $obj;
 		} else {
-			die ("$class is not a subclass of tx_newsletter_plain");
+			die("$class is not a subclass of tx_newsletter_plain");
 		}
 	}
 
@@ -65,9 +65,7 @@ class tx_newsletter_plain {
 	* @param   string      Html to convert.
 	* @return   void
 	*/
-	function setHtml($var) {
-		die ('Implement setHtml-method');
-	}
+	abstract function setHtml($var);
 
 	/**
 	* Get the plaintext
@@ -79,4 +77,3 @@ class tx_newsletter_plain {
 	}
 }
 
-?>

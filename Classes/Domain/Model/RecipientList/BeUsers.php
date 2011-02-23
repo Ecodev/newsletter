@@ -1,7 +1,6 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_gentlesql.php');
 
-class tx_newsletter_target_beusers extends tx_newsletter_target_gentlesql { 
+class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql { 
 	var $tableName = 'be_users';
 
 	function init() {

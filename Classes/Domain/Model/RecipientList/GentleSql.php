@@ -1,5 +1,4 @@
 <?php
-require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sql.php');
 
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
@@ -7,7 +6,7 @@ require_once (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target_sq
  *
  * @abstract
  */
-class tx_newsletter_target_gentlesql extends tx_newsletter_target_sql {
+class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
 	/**
 	 * This increases the bounce-counter each time a mail has bounced.
 	 * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled. 

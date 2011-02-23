@@ -34,11 +34,11 @@
 class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
-	 * startTime
+	 * beginTime
 	 *
-	 * @var string $startTime
+	 * @var string $beginTime
 	 */
-	protected $startTime;
+	protected $beginTime;
 
 	/**
 	 * endTime
@@ -61,13 +61,6 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 * @var string $recipientData
 	 */
 	protected $recipientData;
-
-	/**
-	 * authCode
-	 *
-	 * @var string $authCode
-	 */
-	protected $authCode;
 
 	/**
 	 * opened
@@ -98,22 +91,22 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	protected $newsletter;
 
 	/**
-	 * Setter for startTime
+	 * Setter for beginTime
 	 *
-	 * @param string $startTime startTime
+	 * @param string $beginTime beginTime
 	 * @return void
 	 */
-	public function setStartTime($startTime) {
-		$this->startTime = $startTime;
+	public function setBeginTime($beginTime) {
+		$this->beginTime = $beginTime;
 	}
 
 	/**
-	 * Getter for startTime
+	 * Getter for beginTime
 	 *
-	 * @return string startTime
+	 * @return string beginTime
 	 */
-	public function getStartTime() {
-		return $this->startTime;
+	public function getBeginTime() {
+		return $this->beginTime;
 	}
 
 	/**
@@ -157,30 +150,20 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for recipientData
 	 *
-	 * @param string $recipientData recipientData
+	 * @param array $recipientData recipientData
 	 * @return void
 	 */
-	public function setRecipientData($recipientData) {
-		$this->recipientData = $recipientData;
+	public function setRecipientData(array $recipientData) {
+		$this->recipientData = serialize($recipientData);
 	}
 
 	/**
 	 * Getter for recipientData
 	 *
-	 * @return string recipientData
+	 * @return array recipientData
 	 */
 	public function getRecipientData() {
-		return $this->recipientData;
-	}
-
-	/**
-	 * Setter for authCode
-	 *
-	 * @param string $authCode authCode
-	 * @return void
-	 */
-	public function setAuthCode($authCode) {
-		$this->authCode = $authCode;
+		return unserialize($this->recipientData);
 	}
 
 	/**
@@ -189,7 +172,7 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 * @return string authCode
 	 */
 	public function getAuthCode() {
-		return $this->authCode;
+		return md5($this->uid . $this->getRecipientAddress());
 	}
 
 	/**

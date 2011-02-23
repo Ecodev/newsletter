@@ -5,7 +5,7 @@ plugin.tx_newsletter {
 		layoutRootPath = {$plugin.tx_newsletter.view.layoutRootPath}
 	}
 	persistence {
-		storagePid = {$plugin.tx_newsletter.persistence.storagePid}
+		storagePid = 987654321
 	}
 }
 

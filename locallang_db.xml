@@ -4,15 +4,15 @@
 		<languageKey index="default" type="array">
 			<label index="pages.newslettertype">Newsletter</label>
 			<label index="pages.tx_newsletter_senttime">Newsletter send time:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Do not repeat</label>
-			<label index="pages.tx_newsletter_repeat.I.1">One day</label>
-			<label index="pages.tx_newsletter_repeat.I.2">One week</label>
-			<label index="pages.tx_newsletter_repeat.I.3">Two weeks</label>
-			<label index="pages.tx_newsletter_repeat.I.4">One month</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Three months</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Six months</label>
-			<label index="pages.tx_newsletter_repeat.I.7">One year</label>
-			<label index="pages.tx_newsletter_repeat">Newsletter repeat:</label>
+			<label index="pages.repetition.I.0">Do not repeat</label>
+			<label index="pages.repetition.I.1">One day</label>
+			<label index="pages.repetition.I.2">One week</label>
+			<label index="pages.repetition.I.3">Two weeks</label>
+			<label index="pages.repetition.I.4">One month</label>
+			<label index="pages.repetition.I.5">Three months</label>
+			<label index="pages.repetition.I.6">Six months</label>
+			<label index="pages.repetition.I.7">One year</label>
+			<label index="pages.repetition">Newsletter repeat:</label>
 			<label index="pages.tx_newsletter_attachfiles">Attach files to newsletter:</label>
 			<label index="pages.tx_newsletter_real_target">Real receivers:</label>
 			<label index="pages.tx_newsletter_dotestsend">Newsletter do test send:</label>
@@ -74,15 +74,15 @@
 		<languageKey index="dk" type="array">
 			<label index="pages.newslettertype">Nyhedsbrev</label>
 			<label index="pages.tx_newsletter_senttime">Nyhedsbrev udsendelsestid:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Gentag ikke</label>
-			<label index="pages.tx_newsletter_repeat.I.1">En dag</label>
-			<label index="pages.tx_newsletter_repeat.I.2">En uge</label>
-			<label index="pages.tx_newsletter_repeat.I.3">To uger</label>
-			<label index="pages.tx_newsletter_repeat.I.4">En måned</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Tre måneder</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Seks måneder</label>
-			<label index="pages.tx_newsletter_repeat.I.7">Et år</label>
-			<label index="pages.tx_newsletter_repeat">Nyhedsbrevs gentagelse:</label>
+			<label index="pages.repetition.I.0">Gentag ikke</label>
+			<label index="pages.repetition.I.1">En dag</label>
+			<label index="pages.repetition.I.2">En uge</label>
+			<label index="pages.repetition.I.3">To uger</label>
+			<label index="pages.repetition.I.4">En måned</label>
+			<label index="pages.repetition.I.5">Tre måneder</label>
+			<label index="pages.repetition.I.6">Seks måneder</label>
+			<label index="pages.repetition.I.7">Et år</label>
+			<label index="pages.repetition">Nyhedsbrevs gentagelse:</label>
 			<label index="pages.tx_newsletter_attachfiles">Vedhæft filer til nyhedsbrev:</label>
 			<label index="pages.tx_newsletter_real_target">Rigtige modtagere:</label>
 			<label index="pages.tx_newsletter_dotestsend">Nyhedsbrev testudsendelse:</label>
@@ -141,15 +141,15 @@
 		<languageKey index="de" type="array">
 			<label index="pages.newslettertype">Newsletter</label>
 			<label index="pages.tx_newsletter_senttime">Sendezeit für Newsletter:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Nicht wiederholen</label>
-			<label index="pages.tx_newsletter_repeat.I.1">Ein Tag</label>
-			<label index="pages.tx_newsletter_repeat.I.2">Eine Woche</label>
-			<label index="pages.tx_newsletter_repeat.I.3">Zwei Wochen</label>
-			<label index="pages.tx_newsletter_repeat.I.4">Ein Monat</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Drei Monate</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Sechs Monate</label>
-			<label index="pages.tx_newsletter_repeat.I.7">Ein Jahr</label>
-			<label index="pages.tx_newsletter_repeat">Wiederholungsintervall für Newsletter:</label>
+			<label index="pages.repetition.I.0">Nicht wiederholen</label>
+			<label index="pages.repetition.I.1">Ein Tag</label>
+			<label index="pages.repetition.I.2">Eine Woche</label>
+			<label index="pages.repetition.I.3">Zwei Wochen</label>
+			<label index="pages.repetition.I.4">Ein Monat</label>
+			<label index="pages.repetition.I.5">Drei Monate</label>
+			<label index="pages.repetition.I.6">Sechs Monate</label>
+			<label index="pages.repetition.I.7">Ein Jahr</label>
+			<label index="pages.repetition">Wiederholungsintervall für Newsletter:</label>
 			<label index="pages.tx_newsletter_attachfiles">Dateien an newsletter anhängen:</label>
 			<label index="pages.tx_newsletter_real_target">Ziel für reguläre Empfänger:</label>
 			<label index="pages.tx_newsletter_dotestsend">Versende Testmail:</label>
@@ -162,10 +162,10 @@
 			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx-Textbrowser</label>
 			<label index="pages.tx_newsletter_plainconvert.I.2">Eingebauter HTML-Kponverter</label>
 			<label index="pages.tx_newsletter_plainconvert">Methode für &quot;nur Text&quot;:</label>
-			<label index="tx_newsletter_domain_model_emailqueue">Newsletter-Logeintrag</label>
-			<label index="tx_newsletter_domain_model_emailqueue.begintime">Startzeit:</label>
-			<label index="tx_newsletter_domain_model_emailqueue.sendtime">Sendezeit:</label>
-			<label index="tx_newsletter_domain_model_emailqueue.receiver">Empfänger:</label>
+			<label index="tx_newsletter_domain_model_email">Newsletter-Logeintrag</label>
+			<label index="tx_newsletter_domain_model_email.begintime">Startzeit:</label>
+			<label index="tx_newsletter_domain_model_email.sendtime">Sendezeit:</label>
+			<label index="tx_newsletter_domain_model_email.receiver">Empfänger:</label>
 			<label index="tx_newsletter_domain_model_recipientlist">Ziel für Newsletter</label>
 			<label index="tx_newsletter_domain_model_recipientlist.title">Titel des Ziels:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.actual_receivers">Empfänger:</label>
@@ -174,15 +174,15 @@
 		<languageKey index="it" type="array">
 			<label index="pages.newslettertype">Newsletter (Newsletter)</label>
 			<label index="pages.tx_newsletter_senttime">Ora di spedizione:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Non ripetere</label>
-			<label index="pages.tx_newsletter_repeat.I.1">Fra un giorno</label>
-			<label index="pages.tx_newsletter_repeat.I.2">Fra una settimana</label>
-			<label index="pages.tx_newsletter_repeat.I.3">Fra due settimane</label>
-			<label index="pages.tx_newsletter_repeat.I.4">Fra un mese</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Fra tre mesi</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Fra sei mesi</label>
-			<label index="pages.tx_newsletter_repeat.I.7">Un anno</label>
-			<label index="pages.tx_newsletter_repeat">Ripeti spedizione:</label>
+			<label index="pages.repetition.I.0">Non ripetere</label>
+			<label index="pages.repetition.I.1">Fra un giorno</label>
+			<label index="pages.repetition.I.2">Fra una settimana</label>
+			<label index="pages.repetition.I.3">Fra due settimane</label>
+			<label index="pages.repetition.I.4">Fra un mese</label>
+			<label index="pages.repetition.I.5">Fra tre mesi</label>
+			<label index="pages.repetition.I.6">Fra sei mesi</label>
+			<label index="pages.repetition.I.7">Un anno</label>
+			<label index="pages.repetition">Ripeti spedizione:</label>
 			<label index="pages.tx_newsletter_attachfiles">Allega files alla newsletter (newsletter):</label>
 			<label index="pages.tx_newsletter_sendername">Nome mittente:</label>
 			<label index="pages.tx_newsletter_senderemail">Email mittente:</label>
@@ -205,15 +205,15 @@
 		<languageKey index="nl" type="array">
 			<label index="pages.newslettertype">Nieuwsbrief</label>
 			<label index="pages.tx_newsletter_senttime">Nieuwsbrief verzonden op:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Niet herhalen</label>
-			<label index="pages.tx_newsletter_repeat.I.1">Een dag</label>
-			<label index="pages.tx_newsletter_repeat.I.2">Een week</label>
-			<label index="pages.tx_newsletter_repeat.I.3">Twee weken</label>
-			<label index="pages.tx_newsletter_repeat.I.4">Een maand</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Drie maanden</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Zes maanden</label>
-			<label index="pages.tx_newsletter_repeat.I.7">Een jaar</label>
-			<label index="pages.tx_newsletter_repeat">Verzenden nieuwsbrief herhalen:</label>
+			<label index="pages.repetition.I.0">Niet herhalen</label>
+			<label index="pages.repetition.I.1">Een dag</label>
+			<label index="pages.repetition.I.2">Een week</label>
+			<label index="pages.repetition.I.3">Twee weken</label>
+			<label index="pages.repetition.I.4">Een maand</label>
+			<label index="pages.repetition.I.5">Drie maanden</label>
+			<label index="pages.repetition.I.6">Zes maanden</label>
+			<label index="pages.repetition.I.7">Een jaar</label>
+			<label index="pages.repetition">Verzenden nieuwsbrief herhalen:</label>
 			<label index="pages.tx_newsletter_attachfiles">Annex voor nieuwsbrief:</label>
 			<label index="pages.tx_newsletter_real_target">Addressenbestand voor ontvangers:</label>
 			<label index="pages.tx_newsletter_dotestsend">Verstuur een test-nieuwsbrief:</label>
@@ -275,15 +275,15 @@
 		<languageKey index="dk" type="array">
 			<label index="pages.newslettertype" type="integer">132251442</label>
 			<label index="pages.tx_newsletter_senttime" type="integer">103531403</label>
-			<label index="pages.tx_newsletter_repeat.I.0" type="integer">248611784</label>
-			<label index="pages.tx_newsletter_repeat.I.1" type="integer">34582365</label>
-			<label index="pages.tx_newsletter_repeat.I.2" type="integer">227755754</label>
-			<label index="pages.tx_newsletter_repeat.I.3" type="integer">184812142</label>
-			<label index="pages.tx_newsletter_repeat.I.4" type="integer">158636124</label>
-			<label index="pages.tx_newsletter_repeat.I.5" type="integer">69545385</label>
-			<label index="pages.tx_newsletter_repeat.I.6" type="integer">146677935</label>
-			<label index="pages.tx_newsletter_repeat.I.7" type="integer">14968501</label>
-			<label index="pages.tx_newsletter_repeat" type="integer">27257066</label>
+			<label index="pages.repetition.I.0" type="integer">248611784</label>
+			<label index="pages.repetition.I.1" type="integer">34582365</label>
+			<label index="pages.repetition.I.2" type="integer">227755754</label>
+			<label index="pages.repetition.I.3" type="integer">184812142</label>
+			<label index="pages.repetition.I.4" type="integer">158636124</label>
+			<label index="pages.repetition.I.5" type="integer">69545385</label>
+			<label index="pages.repetition.I.6" type="integer">146677935</label>
+			<label index="pages.repetition.I.7" type="integer">14968501</label>
+			<label index="pages.repetition" type="integer">27257066</label>
 			<label index="pages.tx_newsletter_attachfiles" type="integer">93471628</label>
 			<label index="pages.tx_newsletter_real_target" type="integer">187328602</label>
 			<label index="pages.tx_newsletter_dotestsend" type="integer">117963175</label>
@@ -344,15 +344,15 @@
 		<languageKey index="dk" type="array">
 			<label index="pages.newslettertype">Newsletter</label>
 			<label index="pages.tx_newsletter_senttime">Newsletter send time:</label>
-			<label index="pages.tx_newsletter_repeat.I.0">Do not repeat</label>
-			<label index="pages.tx_newsletter_repeat.I.1">One day</label>
-			<label index="pages.tx_newsletter_repeat.I.2">One week</label>
-			<label index="pages.tx_newsletter_repeat.I.3">Two weeks</label>
-			<label index="pages.tx_newsletter_repeat.I.4">One month</label>
-			<label index="pages.tx_newsletter_repeat.I.5">Three months</label>
-			<label index="pages.tx_newsletter_repeat.I.6">Six months</label>
-			<label index="pages.tx_newsletter_repeat.I.7">One year</label>
-			<label index="pages.tx_newsletter_repeat">Newsletter repeat:</label>
+			<label index="pages.repetition.I.0">Do not repeat</label>
+			<label index="pages.repetition.I.1">One day</label>
+			<label index="pages.repetition.I.2">One week</label>
+			<label index="pages.repetition.I.3">Two weeks</label>
+			<label index="pages.repetition.I.4">One month</label>
+			<label index="pages.repetition.I.5">Three months</label>
+			<label index="pages.repetition.I.6">Six months</label>
+			<label index="pages.repetition.I.7">One year</label>
+			<label index="pages.repetition">Newsletter repeat:</label>
 			<label index="pages.tx_newsletter_attachfiles">Attach files to newsletter:</label>
 			<label index="pages.tx_newsletter_real_target">Real receivers:</label>
 			<label index="pages.tx_newsletter_dotestsend">Newsletter do test send:</label>

@@ -1,8 +1,7 @@
 #! /usr/bin/php -q
 <?php
-require ("clirun.php");
+require_once('clirun.php');
 require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_bouncehandler.php');
-require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
 
 $fd = fopen('php://stdin', 'r');
 while ($buffer = fread($fd, 8096)) {
@@ -21,7 +20,7 @@ switch ($bounce->status) {
 	
 
 	case NEWSLETTER_BOUNCE_UNREMOVABLE:
-	$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_emailqueue', 
+	$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_email', 
 					"authcode = '$bounce->authCode' AND uid = '$bounce->sendid'", 
 					array('bounced' => 1));
 		break;
@@ -29,4 +28,3 @@ switch ($bounce->status) {
 	/* Nothing to be done for other bounce types. */
 	break;
 }
-?>

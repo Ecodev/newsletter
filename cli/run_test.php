@@ -22,21 +22,8 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require('clirun.php');
-require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_tools.php");
 
-/* Get all test pages */
-$rs = $TYPO3_DB->sql_query("SELECT * 
-                              FROM pages 
-                              WHERE tx_newsletter_dotestsend = 1 
-                              AND deleted = 0
-                              AND hidden = 0           
-                              AND doktype = 189");
-/* Each pages */    
-while ($page = $TYPO3_DB->sql_fetch_assoc($rs)) {
-    tx_newsletter_tools::mailForTest($page);
-    $TYPO3_DB->sql_query("UPDATE pages SET tx_newsletter_dotestsend = 0 WHERE uid = $page[uid]");
-}
+require_once('clirun.php');
 
-                            
-?>
+tx_newsletter_tools::createAllSpool(true);
+tx_newsletter_tools::runSpoolOneAll(true);

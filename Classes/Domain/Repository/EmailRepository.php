@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
  
-class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
 }
 ?>

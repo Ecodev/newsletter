@@ -11,7 +11,6 @@
 			<label index="end_time.description">endTime</label>
 			<label index="recipient_address.description">recipientAddress</label>
 			<label index="recipient_data.description">recipientData</label>
-			<label index="auth_code.description">authCode</label>
 			<label index="opened.description">opened</label>
 			<label index="bounced.description">bounced</label>
 			<label index="host.description">host</label>

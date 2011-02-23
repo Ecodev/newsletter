@@ -137,7 +137,7 @@
 			<label index="tx_newsletter_domain_model_newsletter.planned_time">When the newsletter will start sending emails</label>
 			<label index="tx_newsletter_domain_model_newsletter.begin_time">beginTime</label>
 			<label index="tx_newsletter_domain_model_newsletter.end_time">endTime</label>
-			<label index="tx_newsletter_domain_model_newsletter.tx_newsletter_repeat">0-7 values to indicates when this newsletter will repeat</label>
+			<label index="tx_newsletter_domain_model_newsletter.repetition">0-7 values to indicates when this newsletter will repeat</label>
 			<label index="tx_newsletter_domain_model_newsletter.plain_converter">Tool used to convert to plain text</label>
 			<label index="tx_newsletter_domain_model_newsletter.is_test">Whether this newsletter is for test purpose. If it is it will be ignored in statistics</label>
 			<label index="tx_newsletter_domain_model_newsletter.attachments">List of files to be attached (comma separated list</label>
@@ -167,7 +167,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">csvFields</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">csvFilename</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_values">csvValues</label>
-			<label index="tx_newsletter_domain_model_recipientlist.tx_newsletter_sql">sql</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">sql</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_file">htmlFile</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">htmlFetchType</label>
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">calculatedRecipients</label>
@@ -177,7 +177,6 @@
 			<label index="tx_newsletter_domain_model_email.end_time">endTime</label>
 			<label index="tx_newsletter_domain_model_email.recipient_address">recipientAddress</label>
 			<label index="tx_newsletter_domain_model_email.recipient_data">recipientData</label>
-			<label index="tx_newsletter_domain_model_email.auth_code">authCode</label>
 			<label index="tx_newsletter_domain_model_email.opened">opened</label>
 			<label index="tx_newsletter_domain_model_email.bounced">bounced</label>
 			<label index="tx_newsletter_domain_model_email.host">host</label>

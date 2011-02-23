@@ -9,6 +9,6 @@ plugin.tx_newsletter {
 	}
 	persistence {
 		# cat=plugin.tx_newsletter//a; type=int+; label=Default storage PID
-		storagePid = 
+		storagePid = 12345678
 	}
 }

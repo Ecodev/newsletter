@@ -115,7 +115,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The html content of the mail
 	 * @return   void
 	 */    
-	public function setHtml ($src) {
+	public function setHtml($src) {
 		/* Find linked css and convert into a style-tag */
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $src, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -126,8 +126,8 @@ class tx_newsletter_mailer {
 				."\n-->\n</style>", $src);
 		}
 
-		/* We cant very well have attached javascript in a newsmail ... removing */
-		$src = preg_replace('|<script type="text/javascript" src="[^"]+"></script>|', '', $src);
+		// We cant very well have attached javascript in a newsmail ... removing
+		$src = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $src);
 
 		/* Convert external file resouces to attached filer or correct their links */
 		$replace_regs = array(
@@ -186,18 +186,6 @@ class tx_newsletter_mailer {
 		$this->html_tpl = $src;
 		$this->html = $src;
 	}
-   
-	/**
-	 * Insert a "mail-open-spy" in the mail for test.
-	 *
-	 * @return   void
-	 */
-	private function testSpy() {
-		$this->html = str_replace (
-					'</body>', 
-					'<div><img src="'.$this->siteUrl.'typo3/clear.gif" width="0" height="0" /></div></body>', 
-					$this->html);
-	}
     
 	/**
 	 * Insert a "mail-open-spy" in the mail for real. This relies on the $this->authcode being set.
@@ -205,9 +193,9 @@ class tx_newsletter_mailer {
 	 * @return   void
 	 */
 	private function insertSpy($authCode, $sendid) {
-		$this->html = str_replace (
+		$this->html = str_ireplace (
 				'</body>', 
-				'<div><img src="'.$this->homeUrl.'web/beenthere.php?c='.$authCode.'&s='.$sendid.'" width="0" height="0" /></div></body>',
+				'<div><img src="'.$this->homeUrl.'web/beenthere.php?c='.$authCode.'" width="0" height="0" /></div></body>',
 				$this->html);
 	}
     
@@ -353,42 +341,14 @@ class tx_newsletter_mailer {
 		return $links;   
 	}
 
-	/**
-	 * Replace all links in the mail to make test spy links.
-	 * This will create links similar to the real spy links, but does not require any database activity in order to work, 
-	 * and does not reveal any information of the receiver.
-	 *
-	 * @return   void
-	 */
-	private function testClickLinks() {
-		/* Exchange all http:// links  html */
-		preg_match_all ('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
-		foreach ($urls[1] as $i => $url) {
-			$link = str_replace($url, $this->homeUrl."web/tclick.php?l=".base64_encode(html_entity_decode($url)), $urls[0][$i]);
-			$this->html  = str_replace($urls[0][$i], $link, $this->html);
-		}
-
-		/* Exchange all http:// links plaintext */
-		preg_match_all ('|http://[^ \n\r\)]*|i', $this->plain, $urls);
-		foreach ($urls[0] as $i => $url) {   
-			$this->plain = str_replace($url, $this->homeUrl."web/tclick.php?l=".base64_encode($url),$this->plain);
-		}
-	}
-	    
 	public function prepare(array $receiverRecord, $options = array())
 	{
-		$this->resetMarkers();		
+		$this->resetMarkers();
 		$this->substituteMarkers($receiverRecord);
-		
-		if (@$options['testSpy'])
-			$this->testSpy();
 		
 		if (@$options['insertSpy'] && @$options['authCode'] && @$options['sendid'])
 			$this->insertSpy($options['authCode'], $options['sendid']);
-			
-		if (@$options['testClickLinks'])
-			$this->testClickLinks();
-			
+		
 		if (@$options['makeClickLinks'] && @$options['authCode'] && @$options['sendid'])
 			$this->makeClickLinks($options['authCode'], $options['sendid']);
 	}
