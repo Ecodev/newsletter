@@ -91,46 +91,11 @@ abstract class tx_newsletter_tools {
 	* @param    Tx_Newsletter_Domain_Model_Newsletter       Page record.
 	* @return   object      tx_newsletter_mailer object preconfigured for sending.
 	*/
-	public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '') {
-		$append_url = tx_newsletter_tools::confParam('append_url');
-
-		/* Any language defined? */
-		
-		/** 
-		 * 12.09.2008 mads@brunn.dk
-		 * L-param is set even if it's '0' 
-		 * Needed in those cases where default language in frontend and backend differs
-		 */ 
-		if ($lang <> -1 && $lang <> "") {
-			$lang = "&L=$lang";
-		}
-		
+	public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '')
+	{	
 		// Configure the mailer
 		$mailer = new tx_newsletter_mailer();
-		$domain = $newsletter->getDomain();
-		$mailer->siteUrl = "http://$domain/";
-		$mailer->homeUrl = "http://$domain/".t3lib_extMgm::siteRelPath('newsletter');
-		$mailer->senderName = $newsletter->getSenderName();
-		$mailer->senderEmail = $newsletter->getSenderEmail();
-		$bounceAccount = $newsletter->getBounceAccount();
-		$mailer->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
-		$mailer->setTitle($newsletter->getTitle());
-		$url = "http://$domain/index.php?id=" . $newsletter->getPid() . "&no_cache=1$lang$append_url";
-		$mailer->setHtml(tx_newsletter_tools::getURL($url));
-
-		// Build plaintext
-		$plain = $newsletter->getPlainConverterInstance();
-		$plain->setContent($mailer->html, $url, $mailer->domain);		
-		$mailer->setPlain($plain->getPlaintext());
-
-		// Attaching files 
-		$files = $newsletter->getAttachments();
-		foreach ($files as $file) {
-			if (trim($file) != '') {
-				$file = PATH_site."uploads/tx_newsletter/$file";
-				$mailer->addAttachment($file);
-			}
-		}
+		$mailer->setNewsletter($newsletter, $lang);
 
 		// hook for modifing the mailer before finish preconfiguring
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
@@ -361,12 +326,7 @@ abstract class tx_newsletter_tools {
 			}
 
 			// Send the email
-			$mailers[$L]->send($recipientData, array(
-					'insertSpy' => $newsletter->getInjectOpenSpy(),
-					'makeClickLinks' => $newsletter->getInjectLinksSpy(),
-					'authCode' => $email->getAuthCode(),
-				)
-			);
+			$mailers[$L]->send($email);
 
             // Mark it as sent already
             $email->setEndTime(time());

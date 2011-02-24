@@ -12,25 +12,25 @@ class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_D
 	 * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled. 
 	 * You should be able to reset then in the backend
 	 *
-	 * @param	integer		This is the uid of the receiver.
+	 * @param string $email the email address of the recipient
 	 * @param	integer		This is the level of the bounce.
 	 * @return	bool		Success of the bounce-handling.
 	 */
-	function disableReceiver($uid, $bounce_level) {
+	function disableReceiver($email, $bounce_level) {
 		global $TYPO3_DB;
 
 		switch ($bounce_level) {
 			case	NEWSLETTER_HARDBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
 							SET tx_newsletter_bounce = tx_newsletter_bounce + 5
-							WHERE uid = $uid");
+							WHERE email = '$email'");
 
 				return $TYPO3_DB->sql_affected_rows();
 
 			case	NEWSLETTER_SOFTBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
 							SET tx_newsletter_bounce = tx_newsletter_bounce + 1
-							WHERE uid = $uid");
+							WHERE email = '$email'");
 				return $TYPO3_DB->sql_affected_rows();
 
 			default:
@@ -43,23 +43,23 @@ class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_D
 	 * Here we just reset the bounce counter. If the user reads the mail, it must have succeded. 
 	 * It can also be used for marketing og statistics purposes 
 	 *
-	 * @param	integer		The uid of the receiver.
+	 * @param string $email the email address of the recipient
 	 */
-	function registerClick($uid) {
+	function registerClick($email) {
 		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
 							SET tx_newsletter_bounce = 0
-							WHERE uid = $uid");
+							WHERE email = '$email'");
 	}
 
 	/**
 	 * Like the registerClick()-method, but just for embedded spy-image.
 	 *
-	 * @param	integer		The uid of the receiver.
+	 * @param string $email the email address of the recipient
 	 */
-	function registerOpen($uid) {
+	function registerOpen($email) {
 		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
 							SET tx_newsletter_bounce = 0
-							WHERE uid = $uid");
+							WHERE email = '$email'");
 	}
 }
 

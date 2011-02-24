@@ -79,10 +79,8 @@
 			<label index="tx_newsletter_domain_model_email.host">Host</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>
-			<label index="tx_newsletter_domain_model_link.type">Type</label>
 			<label index="tx_newsletter_domain_model_link.url">Url</label>
-			<label index="tx_newsletter_domain_model_link.opened">Opened</label>
-			<label index="tx_newsletter_domain_model_link.email">Email</label>
+			<label index="tx_newsletter_domain_model_link.newsletter">Newsletter</label>
 		</languageKey>
 	</data>
 </T3locallang>

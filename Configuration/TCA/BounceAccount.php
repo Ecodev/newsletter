@@ -9,7 +9,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 		'showRecordFieldList'	=> 'email,server,protocol,username,password',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'email,server,protocol,username,password'),
+		'1' => array('showitem'	=> 'email,protocol,server,username,password'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
@@ -23,7 +23,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 			)
 		),
 		'email' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_bounceaccount.email',
 			'config'	=> array(
 				'type' => 'input',
@@ -32,7 +32,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 			),
 		),
 		'server' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_bounceaccount.server',
 			'config'	=> array(
 				'type' => 'input',
@@ -41,7 +41,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 			),
 		),
 		'protocol' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_bounceaccount.protocol',
 			'config'	=> array(
 	            'type' => 'select',
@@ -54,7 +54,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 			),
 		),
 		'username' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_bounceaccount.username',
 			'config'	=> array(
 				'type' => 'input',
@@ -63,14 +63,13 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
 			),
 		),
 		'password' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_bounceaccount.password',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim'
+				'eval' => 'password'
 			),
 		),
 	),
 );
-?>

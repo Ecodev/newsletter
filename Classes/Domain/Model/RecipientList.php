@@ -627,30 +627,30 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sesible default. "tableName" should also be included 
 	 * for compatibility reasons.
 	 *
-	 * @param   integer    Uid of the address that has failed.
+	 * @param string $email the email address of the recipient
 	 * @param   integer    Status of the bounce expect: NEWSLETTER_HARDBOUNCE or NEWSLETTER_SOFTBOUNCE 
 	 * @return  bool       Status of the success of the removal.
 	 */
-	function disableReceiver($uid, $bounce_type) {
+	function disableReceiver($email, $bounce_type) {
 		return false;
 	}
 
 	/**
 	 * Here you can implement some action to take when ever the user has opened the mail via beenthere.php
 	 *
-	 * @param	integer	Uid of the user that has opened the mail
+	 * @param string $email the email address of the recipient (who opened the mail)
 	 * @return	void
 	 */
-	function registerOpen ($uid) {
+	function registerOpen ($email) {
 	}
 
 	/**
 	 * Here you can implement some action to take when ever the user has clicked a link via click.php
 	 *
-	 * @param	integer	Uid of the user that has clicked a link
+	 * @param string $email the email address of the recipient
 	 * @return	void
 	 */
-	function registerClick ($uid) {
+	function registerClick ($email) {
 	}
 	
 	/**

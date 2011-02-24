@@ -112,17 +112,20 @@ CREATE TABLE tx_newsletter_domain_model_link (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
-	
-	type varchar(255) DEFAULT '' NOT NULL,
 	url varchar(255) DEFAULT '' NOT NULL,
-	opened tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	email int(11) unsigned DEFAULT '0',
-
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	newsletter int(11) unsigned DEFAULT '0',
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
+);
+
+
+CREATE TABLE tx_newsletter_domain_model_linkopened (
+	uid int(11) NOT NULL auto_increment,
+
+	link int(11) unsigned DEFAULT '0',
+	email int(11) unsigned DEFAULT '0',
+	is_plain tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	
+	PRIMARY KEY (uid)
 );

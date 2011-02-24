@@ -3,8 +3,6 @@
  * This is the click link script that identifies and registers the user, and provides the correct link
  */
 require ('browserrun.php');
-require (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_target.php');
-require (t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_tools.php');
 
 $authcode = addslashes($_REQUEST['c']);
 $linkid = intval($_REQUEST['l']);
@@ -24,7 +22,7 @@ $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET beenthere = 1 
 
 $rs = $TYPO3_DB->sql_query("SELECT target, user_uid FROM tx_newsletter_domain_model_email WHERE authcode = '$authcode' AND uid = $sendid");
 if (list($targetUid, $userUid) = $TYPO3_DB->sql_fetch_row($rs)) {
-	$target = tx_newsletter_target::getTarget($targetUid);
+	$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($targetUid);
 	$target->registerClick($userUid);
 }
 

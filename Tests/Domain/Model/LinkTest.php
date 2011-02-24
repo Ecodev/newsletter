@@ -86,47 +86,24 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function getOpenedReturnsInitialValueForBoolean() { 
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getOpened()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setOpenedForBooleanSetsOpened() { 
-		$this->fixture->setOpened(TRUE);
-
-		$this->assertSame(
-			TRUE,
-			$this->fixture->getOpened()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getEmailReturnsInitialValueForTx_Newsletter_Domain_Model_Email() { 
+	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() { 
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getEmail()
+			$this->fixture->getNewsletter()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setEmailForTx_Newsletter_Domain_Model_EmailSetsEmail() { 
-		$dummyObject = new Tx_Newsletter_Domain_Model_Email();
-		$this->fixture->setEmail($dummyObject);
+	public function setNewsletterForTx_Newsletter_Domain_Model_NewsletterSetsNewsletter() { 
+		$dummyObject = new Tx_Newsletter_Domain_Model_Newsletter();
+		$this->fixture->setNewsletter($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getEmail()
+			$this->fixture->getNewsletter()
 		);
 	}
 	
 }
-?>

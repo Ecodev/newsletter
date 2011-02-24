@@ -53,7 +53,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	 * Here you can implement database operation done when an email address has failed. 
 	 * It is not mandatory to do anything, but here is a sensible default provided for database-provided receivers. 
 	 * IF YOU DO NOT WANT TO DELETE YOUR RECORDS, PLEASE, PLEASE OVERRIDE THIS METHOD WITH SOMETHING MORE GENTLE. 
-	 * DONT BLAME ME FOR LOST DATA. Alternatively you can inherit from the tx_newsletter_target:gentlesql class
+	 * DONT BLAME ME FOR LOST DATA. Alternatively you can inherit from the Tx_Newsletter_Domain_Model_RecipientList_GentleSql class
 	 * instead.
 	 *
 	 * @param   integer    Uid of the address that has failed.

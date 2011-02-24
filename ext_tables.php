@@ -84,13 +84,7 @@ t3lib_extMgm::allowTableOnStandardPages('tx_newsletter_domain_model_link');
 $TCA['tx_newsletter_domain_model_link'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_link',
-		'label' 			=> 'type',
-		'tstamp' 			=> 'tstamp',
-		'crdate' 			=> 'crdate',
-		'delete' 			=> 'deleted',
-		'enablecolumns' 	=> array(
-			'disabled' => 'hidden'
-			),
+		'label' 			=> 'url',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Link.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_link.gif'
 	)

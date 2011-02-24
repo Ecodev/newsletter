@@ -123,7 +123,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	/**
 	 * This is the object factory, without init(), for all newsletter targets.
 	 *
-	 * @param     integer     Uid of a tx_newsletter_target from the database.
+	 * @param     integer     Uid of a Tx_Newsletter_Domain_Model_RecipientList from the database.
 	 * @return    object      Of newsletter_target type.
 	 */
 	protected function getRecipients($uid) {

@@ -34,53 +34,19 @@
 class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
-	 * type
-	 *
-	 * @var string $type
-	 * @validate NotEmpty
-	 */
-	protected $type;
-
-	/**
 	 * url
 	 *
 	 * @var string $url
 	 */
 	protected $url;
-
+	
 	/**
-	 * opened
+	 * newsletter
 	 *
-	 * @var boolean $opened
+	 * @var string $newsletter
 	 */
-	protected $opened;
-
-	/**
-	 * email
-	 *
-	 * @var Tx_Newsletter_Domain_Model_Email $email
-	 */
-	protected $email;
-
-	/**
-	 * Setter for type
-	 *
-	 * @param string $type type
-	 * @return void
-	 */
-	public function setType($type) {
-		$this->type = $type;
-	}
-
-	/**
-	 * Getter for type
-	 *
-	 * @return string type
-	 */
-	public function getType() {
-		return $this->type;
-	}
-
+	protected $newsletter;
+	
 	/**
 	 * Setter for url
 	 *
@@ -101,51 +67,22 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * Setter for opened
-	 *
-	 * @param boolean $opened opened
-	 * @return void
-	 */
-	public function setOpened($opened) {
-		$this->opened = $opened;
-	}
-
-	/**
-	 * Getter for opened
-	 *
-	 * @return boolean opened
-	 */
-	public function getOpened() {
-		return $this->opened;
-	}
-
-	/**
-	 * Returns the state of opened
-	 *
-	 * @return boolean the state of opened
-	 */
-	public function isOpened() {
-		return $this->getOpened();
-	}
-
-	/**
-	 * Setter for email
+	 * Setter for newsletter
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Email $email email
 	 * @return void
 	 */
-	public function setEmail(Tx_Newsletter_Domain_Model_Email $email) {
-		$this->email = $email;
+	public function setEmail(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
+		$this->newsletter = $newsletter;
 	}
 
 	/**
-	 * Getter for email
+	 * Getter for newsletter
 	 *
-	 * @return Tx_Newsletter_Domain_Model_Email email
+	 * @return Tx_Newsletter_Domain_Model_Newsletter newsletter
 	 */
-	public function getEmail() {
-		return $this->email;
+	public function getNewsletter() {
+		return $this->newsletter;
 	}
 
 }
-?>

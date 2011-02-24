@@ -181,10 +181,8 @@
 			<label index="tx_newsletter_domain_model_email.host">host</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>
-			<label index="tx_newsletter_domain_model_link.type">type</label>
 			<label index="tx_newsletter_domain_model_link.url">url</label>
-			<label index="tx_newsletter_domain_model_link.opened">opened</label>
-			<label index="tx_newsletter_domain_model_link.email">email</label>
+			<label index="tx_newsletter_domain_model_link.newsletter">newsletter</label>
 		</languageKey>
 		<languageKey index="fr">
 			<label index="select_page">Veuillez sélectionner une page.</label>

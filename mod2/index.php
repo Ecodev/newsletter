@@ -559,7 +559,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 	  
 		foreach ($targets as $tid) {
-			$tobj = tx_newsletter_target::loadTarget($tid);
+			$tobj = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($tid);
 
 			$out .= '<tr><td colspan="5"><b>'.$this->editTarget($tid).'</b></td></tr>';
 

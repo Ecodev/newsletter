@@ -15,7 +15,7 @@ $bounce = new tx_newsletter_bouncehandler($content);
 switch ($bounce->status) {
 	case NEWSLETTER_HARDBOUNCE :
 	case NEWSLETTER_SOFTBOUNCE :
-		$target = tx_newsletter_target::getTarget($bounce->targetUid);
+		$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($bounce->targetUid);
 		$target->disableReceiver($bounce->uid, $bounce->status);
 	
 

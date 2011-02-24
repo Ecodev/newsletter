@@ -29,12 +29,18 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
  * It is normally used in an instance per language to compile MIME 1.0 compatible mails
  */
 class tx_newsletter_mailer {
-	/* Vars that might need to be overridden */
-	var $senderName = "Test Testermann";
-	var $senderEmail = "test@test.net";
-	var $bounceAddress = 'bounce@test.test';
-	var $siteUrl = "http://www.test.test/";
-	var $homeUrl = "www.test.test/typo3conf/ext/newsletter/";
+	
+	private $html;
+	private $html_tpl;
+	private $plain;
+	private $plain_tpl;
+	private $title;
+	private $title_tpl;
+	private $senderName;
+	private $senderEmail;
+	private $bounceAddress;
+	private $siteUrl;
+	private $homeUrl;
 	private $attachments = array();
 	private $attachmentsEmbedded = array();
 
@@ -50,16 +56,49 @@ class tx_newsletter_mailer {
 		$this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
 		$this->realPath = PATH_site;
 	}
-
-	/**
-	 * Add a file attachement to the mail
-	 *
-	 * @param   string      Filename of file to attach.
-	 * @return   void
-	 */
-	public function addAttachment($filename)
+	
+	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '')
 	{
-		$this->attachments[] = Swift_Attachment::fromPath($filename);
+		$append_url = tx_newsletter_tools::confParam('append_url');
+
+		/* Any language defined? */
+		
+		/** 
+		 * 12.09.2008 mads@brunn.dk
+		 * L-param is set even if it's '0' 
+		 * Needed in those cases where default language in frontend and backend differs
+		 */ 
+		if ($lang <> -1 && $lang <> '') {
+			$lang = "&L=$lang";
+		}
+		
+		$this->newsletter = $newsletter;
+		$domain = $newsletter->getDomain();
+		$this->siteUrl = "http://$domain/";
+		$this->homeUrl = $this->siteUrl . t3lib_extMgm::siteRelPath('newsletter');
+		$this->senderName = $newsletter->getSenderName();
+		$this->senderEmail = $newsletter->getSenderEmail();
+		$bounceAccount = $newsletter->getBounceAccount();
+		$this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
+		$this->setTitle($newsletter->getTitle());
+		
+		// Build html
+		$url = "http://$domain/index.php?id=" . $newsletter->getPid() . "&no_cache=1$lang$append_url";
+		$this->setHtml(tx_newsletter_tools::getURL($url));
+
+		// Build plaintext
+		$plain = $newsletter->getPlainConverterInstance();
+		$plain->setContent($this->html, $url, $this->domain);		
+		$this->setPlain($plain->getPlaintext());
+
+		// Attaching files 
+		$files = $newsletter->getAttachments();
+		foreach ($files as $file) {
+			if (trim($file) != '') {
+				$filename = PATH_site."uploads/tx_newsletter/$file";
+				$this->attachments[] = Swift_Attachment::fromPath($filename);
+			}
+		}
 	}
 
 	/**
@@ -68,7 +107,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The title
 	 * @return   void
 	 */
-	public function setTitle($src) {
+	private function setTitle($src) {
 		/* Detect what markers we need to substitute later on */
 		preg_match_all ('/###[\w]+###/', $src, $fields);
 		$this->titleMarkers = str_replace ('###', '', $fields[0]);
@@ -90,7 +129,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The plain text content of the mail
 	 * @return   void
 	 */
-	public function setPlain($src) {
+	private function setPlain($src) {
 		/* Remove html-comments */
 		$src = preg_replace('/<!--.*-->/U', '', $src);
       
@@ -115,7 +154,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The html content of the mail
 	 * @return   void
 	 */    
-	public function setHtml($src) {
+	private function setHtml($src) {
 		/* Find linked css and convert into a style-tag */
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $src, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -192,10 +231,10 @@ class tx_newsletter_mailer {
 	 *
 	 * @return   void
 	 */
-	private function insertSpy($authCode, $sendid) {
+	private function insertSpy(Tx_Newsletter_Domain_Model_Email $email) {
 		$this->html = str_ireplace (
 				'</body>', 
-				'<div><img src="'.$this->homeUrl.'web/beenthere.php?c='.$authCode.'" width="0" height="0" /></div></body>',
+				'<div><img src="'.$this->homeUrl.'web/beenthere.php?c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>',
 				$this->html);
 	}
     
@@ -284,7 +323,8 @@ class tx_newsletter_mailer {
 	 * @param   array      Assoc array with name => value pairs.
 	 * @return   void
 	 */
-	private function substituteMarkers($record) {
+	private function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email) {
+		$record = $email->getRecipientData();
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
 			foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
 				$_procObj = & t3lib_div::getUserObj($_classRef);
@@ -299,58 +339,73 @@ class tx_newsletter_mailer {
 		}
 	}
     
+	private function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPlainText = false)
+	{
+		global $TYPO3_DB;
+		$url = html_entity_decode($url);
+		
+		// Look for the link datbase, it may already exist
+		$res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = "' . $url . '" AND newsletter = ' . $this->newsletter->getUid() . ' LIMIT 1');
+		$row = $TYPO3_DB->sql_fetch_row($res);
+		if ($row)
+		{
+			$linkId = $row[0];
+		}
+		// Otherwise create it
+		else
+		{
+			$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', array(
+				'pid' => $this->newsletter->getPid(),
+				'url' => $url,
+				'newsletter' => $this->newsletter->getUid(),
+			));
+		
+			$linkId = $TYPO3_DB->sql_insert_id();
+		}
+		
+		
+		$authCode = md5($email->getAuthCode() . $linkId);
+		$newUrl = $this->homeUrl . 'web/click.php?l=' . $authCode . '&url=' . urlencode($url) . ($isPlainText ? '&plain=1' : '');
+		
+		return $newUrl;
+	}
+	
 	/**
 	 * Replace all links in the mail to make spy links.
 	 *
 	 * @param    string     Encryption code for the links
 	 * @return   array      Data structure with original links.
 	 */
-	private function makeClickLinks($authCode, $sendid) {
-		$links['plain'] = array();
-		$links['html'] = array();
-
+	private function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email) {
 		/* Exchange all http:// links  html */
 		preg_match_all ('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
 		foreach ($urls[1] as $i => $url) {
-			$links['html'][$i] = html_entity_decode($url);
-			  
+			$newUrl = $this->getLinkAuthCode($email, $url);
+			
 			/* Two step replace to be as precise as possible */
-			$link = str_replace($url, $this->homeUrl."web/click.php?l=$i&t=html&c=$authCode&s=$sendid", $urls[0][$i]);      
-			$this->html  = str_replace($urls[0][$i], $link, $this->html);
+			$link = str_replace($url, $newUrl, $urls[0][$i]);
+			$this->html = str_replace($urls[0][$i], $link, $this->html);
 		}
 
 		/* Exchange all http:// links plaintext */
 		preg_match_all ('|http://[^ \r\n\)]*|i', $this->plain, $urls);
 		foreach ($urls[0] as $i => $url) {
-			$links['plain'][$i] = html_entity_decode($url);
-			$this->plain = str_replace($url, $this->homeUrl."web/click.php?l=$i&t=plain&c=$authCode&s=$sendid", $this->plain);
-		}
-
-		/* Write to the DB the links that have been registered */
-		global $TYPO3_DB;
-		foreach ($links as $type => $sublinks) {
-			foreach ($sublinks as $linkid => $url) {
-				$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_clicklink', array(
-					'sentlog' => $sendid,
-					'linktype' => $type,
-					'linkid' => $linkid,
-					'url' => $url));
-			}
-		}
-		
-		return $links;   
+			$newUrl = $this->getLinkAuthCode($email, $url);
+			
+			$this->plain = str_replace($url, $newUrl, $this->plain);
+		}   
 	}
 
-	public function prepare(array $receiverRecord, $options = array())
+	public function prepare(Tx_Newsletter_Domain_Model_Email $email)
 	{
 		$this->resetMarkers();
-		$this->substituteMarkers($receiverRecord);
+		$this->substituteMarkers($email);
 		
-		if (@$options['insertSpy'] && @$options['authCode'] && @$options['sendid'])
-			$this->insertSpy($options['authCode'], $options['sendid']);
-		
-		if (@$options['makeClickLinks'] && @$options['authCode'] && @$options['sendid'])
-			$this->makeClickLinks($options['authCode'], $options['sendid']);
+		if ($this->newsletter->getInjectOpenSpy())
+			$this->insertSpy($email);
+			
+		if ($this->newsletter->getInjectLinksSpy())
+			$this->makeClickLinks($email);	
 	}
 	
 	/**
@@ -360,14 +415,10 @@ class tx_newsletter_mailer {
 	 * @param   array      Array with extra headers to apply to mails as name => value pairs.
 	 * @return   void
 	 */
-	public function send(array $receiverRecord, $options = array()) {
-		$this->prepare($receiverRecord, $options);
-		
-		$extraHeaders = @$options['extraHeaders'];
-		if (!is_array($extraHeaders))
-			$extraHeaders = array();
-			
-		$this->raw_send($receiverRecord, $extraHeaders);
+	public function send(Tx_Newsletter_Domain_Model_Email $email)
+	{
+		$this->prepare($email);
+		$this->raw_send($email);
 	}
 
 	/**
@@ -378,48 +429,46 @@ class tx_newsletter_mailer {
 	 * @param   array      Array with extra headers to apply to mails as name => value pairs.
 	 * @return   void
 	 */
-	private function raw_send(array $receiverRecord, array $extraHeaders = array())
+	private function raw_send(Tx_Newsletter_Domain_Model_Email $email)
 	{
-		$email = t3lib_div::makeInstance('t3lib_mail_Message');
-		$email->setTo($receiverRecord['email'])
+		$rawEmail = t3lib_div::makeInstance('t3lib_mail_Message');
+		$rawEmail->setTo($email->getRecipientAddress())
 					->setFrom(array($this->senderEmail => $this->senderName))
 					->setSubject($this->title)
 					;
 					
 		if ($this->bounceAddress)
 		{
-			$email->setReturnPath($this->bounceAddress);
+			$rawEmail->setReturnPath($this->bounceAddress);
 		}
 		
 		foreach ($this->attachments as $attachment)
 		{
-			$email->attach($attachment);
+			$rawEmail->attach($attachment);
 		}
 		
 		// Attach inline files and replace markers used for URL
 		foreach ($this->attachmentsEmbedded as $marker => $attachment)
 		{
-			$embeddedSrc = $email->embed($attachment);
+			$embeddedSrc = $rawEmail->embed($attachment);
 			$this->plain = str_replace($marker, $embeddedSrc, $this->plain);
 			$this->html = str_replace($marker, $embeddedSrc, $this->html);
 		}
 		
-		// TODO insert extra headers
+		// TODO insert extra headers for bounce identifiaction
 		
-		// Plain version
-		$plain = t3lib_div::substUrlsInPlainText($this->plain, 'all', $this->siteUrl);
-	
-		if ($receiverRecord['plain_only'])
+		$recipientData = $email->getRecipientData();
+		if ($recipientData['plain_only'])
 		{
-			$email->setBody($plain, 'text/plain');
+			$rawEmail->setBody($plain, 'text/plain');
 		}
 		else
 		{
-			$email->setBody($this->html, 'text/html');
-			$email->addPart($plain, 'text/plain');
+			$rawEmail->setBody($this->html, 'text/html');
+			$rawEmail->addPart($plain, 'text/plain');
 		}
 		
-		$email->send();
+		$rawEmail->send();
 	}
 
 }

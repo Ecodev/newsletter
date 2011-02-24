@@ -17,7 +17,7 @@ $targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
 
 /* Search the user */
 foreach ($targets as $tid) {
-    $tobj = tx_newsletter_target::loadTarget($tid);
+    $tobj = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($tid);
     
      while ($record = $tobj->getRecord()) {
      

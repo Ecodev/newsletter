@@ -31,13 +31,13 @@ class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newslet
 	/**
 	 * Returns all objects of this repository
 	 *
-	 * @param string $record, this can be tx_newsletter_target_rawsql
+	 * @param string $record, this can be Tx_Newsletter_Domain_Model_RecipientList_RawSql
 	 * @return array An array of element, empty if no records found
 	 */
 	public function findAllByRecipientType($record) {
 		$result = array();
 		switch ($record['targettype']) {
-			case 'tx_newsletter_target_rawsql':
+			case 'Tx_Newsletter_Domain_Model_RecipientList_RawSql':
 				$result = $this->getRecipientSql($record);
 				break;
 		}
@@ -47,7 +47,7 @@ class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newslet
 	/**
 	 * Returns all objects of this repository
 	 *
-	 * @param string $type, this can be tx_newsletter_target_rawsql
+	 * @param string $type, this can be Tx_Newsletter_Domain_Model_RecipientList_RawSql
 	 * @return array An array of element, empty if no records found
 	 */
 	public function getRecipientSql($record) {
