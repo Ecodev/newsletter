@@ -4,14 +4,6 @@
 		<languageKey index="default" type="array">
 			<label index="pages.newslettertype">Newsletter</label>
 			<label index="pages.tx_newsletter_senttime">Newsletter send time:</label>
-			<label index="pages.repetition.I.0">Do not repeat</label>
-			<label index="pages.repetition.I.1">One day</label>
-			<label index="pages.repetition.I.2">One week</label>
-			<label index="pages.repetition.I.3">Two weeks</label>
-			<label index="pages.repetition.I.4">One month</label>
-			<label index="pages.repetition.I.5">Three months</label>
-			<label index="pages.repetition.I.6">Six months</label>
-			<label index="pages.repetition.I.7">One year</label>
 			<label index="pages.repetition">Newsletter repeat:</label>
 			<label index="pages.tx_newsletter_attachfiles">Attach files to newsletter:</label>
 			<label index="pages.tx_newsletter_real_target">Real receivers:</label>
@@ -23,11 +15,6 @@
 			<label index="pages.tx_newsletter_spy">Attempt to detect opened emails:</label>
 			<label index="pages.tx_newsletter_usebcc">Use BCC-header to send mails:</label>
 			<label index="pages.tx_newsletter_register_clicks">Register clicked links:</label>
-			<label index="pages.tx_newsletter_plainconvert.I.0">Plain text template (&amp;type=99)</label>
-			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx cli-browser</label>
-			<label index="pages.tx_newsletter_plainconvert.I.2">Build-in html converter</label>
-			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
-			<label index="pages.tx_newsletter_plainconvert">Plain text method:</label>
 			<label index="tx_newsletter_domain_model_recipientlist">Newsletter receivers</label>
 			<label index="tx_newsletter_domain_model_recipientlist.title">Receivers title:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Receive as plaintext only:</label>
@@ -82,11 +69,6 @@
 			<label index="pages.tx_newsletter_spy">Forsøg at detektere åbnede emails:</label>
 			<label index="pages.tx_newsletter_usebcc">Brug BCC-header til at sende mails:</label>
 			<label index="pages.tx_newsletter_register_clicks">Registrer benyttede links:</label>
-			<label index="pages.tx_newsletter_plainconvert.I.0">Plaintekst-template (&amp;type=99)</label>
-			<label index="pages.tx_newsletter_plainconvert.I.1">Lynx cli-browser</label>
-			<label index="pages.tx_newsletter_plainconvert.I.2">Indbygget htmlkonvertering</label>
-			<label index="pages.tx_newsletter_plainconvert.I.3">Chuggnutt's html2text</label>
-			<label index="pages.tx_newsletter_plainconvert">Plaintekst metode:</label>
 			<label index="tx_newsletter_domain_model_recipientlist">Nyhedsbrevsmodtagere</label>
 			<label index="tx_newsletter_domain_model_recipientlist.title">Titel for modtagere:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Modtager kun plain-tekst:</label>

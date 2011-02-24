@@ -222,6 +222,25 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getPlainConverter() {
 		return $this->plainConverter;
 	}
+	
+	/**
+	 * Returns an instance of plain converter
+	 * @throws Exception
+	 * @return Tx_Newsletter_Domain_Model_IPlainConverter
+	 */
+	public function getPlainConverterInstance()
+	{
+		$class = $this->getPlainConverter();
+		if (!class_exists($class))
+			throw new Exception("Plain text converter of class '$class' not found");
+			
+		$converter = new $class();
+		 
+		if (!($converter instanceof Tx_Newsletter_Domain_Model_IPlainConverter))
+			throw new Exception("$class does not implement Tx_Newsletter_Domain_Model_IPlainConverter");
+			
+		return $converter;
+	}
 
 	/**
 	 * Setter for isTest

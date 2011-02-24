@@ -6,54 +6,15 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_email'] = array(
 	'ctrl' => $TCA['tx_newsletter_domain_model_email']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList'	=> 'begin_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter',
+		'showRecordFieldList'	=> 'begin_time,end_time,recipient_address,recipient_data,opened,bounced,host,newsletter',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'begin_time,end_time,recipient_address,recipient_data,auth_code,opened,bounced,host,newsletter'),
+		'1' => array('showitem'	=> 'begin_time,end_time,recipient_address,recipient_data,opened,bounced,host,newsletter'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
 	),
 	'columns' => array(
-		'sys_language_uid' => array(
-			'exclude'			=> 1,
-			'label'				=> 'LLL:EXT:lang/locallang_general.php:LGL.language',
-			'config'			=> array(
-				'type'					=> 'select',
-				'foreign_table'			=> 'sys_language',
-				'foreign_table_where'	=> 'ORDER BY sys_language.title',
-				'items' => array(
-					array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
-				),
-			)
-		),
-		'l18n_parent' => array(
-			'displayCond'	=> 'FIELD:sys_language_uid:>:0',
-			'exclude'		=> 1,
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
-			'config'		=> array(
-				'type'			=> 'select',
-				'items'			=> array(
-					array('', 0),
-				),
-				'foreign_table' => 'tx_newsletter_domain_model_email',
-				'foreign_table_where' => 'AND tx_newsletter_domain_model_email.uid=###REC_FIELD_l18n_parent### AND tx_newsletter_domain_model_email.sys_language_uid IN (-1,0)',
-			)
-		),
-		'l18n_diffsource' => array(
-			'config'		=>array(
-				'type'		=>'passthrough',
-			)
-		),
-		't3ver_label' => array(
-			'displayCond'	=> 'FIELD:t3ver_label:REQ:true',
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
-			'config'		=> array(
-				'type'		=>'none',
-				'cols'		=> 27,
-			)
-		),
 		'hidden' => array(
 			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -66,8 +27,9 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.begin_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int'
+				'size' => 12,
+				'readOnly' => true,
+				'eval' => 'datetime',
 			),
 		),
 		'end_time' => array(
@@ -75,8 +37,9 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.end_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int'
+				'size' => 12,
+				'readOnly' => true,
+				'eval' => 'datetime',
 			),
 		),
 		'recipient_address' => array(
@@ -91,15 +54,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 		'recipient_data' => array(
 			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_data',
-			'config'	=> array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
-			),
-		),
-		'auth_code' => array(
-			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.auth_code',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,

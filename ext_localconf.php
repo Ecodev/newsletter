@@ -8,13 +8,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Newsletter.Remote'
 
 # Register Ajax function
 #$TYPO3_CONF_VARS['BE']['AJAX']['NewsletterController::getListOfNewsletter'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote->getListOfNewsletter';
-
-$tempFilePath = t3lib_extMgm::extPath('newsletter');
-$TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'] = array(
-    $tempFilePath.'class.tx_newsletter_plain_html2text.php',
-    $tempFilePath.'class.tx_newsletter_plain_lynx.php',
-    $tempFilePath.'class.tx_newsletter_plain_simple.php',
-    $tempFilePath.'class.tx_newsletter_plain_template.php');
     
    
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'] = 'TYPO3 CMS - newsletter extension';

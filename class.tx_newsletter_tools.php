@@ -25,10 +25,7 @@
 require_once(PATH_t3lib.'class.t3lib_extmgm.php');
 require_once(PATH_t3lib.'class.t3lib_befunc.php');
 require_once(t3lib_extMgm::extPath('newsletter').'class.tx_newsletter_mailer.php'); 
-foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['includeClassFiles'] as $file) {
-	require_once($file);
-}
- 
+
 /**
  * Toolbox for newsletter and dependant extensions.
  *
@@ -122,11 +119,8 @@ abstract class tx_newsletter_tools {
 		$mailer->setHtml(tx_newsletter_tools::getURL($url));
 
 		// Build plaintext
-		$plain = tx_newsletter_plain::loadPlain($newsletter, $mailer->domain);
-		switch ($plain->fetchMethod) {
-			case 'src' :  $plain->setHtml($mailer->html); break;
-			case 'url' :  $plain->setHtml($url); break;
-		}
+		$plain = $newsletter->getPlainConverterInstance();
+		$plain->setContent($mailer->html, $url, $mailer->domain);		
 		$mailer->setPlain($plain->getPlaintext());
 
 		// Attaching files 

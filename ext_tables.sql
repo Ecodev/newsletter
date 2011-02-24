@@ -18,7 +18,7 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 	repetition int(11) DEFAULT '0' NOT NULL,
 	sender_name varchar(255) DEFAULT '' NOT NULL,
 	sender_email varchar(255) DEFAULT '' NOT NULL,
-	plain_converter varchar(255) DEFAULT 'tx_newsletter_plain_simple' NOT NULL,
+	plain_converter varchar(255) DEFAULT 'Tx_Newsletter_Domain_Model_PlainConverter_Builtin' NOT NULL,
 	attachments varchar(255) DEFAULT '' NOT NULL,
 	inject_open_spy tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	inject_links_spy tinyint(1) unsigned DEFAULT '0' NOT NULL,

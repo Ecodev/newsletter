@@ -785,10 +785,6 @@ class $targetName extends tx_newsletter_target_sql {
 		
 		$filename = 'class.'.$targetName.'.php';
 		$this->addFileToFileArray($filename, $targetSource);
-		
-		$this->wizard->ext_localconf[] = 
-		    "\$TYPO3_CONF_VARS['EXTCONF']['newsletter']['includeClassFiles'][] =".
-		    " t3lib_extMgm::extPath('$extKey').'class.$targetName.php';";
 	}
 
 	/**

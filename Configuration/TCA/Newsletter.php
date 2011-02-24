@@ -28,32 +28,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 				),
 			)
 		),
-		'l18n_parent' => array(
-			'displayCond'	=> 'FIELD:sys_language_uid:>:0',
-			'exclude'		=> 1,
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
-			'config'		=> array(
-				'type'			=> 'select',
-				'items'			=> array(
-					array('', 0),
-				),
-				'foreign_table' => 'tx_newsletter_domain_model_newsletter',
-				'foreign_table_where' => 'AND tx_newsletter_domain_model_newsletter.uid=###REC_FIELD_l18n_parent### AND tx_newsletter_domain_model_newsletter.sys_language_uid IN (-1,0)',
-			)
-		),
-		'l18n_diffsource' => array(
-			'config'		=>array(
-				'type'		=>'passthrough',
-			)
-		),
-		't3ver_label' => array(
-			'displayCond'	=> 'FIELD:t3ver_label:REQ:true',
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
-			'config'		=> array(
-				'type'		=>'none',
-				'cols'		=> 27,
-			)
-		),
 		'hidden' => array(
 			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
@@ -62,12 +36,12 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			)
 		),
 		'planned_time' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.planned_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int,required'
+				'size' => 12,
+				'eval' => 'datetime,required'
 			),
 		),
 		'begin_time' => array(
@@ -75,8 +49,9 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.begin_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int'
+				'size' => 12,
+				'readOnly' => true,
+				'eval' => 'datetime',
 			),
 		),
 		'end_time' => array(
@@ -84,26 +59,42 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.end_time',
 			'config'	=> array(
 				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int'
+				'size' => 12,
+				'readOnly' => true,
+				'eval' => 'datetime',
 			),
 		),
 		'repetition' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition',
 			'config'	=> array(
-				'type' => 'input',
-				'size' => 4,
-				'eval' => 'int'
+				'type' => 'select',
+				'items' => array (
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_none', '0'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_daily', '1'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_weekly', '2'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_biweekly', '3'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_monthly', '4'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_quarterly', '5'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_semiyearly', '6'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition_yearly', '7'),
+				),
+				'size' => 1,	
+				'maxitems' => 1,
 			),
 		),
 		'plain_converter' => array(
-			'exclude'	=> 0,
+			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter',
 			'config'	=> array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
+			'type' => 'select',
+				'items' => array (
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Tx_Newsletter_Domain_Model_PlainConverter_Builtin'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_template', 'Tx_Newsletter_Domain_Model_PlainConverter_Template'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Tx_Newsletter_Domain_Model_PlainConverter_Lynx'),
+				),
+				'size' => 1,
+				'maxitems' => 1,
 			),
 		),
 		'is_test' => array(
