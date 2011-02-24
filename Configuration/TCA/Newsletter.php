@@ -15,19 +15,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 		'1' => array('showitem'	=> ''),
 	),
 	'columns' => array(
-		'sys_language_uid' => array(
-			'exclude'			=> 1,
-			'label'				=> 'LLL:EXT:lang/locallang_general.php:LGL.language',
-			'config'			=> array(
-				'type'					=> 'select',
-				'foreign_table'			=> 'sys_language',
-				'foreign_table_where'	=> 'ORDER BY sys_language.title',
-				'items' => array(
-					array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
-				),
-			)
-		),
 		'hidden' => array(
 			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',

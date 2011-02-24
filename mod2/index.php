@@ -625,7 +625,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
 		$out .= '&edit[tx_newsletter_domain_model_recipientlist]['.$uid.']=edit">';
 		$out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
-		$out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'mailtargets.gif" />';
+		$out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'/Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif" />';
 		$out .= "$title ($uid)";
 	  
 		return $out;

@@ -213,7 +213,7 @@ abstract class tx_newsletter_tools {
 					'recipient_address' => $receiver['email'],
 					'recipient_data' => serialize($receiver),
 					'host' => $host,
-					'pid' => $newsletter->getPid,
+					'pid' => $newsletter->getPid(),
 					'newsletter' => $newsletter->getUid(),
 				));
 			}
