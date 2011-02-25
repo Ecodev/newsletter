@@ -4,35 +4,50 @@
  */
 require ('browserrun.php');
 
-$authcode = addslashes($_REQUEST['c']);
-$linkid = intval($_REQUEST['l']);
-$linktype = addslashes($_REQUEST['t']);
-$sendid = intval($_REQUEST['s']);
+$authcode = addslashes(@$_REQUEST['l']);
+$isPlain = @$_REQUEST['p'] ? '1' : '0';
+$url = @$_REQUEST['url'];
 
-$where_clause = "WHERE authcode = '$authcode' AND linkid = $linkid AND uid = $sendid AND linktype = '$linktype'";
+// Insert an email-link record to register which user clicked on which link
+$TYPO3_DB->sql_query("
+INSERT INTO tx_newsletter_domain_model_linkopened (link, email, is_plain)
+SELECT tx_newsletter_domain_model_link.uid AS link, tx_newsletter_domain_model_email.uid AS email, $isPlain AS is_plain 
+FROM tx_newsletter_domain_model_email
+LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+LEFT JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
+WHERE
+MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authcode'
+");
 
-/* Register this link */ 
-$TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_clicklink 
-                       INNER JOIN tx_newsletter_domain_model_email ON tx_newsletter_domain_model_clicklink.sentlog = tx_newsletter_domain_model_email.uid
-                       SET opened = 1 $where_clause"); 
+// Increment the total count of clicks for the link opened (so if the emails record are deleted, we still know how many times the link was opened)
+$TYPO3_DB->sql_query("
+UPDATE tx_newsletter_domain_model_email
+LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+LEFT JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
+SET tx_newsletter_domain_model_link.opened_count = tx_newsletter_domain_model_link.opened_count + 1 
+WHERE
+MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authcode'
+");
 
-/* Register the user */
-$TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET beenthere = 1 WHERE authcode = '$authcode' AND uid = $sendid");
 
-
-$rs = $TYPO3_DB->sql_query("SELECT target, user_uid FROM tx_newsletter_domain_model_email WHERE authcode = '$authcode' AND uid = $sendid");
-if (list($targetUid, $userUid) = $TYPO3_DB->sql_fetch_row($rs)) {
-	$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($targetUid);
-	$target->registerClick($userUid);
+// Forward which user clicked the link to the recipientList so the recipientList may take appropriate action
+$rs = $TYPO3_DB->sql_query("
+SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
+FROM tx_newsletter_domain_model_email
+LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+LEFT JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
+WHERE
+MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authcode'
+AND recipient_list IS NOT NULL
+");
+if (list($recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
+	$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($recipientListUid);
+	if ($target)
+	{
+		$target->registerClick($email);
+	}
 }
 
-
-
-/* Deliver the real url */
-$rs = $TYPO3_DB->sql_query("SELECT url FROM tx_newsletter_domain_model_clicklink 
-                            INNER JOIN tx_newsletter_domain_model_email ON tx_newsletter_domain_model_clicklink.sentlog = tx_newsletter_domain_model_email.uid
-                            $where_clause");
-                              
-list($url) = $TYPO3_DB->sql_fetch_row($rs);
-header ("Location: $url");
+// Finally redirect to the destination URL
+header("Location: $url");
 

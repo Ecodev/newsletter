@@ -67,7 +67,7 @@ t3lib_extMgm::allowTableOnStandardPages('tx_newsletter_domain_model_email');
 $TCA['tx_newsletter_domain_model_email'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email',
-		'label' 			=> 'begin_time',
+		'label' 			=> 'recipient_address',
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',
 		'delete' 			=> 'deleted',

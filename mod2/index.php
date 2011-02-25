@@ -357,7 +357,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$id = intval($_REQUEST['id']);
 		$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = ".intval($_REQUEST[id]));
 		$page = $TYPO3_DB->sql_fetch_assoc($rs);
-		$domain = tx_newsletter_tools::getDomainForPage($page);
+		$domain = $this->newsletter->getDomain();
 		$html_src = file_get_contents("http://$domain/index.php?id=$id&no_cache=1");
 
 		/* Any linked CSS-files */
@@ -545,9 +545,10 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = $_REQUEST[id]");
 		$page = $TYPO3_DB->sql_fetch_assoc($rs);
 	  
-		$mailer = tx_newsletter_tools::getConfiguredMailer($page);
-		$targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
+		$mailer = tx_newsletter_tools::getConfiguredMailer($this->newsletter);
 	  
+		
+		$out .= '<p>' . $this->editTarget($this->newsletter->getRecipientList()) . '</p>';
 		$out .= '<table>';
 		$out .= '<tr>';
 		$out .= '<td><b>'.$LANG->getLL('receiver').'</b></td>';
@@ -557,49 +558,49 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$out .= '<td><b>'.$LANG->getLL('preview').'</b></td>';
 		$out .= '</tr>';
 
-	  
-		foreach ($targets as $tid) {
-			$tobj = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($tid);
+		$recipientList = $this->newsletter->getRecipientListConcreteInstance();
 
-			$out .= '<tr><td colspan="5"><b>'.$this->editTarget($tid).'</b></td></tr>';
-
-			while ($record = $tobj->getRecord()) {
-				$out .= '<tr>';
-				$out .= "<td><a href=\"mailto:$record[email]\">$record[email]</td>";
-
-
-				/* Number of fields */
-				$num_fields = count($record);
-
-				/* Number of unsubstituted fields */
-				$mailer->prepare($record);
-				preg_match_all('|###[a-z0-9_]+###|i', $mailer->html, $nonfields_html);
-				preg_match_all('|###[a-z0-9_]+###|i', $mailer->plain, $nonfields_plain);
-				$num_nonfields = max (count ($nonfields_html[0]), count ($nonfields_plain[0]));
+		while ($record = $recipientList->getRecord())
+		{
+			// Build a fake email
+			$email = new Tx_Newsletter_Domain_Model_Email();
+			$email->setRecipientAddress($record['email']);
+			$email->setRecipientData($record);
+			
+			$out .= '<tr>';
+			$out .= "<td><a href=\"mailto:$record[email]\">$record[email]</td>";
 
 
-				/* Ok fields icon? */
-				$status_url = $GLOBALS['BACK_PATH'].'gfx';
-				if ($num_nonfields != 0) {
-					$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_fatalerror.gif" /></td>';
-				} else {
-					$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_ok.gif" /></td>';
-				}
+			/* Number of fields */
+			$num_fields = count($record);
 
-				$out .= "<td>$num_fields</td>";
-				$out .= "<td>$num_nonfields</td>";
-				$out .= '<td>';
+			// Number of unsubstituted fields
+			$mailer->prepare($email);
+			preg_match_all('|###[a-z0-9_]+###|i', $mailer->getHtml(), $nonfields_html);
+			preg_match_all('|###[a-z0-9_]+###|i', $mailer->getPlain(), $nonfields_plain);
+			$num_nonfields = max(count($nonfields_html[0]), count($nonfields_plain[0]));
 
-				if (!$record['plain_only']) {
-					$out .= $this->previewLink('html', $record['email']);
-				} else {
-					$out .= $GLOBALS['LANG']->getLL('preview_html');
-				}
-
-				$out .= '&nbsp;'.$this->previewLink('plain', $record['email']).'</td>';
-				$out .= "</tr>\n";
-
+			/* Ok fields icon? */
+			$status_url = $GLOBALS['BACK_PATH'].'gfx';
+			if ($num_nonfields != 0) {
+				$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_fatalerror.gif" /></td>';
+			} else {
+				$out .= '<td><img src="'.$GLOBALS['BACK_PATH'].'gfx/icon_ok.gif" /></td>';
 			}
+
+			$out .= "<td>$num_fields</td>";
+			$out .= "<td>$num_nonfields</td>";
+			$out .= '<td>';
+
+			if (!$record['plain_only']) {
+				$out .= $this->previewLink($this->newsletter, 'html', $record['email']);
+			} else {
+				$out .= $GLOBALS['LANG']->getLL('preview_html');
+			}
+
+			$out .= '&nbsp;'.$this->previewLink($this->newsletter, 'plain', $record['email']).'</td>';
+			$out .= "</tr>\n";
+
 		}
 	  
 		$out .= '</table>';
@@ -607,26 +608,21 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		return $out;
 	}
 
-	function previewLink($type, $email) {
+	function previewLink(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $type, $email) {
 		return '<a target="_new" href="'.$GLOBALS['BACK_PATH']
 		.t3lib_extMgm::extRelPath('newsletter')
-		.'web/preview.php?email='.rawurlencode($email).'&type='.$type.'&uid='.$_REQUEST['id'].'">'
+		.'web/preview.php?newsletter='. $newsletter->getUid() .'&email='.rawurlencode($email).'&type='.$type.'">'
 		.$GLOBALS['LANG']->getLL("preview_$type")
 		.'</a>';
 	}
 
-	function editTarget($uid) {
-		global $TYPO3_DB;
+	function editTarget(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
 		global $BACK_PATH;
-	  
-		$rs = $TYPO3_DB->exec_SELECTquery('title', 'tx_newsletter_domain_model_recipientlist', "uid = $uid");
-		list($title) = $TYPO3_DB->sql_fetch_row($rs);
 
 		$out .= '<a href="'.$BACK_PATH.'alt_doc.php?returnUrl='.rawurlencode(t3lib_div::getIndpEnv("REQUEST_URI"));
-		$out .= '&edit[tx_newsletter_domain_model_recipientlist]['.$uid.']=edit">';
-		$out .= '<img src="'.$BACK_PATH.'gfx/edit2.gif" />';
-		$out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'/Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif" />';
-		$out .= "$title ($uid)";
+		$out .= '&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit">';
+		$out .= '<img src="'.$BACK_PATH.t3lib_extMgm::extRelPath('newsletter').'/Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif" /> ';
+		$out .= $recipientList->getTitle() . ' (' . $recipientList->getUid() . ')';
 	  
 		return $out;
 	}

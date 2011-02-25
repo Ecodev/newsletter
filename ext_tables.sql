@@ -114,6 +114,7 @@ CREATE TABLE tx_newsletter_domain_model_link (
 	
 	url varchar(255) DEFAULT '' NOT NULL,
 	newsletter int(11) unsigned DEFAULT '0',
+	opened_count int(11) unsigned NOT NULL DEFAULT '0',
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

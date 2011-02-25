@@ -1,45 +1,44 @@
 <?php
 require('browserrun.php');
-require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_mailer.php");
 require_once(t3lib_extMgm::extPath('newsletter')."class.tx_newsletter_tools.php");
 
-/* Load the page */
-$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', 'uid = '.intval($_REQUEST['uid']));
-$page = $TYPO3_DB->sql_fetch_assoc($rs);
-
-/* DONT encode images..   really n/a here */
-$theConf = unserialize ($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
-$theConf['attach_images'] = 0;
+// Override settings to NOT embed images inlines (doesn't make sense for web display)
+$theConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
+$theConf['attach_images'] = false;
 $TYPO3_CONF_VARS['EXT']['extConf']['newsletter'] = serialize($theConf);
 
-$mailer = tx_newsletter_tools::getConfiguredMailer($page);
-$targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
 
-/* Search the user */
-foreach ($targets as $tid) {
-    $tobj = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($tid);
-    
-     while ($record = $tobj->getRecord()) {
-     
-        /* Got it */
-        if ($record['email'] == $_REQUEST['email']) {
-	    $mailer->prepare($record);
-	
-	    if ($_REQUEST['type'] == 'plain') {
-		print ('<html><head><title>'.$page['title'].'</title></head><body><pre>');
-		print ($mailer->plain);
-		print ('</body></html>');
-	    } else {
-		print (str_replace('<head>', "<head><title>$page[title]</title>", $mailer->html));
-	    }
-	    
-	    exit(0);
+$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+$newsletter = $newsletterRepository->findByUid($_REQUEST['newsletter']);
+if (!$newsletter)
+	die();
+
+// Find the recipient
+$recipientList = $newsletter->getRecipientListConcreteInstance();
+while ($record = $recipientList->getRecord()) {
+	 
+	// Got him
+	if ($record['email'] == $_REQUEST['email'])
+	{
+		// Build a fake email
+		$email = new Tx_Newsletter_Domain_Model_Email();
+		$email->setRecipientAddress($record['email']);
+		$email->setRecipientData($record);
+		
+		$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter);
+		$mailer->prepare($email);
+
+		if (@$_REQUEST['type'] == 'plain') {
+			echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><pre>';
+			echo $mailer->getPlain();
+			echo '</pre></body></html>';
+		} else {
+			echo $mailer->getHtml();
+		}
+		 
+		die();
 	}
-     }
-     
-
 }
 
 print ('Receiver couldnt be found :-(');
 
-?>

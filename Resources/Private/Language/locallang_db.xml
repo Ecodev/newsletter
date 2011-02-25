@@ -80,6 +80,7 @@
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>
 			<label index="tx_newsletter_domain_model_link.url">Url</label>
+			<label index="tx_newsletter_domain_model_link.opened_count">Opened count</label>
 			<label index="tx_newsletter_domain_model_link.newsletter">Newsletter</label>
 		</languageKey>
 	</data>

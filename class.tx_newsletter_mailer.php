@@ -56,6 +56,22 @@ class tx_newsletter_mailer {
 		$this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
 		$this->realPath = PATH_site;
 	}
+
+	/**
+	 * Returns the current HTML content
+	 */
+	public function getHtml()
+	{
+		return $this->html;
+	}
+	
+	/**
+	 * Returns the current Plain Text content
+	 */
+	public function getPlain()
+	{
+		return $this->plain;
+	}
 	
 	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '')
 	{
@@ -182,7 +198,7 @@ class tx_newsletter_mailer {
 					
 					// Mark places for embedded files and keep the embed files to be replaced
 					$get_url = str_replace($this->siteUrl, '', $url);
-					$swiftEmbeddedMarker = '###_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_###';
+					$swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
 					
 					$this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($this->realPath . $get_url);
 					
@@ -365,7 +381,7 @@ class tx_newsletter_mailer {
 		
 		
 		$authCode = md5($email->getAuthCode() . $linkId);
-		$newUrl = $this->homeUrl . 'web/click.php?l=' . $authCode . '&url=' . urlencode($url) . ($isPlainText ? '&plain=1' : '');
+		$newUrl = $this->homeUrl . 'web/click.php?url=' . urlencode($url) . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
 		
 		return $newUrl;
 	}
