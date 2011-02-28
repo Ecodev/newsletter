@@ -530,12 +530,14 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_domain_model_recipientlist WHERE uid = $uid");
 		$fields = $TYPO3_DB->sql_fetch_assoc($rs);
 		$object = new $fields['type'];
-		if (is_subclass_of($object, 'Tx_Newsletter_Domain_Model_RecipientList')) {
-			$object->fields = $fields;
-			return $object;
-		} else {
+		if (!is_subclass_of($object, 'Tx_Newsletter_Domain_Model_RecipientList'))
+		{
 			die ("Ooops..   $fields[targettype] is not a Tx_Newsletter_Domain_Model_RecipientList child class");
 		}
+		
+		$object->fields = $fields;
+		$object->uid = $uid;
+		return $object;
 	}
    
 	/**
@@ -693,8 +695,8 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 			$out = '<table style="border: 1px grey solid; border-collapse: collapse;">'.$out.'</table>';
 			
 			$out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
-			(<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=$uid\">export XML</a>, "
-			.'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=$uid\">export CSV</a>"
+			(<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export XML</a>, "
+			.'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export CSV</a>"
 			.')</p>';
 		}
 		

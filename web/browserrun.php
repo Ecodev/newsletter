@@ -1,11 +1,13 @@
 <?php
-unset($MCONF);
-define('TYPO3_MODE','FE');
+
+// DO NOT REMOVE OR CHANGE THESE LINES:
+define('TYPO3_MOD_PATH', '../typo3conf/ext/newsletter/web/');
+$BACK_PATH = '../../../../typo3/';
+define('TYPO3_MODE', 'FE');
 define('TYPO3_PROCEED_IF_NO_USER', TRUE);
 define('PATH_thisScript', __FILE__);
 
-require('conf.php');
-require($BACK_PATH.'init.php');
+require(dirname(__FILE__) . '/../../../../typo3/init.php');
 
 
 function initTSFE($pageUid = 1, $overrule = FALSE) {
