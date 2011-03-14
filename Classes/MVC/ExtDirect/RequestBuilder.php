@@ -1,262 +1,134 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com>
-*  All rights reserved
-*
-*  This class is a backport of the corresponding class of FLOW3.
-*  All credits go to the v5 team.
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+declare(ENCODING = 'utf-8');
+
+/*                                                                        *
+ * This script belongs to the FLOW3 package "ExtJS".                      *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU Lesser General Public License as published by the *
+ * Free Software Foundation, either version 3 of the License, or (at your *
+ * option) any later version.                                             *
+ *                                                                        *
+ * This script is distributed in the hope that it will be useful, but     *
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+ * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
+ * General Public License for more details.                               *
+ *                                                                        *
+ * You should have received a copy of the GNU Lesser General Public       *
+ * License along with the script.                                         *
+ * If not, see http://www.gnu.org/licenses/lgpl.html                      *
+ *                                                                        *
+ * The TYPO3 project - inspiring people to share!                         *
+ *                                                                        */
 
 /**
- * Builds a Ext.Direct web request.
+ * The Ext Direct request builder
  *
- * @package MvcExtjs
- * @subpackage MVC\Web
- * @version $ID:$
- *
- * @scope prototype
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder {
+class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 
 	/**
-	 * This is a unique key for a plugin (not the extension key!)
-	 *
-	 * @var string
+	 * @inject
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */
-	protected $pluginName = 'plugin';
+	protected $objectManager;
 
 	/**
-	 * The name of the extension (in UpperCamelCase)
-	 *
-	 * @var string
+	 * @inject
+	 * @var Tx_Extbase_Configuration_ConfigurationManager
 	 */
-	protected $extensionName = 'MvcExtjs';
-
-	/**
-	 * The default controller name
-	 *
-	 * @var string
-	 */
-	protected $defaultControllerName = 'Default';
-
-	/**
-	 * The default action of the default controller
-	 *
-	 * @var string
-	 */
-	protected $defaultActionName = 'index';
-
-	/**
-	 * The allowed actions of the controller. This actions can be called via Ext.Direct
-	 *
-	 * @var array
-	 */
-	protected $allowedControllerActions;
+	protected $configurationManager;
 	
 	/**
-	 * @var Tx_Extbase_Reflection_Service
-	 */
-	protected $reflectionService;
-	
-	/**
-	 * Initializes the DirectRequestBuilder.
+	 * Injects the ObjectManager
 	 * 
-	 * @param array $configuration
-	 * @param Tx_Extbase_Reflection_Service $reflectionService
+	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
 	 */
-	public function initialize($configuration) {
-		if (!empty($configuration['pluginName'])) {
-			$this->pluginName = $configuration['pluginName'];
-		}
-		if (!empty($configuration['extensionName'])) {
-			$this->extensionName = $configuration['extensionName'];
-		}
-		if (!empty($configuration['controller'])) {
-			$this->defaultControllerName = $configuration['controller'];
-		} elseif (is_array($configuration['switchableControllerActions'])) {
-			$firstControllerActions = current($configuration['switchableControllerActions']);
-			$this->defaultControllerName = $firstControllerActions['controller'];
-		}
-		if (!empty($configuration['action'])) {
-			$this->defaultActionName = $configuration['action'];
-		} elseif (is_array($configuration['switchableControllerActions'])) {
-			$firstControllerActions = current($configuration['switchableControllerActions']);
-			$this->defaultActionName = array_shift(t3lib_div::trimExplode(',', $firstControllerActions['actions'], TRUE));
-		}
-		$allowedControllerActions = array();
-		if (is_array($configuration['switchableControllerActions'])) {
-			foreach ($configuration['switchableControllerActions'] as $controllerConfiguration) {
-				$controllerActions = t3lib_div::trimExplode(',', $controllerConfiguration['actions']);
-				foreach ($controllerActions as $actionName) {
-					$allowedControllerActions[$controllerConfiguration['controller']][] = $actionName;
-				}
-			}
-		}
-		$this->allowedControllerActions = $allowedControllerActions;
-		$this->reflectionService = t3lib_div::makeInstance('Tx_Extbase_Reflection_Service');
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+		$this->objectManager = $objectManager;
 	}
-
-	/**
-	 * Builds a Ext.Direct web request object from the raw HTTP information the configuration and the given
-	 * Ext.Direct request informations.
-	 * Note: Ext.Direct tells about action->method. Extbase knows about controller->action.
+	
+/**
+	 * Injects the ConfigurationManager
 	 * 
-	 * @param array $requestData
-	 * @return Tx_MvcExtjs_MVC_Web_DirectRequest The web request as an object
+	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+	 * @return void
 	 */
-	public function build($requestData) {	
-		$controllerName = str_replace('Controller','',$requestData['action']);
-		$actionName = str_replace('Action','',$requestData['method']);
-		$parameters = $requestData['data'];
-		$tid = $requestData['tid'];
-			
-		if (is_string($controllerName) && array_key_exists($controllerName, $this->allowedControllerActions)) {
-			$controllerName = filter_var($controllerName, FILTER_SANITIZE_STRING);
-			$allowedActions = $this->allowedControllerActions[$controllerName];
-			if (is_string($actionName) && is_array($allowedActions) && in_array($actionName, $allowedActions)) {
-				$actionName = filter_var($actionName, FILTER_SANITIZE_STRING);
-			} else {
-				$actionName = $this->defaultActionName;
-			}
+	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManager $configurationManager) {
+		$this->configurationManager = $configurationManager;
+	}
+	
+	/**
+	 * Builds an Ext Direct request
+	 *
+	 * @return \F3\ExtJS\ExtDirect\Request The built request
+	 */
+	public function build() {
+		$postArguments = $_POST;
+		if (isset($postArguments['extAction'])) {
+			throw new Tx_MvcExtjs_ExtJS_Exception('Form Post Request building is not yet implemented.', 1281379502);
+			$request = $this->buildFormPostRequest($postArguments);
 		} else {
-			$controllerName = $this->defaultControllerName;
-			$actionName = $this->defaultActionName;
-		}				
-		
-		$request = t3lib_div::makeInstance('Tx_MvcExtjs_MVC_ExtDirect_Request');
-		$request->setPluginName($this->pluginName);
-		$request->setControllerExtensionName($this->extensionName);
-		$request->setControllerName($controllerName);
-		$request->setControllerActionName($actionName);
-		$request->setRequestURI(t3lib_div::getIndpEnv('TYPO3_REQUEST_URL'));
-		$request->setBaseURI(t3lib_div::getIndpEnv('TYPO3_SITE_URL'));
-		$request->setTransactionId($tid);
-		$request->setType($requestData['type']);
-		$request->setMethod((isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : NULL);
-
-		if (is_string($parameters['format']) && (strlen($parameters['format']))) {
-			$request->setFormat(filter_var($parameters['format'], FILTER_SANITIZE_STRING));
-			unset($parameters['format']);
-		}
-		
-		$actionParameter = $this->reflectionService->getMethodParameters($request->getControllerObjectName(),$request->getControllerActionName() . 'Action');
-		
-		if (is_array($parameters)) {
-			foreach ($parameters as $argumentPosition => $incomingArgumentValue) {
-				$argumentName = $this->resolveArgumentName($argumentPosition,$actionParameter);
-				try {
-					$argumentValue = $this->transformArgumentValue($incomingArgumentValue,$actionParameter[$argumentName]);
-					$request->setArgument($argumentName, $argumentValue);
-				} catch (Tx_MvcExtjs_ExtJS_Exception $e) {}
-				//t3lib_div::sysLog('$argumentName: '.print_r($argumentName,true),'MVC_ExtJs',0);
-				//t3lib_div::sysLog('$argumentValue: '.print_r($argumentValue,true),'MVC_ExtJs',0);
-			}
+			$request = $this->buildJsonRequest();
 		}
 		return $request;
 	}
-	
+
 	/**
-	 * Transforms the incoming arguments from the Ext.Direct request into
-	 * the argument syntax that is used by fluid and extbase.
-	 * 
-	 * @param mixed $incomingArgumentValueDescription
-	 * @param array $actionParameterDescription
-	 * @return mixed
+	 * Builds a Json Ext Direct request by reading the transaction data from
+	 * standard input.
+	 *
+	 * @return Tx_MvcExtjs_ExtDirect_Request The Ext Direct request object
+	 * @throws Tx_MvcExtjs_ExtDirect_Exception_InvalidExtDirectRequestException
+	 * @author Christopher Hlubek <hlubek@networkteam.com>
+	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	protected function transformArgumentValue($incomingArgumentValueDescription, $actionParameterDescription) {
-		if (is_array($incomingArgumentValueDescription)) {
-			if ($actionParameterDescription['type'] === 'array') {
-				return $incomingArgumentValueDescription;
-			}
-			if ($actionParameterDescription['type'] === 'object' || $actionParameterDescription['class'] !== '') {
-					// REFACTOR THIS! we handle store requests special here, by asking for data....
-					// first:  eval if the object data is nested in data or not.
-				$propertyIterationArray = array();
-				if (isset($incomingArgumentValueDescription['data'])) {
-					$propertyIterationArray = $incomingArgumentValueDescription['data'];
-				} else {
-					$propertyIterationArray = $incomingArgumentValueDescription;
-				}
-				if (count($propertyIterationArray) === 0) throw new Tx_MvcExtjs_ExtJS_Exception('we want to map an not existing argument', 1288187158); 
-					// second: eval if a uid is given.
-				if (isset($propertyIterationArray['uid'])) {
-					$uid = (int) $propertyIterationArray['uid'];
-					unset($propertyIterationArray['uid']);
-				} else if(!is_array($propertyIterationArray)) {
-					$uid = (int) $propertyIterationArray;
-					$propertyIterationArray = array();
-				} else {
-					$uid = FALSE;
-				}
-				$argumentValueDescription = array();
-				foreach ($propertyIterationArray as $propertyName => $propertyValue) {
-					if ($propertyValue === NULL) {
-						continue;
-					} else if(is_array($propertyValue) && $propertyValue['uid']) {
-						$argumentValueDescription[$propertyName]['__identity'] = $propertyValue['uid'];
-					} else if(is_array($propertyValue) && !$propertyValue['uid'] && count($propertyValue) > 0) {
-						foreach ($propertyValue as $propertyValueChild) {
-								// we have a relation that has to be removed...
-								// there is some bug when clearing this completely
-							$hackedShitArray = array();
-							if ($propertyValueChild['uid']) {
-								$hackedShitArray['__identity'] = $propertyValueChild['uid'];
-							}
-							if ($propertyValueChild['deleted']) {
-								$hackedShitArray['deleted'] = $propertyValueChild['deleted'];
-							}
-							$argumentValueDescription[$propertyName][] = $hackedShitArray;
-						}	
-					} else {
-						$argumentValueDescription[$propertyName] = $propertyValue;
-					}
-				}
-				
-				if ($uid !== FALSE) {
-					$argumentValueDescription['__identity'] = $uid;
-				}
-				return $argumentValueDescription;
-				
-			}
-		} else {
-			return $incomingArgumentValueDescription;
+	protected function buildJsonRequest() {
+		$transactionDatas = $GLOBALS['HTTP_RAW_POST_DATA'];
+
+		if ( ($transactionDatas = json_decode($transactionDatas)) === NULL) {
+			throw new Tx_MvcExtjs_ExtDirect_Exception_InvalidExtDirectRequestException('The request is not a valid Ext Direct request', 1268490738);
 		}
-	}
-	
-	/**
-	 * Resolves the name of the argument.
-	 * 
-	 * @param int $argumentPosition
-	 * @param array $actionParameters
-	 * @return string
-	 */
-	protected function resolveArgumentName($argumentPosition, array $actionParameters) {
-		foreach ($actionParameters as $argumentName => $argumentConfiguration) {
-			if ($argumentPosition === $argumentConfiguration['position']) {
-				return $argumentName;
-			}
+		
+		if (!is_array($transactionDatas)) $transactionDatas = array($transactionDatas);
+		
+		$request = $this->objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_Request');
+		foreach ($transactionDatas as $transactionData) {
+			$request->createAndAddTransaction(
+				$transactionData->action,
+				$transactionData->method,
+				is_array($transactionData->data) ? $transactionData->data : array(),
+				$transactionData->tid
+			);
 		}
-		throw new Tx_Extbase_MVC_Exception_NoSuchArgument('Could not map a Ext.Direct argument to it\'s action. There is no argument expected for position ' . $argumentPosition,1277724391);
+		return $request;
 	}
 
+	/**
+	 * Builds a Form Post Ext Direct Request
+	 *
+	 * @return Tx_MvcExtjs_ExtDirect_Request The Ext Direct request object
+	 * @author Christopher Hlubek <hlubek@networkteam.com>
+	 * @author Robert Lemke <robert@typo3.org>
+	 * @todo Well... make it work, eh?
+	 */
+	protected function buildFormPostRequest() {
+		$directRequest->setFormPost(TRUE);
+		$directRequest->setFileUpload($request->getArgument('extUpload') === 'true');
+
+		$packageKey = $request->getArgument('packageKey');
+		$subpackageKey = $request->hasArgument('subpackageKey') ? $request->getArgument('subpackageKey') : '';
+
+		$directRequest->addTransaction(
+			$request->getArgument('extAction'),
+			$request->getArgument('extMethod'),
+			NULL,
+			$request->getArgument('extTID'),
+			$packageKey,
+			$subpackageKey
+		);
+	}
 }
 ?>

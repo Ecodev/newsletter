@@ -1,199 +1,131 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com>
-*  All rights reserved
-*
-*  This class is a backport of the corresponding class of FLOW3.
-*  All credits go to the v5 team.
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+declare(ENCODING = 'utf-8');
+
+/*                                                                        *
+ * This script belongs to the FLOW3 package "ExtJS".                      *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU Lesser General Public License as published by the *
+ * Free Software Foundation, either version 3 of the License, or (at your *
+ * option) any later version.                                             *
+ *                                                                        *
+ * This script is distributed in the hope that it will be useful, but     *
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+ * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
+ * General Public License for more details.                               *
+ *                                                                        *
+ * You should have received a copy of the GNU Lesser General Public       *
+ * License along with the script.                                         *
+ * If not, see http://www.gnu.org/licenses/lgpl.html                      *
+ *                                                                        *
+ * The TYPO3 project - inspiring people to share!                         *
+ *                                                                        */
 
 /**
- * Represents a Ext.Direct request.
+ * An Ext Direct request
  *
- *
- * TODO: When extbase request handling is made dont extends Tx_Extbase_MVC_Web_Request
- * but extend Tx_Extbase_MVC_Request
- * @package MvcExtjs
- * @subpackage MVC\Web
- * @version $ID:$
- *
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
- * @api
  */
-class Tx_MvcExtjs_MVC_ExtDirect_Request extends Tx_Extbase_MVC_Web_Request {
-	
-	/**
-	 * @var int The transaction id.
-	 */
-	protected $tid = 0;
-	
-	/**
-	 * @var string
-	 */
-	protected $type;
-	
-	/**
-	 * @var string The requested representation format
-	 */
-	protected $format = 'json';
+class Tx_MvcExtjs_MVC_ExtDirect_Request {
 
 	/**
-	 * @var string Contains the request method
+	 * @inject
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */
-	protected $method = 'POST';
+	protected $objectManager;
 
 	/**
-	 * @var string
+	 * The transactions inside this request
+	 *
+	 * @var array
 	 */
-	protected $requestURI;
+	protected $transactions = array();
 
 	/**
-	 * @var string The base URI for this request - ie. the host and path leading to the index.php
+	 * True if this request is a form post
+	 *
+	 * @var boolean
 	 */
-	protected $baseURI;
+	protected $formPost = FALSE;
 
 	/**
-	 * @var boolean TRUE if the current request is cached, false otherwise.
+	 * True if this request is containing a file upload
+	 *
+	 * @var boolean
 	 */
-	protected $isCached = FALSE;
+	protected $fileUpload = FALSE;
 	
 	/**
-	 * Sets the Transaction Id (tid).
+	 * Injects the ObjectManager
 	 * 
-	 * @param int $tid
+	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
 	 */
-	public function setTransactionId($tid) {
-		$this->tid = $tid;
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+		$this->objectManager = $objectManager;
 	}
-	
+
 	/**
-	 * Returns the Transaction Id (tid).
-	 * 
-	 * @return int
-	 */
-	public function getTransactionId() {
-		return $this->tid;
-	}
-	
-	/**
-	 * Returns the type.
-	 * 
+	 * Creates an Ext Direct Transaction and adds it to the request instance.
+	 *
+	 * @param string $action The "action" – the "controller object name" in FLOW3 terms
+	 * @param string $method The "method" – the "action name" in FLOW3 terms
+	 * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method
+	 * @param mixed $tid The ExtDirect transaction id
 	 * @return void
 	 */
-	public function setType($type) {
-		$this->type = $type;
-	}
-	
-	/**
-	 * Gets the type.
-	 * 
-	 * @return string
-	 */
-	public function getType() {
-		return $this->type;
-	}
-	
-	/**
-	 * Sets the request method
-	 *
-	 * @param string $method Name of the request method
-	 * @return void
-	 * @throws Tx_Extbase_MVC_Exception_InvalidRequestMethod if the request method is not supported
-	 */
-	public function setMethod($method) {
-		if ($method === '' || (strtoupper($method) !== $method)) throw new Tx_Extbase_MVC_Exception_InvalidRequestMethod('The request method "' . $method . '" is not supported.', 1217778382);
-		$this->method = $method;
+	public function createAndAddTransaction($action, $method, array $data, $tid) {
+		$transaction = $this->objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_Transaction', $this, $action, $method, $data, $tid);
+		$this->transactions[] = $transaction;
 	}
 
 	/**
-	 * Returns the name of the request method
+	 * Getter for transactions.
 	 *
-	 * @return string Name of the request method
-	 * @api
+	 * @return array
 	 */
-	public function getMethod() {
-		return $this->method;
+	public function getTransactions() {
+		return $this->transactions;
 	}
 
 	/**
-	 * Sets the request URI
+	 * Whether this request represents a form post or not.
 	 *
-	 * @param string $requestURI URI of this web request
+	 * @return boolean
+	 */
+	public function isFormPost() {
+		return $this->formPost;
+	}
+
+	/**
+	 * Marks this request as representing a form post or not.
+	 *
+	 * @param boolean $formPost
 	 * @return void
 	 */
-	public function setRequestURI($requestURI) {
-		$this->requestURI = $requestURI;
+	public function setFormPost($formPost) {
+		$this->formPost = $formPost;
 	}
 
 	/**
-	 * Returns the request URI
+	 * Whether this request represents a file upload or not.
 	 *
-	 * @return string URI of this web request
-	 * @api
+	 * @return boolean
 	 */
-	public function getRequestURI() {
-		return $this->requestURI;
+	public function isFileUpload() {
+		return $this->fileUpload;
 	}
 
 	/**
-	 * Sets the base URI for this request.
+	 * Marks this request as representing a file upload or not.
 	 *
-	 * @param string $baseURI New base URI
+	 * @param boolean $fileUpload
 	 * @return void
 	 */
-	public function setBaseURI($baseURI) {
-		$this->baseURI = $baseURI;
+	public function setFileUpload($fileUpload) {
+		$this->fileUpload = $fileUpload ? TRUE : FALSE;
 	}
 
-	/**
-	 * Returns the base URI
-	 *
-	 * @return string Base URI of this web request
-	 * @api
-	 */
-	public function getBaseURI() {
-		if (TYPO3_MODE === 'BE') {
-			return $this->baseURI . TYPO3_mainDir;
-		} else {
-			return $this->baseURI;
-		}
-	}
-	
-	/**
-	 * Set if the current request is cached.
-	 * 
-	 * @param boolean $isCached
-	 */
-	public function setIsCached($isCached) {
-		$this->isCached = (boolean) $isCached;
-	} 
-	/**
-	 * Return whether the current request is a cached request or not.
-	 * 
-	 * @api (v4 only)
-	 * @return boolean the caching status.
-	 */
-	public function isCached() {
-		return $this->isCached;
-	}
 }
 ?>
