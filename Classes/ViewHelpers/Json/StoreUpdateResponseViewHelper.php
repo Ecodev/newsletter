@@ -37,20 +37,32 @@ class Tx_MvcExtjs_ViewHelpers_Json_StoreUpdateResponseViewHelper extends Tx_Flui
 	/**
 	 * Renders a JSON response for a ExtJS CRUD store read request.
 	 * 
-	 * @param array $data
+	 * @param array $data DEPRECATED use $object or $objects instead!
+	 * @param object $object
+	 * @param array $objects
 	 * @param string $message
 	 * @param boolean $success
-	 * @param array columns
 	 * @return string
 	 */
-	public function render(array $data = array(), $message = 'default message', $success = TRUE, array $columns = array()) {
-		$this->columns = $columns;
+	public function render(array $data = NULL, $object = NULL, array $objects = array(), $message = 'default message', $success = TRUE, array $columns = array()) {
 		$responseArray = array();
 		$responseArray['message'] = $message;
 		$responseArray['total'] = count($objects);
 		$responseArray['success'] = $success;
-
-		$responseArray['data'] = $data;
+			// while $data is still available, check that it is not used together with $object or $objects
+		if ($data !== NULL && ($object !== NULL || $objects !== NULL)) {
+			throw new Tx_MvcExtjs_ExtJS_Exception('$data should not be used together with $object or $objects',1277981799);
+		}
+		if (is_array($data)) {
+			$responseArray['data'] = $data;
+		} else if ($object !== NULL) {
+			$responseArray['data'] = Tx_MvcExtjs_ExtJS_Utility::encodeObjectForJSON($object, $columns);
+		} else {
+			$responseArray['data'] = array();
+			foreach ($objects as $object) {
+				$responseArray['data'][] = Tx_MvcExtjs_ExtJS_Utility::encodeObjectForJSON($object, $columns);
+			}
+		}
 
 		return json_encode($responseArray);
 	}

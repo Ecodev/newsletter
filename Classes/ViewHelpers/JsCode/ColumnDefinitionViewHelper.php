@@ -57,13 +57,21 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcEx
 	 * @param string $name is used as variable name AND storeId for the generated store
 	 * @param string $extensionName
 	 * @param array $columns
+	 * @param array $specialRenderer
+	 * @param array $specialWidth
+	 * @param array $specialHeader
+	 * @param array $editors
 	 * @return void
 	 */
 	public function render($domainModel = NULL,
 						   $extensionName = NULL,
 						   array $columns = array(),
 						   array $hiddenColumns = array(),
-						   array $specialRenderer = array()) {
+						   array $specialRenderer = array(),
+						   array $specialWidth = array(),
+						   array $specialHeader = array(),
+						   array $editors = array()) {
+
 
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
@@ -84,25 +92,48 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ColumnDefinitionViewHelper extends Tx_MvcEx
 
 		foreach ($rProperties as $rProperty) {
 			$columnDef = new Tx_MvcExtjs_CodeGeneration_JavaScript_ExtJS_Config();
-			// TODO: fetch label from TCA?
-			$columnDef->set('header', $rProperty->getName())
-					  ->set('dataIndex', $rProperty->getName())
-					  ->setRaw('sortable', 'true');
+
+			$columnDef->set('dataIndex', $rProperty->getName());
+					  	  
+			if (isset($specialHeader[$rProperty->getName()])) { 
+				$columnDef->set('header', $specialHeader[$rProperty->getName()]);
+			} else {
+				// TODO: fetch label from TCA?
+				$columnDef->set('header', $rProperty->getName());
+			} 
 			if (isset($specialRenderer[$rProperty->getName()])) { 
 				$columnDef->setRaw('renderer', $specialRenderer[$rProperty->getName()]);
+			}
+			if (isset($specialWidth[$rProperty->getName()])) { 
+				$columnDef->setRaw('width', $specialWidth[$rProperty->getName()]);
+			}
+			if (isset($editors[$rProperty->getName()])) { 
+				$columnDef->setRaw('editor', $editors[$rProperty->getName()]);
 			}
 			if (in_array($rProperty->getName(), $hiddenColumns)) {
 				$columnDef->setRaw('hidden', 'true');
 			} else {
 				$columnDef->setRaw('hidden', 'false');
 			}
-			$columnArray->addElement($columnDef);
+			if (($columns == array())||(in_array($rProperty->getName(), $columns))) {
+				$columnArray->addElement($columnDef);
+			}
 		}
 
 		$this->columnVariable = t3lib_div::makeInstance('Tx_MvcExtjs_CodeGeneration_JavaScript_Variable', $this->extJsNamespace . '.' . $varName, $columnArray);
 
-		$this->jsCode->addSnippet($this->columnVariable); 
 		$this->injectJsCode();
+	}
+	
+	/**
+	 * @see Classes/ViewHelpers/JsCode/Tx_MvcExtjs_ViewHelpers_JsCode_AbstractJavaScriptCodeViewHelper#injectJsCode()
+	 */
+	protected function injectJsCode() {
+			// Allow objects to be declared inside this viewhelper; they are rendered above
+		$this->renderChildren();
+			// Add the code and write it into the inline section in your HTML head
+		$this->jsCode->addSnippet($this->columnVariable); 
+		parent::injectJsCode();
 	}
 
 }

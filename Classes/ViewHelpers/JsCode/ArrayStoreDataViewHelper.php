@@ -117,7 +117,9 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreDataViewHelper extends Tx_MvcExtj
 				continue;
 			}
 			if ($value instanceof DateTime) {
-				$value = $value->format('U');
+				$value = $value->format('c');
+			}
+
 			}
 
 			$objectArray->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue($value));

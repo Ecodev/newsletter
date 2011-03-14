@@ -86,7 +86,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_MultiSelectFieldViewHelper extends Tx_MvcEx
 	 * @param int $maxSelections
 	 * @param string $minSelectionsText
 	 * @param string $maxSelectionsText
-	 * @return unknown_type
+	 * @return void
 	 */
 	public function render($domainModel = NULL,
 						   $extensionName = NULL,

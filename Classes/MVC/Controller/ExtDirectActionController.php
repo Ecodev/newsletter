@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Xavier Perseguers <typo3@perseguers.ch>
+*  (c) 2010 Dennis Ahrens <dennis.ahrens@fh-hannover.de>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,32 +23,27 @@
 ***************************************************************/
 
 /**
- * A ViewHelper which returns its input as a json-encoded string.
- *
- * = Examples =
+ * A Controller used for answering via AJAX speaking JSON
  * 
- * <f:json>{anyArray}</f:json>
- * 
- * 
- * @category    ViewHelpers
- * @package     TYPO3
- * @subpackage  tx_mvcextjs
- * @author      Xavier Perseguers <typo3@perseguers.ch>
+ * @package     MvcExtjs
+ * @subpackage  MVC/Controller
+ * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_JsonViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
-
+class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController {
+	
 	/**
-	 * Render a json-encoded string.
-	 *
-	 * @return string 
+	 * Initializes the View to be a Tx_MvcExtjs_ExtDirect_View that renders json without Template Files.
+	 * 
+	 * @return void
 	 */
-	public function render() {
-		$items = $this->renderChildren();
-		$arr = Tx_MvcExtjs_ExtJS_Utility::encodeArrayForJSON($items);
-		return Tx_MvcExtjs_ExtJS_Utility::getJSON($arr);
+	public function initializeView() {
+		if ($this->request->getFormat() === 'extdirect') {
+			$this->view = $this->objectManager->create('Tx_MvcExtjs_MVC_View_ExtDirectView');
+			$this->view->setControllerContext($this->controllerContext);
+		}
 	}
-
+	
 }
 ?>

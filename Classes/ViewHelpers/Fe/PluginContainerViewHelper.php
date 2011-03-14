@@ -61,7 +61,10 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 	 * @param string  $scriptaculousModule additionales modules for scriptaculous
 	 * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to FALSE
 	 * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to FALSE
-	 * @param string  $extJsAdapter load alternative adapter (ext-base is default adapter)
+	 * @param string  $extJsAdapter load alternative adapter (prototype is default adapter)
+	 * @param boolean $concatenate specifies if the loaded jsFiles should be concatenated into one file. Defaults to TRUE
+	 * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
+	 * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
 	 * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only
 	 * @see t3lib_PageRenderer
 	 */
@@ -72,20 +75,23 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 						   $loadExtJs = TRUE,
 						   $loadExtJsTheme = TRUE,
 						   $extJsAdapter = 'prototype',
+						   $concatenate = TRUE,
+						   $compressJs = TRUE,
+						   $compressCss= TRUE,
 						   $enableExtJsDebug = FALSE) {
 		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		$controllerName = $this->controllerContext->getRequest()->getControllerName();
 		$this->extJsNamespace = $extensionName . '.' . $controllerName;
 
-		if ($loadPrototype) {
+		if ($loadPrototype === TRUE) {
 			$this->pageRenderer->loadPrototype();
 		}
-		if ($loadScriptaculous) {
+		if ($loadScriptaculous === TRUE) {
 			$this->pageRenderer->loadScriptaculous($scriptaculousModule);
 		}
-		if ($loadExtJs) {
+		if ($loadExtJs === TRUE) {
 			$this->pageRenderer->loadExtJS(TRUE, $loadExtJsTheme, $extJsAdapter);
-			if ($enableExtJsDebug) {
+			if ($enableExtJsDebug === TRUE) {
 				$this->pageRenderer->enableExtJsDebug();
 			}
 		}
@@ -95,6 +101,18 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Plugin',$jsNS);
 
 		$this->renderChildren();
+		
+						   if ($compressJs === TRUE) {
+			$this->pageRenderer->enableCompressJavaScript();
+				// if compressJs is set, we have to tell the concaneting service to compress its code, too
+			tx_MvcExtjs_PageRenderer_Service::$compress = TRUE;
+		}
+		if ($compressCss === TRUE) {
+			$this->pageRenderer->enableCompressCss();
+		}
+		if ($concatenate === TRUE) {
+			$this->pageRenderer->enableConcatenateFiles();
+		}
 
 		$output .= '<div id="' . $divContainerId . '"></div>';
 		return $output;

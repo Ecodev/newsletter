@@ -105,14 +105,15 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonReaderViewHelper extends Tx_MvcExtjs_Vi
 			// Build up and set the for the JS store variable
 		$varNameReader = $domainModel . 'JsonReader';
 		$this->reader->setName($varNameReader);
-		$fields = Tx_MvcExtjs_ExtJS_Utility::getFieldsArray($domainClassName);
+		//$fields = Tx_MvcExtjs_ExtJS_Utility::getFieldsArray($domainClassName);
+		$fields = $this->createFieldsArray($domainClassName);
 
 			// Read the given config parameters into the Extjs Config Object
 		$this->config->set('totalProperty', $totalProperty)
 					 ->set('successProperty', $successProperty)
 					 ->set('idProperty', $idProperty)
 					 ->set('root', $root)
-					 ->setRaw('fields', $fields);
+					 ->setRaw('fields', json_encode($fields));
 
 			// Apply the configuration again
 		$this->reader->setConfig($this->config);
@@ -121,6 +122,39 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_JsonReaderViewHelper extends Tx_MvcExtjs_Vi
 			// Add the code and write it into the inline section in your HTML head
 		$this->jsCode->addSnippet($this->reader);
 		$this->injectJsCode();
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param string $className
+	 * @return array
+	 */
+	protected function createFieldsArray($className) {
+		$fields = array();
+		$classObject = t3lib_div::makeInstance($className);
+		$reflectionService = t3lib_div::makeInstance('Tx_Extbase_Reflection_Service');
+		$propertyNames = Tx_Extbase_Reflection_ObjectAccess::getAccessiblePropertyNames($classObject);
+		$i = 0;
+		foreach ($propertyNames as $propertyName) {
+			$fields[$i] = array(
+				'name' => $propertyName,
+			);
+			$propertyType = $reflectionService->getPropertyTagValues($className, $propertyName, 'var');
+			$propertyType = explode(' ',$propertyType[0]);
+			if ($propertyType[0] !== '') {
+				$fields[$i]['type'] = $propertyType[0];
+			}
+			if (substr($propertyType[0], 0,36) === 'Tx_Extbase_Persistence_ObjectStorage') {
+				$fields[$i]['type'] = 'array';
+			}
+			if ($propertyType[0] === 'DateTime'){
+				 $fields[$i]['type'] = 'date';
+				 $fields[$i]['dateFormat'] = 'c';
+			}
+			$i++;
+		}
+		return $fields;
 	}
 
 }

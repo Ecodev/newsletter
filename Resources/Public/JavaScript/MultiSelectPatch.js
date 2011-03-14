@@ -1,4 +1,4 @@
-Ext.override( Ext.ux.form.MultiSelect, {
+Ext.override(Ext.ux.form.MultiSelect, {
 	onRender: function(ct, position){
     	Ext.ux.form.MultiSelect.superclass.onRender.call(this, ct, position);
 
@@ -14,10 +14,10 @@ Ext.override( Ext.ux.form.MultiSelect, {
     	});
     	fs.body.addClass('ux-mselect');
 
-    	this.view = new Ext.ListView({
+    	this.view = new Ext.list.ListView({
     		multiSelect: true,
     		store: this.store,
-    		columns: [{ header: 'Value', width: 1, dataIndex: this.displayField }],
+    		columns: [{ header: 'Value', width: 1, dataIndex: this.displayField, tpl: this.tpl}],
     		hideHeaders: true
     	});
 
@@ -33,4 +33,29 @@ Ext.override( Ext.ux.form.MultiSelect, {
     	this.hiddenField.dom.disabled = this.hiddenName != this.name;
     	fs.doLayout();
 	},
+	
+	afterRender: function() {
+        Ext.ux.form.MultiSelect.superclass.afterRender.call(this);
+
+        if (this.ddReorder && !this.dragGroup && !this.dropGroup){
+            this.dragGroup = this.dropGroup = 'MultiselectDD-' + Ext.id();
+        }
+
+        if (this.draggable || this.dragGroup){
+            this.dragZone = new Ext.ux.form.MultiSelect.DragZone(this, {
+                ddGroup: this.dragGroup
+            });
+        }
+        if (this.droppable || this.dropGroup){
+            this.dropZone = new Ext.ux.form.MultiSelect.DropZone(this, {
+                ddGroup: this.dropGroup
+            });
+        }
+        
+        this.loadMask = new Ext.LoadMask(this.getEl(), Ext.apply({store:this.store}, this.loadMask));
+    },
+    
+    validateValue: function() {
+    	
+    }
 });

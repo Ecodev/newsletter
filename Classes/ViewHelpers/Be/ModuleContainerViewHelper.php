@@ -30,7 +30,8 @@
  * = Examples =
  *
  * <code title="Simple">
- * <f:be.container>your additional viewhelpers inside</f:be.container>
+ * {namespace ext=Tx_MvcExtjs_ViewHelpers}
+ * <ext:be.container>your additional viewhelpers inside</ext:be.container>
  * </code>
  *
  * Output:
@@ -38,8 +39,8 @@
  * Default backend CSS styles and JavaScript will be included
  *
  * <code title="All options">
- * {namespace mvcextjs=Tx_MvcExtjs_ViewHelpers}
- * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true">your module content</f:be.container>
+ * {namespace ext=Tx_MvcExtjs_ViewHelpers}
+ * <ext:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
  * </code>
  *
  * @category    ViewHelpers
@@ -57,38 +58,40 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 	 *
 	 * @param string  $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
 	 * @param boolean $enableJumpToUrl If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
-	 * @param boolean $enableClickMenu If TRUE, loads clickmenu.js required by BE context menus. Defaults to TRUE
-	 * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to TRUE
+	 * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to FALSE
 	 * @param boolean $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
 	 * @param string  $scriptaculousModule additionales modules for scriptaculous
-	 * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to FALSE
-	 * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to FALSE
+	 * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to TRUE
+	 * @param boolean $loadExtCore specifies whether to load ExtJS library. Defaults to TRUE
+	 * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to TRUE
 	 * @param string  $extJsAdapter load alternative adapter (ext-base is default adapter)
-	 * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only
+	 * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only.
+	 * @param boolean $concatenate specifies if the loaded jsFiles should be concatenated into one file. Defaults to TRUE
+	 * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
+	 * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
 	 * @param boolean $enableExtJSQuickTips
 	 * @return string
 	 * @see template
 	 * @see t3lib_PageRenderer
 	 */
 	public function render($pageTitle = '',
-						   $enableJumpToUrl = TRUE,
-						   $enableClickMenu = TRUE,
+						   $enableJumpToUrl = FALSE,
 						   $loadPrototype = FALSE,
 						   $loadScriptaculous = FALSE,
 						   $scriptaculousModule = '',
 						   $loadExtJs = TRUE,
+						   $loadExtCore = FALSE,
 						   $loadExtJsTheme = TRUE,
-						   $extJsAdapter = 'prototype',
+						   $extJsAdapter = '',
 						   $enableExtJsDebug = FALSE,
+						   $concatenate = TRUE,
+						   $compressJs = TRUE,
+						   $compressCss= TRUE,
 						   $enableExtJSQuickTips = TRUE) {
 
 		$doc = $this->getDocInstance();
 
-		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
-		$controllerName = $this->controllerContext->getRequest()->getControllerName();
-		$this->extJsNamespace = $extensionName . '.' . $controllerName;
-
-		if ($enableJumpToUrl) {
+		if ($enableJumpToUrl === TRUE) {
 			$doc->JScode .= '
 				<script language="javascript" type="text/javascript">
 					script_ended = 0;
@@ -99,33 +102,38 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 				</script>
 			';
 		}
-		if ($enableClickMenu) {
-			$doc->loadJavascriptLib('js/clickmenu.js');
-		}
-		if ($loadPrototype) {
+		if ($loadPrototype === TRUE) {
 			$this->pageRenderer->loadPrototype();
 		}
-		if ($loadScriptaculous) {
+		if ($loadScriptaculous === TRUE) {
 			$this->pageRenderer->loadScriptaculous($scriptaculousModule);
 		}
-		if ($loadExtJs) {
+		if ($loadExtJs === TRUE) {
 			$this->pageRenderer->loadExtJS(TRUE, $loadExtJsTheme, $extJsAdapter);
-			if ($enableExtJsDebug) {
+			if ($enableExtJsDebug === TRUE) {
 				$this->pageRenderer->enableExtJsDebug();
 			}
 		}
-		if ($enableExtJSQuickTips) {
+		if ($loadExtCore === TRUE) {
+			$this->pageRenderer->loadExtCore();
+		}
+		if ($enableExtJSQuickTips === TRUE) {
 			$this->pageRenderer->enableExtJSQuickTips();
 		}
 
 		$this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
-
-		$jsNS  = "\n" . 'Ext.ns(\'' . $this->extJsNamespace . '\');' . "\n";
-
-		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Module',$jsNS);
-
+		
 		$this->renderChildren();
-
+		
+		if ($compressJs === TRUE) {
+			$this->pageRenderer->enableCompressJavaScript();
+		}
+		if ($compressCss === TRUE) {
+			$this->pageRenderer->enableCompressCss();
+		}
+		if ($concatenate === TRUE) {
+			$this->pageRenderer->enableConcatenateFiles();
+		}
 		$output = $doc->startPage($pageTitle);
 		$output .= $doc->endPage();
 		return $output;

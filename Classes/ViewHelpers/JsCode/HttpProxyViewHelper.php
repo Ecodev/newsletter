@@ -77,6 +77,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 	 * The store automatically loads its data via AJAX.
 	 * 
 	 * @param string $domainModel is used as variable name AND storeId for the generated store
+	 * @param string $name 
 	 * @param string $extensionName the EXT where the domainModel is located
 	 * @param string $id choose a id for the created variable; default is $domainmodel . 'HttpProxy'
 	 * @param string $controller
@@ -85,6 +86,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 	 */
 	public function render($domainModel = NULL,
 						   $extensionName = NULL,
+						   $name = NULL,
 						   $id = NULL,
 						   $controller = NULL,
 						   $api = array()) {
@@ -99,7 +101,11 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_HttpProxyViewHelper extends Tx_MvcExtjs_Vie
 			throw new Tx_Fluid_Exception('The Domain Model Class (' . $domainClassName . ') for the given domainModel (' . $domainModel . ') was not found', 1264069568);
 		}
 			// Build up and set the for the JS store variable
-		$varNameProxy = $domainModel . 'HttpProxy';
+		if ($name === NULL) {
+			$varNameProxy = $domainModel . 'HttpProxy';
+		} else {
+			$varNameProxy = $name;
+		}
 		$this->proxy->setName($varNameProxy);
 
 			// read the given config parameters into the Extjs Config Object

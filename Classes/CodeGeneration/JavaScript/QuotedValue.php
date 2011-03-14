@@ -81,9 +81,9 @@ class Tx_MvcExtjs_CodeGeneration_JavaScript_QuotedValue implements Tx_MvcExtjs_C
 	 */
 	public function build() {
 		if (!$this->doubleQuote) {
-			return '\'' . $this->value . '\'';
+			return '\'' . addslashes($this->value) . '\'';
 		} else {
-			return '"' . $this->value . '"';
+			return '"' . addslashes($this->value) . '"';
 		}
 	}
 

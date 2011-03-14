@@ -96,12 +96,20 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcE
 	 * @param string $extensionName
 	 * @param string $fromMultiSelect
 	 * @param string $toMultiSelect
+	 * @param int $minSelections
+	 * @param int $maxSelections
+	 * @param string $minSelectionsText
+	 * @param string $maxSelectionsText
 	 * @return void
 	 */
 	public function render($domainModel = NULL,
 						   $extensionName = NULL,
 						   $fromMultiSelect = NULL,
-						   $toMultiSelect = NULL) {
+						   $toMultiSelect = NULL,
+						   $minSelections = NULL,
+						   $maxSelections = NULL,
+						   $minSelectionsText = NULL,
+						   $maxSelectionsText = NULL) {
 
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
@@ -122,6 +130,11 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ItemSelectorFieldViewHelper extends Tx_MvcE
 
 		$this->multiSelects->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($fromMultiSelect));
 		$this->multiSelects->addElement(new Tx_MvcExtjs_CodeGeneration_JavaScript_Snippet($toMultiSelect));
+
+		if ($minSelections !== NULL) $this->config->setRaw('minSelections', $minSelections);
+		if ($maxSelections !== NULL) $this->config->setRaw('maxSelections', $maxSelections);
+		if ($minSelectionsText !== NULL) $this->config->set('minSelectionsText', $minSelectionsText);
+		if ($maxSelectionsText !== NULL) $this->config->set('maxSelectionsText', $maxSelectionsText);
 
 		$this->injectJsCode();
 	}

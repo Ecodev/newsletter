@@ -25,8 +25,6 @@
 /**
  * A ViewHelper which returns its input as a json-encoded string.
  * 
- * 
- * 
  * @category    ViewHelpers
  * @package     TYPO3
  * @subpackage  tx_mvcextjs
@@ -34,33 +32,28 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id:
  */
-class Tx_MvcExtjs_ViewHelpers_Json_StoreReadResponseViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_MvcExtjs_ViewHelpers_Json_FormReadResponseViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * Renders a json response for a extjs CRUD store read request
+	 * Renders a JSON object based on a given Tx_Extbase_DomainObject_AbstractEntity.
 	 * 
-	 * @param array $data Contains the data that should be be outputted
-	 * @param string $message Sets a message for extjs - quicktips or something like that may use it DEFAULT: 'default message'
-	 * @param boolean $success Tells extjs that the call was successful or not
-	 * @param array $columns Defines a set of properties related to $data, that should be include. If $columns is empty (DEFAULT) all properties are included.
+	 * @param Tx_Extbase_DomainObject_AbstractEntity $object
+	 * @param boolean $success
+	 * @param array $excludeProperties
+	 * 
 	 * @return string
 	 */
-	public function render(array $data = array(), $message = 'default message', $success = TRUE, array $columns = array()) {
-		$this->columns = $columns;
-		$responseArray = array();
-		$responseArray['message'] = $message;
-		$responseArray['total'] = count($data);
-		$responseArray['success'] = $success;
-
-		$dataArray = array();
-
-		foreach ($data as $object) {
-			$dataArray[] = Tx_MvcExtjs_ExtJS_Utility::encodeObjectForJSON($object, $columns);
+	public function render(Tx_Extbase_DomainObject_AbstractEntity $object, $success = TRUE, array $excludeProperties = array()) {
+		$properties = Tx_Extbase_Reflection_ObjectAccess::getAccessibleProperties($object);
+		foreach ($excludeProperties as $propertyName) {
+			unset($properties[$propertyName]);
 		}
-
-		$responseArray['data'] = $dataArray;
-		t3lib_div::sysLog('SRR responseArray: ' . print_r($responseArray,true),'MvcExtjs',0);
-		return json_encode($responseArray);
+		$properties['className'] = get_class($object);
+		$returnArray = array(
+			'success' => $success,
+			'data' => $properties
+		);
+		return json_encode($returnArray);
 	}
 
 }

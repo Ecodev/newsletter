@@ -86,7 +86,10 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 	 * @param boolean $autoSave
 	 * @param boolean $restful 
 	 * @param boolean $batch 
-	 * @param boolean $autoLoad
+	 * @param string $autoLoad
+	 * @param string $paramNames the parameter names for the stores
+	 * @param boolean $remoteSort
+	 * 
 	 * @return void
 	 */
 	public function render($domainModel = NULL,
@@ -100,7 +103,9 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 						   $autoSave = TRUE,
 						   $restful = FALSE,
 						   $batch = FALSE,
-						   $autoLoad=FALSE) {
+						   $autoLoad = NULL,
+						   $paramNames = NULL,
+						   $remoteSort = FALSE) {
 
 		if ($extensionName == NULL) {
 			$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
@@ -124,10 +129,13 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_StoreViewHelper extends Tx_MvcExtjs_ViewHel
 		if ($writer !== NULL) $this->config->setRaw('writer', $writer);
 		if ($proxy !== NULL) $this->config->setRaw('proxy', $proxy);
 		if ($data !== NULL) $this->config->setRaw('data', $data);
-		$this->config->setRaw('autoSave', $autoSave ? 'true' : 'false');
+		if ($paramNames !== NULL) $this->config->setRaw('paramNames', $paramNames);
+		if ($autoLoad !== (NULL)) {
+			$this->config->setRaw('autoLoad', $autoLoad);
+		}
 		$this->config->setRaw('restful', $restful ? 'true' : 'false');
 		$this->config->setRaw('batch', $batch ? 'true' : 'false');
-		$this->config->setRaw('autoLoad', $autoLoad ? 'true' : 'false');
+		$this->config->setRaw('remoteSort', $remoteSort ? 'true' : 'false');
 
 			// Apply the configuration again
 		$this->injectJsCode();

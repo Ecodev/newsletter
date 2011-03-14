@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id:
  */
-class Tx_MvcExtjs_ViewHelpers_Json_StoreCreateResponseViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_MvcExtjs_ViewHelpers_Json_StoreResponseViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * Renders a JSON response for a ExtJS CRUD store create request.
@@ -42,29 +42,34 @@ class Tx_MvcExtjs_ViewHelpers_Json_StoreCreateResponseViewHelper extends Tx_Flui
 	 * @param string $message Sets a message for extjs - quicktips or something like that may use it DEFAULT: 'create successful'
 	 * @param boolean $success Tells extjs that the call was successful or not
 	 * @param array columns Defines a set of properties related to $data, that should be include. If $columns is empty (DEFAULT) all properties are included.
+	 * @param int $total
 	 * @return string
 	 */
-	public function render($object = NULL, array $objects = NULL, $message = 'create successful', $success = TRUE, array $columns = array()) {
-		$this->columns = $columns;
+	public function render($object = NULL, array $objects = NULL, $message = 'create successful', $success = TRUE, array $columns = array(), $total = NULL) {
 		$responseArray = array();
 		$responseArray['message'] = $message;
-		$responseArray['total'] = 1;
 		$responseArray['success'] = $success;
 		
 
 		if ($object !== NULL) {
+			$responseArray['total'] = 1;
 			$responseArray['data'] = Tx_MvcExtjs_ExtJS_Utility::encodeObjectForJSON($object, $columns);
 		} else if ($objects !== NULL){
+			$responseArray['total'] = count($objects);
 			$responseArray['data'] = array();
 			foreach ($objects as $object) {
 				$responseArray['data'][] = Tx_MvcExtjs_ExtJS_Utility::encodeObjectForJSON($object, $columns);
 			}
 		} else { 
-			throw new Tx_MvcExtjs_ExtJS_Exception('$object or $objects must not be NULL', 1281006223);
+			$responseArray['data'] = array();
+		}
+		
+		if ($total !== NULL) {
+			$responseArray['total'] = $total;
 		}
 
 		return json_encode($responseArray);
 	}
-
+	
 }
 ?>

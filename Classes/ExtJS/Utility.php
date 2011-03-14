@@ -40,11 +40,11 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 * @param array $objects
 	 * @return array
 	 */
-	public static function encodeArrayForJSON(array $objects) {
+	public static function encodeArrayForJSON(array $objects, array $columns = array(), $lazy = FALSE) {
 		$arr = array();
 
 		foreach ($objects as $object) {
-			$arr[] = self::encodeObjectForJSON($object);
+			$arr[] = self::encodeObjectForJSON($object,$columns,$lazy);
 		}
 
 		return $arr;
@@ -54,35 +54,60 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	 * Encodes an object to be used by JSON later on.
 	 *
 	 * @param mixed $object
+	 * @param array $columns
 	 * @return array
 	 */
-	public static function encodeObjectForJSON($object) {
+	public static function encodeObjectForJSON($object, array $columns = array()) {
+		$columns = self::parseColumnArray($columns);
 		if ($object instanceof DateTime) {
-			return $object->format('r');
-		} elseif (!($object instanceof Tx_Extbase_DomainObject_AbstractEntity)) {
+			return $object->format('c');
+		} else if (!($object instanceof Tx_Extbase_DomainObject_AbstractEntity)) {
 			return $object;
 		}
 
 		$arr = array();
 
-		$rc = new ReflectionClass(get_class($object));
-		$properties = $rc->getProperties();
+		$properties = Tx_Extbase_Reflection_ObjectAccess::getAccessibleProperties($object);
+		foreach ($properties as $name => $value) {
+			if (count($columns) > 0 && !isset($columns[$name])) {
+				// Current property should not be returned
+				continue;
+			} else if (is_array($columns[$name])) {
+				$childColumns = $columns[$name];
+			} else {
+				$childColumns = array('uid');
+			}
+			if ($value instanceof Tx_Extbase_Persistence_ObjectStorage || $value instanceof Tx_Extbase_Persistence_LazyObjectStorage) {
+				$value = self::encodeArrayForJSON($value->toArray(), $childColumns, TRUE);
+			} else if (($value instanceof Tx_Extbase_DomainObject_AbstractEntity || $value instanceof DateTime)) {
+				$value = self::encodeObjectForJSON($value, $childColumns, TRUE);
+			} else if ($value instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+				$value = self::encodeObjectForJSON($value->_loadRealInstance(), $childColumns, TRUE);
+			}
+			$arr[$name] = $value;
+		}
+		return $arr;
+	}
 
-		foreach ($properties as $property) {
-			$propertyGetterName = 'get' . ucfirst($property->name);
-
-			if (method_exists($object, $propertyGetterName)) {
-				$value = call_user_func(array($object, $propertyGetterName));
-				if (is_array($value)) {
-					$value = self::encodeArrayForJSON($value);
-				} elseif (is_object($value)) {
-					$value = self::encodeObjectForJSON($value);
-				}
-				$arr[$property->name] = $value;
+	/**
+	 *
+	 * @param array $columns
+	 * @return array
+	 */
+	private static function parseColumnArray(array $columns = array()) {
+		$childColumns = array();
+		foreach ($columns as $column) {
+			$columnArray = t3lib_div::trimExplode('.',$column);
+			$columnName = $columnArray[0];
+			if (count($columnArray) > 1) {
+				unset($columnArray[0]);
+				$columnData = implode('.',$columnArray);
+				$childColumns[$columnName][] = $columnData;
+			} else if (count($columnArray) === 1){
+				$childColumns[$columnName] = TRUE;
 			}
 		}
-
-		return $arr;
+		return $childColumns;
 	}
 
 	/**
@@ -142,14 +167,14 @@ class Tx_MvcExtjs_ExtJS_Utility {
 	}
 
 	/**
-	 * creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based on the given $class
-	 * EXPERIMENTAL
+	 * Creates a Tx_MvcExtjs_ExtJS_Array Object filled up with field configurations based on the given $class
 	 *
 	 * @param string $class the class u like to fetch the fieldsArray for
 	 * @param mixed $obj an instance of this class
 	 * @param array $columns the columns u like to fetch an empty array will fetch all available properties
 	 * @param array $additionalGetters use this array to fetch informations from methods that will not really work on properties f.e. data that is calculated on the base of two other properties
 	 * @return Tx_MvcExtjs_CodeGeneration_JavaScript_Array this object will produce your JS Code when calling build() on it.
+	 * @deprecated Use Extbase reflection instead
 	 */
 	public static function getFieldsArray($class, $obj = NULL, array $columns = array(), array $additionalGetters = array()) {
 		$fields = new Tx_MvcExtjs_CodeGeneration_JavaScript_Array();

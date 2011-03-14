@@ -70,7 +70,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreViewHelper extends Tx_MvcExtjs_Vi
 	 * @param boolean $autoSave
 	 * @param boolean $restful 
 	 * @param boolean $batch
-	 * @param boolean $autoLoad
+	 * @param string $autoLoad
 	 * @param string $idProperty
 	 * @return void
 	 */
@@ -84,7 +84,7 @@ class Tx_MvcExtjs_ViewHelpers_JsCode_ArrayStoreViewHelper extends Tx_MvcExtjs_Vi
 						   $autoSave = TRUE,
 						   $restful = FALSE,
 						   $batch = FALSE,
-						   $autoLoad = FALSE,
+						   $autoLoad = NULL,
 						   $idProperty = 'uid') {
 
 		if ($extensionName === NULL) {
