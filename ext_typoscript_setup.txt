@@ -1,6 +1,3 @@
-# TODO: Following line should be removed once ExtDirect is fully usable
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:mvc_extjs/Configuration/TypoScript/ajax.txt">
-
 config.tx_extbase {
 	mvc {
 		requestHandlers {

@@ -1,3 +1,8 @@
+2011-03-18  Xavier Perseguers  <typo3@perseguers.ch>
+
+	* Removed no ExtDirect code
+	* Branched old code to /branches/no_extdirect
+
 2011-03-14  Xavier Perseguers  <typo3@perseguers.ch>
 
 	* Merged branch dispatcherrewrite
