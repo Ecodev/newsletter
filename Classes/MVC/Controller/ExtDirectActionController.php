@@ -34,6 +34,22 @@
 class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 	/**
+	 * @var Tx_Extbase_Persistence_ManagerInterface
+	 * @inject
+	 */
+	protected $persistenceManager;
+	
+	/**
+	 * Injects the PersistenceManager.
+	 * 
+	 * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
+	 * @return void
+	 */
+	public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager) {
+		$this->persistenceManager = $persistenceManager;	
+	}
+	
+	/**
 	 * Initializes the View to be a Tx_MvcExtjs_ExtDirect_View that renders json without Template Files.
 	 * 
 	 * @return void
