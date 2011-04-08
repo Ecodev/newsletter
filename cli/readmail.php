@@ -9,22 +9,5 @@ while ($buffer = fread($fd, 8096)) {
 }
 fclose($fd);
 
-$bounce = new tx_newsletter_bouncehandler($content);
-
-
-switch ($bounce->status) {
-	case NEWSLETTER_HARDBOUNCE :
-	case NEWSLETTER_SOFTBOUNCE :
-		$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($bounce->targetUid);
-		$target->disableReceiver($bounce->uid, $bounce->status);
-	
-
-	case NEWSLETTER_BOUNCE_UNREMOVABLE:
-	$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_email', 
-					"authcode = '$bounce->authCode' AND uid = '$bounce->sendid'", 
-					array('bounced' => 1));
-		break;
-	default:
-	/* Nothing to be done for other bounce types. */
-	break;
-}
+$bounceHandler = new tx_newsletter_bouncehandler($content);
+$bounceHandler->dispatch();

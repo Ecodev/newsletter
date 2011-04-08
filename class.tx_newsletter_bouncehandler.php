@@ -1,24 +1,39 @@
 <?php
-define ('NEWSLETTER_NOT_A_BOUNCE', 1);
-define ('NEWSLETTER_BOUNCE_UNREMOVABLE', 2);
-define ('NEWSLETTER_HARDBOUNCE', 3);
-define ('NEWSLETTER_SOFTBOUNCE', 4);
 
-class tx_newsletter_bouncehandler {
-   /* Statusvalue for the mail */
-   var $status = NEWSLETTER_NOT_A_BOUNCE;
-
-   /* Receivers uid, will be populated upon process-invocation */
-   var $uid;
-   
-   /* Newsletters page uid, will be populated upon process-invocation */
-   var $pageUid;
-   
-   /* Newsletter receiver records uid, will be populated upon process-invocation */
-   var $targetUid;
-
-   /* Matches for soft bounces */
-   var $soft = array(
+class tx_newsletter_bouncehandler
+{	
+	const NEWSLETTER_NOT_A_BOUNCE = 1;
+	const NEWSLETTER_SOFTBOUNCE = 2;
+	const NEWSLETTER_HARDBOUNCE = 3;
+	
+	/**
+	 * Bounce level of the mail source specified
+	 * @var integer @see tx_newsletter_bouncehandler
+	 */
+	private $status = self::NEWSLETTER_NOT_A_BOUNCE;
+	
+	/**
+	 * The mail source
+	 * @var string
+	 */
+	private $mailsource = null;
+	
+	/**
+	 * The email concerned by the bounce if any
+	 * @var Tx_Newsletter_Domain_Model_Email
+	 */
+	private $email = null;
+	
+	/**
+	 * The recipient list concerned by the bounce if any
+	 * @var Tx_Newsletter_Domain_Model_RecipientList
+	 */
+	private $recipientList = null;
+	
+	/**
+	 * Matches for soft bounces
+	 */
+	protected $soft = array(
       '/mailbox is full/i',
       '/quota exceeded/i',
       '/Subject:\s*Delivery unsuccessful: Mailbox has exceeded the limit/i',
@@ -26,11 +41,13 @@ class tx_newsletter_bouncehandler {
       '/Mailbox disk quota exceeded/i',
       '/recipient was unavailable to take delivery of the message/i',
       '/Subject:\s*Undelivered Mail Returned to Sender/i',
-   );
-   
-   /* Matches for hard bounces */
-   var $hard = array(
-        /* Any where in the mail */
+	);
+
+	/**
+	 *  Matches for hard bounces
+	 */
+	protected $hard = array(
+	/* Any where in the mail */
         '/User unknown/',
         '/sorry to have to inform you that your message could not be delivered to one or more recipients./i',
         '/Delivery to the following recipients failed/i',
@@ -46,58 +63,117 @@ class tx_newsletter_bouncehandler {
         '/The following addresses had permanent fatal errors/i',
         '/qmail[\s\S]+this is a permanent error/i',
         '/no such user here/',
-        /* On the subjectline */
+	/* On the subjectline */
         '/Subject:\s*Auto: Non existing e-mail/i',
         '/Subject:\s*Delivery Failure:/i',
         '/Subject:\s*Delivery Status Notification (Failure)/i',
         '/Subject:\s*Failed (mail|delivery|notice)/i',
-        /* Both */
+	/* Both */
         '/Subject:\s*Delivery Status Notification[\s\S]+Failed/ix',
-   );
+	);
 
-   function tx_newsletter_bouncehandler($mailsource) {
-      /* Calculate the bounce-score */
-      $this->score = 0;
-      
-      /* Test the soft-bounce level */
-      foreach ($this->soft as $reg) {
-         if (preg_match($reg, $mailsource)) {
-            $this->score++;
-            $this->status = NEWSLETTER_SOFTBOUNCE;
-         }
-      }
-      
-      /* Test the hard-bounce level */
-      foreach ($this->hard as $reg) {
-         if (preg_match($reg, $mailsource)) {
-            $this->score++;
-            $this->status = NEWSLETTER_HARDBOUNCE;
-         } 
-      }      
-      
-      /* If nothing scored, it must be a non-bounce mail. Just stop now */
-      if ($this->score == 0) {
-         $this->status = NEWSLETTER_NOT_A_BOUNCE;
-         return;
-      }
-      
-      /* If we got this far, it is a bounce mail. Get the X-newsletter-info header value to see who we we a dealing with.
-         If we can get the values and the authcode checks out, return with success, else report unremovable. */
-      if (preg_match('|X-newsletter-info: //(.*)//|', $mailsource, $match)) {
-         list($pageUid, $targetUid, $uid, $authCode, $sendid) = explode('/', $match[1]);
-         $this->pageUid = intval($pageUid);
-         $this->targetUid = intval($targetUid);
-         $this->uid = intval($uid);
-         $this->sendid = intval($sendid);
-         $this->authCode = addslashes($authCode);
-         
-         if ($this->authCode != t3lib_div::stdAuthCode($this->uid)) {
-            $this->status = NEWSLETTER_BOUNCE_UNREMOVABLE;
-         }           
-      } else {
-         $this->status = NEWSLETTER_BOUNCE_UNREMOVABLE;
-      }
-   }
+	/**
+	 * Constructor for bounce handler
+	 * @param string $mailsource
+	 */
+	function __construct($mailsource = '') {
+		$this->analyze($mailsource);
+	}
+	
+	/**
+	 * Analyze the given mail source to guess the bounce level
+	 * @param string $mailsource
+	 */
+	protected function analyze($mailsource)
+	{
+		$this->mailsource = $mailsource;
+		/* Calculate the bounce-score */
+		$this->score = 0;
+
+		/* Test the soft-bounce level */
+		foreach ($this->soft as $reg) {
+			if (preg_match($reg, $this->mailsource)) {
+				$this->score++;
+				$this->status = NEWSLETTER_SOFTBOUNCE;
+			}
+		}
+
+		/* Test the hard-bounce level */
+		foreach ($this->hard as $reg) {
+			if (preg_match($reg, $this->mailsource)) {
+				$this->score++;
+				$this->status = NEWSLETTER_HARDBOUNCE;
+			}
+		}
+
+		/* If nothing scored, it must be a non-bounce mail. Just stop now */
+		if ($this->score == 0) {
+			$this->status = self::NEWSLETTER_NOT_A_BOUNCE;
+			return;
+		}
+	}
+	
+	/**
+	 * Attempt to find the email in database which were bounced 
+	 */
+	protected function findEmail()
+	{
+		global $TYPO3_DB;
+		$this->email = null;
+		$this->recipientList = null;
+		
+		if (preg_match_all('|Message-ID: <(.*)@.*>|', $this->mailsource, $match))
+		{
+			// The last match is the authcode of the email sent
+			$this->authCode = end($match[1]);
+				
+			// Tell the target that he opened the email
+			$rs = $TYPO3_DB->sql_query("
+			SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.uid
+			FROM tx_newsletter_domain_model_email
+			LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+			LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid) 
+			WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = '$this->authCode' AND recipient_list IS NOT NULL
+			LIMIT 1");
+				
+			if (list($recipientListUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
+				$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+				$this->email = $emailRepository->findByUid($emailUid);
+				$this->recipientList = Tx_Newsletter_Domain_Model_RecipientList::getTarget($recipientListUid);
+			}
+		}
+	}
+
+	/**
+	 * Dispatch actions to take according to current bounce level
+	 */
+	public function dispatch()
+	{
+		var_dump($this->status);
+		$this->findEmail();
+		
+		// If couldn't find the original email we cannot do anything
+		if (!$this->email)
+			return;
+			
+		switch ($bounce->status)
+		{
+			case NEWSLETTER_HARDBOUNCE:
+			case NEWSLETTER_SOFTBOUNCE:
+				if ($this->recipientList)
+				{
+					$this->recipientList->disableReceiver($this->email->getRecipientAddress(), $this->status);
+				}
+				
+				$this->email->setBounced(true);
+				$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+				$emailRepository->updateNow($this->email);
+				break;
+				
+			default:
+				// Nothing to be done for other bounce types.
+				break;
+		}
+	}
 }
 
-?>

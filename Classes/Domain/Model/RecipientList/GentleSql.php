@@ -20,14 +20,14 @@ class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_D
 		global $TYPO3_DB;
 
 		switch ($bounce_level) {
-			case	NEWSLETTER_HARDBOUNCE:
+			case	tx_newsletter_bouncehandler::NEWSLETTER_HARDBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
 							SET tx_newsletter_bounce = tx_newsletter_bounce + 5
 							WHERE email = '$email'");
 
 				return $TYPO3_DB->sql_affected_rows();
 
-			case	NEWSLETTER_SOFTBOUNCE:
+			case	tx_newsletter_bouncehandler::NEWSLETTER_SOFTBOUNCE:
 				$TYPO3_DB->sql_query("UPDATE $this->tableName 
 							SET tx_newsletter_bounce = tx_newsletter_bounce + 1
 							WHERE email = '$email'");

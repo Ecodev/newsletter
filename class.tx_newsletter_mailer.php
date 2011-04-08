@@ -438,38 +438,40 @@ class tx_newsletter_mailer {
 	 * @return   void
 	 */
 	protected function raw_send(Tx_Newsletter_Domain_Model_Email $email) {
-		$rawEmail = t3lib_div::makeInstance('t3lib_mail_Message');
-		$rawEmail->setTo($email->getRecipientAddress())
+		$message = t3lib_div::makeInstance('t3lib_mail_Message');
+		$message->setTo($email->getRecipientAddress())
 				->setFrom(array($this->senderEmail => $this->senderName))
 				->setSubject($this->title)
 		;
 
 		if ($this->bounceAddress) {
-			$rawEmail->setReturnPath($this->bounceAddress);
+			$message->setReturnPath($this->bounceAddress);
 		}
 
 		foreach ($this->attachments as $attachment) {
-			$rawEmail->attach($attachment);
+			$message->attach($attachment);
 		}
 
-		// Attach inline files and replace markers used for URL
-		foreach ($this->attachmentsEmbedded as $marker => $attachment) {
-			$embeddedSrc = $rawEmail->embed($attachment);
-			$this->plain = str_replace($marker, $embeddedSrc, $this->plain);
-			$this->html = str_replace($marker, $embeddedSrc, $this->html);
-		}
-
-		// TODO insert extra headers for bounce identifiaction
+		// Specify message-id for bounce identification
+		$msgId = $message->getHeaders()->get('Message-ID');
+		$msgId->setId($email->getAuthCode() . '@' . $this->newsletter->getDomain());
 
 		$recipientData = $email->getRecipientData();
 		if ($recipientData['plain_only']) {
-			$rawEmail->setBody($plain, 'text/plain');
+			$message->setBody($this->plain, 'text/plain');
 		} else {
-			$rawEmail->setBody($this->html, 'text/html');
-			$rawEmail->addPart($plain, 'text/plain');
+			// Attach inline files and replace markers used for URL
+			foreach ($this->attachmentsEmbedded as $marker => $attachment) {
+				$embeddedSrc = $message->embed($attachment);
+				$this->plain = str_replace($marker, $embeddedSrc, $this->plain);
+				$this->html = str_replace($marker, $embeddedSrc, $this->html);
+			}
+			
+			$message->setBody($this->html, 'text/html');
+			$message->addPart($this->plain, 'text/plain');
 		}
 
-		$rawEmail->send();
+		$message->send();
 	}
 
 }

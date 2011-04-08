@@ -18,11 +18,11 @@ LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_mode
 WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = '$authcode' AND recipient_list IS NOT NULL
 LIMIT 1");
 
-if (list($recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
+if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
 	$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($recipientListUid);
 	if ($target)
 	{
-		$target->registerOpen($email);
+		$target->registerOpen($emailAddress);
 	}
 }
 

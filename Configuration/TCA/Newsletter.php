@@ -96,10 +96,16 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.attachments',
 			'config'	=> array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
-			),
+				'type' => 'group',
+				'internal_type' => 'file',
+				'allowed' => '',    
+				'disallowed' => 'php,php3',    
+				'max_size' => 500,    
+				'uploadfolder' => 'uploads/tx_newsletter',
+				'size' => 3,    
+				'minitems' => 0,
+				'maxitems' => 10,
+        	),
 		),
 		'sender_name' => array(
 			'exclude'	=> 0,
@@ -107,7 +113,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim'
 			),
 		),
 		'sender_email' => array(
@@ -116,7 +122,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim'
 			),
 		),
 		'inject_open_spy' => array(

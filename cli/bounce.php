@@ -28,18 +28,16 @@ require_once('clirun.php');
 $fetchmailhome = PATH_site.'uploads/tx_newsletter';
 $fetchmailfile = "$fetchmailhome/fetchmailrc";
 $servers = array();
-$fd = fopen($fetchmailfile, 'w');
-$rs = $TYPO3_DB->sql_query("SELECT servertype, server, username, passwd FROM tx_newsletter_domain_model_bounceaccount
+$rs = $TYPO3_DB->sql_query("SELECT protocol, server, username, password FROM tx_newsletter_domain_model_bounceaccount
                                 WHERE hidden = 0 
                                 AND deleted = 0");
-                                     
-while (list($type, $server, $username, $passwd) = $TYPO3_DB->sql_fetch_row($rs)) {
-   $contents .= "poll $server proto $type username \"$username\" password \"$passwd\"\n";
+
+while (list($protocol, $server, $username, $passwd) = $TYPO3_DB->sql_fetch_row($rs)) {
+   $contents .= "poll $server proto $protocol username \"$username\" password \"$passwd\"\n";
    $servers[] = $server;
 }
+file_put_contents($fetchmailfile, $contents);
 
-fwrite($fd, $contents);
-fclose($fd);
 chmod($fetchmailfile, 0600); 
 
 putenv("FETCHMAILHOME=$fetchmailhome");
@@ -58,4 +56,3 @@ foreach ($servers as $server) {
 }
 
 unlink($fetchmailfile);
-?>
