@@ -31,19 +31,19 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
  */
 class tx_newsletter_mailer {
 
-	protected $html;
-	protected $html_tpl;
-	protected $plain;
-	protected $plain_tpl;
-	protected $title;
-	protected $title_tpl;
-	protected $senderName;
-	protected $senderEmail;
-	protected $bounceAddress;
-	protected $siteUrl;
-	protected $homeUrl;
-	protected $attachments = array();
-	protected $attachmentsEmbedded = array();
+	private $html;
+	private $html_tpl;
+	private $plain;
+	private $plain_tpl;
+	private $title;
+	private $title_tpl;
+	private $senderName;
+	private $senderEmail;
+	private $bounceAddress;
+	private $siteUrl;
+	private $homeUrl;
+	private $attachments = array();
+	private $attachmentsEmbedded = array();
 
 	/**
 	 * Constructor that set up basic internal datastructures. Do not call directly
@@ -120,7 +120,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The title
 	 * @return   void
 	 */
-	protected function setTitle($src) {
+	private function setTitle($src) {
 		/* Detect what markers we need to substitute later on */
 		preg_match_all('/###[\w]+###/', $src, $fields);
 		$this->titleMarkers = str_replace('###', '', $fields[0]);
@@ -142,7 +142,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The plain text content of the mail
 	 * @return   void
 	 */
-	protected function setPlain($src) {
+	private function setPlain($src) {
 		/* Remove html-comments */
 		$src = preg_replace('/<!--.*-->/U', '', $src);
 
@@ -167,7 +167,7 @@ class tx_newsletter_mailer {
 	 * @param   string      The html content of the mail
 	 * @return   void
 	 */
-	protected function setHtml($src) {
+	private function setHtml($src) {
 		/* Find linked css and convert into a style-tag */
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $src, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -244,7 +244,7 @@ class tx_newsletter_mailer {
 	 *
 	 * @return   void
 	 */
-	protected function insertSpy(Tx_Newsletter_Domain_Model_Email $email) {
+	private function insertSpy(Tx_Newsletter_Domain_Model_Email $email) {
 		$this->html = str_ireplace(
 						'</body>',
 						'<div><img src="' . $this->homeUrl . 'web/beenthere.php?c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>',
@@ -256,7 +256,7 @@ class tx_newsletter_mailer {
 	 *
 	 * @return   void
 	 */
-	protected function resetMarkers() {
+	private function resetMarkers() {
 		$this->html = $this->html_tpl;
 		$this->plain = $this->plain_tpl;
 		$this->title = $this->title_tpl;
@@ -271,7 +271,7 @@ class tx_newsletter_mailer {
 	 * @param   string      Value to replace marker with.
 	 * @return   void
 	 */
-	protected function substituteMarker($name, $value) {
+	private function substituteMarker($name, $value) {
 		/* For each marker, only substitute if the field is registered as a marker. This approach has shown to
 		  speed up things quite a bit. */
 		if (in_array($name, $this->htmlAdvancedMarkers)) {
@@ -308,7 +308,7 @@ class tx_newsletter_mailer {
 	 * @param   boolean      Display value of marker.
 	 * @return   string      Source with applied marker.
 	 */
-	protected function advancedSubstituteMarker($src, $name, $value) {
+	private function advancedSubstituteMarker($src, $name, $value) {
 		preg_match_all("/###:IF: $name ###([\w\W]*)###:ELSE:###([\w\W]*)###:ENDIF:###/U", $src, $matches);
 		foreach ($matches[0] as $i => $full_mark) {
 			if ($value) {
@@ -336,7 +336,7 @@ class tx_newsletter_mailer {
 	 * @param   array      Assoc array with name => value pairs.
 	 * @return   void
 	 */
-	protected function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email) {
+	private function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email) {
 		$record = $email->getRecipientData();
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
@@ -352,7 +352,7 @@ class tx_newsletter_mailer {
 		}
 	}
 
-	protected function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPlainText = false) {
+	private function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPlainText = false) {
 		global $TYPO3_DB;
 		$url = html_entity_decode($url);
 
@@ -386,7 +386,7 @@ class tx_newsletter_mailer {
 	 * @param    string     Encryption code for the links
 	 * @return   array      Data structure with original links.
 	 */
-	protected function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email) {
+	private function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email) {
 		/* Exchange all http:// links  html */
 		preg_match_all('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -437,7 +437,7 @@ class tx_newsletter_mailer {
 	 * @param   array      Array with extra headers to apply to mails as name => value pairs.
 	 * @return   void
 	 */
-	protected function raw_send(Tx_Newsletter_Domain_Model_Email $email) {
+	private function raw_send(Tx_Newsletter_Domain_Model_Email $email) {
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
 		$message->setTo($email->getRecipientAddress())
 				->setFrom(array($this->senderEmail => $this->senderName))
