@@ -122,9 +122,9 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 		}
 
 		$this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
-		
+
 		$this->renderChildren();
-		
+
 		if ($compressJs === TRUE) {
 			$this->pageRenderer->enableCompressJavaScript();
 		}
@@ -135,6 +135,7 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 			$this->pageRenderer->enableConcatenateFiles();
 		}
 		$output = $doc->startPage($pageTitle);
+		$output .= $this->pageRenderer->getBodyContent();
 		$output .= $doc->endPage();
 		return $output;
 	}
