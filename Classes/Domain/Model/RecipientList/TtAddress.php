@@ -4,7 +4,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_TtAddress extends Tx_Newsletter_D
 	var $tableName = 'tt_address';
 
 	function init() {
-		$config = explode(',',$this->fields['ttaddress']);
+		$config = explode(',',$this->fields['tt_address']);
 		$config[] = -1;
 		$config = array_filter($config);
      

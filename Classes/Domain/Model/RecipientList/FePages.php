@@ -4,7 +4,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Dom
 	var $tableName = 'fe_users';
 
 	function init () {
-		$config = explode(',',$this->fields['fepages']);
+		$config = explode(',',$this->fields['fe_pages']);
 		$config[] = -1;
 		$config = array_filter($config);
        

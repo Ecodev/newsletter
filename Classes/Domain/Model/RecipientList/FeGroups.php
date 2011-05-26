@@ -4,7 +4,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_FeGroups extends Tx_Newsletter_Do
 	var $tableName = 'fe_users';
 
 	function init () {
-		$groups = explode(',',$this->fields['fegroups']);
+		$groups = explode(',',$this->fields['fe_groups']);
 		$groups[] = -1;
 		$groups = array_filter($groups);
        

@@ -4,7 +4,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Dom
 	var $tableName = 'be_users';
 
 	function init() {
-		$config = explode(',',$this->fields['beusers']);
+		$config = explode(',', $this->fields['be_users']);
 		$config[] = -1;       
 		$config = array_filter($config);
                            
