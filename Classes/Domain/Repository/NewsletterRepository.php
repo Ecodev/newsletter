@@ -41,9 +41,9 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 	{
 		$query = $this->createQuery();
 		$query->setLimit(1);
-		$query->equals('pid', $pid);
+		$query->matching($query->equals('pid', $pid));
+		
 		$query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
-		//
 		
 		return $query->execute()->getFirst();
 	}
