@@ -42,7 +42,9 @@ class ext_update {
 		// Recipient lists
 		"INSERT INTO tx_newsletter_domain_model_recipientlist (
 			uid, pid, title, plain_only, lang, type, be_users, fe_groups, fe_pages, tt_address, csv_url, csv_separator, csv_fields, csv_filename, csv_values, sql_statement, html_file, html_fetch_type, calculated_recipients, tstamp, crdate, deleted, hidden
-		) SELECT uid, pid, title, plain_only, lang, REPLACE(targettype, 'tx_tcdirectmail_target_', 'Tx_Newsletter_Domain_Model_RecipientList_'), beusers, fegroups, fepages, ttaddress, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, calculated_receivers, tstamp, crdate, deleted, hidden
+		) SELECT uid, pid, title, plain_only, lang, 
+		CONCAT( 'Tx_Newsletter_Domain_Model_RecipientList_', CONCAT( UPPER( LEFT( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 1 ) ) , SUBSTRING( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 2 ) ) ),
+		beusers, fegroups, fepages, ttaddress, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, calculated_receivers, tstamp, crdate, deleted, hidden
 		FROM tx_tcdirectmail_targets;",
 		
 		// Emails
@@ -60,9 +62,11 @@ class ext_update {
 		// Migrate newsletter from page to its own table
 		"INSERT INTO tx_newsletter_domain_model_newsletter (
 			pid, planned_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
-		) SELECT uid, tx_tcdirectmail_senttime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, REPLACE(tx_tcdirectmail_plainconvert, 'tx_tcdirectmail', 'Tx_Newsletter_Domain_Model_PlainConverter_'), tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
+		) SELECT uid, tx_tcdirectmail_senttime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, 
+		CONCAT( 'Tx_Newsletter_Domain_Model_PlainConverter_', CONCAT( UPPER( LEFT( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 1 ) ) , SUBSTRING( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 2 ) ) ),
+		tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
 		FROM pages
-		WHERE tx_tcdirectmail_senttime != 0;",
+		WHERE tx_tcdirectmail_real_target != 0;",
 		
 		// Migrate CLI beuser 
 		"INSERT INTO be_users (
@@ -74,8 +78,20 @@ class ext_update {
 		"UPDATE fe_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
 		"UPDATE be_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
 	
+		// Normalize case
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Beusers';",
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FeGroups' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fegroups';",
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FePages' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fepages';",
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_TtAddress' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Ttaddress';", 
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_RawSql' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Rawsql';", 
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvfile';", 
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvList' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvlist';", 
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvurl';", 
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Html' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_html';",
+	
 		// TODO link email to newsletter according to PID
 		//"UPDATE tx_newsletter_domain_model_email SET newsletter = LEFT JOIN???;",
+		// TODO define begin_time and end_time for newsletter based on tx_tcdirectmail_lock
 	);
 
 	/**
@@ -181,7 +197,7 @@ class ext_update {
 		foreach ($this->queries as $query)
 		{
 			$res = $TYPO3_DB->sql_query($query);
-			if ($error = $TYPO3_DB->sql_error()) die(  $query . "<br>" . $error);
+			if ($error = $TYPO3_DB->sql_error()) die("<pre>" .  $query . "<br>" . $error . "</pre>");
 			$recordCount += $TYPO3_DB->sql_affected_rows($res);
 		}
 	
