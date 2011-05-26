@@ -684,8 +684,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 				}
 				$out .= '</tr>';
 		
-				if ($i++ == $limit) {
-					$out . '<tr><td><strong>...</strong></td></tr>';
+				if (++$i == $limit) {
 					break;
 				}
 			}
