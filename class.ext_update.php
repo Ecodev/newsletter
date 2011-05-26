@@ -32,45 +32,50 @@
  * $Id$
  */
 class ext_update {
-	
-	/**
-	 * SQL queries to copy fields data from tcdirectmail to newsletter but only if data from newsletter have default values (so we don't override new data)
-	 * @var array
-	 */
-	private $fieldsQueries = array(
-		"UPDATE pages SET tx_newsletter_senttime = tx_tcdirectmail_senttime WHERE tx_newsletter_senttime = 0;",
-		"UPDATE pages SET repetition = tx_tcdirectmail_repeat WHERE repetition = 0;",
-		"UPDATE pages SET tx_newsletter_plainconvert = REPLACE(tx_tcdirectmail_plainconvert, 'tcdirectmail', 'newsletter') WHERE tx_newsletter_plainconvert = 'tx_newsletter_plain_simple';",
-		"UPDATE pages SET tx_newsletter_test_target = tx_tcdirectmail_test_target WHERE tx_newsletter_test_target = 0;",
-		"UPDATE pages SET tx_newsletter_real_target = tx_tcdirectmail_real_target WHERE tx_newsletter_real_target = '';",
-		"UPDATE pages SET tx_newsletter_dotestsend = tx_tcdirectmail_dotestsend WHERE tx_newsletter_dotestsend = 0;",
-		"UPDATE pages SET tx_newsletter_attachfiles = tx_tcdirectmail_attachfiles WHERE tx_newsletter_attachfiles = '';",
-		"UPDATE pages SET tx_newsletter_sendername = tx_tcdirectmail_sendername WHERE tx_newsletter_sendername = '';",
-		"UPDATE pages SET tx_newsletter_senderemail = tx_tcdirectmail_senderemail WHERE tx_newsletter_senderemail = '';",
-		"UPDATE pages SET tx_newsletter_bounceaccount = tx_tcdirectmail_bounceaccount WHERE tx_newsletter_bounceaccount = 0;",
-		"UPDATE pages SET tx_newsletter_spy = tx_tcdirectmail_spy WHERE tx_newsletter_spy = 0 ;",
-		"UPDATE pages SET tx_newsletter_register_clicks = tx_tcdirectmail_register_clicks WHERE tx_newsletter_register_clicks = 0;",
-		"UPDATE fe_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
-		"UPDATE be_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
-	);
 
 	/**
-	 * SQL queries to copy tables data from tcdirectmail to newsletter
+	 * SQL queries to copy data from tcdirectmail to newsletter
 	 * @var array
 	 */
-	private $tablesQueries = array(
-		"INSERT INTO tx_newsletter_domain_model_bounceaccount SELECT * FROM tx_tcdirectmail_bounceaccount;",
-		"INSERT INTO tx_newsletter_domain_model_clicklink SELECT * FROM tx_tcdirectmail_clicklinks;",
-		"INSERT INTO tx_newsletter_domain_model_email SELECT * FROM tx_tcdirectmail_sentlog;",
-		"INSERT INTO tx_newsletter_domain_model_recipientlist SELECT * FROM tx_tcdirectmail_targets;",
-		"INSERT INTO tx_newsletter_domain_model_lock SELECT * FROM tx_tcdirectmail_lock;",
-		"UPDATE tx_newsletter_domain_model_recipientlist SET targettype = REPLACE(targettype, 'tcdirectmail', 'newsletter');",
-		"
-INSERT INTO be_users (
-pid, tstamp, username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
-) SELECT 
-pid, tstamp, REPLACE(username, 'tcdirectmail', 'newsletter') AS username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
-FROM be_users WHERE username = '_cli_tcdirectmail';",
+	private $queries = array(
+
+		// Recipient lists
+		"INSERT INTO tx_newsletter_domain_model_recipientlist (
+			uid, pid, title, plain_only, lang, type, be_users, fe_groups, fe_pages, tt_address, csv_url, csv_separator, csv_fields, csv_filename, csv_values, sql_statement, html_file, html_fetch_type, calculated_recipients, tstamp, crdate, deleted, hidden
+		) SELECT uid, pid, title, plain_only, lang, REPLACE(targettype, 'tx_tcdirectmail_target_', 'Tx_Newsletter_Domain_Model_RecipientList_'), beusers, fegroups, fepages, ttaddress, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, calculated_receivers, tstamp, crdate, deleted, hidden
+		FROM tx_tcdirectmail_targets;",
+		
+		// Emails
+		"INSERT INTO tx_newsletter_domain_model_email (
+			pid, begin_time, end_time, recipient_address, recipient_data, opened, bounced, host
+		) SELECT pid, begintime, sendtime, receiver, userdata, beenthere, bounced, host
+		FROM tx_tcdirectmail_sentlog;",
+	
+		// Bounce accounts
+		"INSERT INTO tx_newsletter_domain_model_bounceaccount (
+			pid, email, server, protocol, username, password, tstamp, crdate, deleted, hidden
+		) SELECT pid, email, server, servertype, username, passwd, tstamp, crdate, deleted, hidden
+		FROM tx_tcdirectmail_bounceaccount;",
+	
+		// Migrate newsletter from page to its own table
+		"INSERT INTO tx_newsletter_domain_model_newsletter (
+			pid, planned_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
+		) SELECT uid, tx_tcdirectmail_senttime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, REPLACE(tx_tcdirectmail_plainconvert, 'tx_tcdirectmail', 'Tx_Newsletter_Domain_Model_PlainConverter_'), tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
+		FROM pages
+		WHERE tx_tcdirectmail_senttime != 0;",
+		
+		// Migrate CLI beuser 
+		"INSERT INTO be_users (
+			pid, tstamp, username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
+		) SELECT pid, tstamp, REPLACE(username, 'tcdirectmail', 'newsletter') AS username, password, admin, usergroup, disable, starttime, endtime, lang, email, db_mountpoints, options, crdate, cruser_id, realName, userMods, allowed_languages, uc, file_mountpoints, fileoper_perms, workspace_perms, lockToDomain, disableIPlock, deleted, TSconfig, lastlogin, createdByAction, usergroup_cached_list, workspace_id, workspace_preview
+		FROM be_users
+		WHERE username = '_cli_tcdirectmail';",
+			
+		"UPDATE fe_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
+		"UPDATE be_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
+	
+		// TODO link email to newsletter according to PID
+		//"UPDATE tx_newsletter_domain_model_email SET newsletter = LEFT JOIN???;",
 	);
 
 	/**
@@ -149,10 +154,9 @@ FROM be_users WHERE username = '_cli_tcdirectmail';",
 		// Check that newsletter tables are empty otherwise we would have primary key collision
 		$emptyTables = array(
 			'tx_newsletter_domain_model_bounceaccount',
-			'tx_newsletter_domain_model_clicklink',
 			'tx_newsletter_domain_model_email',
 			'tx_newsletter_domain_model_recipientlist',
-			'tx_newsletter_domain_model_lock',
+			'tx_newsletter_domain_model_newsletter',
 		);
 	
 		foreach ($emptyTables as $table)
@@ -173,11 +177,11 @@ FROM be_users WHERE username = '_cli_tcdirectmail';",
 	{
 		global $TYPO3_DB;
 		
-		$queries = array_merge($this->fieldsQueries, $this->tablesQueries);		
 		$recordCount = 0;
-		foreach ($queries as $query)
+		foreach ($this->queries as $query)
 		{
 			$res = $TYPO3_DB->sql_query($query);
+			if ($error = $TYPO3_DB->sql_error()) die(  $query . "<br>" . $error);
 			$recordCount += $TYPO3_DB->sql_affected_rows($res);
 		}
 	

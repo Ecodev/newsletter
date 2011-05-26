@@ -626,7 +626,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	/**
 	 * Here you can define an action when an address bounces. This can either be database operations such a a deletion. 
 	 * For external data-sources, you might consider collecting the addresses for later removal from the foreign system. 
-	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sesible default. "tableName" should also be included 
+	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sensible default. "tableName" should also be included 
 	 * for compatibility reasons.
 	 *
 	 * @param string $email the email address of the recipient
