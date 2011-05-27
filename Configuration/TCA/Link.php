@@ -37,7 +37,8 @@ $TCA['tx_newsletter_domain_model_link'] = array(
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 4,
-				'eval' => 'int,'
+				'eval' => 'int',
+				'readOnly' => true,
 			),
 		),
 		'newsletter' => array(

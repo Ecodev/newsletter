@@ -145,15 +145,16 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.bounce_account',
 			'config'	=> array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'tx_newsletter_domain_model_bounceaccount',
-				'minitems' => 0,
+				'items' => array(array('', 0)),
 				'maxitems' => 1,
-				'appearance' => array(
-					'collapse' => 0,
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+				'wizards' => array(
+					'edit' => array(
+						'type' => 'popup',
+						'icon' => 'edit2.gif',
+						'script' => 'wizard_edit.php',
+					),
 				),
 			),
 		),
@@ -161,15 +162,15 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.recipient_list',
 			'config'	=> array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'tx_newsletter_domain_model_recipientlist',
-				'minitems' => 0,
 				'maxitems' => 1,
-				'appearance' => array(
-					'collapse' => 0,
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+				'wizards' => array(
+					'edit' => array(
+						'type' => 'popup',
+						'icon' => 'edit2.gif',
+						'script' => 'wizard_edit.php',
+					),
 				),
 			),
 		),
