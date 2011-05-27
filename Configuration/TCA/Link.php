@@ -51,7 +51,6 @@ $TCA['tx_newsletter_domain_model_link'] = array(
 				'maxitems' => 1,
 				'appearance' => array(
 					'collapse' => 0,
-					'newRecordLinkPosition' => 'bottom',
 					'showSynchronizationLink' => 1,
 					'showPossibleLocalizationRecords' => 1,
 					'showAllLocalizationLink' => 1
