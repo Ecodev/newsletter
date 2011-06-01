@@ -5,6 +5,7 @@ class tx_newsletter_bouncehandler
 	const NEWSLETTER_NOT_A_BOUNCE = 1;
 	const NEWSLETTER_SOFTBOUNCE = 2;
 	const NEWSLETTER_HARDBOUNCE = 3;
+	const NEWSLETTER_UNSUBSCRIBE = 4;
 	
 	/**
 	 * Bounce level of the mail source specified
@@ -94,7 +95,7 @@ class tx_newsletter_bouncehandler
 		foreach ($this->soft as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
 				$this->score++;
-				$this->status = NEWSLETTER_SOFTBOUNCE;
+				$this->status = self::NEWSLETTER_SOFTBOUNCE;
 			}
 		}
 
@@ -102,7 +103,7 @@ class tx_newsletter_bouncehandler
 		foreach ($this->hard as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
 				$this->score++;
-				$this->status = NEWSLETTER_HARDBOUNCE;
+				$this->status = self::NEWSLETTER_HARDBOUNCE;
 			}
 		}
 
@@ -149,7 +150,6 @@ class tx_newsletter_bouncehandler
 	 */
 	public function dispatch()
 	{
-		var_dump($this->status);
 		$this->findEmail();
 		
 		// If couldn't find the original email we cannot do anything
@@ -158,8 +158,9 @@ class tx_newsletter_bouncehandler
 			
 		switch ($bounce->status)
 		{
-			case NEWSLETTER_HARDBOUNCE:
-			case NEWSLETTER_SOFTBOUNCE:
+			case self::NEWSLETTER_UNSUBSCRIBE:
+			case self::NEWSLETTER_HARDBOUNCE:
+			case self::NEWSLETTER_SOFTBOUNCE:
 				if ($this->recipientList)
 				{
 					$this->recipientList->disableReceiver($this->email->getRecipientAddress(), $this->status);

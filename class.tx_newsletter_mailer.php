@@ -338,6 +338,12 @@ class tx_newsletter_mailer {
 	 */
 	private function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email) {
 		$record = $email->getRecipientData();
+		
+		// Add predefined markers
+		$authCode = $email->getAuthCode();
+		$record['newsletter_view_url'] = $this->homeUrl . 'web/preview.php?c=' . $authCode;
+		$record['newsletter_unsubscribe_url'] = $this->homeUrl . 'web/unsubscribe.php?c=' . $authCode;
+		
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
 				$_procObj = & t3lib_div::getUserObj($_classRef);

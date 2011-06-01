@@ -18,24 +18,29 @@ class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_D
 	 */
 	function disableReceiver($email, $bounce_level) {
 		global $TYPO3_DB;
-
+		
+		$increment = 0;
 		switch ($bounce_level) {
-			case	tx_newsletter_bouncehandler::NEWSLETTER_HARDBOUNCE:
-				$TYPO3_DB->sql_query("UPDATE $this->tableName 
-							SET tx_newsletter_bounce = tx_newsletter_bounce + 5
-							WHERE email = '$email'");
-
-				return $TYPO3_DB->sql_affected_rows();
-
-			case	tx_newsletter_bouncehandler::NEWSLETTER_SOFTBOUNCE:
-				$TYPO3_DB->sql_query("UPDATE $this->tableName 
-							SET tx_newsletter_bounce = tx_newsletter_bounce + 1
-							WHERE email = '$email'");
-				return $TYPO3_DB->sql_affected_rows();
-
-			default:
-				return false;
+			case tx_newsletter_bouncehandler::NEWSLETTER_UNSUBSCRIBE:
+				$increment = 10;
+				break;
+			case tx_newsletter_bouncehandler::NEWSLETTER_HARDBOUNCE:
+				$increment = 5;
+				break;
+			case tx_newsletter_bouncehandler::NEWSLETTER_SOFTBOUNCE:
+				$increment = 1;
+				break;
 		}
+		
+		if ($increment)
+		{
+			$TYPO3_DB->sql_query("UPDATE $this->tableName 
+						SET tx_newsletter_bounce = tx_newsletter_bounce + $increment
+						WHERE email = '$email'");
+			return $TYPO3_DB->sql_affected_rows();
+		}
+		
+		return false;
 	}
 
 	/**

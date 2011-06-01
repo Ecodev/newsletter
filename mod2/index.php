@@ -546,7 +546,9 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$page = $TYPO3_DB->sql_fetch_assoc($rs);
 	  
 		$mailer = tx_newsletter_tools::getConfiguredMailer($this->newsletter);
-	  
+	  	
+		if (!$this->newsletter->getRecipientList())
+			return "ERROR: not recipient list defined";
 		
 		$out .= '<p>' . $this->editTarget($this->newsletter->getRecipientList()) . '</p>';
 		$out .= '<table>';

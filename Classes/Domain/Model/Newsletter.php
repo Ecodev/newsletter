@@ -501,7 +501,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if (!$this->getRecipientList())
 			return null;
 			
-		// TODO cleanup instanciation process for recipientLis, see as well self:setRecipientList, RecipientList::getTarget() and RecipientList::loadTarget()
+		// TODO cleanup instanciation process for recipientList, see as well self:setRecipientList, RecipientList::getTarget() and RecipientList::loadTarget()
 		return Tx_Newsletter_Domain_Model_RecipientList::loadTarget($this->getRecipientList()->getUid());
 	}
 	

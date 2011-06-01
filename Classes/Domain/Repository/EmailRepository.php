@@ -33,5 +33,15 @@
  
 class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
+	/**
+	 * Returns the latest newsletter for the given page
+	 * @param integer $pid
+	 */
+	public function findByAuthcode($authcode)
+	{
+		$query = $this->createQuery();
+		$query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE MD5(CONCAT(`uid`, `recipient_address`)) = ? LIMIT 1', array($authcode));
+		
+		return $query->execute()->getFirst();
+	}
 }
-?>
