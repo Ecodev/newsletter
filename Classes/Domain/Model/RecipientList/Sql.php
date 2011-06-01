@@ -60,11 +60,11 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	 * @param   integer    Status of the bounce
 	 * @return  bool       Status of the success of the removal.
 	 */
-	function disableReceiver($uid, $bounce_type) {
+	function disableReceiver($email, $bounce_type) {
 		global $TYPO3_DB;
 	      
-		if ($this->tableName <> 'undefinedtable') {
-			$TYPO3_DB->sql_query("DELETE FROM $this->tableName WHERE uid = $uid");
+		if ($this->tableName != 'undefinedtable') {
+			$TYPO3_DB->sql_query("DELETE FROM $this->tableName WHERE email = '$email'");
 			return $TYPO3_DB->sql_affected_rows();
 		} else {
 			return false;
