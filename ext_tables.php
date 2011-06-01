@@ -96,6 +96,7 @@ if (TYPO3_MODE=="BE")	{
 	// temporary line
 	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
 
+	/*
 	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
 		'web',// Make newsletter module a submodule of 'user'
@@ -110,6 +111,6 @@ if (TYPO3_MODE=="BE")	{
 			'icon'   => 'EXT:newsletter/Resources/Public/images/icons/ext_icon.png',
 			'labels' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_module.xml',
 		)
-	);
+	);*/
 }
 ?>

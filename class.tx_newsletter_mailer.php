@@ -341,7 +341,7 @@ class tx_newsletter_mailer {
 		
 		// Add predefined markers
 		$authCode = $email->getAuthCode();
-		$record['newsletter_view_url'] = $this->homeUrl . 'web/preview.php?c=' . $authCode;
+		$record['newsletter_view_url'] = $this->homeUrl . 'web/view.php?c=' . $authCode;
 		$record['newsletter_unsubscribe_url'] = $this->homeUrl . 'web/unsubscribe.php?c=' . $authCode;
 		
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {

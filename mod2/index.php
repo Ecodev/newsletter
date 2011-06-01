@@ -613,7 +613,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	function previewLink(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $type, $email) {
 		return '<a target="_new" href="'.$GLOBALS['BACK_PATH']
 		.t3lib_extMgm::extRelPath('newsletter')
-		.'web/preview.php?newsletter='. $newsletter->getUid() .'&email='.rawurlencode($email).'&type='.$type.'">'
+		.'web/view.php?newsletter='. $newsletter->getUid() .'&email='.rawurlencode($email).'&type='.$type.'">'
 		.$GLOBALS['LANG']->getLL("preview_$type")
 		.'</a>';
 	}
