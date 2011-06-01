@@ -62,8 +62,10 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	public function countStatistics($pid) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$numberOfRecords = $query->matching($query->equals('pid', $pid))
-				->count();
+		$result = $query->statement("SELECT COUNT(*) AS count FROM tx_newsletter_domain_model_newsletter WHERE pid = $pid")
+				->execute();
+		$numberOfRecords = $result[0]['count'];
+		
 		return $numberOfRecords;
 	}
 
@@ -76,7 +78,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	public function findByUid($uid) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$records = $query->matching($query->equals('uid', $uid))
+		$records = $query->statement("SELECT * FROM tx_newsletter_domain_model_newsletter WHERE uid = $uid")
 				->execute();
 		$record = $records[0];
 		$record['begintime_formatted'] = $record['stoptime_formatted'] = '';
@@ -179,12 +181,12 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	public function findAllByPid($pid) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$records = $query->matching($query->equals('pid', $pid))
+		$records = $query->statement("SELECT * FROM tx_newsletter_domain_model_newsletter WHERE pid = $pid")
 				->execute();
 		
 		// Adds custom fields
 		foreach ($records as &$record) {
-			$record['number_of_recipients'] = $this->getNumberOfRecipients($pid, $record['begintime']);
+			$record['number_of_recipients'] = $this->getNumberOfRecipients($record['uid']);
 			$record['statistic_label_formatted'] = '';
 		}
 		return $records;
@@ -199,13 +201,9 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * @param int $begintime: the time when the newsletter was sent
 	 * @return int $fieldsMetaData: list of metadata for the given $fields
 	 */
-	protected function getNumberOfRecipients($pid, $begintime) {
+	protected function getNumberOfRecipients($uidNewsletter) {
 		global $TYPO3_DB;
-
-		$condition[] = 'pid = ' . $pid;
-		$condition[] = 'begintime = ' . $begintime;
-
-		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('uid', 'tx_newsletter_domain_model_email', implode(' AND ', $condition));
+		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
 
 		return (int)$numberOfRecipients;
 	}
@@ -275,7 +273,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 //        // custom property
 //        "foo": "bar"
 //    },
-		$tableName = 'tx_newsletter_domain_model_lock';
+		$tableName = 'tx_newsletter_domain_model_newsletter';
 		$metaData['idProperty'] = 'uid';
 		$metaData['root'] = 'records';
 		$metaData['totalProperty'] = 'total';
@@ -291,7 +289,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * @return array $metaData
 	 */
 	public function getMetaDataForSingleRecord() {
-		$tableName = 'tx_newsletter_domain_model_lock';
+		$tableName = 'tx_newsletter_domain_model_newsletter';
 		$metaData['idProperty'] = 'uid';
 		$metaData['root'] = 'data';
 		$metaData['totalProperty'] = 'total';

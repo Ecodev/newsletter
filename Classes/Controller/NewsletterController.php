@@ -308,8 +308,6 @@ EOF;
 
 		$this->inlineJavascript[] .= <<< EOF
 
-		Ext.chart.Chart.CHART_URL = 'http://newsletter.local/typo3/contrib/extjs/resources/charts.swf';
-
 		Ext.ns("TYPO3.Newsletter");
 		TYPO3.Newsletter.Language = $labels;
 
