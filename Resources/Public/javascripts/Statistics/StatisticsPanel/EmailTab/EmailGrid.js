@@ -22,18 +22,36 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 			// column model
 			columns:[
 				{
-					dataIndex: 'recipient_id',
+					dataIndex: 'uid',
 					header: TYPO3.Newsletter.Language.link_id,
 					sortable: true,
 					width: 40
 				},
 				{
-					dataIndex: 'email',
-					header: TYPO3.Newsletter.Language.percentage_of_opened,
-					width: 200,
+					dataIndex: 'recipient_address',
+					header: TYPO3.Newsletter.Language.recipients,
+					width: 300,
 					sortable: true,
-//					css: 'text-align: center;',
 					renderer: this._renderEmail
+				},
+				{
+					dataIndex: 'opened',
+					header: TYPO3.Newsletter.Language.opened,
+					width: 100,
+					sortable: true
+				},
+				{
+					dataIndex: 'bounced',
+					header: TYPO3.Newsletter.Language.bounced,
+					width: 100,
+					sortable: true
+				},
+				{
+					dataIndex: 'preview',
+					header: TYPO3.Newsletter.Language.preview,
+					width: 100,
+					sortable: true,
+					renderer: this._renderPreview
 				},
 			],
 
@@ -57,6 +75,10 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 	 */
 	_renderEmail: function(value, parent, record) {
 		return String.format('<a href="mailto:{0}">{0}</a>', value);
+	},
+	
+	_renderPreview: function(value, parent, record) {
+		return String.format('<a href="/typo3conf/ext/newsletter/web/view.php?c={0}">view</a>', value);
 	}
 
 });

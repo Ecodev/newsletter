@@ -21,7 +21,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend(Ext.gr
 			// column model
 			columns:[
 				{
-					dataIndex: 'link_id',
+					dataIndex: 'uid',
 					header: TYPO3.Newsletter.Language.link_id,
 					sortable: true,
 					width: 40
@@ -35,7 +35,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend(Ext.gr
 					renderer: this._renderPercentageOfOpened
 				},
 				{
-					dataIndex: 'number_of_opened',
+					dataIndex: 'opened_count',
 					header: TYPO3.Newsletter.Language.number_of_opened,
 					width: 100,
 					sortable: true,
@@ -46,7 +46,9 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend(Ext.gr
 				{
 					dataIndex: 'url',
 					header: 'URL',
-					width: 600
+					sortable: true,
+					width: 600,
+					renderer: this._renderUrl
 				}
 			],
 
@@ -82,9 +84,12 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend(Ext.gr
 	 * @return string
 	 */
 	_renderNumberOfOpened: function(value, parent, record) {
-		return String.format('{0}/{1}', value, record.data['total_number_of_opened']);
-	}
+		return String.format('{0}/{1}', value, record.data['number_of_recipients']);
+	},
 
+	_renderUrl: function(value, parent, record) {
+		return String.format('<a href="{0}">{0}</a>', value);
+	}
 });
 
 Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid', TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid);

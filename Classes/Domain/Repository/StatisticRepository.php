@@ -94,8 +94,8 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 			$record['percent_of_not_opened'] = round($record['number_of_not_opened'] * 100 / $record['number_of_recipients'], 2);
 			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_recipients'], 2);
 		}
-		$record['clicked_links'] = $this->getClickedLinks($record['begintime'], $record['number_of_opened']);
-		$record['sent_emails'] = $this->getSentEmails($record['begintime']);
+		$record['clicked_links'] = $this->getClickedLinks($record['uid'], $record['number_of_recipients']);
+		$record['sent_emails'] = $this->getSentEmails($record['uid']);
 		return $record;
 	}
 
@@ -108,34 +108,21 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * @param int $numberOfOpened
 	 * @return int $fieldsMetaData: list of metadata for the given $fields
 	 */
-	protected function getSentEmails($begintime, $numberOfOpened) {
+	protected function getSentEmails($uidNewsletter) {
 		global $TYPO3_DB;
 
-		/* Get list of receivers */
-		$pid = t3lib_div::_GET('pid');
-	    $rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = $pid");
-	    $page = $TYPO3_DB->sql_fetch_assoc($rs);
-		$targets = array_filter(explode(',',$page['tx_newsletter_real_target']));
+		$sql = "SELECT uid, recipient_address, end_time, opened, bounced
+                       FROM tx_newsletter_domain_model_email
+                       WHERE newsletter = $uidNewsletter";
 
-	    foreach ($targets as $tid) {
-			$recipients = $this->getRecipients($tid);
+		$records = array();
+		$res = $TYPO3_DB->sql_query($sql);
+		while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
+			$row['preview'] = md5($row['uid'] . $row['recipient_address']);
+			$records[] = $row;
 		}
-		return $recipients;
-	}
-
-	/**
-	 * This is the object factory, without init(), for all newsletter targets.
-	 *
-	 * @param     integer     Uid of a Tx_Newsletter_Domain_Model_RecipientList from the database.
-	 * @return    object      Of newsletter_target type.
-	 */
-	protected function getRecipients($uid) {
-		global $TYPO3_DB;
-
-		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_domain_model_recipientlist WHERE uid = $uid");
-		$record = $TYPO3_DB->sql_fetch_assoc($rs);
-		$repository = new Tx_Newsletter_Domain_Repository_RecipientListRepository();
-		return $repository->findAllByRecipientType($record);
+		
+		return $records;
 	}
 
 	/**
@@ -147,27 +134,22 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * @param int $numberOfOpened
 	 * @return int $fieldsMetaData: list of metadata for the given $fields
 	 */
-	protected function getClickedLinks($begintime, $numberOfOpened) {
+	protected function getClickedLinks($uidNewsletter, $numberOfRecipients) {
 		global $TYPO3_DB;
 
-		$sql = "SELECT linkid AS link_id, SUM(opened) AS number_of_opened, MIN(url) AS url
-                       FROM tx_newsletter_domain_model_email
-                       INNER JOIN tx_newsletter_domain_model_clicklink ON sentlog = uid
-                       WHERE begintime = $begintime
-                       AND linktype = 'html'
-                       AND opened = 1
-                       GROUP BY 1
-                       ORDER BY 1";
+		$sql = "SELECT uid, opened_count, url
+                       FROM tx_newsletter_domain_model_link
+                       WHERE newsletter = $uidNewsletter";
 
 
 		$records = array();
 		$res = $TYPO3_DB->sql_query($sql);
 		while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
 			$row['percentage_of_opened'] = 0;
-			if ($numberOfOpened != 0) {
-				$row['percentage_of_opened'] = round($row['number_of_opened'] * 100 / $numberOfOpened, 2);
+			if ($numberOfRecipients != 0) {
+				$row['percentage_of_opened'] = round($row['opened_count'] * 100 / $numberOfRecipients, 2);
 			}
-			$row['total_number_of_opened'] = $numberOfOpened;
+			$row['number_of_recipients'] = $numberOfRecipients;
 			$records[] = $row;
 		}
 		return $records;
@@ -324,19 +306,20 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 		global $TYPO3_DB;
 		$fieldsInTable = $TYPO3_DB->admin_get_fields($tableName);
 		$fieldsMetaData = array();
-		foreach ($fieldsInTable as $fieldName) {
-			if ($fieldName['Field'] == 'crdate' ||
-					$fieldName['Field'] == 'tstamp' ||
-					$fieldName['Field'] == 'begintime' ||
-					$fieldName['Field'] == 'stoptime') {
-				$fieldsMetaData[] = array('name' => $fieldName['Field'], 'type' => 'date', 'dateFormat' => 'timestamp');
+		foreach ($fieldsInTable as $field) {
+			$fieldName = $field['Field'];
+			$fieldType = $field['Type'];
+			
+			if (preg_match('/_time$/', $fieldName) ||
+					$fieldName == 'crdate' ||
+					$fieldName == 'tstamp') {
+				$fieldsMetaData[] = array('name' => $fieldName, 'type' => 'date', 'dateFormat' => 'timestamp');
 			}
-			$fieldType = $fieldName['Type'];
-			if (strpos($fieldType, 'int') !== FALSE) {
-				$fieldsMetaData[] = array('name' => $fieldName['Field'], 'type' => 'int');
+			elseif (strpos($fieldType, 'int') !== FALSE) {
+				$fieldsMetaData[] = array('name' => $fieldName, 'type' => 'int');
 			}
 			else { // means this is a string
-				$fieldsMetaData[] = array('name' => $fieldName['Field'], 'type' => 'string');
+				$fieldsMetaData[] = array('name' => $fieldName, 'type' => 'string');
 			}
 		}
 		return $fieldsMetaData;

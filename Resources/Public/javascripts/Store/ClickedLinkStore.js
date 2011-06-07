@@ -10,7 +10,7 @@ TYPO3.Newsletter.Store.initClickedLink = function() {
 		remoteSort: false,
 		fields: [
 			{
-				name: 'link_id',
+				name: 'uid',
 				type: 'int'
 			},
 			{
@@ -22,7 +22,7 @@ TYPO3.Newsletter.Store.initClickedLink = function() {
 				type: 'int'
 			},
 			{
-				name: 'total_number_of_opened',
+				name: 'number_of_recipients',
 				type: 'int'
 			},
 			{

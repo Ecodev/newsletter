@@ -28,43 +28,5 @@
  */
 class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
-	/**
-	 * Returns all objects of this repository
-	 *
-	 * @param string $record, this can be Tx_Newsletter_Domain_Model_RecipientList_RawSql
-	 * @return array An array of element, empty if no records found
-	 */
-	public function findAllByRecipientType($record) {
-		$result = array();
-		switch ($record['targettype']) {
-			case 'Tx_Newsletter_Domain_Model_RecipientList_RawSql':
-				$result = $this->getRecipientSql($record);
-				break;
-		}
-		return $result;
-	}
-
-	/**
-	 * Returns all objects of this repository
-	 *
-	 * @param string $type, this can be Tx_Newsletter_Domain_Model_RecipientList_RawSql
-	 * @return array An array of element, empty if no records found
-	 */
-	public function getRecipientSql($record) {
-		/* @var $TYPO3_DB t3lib_DB */
-		global $TYPO3_DB;
-		$records = array();
-		$request = $record['rawsql'];
-		if (! preg_match('/UPDATE|DELETE|INSERT|pwd|password/isU', $request)) {
-			$res = $TYPO3_DB->sql_query($record['rawsql']);
-			$loop = 0;
-			while($row = $TYPO3_DB->sql_fetch_assoc($res)) {
-				$row['recipient_id'] = ++$loop;
-				$records[] = $row;
-			}
-		}
-		return $records;
-	}
-
 }
 ?>
