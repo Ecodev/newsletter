@@ -36,7 +36,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_Newsletter_ViewHelpers_Format_BegintimeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_Format_BeginTimeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * This method formats the begintime value
@@ -45,8 +45,8 @@ class Tx_Newsletter_ViewHelpers_Format_BegintimeViewHelper extends Tx_Fluid_Core
 	 * @return	string	content to display
 	 */
 	public function render($record = array()) {
-		$result = ' ' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $record['begintime']);
-		$result .= '@' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $record['begintime']);
+		$result = ' ' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $record['begin_time']);
+		$result .= '@' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $record['begin_time']);
 		return $result;
 	}
 

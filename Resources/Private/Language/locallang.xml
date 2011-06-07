@@ -124,6 +124,8 @@
 			<label index="emails_opened">emails opened</label>
 			<label index="emails_not_opened">emails not opened</label>
 			<label index="emails_bounced">emails bounced</label>
+			<label index="sent">sent</label>
+			<label index="not_sent">not yet sent</label>
 			<label index="started">Started on</label>
 			<label index="ended">Ended on</label>
 			<label index="percentage_of_opened">% of opened</label>

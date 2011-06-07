@@ -36,7 +36,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_Newsletter_ViewHelpers_Format_StoptimeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_Format_EndTimeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * This method formats the Stoptime value
@@ -45,8 +45,8 @@ class Tx_Newsletter_ViewHelpers_Format_StoptimeViewHelper extends Tx_Fluid_Core_
 	 * @return	string	content to display
 	 */
 	public function render($record = array()) {
-		$result = ' ' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $record['stoptime']);
-		$result .= '@' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $record['stoptime']);
+		$result = ' ' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $record['end_time']);
+		$result .= '@' . date($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $record['end_time']);
 		return $result;
 	}
 

@@ -38,15 +38,15 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 
 		$this->additionalFields = array(
 			array('name' => 'number_of_sent', 'type' => 'int'),
+			array('name' => 'number_of_not_sent', 'type' => 'int'),
 			array('name' => 'number_of_opened', 'type' => 'int'),
-			array('name' => 'number_of_not_opened', 'type' => 'int'),
 			array('name' => 'number_of_bounced', 'type' => 'int'),
 			array('name' => 'number_of_recipients', 'type' => 'int'),
 			array('name' => 'percent_of_opened', 'type' => 'int'),
 			array('name' => 'percent_of_not_opened', 'type' => 'int'),
 			array('name' => 'percent_of_bounced', 'type' => 'int'),
-			array('name' => 'begintime_formatted', 'type' => 'string'),
-			array('name' => 'stoptime_formatted', 'type' => 'string'),
+			array('name' => 'begin_time_formatted', 'type' => 'string'),
+			array('name' => 'end_time_formatted', 'type' => 'string'),
 			array('name' => 'statistic_label_formatted', 'type' => 'string'),
 			array('name' => 'clicked_links'),
 			array('name' => 'sent_emails'),
@@ -81,17 +81,18 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 		$records = $query->statement("SELECT * FROM tx_newsletter_domain_model_newsletter WHERE uid = $uid")
 				->execute();
 		$record = $records[0];
-		$record['begintime_formatted'] = $record['stoptime_formatted'] = '';
-		$record['number_of_recipients'] = $this->getNumberOfRecipients($record['pid'], $record['begintime']);
-		$record['number_of_sent'] = $record['number_of_recipients'];
-		$record['number_of_opened'] = $this->getNumberOfOpened($record['pid'], $record['begintime']);
-		$record['number_of_not_opened'] = $record['number_of_sent'] - $record['number_of_opened'];
-		$record['number_of_bounced'] = $this->getNumberOfBounce($record['pid'], $record['begintime']);
+		$record['begin_time_formatted'] = $record['end_time_formatted'] = '';
+		$record['number_of_recipients'] = $this->getNumberOfRecipients($record['uid']);
+		$record['number_of_sent'] = $this->getNumberOfSent($record['uid']);
+		$record['number_of_not_sent'] = $this->getNumberOfNotSent($record['uid']);
+		$record['number_of_opened'] = $this->getNumberOfOpened($record['uid']);
+		$record['number_of_bounced'] = $this->getNumberOfBounce($record['uid']);
+		
 		$record['percent_of_opened'] = $record['percent_of_not_opened'] = $record['percent_of_bounced'] = 0;
-		if ($record['number_of_sent'] != 0) {
-			$record['percent_of_opened'] = round($record['number_of_opened'] * 100 / $record['number_of_sent'], 2);
-			$record['percent_of_not_opened'] = round($record['number_of_not_opened'] * 100 / $record['number_of_sent'], 2);
-			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_sent'], 2);
+		if ($record['number_of_recipients'] != 0) {
+			$record['percent_of_opened'] = round($record['number_of_opened'] * 100 / $record['number_of_recipients'], 2);
+			$record['percent_of_not_opened'] = round($record['number_of_not_opened'] * 100 / $record['number_of_recipients'], 2);
+			$record['percent_of_bounced'] = round($record['number_of_bounced'] * 100 / $record['number_of_recipients'], 2);
 		}
 		$record['clicked_links'] = $this->getClickedLinks($record['begintime'], $record['number_of_opened']);
 		$record['sent_emails'] = $this->getSentEmails($record['begintime']);
@@ -194,40 +195,58 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 
 	/**
 	 * Get the number of recipient for a newsletter
-	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
-	 *
 	 * @global t3lib_DB $TYPO3_DB
-	 * @param int $pid: page id where newsletter is stored
-	 * @param int $begintime: the time when the newsletter was sent
-	 * @return int $fieldsMetaData: list of metadata for the given $fields
+	 * @param int $uidNewsletter
+	 * @return int count of recipients
 	 */
 	protected function getNumberOfRecipients($uidNewsletter) {
 		global $TYPO3_DB;
+		
 		$numberOfRecipients = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
 
 		return (int)$numberOfRecipients;
+	}
+	
+	/**
+	 * Get the number of not yet sent email for a newsletter
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param int $uidNewsletter
+	 * @return int count of recipients
+	 */
+	protected function getNumberOfNotSent($uidNewsletter) {
+		global $TYPO3_DB;
+		
+		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $uidNewsletter);
+
+		return (int)$numberOfNotSent;
+	}
+	
+	/**
+	 * Get the number of sent email for a newsletter
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param int $uidNewsletter
+	 * @return int count of recipients
+	 */
+	protected function getNumberOfSent($uidNewsletter) {
+		global $TYPO3_DB;
+		
+		$numberOfSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time != 0 AND opened = 0 AND bounced = 0 AND newsletter = ' . $uidNewsletter);
+
+		return (int)$numberOfSent;
 	}
 
 	/**
 	 * Get the number of opened email.
 	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
-	 *
 	 * @global t3lib_DB $TYPO3_DB
-	 * @param int $pid: page id where newsletter is stored
-	 * @param int $begintime: the time when the newsletter was sent
-	 * @return int $numberOfOpened
+	 * @param int $uidNewsletter
+	 * @return int count of opened emails
 	 */
-	protected function getNumberOfOpened($pid, $begintime) {
+	protected function getNumberOfOpened($uidNewsletter) {
 		global $TYPO3_DB;
 		
-		$sql = "SELECT COUNT(uid)
-				FROM tx_newsletter_domain_model_email
-				WHERE begintime = $begintime
-				AND beenthere = 1
-				AND pid = $pid";
-
-		$rs = $TYPO3_DB->sql_query($sql);
-		list($numberOfOpened) = $TYPO3_DB->sql_fetch_row($rs);
+		$numberOfOpened = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'opened = 1 AND bounced = 0 AND newsletter = ' . $uidNewsletter);
+		
 		return (int)$numberOfOpened;
 	}
 
@@ -236,20 +255,14 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
 	 *
 	 * @global t3lib_DB $TYPO3_DB
-	 * @param int $pid: page id where newsletter is stored
-	 * @param int $begintime: the time when the newsletter was sent
+	 * @param int $uidNewsletter
 	 * @return int $numberOfBounce
 	 */
-	protected function getNumberOfBounce($pid, $begintime) {
+	protected function getNumberOfBounce($uidNewsletter) {
 		global $TYPO3_DB;
 
-		$sql = "SELECT SUM(bounced)
-				FROM tx_newsletter_domain_model_email
-				WHERE begintime = $begintime
-				AND pid = $pid";
-
-		$rs = $TYPO3_DB->sql_query($sql);
-		list($numberOfBounce) = $TYPO3_DB->sql_fetch_row($rs);
+		$numberOfBounce = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'bounced = 1 AND newsletter = ' . $uidNewsletter);
+		
 		return (int)$numberOfBounce;
 	}
 

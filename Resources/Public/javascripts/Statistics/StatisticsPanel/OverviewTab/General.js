@@ -36,22 +36,19 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 							tpl: new Ext.XTemplate(
 								'<tpl for=".">',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										'<span class="t3-newsletter-span-statistic-sent">{number_of_recipients}</span> ' + TYPO3.Newsletter.Language.emails_sent,
+										'<span class="t3-newsletter-span-statistic-sent">{number_of_recipients}</span> ' + TYPO3.Newsletter.Language.recipients,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
 										'<span class="t3-newsletter-span-statistic-opened">{percent_of_opened}%</span> ' + TYPO3.Newsletter.Language.emails_opened,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										'<span class="t3-newsletter-span-statistic-not-opened">{percent_of_not_opened}%</span> ' + TYPO3.Newsletter.Language.emails_not_opened,
-									'</div>',
-									'<div class="t3-newsletter-span-statistic">',
 										'<span class="t3-newsletter-span-statistic-bounced">{percent_of_bounced}%</span> ' + TYPO3.Newsletter.Language.emails_bounced,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{begintime_formatted}</span>',
+										TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{begin_time_formatted}</span>',
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{stoptime_formatted}</span>',
+										TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{end_time_formatted}</span>',
 									'</div>',
 								'</tpl>'
 							),
@@ -65,7 +62,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 							categoryField: 'label',
 							flex: 1,
 							seriesStyles: {
-								colors:['#078207','#25CDF2','#FFAA3C','#F8869D','#DEFE39']
+								colors:['#CCCCCC', '#25CDF2', '#078207', '#E01B4C']
 							},
 							//extra styles get applied to the chart defaults
 							extraStyle:

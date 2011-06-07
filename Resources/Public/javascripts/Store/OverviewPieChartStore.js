@@ -27,13 +27,18 @@ TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 
 			//  Adds records
 			this.add(new Ext.data.Record({
-					label: TYPO3.Newsletter.Language.opened,
-					total: record.json.number_of_opened
+					label: TYPO3.Newsletter.Language.not_sent,
+					total: record.json.number_of_not_sent
 				})
 			);
 			this.add(new Ext.data.Record({
-					label: TYPO3.Newsletter.Language.not_opened,
-					total: record.json.number_of_not_opened
+					label: TYPO3.Newsletter.Language.sent,
+					total: record.json.number_of_sent
+				})
+			);
+			this.add(new Ext.data.Record({
+					label: TYPO3.Newsletter.Language.opened,
+					total: record.json.number_of_opened
 				})
 			);
 			this.add(new Ext.data.Record({
