@@ -256,18 +256,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 	 * @return array $metaData
 	 */
 	public function getMetaDataForMultipleRecords() {
-//		metaData: {
-//        // used by store to set its sortInfo
-//        "sortInfo":{
-//           "field": "name",
-//           "direction": "ASC"
-//        },
-//        // paging data (if applicable)
-//        "start": 0,
-//        "limit": 2,
-//        // custom property
-//        "foo": "bar"
-//    },
+		
 		$tableName = 'tx_newsletter_domain_model_newsletter';
 		$metaData['idProperty'] = 'uid';
 		$metaData['root'] = 'records';
@@ -276,6 +265,7 @@ class Tx_Newsletter_Domain_Repository_StatisticRepository extends Tx_Newsletter_
 		$metaData['fields'] = array_merge($this->getFieldMetaData($tableName), $this->additionalFields);
 		return $metaData;
 	}
+	
 	/**
 	 * Get datasource's meta data for statistic.
 	 * The method will return an array containing information for a JsonStore
