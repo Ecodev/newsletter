@@ -1,11 +1,12 @@
 plugin.tx_newsletter {
+	persistence {
+		// We will override the storage pid by code anyway, so we don't need to have a real value here
+		storagePid = 123456789
+	}
 	view {
 		templateRootPath = {$plugin.tx_newsletter.view.templateRootPath}
 		partialRootPath = {$plugin.tx_newsletter.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_newsletter.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = 987654321
 	}
 }
 
@@ -28,3 +29,16 @@ plugin.tx_newsletter._CSS_DEFAULT_STYLE (
 		vertical-align:top;
 	}
 )
+
+
+module.tx_newsletter {
+	persistence {
+			// Our records (from ext_tables_static+adt.sql) are stored at root
+		storagePid = 0
+	}
+	view {
+		templateRootPath = {$module.tx_newsletter.view.templateRootPath}
+		partialRootPath = {$module.tx_newsletter.view.partialRootPath}
+		layoutRootPath = {$module.tx_newsletter.view.layoutRootPath}
+	}
+}

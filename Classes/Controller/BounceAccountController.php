@@ -30,7 +30,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Newsletter_Controller_BounceAccountController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 	
 	/**
 	 * bounceAccountRepository

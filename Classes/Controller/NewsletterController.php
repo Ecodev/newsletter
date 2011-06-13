@@ -30,7 +30,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 
 	/**
 	 * API of $this->pageRendererObject can be found at
@@ -111,9 +111,9 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Extbase_MVC_Contr
 		$this->pageRendererObject = $this->doc->getPageRenderer();
 
 		// Defines CSS + Javascript resource file
-		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/javascripts/';
+		$this->javascriptPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/JavaScript/';
 		$this->stylesheetsPath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/stylesheets/';
-		$this->imagePath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/images/';
+		$this->imagePath = t3lib_extMgm::extRelPath('newsletter') . 'Resources/Public/Images/';
 
 		// Get page info
 		$this->pageinfo = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);

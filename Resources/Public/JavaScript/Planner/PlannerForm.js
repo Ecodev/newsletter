@@ -1,11 +1,31 @@
 Ext.ns("TYPO3.Newsletter.UserInterface");
 
+    // turn on validation errors beside the field globally
+    Ext.form.Field.prototype.msgTarget = 'side';
+	
 TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
 		var config = {
 			title: 'My newsletter form',
 			height: 700,
+//			standardSubmit: true,
+			clientValidation: false,
+			method: 'GET',
+
+			baseParams: {
+				pid: TYPO3.Devlog.Data.Parameters.pid,
+				M: 'web_NewsletterTxNewsletterM1',
+				'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
+				'tx_newsletter_web_newslettertxnewsletterm1[action]': 'index',
+				'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
+				'tx_newsletter_web_newslettertxnewsletterm1[pid]': TYPO3.Devlog.Data.Parameters.pid
+			},
+			proxy: new Ext.data.HttpProxy({
+				method: 'GET',
+				url: '/typo3/mod.php'
+			}),
+			url: '/typo3/mod.php',
 
 			items: [
 			{
@@ -172,7 +192,7 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 							frame: true,
 							height: 100
 						}]
-						}
+					}
 					,
 					{
 						xtype: 'fieldset',
@@ -213,7 +233,15 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
  * @private
  */
 	submit:function() {
-		alert("Oui :)");
+		//alert("Oui :)");
+		
+		var fp = this.ownerCt.ownerCt,
+		form = fp.getForm();
+		console.log(form);
+		form.submit({clientValidation: false});
+		console.log(this.url);
+		return; 
+				
 		this.getForm().submit({
 			url:this.url,
 			scope:this

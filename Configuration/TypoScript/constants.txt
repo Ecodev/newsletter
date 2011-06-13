@@ -12,3 +12,15 @@ plugin.tx_newsletter {
 		storagePid = 12345678
 	}
 }
+
+
+module.tx_newsletter {
+	view {
+			# cat=plugin.tx_newsletter/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:newsletter/Resources/Private/Backend/Templates/
+			# cat=plugin.tx_newsletter/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:newsletter/Resources/Private/Backend/Partials/
+			# cat=plugin.tx_newsletter/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:newsletter/Resources/Private/Backend/Layouts/
+	}
+}

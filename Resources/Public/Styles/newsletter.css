@@ -9,11 +9,11 @@ $Id$
 }
 
 .t3-newsletter-button-planner {
-	background-image: url(../images/icons/ext_icon.png) !important;
+	background-image: url(../Icons/tx_newsletter.png) !important;
 }
 
 .t3-newsletter-button-statistics {
-	background-image: url(../images/icons/chart_bar.png) !important;
+	background-image: url(../Icons/chart_bar.png) !important;
 }
 
 #newsletterListMenu {
@@ -66,7 +66,7 @@ $Id$
 }
 
 #loading span {
-     background: url(../images/icons/loading.png) no-repeat left center;
+     background: url(../Icons/loading.png) no-repeat left center;
      padding: 5px 30px;
      display: block;
 }

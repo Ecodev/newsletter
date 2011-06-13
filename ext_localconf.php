@@ -22,18 +22,3 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_N
         'title'            => 'Run TC Newsletter Bounce',
         'description'      => 'Fetch bounce statistic',
 );
-
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
-	'TxNewsletterM1',
-	array(
-		// controller Actions declared
-		'Newsletter' => 'index, show, new, create, edit, update, delete',
-		'Statistic' => 'index, show, new, create, edit, update, delete',
-	),
-	array(
-		// non cachable actions -> change this to 'create, update, delete'
-		'Newsletter' => 'index, show, new, create, edit, update, delete',
-		'Statistic' => 'index, show, new, create, edit, update, delete',
-	)
-);

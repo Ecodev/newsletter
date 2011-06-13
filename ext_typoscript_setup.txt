@@ -1,11 +1,2 @@
-plugin.tx_newsletter {
-	persistence {
-		classes {
-			Tx_Newsletter_Domain_Model_Statistic {
-				mapping {
-					tableName = tx_newsletter_domain_model_lock
-				}
-			}
-		}
-	}
-}
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/ajax.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/setup.txt">

@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_Newsletter_Controller_StatisticController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Newsletter_Controller_StatisticController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 
 	/**
 	 * @var Tx_Newsletter_Domain_Repository_StatisticRepository

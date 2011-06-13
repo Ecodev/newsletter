@@ -1,0 +1,1 @@
+Ext.ux.TYPO3.Newsletter.Module.initApplication();

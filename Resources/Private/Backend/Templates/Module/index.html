@@ -1,0 +1,33 @@
+{namespace ext=Tx_MvcExtjs_ViewHelpers}
+<!--
+This container handles the pageRenderer in the background
+Specifiy which js librarys should be loaded askdaksmdaksdm
+-->
+<ext:Be.moduleContainer
+	pageTitle="Sample Module"
+	loadExtJs="true"
+	loadExtJsTheme="true">
+	<!-- load needed CSS Files -->
+	<ext:includeCssFile name="module.css" />
+	<ext:includeCssFile name="roweditor.css" />
+	<ext:includeCssFile name="flashmessages.css" />
+	<!-- load needed JS Files -->
+	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.UriBuilder.js" extKey="mvc_extjs" />
+	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.js" extKey="mvc_extjs" />
+
+	<ext:includeJsFile name="RowEditor.js" />
+	<ext:includeJsFile name="DirectProxyPatch.js" />
+	
+	<ext:includeJsFolder name="Movie/" />
+	<ext:includeJsFolder name="Genre/" />
+	
+	<ext:includeJsFile name="Module/FlashMessageOverlayContainer.js" />
+	<ext:includeJsFile name="Module/Application.js" />
+	
+	<ext:ExtDirectProvider
+		name="descriptor"
+		namespace="Ext.ux.TYPO3.MvcExtjsSamples.Remote"
+		cache="false" />
+	<!-- create inline JS based on the Domain Model Definitions -->
+	<ext:includeExtOnReadyFromFile name="Module/ExtOnReady.js" />
+</ext:Be.moduleContainer>

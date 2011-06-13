@@ -1,8 +1,31 @@
 <?php
-if (!defined ('TYPO3_MODE')) die ('Access denied.');
+if (!defined ('TYPO3_MODE')) {
+        die ('Access denied.');
+}
 
+// ========== Register BE Modules
+if (TYPO3_MODE == 'BE')	{
+	// temporary line to include the old module's interface
+	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
 
+	Tx_Extbase_Utility_Extension::registerModule(
+		$_EXTKEY,
+		'web',// Make newsletter module a submodule of 'user'
+		'tx_newsletter_m1',  // Submodule key
+		'before:info',           // Position
+		array(
+			'Module' => 'index',
+			'Newsletter' => 'index, show, new, create, edit, update, delete',
+			'Statistic' => 'index,show',
+		),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter.png',
+			'labels' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_module.xml',
+		)
+	);
 
+}
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Newsletter');
@@ -89,27 +112,3 @@ $TCA['tx_newsletter_domain_model_link'] = array (
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_link.gif'
 	)
 );
-
-
-// Loads BE modules
-if (TYPO3_MODE=="BE")	{
-	// temporary line
-	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
-
-	Tx_Extbase_Utility_Extension::registerModule(
-		$_EXTKEY,
-		'web',// Make newsletter module a submodule of 'user'
-		'tx_newsletter_m1',  // Submodule key
-		'before:info',           // Position
-		array(
-			'Newsletter' => 'index',
-			'Statistic' => 'index,show',
-		),
-		array(
-			'access' => 'user,group',
-			'icon'   => 'EXT:newsletter/Resources/Public/images/icons/ext_icon.png',
-			'labels' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_module.xml',
-		)
-	);
-}
-?>

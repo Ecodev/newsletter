@@ -37,6 +37,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'fluid' => '',
 			'php' => '5.2.9-',
 			'typo3' => '4.5.0-',
+			'mvc_extjs' => '0.2.0',
 		),
 		'conflicts' => array(
 		),
