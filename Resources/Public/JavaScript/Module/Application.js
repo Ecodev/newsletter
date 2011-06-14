@@ -1,10 +1,10 @@
-"use strict";
 
-Ext.ns("TYPO3.Newsletter");
+
+Ext.ns("Ext.ux.TYPO3.Newsletter");
 
 /**
- * @class TYPO3.Newsletter.Application
- * @namespace TYPO3.Newsletter
+ * @class Ext.ux.TYPO3.Newsletter.Module
+ * @namespace Ext.ux.TYPO3.Newsletter
  * @extends Ext.util.Observable
  *
  * The main entry point which controls the lifecycle of the application.
@@ -21,9 +21,9 @@ Ext.ns("TYPO3.Newsletter");
  * $Id$
  */
 
-TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
+Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable(), {
 	/**
-	 * @event TYPO3.Newsletter.Application.afterBootstrap
+	 * @event Ext.ux.TYPO3.Newsletter.Module.Application.afterBootstrap
 	 * After bootstrap event. Should be used for main initialization.
 	 */
 
@@ -46,7 +46,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 
 		Ext.QuickTips.init();
 
-		this.fireEvent('TYPO3.Newsletter.Application.afterBootstrap');
+		this.fireEvent('Ext.ux.TYPO3.Newsletter.Module.Application.afterBootstrap');
 
 		this._initializeHistoryManager();
 	},
@@ -57,7 +57,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_registerEventBeforeLoading: function() {
 		this.on(
-			'TYPO3.Newsletter.Application.busy',
+			'Ext.ux.TYPO3.Newsletter.Module.Application.busy',
 			function() {
 				Ext.get('loading-mask').setStyle({
 					visibility: 'visible',
@@ -81,7 +81,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_registerEventAfterLoading: function() {
 		this.on(
-			'TYPO3.Newsletter.Application.afterbusy',
+			'Ext.ux.TYPO3.Newsletter.Module.Application.afterbusy',
 			function() {
 				var loading;
 				loading = Ext.get('loading');
@@ -110,8 +110,8 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	/**
 	 * Registers a new bootstrap class.
 	 *
-	 * Every bootstrap class needs to extend TYPO3.Newsletter.Application.AbstractBootstrap.
-	 * @param {TYPO3.Newsletter.Application.AbstractBootstrap} bootstrap The bootstrap class to be registered.
+	 * Every bootstrap class needs to extend Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap.
+	 * @param {Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap} bootstrap The bootstrap class to be registered.
 	 * @api
 	 */
 	registerBootstrap: function(bootstrap) {
@@ -138,7 +138,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	 */
 	_initializeHistoryManager: function() {
 		Ext.History.on('change', function(token) {
-			this.fireEvent('TYPO3.Newsletter.Application.navigate', token);
+			this.fireEvent('Ext.ux.TYPO3.Newsletter.Module.Application.navigate', token);
 		}, this);
 
 		// Handle initial token (on page load)
@@ -148,7 +148,6 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 
 		Ext.History.add(Ext.state.Manager.get('token'));
 	},
-
 
 	/**
 	 * Register Event Debugging
@@ -161,7 +160,7 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 			this,
 			function(e) {
 				if (window.console && window.console.log) {
-//					console.log(e, arguments);
+					console.log(e, arguments);
 				}
 			}
 		);
@@ -205,5 +204,3 @@ TYPO3.Newsletter.Application = Ext.apply(new Ext.util.Observable(), {
 	}
 
 });
-
-Ext.onReady(TYPO3.Newsletter.Application.bootstrap, TYPO3.Newsletter.Application);

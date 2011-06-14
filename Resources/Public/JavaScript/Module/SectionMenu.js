@@ -1,31 +1,24 @@
-Ext.ns('TYPO3.Newsletter.UserInterface');
+Ext.ns('Ext.ux.TYPO3.Newsletter.Module');
 
 /**
- * @class TYPO3.Newsletter.UserInterface.SectionMenu
- * @namespace TYPO3.Newsletter.UserInterface
+ * @class Ext.ux.TYPO3.Newsletter.Module.SectionMenu
+ * @namespace Ext.ux.TYPO3.Newsletter.Module
  * @extends Ext.Panel
  *
  * Class for the main menu
  *
  * $Id$
  */
-TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
+Ext.ux.TYPO3.Newsletter.Module.SectionMenu = Ext.extend(Ext.Panel, {
 
 	initComponent: function() {
 		var config = {
-			renderTo: 't3-newsletter-menu',
 			layout: 'hbox',
-			width: 300,
-//			layoutConfig: {
-//				padding: '5px',
-//				width: '200px'
-//			},
-			border: false,
 			bodyStyle: 'background-color: #DADADA',
 			items: this._getMenuItems()
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.UserInterface.SectionMenu.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Module.SectionMenu.superclass.initComponent.call(this);
 	},
 
 	/**
@@ -38,7 +31,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 		var modules = [];
 
 		// Get menus
-		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
+		Ext.each(Ext.ux.TYPO3.Newsletter.Module.MenuRegistry.items.mainMenu, function(menuItem) {
 			modules.push(
 				{
 					xtype: 'button',
@@ -50,7 +43,7 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 						Ext.state.Manager.set('token', token);
 						Ext.History.add(token);
 						if (! menuItem.isLoaded) {
-							TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.busy');
+							Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.busy');
 							menuItem.isLoaded = true;
 						}
 					}
@@ -61,4 +54,4 @@ TYPO3.Newsletter.UserInterface.SectionMenu = Ext.extend(Ext.Panel, {
 	}
 
 });
-Ext.reg('TYPO3.Newsletter.UserInterface.SectionMenu', TYPO3.Newsletter.UserInterface.SectionMenu);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Module.SectionMenu', Ext.ux.TYPO3.Newsletter.Module.SectionMenu);

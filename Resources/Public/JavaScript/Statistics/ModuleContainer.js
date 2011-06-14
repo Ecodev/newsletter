@@ -1,38 +1,38 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 
 /**
- * @class TYPO3.Newsletter.Statistics.ModuleContainer
- * @namespace TYPO3.Newsletter.Statistics
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics
  * @extends Ext.Container
  *
  * Class for statistic container
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
+Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
 			items: [
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.NoStatisticsPanel',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NoStatisticsPanel',
 					ref: 'noStatisticsPanel'
 				},
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.NewsletterListMenu',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu',
 					ref: 'newsletterListMenu'
 				},
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel',
 					ref: 'statisticsPanel'
 				}
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.ModuleContainer.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.ModuleContainer', TYPO3.Newsletter.Statistics.ModuleContainer);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer', Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer);

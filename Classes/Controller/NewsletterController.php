@@ -280,7 +280,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		}
 
 		// Add ExtJS API
-		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=TYPO3.Newsletter', 'text/javascript', FALSE);
+		$this->pageRendererObject->addJsFile('ajax.php?ajaxID=ExtDirect::getAPI&namespace=Ext.ux.TYPO3.Newsletter', 'text/javascript', FALSE);
 
 		$numberOfStatistics = json_encode($this->statisticRepository->countStatistics($this->id));
 		
@@ -289,9 +289,9 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->readyJavascript = array();
 		$this->readyJavascript[] .= <<< EOF
 
-			Ext.ns("TYPO3.Newsletter.Data");
-			TYPO3.Newsletter.Data.numberOfStatistics = $numberOfStatistics;
-			TYPO3.Newsletter.Data.imagePath = '$this->imagePath';
+			Ext.ns("Ext.ux.TYPO3.Newsletter.Data");
+			Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics = $numberOfStatistics;
+			Ext.ux.TYPO3.Newsletter.Data.imagePath = '$this->imagePath';
 
 		// Enable our remote calls
 		for (var api in Ext.app.ExtDirectAPI) {
@@ -308,8 +308,8 @@ EOF;
 
 		$this->inlineJavascript[] .= <<< EOF
 
-		Ext.ns("TYPO3.Newsletter");
-		TYPO3.Newsletter.Language = $labels;
+		Ext.ns("Ext.ux.TYPO3.Newsletter");
+		Ext.ux.TYPO3.Newsletter.Language = $labels;
 
 		Ext.ns("TYPO3.Devlog.Data");
 		TYPO3.Devlog.Data.Parameters = $parameters;

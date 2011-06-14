@@ -1,14 +1,14 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Store");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Store");
 
-TYPO3.Newsletter.Store.initStatistic = function() {
+Ext.ux.TYPO3.Newsletter.Store.initStatistic = function() {
 	 return new Ext.data.JsonStore({
 		storeId: 'statistic',
 		autoLoad: false,
 		remoteSort: true,
 		baseParams: {
-			pid: TYPO3.Devlog.Data.Parameters.pid,
+			pid: 50, //TODO: TYPO3.Devlog.Data.Parameters.pid,
 			M: 'web_NewsletterTxNewsletterM1',
 			'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
 			'tx_newsletter_web_newslettertxnewsletterm1[action]': 'show',
@@ -31,8 +31,8 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 			 */
 			load: function (store, data) {
 				if (store.getCount() > 0) {
-					this.fireEvent('TYPO3.Newsletter.Store.Statistic.afterload', data);
-					TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
+					this.fireEvent('Ext.ux.TYPO3.Newsletter.Store.Statistic.afterload', data);
+					Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.afterbusy');
 				}
 			},
 
@@ -40,11 +40,11 @@ TYPO3.Newsletter.Store.initStatistic = function() {
 			 * Fired when User has changed the newsletter in drop down menu.
 			 * The function will load the statistics for a newsletter.
 			 *
-			 * @event TYPO3.Newsletter.Store.Statistic.load
+			 * @event Ext.ux.TYPO3.Newsletter.Store.Statistic.load
 			 * @param {int} uid: the uid of the newsletter to load
 			 */
-			'TYPO3.Newsletter.Store.Statistic.load': function(uid) {
-				TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.busy');
+			'Ext.ux.TYPO3.Newsletter.Store.Statistic.load': function(uid) {
+				Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.busy');
 				this.setBaseParam('tx_newsletter_web_newslettertxnewsletterm1[uid]', uid);
 				this.load();
 			}

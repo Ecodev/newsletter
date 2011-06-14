@@ -1,17 +1,17 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel
- * @namespace TYPO3.Newsletter.Statistics
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics
  * @extends Ext.TabPanel
  *
  * Class for statistic tab panel
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
+Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 
 	initComponent: function() {
 		
@@ -27,7 +27,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 			items: this._getMenuItems()
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
 	},
 
 	/**
@@ -40,7 +40,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 		var modules = [];
 
 		// traverses menus
-		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
+		Ext.each(Ext.ux.TYPO3.Newsletter.Module.MenuRegistry.items.mainMenu, function(menuItem) {
 			if (menuItem.itemId === 'statistics') {
 				Ext.each(menuItem.items, function (subMenuItem) {
 					var xtypeName = subMenuItem.itemId.slice(0,1).toUpperCase() + subMenuItem.itemId.slice(1);
@@ -49,7 +49,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 							title: subMenuItem.title,
 							items: [
 								{
-									xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.' + xtypeName,
+									xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.' + xtypeName,
 									ref: subMenuItem.itemId
 								}
 							]
@@ -63,4 +63,4 @@ TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel', TYPO3.Newsletter.Statistics.StatisticsPanel);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel);

@@ -1,17 +1,17 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab
- * @namespace TYPO3.Newsletter.Statistics.StatisticsPanel
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel
  * @extends Ext.Container
  *
  * Class for statistic container
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Container, {
+Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -22,14 +22,14 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Container, 
 			},
 			items: [
 				{
-					xtype: 'TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid',
 					ref: 'linkGrid'
 				},
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab', TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab);

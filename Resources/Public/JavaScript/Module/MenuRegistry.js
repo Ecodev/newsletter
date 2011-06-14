@@ -1,14 +1,14 @@
-Ext.ns("TYPO3.Newsletter.Application");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
 /**
- * @class TYPO3.Newsletter.Application.MenuRegistry
- * @namespace TYPO3.Newsletter.Application
+ * @class Ext.ux.TYPO3.Newsletter.Module.MenuRegistry
+ * @namespace Ext.ux.TYPO3.Newsletter.Module
  * @extends Ext.util.Observable
  *
  * The menu registry provides the structure of all menus used in the application.
  * 
  * @singleton
  */
-TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable(), {
+Ext.ux.TYPO3.Newsletter.Module.MenuRegistry = Ext.apply(new Ext.util.Observable(), {
 
 	/**
 	 * Contains the menu architecture
@@ -17,8 +17,8 @@ TYPO3.Newsletter.Application.MenuRegistry = Ext.apply(new Ext.util.Observable(),
 	items: {},
 
 	/**
-	 * @event TYPO3.Newsletter.UserInterface.RootlineMenu.buttonUnpressed
-	 * @param {TYPO3.Newsletter.UserInterface.RootlineMenu.Button} button the button being released
+	 * @event Ext.ux.TYPO3.Newsletter.Module.RootlineMenu.buttonUnpressed
+	 * @param {Ext.ux.TYPO3.Newsletter.Module.RootlineMenu.Button} button the button being released
 	 * Called if a button is unpressed.
 	 */
 

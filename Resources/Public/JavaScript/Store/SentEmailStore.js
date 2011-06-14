@@ -1,8 +1,8 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Store");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Store");
 
-TYPO3.Newsletter.Store.initSentEmail = function() {
+Ext.ux.TYPO3.Newsletter.Store.initSentEmail = function() {
 
 	var store;
 	store = new Ext.data.JsonStore({
@@ -21,10 +21,10 @@ TYPO3.Newsletter.Store.initSentEmail = function() {
 		data: {}
 	});
 
-	// Add method to listener TYPO3.Newsletter.Store.Statistic.afterload
+	// Add method to listener Ext.ux.TYPO3.Newsletter.Store.Statistic.afterload
 	// Basically the code bellow empties the data and replaces new records
-	TYPO3.Newsletter.Store.Statistic.on(
-		'TYPO3.Newsletter.Store.Statistic.afterload',
+	Ext.ux.TYPO3.Newsletter.Store.Statistic.on(
+		'Ext.ux.TYPO3.Newsletter.Store.Statistic.afterload',
 		function (records) {
 
 			// Empties records firstly

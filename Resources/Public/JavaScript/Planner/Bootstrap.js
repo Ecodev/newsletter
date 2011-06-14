@@ -1,15 +1,15 @@
-Ext.ns("TYPO3.Newsletter.Planner");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Planner");
 
 /**
- * @class TYPO3.Newsletter.Planner.Bootstrap
- * @namespace TYPO3.Newsletter.Planner
- * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ * @class Ext.ux.TYPO3.Newsletter.Planner.Bootstrap
+ * @namespace Ext.ux.TYPO3.Newsletter.Planner
+ * @extends Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap
  *
  * Bootrap module planner
  *
  * $Id$
  */
-TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap, {
+Ext.ux.TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap, {
 
 	// Properties
 	moduleName: 'planner',
@@ -24,19 +24,19 @@ TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.
 		 * @param scope
 		 */
 		this.handleNavigationToken(/planner/, function(e) {
-			var component = TYPO3.Newsletter.UserInterface.contentArea.plannerForm || null;
+			var component = Ext.ux.TYPO3.Newsletter.Module.contentArea.plannerForm || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
-					xtype: 'TYPO3.Newsletter.UserInterface.PlannerForm',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Module.PlannerForm',
 					ref: 'plannerForm'
 				});
 
-				TYPO3.Newsletter.UserInterface.contentArea.add(component);
-				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
+				Ext.ux.TYPO3.Newsletter.Module.contentArea.add(component);
+				Ext.ux.TYPO3.Newsletter.Module.contentArea.doLayout();
 			}
 
 			// temporary line: makes the loading message disappear
-			TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
+			Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.afterbusy');
 
 			// Defines the menu as loaded
 			this.getMenuItem(this.moduleName).isLoaded = true;
@@ -48,4 +48,4 @@ TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.
 	}
 });
 
-TYPO3.Newsletter.Application.registerBootstrap(TYPO3.Newsletter.Planner.Bootstrap);
+Ext.ux.TYPO3.Newsletter.Module.Application.registerBootstrap(Ext.ux.TYPO3.Newsletter.Planner.Bootstrap);

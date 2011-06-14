@@ -1,9 +1,9 @@
-Ext.ns("TYPO3.Newsletter.UserInterface");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
 
     // turn on validation errors beside the field globally
     Ext.form.Field.prototype.msgTarget = 'side';
 	
-TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
+Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
 		var config = {
@@ -14,12 +14,12 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			method: 'GET',
 
 			baseParams: {
-				pid: TYPO3.Devlog.Data.Parameters.pid,
+				pid: 50, // TODO: TYPO3.Devlog.Data.Parameters.pid,
 				M: 'web_NewsletterTxNewsletterM1',
 				'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
 				'tx_newsletter_web_newslettertxnewsletterm1[action]': 'index',
 				'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
-				'tx_newsletter_web_newslettertxnewsletterm1[pid]': TYPO3.Devlog.Data.Parameters.pid
+				'tx_newsletter_web_newslettertxnewsletterm1[pid]': 50 // TODO: TYPO3.Devlog.Data.Parameters.pid
 			},
 			proxy: new Ext.data.HttpProxy({
 				method: 'GET',
@@ -223,7 +223,7 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 		};
 
 		Ext.apply(this, config);
-		TYPO3.Newsletter.UserInterface.PlannerForm.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Module.PlannerForm.superclass.initComponent.call(this);
 	},
 
 
@@ -249,12 +249,12 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 	}, // eo function submit
 
 	onRender: function() {		
-		TYPO3.Newsletter.UserInterface.PlannerForm.superclass.onRender.apply(this, arguments);
+		Ext.ux.TYPO3.Newsletter.Module.PlannerForm.superclass.onRender.apply(this, arguments);
 
 		Ext.apply(this.getForm(),{
 			api: {
-				load: TYPO3.Newsletter.Remote.getFormData,
-				submit: TYPO3.Newsletter.Remote.getFormData
+				load: Ext.ux.TYPO3.Newsletter.Remote.getFormData,
+				submit: Ext.ux.TYPO3.Newsletter.Remote.getFormData
 			},
 			paramsAsHash: false
 
@@ -262,4 +262,4 @@ TYPO3.Newsletter.UserInterface.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 	//	this.form.load();
 	}
 });
-Ext.reg('TYPO3.Newsletter.UserInterface.PlannerForm', TYPO3.Newsletter.UserInterface.PlannerForm);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Module.PlannerForm', Ext.ux.TYPO3.Newsletter.Module.PlannerForm);

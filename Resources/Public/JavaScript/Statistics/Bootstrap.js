@@ -1,35 +1,35 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 
 /**
- * @class TYPO3.Newsletter.Statistics.Bootstrap
- * @namespace TYPO3.Newsletter.Statistics
- * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics
+ * @extends Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap
  *
  * Bootrap module statistics
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap(), {
+Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap(), {
 
 	// Properties
 	moduleName: 'statistics',
 	
 	initialize: function() {
 
-		// xtypeName will be as follows: TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
+		// xtypeName will be as follows: Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
 		this.addToMenu(['mainMenu', this.moduleName], [
 			{
-				title: TYPO3.Newsletter.Language.overview_tab,
+				title: Ext.ux.TYPO3.Newsletter.Language.overview_tab,
 				itemId: 'overviewTab'
 			},
 			{
-				title: TYPO3.Newsletter.Language.links_tab,
+				title: Ext.ux.TYPO3.Newsletter.Language.links_tab,
 				itemId: 'linkTab'
 			},
 			{
-				title: TYPO3.Newsletter.Language.emails_tab,
+				title: Ext.ux.TYPO3.Newsletter.Language.emails_tab,
 				itemId: 'emailTab'
 			}
 		]);
@@ -42,15 +42,15 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 		 * @param scope
 		 */
 		this.handleNavigationToken(/statistics/, function(e) {
-			var component = TYPO3.Newsletter.UserInterface.contentArea.statistics || null;
+			var component = Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics || null;
 			if (!component) {
 				component = Ext.ComponentMgr.create({
-					xtype: 'TYPO3.Newsletter.Statistics.ModuleContainer',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer',
 					ref: this.moduleName
 				});
 				
-				TYPO3.Newsletter.UserInterface.contentArea.add(component);
-				TYPO3.Newsletter.UserInterface.contentArea.doLayout();
+				Ext.ux.TYPO3.Newsletter.Module.contentArea.add(component);
+				Ext.ux.TYPO3.Newsletter.Module.contentArea.doLayout();
 			}
 
 			// Defines the current module as loaded
@@ -61,7 +61,7 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 
 			// Check wheter there are staticis for the page.
 			// If not load a special panel for that case.
-			if (TYPO3.Newsletter.Data.numberOfStatistics == 0) {
+			if (Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
 				this._loadNoStatisticsPanel();
 			}
 			else {
@@ -78,10 +78,10 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 	 * @return void
 	 */
 	_loadNoStatisticsPanel: function() {
-		TYPO3.Newsletter.Application.fireEvent('TYPO3.Newsletter.Application.afterbusy');
-		TYPO3.Newsletter.UserInterface.contentArea.statistics.noStatisticsPanel.removeClass('t3-newsletter-hidden');
-		TYPO3.Newsletter.UserInterface.contentArea.statistics.statisticsPanel.hide();
-		TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu.hide();
+		Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.afterbusy');
+		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.noStatisticsPanel.removeClass('t3-newsletter-hidden');
+		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.statisticsPanel.hide();
+		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.newsletterListMenu.hide();
 	},
 
 	/**
@@ -92,8 +92,8 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 	 */
 	_loadStatisticsInCaseNotAlreadyLoaded: function() {
 		var menu, store;
-		menu = TYPO3.Newsletter.UserInterface.contentArea.statistics.newsletterListMenu;
-		store = TYPO3.Newsletter.Store.NewsletterList;
+		menu = Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.newsletterListMenu;
+		store = Ext.ux.TYPO3.Newsletter.Store.NewsletterList;
 		if (menu.getValue() == '' && store.getAt(0)) {
 			menu.setValue(store.getAt(0).json.uid);
 			menu.fireEvent('select');
@@ -101,4 +101,4 @@ TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new TYPO3.Newsletter.Applicati
 	}
 });
 
-TYPO3.Newsletter.Application.registerBootstrap(TYPO3.Newsletter.Statistics.Bootstrap);
+Ext.ux.TYPO3.Newsletter.Module.Application.registerBootstrap(Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap);

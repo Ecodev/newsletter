@@ -1,19 +1,19 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Store");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Store");
 
 /**
- * @class TYPO3.Newsletter.Store.Bootstrap
- * @namespace TYPO3.Newsletter.Store
- * @extends TYPO3.Newsletter.Application.AbstractBootstrap
+ * @class Ext.ux.TYPO3.Newsletter.Store.Bootstrap
+ * @namespace Ext.ux.TYPO3.Newsletter.Store
+ * @extends Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap
  *
  * Bootrap store
  *
  * $Id$
  */
-TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.AbstractBootstrap(), {
+Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap(), {
 	initialize: function() {
-		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.afterBootstrap', this.initStore, this);
+		Ext.ux.TYPO3.Newsletter.Module.Application.on('Ext.ux.TYPO3.Newsletter.Module.Application.afterBootstrap', this.initStore, this);
 	},
 	initStore: function() {
 		var api;
@@ -22,14 +22,14 @@ TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new TYPO3.Newsletter.Application.Ab
 				Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
 			}
 		}
-//		TYPO3.Newsletter.LogStore2.doRequest();
+//		Ext.ux.TYPO3.Newsletter.LogStore2.doRequest();
 
-		TYPO3.Newsletter.Store.NewsletterList = TYPO3.Newsletter.Store.initNewsletterList();
-		TYPO3.Newsletter.Store.Statistic = TYPO3.Newsletter.Store.initStatistic();
-		TYPO3.Newsletter.Store.OverviewPieChart = TYPO3.Newsletter.Store.initOverviewPieChart();
-		TYPO3.Newsletter.Store.ClickedLink = TYPO3.Newsletter.Store.initClickedLink();
-		TYPO3.Newsletter.Store.SentEmail = TYPO3.Newsletter.Store.initSentEmail();
+		Ext.ux.TYPO3.Newsletter.Store.NewsletterList = Ext.ux.TYPO3.Newsletter.Store.initNewsletterList();
+		Ext.ux.TYPO3.Newsletter.Store.Statistic = Ext.ux.TYPO3.Newsletter.Store.initStatistic();
+		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
+		Ext.ux.TYPO3.Newsletter.Store.ClickedLink = Ext.ux.TYPO3.Newsletter.Store.initClickedLink();
+		Ext.ux.TYPO3.Newsletter.Store.SentEmail = Ext.ux.TYPO3.Newsletter.Store.initSentEmail();
 	}
 });
 
-TYPO3.Newsletter.Application.registerBootstrap(TYPO3.Newsletter.Store.Bootstrap);
+Ext.ux.TYPO3.Newsletter.Module.Application.registerBootstrap(Ext.ux.TYPO3.Newsletter.Store.Bootstrap);

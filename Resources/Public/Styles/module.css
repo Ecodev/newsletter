@@ -1,0 +1,86 @@
+/* - - - - - - - - - - - - - - - - - - - - -
+Newsletter style
+
+$Id: newsletter.css 48671 2011-06-13 15:13:44Z acrivelli $
+- - - - - - - - - - - - - - - - - - - - - */
+
+#t3-newsletter-menu .x-btn {
+	padding-right: 20px;
+}
+
+.t3-newsletter-button-planner {
+	background-image: url(../Icons/tx_newsletter.png) !important;
+}
+
+.t3-newsletter-button-statistics {
+	background-image: url(../Icons/chart_bar.png) !important;
+}
+
+#newsletterListMenu {
+	margin-bottom: 10px;
+}
+
+.t3-newsletter-span-statistic {
+	font-size: 120%;
+	margin-bottom: 10px;
+}
+
+.t3-newsletter-span-statistic span{
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.t3-newsletter-span-statistic-sent {
+	/*color: #83CAFF;*/
+	color: #000;
+}
+
+.t3-newsletter-span-statistic-opened {
+	color: #078207;
+}
+
+.t3-newsletter-span-statistic-not-opened {
+	color: #25CDF2;
+}
+
+.t3-newsletter-span-statistic-bounced {
+	color: #E01B4C;
+}
+
+#loading-mask {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: #000;
+     z-index: 10;
+	 opacity: 0.4;
+}
+
+#loading {
+     position: absolute;
+     top: 40%;
+     left: 45%;
+     z-index: 12;
+}
+
+#loading span {
+     background: url(../Icons/loading.png) no-repeat left center;
+     padding: 5px 30px;
+     display: block;
+}
+
+.t3-newsletter-div-no-statistics {
+	margin-top: 30px;
+	font-size: 12pt;
+}
+
+.t3-newsletter-img-no-statistics {
+	margin-top: 30px;
+	margin-left: 80px;
+}
+
+.t3-newsletter-hidden {
+	display: none;
+}

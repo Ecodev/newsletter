@@ -1,54 +1,54 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid
- * @namespace TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab
  * @extends Ext.Container
  *
  * Class for statistic container
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.grid.GridPanel, {
+Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.grid.GridPanel, {
 
 	initComponent: function() {
 
 		var config = {
 			// store
-			store: TYPO3.Newsletter.Store.SentEmail,
+			store: Ext.ux.TYPO3.Newsletter.Store.SentEmail,
 
 			// column model
 			columns:[
 				{
 					dataIndex: 'uid',
-					header: TYPO3.Newsletter.Language.link_id,
+					header: Ext.ux.TYPO3.Newsletter.Language.link_id,
 					sortable: true,
 					width: 40
 				},
 				{
 					dataIndex: 'recipient_address',
-					header: TYPO3.Newsletter.Language.recipients,
+					header: Ext.ux.TYPO3.Newsletter.Language.recipients,
 					width: 300,
 					sortable: true,
 					renderer: this._renderEmail
 				},
 				{
 					dataIndex: 'opened',
-					header: TYPO3.Newsletter.Language.opened,
+					header: Ext.ux.TYPO3.Newsletter.Language.opened,
 					width: 100,
 					sortable: true
 				},
 				{
 					dataIndex: 'bounced',
-					header: TYPO3.Newsletter.Language.bounced,
+					header: Ext.ux.TYPO3.Newsletter.Language.bounced,
 					width: 100,
 					sortable: true
 				},
 				{
 					dataIndex: 'preview',
-					header: TYPO3.Newsletter.Language.preview,
+					header: Ext.ux.TYPO3.Newsletter.Language.preview,
 					width: 100,
 					sortable: true,
 					renderer: this._renderPreview
@@ -60,7 +60,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 		};
 
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid.superclass.initComponent.call(this);
 	},
 	
 	/**
@@ -83,4 +83,4 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.extend(Ext.
 
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid', TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid);

@@ -1,15 +1,15 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Application");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
 
 /**
- * @class TYPO3.Newsletter.Application.AbstractBootstrap
- * @namespace TYPO3.Newsletter.Application
+ * @class Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap
+ * @namespace Ext.ux.TYPO3.Newsletter.Module
  * @extends Ext.util.Observable
  *
  * Base class for all bootstrappers. This class provides convenience methods for extending the user interface.
  */
-TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable, {
+Ext.ux.TYPO3.Newsletter.Module.AbstractBootstrap = Ext.extend(Ext.util.Observable, {
 
 	/**
 	 * Add items to a menu.
@@ -18,7 +18,7 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 	 * @param {Array} items The items to add
 	 */
 	addToMenu: function(path, items) {
-		TYPO3.Newsletter.Application.MenuRegistry.addMenuItems(path, items);
+		Ext.ux.TYPO3.Newsletter.Module.MenuRegistry.addMenuItems(path, items);
 	},
 
 	/**
@@ -29,7 +29,7 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 	 */
 	getMenuItem: function(itemName) {
 		var result = {};
-		Ext.each(TYPO3.Newsletter.Application.MenuRegistry.items.mainMenu, function(menuItem) {
+		Ext.each(Ext.ux.TYPO3.Newsletter.Module.MenuRegistry.items.mainMenu, function(menuItem) {
 			if (menuItem.itemId == itemName) {
 				result = menuItem;
 			}
@@ -46,12 +46,12 @@ TYPO3.Newsletter.Application.AbstractBootstrap = Ext.extend(Ext.util.Observable,
 	 */
 	handleNavigationToken: function(regexp, callback, scope) {
 		scope = scope || this;
-		TYPO3.Newsletter.Application.on('TYPO3.Newsletter.Application.navigate', function(token) {
+		Ext.ux.TYPO3.Newsletter.Module.Application.on('Ext.ux.TYPO3.Newsletter.Module.Application.navigate', function(token) {
 			var matches = token && token.match(regexp);
 			if (matches) {
 
 				// As a first step, hides every panel.
-				Ext.iterate(TYPO3.Newsletter.UserInterface.contentArea.items.items, function (element) {
+				Ext.iterate(Ext.ux.TYPO3.Newsletter.Module.contentArea.items.items, function (element) {
 					element.setVisible(false)
 				});
 				

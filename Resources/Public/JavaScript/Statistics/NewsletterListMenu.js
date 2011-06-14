@@ -1,23 +1,23 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 
 /**
- * @class TYPO3.Newsletter.Statistics.NewsletterListMenu
- * @namespace TYPO3.Newsletter.Statistics
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics
  * @extends Ext.form.ComboBox
  *
  * Class for newsletter drop down menu
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
+Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 
 	initComponent: function() {
 		
 		var config = {
 			id: 'newsletterListMenu',
-			store: TYPO3.Newsletter.Store.NewsletterList,
+			store: Ext.ux.TYPO3.Newsletter.Store.NewsletterList,
 			displayField: 'statistic_label_formatted',
 			valueField: 'uid',
 			typeAhead: false,
@@ -29,7 +29,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 			selectOnFocus: true
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
 		
 		// Defines listener
 		this.on(
@@ -38,8 +38,8 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 			this
 		);
 
-		TYPO3.Newsletter.Store.NewsletterList.on(
-			'TYPO3.Newsletter.Store.NewsletterList.afterload',
+		Ext.ux.TYPO3.Newsletter.Store.NewsletterList.on(
+			'Ext.ux.TYPO3.Newsletter.Store.NewsletterList.afterload',
 			this.onafterload,
 			this
 		);
@@ -54,7 +54,7 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 */
 	onafterload: function(data) {
 		this.setValue(data[0].id);
-		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.load', data[0].id);
+		Ext.ux.TYPO3.Newsletter.Store.Statistic.fireEvent('Ext.ux.TYPO3.Newsletter.Store.Statistic.load', data[0].id);
 	},
 
 	/**
@@ -65,8 +65,8 @@ TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 	 * @return void
 	 */
 	onselect: function() {
-		TYPO3.Newsletter.Store.Statistic.fireEvent('TYPO3.Newsletter.Store.Statistic.load', this.getValue());
+		Ext.ux.TYPO3.Newsletter.Store.Statistic.fireEvent('Ext.ux.TYPO3.Newsletter.Store.Statistic.load', this.getValue());
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.NewsletterListMenu', TYPO3.Newsletter.Statistics.NewsletterListMenu);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu', Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu);

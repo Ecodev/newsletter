@@ -1,17 +1,17 @@
 "use strict";
 
-Ext.ns("TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
+Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab");
 
 /**
- * @class TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General
- * @namespace TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General
+ * @namespace Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
  * @extends Ext.Container
  *
  * Class for statistic container
  *
  * $Id$
  */
-TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext.Container, {
+Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -31,24 +31,24 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 					items: [
 						{
 							xtype: 'dataview',
-							store: TYPO3.Newsletter.Store.Statistic,
+							store: Ext.ux.TYPO3.Newsletter.Store.Statistic,
 							emptyText: 'No text to display',
 							tpl: new Ext.XTemplate(
 								'<tpl for=".">',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										'<span class="t3-newsletter-span-statistic-sent">{number_of_recipients}</span> ' + TYPO3.Newsletter.Language.recipients,
+										'<span class="t3-newsletter-span-statistic-sent">{number_of_recipients}</span> ' + Ext.ux.TYPO3.Newsletter.Language.recipients,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										'<span class="t3-newsletter-span-statistic-opened">{percent_of_opened}%</span> ' + TYPO3.Newsletter.Language.emails_opened,
+										'<span class="t3-newsletter-span-statistic-opened">{percent_of_opened}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_opened,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										'<span class="t3-newsletter-span-statistic-bounced">{percent_of_bounced}%</span> ' + TYPO3.Newsletter.Language.emails_bounced,
+										'<span class="t3-newsletter-span-statistic-bounced">{percent_of_bounced}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_bounced,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{begin_time_formatted}</span>',
+										Ext.ux.TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{begin_time_formatted}</span>',
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{end_time_formatted}</span>',
+										Ext.ux.TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{end_time_formatted}</span>',
 									'</div>',
 								'</tpl>'
 							),
@@ -57,7 +57,7 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 						},
 						{
 							xtype: 'piechart',
-							store: TYPO3.Newsletter.Store.OverviewPieChart,
+							store: Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart,
 							dataField: 'total',
 							categoryField: 'label',
 							flex: 1,
@@ -87,8 +87,8 @@ TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.extend(Ext
 			]
 		};
 		Ext.apply(this, config);
-		TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General', TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General);
