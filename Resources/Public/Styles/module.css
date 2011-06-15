@@ -84,3 +84,11 @@ $Id: newsletter.css 48671 2011-06-13 15:13:44Z acrivelli $
 .t3-newsletter-hidden {
 	display: none;
 }
+
+.t3-newsletter-img-no-statistics
+{
+	display: block;
+	width: 118px;
+	height: 114px;
+	background-image: url(../Images/cog.png);
+}
