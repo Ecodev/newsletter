@@ -1,2 +1,0 @@
-{namespace newsletter=Tx_Newsletter_ViewHelpers}
-<newsletter:jsonStore metaData="{metaData}" indent="TRUE">{statistic}</newsletter:jsonStore>
