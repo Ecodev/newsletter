@@ -54,7 +54,7 @@ class Tx_Newsletter_Controller_StatisticController extends Tx_MvcExtjs_MVC_Contr
 	 * @param int $pid: the pid where newsletter are stored
 	 * @return string The rendered view
 	 */
-	public function indexAction($pid) {
+	public function listAction($pid) {
 		$statistics = $this->statisticRepository->findAllByPid($pid);
 		$this->view->assign('statistics', $statistics);
 		$this->view->assign('metaData', $this->statisticRepository->getMetaDataForMultipleRecords());

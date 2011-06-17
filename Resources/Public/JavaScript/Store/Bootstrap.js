@@ -29,6 +29,10 @@ Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
 		Ext.ux.TYPO3.Newsletter.Store.ClickedLink = Ext.ux.TYPO3.Newsletter.Store.initClickedLink();
 		Ext.ux.TYPO3.Newsletter.Store.SentEmail = Ext.ux.TYPO3.Newsletter.Store.initSentEmail();
+		
+		
+		var s1 = Ext.ux.TYPO3.Newsletter.Newsletter.Store.initialize();
+		var s2 = Ext.ux.TYPO3.Newsletter.Link.Store.initialize();
 	}
 });
 

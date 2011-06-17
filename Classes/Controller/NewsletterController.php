@@ -51,7 +51,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 *
 	 * @return void
 	 */
-	protected function initializeAction() {
+	protected function initializeActihhon() {
 		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$this->statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
 
@@ -61,6 +61,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		if (!$this->id) {
 			$this->id = 0;
 		}
+		parent::initializeAction();
 	}
 		
 	/**

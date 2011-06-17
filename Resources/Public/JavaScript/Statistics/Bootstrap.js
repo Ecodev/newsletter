@@ -61,7 +61,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsle
 
 			// Check wheter there are staticis for the page.
 			// If not load a special panel for that case.
-			if (Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
+			if (true){ // TODO FIXME: Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
 				this._loadNoStatisticsPanel();
 			}
 			else {
@@ -93,7 +93,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsle
 	_loadStatisticsInCaseNotAlreadyLoaded: function() {
 		var menu, store;
 		menu = Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.newsletterListMenu;
-		store = Ext.ux.TYPO3.Newsletter.Store.NewsletterList;
+		store = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
 		if (menu.getValue() == '' && store.getAt(0)) {
 			menu.setValue(store.getAt(0).json.uid);
 			menu.fireEvent('select');

@@ -17,7 +17,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 				pid: 50, // TODO: TYPO3.Devlog.Data.Parameters.pid,
 				M: 'web_NewsletterTxNewsletterM1',
 				'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
-				'tx_newsletter_web_newslettertxnewsletterm1[action]': 'index',
+				'tx_newsletter_web_newslettertxnewsletterm1[action]': 'list',
 				'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
 				'tx_newsletter_web_newslettertxnewsletterm1[pid]': 50 // TODO: TYPO3.Devlog.Data.Parameters.pid
 			},

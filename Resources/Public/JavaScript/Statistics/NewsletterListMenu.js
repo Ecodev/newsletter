@@ -17,7 +17,9 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 		
 		var config = {
 			id: 'newsletterListMenu',
-			store: Ext.ux.TYPO3.Newsletter.Store.NewsletterList,
+			//store: Ext.ux.TYPO3.Newsletter.Store.NewsletterList,
+			//store: Ext.ux.TYPO3.Newsletter.Newsletter.Store,
+			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter'),
 			displayField: 'statistic_label_formatted',
 			valueField: 'uid',
 			typeAhead: false,

@@ -15,8 +15,11 @@ if (TYPO3_MODE == 'BE')	{
 		'before:info',           // Position
 		array(
 			'Module' => 'index',
-			'Newsletter' => 'index, show, new, create, edit, update, delete',
-			'Statistic' => 'index,show',
+			'Newsletter' => 'list, show, new, create, edit, update, delete',
+			'Statistic' => 'list,show',
+			'Email' => 'list, show, new, create, edit, update, delete',
+			'Link' => 'list, show, new, create, edit, update, delete',
+			'BounceAccount' => 'list, show, new, create, edit, update, delete',
 		),
 		array(
 			'access' => 'user,group',

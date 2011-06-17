@@ -11,7 +11,7 @@ Ext.ux.TYPO3.Newsletter.Store.initNewsletterList = function() {
 			pid: 50, // TODO: TYPO3.Devlog.Data.Parameters.pid,
 			M: 'web_NewsletterTxNewsletterM1',
 			'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
-			'tx_newsletter_web_newslettertxnewsletterm1[action]': 'index',
+			'tx_newsletter_web_newslettertxnewsletterm1[action]': 'list',
 			'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
 			'tx_newsletter_web_newslettertxnewsletterm1[pid]': 50 // TODO: TYPO3.Devlog.Data.Parameters.pid
 		},
@@ -31,7 +31,7 @@ Ext.ux.TYPO3.Newsletter.Store.initNewsletterList = function() {
 			 */
 			load: function (store, data) {
 				if (store.getCount() > 0) {
-					this.fireEvent('Ext.ux.TYPO3.Newsletter.Store.NewsletterList.afterload', data);
+					//this.fireEvent('Ext.ux.TYPO3.Newsletter.Store.NewsletterList.afterload', data);
 				}
 			}
 		}
