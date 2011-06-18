@@ -63,12 +63,12 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	/**
 	 * Builds an Ext Direct request
 	 *
-	 * @return \F3\ExtJS\ExtDirect\Request The built request
+	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The built request
 	 */
 	public function build() {
 		$postArguments = $_POST;
 		if (isset($postArguments['extAction'])) {
-			throw new Tx_MvcExtjs_ExtJS_Exception('Form Post Request building is not yet implemented.', 1281379502);
+			throw new Tx_MvcExtjs_Exception('Form Post Request building is not yet implemented.', 1281379502);
 			$request = $this->buildFormPostRequest($postArguments);
 		} else {
 			$request = $this->buildJsonRequest();
@@ -86,7 +86,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
 	protected function buildJsonRequest() {
-		$transactionDatas = $GLOBALS['HTTP_RAW_POST_DATA'];
+		$transactionDatas = file_get_contents("php://input");
 
 		if ( ($transactionDatas = json_decode($transactionDatas)) === NULL) {
 			throw new Tx_MvcExtjs_ExtDirect_Exception_InvalidExtDirectRequestException('The request is not a valid Ext Direct request', 1268490738);

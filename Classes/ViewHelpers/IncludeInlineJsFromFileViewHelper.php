@@ -59,7 +59,7 @@ class Tx_MvcExtjs_ViewHelpers_IncludeInlineJsFromFileViewHelper extends Tx_MvcEx
 		$filePath = $extPath . $pathInsideExt . $name;
 
 		if (!file_exists($filePath)) {
-			throw new Tx_MvcExtjs_ExtJS_Exception('File not found: ' . $filePath, 1264197781);
+			throw new Tx_MvcExtjs_Exception('File not found: ' . $filePath, 1264197781);
 		}
 
 		$fileContent = file_get_contents($extPath . $pathInsideExt . $name);

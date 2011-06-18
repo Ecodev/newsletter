@@ -22,11 +22,11 @@ declare(ENCODING = 'utf-8');
  *                                                                        */
 
 /**
- * An exception for an invalid Ext Direct request
+ * The base exception for this extension.
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_MvcExtjs_MVC_ExtDirect_Exception_InvalidExtDirectRequestException extends Tx_MvcExtjs_Exception {
+class Tx_MvcExtjs_Exception extends Tx_Extbase_Exception {
 
 }
 ?>

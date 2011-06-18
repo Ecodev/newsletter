@@ -69,7 +69,7 @@ class Tx_MvcExtjs_ViewHelpers_IncludeJsFolderViewHelper extends Tx_MvcExtjs_View
 				$files[$hash] = $name . $filename;
 			}
 		} else {
-			$files = t3lib_div::getAllFilesAndFoldersInPath(array(), $absFolderPath, '',0,99,'.svn');
+			$files = t3lib_div::getAllFilesAndFoldersInPath(array(), $absFolderPath, '',0,99,'\\.svn');
 			foreach ($files as $hash => $absPath) {
 				$files[$hash] = str_replace($extPath . $pathInsideExt, '',$absPath);
 			}
