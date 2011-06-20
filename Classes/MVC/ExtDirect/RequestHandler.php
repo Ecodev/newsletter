@@ -37,7 +37,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Request
 	 * @var Tx_Extbase_MVC_Dispatcher
 	 */
 	protected $dispatcher;
-	
+
 	/**
 	 * @var Tx_Extbase_MVC_Controller_FlashMessages
 	 */
@@ -70,7 +70,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Request
 		$this->dispatcher = $dispatcher;
 		$this->requestBuilder = $requestBuilder;
 	}
-	
+
 	/**
 	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
@@ -177,7 +177,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Request
 			$response->setHeader('Content-Type', 'text/html');
 			$response->setContent('<html><body><textarea>' . $jsonResponse . '</textarea></body></html>');
 		} else {
-			$response->setHeader('Content-Type', 'text/javascript');
+			$response->setHeader('Content-Type', 'application/json');
 			$response->setContent($jsonResponse);
 		}
 		return $response;
