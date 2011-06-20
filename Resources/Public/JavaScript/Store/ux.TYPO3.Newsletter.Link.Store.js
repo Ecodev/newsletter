@@ -19,7 +19,8 @@ Ext.ux.TYPO3.Newsletter.Link.Store = function() {
 					fields:[
 					    {name: '__identity', type: 'int'},
 					    {name: 'url', type: 'string'},
-					    {name: 'openedCount', type: 'int'}
+					    {name: 'openedCount', type: 'int'},
+					    {name: 'openedPercentage', type: 'int'}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({
@@ -33,7 +34,7 @@ Ext.ux.TYPO3.Newsletter.Link.Store = function() {
 					create: Ext.ux.TYPO3.Newsletter.Remote.LinkController.createAction
 				},
 				paramOrder: {
-					read: [],
+					read: [''],
 					update: ['data'],
 					create: ['data'],
 					destroy: ['data']
@@ -42,6 +43,9 @@ Ext.ux.TYPO3.Newsletter.Link.Store = function() {
 				restful: false,
 				batch: false,
 				remoteSort: false
+			});
+			linkStore.on('beforeload', function(store){
+				store.setBaseParam('toto', 'valueeee');
 			});
 		}
 	}

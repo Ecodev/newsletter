@@ -36,7 +36,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * When the newsletter will start sending emails
 	 *
-	 * @var integer $plannedTime
+	 * @var DateTime $plannedTime
 	 * @validate NotEmpty
 	 */
 	protected $plannedTime;
@@ -44,14 +44,14 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * beginTime
 	 *
-	 * @var string $beginTime
+	 * @var DateTime $beginTime
 	 */
 	protected $beginTime;
 
 	/**
 	 * endTime
 	 *
-	 * @var string $endTime
+	 * @var DateTime $endTime
 	 */
 	protected $endTime;
 
@@ -131,17 +131,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Setter for plannedTime
 	 *
-	 * @param integer $plannedTime When the newsletter will start sending emails
+	 * @param DateTime $plannedTime When the newsletter will start sending emails
 	 * @return void
 	 */
-	public function setPlannedTime($plannedTime) {
+	public function setPlannedTime(DateTime $plannedTime) {
 		$this->plannedTime = $plannedTime;
 	}
 
 	/**
 	 * Getter for plannedTime
 	 *
-	 * @return integer When the newsletter will start sending emails
+	 * @return DateTime When the newsletter will start sending emails
 	 */
 	public function getPlannedTime() {
 		return $this->plannedTime;
@@ -150,17 +150,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Setter for beginTime
 	 *
-	 * @param string $beginTime beginTime
+	 * @param DateTime $beginTime beginTime
 	 * @return void
 	 */
-	public function setBeginTime($beginTime) {
+	public function setBeginTime(DateTime $beginTime) {
 		$this->beginTime = $beginTime;
 	}
 
 	/**
 	 * Getter for beginTime
 	 *
-	 * @return string beginTime
+	 * @return DateTime beginTime
 	 */
 	public function getBeginTime() {
 		return $this->beginTime;
@@ -169,17 +169,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Setter for endTime
 	 *
-	 * @param string $endTime endTime
+	 * @param DateTime $endTime endTime
 	 * @return void
 	 */
-	public function setEndTime($endTime) {
+	public function setEndTime(DateTime $endTime) {
 		$this->endTime = $endTime;
 	}
 
 	/**
 	 * Getter for endTime
 	 *
-	 * @return string endTime
+	 * @return DateTime endTime
 	 */
 	public function getEndTime() {
 		return $this->endTime;
@@ -592,5 +592,15 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		
 	}
 	
+	/**
+	 * Returns the count of recipient to which the newsletter was actually sent.
+	 * This may differ from $newsletter->getRecipientListConcreteInstance()->getCount()
+	 * because the recipientList may change over time.
+	 */
+	public function getEmailCount()
+	{
+		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		return $emailRepository->getCount($this->uid);
+	}
 }
 ?>

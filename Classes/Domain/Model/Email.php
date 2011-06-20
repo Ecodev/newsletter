@@ -36,14 +36,14 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * beginTime
 	 *
-	 * @var string $beginTime
+	 * @var DateTime $beginTime
 	 */
 	protected $beginTime;
 
 	/**
 	 * endTime
 	 *
-	 * @var string $endTime
+	 * @var DateTime $endTime
 	 */
 	protected $endTime;
 
@@ -93,17 +93,17 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for beginTime
 	 *
-	 * @param string $beginTime beginTime
+	 * @param DateTime $beginTime beginTime
 	 * @return void
 	 */
-	public function setBeginTime($beginTime) {
+	public function setBeginTime(DateTime $beginTime) {
 		$this->beginTime = $beginTime;
 	}
 
 	/**
 	 * Getter for beginTime
 	 *
-	 * @return string beginTime
+	 * @return DateTime beginTime
 	 */
 	public function getBeginTime() {
 		return $this->beginTime;
@@ -112,17 +112,17 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Setter for endTime
 	 *
-	 * @param string $endTime endTime
+	 * @param DateTime $endTime endTime
 	 * @return void
 	 */
-	public function setEndTime($endTime) {
+	public function setEndTime(DateTime $endTime) {
 		$this->endTime = $endTime;
 	}
 
 	/**
 	 * Getter for endTime
 	 *
-	 * @return string endTime
+	 * @return DateTime endTime
 	 */
 	public function getEndTime() {
 		return $this->endTime;

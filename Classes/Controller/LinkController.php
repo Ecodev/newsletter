@@ -44,10 +44,9 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	 *
 	 * @return void
 	 */
-	protected function initializeActionl() {
+	protected function initializeAction() {
 		$this->linkRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_LinkRepository');
 	}
-	
 	
 		
 	/**
@@ -65,7 +64,19 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 			}
 		}
 		
-		$this->view->assign('links', $links);
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => self::resolveJsonViewConfiguration()
+			)
+		));
+		
+		$this->flashMessages->add('Loaded all Links from Server side.','Links loaded successfully', t3lib_FlashMessage::NOTICE);
+		
+		$this->view->assign('total', $links->count());
+		$this->view->assign('data', $links);
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 		
@@ -146,5 +157,17 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	}
 	
 
+	/**
+	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
+	 * a Link record.
+	 * 
+	 * @return array
+	 */
+	static public function resolveJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array('url','openedCount', 'openedPercentage'),
+				);
+	}
 }
 ?>

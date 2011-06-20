@@ -32,5 +32,5 @@
  */
  
 class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
-
+	
 }

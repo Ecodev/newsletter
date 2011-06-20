@@ -20,15 +20,16 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 			//store: Ext.ux.TYPO3.Newsletter.Store.NewsletterList,
 			//store: Ext.ux.TYPO3.Newsletter.Newsletter.Store,
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter'),
-			displayField: 'statistic_label_formatted',
+			displayField: 'title',
 			valueField: 'uid',
 			typeAhead: false,
-			width: 300,
+			width: 400,
 			mode: 'local',
 			forceSelection: true,
 			editable: false,
 			triggerAction: 'all',
-			selectOnFocus: true
+			selectOnFocus: true,
+			tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item">{title} @ {beginTime} - {emailCount} emails</div></tpl>')
 		};
 		Ext.apply(this, config);
 		Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);

@@ -44,4 +44,16 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 		
 		return $query->execute()->getFirst();
 	}
+	
+	/**
+	 * Returns the count of emails for a given newsletter
+	 * @param integer $uidNewsletter
+	 */
+	public function getCount($uidNewsletter)
+	{
+		global $TYPO3_DB;
+		$count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
+
+		return (int)$count;
+	}
 }

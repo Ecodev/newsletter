@@ -51,7 +51,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 *
 	 * @return void
 	 */
-	protected function initializeActihhon() {
+	protected function initializeAction() {
 		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$this->statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
 
@@ -70,7 +70,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @return string The rendered list view
 	 */
 	public function listAction() {
-		$newsletters = $this->newsletterRepository->findAll();
+		$newsletters = $this->newsletterRepository->findAllByPid($this->id);
 		
 		if(count($newsletters) < 1){
 			$settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -79,7 +79,19 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			}
 		}
 		
-		$this->view->assign('newsletters', $newsletters);
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => self::resolveJsonViewConfiguration()
+			)
+		));
+		
+		$this->flashMessages->add('Loaded Newsletters from Server side.','Newsletters loaded successfully', t3lib_FlashMessage::NOTICE);
+		
+		$this->view->assign('total', $newsletters->count());
+		$this->view->assign('data', $newsletters);
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 		
@@ -159,6 +171,37 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->redirect('list');
 	}
 	
-
+	/**
+	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
+	 * a Newsletter record.
+	 * 
+	 * @return array
+	 */
+	static public function resolveJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array(
+						'beginTime',
+						'bounceAccount',
+						'domain',
+						'emailCount',
+						'endTime',
+						'injectLinksSpy',
+						'injectOpenSpy',
+						'isTest',
+						'plainConverter',
+						'plannedTime',
+						'repetition',
+						'senderEmail',
+						'senderName',
+						'title',
+					),
+					'_descend' => array(
+						'beginTime' => array(),
+						'endTime' => array(),
+						'plannedTime' => array(),
+						)
+				);
+	}
 }
 ?>

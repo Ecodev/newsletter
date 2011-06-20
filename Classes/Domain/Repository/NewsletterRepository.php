@@ -48,5 +48,18 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 		return $query->execute()->getFirst();
 	}
 	
+	public function findAllByPid($pid)
+	{
+		if ($pid < 1)
+			return $this->findAll();
+		
+		$query = $this->createQuery();
+		$query->matching($query->equals('pid', $pid));
+		
+		$query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		
+		return $query->execute();
+	}
+	
 }
 ?>

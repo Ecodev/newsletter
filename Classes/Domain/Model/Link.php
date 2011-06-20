@@ -43,9 +43,16 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * newsletter
 	 *
-	 * @var string $newsletter
+	 * @var integer $newsletter
 	 */
 	protected $newsletter;
+	
+	/**
+	 * opened count
+	 *
+	 * @var integer $openedCount
+	 */
+	protected $openedCount;
 	
 	/**
 	 * Setter for url
@@ -82,7 +89,37 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return Tx_Newsletter_Domain_Model_Newsletter newsletter
 	 */
 	public function getNewsletter() {
-		return $this->newsletter;
+		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		return $newsletterRepository->findByUid($this->newsletter);
 	}
 
+	/**
+	 * Setter for openedCount
+	 *
+	 * @param integer $openedCount openedCount
+	 * @return void
+	 */
+	public function setOpenedCount($openedCount) {
+		$this->openedCount = $openedCount;
+	}
+
+	/**
+	 * Getter for openedCount
+	 *
+	 * @return integer openedCount
+	 */
+	public function getOpenedCount() {
+		return $this->openedCount;
+		
+	}
+	
+	public function getOpenedPercentage() {
+		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$emailCount = $emailRepository->getCount($this->newsletter);
+	
+		
+		if ($emailCount == 0)
+			return -1;
+		return round($this->getOpenedCount() * 100 / $emailCount, 2);
+	}
 }

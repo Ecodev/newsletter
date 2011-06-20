@@ -18,10 +18,20 @@ Ext.ux.TYPO3.Newsletter.Newsletter.Store = function() {
 					root:'data',
 					fields:[
 					    {name: '__identity', type: 'int'},
-					    {name: 'title', type: 'string'},
-					    {name: 'director', type: 'string'},
-					    {name: 'releaseDate', type: 'date'},
-					    {name: 'genre', type: 'object'}
+						{name: 'beginTime', type: 'date'},
+						//{name: 'bounceAccount', type: 'string'},
+						{name: 'domain', type: 'string'},
+						{name: 'emailCount', type: 'int'},
+						{name: 'endTime', type: 'date'},
+						{name: 'injectLinksSpy', type: 'boolean'},
+						{name: 'injectOpenSpy', type: 'boolean'},
+						{name: 'isTest', type: 'boolean'},
+						//{name: 'plainConverter', type: 'string'},
+						{name: 'plannedTime', type: 'date'},
+						{name: 'repetition', type: 'int'},
+						{name: 'senderEmail', type: 'string'},
+						{name: 'senderName', type: 'string'},
+						{name: 'title', type: 'string'},
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

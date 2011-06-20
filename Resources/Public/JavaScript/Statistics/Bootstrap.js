@@ -61,7 +61,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsle
 
 			// Check wheter there are staticis for the page.
 			// If not load a special panel for that case.
-			if (true){ // TODO FIXME: Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
+			if (false){ // TODO FIXME: Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
 				this._loadNoStatisticsPanel();
 			}
 			else {
