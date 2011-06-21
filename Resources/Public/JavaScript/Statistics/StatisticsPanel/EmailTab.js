@@ -15,7 +15,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.Con
 
 	initComponent: function() {
 		var config = {
-			layout:'table',
+			layout:'fit',
 			width: 'auto',
 			layoutConfig: {
 				columns: 1
