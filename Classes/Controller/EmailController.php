@@ -45,6 +45,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	 * @return void
 	 */
 	protected function initializeAction() {
+		parent::initializeAction();
 		$this->emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 	}
 	
@@ -65,7 +66,19 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 			}
 		}
 		
-		$this->view->assign('emails', $emails);
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => self::resolveJsonViewConfiguration()
+			)
+		));
+		
+		$this->flashMessages->add('Loaded all Emails from Server side.','Emails loaded successfully', t3lib_FlashMessage::NOTICE);
+		
+		$this->view->assign('total', $emails->count());
+		$this->view->assign('data', $emails);
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 		
@@ -133,7 +146,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	}
 	
 		
-			/**
+	/**
 	 * Deletes an existing Email
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Email $email the Email to be deleted
@@ -146,5 +159,21 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	}
 	
 
+	/**
+	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
+	 * a Email record.
+	 * 
+	 * @return array
+	 */
+	static public function resolveJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array('beginTime', 'endTime', 'authCode','bounced', 'opened', 'recipientAddress'),
+					'_descend' => array(
+						'beginTime' => array(),
+						'endTime' => array(),
+					)
+				);
+	}
 }
 ?>

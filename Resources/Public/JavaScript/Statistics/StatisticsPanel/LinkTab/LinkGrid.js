@@ -16,7 +16,6 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend
 	initComponent: function() {
 		var config = {
 			// store
-			//store: Ext.ux.TYPO3.Newsletter.Store.ClickedLink,
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
 
 			// column model

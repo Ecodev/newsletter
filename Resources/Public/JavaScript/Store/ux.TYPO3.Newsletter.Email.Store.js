@@ -20,7 +20,11 @@ Ext.ux.TYPO3.Newsletter.Email.Store = function() {
 					    {name: '__identity', type: 'int'},
 					    {name: 'recipientAddress', type: 'string'},
 						{name: 'beginTime', type: 'date'},
-						{name: 'endTime', type: 'date'}
+						{name: 'endTime', type: 'date'},
+						{name: 'authCode', type: 'string'},
+						{name: 'bounced', type: 'string'},
+						{name: 'opened', type: 'boolean'},
+						{name: 'recipientAddress', type: 'string'},
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

@@ -15,24 +15,16 @@ Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.
 	initialize: function() {
 		Ext.ux.TYPO3.Newsletter.Module.Application.on('Ext.ux.TYPO3.Newsletter.Module.Application.afterBootstrap', this.initStore, this);
 	},
+	
 	initStore: function() {
-		var api;
-		for (api in Ext.app.ExtDirectAPI) {
-			if (Ext.app.ExtDirectAPI[api]) {
-				Ext.Direct.addProvider(Ext.app.ExtDirectAPI[api]);
-			}
-		}
-//		Ext.ux.TYPO3.Newsletter.LogStore2.doRequest();
 
 		Ext.ux.TYPO3.Newsletter.Store.NewsletterList = Ext.ux.TYPO3.Newsletter.Store.initNewsletterList();
 		Ext.ux.TYPO3.Newsletter.Store.Statistic = Ext.ux.TYPO3.Newsletter.Store.initStatistic();
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
-		Ext.ux.TYPO3.Newsletter.Store.ClickedLink = Ext.ux.TYPO3.Newsletter.Store.initClickedLink();
-		Ext.ux.TYPO3.Newsletter.Store.SentEmail = Ext.ux.TYPO3.Newsletter.Store.initSentEmail();
 		
-		
-		var s1 = Ext.ux.TYPO3.Newsletter.Newsletter.Store.initialize();
-		var s2 = Ext.ux.TYPO3.Newsletter.Link.Store.initialize();
+		Ext.ux.TYPO3.Newsletter.Newsletter.Store.initialize();
+		Ext.ux.TYPO3.Newsletter.Email.Store.initialize();
+		Ext.ux.TYPO3.Newsletter.Link.Store.initialize();
 	}
 });
 

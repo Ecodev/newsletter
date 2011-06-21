@@ -32,6 +32,9 @@ Ext.ux.TYPO3.Newsletter.Newsletter.Store = function() {
 						{name: 'senderEmail', type: 'string'},
 						{name: 'senderName', type: 'string'},
 						{name: 'title', type: 'string'},
+						{name: 'fullTitle', convert: function(v, record) {
+								return String.format('{0} @ {1} - {2} emails', record.title, record.plannedTime, record.emailCount);
+							}}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

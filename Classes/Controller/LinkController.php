@@ -45,6 +45,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	 * @return void
 	 */
 	protected function initializeAction() {
+		parent::initializeAction();
 		$this->linkRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_LinkRepository');
 	}
 	
@@ -144,7 +145,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	}
 	
 		
-			/**
+	/**
 	 * Deletes an existing Link
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Link $link the Link to be deleted

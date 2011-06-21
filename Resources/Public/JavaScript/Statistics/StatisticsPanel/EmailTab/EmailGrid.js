@@ -17,22 +17,30 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 
 		var config = {
 			// store
-			store: Ext.ux.TYPO3.Newsletter.Store.SentEmail,
+			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
 
 			// column model
 			columns:[
 				{
-					dataIndex: 'uid',
+					dataIndex:'__identity',
 					header: Ext.ux.TYPO3.Newsletter.Language.link_id,
 					sortable: true,
 					width: 40
 				},
 				{
-					dataIndex: 'recipient_address',
+					dataIndex: 'recipientAddress',
 					header: Ext.ux.TYPO3.Newsletter.Language.recipients,
 					width: 300,
 					sortable: true,
 					renderer: this._renderEmail
+				},
+				{
+					dataIndex: 'endTime',
+					header: Ext.ux.TYPO3.Newsletter.Language.sent,
+					xtype: 'datecolumn',
+					format: 'Y-m-d h:m:s',
+					width: 150,
+					sortable: true
 				},
 				{
 					dataIndex: 'opened',
@@ -47,7 +55,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 					sortable: true
 				},
 				{
-					dataIndex: 'preview',
+					dataIndex: 'authCode',
 					header: Ext.ux.TYPO3.Newsletter.Language.preview,
 					width: 100,
 					sortable: true,
@@ -55,8 +63,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 				},
 			],
 
-			height: 300,
-			width: 700
+			height: 300
 		};
 
 		Ext.apply(this, config);
