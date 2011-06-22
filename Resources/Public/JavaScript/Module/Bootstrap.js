@@ -20,7 +20,7 @@ Ext.ux.TYPO3.Newsletter.Module.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter
 			itemId: 'planner'
 		},
 		{
-			text: Ext.ux.TYPO3.Newsletter.Language.statistics_button + ' (' + 123456789 + ')',
+			text: Ext.ux.TYPO3.Newsletter.Language.statistics_button,
 			itemId: 'statistics'
 		}
 		]);

@@ -58,46 +58,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsle
 
 			// Shows up the panel
 			component.setVisible(true);
-
-			// Check wheter there are staticis for the page.
-			// If not load a special panel for that case.
-			if (false){ // TODO FIXME: Ext.ux.TYPO3.Newsletter.Data.numberOfStatistics == 0) {
-				this._loadNoStatisticsPanel();
-			}
-			else {
-				this._loadStatisticsInCaseNotAlreadyLoaded();
-			}
-
 			
 		});
-	},
-
-	/**
-	 * Loade the no statistics panel and hide not wanted components
-	 *
-	 * @return void
-	 */
-	_loadNoStatisticsPanel: function() {
-		Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.afterbusy');
-		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.noStatisticsPanel.removeClass('t3-newsletter-hidden');
-		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.statisticsPanel.hide();
-		Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.newsletterListMenu.hide();
-	},
-
-	/**
-	 * Loads the first newsletter's statistics when clicking on the module button
-	 * This will prevent a bug when the page was not loaded firstly (not anchor #statistics)
-	 *
-	 * @return void
-	 */
-	_loadStatisticsInCaseNotAlreadyLoaded: function() {
-		var menu, store;
-		menu = Ext.ux.TYPO3.Newsletter.Module.contentArea.statistics.newsletterListMenu;
-		store = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
-		if (menu.getValue() == '' && store.getAt(0)) {
-			menu.setValue(store.getAt(0).json.uid);
-			menu.fireEvent('select');
-		}
 	}
 });
 

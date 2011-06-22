@@ -14,10 +14,20 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
 
 	initComponent: function() {
+		var thisNewsletterListMenu = this;
+		var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
+		
+		// TODO: It should not be necessary to manually select the first item after the store is loaded,
+		// but somehow the flag autoSlect does not work, even if the store is load *after* the combo is rendered
+		newsletterStore.on('load', function(store, records, options) { 
+			thisNewsletterListMenu.setValue(records[0].data.__identity);
+			thisNewsletterListMenu.fireEvent('select', thisNewsletterListMenu, records[0], 0);
+		});
 		
 		var config = {
+			emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
 			id: 'newsletterListMenu',
-			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter'),
+			store: newsletterStore,
 			displayField: 'fullTitle',
 			valueField: '__identity',
 			width: 400,
@@ -26,6 +36,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 			triggerAction: 'all',
 			selectOnFocus: true,
 			autoSelect: true,
+			typeAhead: false,
 			listeners: {
 				'select' : this.onNewsletterSelected
 			}
