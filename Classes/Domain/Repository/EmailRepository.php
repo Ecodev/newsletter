@@ -56,4 +56,15 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 
 		return (int)$count;
 	}
+	
+	public function findAllByNewsletter($uidNewsletter)
+	{
+		if ($uidNewsletter < 1)
+			return $this->findAll();
+		
+		$query = $this->createQuery();
+		$query->matching($query->equals('newsletter', $uidNewsletter));
+		
+		return $query->execute();
+	}
 }

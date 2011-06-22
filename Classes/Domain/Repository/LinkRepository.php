@@ -33,4 +33,15 @@
  
 class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 	
+	public function findAllByNewsletter($uidNewsletter)
+	{
+		if ($uidNewsletter < 1)
+			return $this->findAll();
+		
+		$query = $this->createQuery();
+		$query->matching($query->equals('newsletter', $uidNewsletter));
+		
+		return $query->execute();
+	}
+	
 }

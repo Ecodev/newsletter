@@ -54,10 +54,11 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	/**
 	 * Displays all Emails
 	 *
+	 * @param integer $uidNewsletter
 	 * @return string The rendered list view
 	 */
-	public function listAction() {
-		$emails = $this->emailRepository->findAll();
+	public function listAction($uidNewsletter) {
+		$emails = $this->emailRepository->findAllByNewsletter($uidNewsletter);
 		
 		if(count($emails) < 1){
 			$settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);

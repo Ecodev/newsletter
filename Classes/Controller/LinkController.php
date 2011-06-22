@@ -53,10 +53,11 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	/**
 	 * Displays all Links
 	 *
+	 * @param integer $uidNewsletter
 	 * @return string The rendered list view
 	 */
-	public function listAction() {
-		$links = $this->linkRepository->findAll();
+	public function listAction($uidNewsletter) {
+		$links = $this->linkRepository->findAllByNewsletter($uidNewsletter);
 		
 		if(count($links) < 1){
 			$settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);

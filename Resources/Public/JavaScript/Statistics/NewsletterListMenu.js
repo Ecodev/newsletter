@@ -38,11 +38,20 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 	/**
 	 * When a newsletter is selected, we update the store representing the selected newsletter.
 	 * TODO: there probably is a cleaner way to do this wihtout an intermediary store, but I couldn't find how to do yet
+	 * 
+	 * And we also update other depending stores (links and email)
+	 * TODO: it should be the depending stores listening to the newsletterList, but I couldn't 
+	 * find an easy way to access the newsletterList from the stores
 	 */
-	onNewsletterSelected: function(combo, record, index) {
-		var selectedNewsletter = {data: [record.data] };
+	onNewsletterSelected: function(combo, newsletter, index) {
 		var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
-		selectedNewsletterStore.loadData(selectedNewsletter);
+		selectedNewsletterStore.loadData({data: [newsletter.data] });
+		
+		var linkStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link');
+		linkStore.load({params: {data: newsletter.data.__identity }});
+		
+		var linkEmail = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email');
+		linkEmail.load({params: {data: newsletter.data.__identity }});
 	}
 });
 

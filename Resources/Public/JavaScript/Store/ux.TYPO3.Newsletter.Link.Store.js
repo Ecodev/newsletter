@@ -34,15 +34,11 @@ Ext.ux.TYPO3.Newsletter.Link.Store = function() {
 					create: Ext.ux.TYPO3.Newsletter.Remote.LinkController.createAction
 				},
 				paramOrder: {
-					read: [''],
+					read: ['data'],
 					update: ['data'],
 					create: ['data'],
 					destroy: ['data']
-				},
-				autoLoad: true,
-				restful: false,
-				batch: false,
-				remoteSort: false
+				}
 			});
 			linkStore.on('beforeload', function(store){
 				store.setBaseParam('toto', 'valueeee');

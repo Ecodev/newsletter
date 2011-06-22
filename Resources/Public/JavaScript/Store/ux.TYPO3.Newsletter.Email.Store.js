@@ -38,15 +38,11 @@ Ext.ux.TYPO3.Newsletter.Email.Store = function() {
 					create: Ext.ux.TYPO3.Newsletter.Remote.EmailController.createAction
 				},
 				paramOrder: {
-					read: [''],
+					read: ['data'],
 					update: ['data'],
 					create: ['data'],
 					destroy: ['data']
-				},
-				autoLoad: true,
-				restful: false,
-				batch: false,
-				remoteSort: false
+				}
 			});
 		}
 	}
