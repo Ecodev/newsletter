@@ -593,7 +593,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 	/**
-	 * Returns the count of recipient to which the newsletter was actually sent.
+	 * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
 	 * This may differ from $newsletter->getRecipientListConcreteInstance()->getCount()
 	 * because the recipientList may change over time.
 	 */
@@ -602,5 +602,59 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		return $emailRepository->getCount($this->uid);
 	}
+	
+	/**
+	 * Get the number of not yet sent email
+	 */
+	public function getEmailNotSentCount() {
+		global $TYPO3_DB;
+		
+		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
+
+		return (int)$numberOfNotSent;
+	}
+	
+	/**
+	 * Get the number of sent email for a newsletter
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return int count of email already sent
+	 */
+	public function getEmailSentCount() {
+		global $TYPO3_DB;
+		
+		$numberOfSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time != 0 AND opened = 0 AND bounced = 0 AND newsletter = ' . $this->getUid());
+
+		return (int)$numberOfSent;
+	}
+
+	/**
+	 * Get the number of opened email.
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return int count of opened emails
+	 */
+	public function getEmailOpenedCount() {
+		global $TYPO3_DB;
+		
+		$numberOfOpened = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'opened = 1 AND bounced = 0 AND newsletter = ' . $this->getUid());
+		
+		return (int)$numberOfOpened;
+	}
+
+	/**
+	 * Get the number of bounced email.
+	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
+	 *
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return int $numberOfBounce
+	 */
+	public function getEmailBouncedCount() {
+		global $TYPO3_DB;
+
+		$numberOfBounce = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'bounced = 1 AND newsletter = ' . $this->getUid());
+		
+		return (int)$numberOfBounce;
+	}
+	
 }
 ?>

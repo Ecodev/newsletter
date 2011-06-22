@@ -16,7 +16,6 @@ if (TYPO3_MODE == 'BE')	{
 		array(
 			'Module' => 'index',
 			'Newsletter' => 'list, show, new, create, edit, update, delete',
-			'Statistic' => 'list,show',
 			'Email' => 'list, show, new, create, edit, update, delete',
 			'Link' => 'list, show, new, create, edit, update, delete',
 			'BounceAccount' => 'list, show, new, create, edit, update, delete',

@@ -21,7 +21,6 @@ Ext.ux.TYPO3.Newsletter.Newsletter.Store = function() {
 						{name: 'beginTime', type: 'date'},
 						//{name: 'bounceAccount', type: 'string'},
 						{name: 'domain', type: 'string'},
-						{name: 'emailCount', type: 'int'},
 						{name: 'endTime', type: 'date'},
 						{name: 'injectLinksSpy', type: 'boolean'},
 						{name: 'injectOpenSpy', type: 'boolean'},
@@ -32,9 +31,16 @@ Ext.ux.TYPO3.Newsletter.Newsletter.Store = function() {
 						{name: 'senderEmail', type: 'string'},
 						{name: 'senderName', type: 'string'},
 						{name: 'title', type: 'string'},
-						{name: 'fullTitle', convert: function(v, record) {
-								return String.format('{0} @ {1} - {2} emails', record.title, record.plannedTime, record.emailCount);
-							}}
+						{name: 'emailCount', type: 'int'},
+						{name: 'emailNotSentCount', type: 'int'},
+						{name: 'emailSentCount', type: 'int'},
+						{name: 'emailOpenedCount', type: 'int'},
+						{name: 'emailBouncedCount', type: 'int'},
+						{name: 'emailNotSentPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailNotSentCount / newsletter.emailCount) : 0;}},
+						{name: 'emailSentPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailSentCount / newsletter.emailCount) : 0;}},
+						{name: 'emailOpenedPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailOpenedCount / newsletter.emailCount) : 0;}},
+						{name: 'emailBouncedPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailBouncedCount / newsletter.emailCount) : 0;}},
+						{name: 'fullTitle', convert: function(v, newsletter) { return String.format('{0} @ {1} - {2} emails', newsletter.title, newsletter.plannedTime, newsletter.emailCount);}}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

@@ -7,48 +7,67 @@ Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 	var store;
 	store = new Ext.data.JsonStore({
 		storeId: 'overviewPieChart',
-//		autoLoad: false,
-		remoteSort: false,
-		fields: ['label', 'total'],
-		data: {}
+		root: 'data',
+		fields: ['label', 'data'],
+		remoteSort: false
 	});
 
-	// Add method to listener Ext.ux.TYPO3.Newsletter.Store.Statistic.afterload
-	// Basically the code bellow empties the data and replaces new ones
-	// for the piechart's graph
-	Ext.ux.TYPO3.Newsletter.Store.Statistic.on(
-		'Ext.ux.TYPO3.Newsletter.Store.Statistic.afterload',
-		function (records) {
-			var record;
-			record = records[0];
+	// When a newsletter is selected, we update the data for the pie chart
+	Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter').on(
+		'datachanged',
+		function (selectedNewsletterStore) {
+			var newsletter = selectedNewsletterStore.getAt(0);
+			this.loadData({
+				data:[
+				{
+					label: Ext.ux.TYPO3.Newsletter.Language.not_sent,
+					data: newsletter.json.emailNotSentCount
+				},
+				{
+					label: Ext.ux.TYPO3.Newsletter.Language.sent,
+					data: newsletter.json.emailSentCount
+				}, 
+				{
+					label: Ext.ux.TYPO3.Newsletter.Language.opened,
+					data: newsletter.json.emailOpenedCount
+				},
+				{
+					label: Ext.ux.TYPO3.Newsletter.Language.bounced,
+					data: newsletter.json.emailBouncedCount
+				}
+				]
+			});
 
+			return;
 			// Empties records firstly
 			this.removeAll();
 
-			//  Adds records
+			//  Adds records from the currently selected newsletter
 			this.add(new Ext.data.Record({
-					label: Ext.ux.TYPO3.Newsletter.Language.not_sent,
-					total: record.json.number_of_not_sent
-				})
+				label: Ext.ux.TYPO3.Newsletter.Language.not_sent,
+				data: newsletter.json.emailNotSendCount
+			})
 			);
 			this.add(new Ext.data.Record({
-					label: Ext.ux.TYPO3.Newsletter.Language.sent,
-					total: record.json.number_of_sent
-				})
+				label: Ext.ux.TYPO3.Newsletter.Language.sent,
+				data: newsletter.json.emailSentCount
+			})
 			);
 			this.add(new Ext.data.Record({
-					label: Ext.ux.TYPO3.Newsletter.Language.opened,
-					total: record.json.number_of_opened
-				})
+				label: Ext.ux.TYPO3.Newsletter.Language.opened,
+				data: newsletter.json.emailOpenedCount
+			})
 			);
 			this.add(new Ext.data.Record({
-					label: Ext.ux.TYPO3.Newsletter.Language.bounced,
-					total: record.json.number_of_bounced
-				})
+				label: Ext.ux.TYPO3.Newsletter.Language.bounced,
+				data: newsletter.json.emailBouncedCount
+			})
 			);
 		},
 		store
-	);
-		
+		);
+	store.on('datachanged', function(store){
+		console.log(store);
+	});
 	return store;
 };

@@ -20,51 +20,29 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter'),
 			displayField: 'fullTitle',
 			valueField: '__identity',
-			typeAhead: false,
 			width: 400,
 			mode: 'local',
 			forceSelection: true,
 			triggerAction: 'all',
-			selectOnFocus: true
+			selectOnFocus: true,
+			autoSelect: true,
+			listeners: {
+				'select' : this.onNewsletterSelected
+			}
 		};
+		
 		Ext.apply(this, config);
 		Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
-		
-		// Defines listener
-		this.on(
-			'select',
-			this.onselect,
-			this
-		);
-
-		Ext.ux.TYPO3.Newsletter.Store.NewsletterList.on(
-			'Ext.ux.TYPO3.Newsletter.Store.NewsletterList.afterload',
-			this.onafterload,
-			this
-		);
 	},
 
 	/**
-	 * Defines behaviour after component is loaded
-	 *
-	 * @access public
-	 * @method onafterrender
-	 * @return void
+	 * When a newsletter is selected, we update the store representing the selected newsletter.
+	 * TODO: there probably is a cleaner way to do this wihtout an intermediary store, but I couldn't find how to do yet
 	 */
-	onafterload: function(data) {
-		this.setValue(data[0].id);
-		Ext.ux.TYPO3.Newsletter.Store.Statistic.fireEvent('Ext.ux.TYPO3.Newsletter.Store.Statistic.load', data[0].id);
-	},
-
-	/**
-	 * Defines behaviour on change value
-	 *
-	 * @access public
-	 * @method onafterrender
-	 * @return void
-	 */
-	onselect: function() {
-		Ext.ux.TYPO3.Newsletter.Store.Statistic.fireEvent('Ext.ux.TYPO3.Newsletter.Store.Statistic.load', this.getValue());
+	onNewsletterSelected: function(combo, record, index) {
+		var selectedNewsletter = {data: [record.data] };
+		var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+		selectedNewsletterStore.loadData(selectedNewsletter);
 	}
 });
 

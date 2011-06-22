@@ -17,14 +17,13 @@ Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.
 	},
 	
 	initStore: function() {
-
-		Ext.ux.TYPO3.Newsletter.Store.NewsletterList = Ext.ux.TYPO3.Newsletter.Store.initNewsletterList();
-		Ext.ux.TYPO3.Newsletter.Store.Statistic = Ext.ux.TYPO3.Newsletter.Store.initStatistic();
-		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
-		
 		Ext.ux.TYPO3.Newsletter.Newsletter.Store.initialize();
+		Ext.ux.TYPO3.Newsletter.SelectedNewsletter.Store.initialize();
 		Ext.ux.TYPO3.Newsletter.Email.Store.initialize();
 		Ext.ux.TYPO3.Newsletter.Link.Store.initialize();
+		
+		// pie chart depends on SelectedNewsletter store so it must be initialized after it
+		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
 	}
 });
 

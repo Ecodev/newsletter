@@ -31,24 +31,24 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 					items: [
 						{
 							xtype: 'dataview',
-							store: Ext.ux.TYPO3.Newsletter.Store.Statistic,
+							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter'),
 							emptyText: 'No text to display',
 							tpl: new Ext.XTemplate(
 								'<tpl for=".">',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										'<span class="t3-newsletter-span-statistic-sent">{number_of_recipients}</span> ' + Ext.ux.TYPO3.Newsletter.Language.recipients,
+										'<span class="t3-newsletter-span-statistic-sent">{emailCount}</span> ' + Ext.ux.TYPO3.Newsletter.Language.recipients,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										'<span class="t3-newsletter-span-statistic-opened">{percent_of_opened}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_opened,
+										'<span class="t3-newsletter-span-statistic-opened">{emailOpenedPercentage}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_opened,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										'<span class="t3-newsletter-span-statistic-bounced">{percent_of_bounced}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_bounced,
+										'<span class="t3-newsletter-span-statistic-bounced">{emailBouncedPercentage}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_bounced,
 									'</div>',
 									'<div class="t3-newsletter-span-statistic" style="margin-top: 30px;">',
-										Ext.ux.TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{begin_time_formatted}</span>',
+										Ext.ux.TYPO3.Newsletter.Language.started + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{beginTime}</span>',
 									'</div>',
 									'<div class="t3-newsletter-span-statistic">',
-										Ext.ux.TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{end_time_formatted}</span>',
+										Ext.ux.TYPO3.Newsletter.Language.ended + '<span class="t3-newsletter-span-statistic" style="font-size: 120%">{endTime}</span>',
 									'</div>',
 								'</tpl>'
 							),
@@ -58,7 +58,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 						{
 							xtype: 'piechart',
 							store: Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart,
-							dataField: 'total',
+							dataField: 'data',
 							categoryField: 'label',
 							flex: 1,
 							seriesStyles: {
@@ -69,13 +69,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 							{
 								legend:
 								{
-									display: 'bottom',
-									padding: 5,
-									font:
-									{
-										family: 'Tahoma',
-										size: 10
-									}
+									display: 'bottom'
 								},
 								background:{
 									color: '#EFEFF4'

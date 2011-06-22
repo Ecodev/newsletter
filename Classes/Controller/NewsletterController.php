@@ -33,13 +33,6 @@
 class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 
 	/**
-	 * the page info
-	 *
-	 * @var Tx_Newsletter_Domain_Repository_StatisticRepository
-	 */
-	public $statisticRepository;
-
-	/**
 	 * newsletterRepository
 	 * 
 	 * @var Tx_Newsletter_Domain_Repository_NewsletterRepository
@@ -53,7 +46,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 */
 	protected function initializeAction() {
 		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-		$this->statisticRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_StatisticRepository');
 
 
 		// Set default value to id
@@ -184,7 +176,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						'beginTime',
 						'bounceAccount',
 						'domain',
-						'emailCount',
 						'endTime',
 						'injectLinksSpy',
 						'injectOpenSpy',
@@ -195,6 +186,11 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						'senderEmail',
 						'senderName',
 						'title',
+						'emailCount',
+						'emailNotSentCount',
+						'emailSentCount',
+						'emailOpenedCount',
+						'emailBouncedCount',
 					),
 					'_descend' => array(
 						'beginTime' => array(),
