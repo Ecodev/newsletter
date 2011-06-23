@@ -71,20 +71,7 @@ class tx_newsletter_mailer {
 		return $this->plain;
 	}
 
-	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '') {
-		$append_url = tx_newsletter_tools::confParam('append_url');
-
-		/* Any language defined? */
-
-		/**
-		 * 12.09.2008 mads@brunn.dk
-		 * L-param is set even if it's '0' 
-		 * Needed in those cases where default language in frontend and backend differs
-		 */
-		if ($lang <> -1 && $lang <> '') {
-			$lang = "&L=$lang";
-		}
-
+	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null) {
 		$this->newsletter = $newsletter;
 		$domain = $newsletter->getDomain();
 		$this->siteUrl = "http://$domain/";
@@ -96,12 +83,16 @@ class tx_newsletter_mailer {
 		$this->setTitle($newsletter->getTitle());
 
 		// Build html
-		$url = "http://$domain/index.php?id=" . $newsletter->getPid() . "&no_cache=1$lang$append_url";
-		$this->setHtml(tx_newsletter_tools::getURL($url));
+		$validatedContent = $newsletter->getValidatedContent($language);
+		if (count($validatedContent['errors']))
+		{
+			throw new Exception('The newsletter HTML content does not validate. The sending is aborted. See errors: ' . serialize($validatedContent['errors']));
+		}
+		$this->setHtml($validatedContent['content']);
 
 		// Build plaintext
 		$plain = $newsletter->getPlainConverterInstance();
-		$plain->setContent($this->html, $url, $this->domain);
+		$plain->setContent($validatedContent['content'], $newsletter->getContentUrl($language), $this->domain);
 		$this->setPlain($plain->getPlaintext());
 
 		// Attaching files 
@@ -143,8 +134,6 @@ class tx_newsletter_mailer {
 	 * @return   void
 	 */
 	private function setPlain($src) {
-		/* Remove html-comments */
-		$src = preg_replace('/<!--.*-->/U', '', $src);
 
 		/* Detect what markers we need to substitute later on */
 		preg_match_all('/###[\w]+###/', $src, $fields);
@@ -162,24 +151,13 @@ class tx_newsletter_mailer {
 	}
 
 	/**
-	 * Set the html content on the mail
+	 * Set the html content of the mail which will be used as template.
+	 * The content will be edited to include images as attachements if needed.
 	 *
 	 * @param   string      The html content of the mail
 	 * @return   void
 	 */
 	private function setHtml($src) {
-		/* Find linked css and convert into a style-tag */
-		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $src, $urls);
-		foreach ($urls[1] as $i => $url) {
-			$get_url = str_replace($this->siteUrl, '', $url);
-			$src = str_replace($urls[0][$i],
-							"<style type=\"text/css\">\n<!--\n"
-							. t3lib_div::getURL($this->realPath . str_replace($this->siteUrl, '', $url))
-							. "\n-->\n</style>", $src);
-		}
-
-		// We cant very well have attached javascript in a newsmail ... removing
-		$src = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $src);
 
 		/* Convert external file resouces to attached filer or correct their links */
 		$replace_regs = array(
@@ -214,16 +192,6 @@ class tx_newsletter_mailer {
 			}
 		}
 
-		/* Fix relative links */
-		preg_match_all('|<a [^>]*href="(.*)"|Ui', $src, $urls);
-		foreach ($urls[1] as $i => $url) {
-			/* If this is already a absolute link, dont replace it */
-			if (!preg_match('|^http://|', $url) && !preg_match('|^mailto:|', $url) && !preg_match('|^#|', $url)) {
-				$replace_url = str_replace($url, $this->siteUrl . $url, $urls[0][$i]);
-				$src = str_replace($urls[0][$i], $replace_url, $src);
-			}
-		}
-
 		/* Detect what markers we need to substitute later on */
 		preg_match_all('/###[\w]+###/', $src, $fields);
 		$this->htmlMarkers = str_replace('###', '', $fields[0]);
@@ -240,7 +208,7 @@ class tx_newsletter_mailer {
 	}
 
 	/**
-	 * Insert a "mail-open-spy" in the mail for real. This relies on the $this->authcode being set.
+	 * Insert a "mail-open-spy" in the mail.
 	 *
 	 * @return   void
 	 */

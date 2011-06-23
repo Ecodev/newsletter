@@ -44,7 +44,15 @@ require_once (t3lib_extMgm::extPath('newsletter').'/Classes/Domain/Repository/Ne
 class tx_newsletter_module1 extends t3lib_SCbase {
 
 	var $pageinfo;
+	
+	/**
+	 * @var Tx_Newsletter_Domain_Repository_NewsletterRepository
+	 */
 	private $newsletterRepository = null;
+	
+	/**
+	 * @var Tx_Newsletter_Domain_Model_Newsletter
+	 */
 	private $newsletter = null;
 
 	/**
@@ -347,103 +355,37 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	function checkMailValidity() {
 		global $LANG;
 		global $ICON_PATH;
-		global $TYPO3_DB;
 		 
-		$warn = array();
-		$fail = array();
-		$note = array();
-		 
-		/* Get the page-contents */
-		$id = intval($_REQUEST['id']);
-		$rs = $TYPO3_DB->exec_SELECTquery('*', 'pages', "uid = ".intval($_REQUEST[id]));
-		$page = $TYPO3_DB->sql_fetch_assoc($rs);
-		$domain = $this->newsletter->getDomain();
-		$html_src = file_get_contents("http://$domain/index.php?id=$id&no_cache=1");
-
-		/* Any linked CSS-files */
-		if (strpos($html_src, '<link rel="stylesheet" type="text/css" href="')) {
-			$note[] = $LANG->getLL('mail_contains_linked_styles');
-		}
-
-		/* Find linked css and convert into a style-tag */
-		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $html_src, $urls);
-		foreach ($urls[1] as $i => $url) {
-			$get_url = str_replace("http://$domain/", '', $url);
-			$html_src = str_replace ($urls[0][$i],
-                   "<style type=\"text/css\">\n<!--\n"
-                   .file_get_contents(PATH_site.str_replace("http://$domain/", '', $url))
-                   ."\n-->\n</style>", $html_src);
-		}
-
-		/* Any javascript */
-		if (strpos($html_src, '<script')) {
-			$fail[] = $LANG->getLL('mail_contains_javascript');
-		}
-		 
-		 
-		/* Images in CSS */
-		if (preg_match('|background-image: url\([^\)]+\)|', $html_src) || preg_match('|list-style-image: url\([^\)]+\)|', $html_src)) {
-			$fail[] = $LANG->getLL('mail_contains_css_images');
-		}
-		 
-		/* CSS-classes */
-		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $html_src)) {
-			$note[] = $LANG->getLL('mail_contains_css_classes');
-		}
-		 
-		/* Positioning & element sizes in CSS */
-		if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $html_src, $matches)) {
-			 
-			foreach ($matches[1] as $stylepart) {
-				if (strpos($stylepart, 'width') !== false) {
-					$warn[] = str_replace ('###PROPERTY###','width', $LANG->getLL('mail_contains_css_some_property'));
-				}
-
-				if (strpos($stylepart, 'margin') !== false) {
-					$warn[] = str_replace ('###PROPERTY###','margin', $LANG->getLL('mail_contains_css_some_property'));
-				}
-
-				if (strpos($stylepart, 'height') !== false) {
-					$warn[] = str_replace ('###PROPERTY###','height', $LANG->getLL('mail_contains_css_some_property'));
-				}
-
-				if (strpos($stylepart, 'padding') !== false) {
-					$warn[] = str_replace ('###PROPERTY###','padding', $LANG->getLL('mail_contains_css_some_property'));
-				}
-
-				if (strpos($stylepart, 'position') !== false) {
-					$warn[] = str_replace ('###PROPERTY###','position', $LANG->getLL('mail_contains_css_some_property'));
-				}
-			}
-
-			$warn = array_unique($warn);
-		}
-		 
+		$validatedContent = $this->newsletter->getValidatedContent();
+		$fail = $validatedContent['errors'];
+		$warn = $validatedContent['warnings'];
+		$note = $validatedContent['infos'];
+		
 		if (count($fail)) {
 			$content .= '<h4>'.$LANG->getLL('mail_contains_serious_errors').'</h4>';
 			foreach ($fail as $failure) {
-				$content .= '<p><img src="'.$ICON_PATH.'icon_fatalerror.gif" />'.$failure.'</p>';
+				$content .= '<p><img src="'.$ICON_PATH.'error.png" />'.$failure.'</p>';
 			}
 		} else {
-			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_serious_errors').'</h4>';
+			$content .= '<h4><img src="'.$ICON_PATH.'ok.png" />'.$LANG->getLL('mail_contains_no_serious_errors').'</h4>';
 		}
 		 
 		if (count($warn)) {
 			$content .= '<h4>'.$LANG->getLL('mail_contains_warnings').'</h4>';
 			foreach ($warn as $warning) {
-				$content .= '<p><img src="'.$ICON_PATH.'icon_warning.gif" />'.$warning.'</p>';
+				$content .= '<p><img src="'.$ICON_PATH.'warning.png" />'.$warning.'</p>';
 			}
 		} else {
-			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_warnings').'</h4>';
+			$content .= '<h4><img src="'.$ICON_PATH.'ok.png" />'.$LANG->getLL('mail_contains_no_warnings').'</h4>';
 		}
 		 
 		if (count($note)) {
 			$content .= '<h4>'.$LANG->getLL('mail_contains_notices').'</h4>';
 			foreach ($note as $notice) {
-				$content .= '<p><img src="'.$ICON_PATH.'icon_note.gif" />'.$notice.'</p>';
+				$content .= '<p><img src="'.$ICON_PATH.'information.png" />'.$notice.'</p>';
 			}
 		} else {
-			$content .= '<h4><img src="'.$ICON_PATH.'icon_ok.gif" />'.$LANG->getLL('mail_contains_no_notices').'</h4>';
+			$content .= '<h4><img src="'.$ICON_PATH.'ok.png" />'.$LANG->getLL('mail_contains_no_notices').'</h4>';
 		}
 		 
 		 

@@ -656,5 +656,117 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		return (int)$numberOfBounce;
 	}
 	
+	/**
+	 * Returns the URL of the content of this newsletter
+	 * @return string
+	 */
+	public function getContentUrl($language = null) {
+		$append_url = tx_newsletter_tools::confParam('append_url');
+		$domain = $this->getDomain();
+		
+		if (!is_null($language)) {
+			$language = '&L=' . $language;
+		}
+		
+		return "http://$domain/index.php?no_cache=1&id=" . $this->getPid() . $language . $append_url;
+	}
+	
+	/**
+	 * Returns the content of this newsletter with validation messages. The content
+	 * is also "fixed" automatically when possible.
+	 * @global type $LANG
+	 * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
+	 * @return array
+	 */
+	public function getValidatedContent($language = null)
+	{	
+		global $LANG;
+		$domain = $this->getDomain();
+		$content= t3lib_div::getURL($this->getContentUrl());
+		
+		
+		// Content should be more that just a few characters. Apache error propably occured
+		if (strlen($content) < 200) {
+			$errors []= "Content too short. The content must be at least 200 chars long to be considered valid.";
+		}
+
+		// Content should not contain PHP-Warnings
+		if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
+			$errors []= "Content contains PHP Warnings. This must not reach the receivers.";
+		}
+
+		// Content should not contain PHP-Warnings
+		if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
+			$errors []= "Content contains PHP Fatal errors. This must not reach the receivers.";
+		}
+
+		// If the page contains a "Pages is being generared" text... this is bad too
+		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
+			$errors []= "Content contains \"wait\" signatures. This must not reach the receivers.";
+		}
+		
+		// Find linked css and convert into a style-tag
+		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
+		foreach ($urls[1] as $i => $url) {
+			$get_url = str_replace("http://$domain/", '', $url);
+			$content = str_replace ($urls[0][$i],
+                   "<style type=\"text/css\">\n<!--\n"
+                   . t3lib_div::getURL(PATH_site . str_replace("http://$domain/", '', $url))
+                   . "\n-->\n</style>", $content);
+		}
+		if (count($urls[1])) {
+			$infos[] = $LANG->getLL('mail_contains_linked_styles');
+		}
+
+		// We cant very well have attached javascript in a newsmail ... removing
+		$content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
+		if ($count) {
+			$warnings[] = $LANG->getLL('mail_contains_javascript');
+		}
+		
+		// Fix relative links
+		preg_match_all('|<a [^>]*href="(.*)"|Ui', $src, $urls);
+		foreach ($urls[1] as $i => $url) {
+			// If this is already a absolute link, dont replace it
+			if (!preg_match('|^http://|', $url) && !preg_match('|^mailto:|', $url) && !preg_match('|^#|', $url)) {
+				$replace_url = str_replace($url, "http://$domain/" . $url, $urls[0][$i]);
+				$src = str_replace($urls[0][$i], $replace_url, $src);
+			}
+		}
+		if (count($urls[1])) {
+			$infos[]= 'Relative URL for links converted to absolute URL';
+		}
+		
+		// Images in CSS
+		if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
+			$errors[] = $LANG->getLL('mail_contains_css_images');
+		}
+		
+		// CSS-classes
+		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
+			$warnings[] = $LANG->getLL('mail_contains_css_classes');
+		}
+		
+		// Positioning & element sizes in CSS
+		$forbiddenCssProperties = array('width', 'margin', 'height', 'padding', 'position');
+		if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
+			foreach ($matches[1] as $stylepart) {
+				foreach ($forbiddenCssProperties as $property)
+				{
+					if (strpos($stylepart, 'width') !== false) {
+						$warnings[] = str_replace('###PROPERTY###', $property, $LANG->getLL('mail_contains_css_some_property'));
+					}
+				}
+			}
+		}
+		
+		return array(
+			'content' => $content,
+			'errors' => $errors,
+			'warnings' => $warnings,
+			'infos' => $infos,
+		);
+	}
+	
 }
 ?>
