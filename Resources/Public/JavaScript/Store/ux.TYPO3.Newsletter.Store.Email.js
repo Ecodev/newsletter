@@ -3,7 +3,7 @@ Ext.namespace('Ext.ux.TYPO3.Newsletter.Email');
  * A Store for the email model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.Email.Store = function() {
+Ext.ux.TYPO3.Newsletter.Store.Email = function() {
 	
 	emailStore = null;
 	

@@ -66,8 +66,6 @@ Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 		},
 		store
 		);
-	store.on('datachanged', function(store){
-		console.log(store);
-	});
+	
 	return store;
 };

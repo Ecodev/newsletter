@@ -42,7 +42,6 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		this._initStateProvider();
 		this._initStateDefaultValue();
 		this._registerEventBeforeLoading();
-		this._registerEventAfterLoading();
 
 		Ext.QuickTips.init();
 
@@ -70,37 +69,6 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 				Ext.get('loading').setStyle({
 					visibility: 'visible',
 					opacity: 1
-				});
-			},
-			this
-		)
-	},
-	/**
-	 * Hides the loading message of the application
-	 *
-	 */
-	_registerEventAfterLoading: function() {
-		this.on(
-			'Ext.ux.TYPO3.Newsletter.Module.Application.afterbusy',
-			function() {
-				var loading;
-				loading = Ext.get('loading');
-
-				//  Hide loading message
-				loading.fadeOut({
-					duration: 0.2,
-					remove: false
-				});
-
-				//  Hide loading mask
-				Ext.get('loading-mask').shift({
-					xy: loading.getXY(),
-					width: loading.getWidth(),
-					height: loading.getHeight(),
-					remove: false,
-					duration: 0.35,
-					opacity: 0,
-					easing: 'easeOut'
 				});
 			},
 			this

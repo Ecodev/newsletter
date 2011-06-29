@@ -3,7 +3,7 @@ Ext.namespace('Ext.ux.TYPO3.Newsletter.Link');
  * A Store for the link model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.Link.Store = function() {
+Ext.ux.TYPO3.Newsletter.Store.Link = function() {
 	
 	linkStore = null;
 	

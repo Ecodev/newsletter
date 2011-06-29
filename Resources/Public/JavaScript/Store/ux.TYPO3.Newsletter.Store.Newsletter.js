@@ -3,7 +3,7 @@ Ext.namespace('Ext.ux.TYPO3.Newsletter.Newsletter');
  * A Store for the movie model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.Newsletter.Store = function() {
+Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 	
 	newsletterStore = null;
 	

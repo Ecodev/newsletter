@@ -3,7 +3,7 @@ Ext.namespace('Ext.ux.TYPO3.Newsletter.SelectedNewsletter');
  * A Store for the selectedNewsletter model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.SelectedNewsletter.Store = function() {
+Ext.ux.TYPO3.Newsletter.Store.SelectedNewsletter = function() {
 	
 	selectedNewsletterStore = null;
 	

@@ -35,9 +35,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newslette
 				Ext.ux.TYPO3.Newsletter.Module.contentArea.doLayout();
 			}
 
-			// temporary line: makes the loading message disappear
-			Ext.ux.TYPO3.Newsletter.Module.Application.fireEvent('Ext.ux.TYPO3.Newsletter.Module.afterbusy');
-
 			// Defines the menu as loaded
 			this.getMenuItem(this.moduleName).isLoaded = true;
 			
