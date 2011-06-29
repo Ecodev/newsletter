@@ -86,6 +86,36 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
+	/**
+	 * Displays the newsletter used as model for plannification
+	 *
+	 * @return string The rendered list view
+	 */
+	public function listPlannedAction() {
+		$newsletter = $this->newsletterRepository->getLatest($this->id);
+		if (!$newsletter)
+		{
+			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
+		}
+		
+		$this->view->setVariablesToRender(array('total', 'data', 'success'));
+		
+		// We use the usual configuration with the validationContent added
+		$conf = self::resolveJsonViewConfiguration();
+		$conf['_only'][]= 'validatedContent';
+		$conf['_descend']['validatedContent']= array('_only' => array('errors', 'warnings', 'infos'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => $conf
+			)
+		));
+		
+		$this->view->assign('total', 1);
+		$this->view->assign('data', array($newsletter));
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+	}
+	
 		
 	/**
 	 * Displays a single Newsletter

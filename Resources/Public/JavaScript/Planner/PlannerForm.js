@@ -1,7 +1,7 @@
 Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
 
-    // turn on validation errors beside the field globally
-    Ext.form.Field.prototype.msgTarget = 'side';
+// turn on validation errors beside the field globally
+Ext.form.Field.prototype.msgTarget = 'side';
 	
 Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 
@@ -9,33 +9,35 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 		var config = {
 			title: 'My newsletter form',
 			height: 700,
-//			standardSubmit: true,
+			//			standardSubmit: true,
 			clientValidation: false,
-			method: 'GET',
-
-			baseParams: {
-				pid: 50, // TODO: TYPO3.Devlog.Data.Parameters.pid,
-				M: 'web_NewsletterTxNewsletterM1',
-				'tx_newsletter_web_newslettertxnewsletterm1[controller]': 'Statistic',
-				'tx_newsletter_web_newslettertxnewsletterm1[action]': 'list',
-				'tx_newsletter_web_newslettertxnewsletterm1[format]': 'json',
-				'tx_newsletter_web_newslettertxnewsletterm1[pid]': 50 // TODO: TYPO3.Devlog.Data.Parameters.pid
-			},
-			proxy: new Ext.data.HttpProxy({
-				method: 'GET',
-				url: '/typo3/mod.php'
-			}),
-			url: '/typo3/mod.php',
 
 			items: [
 			{
-				xtype: 'tabpanel', 
+				xtype: 'tabpanel',
+				activeTab: 0,
 				items : [
 				{
+					height: 500,
 					// Fieldset in Column 1
 					xtype:'fieldset',
-					columnWidth: 0.5,
-					title: 'Status'
+					title: 'Status',
+	
+					items:[{
+						height: 500,
+						xtype: 'dataview',
+						store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_PlannedNewsletter'),
+						emptyText: 'No text to display',
+						tpl: new Ext.XTemplate(
+							'<tpl for=".">',
+							'<div>',
+							'<h2>Errors</h2>{errors}',
+							'<h2>Warnings</h2>{warnings}',
+							'<h2>Infos</h2>{infos}',
+							'</div>',
+							'</tpl>'
+							)
+					}]
 				},
 
 				{
@@ -238,7 +240,9 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 		var fp = this.ownerCt.ownerCt,
 		form = fp.getForm();
 		console.log(form);
-		form.submit({clientValidation: false});
+		form.submit({
+			clientValidation: false
+		});
 		console.log(this.url);
 		return; 
 				
@@ -246,20 +250,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			url:this.url,
 			scope:this
 		});
-	}, // eo function submit
+	} // eo function submit
 
-	onRender: function() {		
-		Ext.ux.TYPO3.Newsletter.Module.PlannerForm.superclass.onRender.apply(this, arguments);
-
-		Ext.apply(this.getForm(),{
-			api: {
-				load: Ext.ux.TYPO3.Newsletter.Remote.getFormData,
-				submit: Ext.ux.TYPO3.Newsletter.Remote.getFormData
-			},
-			paramsAsHash: false
-
-		}); 
-	//	this.form.load();
-	}
 });
 Ext.reg('Ext.ux.TYPO3.Newsletter.Module.PlannerForm', Ext.ux.TYPO3.Newsletter.Module.PlannerForm);

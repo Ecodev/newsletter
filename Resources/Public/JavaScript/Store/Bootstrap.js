@@ -19,6 +19,7 @@ Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.
 	initStore: function() {
 		Ext.ux.TYPO3.Newsletter.Store.Newsletter.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.SelectedNewsletter.initialize();
+		Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.Email.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.Link.initialize();
 		
