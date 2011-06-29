@@ -2,10 +2,6 @@
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
-
-// ExtDirect API
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['Ext.ux.TYPO3.Newsletter.Remote'] = 'EXT:newsletter/class.tx_newsletter_remote.php:tx_newsletter_remote';
-
    
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Mailer'] = 'TYPO3 CMS - newsletter extension';
 if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Precedence'])) $TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Precedence'] = 'bulk';
