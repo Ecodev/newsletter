@@ -127,6 +127,7 @@
 			<label index="sent">sent</label>
 			<label index="not_sent">not yet sent</label>
 			<label index="started">Started on</label>
+			<label index="planned_to_be_sent_on">Planned to be sent on</label>
 			<label index="ended">Ended on</label>
 			<label index="percentage_of_opened">% of opened</label>
 			<label index="number_of_opened"># of opened</label>
