@@ -15,11 +15,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.Cont
 
 	initComponent: function() {
 		var config = {
-			layout:'fit',
-			width: 'auto',
-			layoutConfig: {
-				columns: 1
-			},
+			layout: 'fit',
 			items: [
 				{
 					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid',

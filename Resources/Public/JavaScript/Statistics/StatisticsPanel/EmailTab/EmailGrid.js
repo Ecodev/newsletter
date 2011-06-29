@@ -16,6 +16,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 	initComponent: function() {
 
 		var config = {
+			height: 400,
+			loadMask: true,
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
 
@@ -61,9 +63,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 					sortable: true,
 					renderer: this._renderPreview
 				},
-			],
-
-			height: 300
+			]
 		};
 
 		Ext.apply(this, config);

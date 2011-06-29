@@ -16,14 +16,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 	initComponent: function() {
 		var config = {
 			items: [
-				{
-					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu',
-					ref: 'newsletterListMenu'
-				},
-				{
-					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel',
-					ref: 'statisticsPanel'
-				}
+			{
+				xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu',
+				ref: 'newsletterListMenu'
+			},
+			{
+				xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel',
+				ref: 'statisticsPanel'
+			}
 			]
 		};
 		Ext.apply(this, config);

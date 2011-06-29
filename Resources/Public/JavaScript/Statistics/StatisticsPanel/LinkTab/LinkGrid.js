@@ -15,6 +15,9 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend
 
 	initComponent: function() {
 		var config = {
+			height: 400,
+			loadMask: true,
+			
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
 
@@ -48,9 +51,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.LinkGrid = Ext.extend
 					width: 600,
 					renderer: this._renderUrl
 				}
-			],
-
-			height: 500
+			]
 		}; // eo config object
 
 		Ext.apply(this, config);

@@ -15,7 +15,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 
 	initComponent: function() {
 		var config = {
-			layout:'table',
+			layout:	'fit',
 			layoutConfig: {
 				columns: 2
 			},

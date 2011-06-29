@@ -17,13 +17,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 		
 		var config = {
 			activeTab: 0,
-//			hideBorders: true,
-//			hideLabel: true,
-//			bodyBorder: false,
 			border: false,
-			defaults: {
-				autoHeight: true
-			},
 			items: this._getMenuItems()
 		};
 		Ext.apply(this, config);
