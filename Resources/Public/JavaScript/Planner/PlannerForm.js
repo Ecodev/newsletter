@@ -11,11 +11,11 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			height: 700,
 			//			standardSubmit: true,
 			clientValidation: false,
-
+			
 			items: [
 			{
 				xtype: 'tabpanel',
-				activeTab: 0,
+				activeTab: 1,
 				items : [
 				{
 					height: 500,
@@ -63,12 +63,12 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 						[
 						{
 							fieldLabel: 'Name',
-							name: 'username',
+							name: 'senderName',
 							allowBlank:false
 						},
 						{
-							fieldLabel: 'Address',
-							name: 'sender_email',
+							fieldLabel: 'Email address',
+							name: 'senderEmail',
 							allowBlank:false
 						}
 						]
@@ -110,7 +110,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 						title: 'Advanced settings',
 						collapsible: true,
 						titleCollapse: true,
-						collapsed: true, // fieldset initially collapsed
+						//collapsed: true, // fieldset initially collapsed
 						autoHeight:true,
 						defaults: {
 							anchor: '-20'  // leave room for error icon
@@ -122,53 +122,73 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 						{
 							xtype: 'combo',
 							fieldLabel: 'Bounce account',
-							name: 'bounce',
-							allowBlank:false
+							name: 'uidBounceAccount',
+							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_BounceAccount'),
+							displayField: 'fullName',
+							valueField: '__identity',
+							mode: 'local',
+							forceSelection: true,
+							triggerAction: 'all',
+							selectOnFocus: true,
+							autoSelect: true,
+							typeAhead: false
 						},
 						{
 							xtype: 'combo',
 							fieldLabel: 'Plain text method',
-							name: 'plain_text',
-							allowBlank:false
+							name: 'plainConverter',
+							allowBlank:false,
+							store: new Ext.data.ArrayStore({
+								idIndex: 0,
+								fields: ['value', 'name'],
+								data: [
+									['Tx_Newsletter_Domain_Model_PlainConverter_Builtin', Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_plain_converter_builtin],
+									['Tx_Newsletter_Domain_Model_PlainConverter_Template', Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_plain_converter_template],
+									['Tx_Newsletter_Domain_Model_PlainConverter_Lynx', Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_plain_converter_lynx]
+								]
+							}),
+							value: 0,
+							mode:'local',
+							forceSelection:true,
+							triggerAction : 'all',
+							valueField: 'value',
+							displayField: 'name'
 						},
 						{
 							xtype: 'combo',
 							fieldLabel: 'Repeat periodically',
-							name: 'periodicity',
-							store:new Ext.data.SimpleStore({
-								id:0,
-								fields:['choice', 'periodicity'],
-								data:[
-								["0", "Never"],
-								["1", "One day"],
-								["2", "One week"],
-								["3", "Two weeks"],
-								["4", "One month"],
-								["5", "Three months"],
-								["6", "Six months"],
-								["7", "One year"]
+							name: 'repetition',
+							store: new Ext.data.ArrayStore({
+								idIndex: 0,
+								fields: ['value', 'name'],
+								data: [
+									[0, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_none],
+									[1, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_daily],
+									[2, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_weekly],
+									[3, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_biweekly],
+									[4, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_monthly],
+									[5, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_quarterly],
+									[6, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_semiyearly],
+									[7, Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition_yearly]
 								]
 							}),
+							value: 0,
 							mode:'local',
-							disableKeyFilter : true,
-							allowBlank: false,
 							forceSelection:true,
-							valueField:'choice',
-							displayField:'periodicity',
-							value:'0'
+							triggerAction : 'all',
+							valueField: 'value',
+							displayField: 'name'
 
 						},
 						{
 							xtype: 'checkbox',
 							fieldLabel: 'Detect opened emails',
-							name: 'sender_email',
-							allowBlank:false	            
+							name: 'injectOpenSpy'           
 						},
 						{
 							xtype: 'checkbox',
 							fieldLabel: 'Detect clicked links',
-							name: 'sender_email',
-							allowBlank:false	            
+							name: 'injectLinksSpy'          
 						}
 						]
 					}
@@ -202,11 +222,13 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 						items: [
 						{
 							xtype: 'datepicker',
-							title: 'Date to send'
+							title: 'Date to send',
+							name: 'beginTime'
 						},
 						{
 							xtype: 'timefield',
-							title: 'Time to send'
+							title: 'Time to send',
+							name: 'beginTime'
 						}
 						]
 					}
@@ -216,12 +238,13 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			}
 			],
 
-			buttons: [{
-				text: 'Submit',
-				handler: this.submit
 
-			}]
-
+			listeners: 
+			{
+				'afterrender': function(formPanel){
+					formPanel.getForm().doAction('directload');
+				}
+			}
 		};
 
 		Ext.apply(this, config);
@@ -250,7 +273,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			url:this.url,
 			scope:this
 		});
-	} // eo function submit
-
+	}
+	
 });
 Ext.reg('Ext.ux.TYPO3.Newsletter.Module.PlannerForm', Ext.ux.TYPO3.Newsletter.Module.PlannerForm);

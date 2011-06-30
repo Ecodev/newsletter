@@ -19,13 +19,11 @@ Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 					fields:[
 					    {name: '__identity', type: 'int'},
 						{name: 'beginTime', type: 'date'},
-						//{name: 'bounceAccount', type: 'string'},
 						{name: 'domain', type: 'string'},
 						{name: 'endTime', type: 'date'},
 						{name: 'injectLinksSpy', type: 'boolean'},
 						{name: 'injectOpenSpy', type: 'boolean'},
 						{name: 'isTest', type: 'boolean'},
-						//{name: 'plainConverter', type: 'string'},
 						{name: 'plannedTime', type: 'date'},
 						{name: 'repetition', type: 'int'},
 						{name: 'senderEmail', type: 'string'},

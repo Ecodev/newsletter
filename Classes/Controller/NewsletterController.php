@@ -99,19 +99,12 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		}
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success'));
-		
-		// We use the usual configuration with the validationContent added
-		$conf = self::resolveJsonViewConfiguration();
-		$conf['_only'][]= 'validatedContent';
-		$conf['_descend']['validatedContent']= array('_only' => array('errors', 'warnings', 'infos'));
 		$this->view->setConfiguration(array(
-			'data' => array(
-				'_descendAll' => $conf
-			)
+			'data' => self::resolvePlannedJsonViewConfiguration()
 		));
 		
 		$this->view->assign('total', 1);
-		$this->view->assign('data', array($newsletter));
+		$this->view->assign('data', $newsletter);
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
@@ -181,7 +174,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	}
 	
 		
-			/**
+	/**
 	 * Deletes an existing Newsletter
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter the Newsletter to be deleted
@@ -226,6 +219,39 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						'beginTime' => array(),
 						'endTime' => array(),
 						'plannedTime' => array(),
+						)
+				);
+	}
+	
+	static public function resolvePlannedJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array(
+						'beginTime',
+						'uidBounceAccount',
+						'domain',
+						'endTime',
+						'injectLinksSpy',
+						'injectOpenSpy',
+						'isTest',
+						'plainConverter',
+						'plannedTime',
+						'repetition',
+						'senderEmail',
+						'senderName',
+						'title',
+						'validatedContent',
+					),
+					'_descend' => array(
+						'beginTime' => array(),
+						'endTime' => array(),
+						'plannedTime' => array(),
+						'validatedContent' => array(
+							'_only'=> array(
+								'errors',
+								'warnings', 
+								'infos')
+							),
 						)
 				);
 	}

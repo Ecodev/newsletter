@@ -465,6 +465,15 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 
 	/**
+	 * Getter for bounceAccount's UID
+	 *
+	 * @return integer uidBounceAccount
+	 */
+	public function getUidBounceAccount() {
+		return $this->getBounceAccount()->getUid();
+	}
+	
+	/**
 	 * Getter for bounceAccount
 	 *
 	 * @return Tx_Newsletter_Domain_Model_BounceAccount bounceAccount

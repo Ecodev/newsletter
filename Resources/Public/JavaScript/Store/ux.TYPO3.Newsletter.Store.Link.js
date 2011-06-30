@@ -40,9 +40,6 @@ Ext.ux.TYPO3.Newsletter.Store.Link = function() {
 					destroy: ['data']
 				}
 			});
-			linkStore.on('beforeload', function(store){
-				store.setBaseParam('toto', 'valueeee');
-			});
 		}
 	}
 	/**

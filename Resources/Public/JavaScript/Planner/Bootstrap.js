@@ -28,7 +28,11 @@ Ext.ux.TYPO3.Newsletter.Planner.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newslette
 			if (!component) {
 				component = Ext.ComponentMgr.create({
 					xtype: 'Ext.ux.TYPO3.Newsletter.Module.PlannerForm',
-					ref: 'plannerForm'
+					ref: 'plannerForm',
+					api: {
+						load: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.listPlannedAction,
+						submit: Ext.ux.TYPO3.Newsletter.Remote.getFormData
+					}
 				});
 
 				Ext.ux.TYPO3.Newsletter.Module.contentArea.add(component);

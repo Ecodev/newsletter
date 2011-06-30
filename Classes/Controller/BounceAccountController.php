@@ -65,7 +65,19 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 			}
 		}
 		
-		$this->view->assign('bounceAccounts', $bounceAccounts);
+		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' => array(
+				'_descendAll' => self::resolveJsonViewConfiguration()
+			)
+		));
+		
+		$this->flashMessages->add('Loaded BounceAccounts from Server side.','BounceAccounts loaded successfully', t3lib_FlashMessage::NOTICE);
+		
+		$this->view->assign('total', $bounceAccounts->count());
+		$this->view->assign('data', $bounceAccounts);
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 		
@@ -146,5 +158,22 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 	}
 	
 
+	/**
+	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
+	 * a BounceAccount record.
+	 * 
+	 * @return array
+	 */
+	static public function resolveJsonViewConfiguration() {
+		return array(
+					'_exposeObjectIdentifier' => TRUE,
+					'_only' => array(
+						'email',
+						'server',
+						'protocol',
+						'username',
+					)
+				);
+	}
 }
 ?>
