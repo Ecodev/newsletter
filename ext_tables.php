@@ -19,6 +19,7 @@ if (TYPO3_MODE == 'BE')	{
 			'Email' => 'list, show, new, create, edit, update, delete',
 			'Link' => 'list, show, new, create, edit, update, delete',
 			'BounceAccount' => 'list, show, new, create, edit, update, delete',
+			'RecipientList' => 'list, show, new, create, edit, update, delete',
 		),
 		array(
 			'access' => 'user,group',

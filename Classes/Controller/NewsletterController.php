@@ -229,6 +229,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 					'_only' => array(
 						'beginTime',
 						'uidBounceAccount',
+						'uidRecipientList',
 						'domain',
 						'endTime',
 						'injectLinksSpy',

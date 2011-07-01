@@ -15,7 +15,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 			items: [
 			{
 				xtype: 'tabpanel',
-				activeTab: 1,
+				activeTab: 2,
 				items : [
 				{
 					height: 500,
@@ -41,7 +41,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 				},
 
 				{
-					title: 'Tests & Settings',
+					title: 'Settings',
 					xtype: 'panel',
 					height: 700,
 					items: 
@@ -70,36 +70,6 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 							fieldLabel: 'Email address',
 							name: 'senderEmail',
 							allowBlank:false
-						}
-						]
-					},
-					{
-						// Fieldset in Column 1
-						xtype:'fieldset',
-						columnWidth: 0.5,
-						title: 'Testing',
-						collapsible: true,
-						titleCollapse: true,
-						collapsed: true, // fieldset initially collapsed
-						autoHeight:true,
-						defaults: {
-							anchor: '-20'  // leave room for error icon
-						},
-
-						defaultType: 'textfield',
-						items: [{
-							xtype: 'panel',
-							anchor: '100%',
-							title: 'list of recipients ...',
-							frame: true,
-							height: 100
-						},
-						{
-							xtype: 'button',
-							text: 'Sent test emails',
-							handler: function(){
-								alert("email just sent :-)");
-							}
 						}
 						]
 					},
@@ -177,7 +147,8 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 							forceSelection:true,
 							triggerAction : 'all',
 							valueField: 'value',
-							displayField: 'name'
+							displayField: 'name',
+							allowBlank: false
 
 						},
 						{
@@ -198,7 +169,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 				,{
 					// Fieldset in Column 2 - Panel inside
 					xtype:'panel',
-					title: 'Planning', // title, header, or checkboxToggle
+					title: 'Sending', // title, header, or checkboxToggle
 					header: false, // Do not want double title in tab + panel
 					// creates fieldset header
 					autoHeight:true,
@@ -206,29 +177,64 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 					items :[
 					{
 						xtype: 'fieldset',
-						title: 'Recipients', 
-						items: [{
-							xtype: 'panel',
-							anchor: '100%',
-							title: 'list of recipients ...',
-							frame: true,
-							height: 100
-						}]
-					}
-					,
-					{
-						xtype: 'fieldset',
-						title: 'Time to send',
+						title: 'Recipients',
+						defaults: {
+							anchor: '-20'  // leave room for error icon
+						},
+
 						items: [
 						{
-							xtype: 'datepicker',
-							title: 'Date to send',
-							name: 'beginTime'
+							xtype: 'combo',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_recipient_list,
+							name: 'uidRecipientList',
+							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_RecipientList'),
+							displayField: 'fullName',
+							valueField: '__identity',
+							mode: 'local',
+							forceSelection: true,
+							triggerAction: 'all',
+							selectOnFocus: true,
+							autoSelect: true,
+							typeAhead: false,
+							allowBlank: false
+						}]
+					},
+					
+					{
+						// Fieldset in Column 1
+						xtype:'fieldset',
+						title: 'Testing',
+						autoHeight:true,
+						items: [
+						{
+							xtype: 'displayfield',
+							html: '<p>Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.</p><p>Also test newsletters will be ignored by default in statistics.</p>'
 						},
 						{
-							xtype: 'timefield',
-							title: 'Time to send',
-							name: 'beginTime'
+							xtype: 'button',
+							text: 'Sent test emails now',
+							handler: function(){
+								alert("tests email just sent :-)");
+							}
+						}
+						]
+					},
+					{
+						xtype: 'fieldset',
+						title: 'Planning',
+						items: [
+						{
+							xtype: 'xdatetime',
+							fieldLabel: 'Date to send',
+							name: 'plannedTime',
+							hiddenFormat: 'c'
+						},
+						{
+							xtype: 'button',
+							text: 'Add to queue',
+							handler: function(){
+								alert("added to queue :-)");
+							}
 						}
 						]
 					}

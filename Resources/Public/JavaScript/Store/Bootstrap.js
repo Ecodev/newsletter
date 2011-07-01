@@ -23,6 +23,7 @@ Ext.ux.TYPO3.Newsletter.Store.Bootstrap = Ext.apply(new Ext.ux.TYPO3.Newsletter.
 		Ext.ux.TYPO3.Newsletter.Store.Email.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.Link.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.BounceAccount.initialize();
+		Ext.ux.TYPO3.Newsletter.Store.RecipientList.initialize();
 		
 		// pie chart depends on SelectedNewsletter store so it must be initialized after it
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();

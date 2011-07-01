@@ -506,6 +506,20 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 	/**
+	 * Getter for recipientList's UID
+	 *
+	 * @return integer uidRecipientList
+	 */
+	public function getUidRecipientList() {
+		$recipientList = $this->getRecipientList();
+		if ($recipientList)
+			return $recipientList->getUid();
+		else
+			return null;
+	}
+	
+	
+	/**
 	 * Getter for recipientList
 	 *
 	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList

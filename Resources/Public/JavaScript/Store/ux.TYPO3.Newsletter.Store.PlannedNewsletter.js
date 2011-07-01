@@ -19,12 +19,10 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 					root:'data',
 					fields:[
 					    {name: '__identity', type: 'int'},
-						//{name: 'bounceAccount', type: 'string'},
 						{name: 'domain', type: 'string'},
 						{name: 'injectLinksSpy', type: 'boolean'},
 						{name: 'injectOpenSpy', type: 'boolean'},
 						{name: 'isTest', type: 'boolean'},
-						//{name: 'plainConverter', type: 'string'},
 						{name: 'plannedTime', type: 'date'},
 						{name: 'repetition', type: 'int'},
 						{name: 'senderEmail', type: 'string'},
