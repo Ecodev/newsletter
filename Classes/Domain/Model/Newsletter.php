@@ -470,7 +470,11 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return integer uidBounceAccount
 	 */
 	public function getUidBounceAccount() {
-		return $this->getBounceAccount()->getUid();
+		$bounceAccount = $this->getBounceAccount();
+		if ($bounceAccount)
+			return $bounceAccount->getUid();
+		else
+			return null;
 	}
 	
 	/**
