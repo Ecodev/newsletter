@@ -59,13 +59,6 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	public function listAction($uidNewsletter) {
 		$links = $this->linkRepository->findAllByNewsletter($uidNewsletter);
 		
-		if(count($links) < 1){
-			$settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-			if(empty($settings['persistence']['storagePid'])){
-				$this->flashMessageContainer->add('No storagePid configured!');
-			}
-		}
-		
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' => array(
