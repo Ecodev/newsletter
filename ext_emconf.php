@@ -18,7 +18,6 @@ $EM_CONF[$_EXTKEY] = array(
 	'author_email' => 'adrien.crivelli@ecodev.ch, fabien.udriot@ecodev.ch, info@newsletter.dk',
 	'author_company' => 'Ecodev, Casalogic A/S',
 	'shy' => '',
-	'dependencies' => 'cms,extbase,fluid',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => 'mod2,cli,web',
