@@ -20,8 +20,10 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 		// TODO: It should not be necessary to manually select the first item after the store is loaded,
 		// but somehow the flag autoSelect does not work, even if the store is load *after* the combo is rendered
 		newsletterStore.on('load', function(store, records, options) { 
-			thisNewsletterListMenu.setValue(records[0].data.__identity);
-			thisNewsletterListMenu.fireEvent('select', thisNewsletterListMenu, records[0], 0);
+			if (records.length > 0) {
+				thisNewsletterListMenu.setValue(records[0].data.__identity);
+				thisNewsletterListMenu.fireEvent('select', thisNewsletterListMenu, records[0], 0);
+			}
 		});
 		
 		var config = {
