@@ -1,4 +1,4 @@
-Ext.namespace('Ext.ux.TYPO3.Newsletter.SelectedNewsletter'); 
+Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
 /**
  * A Store for the selectedNewsletter model using ExtDirect to communicate with the
  * server side extbase framework.

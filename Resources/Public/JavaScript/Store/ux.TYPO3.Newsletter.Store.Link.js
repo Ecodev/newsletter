@@ -1,4 +1,4 @@
-Ext.namespace('Ext.ux.TYPO3.Newsletter.Link'); 
+Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
 /**
  * A Store for the link model using ExtDirect to communicate with the
  * server side extbase framework.

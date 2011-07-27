@@ -7,7 +7,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
 		var config = {
-			title: 'My newsletter form',
+			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_button,
 			height: 700,
 			//			standardSubmit: true,
 			clientValidation: false,

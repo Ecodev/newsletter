@@ -1,4 +1,4 @@
-Ext.namespace('Ext.ux.TYPO3.Newsletter.RecipientList'); 
+Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
 /**
  * A Store for the recipientList model using ExtDirect to communicate with the
  * server side extbase framework.

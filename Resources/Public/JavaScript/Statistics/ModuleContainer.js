@@ -15,6 +15,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
+			title: Ext.ux.TYPO3.Newsletter.Language.statistics_button,
 			items: [
 			{
 				xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu',

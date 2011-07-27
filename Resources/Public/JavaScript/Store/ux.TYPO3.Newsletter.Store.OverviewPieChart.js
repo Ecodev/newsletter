@@ -1,6 +1,6 @@
 "use strict";
 
-Ext.ns("Ext.ux.TYPO3.Newsletter.Store");
+Ext.ns('Ext.ux.TYPO3.Newsletter.Store');
 
 Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 

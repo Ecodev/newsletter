@@ -1,4 +1,4 @@
-Ext.namespace('Ext.ux.TYPO3.Newsletter.Email'); 
+Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
 /**
  * A Store for the email model using ExtDirect to communicate with the
  * server side extbase framework.

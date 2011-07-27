@@ -4,16 +4,14 @@ Newsletter style
 $Id: newsletter.css 48671 2011-06-13 15:13:44Z acrivelli $
 - - - - - - - - - - - - - - - - - - - - - */
 
-#t3-newsletter-menu .x-btn {
-	padding-right: 20px;
-}
-
 .t3-newsletter-button-planner {
-	background-image: url(../Icons/tx_newsletter.png) !important;
+	background: url(../Icons/tx_newsletter.png) 0 50% no-repeat !important;
+	padding-left: 20px !important;
 }
 
 .t3-newsletter-button-statistics {
-	background-image: url(../Icons/chart_bar.png) !important;
+	background: url(../Icons/chart_bar.png) 0 50% no-repeat !important;
+	padding-left: 20px !important;
 }
 
 #newsletterListMenu {
