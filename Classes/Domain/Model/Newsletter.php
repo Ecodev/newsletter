@@ -129,6 +129,16 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	protected $recipientList;
 
 	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		// Set default values for new newsletter
+		$this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
+		$this->setRepetition(0);
+		$this->setPlannedTime(new DateTime());
+	}
+
+	/**
 	 * Setter for plannedTime
 	 *
 	 * @param DateTime $plannedTime When the newsletter will start sending emails
