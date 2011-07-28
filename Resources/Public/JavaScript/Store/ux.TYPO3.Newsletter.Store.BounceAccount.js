@@ -1,11 +1,14 @@
+"use strict";
+
 Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
+
 /**
  * A Store for the bounceAccount model using ExtDirect to communicate with the
  * server side extbase framework.
  */
 Ext.ux.TYPO3.Newsletter.Store.BounceAccount = function() {
 	
-	bounceAccountStore = null;
+	var bounceAccountStore = null;
 	
 	var initialize = function() {
 		if (bounceAccountStore == null) {

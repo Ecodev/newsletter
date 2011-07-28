@@ -1,9 +1,11 @@
-Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
+"use strict";
+
+Ext.ns("Ext.ux.TYPO3.Newsletter.Planner");
 
 // turn on validation errors beside the field globally
 Ext.form.Field.prototype.msgTarget = 'side';
 	
-Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
+Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
 		var config = {
@@ -254,7 +256,7 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 		};
 
 		Ext.apply(this, config);
-		Ext.ux.TYPO3.Newsletter.Module.PlannerForm.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Planner.Planner.superclass.initComponent.call(this);
 	},
 
 
@@ -282,4 +284,4 @@ Ext.ux.TYPO3.Newsletter.Module.PlannerForm = Ext.extend(Ext.form.FormPanel, {
 	}
 	
 });
-Ext.reg('Ext.ux.TYPO3.Newsletter.Module.PlannerForm', Ext.ux.TYPO3.Newsletter.Module.PlannerForm);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Planner.Planner', Ext.ux.TYPO3.Newsletter.Planner.Planner);

@@ -1,8 +1,10 @@
+"use strict";
+
 Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Module
- * @namespace Ext.ux.TYPO3.Newsletter
+ * @class Ext.ux.TYPO3.Newsletter.Module.Application
+ * @namespace Ext.ux.TYPO3.Newsletter.Module
  * @extends Ext.util.Observable
  *
  * The main entry point which controls the lifecycle of the application.
@@ -41,7 +43,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 				xtype: 'tabpanel',
 				activeTab: 0,
 				items: [{
-					xtype: 'Ext.ux.TYPO3.Newsletter.Module.PlannerForm',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Planner.Planner',
 					iconCls: 't3-newsletter-button-planner',
 					api: {
 						load: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.listPlannedAction,
@@ -49,7 +51,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 					}
 
 				}, {
-					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer',
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.Statistics',
 					iconCls: 't3-newsletter-button-statistics'
 				}]
 			}]

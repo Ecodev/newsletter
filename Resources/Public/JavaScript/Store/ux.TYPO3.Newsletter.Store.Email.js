@@ -1,11 +1,14 @@
+"use strict";
+
 Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
+
 /**
  * A Store for the email model using ExtDirect to communicate with the
  * server side extbase framework.
  */
 Ext.ux.TYPO3.Newsletter.Store.Email = function() {
 	
-	emailStore = null;
+	var emailStore = null;
 	
 	var initialize = function() {
 		if (emailStore == null) {

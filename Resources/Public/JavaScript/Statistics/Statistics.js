@@ -3,7 +3,7 @@
 Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer
+ * @class Ext.ux.TYPO3.Newsletter.Statistics.Statistics
  * @namespace Ext.ux.TYPO3.Newsletter.Statistics
  * @extends Ext.Container
  *
@@ -11,7 +11,7 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
  *
  * $Id$
  */
-Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
+Ext.ux.TYPO3.Newsletter.Statistics.Statistics = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
@@ -28,8 +28,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer = Ext.extend(Ext.Container, {
 			]
 		};
 		Ext.apply(this, config);
-		Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer.superclass.initComponent.call(this);
+		Ext.ux.TYPO3.Newsletter.Statistics.Statistics.superclass.initComponent.call(this);
 	}
 });
 
-Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer', Ext.ux.TYPO3.Newsletter.Statistics.ModuleContainer);
+Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.Statistics', Ext.ux.TYPO3.Newsletter.Statistics.Statistics);

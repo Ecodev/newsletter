@@ -1,15 +1,18 @@
+"use strict";
+
 Ext.ns('Ext.ux.TYPO3.Newsletter.Store');
+
 /**
  * A Store for the plannedNewsletter model using ExtDirect to communicate with the
  * server side extbase framework.
  */
 Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 	
-	plannedNewsletterStore = null;
+	var plannedNewsletterStore = null;
 	
 	var initialize = function() {
 		if (plannedNewsletterStore == null) {
-			newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
+			var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
 			plannedNewsletterStore = new Ext.data.DirectStore({
 				storeId: 'Tx_Newsletter_Domain_Model_PlannedNewsletter',
 				reader: new Ext.data.JsonReader({

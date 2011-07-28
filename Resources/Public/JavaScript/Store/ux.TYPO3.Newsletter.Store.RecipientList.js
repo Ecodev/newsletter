@@ -1,11 +1,14 @@
+"use strict";
+
 Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
+
 /**
  * A Store for the recipientList model using ExtDirect to communicate with the
  * server side extbase framework.
  */
 Ext.ux.TYPO3.Newsletter.Store.RecipientList = function() {
 	
-	recipientListStore = null;
+	var recipientListStore = null;
 	
 	var initialize = function() {
 		if (recipientListStore == null) {

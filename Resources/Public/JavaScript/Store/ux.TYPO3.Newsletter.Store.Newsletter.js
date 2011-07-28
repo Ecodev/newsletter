@@ -1,11 +1,14 @@
+"use strict";
+
 Ext.ns('Ext.ux.TYPO3.Newsletter.Store'); 
+
 /**
  * A Store for the movie model using ExtDirect to communicate with the
  * server side extbase framework.
  */
 Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 	
-	newsletterStore = null;
+	var newsletterStore = null;
 	
 	var initialize = function() {
 		if (newsletterStore == null) {
