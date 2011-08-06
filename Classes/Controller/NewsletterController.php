@@ -48,10 +48,10 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
 
-		// Set default value to id
-		$this->id = filter_var(t3lib_div::_GET('id'), FILTER_VALIDATE_INT, array("min_range"=> 0));
-		if (!$this->id) {
-			$this->id = 0;
+		// Set default value of PID to know where to store/look for newsletter
+		$this->pid = filter_var(t3lib_div::_GET('id'), FILTER_VALIDATE_INT, array("min_range"=> 0));
+		if (!$this->pid) {
+			$this->pid = 0;
 		}
 		parent::initializeAction();
 	}
@@ -62,7 +62,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @return string The rendered list view
 	 */
 	public function listAction() {
-		$newsletters = $this->newsletterRepository->findAllByPid($this->id);
+		$newsletters = $this->newsletterRepository->findAllByPid($this->pid);
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
@@ -85,7 +85,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @return string The rendered list view
 	 */
 	public function listPlannedAction() {
-		$newsletter = $this->newsletterRepository->getLatest($this->id);
+		$newsletter = $this->newsletterRepository->getLatest($this->pid);
 		if (!$newsletter)
 		{
 			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
@@ -131,14 +131,23 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
 	 * @return void
+	 * @dontverifyrequesthash
 	 */
-	public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter) {
+	public function createAction( $newNewsletter=null) {
 		$this->newsletterRepository->add($newNewsletter);
-		$this->flashMessageContainer->add('Your new Newsletter was created.');
+
+		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
+		$this->view->setConfiguration(array(
+			'data' =>  self::resolveJsonViewConfiguration()
+		));
 		
-			
+		$this->newsletterRepository->add($newNewsletter);
+		$this->persistenceManager->persistAll();
+		$this->flashMessages->add('Newsletter has been created','Newsletter added', t3lib_FlashMessage::OK);
 		
-		$this->redirect('list');
+		$this->view->assign('success',TRUE);
+		$this->view->assign('data',$newNewsletter);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
 		
@@ -189,6 +198,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		return array(
 					'_exposeObjectIdentifier' => TRUE,
 					'_only' => array(
+						'pid',
 						'beginTime',
 						'bounceAccount',
 						'domain',
@@ -220,6 +230,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		return array(
 					'_exposeObjectIdentifier' => TRUE,
 					'_only' => array(
+						'pid',
 						'beginTime',
 						'uidBounceAccount',
 						'uidRecipientList',

@@ -47,7 +47,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 					iconCls: 't3-newsletter-button-planner',
 					api: {
 						load: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.listPlannedAction,
-						submit: Ext.ux.TYPO3.Newsletter.Remote.getFormData
+						submit: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.createAction
 					}
 
 				}, {

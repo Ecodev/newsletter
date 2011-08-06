@@ -12,7 +12,6 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 	
 	var initialize = function() {
 		if (plannedNewsletterStore == null) {
-			var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
 			plannedNewsletterStore = new Ext.data.DirectStore({
 				storeId: 'Tx_Newsletter_Domain_Model_PlannedNewsletter',
 				reader: new Ext.data.JsonReader({

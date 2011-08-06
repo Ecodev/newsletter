@@ -8,6 +8,25 @@ Ext.form.Field.prototype.msgTarget = 'side';
 Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 
 	initComponent: function() {
+		
+		function createNewsletter(button, isTest) {
+			// Fetch form values
+			var form = button.findParentByType('form').getForm();
+			var values = form.getFieldValues();
+
+			// Tweak values for for newsletter testing
+			values.isTest = isTest;
+			if (isTest) {
+				values.plannedTime = new Date();
+			}
+
+			// Write to the store who will make an ajax request via ExtDirect
+			var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
+			var newsletter = new newsletterStore.recordType(values);
+			newsletterStore.insert(0, newsletter);
+			console.log("newsletter created :-)");
+		}
+		
 		var config = {
 			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_button,
 			height: 700,
@@ -63,6 +82,10 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						defaultType: 'textfield',
 						items: 
 						[
+						{
+							xtype: 'hidden',
+							name: 'pid'
+						},
 						{
 							fieldLabel: 'Name',
 							name: 'senderName',
@@ -215,8 +238,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						{
 							xtype: 'button',
 							text: 'Sent test emails now',
-							handler: function(){
-								alert("tests email just sent :-)");
+							handler: function(button, event) {
+								createNewsletter(button, true);
 							}
 						}
 						]
@@ -227,15 +250,15 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						items: [
 						{
 							xtype: 'xdatetime',
-							fieldLabel: 'Date to send',
+							fieldLabel: 'Date to start sending',
 							name: 'plannedTime',
 							hiddenFormat: 'c'
 						},
 						{
 							xtype: 'button',
 							text: 'Add to queue',
-							handler: function(){
-								alert("added to queue :-)");
+							handler: function(button, event) {
+								createNewsletter(button, false);
 							}
 						}
 						]

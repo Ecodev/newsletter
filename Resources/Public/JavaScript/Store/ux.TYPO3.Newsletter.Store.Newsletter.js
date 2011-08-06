@@ -21,6 +21,7 @@ Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 					root:'data',
 					fields:[
 					    {name: '__identity', type: 'int'},
+					    {name: 'pid', type: 'int'},
 						{name: 'beginTime', type: 'date'},
 						{name: 'domain', type: 'string'},
 						{name: 'endTime', type: 'date'},
