@@ -145,6 +145,11 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 
 			// Go on and run the queue
 			tx_newsletter_tools::runSpoolOne($newNewsletter);
+			$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
+		}
+		else
+		{
+			$this->flashMessages->add('Newsletter has been queued and will be sent soon.', 'Newsletter queued', t3lib_FlashMessage::OK);
 		}
 		
 		
@@ -153,10 +158,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			'data' =>  self::resolveJsonViewConfiguration()
 		));
 		
-		$this->flashMessages->add('Newsletter has been created','Newsletter added', t3lib_FlashMessage::OK);
-		
 		$this->view->assign('success',TRUE);
-		$this->view->assign('data',$newNewsletter);
+		$this->view->assign('data', $newNewsletter);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
