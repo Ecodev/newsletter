@@ -42,3 +42,11 @@ module.tx_newsletter {
 		layoutRootPath = {$module.tx_newsletter.view.layoutRootPath}
 	}
 }
+
+config.tx_extbase {
+	objects {
+		Tx_Extbase_Persistence_BackendInterface {
+			className = Tx_Newsletter_Persistence_BackendPidFriendly
+		}
+	}
+}

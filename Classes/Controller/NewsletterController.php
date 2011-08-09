@@ -134,8 +134,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @dontverifyrequesthash
 	 */
 	public function createAction( $newNewsletter=null) {
-		$this->newsletterRepository->add($newNewsletter);
-
 		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' =>  self::resolveJsonViewConfiguration()

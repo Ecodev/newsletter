@@ -36,5 +36,6 @@ return array(
 	'tx_newsletter_domain_model_plainconverter_builtin' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Builtin.php'),
 	'tx_newsletter_domain_model_plainconverter_template' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Template.php'),
 	'tx_newsletter_domain_model_plainconverter_lynx' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Lynx.php'),
+	'tx_newsletter_persistence_backendpidfriendly' => t3lib_extMgm::extPath('newsletter', '/Classes/Persistence/BackendPidFriendly.php'),
 );
 
