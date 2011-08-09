@@ -116,7 +116,7 @@ abstract class tx_newsletter_tools {
 		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
 		// Lock the newsletter by setting its begin_time
-		$begintime = time();
+		$begintime = new DateTime();
 		$newsletter->setBeginTime($begintime);
 		$newsletterRepository->updateNow($newsletter);
 
@@ -150,7 +150,7 @@ abstract class tx_newsletter_tools {
 		$newsletter->scheduleNextNewsletter();
 
 		// Unlock the newsletter by setting its end_time
-		$newsletter->setEndTime(time());
+		$newsletter->setEndTime(new DateTime());
 		$newsletterRepository->updateNow($newsletter);
 	}
 
@@ -266,7 +266,7 @@ abstract class tx_newsletter_tools {
 			$email = $emailRepository->findByUid($emailUid);
 
 			// Mark it as started sending
-			$email->setBeginTime(time());
+			$email->setBeginTime(new DateTime());
 			$emailRepository->updateNow($email);
 
 			/* For the page, this way we can support multiple pages in one spool session */
@@ -290,7 +290,7 @@ abstract class tx_newsletter_tools {
 			$mailers[$L]->send($email);
 
 			// Mark it as sent already
-			$email->setEndTime(time());
+			$email->setEndTime(new DateTime());
 			$emailRepository->updateNow($email);
 
 			$numberOfMails++;

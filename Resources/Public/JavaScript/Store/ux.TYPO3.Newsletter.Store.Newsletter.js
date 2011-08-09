@@ -33,6 +33,8 @@ Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 						{name: 'senderEmail', type: 'string'},
 						{name: 'senderName', type: 'string'},
 						{name: 'title', type: 'string'},
+						{name: 'uidBounceAccount', type: 'int'},
+						{name: 'uidRecipientList', type: 'int'},
 						{name: 'emailCount', type: 'int'},
 						{name: 'emailNotSentCount', type: 'int'},
 						{name: 'emailSentCount', type: 'int'},

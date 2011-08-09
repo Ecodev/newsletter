@@ -120,6 +120,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
 	 */
 	protected $bounceAccount;
+	
+	/**
+	 * UID of the bounce account. Only exist for ease of use with ExtJS
+	 * @var integer $uidBounceAccount
+	 */
+	protected $uidBounceAccount;
 
 	/**
 	 * recipientList
@@ -127,6 +133,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @var Tx_Newsletter_Domain_Model_RecipientList $recipientList
 	 */
 	protected $recipientList;
+
+	/**
+	 * UID of the bounce account. Only exist for ease of use with ExtJS
+	 * @var integer $uidRecipientList
+	 */
+	protected $uidRecipientList;
 
 	/**
 	 * Constructor
@@ -488,6 +500,18 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 	/**
+	 * Setter for bounceAccount's UID
+	 *
+	 * @param integer $uidBounceAccount
+	 * @return void
+	 */
+	public function setUidBounceAccount($uidBounceAccount = null) {
+		$bounceAccountRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+		$bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
+		$this->setBounceAccount($bounceAccount);
+	}
+	
+	/**
 	 * Getter for bounceAccount
 	 *
 	 * @return Tx_Newsletter_Domain_Model_BounceAccount bounceAccount
@@ -528,6 +552,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			return null;
 	}
 	
+	/**
+	 * Setter for recipientList's UID
+	 *
+	 * @param integer $uidRecipientList
+	 * @return void
+	 */
+	public function setUidRecipientList($uidRecipientList) {
+		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
+		$this->setRecipientList($recipientList);
+	}
 	
 	/**
 	 * Getter for recipientList
@@ -535,11 +570,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
 	 */
 	public function getRecipientListConcreteInstance() {
-		if (!$this->getRecipientList())
+		$recipientList = $this->getRecipientList();
+		if (!$recipientList)
 			return null;
-			
+		
 		// TODO cleanup instanciation process for recipientList, see as well self:setRecipientList, RecipientList::getTarget() and RecipientList::loadTarget()
-		return Tx_Newsletter_Domain_Model_RecipientList::loadTarget($this->getRecipientList()->getUid());
+		return Tx_Newsletter_Domain_Model_RecipientList::loadTarget($recipientList);
 	}
 	
 	/**

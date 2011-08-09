@@ -133,14 +133,26 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @return void
 	 * @dontverifyrequesthash
 	 */
-	public function createAction( $newNewsletter=null) {
+	public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter=null) {
+		$this->newsletterRepository->add($newNewsletter);
+		$this->persistenceManager->persistAll();
+		
+		// If it is test newsletter, send it immediately
+		if ($newNewsletter->getIsTest())
+		{
+			// Fill the spool
+			tx_newsletter_tools::createSpool($newNewsletter);
+
+			// Go on and run the queue
+			tx_newsletter_tools::runSpoolOne($newNewsletter);
+		}
+		
+		
 		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' =>  self::resolveJsonViewConfiguration()
 		));
 		
-		$this->newsletterRepository->add($newNewsletter);
-		$this->persistenceManager->persistAll();
 		$this->flashMessages->add('Newsletter has been created','Newsletter added', t3lib_FlashMessage::OK);
 		
 		$this->view->assign('success',TRUE);
