@@ -89,6 +89,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		if (!$newsletter)
 		{
 			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
+			$newsletter->setPid($this->pid);
 		}
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success'));
@@ -140,12 +141,17 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		// If it is test newsletter, send it immediately
 		if ($newNewsletter->getIsTest())
 		{
-			// Fill the spool
-			tx_newsletter_tools::createSpool($newNewsletter);
+			try {
+				// Fill the spool and run the queue
+				tx_newsletter_tools::createSpool($newNewsletter);
+				tx_newsletter_tools::runSpoolOne($newNewsletter);
 
-			// Go on and run the queue
-			tx_newsletter_tools::runSpoolOne($newNewsletter);
-			$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
+				$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
+			}
+			catch (Exception $exception)
+			{
+				$this->flashMessages->add($exception->getMessage(), 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
+			}
 		}
 		else
 		{
@@ -161,9 +167,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->view->assign('success',TRUE);
 		$this->view->assign('data', $newNewsletter);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
-	}
-	
-		
+	}	
 	
 	/**
 	 * Updates an existing Newsletter and forwards to the index action afterwards.

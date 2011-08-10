@@ -10,21 +10,36 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 	initComponent: function() {
 		
 		function createNewsletter(button, isTest) {
-			// Fetch form values
+			
+			// Valid the form
 			var form = button.findParentByType('form').getForm();
+			if (!form.isValid()) {
+				Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer.addMessage({
+					severity: 2,
+					message: 'Fix the invalid fields in the form and try again.',
+					title: 'Invalid form'});
+				
+				return; 
+			}
+			
+			// Tweak values for newsletter testing
 			var values = form.getFieldValues();
-
-			// Tweak values for for newsletter testing
 			values.isTest = isTest;
-			if (isTest) {
+			if (values.isTest) {
 				values.plannedTime = new Date();
 			}
+			if (values.uidBounceAccount == null) {
+				values.uidBounceAccount = 0;
+			}
 
-			// Write to the store who will make an ajax request via ExtDirect
+			// Disable the button while processing request to avoid double-submit
 			var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
+			button.disable();
+			newsletterStore.addListener('save', function(){button.enable();}, null, {single: true});
+			
+			// Write to the store who will make an ajax request via ExtDirect
 			var newsletter = new newsletterStore.recordType(values);
 			newsletterStore.insert(0, newsletter);
-			console.log("newsletter created :-)");
 		}
 		
 		var config = {
