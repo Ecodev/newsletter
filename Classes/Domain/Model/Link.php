@@ -117,9 +117,9 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		$emailCount = $emailRepository->getCount($this->newsletter);
 	
-		
 		if ($emailCount == 0)
-			return -1;
+			return 0;
+		
 		return round($this->getOpenedCount() * 100 / $emailCount, 2);
 	}
 }
