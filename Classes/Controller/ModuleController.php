@@ -36,11 +36,12 @@ class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controlle
 	
 	/**
 	 * index action for the module controller
+	 * This will render the HTML needed for ExtJS application
 	 * 
-	 * @return string
+	 * @return void
 	 */
 	public function indexAction() {
-		
+		// Nothing to do here
 	}
 	
 }

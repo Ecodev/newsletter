@@ -102,30 +102,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
-	
-		
-	/**
-	 * Displays a single Newsletter
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter the Newsletter to display
-	 * @return string The rendered view
-	 */
-	public function showAction(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
-		$this->view->assign('newsletter', $newsletter);
-	}
-	
-		
-	/**
-	 * Creates a new Newsletter and forwards to the list action.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
-	 * @return string An HTML form for creating a new Newsletter
-	 * @dontvalidate $newNewsletter
-	 */
-	public function newAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter = NULL) {
-		$this->view->assign('newNewsletter', $newNewsletter);
-	}
-	
 		
 	/**
 	 * Creates a new Newsletter and forwards to the list action.
@@ -167,42 +143,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->view->assign('success',TRUE);
 		$this->view->assign('data', $newNewsletter);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
-	}	
-	
-	/**
-	 * Updates an existing Newsletter and forwards to the index action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter the Newsletter to display
-	 * @return string A form to edit a Newsletter 
-	 */
-	public function editAction(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
-		$this->view->assign('newsletter', $newsletter);
-	}
-	
-		
-
-	/**
-	 * Updates an existing Newsletter and forwards to the list action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter the Newsletter to display
-	 */
-	public function updateAction(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
-		$this->newsletterRepository->update($newsletter);
-		$this->flashMessageContainer->add('Your Newsletter was updated.');
-		$this->redirect('list');
-	}
-	
-		
-	/**
-	 * Deletes an existing Newsletter
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter the Newsletter to be deleted
-	 * @return void
-	 */
-	public function deleteAction(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
-		$this->newsletterRepository->remove($newsletter);
-		$this->flashMessageContainer->add('Your Newsletter was removed.');
-		$this->redirect('list');
 	}
 	
 	/**

@@ -217,7 +217,7 @@
 			<label index="toggleAll">Vælg alle</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="title">TC Newsletter</label>
+			<label index="title">Newsletter</label>
 			<label index="status">Status</label>
 			<label index="stats">Statistiken</label>
 			<label index="reciep">Empfänger</label>

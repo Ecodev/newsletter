@@ -1,41 +1,4 @@
-plugin.tx_newsletter {
-	persistence {
-		// We will override the storage pid by code anyway, so we don't need to have a real value here
-		storagePid = 123456789
-	}
-	view {
-		templateRootPath = {$plugin.tx_newsletter.view.templateRootPath}
-		partialRootPath = {$plugin.tx_newsletter.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_newsletter.view.layoutRootPath}
-	}
-}
-
-plugin.tx_newsletter._CSS_DEFAULT_STYLE (
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-newsletter-pi1 table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-newsletter-pi1 table th {
-		font-weight:bold;
-	}
-
-	.tx-newsletter-pi1 table td {
-		vertical-align:top;
-	}
-)
-
-
 module.tx_newsletter {
-	persistence {
-			// Our records (from ext_tables_static+adt.sql) are stored at root
-		storagePid = 0
-	}
 	view {
 		templateRootPath = {$module.tx_newsletter.view.templateRootPath}
 		partialRootPath = {$module.tx_newsletter.view.partialRootPath}

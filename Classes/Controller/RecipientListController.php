@@ -48,8 +48,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 		$this->recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 	}
 	
-	
-		
+
 	/**
 	 * Displays all RecipientLists
 	 *
@@ -71,79 +70,6 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 		$this->view->assign('data', $recipientLists);
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
-	}
-	
-		
-	/**
-	 * Displays a single RecipientList
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList the RecipientList to display
-	 * @return string The rendered view
-	 */
-	public function showAction(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->view->assign('recipientList', $recipientList);
-	}
-	
-		
-	/**
-	 * Creates a new RecipientList and forwards to the list action.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $newRecipientList a fresh RecipientList object which has not yet been added to the repository
-	 * @return string An HTML form for creating a new RecipientList
-	 * @dontvalidate $newRecipientList
-	 */
-	public function newAction(Tx_Newsletter_Domain_Model_RecipientList $newRecipientList = NULL) {
-		$this->view->assign('newRecipientList', $newRecipientList);
-	}
-	
-		
-	/**
-	 * Creates a new RecipientList and forwards to the list action.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $newRecipientList a fresh RecipientList object which has not yet been added to the repository
-	 * @return void
-	 */
-	public function createAction(Tx_Newsletter_Domain_Model_RecipientList $newRecipientList) {
-		$this->recipientListRepository->add($newRecipientList);
-		$this->flashMessageContainer->add('Your new RecipientList was created.');
-		
-		$this->redirect('list');
-	}
-		
-	
-	/**
-	 * Updates an existing RecipientList and forwards to the index action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList the RecipientList to display
-	 * @return string A form to edit a RecipientList 
-	 */
-	public function editAction(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->view->assign('recipientList', $recipientList);
-	}
-		
-
-	/**
-	 * Updates an existing RecipientList and forwards to the list action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList the RecipientList to display
-	 */
-	public function updateAction(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->recipientListRepository->update($recipientList);
-		$this->flashMessageContainer->add('Your RecipientList was updated.');
-		$this->redirect('list');
-	}
-	
-		
-	/**
-	 * Deletes an existing RecipientList
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList the RecipientList to be deleted
-	 * @return void
-	 */
-	public function deleteAction(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->recipientListRepository->remove($recipientList);
-		$this->flashMessageContainer->add('Your RecipientList was removed.');
-		$this->redirect('list');
 	}
 	
 

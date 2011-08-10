@@ -81,22 +81,5 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		
 		// pie chart depends on SelectedNewsletter store so it must be initialized after it
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
-	},
-
-	/**
-	 * Register Event Debugging
-	 *
-	 * @access private
-	 * @return void
-	 */
-	_registerEventDebugging: function() {
-		Ext.util.Observable.capture(
-			this,
-			function(e) {
-				if (window.console && window.console.log) {
-					console.log(e, arguments);
-				}
-			}
-			);
 	}
 });

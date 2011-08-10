@@ -295,30 +295,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 
 		Ext.apply(this, config);
 		Ext.ux.TYPO3.Newsletter.Planner.Planner.superclass.initComponent.call(this);
-	},
-
-
-	/**
- * Submits the form. Called after Submit buttons is clicked
- * 
- * @private
- */
-	submit:function() {
-		//alert("Oui :)");
-		
-		var fp = this.ownerCt.ownerCt,
-		form = fp.getForm();
-		console.log(form);
-		form.submit({
-			clientValidation: false
-		});
-		console.log(this.url);
-		return; 
-				
-		this.getForm().submit({
-			url:this.url,
-			scope:this
-		});
 	}
 	
 });

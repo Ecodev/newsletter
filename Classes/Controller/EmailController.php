@@ -49,7 +49,6 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		$this->emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 	}
 	
-	
 		
 	/**
 	 * Displays all Emails
@@ -73,83 +72,6 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		$this->view->assign('data', $emails);
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
-	}
-	
-		
-	/**
-	 * Displays a single Email
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $email the Email to display
-	 * @return string The rendered view
-	 */
-	public function showAction(Tx_Newsletter_Domain_Model_Email $email) {
-		$this->view->assign('email', $email);
-	}
-	
-		
-	/**
-	 * Creates a new Email and forwards to the list action.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $newEmail a fresh Email object which has not yet been added to the repository
-	 * @return string An HTML form for creating a new Email
-	 * @dontvalidate $newEmail
-	 */
-	public function newAction(Tx_Newsletter_Domain_Model_Email $newEmail = NULL) {
-		$this->view->assign('newEmail', $newEmail);
-	}
-	
-		
-	/**
-	 * Creates a new Email and forwards to the list action.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $newEmail a fresh Email object which has not yet been added to the repository
-	 * @return void
-	 */
-	public function createAction(Tx_Newsletter_Domain_Model_Email $newEmail) {
-		$this->emailRepository->add($newEmail);
-		$this->flashMessageContainer->add('Your new Email was created.');
-		
-			
-		
-		$this->redirect('list');
-	}
-	
-		
-	
-	/**
-	 * Updates an existing Email and forwards to the index action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $email the Email to display
-	 * @return string A form to edit a Email 
-	 */
-	public function editAction(Tx_Newsletter_Domain_Model_Email $email) {
-		$this->view->assign('email', $email);
-	}
-	
-		
-
-	/**
-	 * Updates an existing Email and forwards to the list action afterwards.
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $email the Email to display
-	 */
-	public function updateAction(Tx_Newsletter_Domain_Model_Email $email) {
-		$this->emailRepository->update($email);
-		$this->flashMessageContainer->add('Your Email was updated.');
-		$this->redirect('list');
-	}
-	
-		
-	/**
-	 * Deletes an existing Email
-	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $email the Email to be deleted
-	 * @return void
-	 */
-	public function deleteAction(Tx_Newsletter_Domain_Model_Email $email) {
-		$this->emailRepository->remove($email);
-		$this->flashMessageContainer->add('Your Email was removed.');
-		$this->redirect('list');
 	}
 	
 

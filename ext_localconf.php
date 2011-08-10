@@ -9,12 +9,12 @@ if (!isset($TYPO3_CONF_VARS['EXTCONF']['newsletter']['extraMailHeaders']['X-Prov
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_NewsletterTask'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run TC Newsletter',
-        'description'      => 'Send email',
+        'title'            => 'Run Newsletter',
+        'description'      => 'Send emails',
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_NewsletterbounceTask'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run TC Newsletter Bounce',
+        'title'            => 'Run Newsletter Bounce',
         'description'      => 'Fetch bounce statistic',
 );
