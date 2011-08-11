@@ -30,6 +30,7 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 						{name: 'senderEmail', type: 'string'},
 						{name: 'senderName', type: 'string'},
 						{name: 'title', type: 'string'},
+						{name: 'status', type: 'string'},
 						{name: 'errors', convert: function(v, newsletter) { return convertMessages(newsletter, 'errors'); }},
 						{name: 'warnings', convert: function(v, newsletter) { return convertMessages(newsletter, 'warnings'); }},
 						{name: 'infos', convert: function(v, newsletter) { return convertMessages(newsletter, 'infos'); }}
@@ -65,6 +66,9 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 		Ext.each(newsletter.validatedContent[level], function(e){
 			html = html + '<li>' + e + '</li>';
 		})
+		
+		if (html == '')
+			html = '<li>none</li>';
 		
 		html = '<ul>' +  html + '</ul>';
 		return html;

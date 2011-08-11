@@ -51,7 +51,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			items: [
 			{
 				xtype: 'tabpanel',
-				activeTab: 2,
+				activeTab: 0,
 				items : [
 				{
 					height: 500,
@@ -59,7 +59,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 					xtype:'fieldset',
 					title: 'Status',
 	
-					items:[{
+					items:[
+					{
 						height: 500,
 						xtype: 'dataview',
 						store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_PlannedNewsletter'),
@@ -67,9 +68,11 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						tpl: new Ext.XTemplate(
 							'<tpl for=".">',
 							'<div>',
-							'<h2>Errors</h2>{errors}',
-							'<h2>Warnings</h2>{warnings}',
-							'<h2>Infos</h2>{infos}',
+							'<h2>Recent activity</h2><p>{status}</p>',
+							'<h2>Newsletter validity</h3>',
+							'<h3>Errors</h3>{errors}',
+							'<h3>Warnings</h3>{warnings}',
+							'<h3>Infos</h3>{infos}',
 							'</div>',
 							'</tpl>'
 							)
