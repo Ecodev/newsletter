@@ -23,7 +23,6 @@ Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 					    {name: '__identity', type: 'int'},
 					    {name: 'pid', type: 'int'},
 						{name: 'beginTime', type: 'date'},
-						{name: 'domain', type: 'string'},
 						{name: 'endTime', type: 'date'},
 						{name: 'injectLinksSpy', type: 'boolean'},
 						{name: 'injectOpenSpy', type: 'boolean'},

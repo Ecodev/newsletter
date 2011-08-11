@@ -593,31 +593,42 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		global $TYPO3_DB;
 
 		// Is anything hardcoded from TYPO3_CONF_VARS ?
-		if ($fetchPath = tx_newsletter_tools::confParam('fetch_path')) {
-			return $fetchPath;
-		}
+		$domain = tx_newsletter_tools::confParam('fetch_path');
 
-		// Else we try to resolve a domain
+		// Else we try to resolve a domain in page root line
+		// Else, we try the HTTP_HOST value (not great, but better than nothing)
+		if (!$domain)
+		{
+			$pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
+			foreach ($pids as $page) {
+				/* Domains */
+				$rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
+								INNER JOIN pages ON sys_domain.pid = pages.uid
+								WHERE NOT sys_domain.hidden
+								AND NOT pages.hidden
+								AND NOT pages.deleted
+								AND pages.uid = $page[uid]
+								ORDER BY sys_domain.sorting
+								LIMIT 0,1");
 
-		/* What pages to search */
-		$pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
-
-		foreach ($pids as $page) {
-			/* Domains */
-			$rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
-						    INNER JOIN pages ON sys_domain.pid = pages.uid
-						    WHERE NOT sys_domain.hidden
-						    AND NOT pages.hidden
-						    AND NOT pages.deleted
-						    AND pages.uid = $page[uid]
-						    ORDER BY sys_domain.sorting
-						    LIMIT 0,1");
-
-			if ($TYPO3_DB->sql_num_rows($rs)) {
-				list($domain) = $TYPO3_DB->sql_fetch_row($rs);
+				if ($TYPO3_DB->sql_num_rows($rs)) {
+					list($domain) = $TYPO3_DB->sql_fetch_row($rs);
+				}
 			}
 		}
 
+		// Else, we try the HTTP_HOST value (not great, but better than nothing)
+		if (!$domain)
+		{
+			$domain = @$_SERVER['HTTP_HOST'];
+		}
+		
+		// If still no domain, can't continue
+		if (!$domain)
+		{
+			throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
+		}
+		
 		return $domain;
 	}
 	
