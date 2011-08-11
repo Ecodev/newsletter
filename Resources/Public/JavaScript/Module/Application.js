@@ -31,7 +31,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer.initialize({
 			minDelay: 5,
 			maxDelay: 15,
-			logLevel: -2
+			logLevel: -2,
+			opacity: 1
 		});
 
 		this.initStore();

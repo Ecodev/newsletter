@@ -5,7 +5,7 @@ define('TYPO3_MOD_PATH', '../typo3conf/ext/newsletter/web/');
 $BACK_PATH = '../../../../typo3/';
 define('TYPO3_MODE', 'FE');
 define('TYPO3_PROCEED_IF_NO_USER', TRUE);
-define('PATH_thisScript', __FILE__);
+define('PATH_thisScript', $_SERVER['SCRIPT_FILENAME']); // Here we cannot use __FILE__ if the extension is symlinked (see https://bugs.php.net/bug.php?id=46260)
 
 require(dirname(__FILE__) . '/../../../../typo3/init.php');
 
