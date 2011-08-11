@@ -75,11 +75,8 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		$this->MOD_MENU = Array (
          "function" => Array (
             "status" => $LANG->getLL("status"),
-            'statistics' => $LANG->getLL('statistics'),
-            'maintanence' => $LANG->getLL('maintenance'),
             'validity' => $LANG->getLL('validity'),
             'preview' => $LANG->getLL('preview'),
-		//	    'help' => $LANG->getLL('help'),
 		)
 		);
 
@@ -191,28 +188,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		/* Must have an id */
 		if (!$_REQUEST['id']) return;
 
-		/* Must be a newsletter page */
-		$rs = $TYPO3_DB->sql_query('SELECT doktype FROM pages WHERE uid = '.intval($_REQUEST['id']));
-		list($doktype) = $TYPO3_DB->sql_fetch_row($rs);
-
-		if ($doktype != 189) {
-			$content = $this->notANewsletterPage();
-			$this->content.=$this->doc->section($LANG->getLL("error"),$content,0,1);
-			return;
-		}
-
 		switch((string)$this->MOD_SETTINGS["function"])   {
-
-			case 'status':
-				$content = $this->viewStatus();
-				$this->content.=$this->doc->section($LANG->getLL("status"),$content,0,1);
-				break;
-				 
-			case 'maintanence':
-				$content = $this->doMaintenance();
-				$this->content.=$this->doc->section($LANG->getLL("maintenance"),$content,0,1);
-				break;
-				 
 			case 'preview':
 				$content = $this->viewPreview();
 				$this->content.=$this->doc->section($LANG->getLL("preview"),$content,0,1);
@@ -222,22 +198,12 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				$content = $this->checkMailValidity();
 				$this->content.=$this->doc->section($LANG->getLL("validity"),$content,0,1);
 				break;
-				 
-			case 'statistics':
-				$content = $this->viewStatistics();
-				$this->content.=$this->doc->section($LANG->getLL("statistics"),$content,0,1);
-				break;
 
-			case 'help':
-				$content = $this->showHelp();
-				$this->content.=$this->doc->section($LANG->getLL("help"),$content,0,1);
-				break;
-
+			case 'status':
 			default :
-				$obj = t3lib_div::makeInstance((string)$this->MOD_SETTINGS["function"]);
-				$this->content.=$obj->main();
+				$content = $this->viewStatus();
+				$this->content.=$this->doc->section($LANG->getLL("status"),$content,0,1);
 				break;
-				 
 		}
 	}
 	 
@@ -307,7 +273,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			$output .= $recipientList->getExtract();
 				
 			if ($plannedTime > 0) {
-				$output .= '<p>'.str_replace('###TIME_TO_SEND###', strftime('%Y-%m-%d %H:%M', $plannedTime),
+				$output .= '<p>'.str_replace('###TIME_TO_SEND###', $plannedTime->format(DateTime::ISO8601),
 				str_replace('###NUMBERS_TO_SEND###', $total_to_send, $LANG->getLL('scheduled_info'))) .'</p>';
 			} else {
 				$output .= '<p><strong>'.$LANG->getLL('not_scheduled').'</strong></p>';
@@ -323,7 +289,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 				$rs = $TYPO3_DB->exec_SELECTquery('COUNT(*)', 'tx_newsletter_domain_model_email', 'end_time > 0 AND newsletter = ' . $this->newsletter->getUid());
 				list ($already_sent) = $TYPO3_DB->sql_fetch_row($rs);
 
-				$output .= '<p>Actually started to send on <strong>'. strftime('%Y-%m-%d %H:%M', $newsletterBegan) .'</strong></p>';
+				$output .= '<p>Actually started to send on <strong>'. $newsletterBegan->format(DateTime::ISO8601) .'</strong></p>';
 				$output .= "<p>Emails sent: <strong>$already_sent / $total_to_send</strong></p>";
 			}
 				
@@ -392,91 +358,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 		return $content;
 	}
 
-	 
-	 
-	function notANewsletterPage() {
-		return '<p>'.$GLOBALS['LANG']->getLL('not_a_newsletter').'</p>';
-	}
-	 
-	function doMaintenance () {
-		global $LANG;
-		global $TYPO3_DB;
-		 
-		$id = intval($_REQUEST['id']);
-		 
-		/* Clear invalid stats? */
-		if ($_REQUEST['clear_invalid']) {
-			$sql = "DELETE FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id";
-			$TYPO3_DB->sql_query($sql);
-			$sql = "DELETE FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id";
-			$TYPO3_DB->sql_query($sql);
-		}
-		 
-		if ($_REQUEST['delete_begintime']) {
-			$sql = "DELETE tx_newsletter_domain_model_lock, tx_newsletter_domain_model_email, tx_newsletter_domain_model_clicklink FROM tx_newsletter_domain_model_lock
-                 LEFT JOIN tx_newsletter_domain_model_email ON tx_newsletter_domain_model_lock.begintime = tx_newsletter_domain_model_email.begintime
-                 LEFT JOIN tx_newsletter_domain_model_clicklink ON tx_newsletter_domain_model_email.uid = tx_newsletter_domain_model_clicklink.sentlog
-                 WHERE tx_newsletter_domain_model_lock.pid = $id
-                 AND tx_newsletter_domain_model_lock.begintime = ".intval($_REQUEST[delete_begintime]);
-			$TYPO3_DB->sql_query($sql);
-		}
-		 
-		 
-		/* Invalid-stats form */
-		$out .= "<form action=\"index.php?id=$_REQUEST[id]\">";
-		$sql = "SELECT uid FROM tx_newsletter_domain_model_email WHERE begintime = 0 AND pid = $id LIMIT 1";
-
-		$rs = $TYPO3_DB->sql_query($sql);
-		$invalid_log = $TYPO3_DB->sql_fetch_row($rs);
-		 
-		$sql = "SELECT uid FROM tx_newsletter_domain_model_lock WHERE (begintime = 0 OR stoptime = 0) AND pid = $id LIMIT 1";
-		$rs = $TYPO3_DB->sql_query($sql);
-		$invalid_lock = $TYPO3_DB->sql_fetch_row($rs);
-		 
-		$out .= '<p><h3>'.$LANG->getLL('stats_status').'</h3></p>';
-		if ($invalid_lock || $invalid_log) {
-			$out .= '<p>'.$LANG->getLL('invalid_stats_found').'</p>';
-			$out .= '<p><input type="submit" name="clear_invalid" value="'.$LANG->getLL('clear_invalid').'" /></p>';
-		} else {
-			$out .= '<p>'.$LANG->getLL('stats_ok').'</p>';
-		}
-		 
-		 
-		/* Old-stats form */
-		/* Get numbers for each session */
-		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
-          FROM tx_newsletter_domain_model_lock lck
-          LEFT JOIN tx_newsletter_domain_model_email lg ON lck.begintime = lg.begintime
-          WHERE lck.pid = $id
-          AND lg.pid = $id
-          GROUP BY 1,2";
-		 
-		$rs = $TYPO3_DB->sql_query($sql);
-
-
-		/* Display */
-		$out .= '<p><h3>'.$LANG->getLL('delete_old_stats').'</h3></p>';
-		$out .= '<table>';
-		$out .= '<tr><td></td><td>'.
-		$LANG->getLL('date').'</td><td>'.
-		$LANG->getLL('fromtime').'</td><td>'.
-		$LANG->getLL('totime').'</td><td>'.
-		$LANG->getLL('total_receivers').'</td></tr>';
-		 
-		while (list($begintime, $stoptime, $num_receivers) = $TYPO3_DB->sql_fetch_row($rs)) {
-			$out .= "<tr style=\"background-color: eeeeee;\">
-                <td><a href=\"index.php?id=$id&delete_begintime=$begintime\"><strong>".
-			$LANG->getLL('delete')."</strong></td><td>".
-			strftime('%Y-%m-%d',$begintime)."</td>
-                <td>".strftime('%H:%M',$begintime).'</td><td>'.strftime('%H:%M',$stoptime)."</td>
-                <td align=right>".$num_receivers."</td></tr>";
-		}
-		$out .= '</table>';
-		$out .= '</form>';
-		 
-		return $out;
-	}
-	 
 	/* View number of mails delivered in the past */
 	function viewPreview() {
 		global $TYPO3_DB;
@@ -570,62 +451,6 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 	  
 		return $out;
 	}
-
-
-	/* View number of mails delivered in the past */
-	function viewStatistics() {
-		global $TYPO3_DB;
-		global $LANG;
-
-		/* Check if the page is a newsletter */
-		$sql = "SELECT doktype FROM pages WHERE uid = $_REQUEST[id]";
-		$rs = $TYPO3_DB->sql_query($sql);
-		list ($doktype) = $TYPO3_DB->sql_fetch_row($rs);
-
-		/* We do not want to show statistics for non-newsletter pages */
-		if ($doktype != 189) {
-			return $this->notANewsletterPage();
-		}
-
-		/* Is a detailed view requested? */
-		if ($_REQUEST['detail_begintime']) {
-			return $this->viewStatsDetailSum($_REQUEST['detail_begintime']);
-		}
-
-		/* Get numbers for each session */
-		$sql = "SELECT lck.begintime, lck.stoptime, COUNT(lg.receiver)
-				FROM tx_newsletter_domain_model_lock lck 
-				LEFT JOIN tx_newsletter_domain_model_email lg ON lck.begintime = lg.begintime 
-				WHERE lck.pid = $_REQUEST[id] 
-				AND lg.pid = $_REQUEST[id] 
-				GROUP BY 1,2";
-
-		$rs = $TYPO3_DB->sql_query($sql);
-
-		/* Display */
-		$output .= '<table>';
-		$output .= '<tr><td>'.
-		$LANG->getLL('date').'</td><td>'.
-		$LANG->getLL('fromtime').'</td><td>'.
-		$LANG->getLL('totime').'</td><td>'.
-		$LANG->getLL('total_receivers').'</td></tr>';
-
-		while (list($begintime, $stoptime, $num_receivers) = $TYPO3_DB->sql_fetch_row($rs)) {
-			$output .= "<tr style=\"background-color: eeeeee;\">
-                                    <td><a href=\"index.php?id=$_REQUEST[id]&detail_begintime=$begintime\"><strong>".
-			strftime('%Y-%m-%d',$begintime)."</strong></a></td>
-                                    <td>".strftime('%H:%M',$begintime).'</td><td>'.strftime('%H:%M',$stoptime)."</td> 
-                                    <td align=right>".$num_receivers."</td></tr>";
-		}
-		$output .= '</table>';
-
-		return $output;
-	}
-
-	function showHelp() {
-		return "No help yet";
-	}
-
 
 	function viewStatsDetailSum() {
 		global $TYPO3_DB;

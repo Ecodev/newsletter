@@ -571,6 +571,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getRecipientListConcreteInstance() {
 		$recipientList = $this->getRecipientList();
+		
+		if ($recipientList instanceof Tx_Newsletter_Domain_Model_RecipientList)
+			$recipientList = $recipientList->getUid();
+
 		if (!$recipientList)
 			return null;
 		
