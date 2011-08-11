@@ -159,7 +159,7 @@ class tx_newsletter_mailer {
 	 */
 	private function setHtml($src) {
 
-		/* Convert external file resouces to attached filer or correct their links */
+		// Convert external files resources to attached files or correct their links
 		$replace_regs = array(
 			'/ src="([^"]+)"/',
 			'/ background="([^"]+)"/',
@@ -171,12 +171,14 @@ class tx_newsletter_mailer {
 				preg_match_all($replace_reg, $src, $urls);
 				foreach ($urls[1] as $i => $url) {
 
+					// Find out the URL to use to fetch content, either a path on disk or an absolute URL on external website
+					$getUrl = str_replace($this->siteUrl, '', $url);
+					if (!preg_match('-^(http|https|ftp):-', $getUrl))
+							$getUrl = $this->realPath . $getUrl;
+					
 					// Mark places for embedded files and keep the embed files to be replaced
-					$get_url = str_replace($this->siteUrl, '', $url);
 					$swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
-
-					$this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($this->realPath . $get_url);
-
+					$this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($getUrl);
 					$src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
 				}
 			}
