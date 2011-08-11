@@ -802,11 +802,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		// Find linked css and convert into a style-tag
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
 		foreach ($urls[1] as $i => $url) {
-			$get_url = str_replace("http://$domain/", '', $url);
-			$content = str_replace ($urls[0][$i],
-                   "<style type=\"text/css\">\n<!--\n"
-                   . t3lib_div::getURL(PATH_site . str_replace("http://$domain/", '', $url))
-                   . "\n-->\n</style>", $content);
+			$getUrl = $url;
+			if (!preg_match('^/(http|https|ftp):/', $getUrl))
+				$getUrl = "http://$domain/" . $getUrl;
+
+			$content = str_replace ($urls[0][$i], "<!-- fetched URL: $getUrl -->
+<style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($getUrl) . "\n-->\n</style>", $content);
 		}
 		if (count($urls[1])) {
 			$infos[] = $LANG->getLL('mail_contains_linked_styles');
