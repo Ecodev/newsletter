@@ -68,9 +68,9 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 		})
 		
 		if (html == '')
-			html = '<li>none</li>';
+			html = '<li class="none">none</li>';
 		
-		html = '<ul>' +  html + '</ul>';
+		html = '<ul class="' + level + '">' +  html + '</ul>';
 		return html;
 	}
 	
