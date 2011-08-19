@@ -64,7 +64,6 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	be_users varchar(255) DEFAULT '' NOT NULL,
 	fe_groups varchar(255) DEFAULT '' NOT NULL,
 	fe_pages varchar(255) DEFAULT '' NOT NULL,
-	tt_address varchar(255) DEFAULT '' NOT NULL,
 	csv_url varchar(255) DEFAULT '' NOT NULL,
 	csv_separator varchar(1) DEFAULT ',' NOT NULL,
 	csv_fields varchar(255) DEFAULT '' NOT NULL,

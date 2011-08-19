@@ -31,7 +31,6 @@ return array(
 	'tx_newsletter_domain_model_recipientlist_html' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/RecipientList/Html.php'),
 	'tx_newsletter_domain_model_recipientlist_rawsql' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/RecipientList/RawSql.php'),
 	'tx_newsletter_domain_model_recipientlist_sql' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/RecipientList/Sql.php'),
-	'tx_newsletter_domain_model_recipientlist_ttaddress' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/RecipientList/TtAddress.php'),
 	'tx_newsletter_domain_model_iplainconverter' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/IPlainConverter.php'),
 	'tx_newsletter_domain_model_plainconverter_builtin' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Builtin.php'),
 	'tx_newsletter_domain_model_plainconverter_template' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Template.php'),

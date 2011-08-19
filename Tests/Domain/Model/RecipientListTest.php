@@ -176,23 +176,6 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function getTtAddressReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setTtAddressForStringSetsTtAddress() { 
-		$this->fixture->setTtAddress('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTtAddress()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
 	public function getCsvUrlReturnsInitialValueForString() { }
 
 	/**

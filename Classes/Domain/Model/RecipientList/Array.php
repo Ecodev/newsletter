@@ -8,10 +8,7 @@
  * @abstract
  */
 
-class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newsletter_Domain_Model_RecipientList {
-	function resetTarget() {
-		reset($this->data);
-	}
+abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newsletter_Domain_Model_RecipientList {
    
 	function getRecord() {
 		$r = current($this->data);

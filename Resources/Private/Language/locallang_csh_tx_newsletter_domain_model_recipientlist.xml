@@ -14,7 +14,6 @@
 			<label index="be_users.description">beUsers</label>
 			<label index="fe_groups.description">feGroups</label>
 			<label index="fe_pages.description">fePages</label>
-			<label index="tt_address.description">ttAddress</label>
 			<label index="csv_url.description">csvUrl</label>
 			<label index="csv_separator.description">csvSeparator</label>
 			<label index="csv_fields.description">csvFields</label>

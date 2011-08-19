@@ -124,7 +124,6 @@ abstract class tx_newsletter_tools {
 		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
 
 		$recipientList = $newsletter->getRecipientListConcreteInstance();
-		$recipientList->startReal();
 		while ($receiver = $recipientList->getRecord()) {
 			if (!$host = current($hosts)) {
 				reset($hosts);
@@ -144,7 +143,6 @@ abstract class tx_newsletter_tools {
 				));
 			}
 		}
-		$recipientList->endReal();
 
 		// Schedule repeated newsletter if any
 		$newsletter->scheduleNextNewsletter();

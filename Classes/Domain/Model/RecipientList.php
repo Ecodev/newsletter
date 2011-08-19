@@ -83,13 +83,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	protected $fePages;
 
 	/**
-	 * ttAddress
-	 *
-	 * @var string $ttAddress
-	 */
-	protected $ttAddress;
-
-	/**
 	 * csvUrl
 	 *
 	 * @var string $csvUrl
@@ -299,25 +292,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 */
 	public function getFePages() {
 		return $this->fePages;
-	}
-
-	/**
-	 * Setter for ttAddress
-	 *
-	 * @param string $ttAddress ttAddress
-	 * @return void
-	 */
-	public function setTtAddress($ttAddress) {
-		$this->ttAddress = $ttAddress;
-	}
-
-	/**
-	 * Getter for ttAddress
-	 *
-	 * @return string ttAddress
-	 */
-	public function getTtAddress() {
-		return $this->ttAddress;
 	}
 
 	/**
@@ -575,17 +549,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	function getRecord() {
 		die ('You need to implement the getRecord-method.');
 	}
-
-	/**
-	 * Reset the newsletter target, so the next record being fetched will be the first. 
-	 * Not currently in use by any known extension
-	 *
-	 * @abstract
-	 * @return   void
-	 */
-	function resetTarget() {
-		die ('You need to implement the resetTarget-method.');
-	}   
    
 	/**
 	 * Get the number of receivers in this newsletter target
@@ -605,22 +568,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 */
 	function getError() {
 		die ('You need to implement the getError-method.');   
-	}
-   
-	/**
-	 * Here you can implement start events for a real send-out.
-	 * 
-	 * @return    void
-	 */
-	function startReal() {
-	}
-
-	/**
-	 * Here you can implement end events for a real send-out.
-	 * 
-	 * @return    void
-	 */   
-	function endReal() {
 	}
 	   
 	/**

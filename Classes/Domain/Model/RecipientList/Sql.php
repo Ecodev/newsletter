@@ -7,7 +7,7 @@
  * @abstract
  */
 
-class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
+abstract class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
 	var $tableName = 'undefinedtable';
 	
 	/**
@@ -41,10 +41,6 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 		return $GLOBALS['TYPO3_DB']->sql_num_rows($this->data);
 	}
    
-	function resetTarget() {
-		$GLOBALS['TYPO3_DB']->sql_data_seek($this->data,0);
-	}
-   
 	function getError() {
 		return $GLOBALS['TYPO3_DB']->sql_error($this->data);
 	}
@@ -56,9 +52,9 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	 * DONT BLAME ME FOR LOST DATA. Alternatively you can inherit from the Tx_Newsletter_Domain_Model_RecipientList_GentleSql class
 	 * instead.
 	 *
-	 * @param   integer    Uid of the address that has failed.
-	 * @param   integer    Status of the bounce
-	 * @return  bool       Status of the success of the removal.
+	 * @param string $email of the address that has failed.
+	 * @param integer Status of the bounce
+	 * @return bool Status of the success of the removal.
 	 */
 	function disableReceiver($email, $bounce_type) {
 		global $TYPO3_DB;

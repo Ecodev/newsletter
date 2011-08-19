@@ -6,7 +6,7 @@
  *
  * @abstract
  */
-class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
+abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
 	/**
 	 * This increases the bounce-counter each time a mail has bounced.
 	 * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled. 

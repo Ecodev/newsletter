@@ -163,7 +163,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.be_users">beUsers</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fe_groups">feGroups</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fe_pages">fePages</label>
-			<label index="tx_newsletter_domain_model_recipientlist.tt_address">ttAddress</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_url">csvUrl</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_separator">csvSeparator</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">csvFields</label>
