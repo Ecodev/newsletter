@@ -755,4 +755,3 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 		}
 	}
 }
-?>

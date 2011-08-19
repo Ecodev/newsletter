@@ -29,4 +29,3 @@
 class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
 }
-?>

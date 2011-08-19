@@ -898,4 +898,3 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 }
-?>

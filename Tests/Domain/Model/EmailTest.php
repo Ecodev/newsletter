@@ -207,4 +207,3 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	}
 	
 }
-?>

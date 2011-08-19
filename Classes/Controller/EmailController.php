@@ -92,4 +92,3 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 				);
 	}
 }
-?>

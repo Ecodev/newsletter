@@ -71,4 +71,4 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	}
 }
 
-?>
+

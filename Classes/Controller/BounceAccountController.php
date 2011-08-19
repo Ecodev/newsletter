@@ -91,4 +91,3 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 				);
 	}
 }
-?>

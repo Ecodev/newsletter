@@ -176,4 +176,3 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 		),
 	),
 );
-?>

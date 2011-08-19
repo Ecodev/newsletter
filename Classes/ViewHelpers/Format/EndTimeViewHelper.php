@@ -51,4 +51,3 @@ class Tx_Newsletter_ViewHelpers_Format_EndTimeViewHelper extends Tx_Fluid_Core_V
 	}
 
 }
-?>

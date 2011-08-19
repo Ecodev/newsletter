@@ -60,4 +60,4 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/schedul
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_newslettertask.php']);
 }
 
-?>
+

@@ -46,4 +46,3 @@ class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controlle
 	
 }
 
-?>

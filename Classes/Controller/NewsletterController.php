@@ -218,4 +218,3 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 				);
 	}
 }
-?>

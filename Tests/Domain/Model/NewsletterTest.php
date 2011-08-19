@@ -308,4 +308,3 @@ class Tx_Newsletter_Domain_Model_NewsletterTest extends Tx_Extbase_Tests_Unit_Ba
 	}
 	
 }
-?>

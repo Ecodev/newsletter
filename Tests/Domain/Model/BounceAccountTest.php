@@ -135,4 +135,3 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	}
 	
 }
-?>

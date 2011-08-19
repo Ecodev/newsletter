@@ -45,4 +45,4 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
 	}
 }
 
-?>
+

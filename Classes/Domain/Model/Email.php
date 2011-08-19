@@ -270,4 +270,3 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 }
-?>

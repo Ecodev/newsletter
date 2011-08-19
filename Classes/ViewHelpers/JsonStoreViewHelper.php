@@ -170,4 +170,3 @@ class Tx_Newsletter_ViewHelpers_JsonStoreViewHelper extends Tx_Fluid_Core_ViewHe
 	}
 
 }
-?>

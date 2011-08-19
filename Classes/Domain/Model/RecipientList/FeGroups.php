@@ -23,4 +23,4 @@ class Tx_Newsletter_Domain_Model_RecipientList_FeGroups extends Tx_Newsletter_Do
 	}
 }
 
-?>
+

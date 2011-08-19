@@ -22,4 +22,4 @@ class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Dom
 	}
 }
 
-?>
+

@@ -59,4 +59,3 @@ class Tx_Newsletter_ViewHelpers_Format_StatisticLabelViewHelper extends Tx_Fluid
 	}
 
 }
-?>

@@ -344,4 +344,3 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	}
 	
 }
-?>

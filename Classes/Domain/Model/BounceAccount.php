@@ -165,4 +165,3 @@ class Tx_Newsletter_Domain_Model_BounceAccount extends Tx_Extbase_DomainObject_A
 	}
 
 }
-?>

@@ -17,4 +17,4 @@ class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Dom
 	}
 }
    
-?>
+

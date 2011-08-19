@@ -125,4 +125,3 @@ function w($var)
 	die("script aborted on purpose.");
 }
 
-?>

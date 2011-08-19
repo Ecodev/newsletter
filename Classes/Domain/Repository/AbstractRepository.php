@@ -66,4 +66,3 @@ abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Ext
 		return $this->updateNow($modifiedObject);
 	}
 }
-?>

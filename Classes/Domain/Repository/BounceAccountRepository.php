@@ -34,4 +34,3 @@
 class Tx_Newsletter_Domain_Repository_BounceAccountRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
 }
-?>

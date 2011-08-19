@@ -62,4 +62,3 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 	}
 	
 }
-?>
