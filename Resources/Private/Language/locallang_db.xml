@@ -50,7 +50,10 @@
 			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">Csv Fields</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">Csv Filename</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_values">Csv Values</label>
-			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">Sql</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">SQL to select recipients</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_register_bounce">SQL to register a bounced email</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_register_open">SQL to register an opened email</label>
+			<label index="tx_newsletter_domain_model_recipientlist.sql_register_click">SQL to register a link clicked</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_file">Html File</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">Calculated Recipients</label>
@@ -58,7 +61,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.type_be_users">BE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_fe_groups">FE-groups with FE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_fe_pages">Pages with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_raw_sql">Raw SQL</label>
+			<label index="tx_newsletter_domain_model_recipientlist.type_sql">SQL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_csv_file">CSV file</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_csv_list">CSV list</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_csv_url">CSV url</label>

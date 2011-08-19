@@ -14,7 +14,7 @@ if (t3lib_div::stdAuthCode($target->fields) == $_REQUEST['authCode']) {
 	
 	print("<recipientList title=\"$title\">\r\n");
 	 
-	while ($row = $target->getRecord()) {
+	while ($row = $target->getRecipient()) {
 		print("\t<recipient>\r\n");
 		 
 		foreach ($row as $field => $value) {

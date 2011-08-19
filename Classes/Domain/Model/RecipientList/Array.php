@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is the basic class for extracting record from other data sources than the database.
+ * This is the basic class for extracting recipient from other data sources than the database.
  * Here the internal datastructure is an array.
  * You might extend your class from this if you use external sources.
  *
@@ -10,7 +10,7 @@
 
 abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newsletter_Domain_Model_RecipientList {
    
-	function getRecord() {
+	function getRecipient() {
 		$r = current($this->data);
 		next($this->data);
      
@@ -39,7 +39,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
 		}
 	}
    
-	function disableReceiver($uid, $bounce_type) {
+	function registerBounce($uid, $bounce_type) {
 		/* We dont have something reasonable to do here, since we dont have a table..   maybe it can be extented in some specific setup..  */
 		return false;
 	}

@@ -22,7 +22,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.beusers">BE-users:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fegroups">FE-groups:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fepages">Pages with FE-users:</label>
-			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Raw SQL:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Separator character:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV fields:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV data:</label>
@@ -74,7 +73,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.beusers">Backendbrugere:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fegroups">Frontend brugergrupper:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fepages">Frontend brugere fra sider:</label>
-			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Rå SQL:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Adskillelsestegn:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV-felter:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV-data:</label>
@@ -92,7 +90,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">Backendbrugere</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">Frontend brugergrupper</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Sider med frontendbrugere</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Rå SQL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV-fil</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV-list</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV-url</label>
@@ -273,7 +270,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.beusers" type="integer">63719504</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fegroups" type="integer">111446607</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fepages" type="integer">247641408</label>
-			<label index="tx_newsletter_domain_model_recipientlist.rawsql" type="integer">54820714</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sepchar" type="integer">193745953</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvfields" type="integer">213675557</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvdata" type="integer">24242654</label>
@@ -291,7 +287,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.optbeusers" type="integer">180369015</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfegroups" type="integer">150610862</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfepages" type="integer">98787373</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optrawsql" type="integer">142772327</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile" type="integer">470206</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist" type="integer">258947844</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl" type="integer">206757671</label>
@@ -340,7 +335,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.beusers">BE-users:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fegroups">FE-groups:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fepages">Pages with FE-users:</label>
-			<label index="tx_newsletter_domain_model_recipientlist.rawsql">Raw SQL:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sepchar">Separator character:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvfields">CSV fields:</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csvdata">CSV data:</label>
@@ -358,7 +352,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.optbeusers">BE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfegroups">FE-groups with FE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optfepages">Pages with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.optrawsql">Raw SQL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvfile">CSV file</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvlist">CSV list</label>
 			<label index="tx_newsletter_domain_model_recipientlist.optcsvurl">CSV url</label>

@@ -30,7 +30,7 @@ else
 	{
 		// Find the recipient
 		$recipientList = $newsletter->getRecipientListConcreteInstance();
-		while ($record = $recipientList->getRecord())
+		while ($record = $recipientList->getRecipient())
 		{
 			// Got him
 			if ($record['email'] == $_GET['email'])

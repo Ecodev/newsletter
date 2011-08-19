@@ -339,7 +339,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 
 		$recipientList = $this->newsletter->getRecipientListConcreteInstance();
 
-		while ($record = $recipientList->getRecord())
+		while ($record = $recipientList->getRecipient())
 		{
 			// Build a fake email
 			$email = new Tx_Newsletter_Domain_Model_Email();

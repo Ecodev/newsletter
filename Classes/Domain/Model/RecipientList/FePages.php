@@ -1,6 +1,6 @@
 <?php
 
-class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Domain_Model_RecipientList_Sql { 
+class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql { 
 	var $tableName = 'fe_users';
 
 	function init () {

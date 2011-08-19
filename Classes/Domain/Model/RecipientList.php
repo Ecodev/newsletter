@@ -125,6 +125,27 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	protected $sqlStatement;
 
 	/**
+	 * sqlRegisterBounce
+	 *
+	 * @var string $sqlRegisterBounce
+	 */
+	protected $sqlRegisterBounce;
+
+	/**
+	 * sqlRegisterOpen
+	 *
+	 * @var string $sqlRegisterOpen
+	 */
+	protected $sqlRegisterOpen;
+
+	/**
+	 * sqlRegisterClick
+	 *
+	 * @var string $sqlRegisterClick
+	 */
+	protected $sqlRegisterClick;
+
+	/**
 	 * htmlFile
 	 *
 	 * @var string $htmlFile
@@ -409,6 +430,63 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	}
 
 	/**
+	 * Setter for sqlRegisterBounce
+	 *
+	 * @param string $sqlRegisterBounce sqlRegisterBounce
+	 * @return void
+	 */
+	public function setSqlRegisterBounce($sqlRegisterBounce) {
+		$this->sqlRegisterBounce = $sqlRegisterBounce;
+	}
+
+	/**
+	 * Getter for sqlRegisterBounce
+	 *
+	 * @return string sqlRegisterBounce
+	 */
+	public function getSqlRegisterBounce() {
+		return $this->sqlRegisterBounce;
+	}
+
+	/**
+	 * Setter for sqlRegisterOpen
+	 *
+	 * @param string $sqlRegisterOpen sqlRegisterOpen
+	 * @return void
+	 */
+	public function setSqlRegisterOpen($sqlRegisterOpen) {
+		$this->sqlRegisterOpen = $sqlRegisterOpen;
+	}
+
+	/**
+	 * Getter for sqlRegisterOpen
+	 *
+	 * @return string sqlRegisterOpen
+	 */
+	public function getSqlRegisterOpen() {
+		return $this->sqlRegisterOpen;
+	}
+
+	/**
+	 * Setter for sqlRegisterClick
+	 *
+	 * @param string $sqlRegisterClick sqlRegisterClick
+	 * @return void
+	 */
+	public function setSqlRegisterClick($sqlRegisterClick) {
+		$this->sqlRegisterClick = $sqlRegisterClick;
+	}
+
+	/**
+	 * Getter for sqlRegisterClick
+	 *
+	 * @return string sqlRegisterClick
+	 */
+	public function getSqlRegisterClick() {
+		return $this->sqlRegisterClick;
+	}
+
+	/**
 	 * Setter for htmlFile
 	 *
 	 * @param string $htmlFile htmlFile
@@ -522,7 +600,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @param     integer     Uid of a Tx_Newsletter_Domain_Model_RecipientList from the database.
 	 * @return    object      Of newsletter_target type.
 	 */
-	public static function loadTarget ($uid) {
+	public static function loadTarget($uid) {
 		$object = self::getTarget($uid);
 		$object->init();
 		return $object;
@@ -546,8 +624,8 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @abstract
 	 * @return   array      Assoc array with fields for the receiver
 	 */
-	function getRecord() {
-		die ('You need to implement the getRecord-method.');
+	function getRecipient() {
+		die ('You need to implement the getRecipient-method.');
 	}
    
 	/**
@@ -580,7 +658,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @param   integer    Status of the bounce expect: NEWSLETTER_HARDBOUNCE or NEWSLETTER_SOFTBOUNCE 
 	 * @return  bool       Status of the success of the removal.
 	 */
-	function disableReceiver($email, $bounce_type) {
+	function registerBounce($email, $bounce_type) {
 		return false;
 	}
 
@@ -590,7 +668,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @param string $email the email address of the recipient (who opened the mail)
 	 * @return	void
 	 */
-	function registerOpen ($email) {
+	function registerOpen($email) {
 	}
 
 	/**
@@ -599,7 +677,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @param string $email the email address of the recipient
 	 * @return	void
 	 */
-	function registerClick ($email) {
+	function registerClick($email) {
 	}
 	
 	/**
@@ -613,7 +691,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 		else
 		{
 			$i = 0;
-			while ($row = $this->getRecord())
+			while ($row = $this->getRecipient())
 			{
 				// Dump formatted table header
 				if ($i == 0)

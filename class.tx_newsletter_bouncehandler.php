@@ -163,7 +163,7 @@ class tx_newsletter_bouncehandler
 			case self::NEWSLETTER_SOFTBOUNCE:
 				if ($this->recipientList)
 				{
-					$this->recipientList->disableReceiver($this->email->getRecipientAddress(), $this->status);
+					$this->recipientList->registerBounce($this->email->getRecipientAddress(), $this->status);
 				}
 				
 				$this->email->setBounced(true);

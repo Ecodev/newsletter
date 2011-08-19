@@ -7,6 +7,9 @@
  * @abstract
  */
 abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
+	
+	protected $tableName = '!undefinedtable!';
+	
 	/**
 	 * This increases the bounce-counter each time a mail has bounced.
 	 * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled. 
@@ -16,7 +19,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	 * @param	integer		This is the level of the bounce.
 	 * @return	bool		Success of the bounce-handling.
 	 */
-	function disableReceiver($email, $bounce_level) {
+	function registerBounce($email, $bounce_level) {
 		global $TYPO3_DB;
 		
 		$increment = 0;
@@ -46,7 +49,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	/**
 	 * This is a default action for registered clicks.
 	 * Here we just reset the bounce counter. If the user reads the mail, it must have succeded. 
-	 * It can also be used for marketing og statistics purposes 
+	 * It can also be used for marketing or statistics purposes 
 	 *
 	 * @param string $email the email address of the recipient
 	 */
