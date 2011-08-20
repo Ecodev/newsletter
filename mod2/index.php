@@ -288,7 +288,7 @@ class tx_newsletter_module1 extends t3lib_SCbase {
 			}
 				
 			// If all emails were not send, we may offer a to invoke the mailer
-			if ($already_sent < $total_to_send && tx_newsletter_tools::confParam('show_invoke_mailer') && $BE_USER->user['admin']) {
+			if ($already_sent < $total_to_send && $BE_USER->user['admin']) {
 				$output .= '<br />';
 				$output .= '<input style="cursor:pointer;" type="submit" name="invoke_mailer" value="Invoke mailer engine" />';
 			}

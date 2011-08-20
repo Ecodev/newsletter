@@ -16,9 +16,6 @@ keep_messages = 0
   # cat=basic; type=boolean; label=Attach images. Leave this checked to enable attached, inline images. This will normally improve you viewers experience, but reduces the performance of the mailer, since it has to deliver much more (binary) data. Uncheckit to instead link to the images online.
 attach_images = 1
 
-  # cat=basic; type=boolean; label=Encode HTML as BASE64. Check this to encode the html-mime-part in base64-encoding. This makes the mails larger than with qouted printable and has a bigger possibility of being tagged as spam, but handles exotic charsets better.
-html_base64 = 0
-
   # cat=basic; type=string; label=String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template.
 append_url =  
 
@@ -30,7 +27,4 @@ mails_per_round = 100
 
   # cat=basic; type=string; label=Host tags for use on a load balanced servers, seperate with ",". This allows you to send out newsletters from several loadbalanced servers. Consult the manuals "Advanced" section on what this is, and how to use it. 
 lb_hosts = 
-
-  # cat=basic; type=boolean; label=Should we display the "Invoke mailer" button in the backend? It is recommended to switch this off, if you set up cron. If you use loadbalanced servers this button must *not* be activated. 
-show_invoke_mailer = 1
 
