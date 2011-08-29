@@ -24,7 +24,7 @@
 
 /**
  * A Controller used for answering via AJAX speaking JSON
- * 
+ *
  * @package     MvcExtjs
  * @subpackage  MVC/Controller
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
@@ -32,26 +32,26 @@
  * @version     SVN: $Id$
  */
 class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController {
-	
+
 	/**
 	 * @var Tx_Extbase_Persistence_ManagerInterface
 	 * @inject
 	 */
 	protected $persistenceManager;
-	
+
 	/**
 	 * Injects the PersistenceManager.
-	 * 
+	 *
 	 * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
 	 * @return void
 	 */
 	public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager) {
-		$this->persistenceManager = $persistenceManager;	
+		$this->persistenceManager = $persistenceManager;
 	}
-	
+
 	/**
 	 * Initializes the View to be a Tx_MvcExtjs_ExtDirect_View that renders json without Template Files.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function initializeView() {
@@ -60,6 +60,31 @@ class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MV
 			$this->view->setControllerContext($this->controllerContext);
 		}
 	}
-	
+
+	/**
+	 * Override parent method to render error message for ExtJS (in JSON).
+	 * Also append detail about what property failed to error message.
+	 *
+	 * @author Adrien Crivelli
+	 * @return string
+	 */
+	protected function errorAction() {
+		$message = parent::errorAction();
+
+			// Append detail of properties if available
+			// Message layout is not optimal, but at least we avoid code duplication
+		foreach ($this->argumentsMappingResults->getErrors() as $error) {
+			if ($error instanceof Tx_Extbase_Validation_PropertyError) {
+				foreach ($error->getErrors() as $subError) {
+					$message .= 'Error:   ' . $subError->getMessage() . PHP_EOL;
+				}
+			}
+		}
+
+		$this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('error', $message);
+		$this->view->assign('success', false);
+	}
 }
 ?>
