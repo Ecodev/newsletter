@@ -24,6 +24,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
             'config' => array (
                 'type' => 'input',    
                 'size' => '30',
+				'eval' => 'trim,required',
             )
         ),
 
@@ -192,19 +193,20 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type',
 		    'config' => array(
-			'type' => 'select',
-			'items' => array(
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_be_users', 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_fe_groups', 'Tx_Newsletter_Domain_Model_RecipientList_FeGroups'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_fe_pages', 'Tx_Newsletter_Domain_Model_RecipientList_FePages'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_sql', 'Tx_Newsletter_Domain_Model_RecipientList_Sql'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_file', 'Tx_Newsletter_Domain_Model_RecipientList_CsvFile'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_list', 'Tx_Newsletter_Domain_Model_RecipientList_CsvList'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_url', 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl'),
-			    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_html', 'Tx_Newsletter_Domain_Model_RecipientList_Html'), 
-			    ),
-			'size' => 1,
-			'maxitems' => 1,
+				'type' => 'select',
+				'items' => array(
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_be_users', 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_fe_groups', 'Tx_Newsletter_Domain_Model_RecipientList_FeGroups'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_fe_pages', 'Tx_Newsletter_Domain_Model_RecipientList_FePages'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_sql', 'Tx_Newsletter_Domain_Model_RecipientList_Sql'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_file', 'Tx_Newsletter_Domain_Model_RecipientList_CsvFile'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_list', 'Tx_Newsletter_Domain_Model_RecipientList_CsvList'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_csv_url', 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl'),
+					array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type_html', 'Tx_Newsletter_Domain_Model_RecipientList_Html'), 
+					),
+				'size' => 1,
+				'maxitems' => 1,
+				'default' => 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers',
 		    ),
 		),
 	
