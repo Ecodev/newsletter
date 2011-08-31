@@ -90,6 +90,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		{
 			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
 			$newsletter->setPid($this->pid);
+			$newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
 		}
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success'));

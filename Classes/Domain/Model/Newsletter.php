@@ -149,6 +149,16 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setRepetition(0);
 		$this->setPlannedTime(new DateTime());
 	}
+	
+	/**
+	 * Setter for uid
+	 * @param integer $uid
+	 * @return void
+	 */
+	public function setUid($uid)
+	{
+		$this->uid = $uid;
+	}
 
 	/**
 	 * Setter for plannedTime
