@@ -54,7 +54,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_bounce">SQL to register a bounced email</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_open">SQL to register an opened email</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_click">SQL to register a link clicked</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_file">Html File</label>
+			<label index="tx_newsletter_domain_model_recipientlist.html_url">Html URL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">Calculated Recipients</label>
 			<label index="tx_newsletter_domain_model_recipientlist.confirmed_recipients">Confirmed Recipients</label>

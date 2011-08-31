@@ -73,7 +73,7 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	sql_register_bounce varchar(255) DEFAULT '' NOT NULL,
 	sql_register_open varchar(255) DEFAULT '' NOT NULL,
 	sql_register_click varchar(255) DEFAULT '' NOT NULL,
-	html_file varchar(255) DEFAULT '' NOT NULL,
+	html_url varchar(255) DEFAULT '' NOT NULL,
 	html_fetch_type varchar(255) DEFAULT '' NOT NULL,
 	calculated_recipients varchar(255) DEFAULT '' NOT NULL,
 	confirmed_recipients varchar(255) DEFAULT '' NOT NULL,

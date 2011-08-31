@@ -5,10 +5,10 @@ class Tx_Newsletter_Domain_Model_RecipientList_Html extends Tx_Newsletter_Domain
 	{
 		$this->data = array();
 		
-		$htmlfile = $this->fields['html_file'];
+		$htmlurl = $this->fields['html_url'];
 		$htmlfetchtype = $this->fields['html_fetch_type'];
 		 
-		$content = t3lib_div::getURL($htmlfile);
+		$content = t3lib_div::getURL($htmlurl);
 		 
 		if ($htmlfetchtype == 'mailto') {
 			preg_match_all('|<a[^>]+href="mailto:([^"]+)"[^>]*>(.*)</a>|Ui', $content, $fetched_data);

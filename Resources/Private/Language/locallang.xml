@@ -169,7 +169,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">csvFilename</label>
 			<label index="tx_newsletter_domain_model_recipientlist.csv_values">csvValues</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">sql</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_file">htmlFile</label>
+			<label index="tx_newsletter_domain_model_recipientlist.html_url">htmlFile</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">htmlFetchType</label>
 			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">calculatedRecipients</label>
 			<label index="tx_newsletter_domain_model_recipientlist.confirmed_recipients">confirmedRecipients</label>

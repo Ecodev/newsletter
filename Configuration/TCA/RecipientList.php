@@ -210,19 +210,19 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		    ),
 		),
 	
-		'html_file' => array(
+		'html_url' => array(
 	            'exclude' => 1,
-	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.htmlurl',
+	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.html_url',
 	            'config' => array(
 	                'type' => 'input',
 	                'size' => 20,
-	            ),
-	
+					'eval' => 'trim,required',
+	            ),	
 		),
 	
 		'html_fetch_type' => array (
 	            'exclude' => 1,
-	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.htmlfetch',
+	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.html_fetch_type',
 	            'config' => array(
 	                'type' => 'select',
 	                'items' => array(
@@ -253,7 +253,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_filename,;;;;2-2-2, calculated_recipients'),
 		'Tx_Newsletter_Domain_Model_RecipientList_CsvList' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_values,;;;;2-2-2, calculated_recipients'),
 		'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_url,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_Html' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, html_file, html_fetch_type,;;;;2-2-2, calculated_recipients'),
+		'Tx_Newsletter_Domain_Model_RecipientList_Html' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, html_url, html_fetch_type,;;;;2-2-2, calculated_recipients'),
     ),
     'palettes' => array (
          '1' => array('showitem' => ''),

@@ -20,7 +20,7 @@
 			<label index="csv_filename.description">csvFilename</label>
 			<label index="csv_values.description">csvValues</label>
 			<label index="sql_statement.description">sql</label>
-			<label index="html_file.description">htmlFile</label>
+			<label index="html_url.description">htmlFile</label>
 			<label index="html_fetch_type.description">htmlFetchType</label>
 			<label index="calculated_recipients.description">calculatedRecipients</label>
 			<label index="confirmed_recipients.description">confirmedRecipients</label>
