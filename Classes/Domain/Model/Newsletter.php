@@ -593,7 +593,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 	/**
-	 * Function to fetch the proper domain from with to fetch content for newsletter.
+	 * Function to fetch the proper domain from which to fetch content for newsletter.
 	 * This is either a sys_domain record from the page tree or the fetch_path property.
 	 *
 	 * @return   string      Correct domain.
@@ -606,7 +606,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$domain = tx_newsletter_tools::confParam('fetch_path');
 
 		// Else we try to resolve a domain in page root line
-		// Else, we try the HTTP_HOST value (not great, but better than nothing)
 		if (!$domain)
 		{
 			$pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
@@ -783,11 +782,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 		
 		$domain = $this->getDomain();
-		$content= t3lib_div::getURL($this->getContentUrl());
+		$url = $this->getContentUrl();
+		$content= t3lib_div::getURL($url);
 		
 		$errors = array();
 		$warnings = array();
-		$infos = array();
+		$infos = array('URL used to fetch content is ' . $url);
 		
 		// Content should be more that just a few characters. Apache error propably occured
 		if (strlen($content) < 200) {

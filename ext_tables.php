@@ -5,9 +5,6 @@ if (!defined ('TYPO3_MODE')) {
 
 // ========== Register BE Modules
 if (TYPO3_MODE == 'BE')	{
-	// temporary line to include the old module's interface
-	t3lib_extMgm::addModule("web","newsletterM2","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod2/");
-
 	Tx_Extbase_Utility_Extension::registerModule(
 		$_EXTKEY,
 		'web',// Make newsletter module a submodule of 'user'
