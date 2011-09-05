@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_email'] = array(
 	'ctrl' => $TCA['tx_newsletter_domain_model_email']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList'	=> 'begin_time,end_time,recipient_address,recipient_data,opened,bounced,host,newsletter',
+		'showRecordFieldList'	=> 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,host,newsletter',
 	),
 	'types' => array(
-		'1' => array('showitem'	=> 'begin_time,end_time,recipient_address,recipient_data,opened,bounced,host,newsletter'),
+		'1' => array('showitem'	=> 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,host,newsletter'),
 	),
 	'palettes' => array(
 		'1' => array('showitem'	=> ''),
@@ -62,18 +62,18 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 				
 			),
 		),
-		'opened' => array(
+		'open_time' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.opened',
+			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.open_time',
 			'config'	=> array(
 				'type' => 'check',
 				'default' => 0,
 				'readOnly' => true,
 			),
 		),
-		'bounced' => array(
+		'bounce_time' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.bounced',
+			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.bounce_time',
 			'config'	=> array(
 				'type' => 'check',
 				'default' => 0,

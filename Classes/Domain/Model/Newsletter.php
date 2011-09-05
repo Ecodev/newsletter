@@ -665,7 +665,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function scheduleNextNewsletter()
 	{
 		$plannedTime = $this->getPlannedTime();
-		list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime));
+		list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->getTimestamp()));
 
 		switch ($this->getRepetition()) {
 			case 0: return;
@@ -719,7 +719,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getEmailSentCount() {
 		global $TYPO3_DB;
 		
-		$numberOfSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time != 0 AND opened = 0 AND bounced = 0 AND newsletter = ' . $this->getUid());
+		$numberOfSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time != 0 AND open_time = 0 AND bounce_time = 0 AND newsletter = ' . $this->getUid());
 
 		return (int)$numberOfSent;
 	}
@@ -733,7 +733,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getEmailOpenedCount() {
 		global $TYPO3_DB;
 		
-		$numberOfOpened = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'opened = 1 AND bounced = 0 AND newsletter = ' . $this->getUid());
+		$numberOfOpened = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'open_time != 0 AND bounce_time = 0 AND newsletter = ' . $this->getUid());
 		
 		return (int)$numberOfOpened;
 	}
@@ -748,7 +748,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getEmailBouncedCount() {
 		global $TYPO3_DB;
 
-		$numberOfBounce = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'bounced = 1 AND newsletter = ' . $this->getUid());
+		$numberOfBounce = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'bounce_time != 0 AND newsletter = ' . $this->getUid());
 		
 		return (int)$numberOfBounce;
 	}
@@ -813,7 +813,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
 		foreach ($urls[1] as $i => $url) {
 			$getUrl = $url;
-			if (!preg_match('^/(http|https|ftp):/', $getUrl))
+			if (!preg_match('/^(http|https|ftp):/', $getUrl))
 				$getUrl = "http://$domain/" . $getUrl;
 
 			$content = str_replace ($urls[0][$i], "<!-- fetched URL: $getUrl -->

@@ -45,14 +45,18 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.EmailGrid = Ext.exte
 					sortable: true
 				},
 				{
-					dataIndex: 'opened',
-					header: Ext.ux.TYPO3.Newsletter.Language.opened,
+					dataIndex: 'openTime',
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_email_open_time,
+					xtype: 'datecolumn',
+					format: 'Y-m-d h:m:s',
 					width: 100,
 					sortable: true
 				},
 				{
-					dataIndex: 'bounced',
-					header: Ext.ux.TYPO3.Newsletter.Language.bounced,
+					dataIndex: 'bounceTime',
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_email_bounce_time,
+					xtype: 'datecolumn',
+					format: 'Y-m-d h:m:s',
 					width: 100,
 					sortable: true
 				},

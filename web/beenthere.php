@@ -7,7 +7,8 @@ require ('browserrun.php');
 
 // Record that the email was opened 
 $authcode = addslashes($_REQUEST['c']);
-$TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET opened = 1 WHERE MD5(CONCAT(uid, recipient_address)) = '$authcode' LIMIT 1");
+
+$TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = UNIX_TIMESTAMP() WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = '$authcode' LIMIT 1");
 
 // Tell the target that he opened the email
 $rs = $TYPO3_DB->sql_query("

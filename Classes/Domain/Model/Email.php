@@ -63,18 +63,18 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	protected $recipientData;
 
 	/**
-	 * opened
+	 * openeTime
 	 *
-	 * @var boolean $opened
+	 * @var DateTime $openTime
 	 */
-	protected $opened;
+	protected $openTime;
 
 	/**
-	 * bounced
+	 * bounceTime
 	 *
-	 * @var boolean $bounced
+	 * @var DateTime $bounceTime
 	 */
-	protected $bounced;
+	protected $bounceTime;
 
 	/**
 	 * host
@@ -176,22 +176,22 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Setter for opened
+	 * Setter for openTime
 	 *
-	 * @param boolean $opened opened
+	 * @param DateTime $openTime openTime
 	 * @return void
 	 */
-	public function setOpened($opened) {
-		$this->opened = $opened;
+	public function setOpened(DateTime $openTime) {
+		$this->openTime = $openTime;
 	}
 
 	/**
-	 * Getter for opened
+	 * Getter for openTime
 	 *
-	 * @return boolean opened
+	 * @return DateTime openTime
 	 */
-	public function getOpened() {
-		return $this->opened;
+	public function getOpenTime() {
+		return $this->openTime;
 	}
 
 	/**
@@ -200,26 +200,26 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 * @return boolean the state of opened
 	 */
 	public function isOpened() {
-		return $this->getOpened();
+		return $this->getOpenTime() > 0;
 	}
 
 	/**
-	 * Setter for bounced
+	 * Setter for bounceTime
 	 *
-	 * @param boolean $bounced bounced
+	 * @param DateTime $bounceTime bounceTime
 	 * @return void
 	 */
-	public function setBounced($bounced) {
-		$this->bounced = $bounced;
+	public function setBounceTime(DateTime $bounceTime) {
+		$this->bounceTime = $bounceTime;
 	}
 
 	/**
-	 * Getter for bounced
+	 * Getter for bounceTime
 	 *
-	 * @return boolean bounced
+	 * @return DateTime bounceTime
 	 */
-	public function getBounced() {
-		return $this->bounced;
+	public function getBounceTime() {
+		return $this->bounceTime;
 	}
 
 	/**
@@ -228,7 +228,7 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 * @return boolean the state of bounced
 	 */
 	public function isBounced() {
-		return $this->getBounced();
+		return $this->getBounceTime() > 0;
 	}
 
 	/**

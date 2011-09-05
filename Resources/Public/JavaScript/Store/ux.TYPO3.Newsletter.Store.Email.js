@@ -24,9 +24,9 @@ Ext.ux.TYPO3.Newsletter.Store.Email = function() {
 					    {name: 'recipientAddress', type: 'string'},
 						{name: 'beginTime', type: 'date'},
 						{name: 'endTime', type: 'date'},
+						{name: 'openTime', type: 'date'},
+						{name: 'bounceTime', type: 'date'},
 						{name: 'authCode', type: 'string'},
-						{name: 'bounced', type: 'string'},
-						{name: 'opened', type: 'boolean'},
 						{name: 'recipientAddress', type: 'string'},
 					]
 				}),

@@ -75,8 +75,8 @@
 			<label index="tx_newsletter_domain_model_email.end_time">End Time</label>
 			<label index="tx_newsletter_domain_model_email.recipient_address">Recipient Address</label>
 			<label index="tx_newsletter_domain_model_email.recipient_data">Recipient Data</label>
-			<label index="tx_newsletter_domain_model_email.opened">Opened</label>
-			<label index="tx_newsletter_domain_model_email.bounced">Bounced</label>
+			<label index="tx_newsletter_domain_model_email.open_time">Open time</label>
+			<label index="tx_newsletter_domain_model_email.bounce_time">Bounce time</label>
 			<label index="tx_newsletter_domain_model_email.host">Host</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>

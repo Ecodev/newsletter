@@ -94,10 +94,10 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	
 	begin_time int(11) unsigned DEFAULT '0' NOT NULL,
 	end_time int(11) unsigned DEFAULT '0' NOT NULL,
+	open_time int(11) unsigned DEFAULT '0' NOT NULL,
+	bounce_time int(11) unsigned DEFAULT '0' NOT NULL,
 	recipient_address varchar(255) DEFAULT '' NOT NULL,
 	recipient_data varchar(255) DEFAULT '' NOT NULL,
-	opened tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	bounced tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	host varchar(255) DEFAULT '' NOT NULL,
 	newsletter int(11) unsigned DEFAULT '0',
 

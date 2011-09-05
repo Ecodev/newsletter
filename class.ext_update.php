@@ -49,7 +49,7 @@ class ext_update {
 		
 		// Emails
 		"INSERT INTO tx_newsletter_domain_model_email (
-			pid, begin_time, end_time, recipient_address, recipient_data, opened, bounced, host
+			pid, begin_time, end_time, recipient_address, recipient_data, open_time, bounce_time, host
 		) SELECT pid, begintime, sendtime, receiver, userdata, beenthere, bounced, host
 		FROM tx_tcdirectmail_sentlog;",
 	

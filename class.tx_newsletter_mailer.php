@@ -173,7 +173,7 @@ class tx_newsletter_mailer {
 
 					// Find out the URL to use to fetch content, either a path on disk or an absolute URL on external website
 					$getUrl = str_replace($this->siteUrl, '', $url);
-					if (!preg_match('-^(http|https|ftp):-', $getUrl))
+					if (!preg_match('/^(http|https|ftp):/', $getUrl))
 							$getUrl = $this->realPath . $getUrl;
 					
 					// Mark places for embedded files and keep the embed files to be replaced
