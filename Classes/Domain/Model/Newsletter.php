@@ -884,7 +884,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$endTime = $this->getEndTime();
 		
 		// If we don't have UID, it means we are a "fake model" newsletter not saved yet
-		if (!$this->getUid())
+		if (!($this->getUid() > 0))
 			return "This newsletter is not planned";
 		
 		if ($plannedTime && !$beginTime)
