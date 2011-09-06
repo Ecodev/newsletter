@@ -830,12 +830,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		}
 		
 		// Fix relative links
-		preg_match_all('|<a [^>]*href="(.*)"|Ui', $src, $urls);
+		preg_match_all('|<a [^>]*href="(.*)"|Ui', $content, $urls);
 		foreach ($urls[1] as $i => $url) {
 			// If this is already a absolute link, dont replace it
 			if (!preg_match('|^http://|', $url) && !preg_match('|^mailto:|', $url) && !preg_match('|^#|', $url)) {
 				$replace_url = str_replace($url, "http://$domain/" . $url, $urls[0][$i]);
-				$src = str_replace($urls[0][$i], $replace_url, $src);
+				$content = str_replace($urls[0][$i], $replace_url, $content);
 			}
 		}
 		if (count($urls[1])) {
