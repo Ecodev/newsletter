@@ -665,7 +665,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function scheduleNextNewsletter()
 	{
 		$plannedTime = $this->getPlannedTime();
-		list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->getTimestamp()));
+		list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->format('U')));
 
 		switch ($this->getRepetition()) {
 			case 0: return;
