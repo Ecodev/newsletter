@@ -47,26 +47,28 @@ class ext_update {
 		beusers, fegroups, fepages, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, calculated_receivers, tstamp, crdate, deleted, hidden
 		FROM tx_tcdirectmail_targets;",
 		
-		// Emails
-		"INSERT INTO tx_newsletter_domain_model_email (
-			pid, begin_time, end_time, recipient_address, recipient_data, open_time, bounce_time, host
-		) SELECT pid, begintime, sendtime, receiver, userdata, beenthere, bounced, host
-		FROM tx_tcdirectmail_sentlog;",
-	
 		// Bounce accounts
 		"INSERT INTO tx_newsletter_domain_model_bounceaccount (
 			pid, email, server, protocol, username, password, tstamp, crdate, deleted, hidden
 		) SELECT pid, email, server, servertype, username, passwd, tstamp, crdate, deleted, hidden
 		FROM tx_tcdirectmail_bounceaccount;",
 	
-		// Migrate newsletter from page to its own table
+		// Migrate newsletter from page and tx_tcdirectmail_lock to its own table tx_newsletter_domain_model_newsletter
 		"INSERT INTO tx_newsletter_domain_model_newsletter (
-			pid, planned_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
-		) SELECT uid, tx_tcdirectmail_senttime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, 
+			pid, planned_time, begin_time, end_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
+		) SELECT pages.uid, tx_tcdirectmail_senttime, tx_tcdirectmail_lock.begintime, tx_tcdirectmail_lock.stoptime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, 
 		CONCAT( 'Tx_Newsletter_Domain_Model_PlainConverter_', CONCAT( UPPER( LEFT( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 1 ) ) , SUBSTRING( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 2 ) ) ),
 		tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
 		FROM pages
+		INNER JOIN tx_tcdirectmail_lock ON (pages.uid = tx_tcdirectmail_lock.pid)
 		WHERE tx_tcdirectmail_real_target != 0;",
+		
+		// Emails matching an existing newsletter
+		"INSERT INTO tx_newsletter_domain_model_email (
+			pid, begin_time, end_time, recipient_address, recipient_data, open_time, bounce_time, host, newsletter
+		) SELECT tx_tcdirectmail_sentlog.pid, begintime, sendtime, receiver, userdata, IF(beenthere, sendtime, 0), IF(bounced, sendtime, 0), host, tx_newsletter_domain_model_newsletter.uid
+		FROM tx_tcdirectmail_sentlog
+		INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_tcdirectmail_sentlog.pid = tx_newsletter_domain_model_newsletter.pid AND tx_tcdirectmail_sentlog.begintime = tx_newsletter_domain_model_newsletter.begin_time);",	
 		
 		// Migrate CLI beuser 
 		"INSERT INTO be_users (
@@ -89,9 +91,6 @@ class ext_update {
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvurl';", 
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Html' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_html';",
 	
-		// TODO link email to newsletter according to PID
-		//"UPDATE tx_newsletter_domain_model_email SET newsletter = LEFT JOIN???;",
-		// TODO define begin_time and end_time for newsletter based on tx_tcdirectmail_lock
 	);
 
 	/**
@@ -103,7 +102,7 @@ class ext_update {
 	{	
 		$content = '';
 		global $TYPO3_DB;
- 
+		
 		// Action! Makes the necessary update
 		$update = t3lib_div::_GP('importtcdirectmail');
 		
@@ -121,7 +120,18 @@ class ext_update {
 			
 			// Import data
 			$recordCount = $this->importFromTcdirectmail();
-			$content .= '<p>Modified records count: ' . $recordCount . '</p>';
+			$newsletterCount = reset($TYPO3_DB->sql_fetch_row($TYPO3_DB->sql_query('SELECT COUNT(*) FROM tx_newsletter_domain_model_newsletter')));
+			$emailCount = reset($TYPO3_DB->sql_fetch_row($TYPO3_DB->sql_query('SELECT COUNT(*) FROM tx_newsletter_domain_model_email')));
+			$recipientListCount = reset($TYPO3_DB->sql_fetch_row($TYPO3_DB->sql_query('SELECT COUNT(*) FROM tx_newsletter_domain_model_recipientlist')));
+			$bounceAccountCount = reset($TYPO3_DB->sql_fetch_row($TYPO3_DB->sql_query('SELECT COUNT(*) FROM tx_newsletter_domain_model_bounceaccount')));
+			 
+			$content .= "<p>Successfully imported data from TCDirectmail:</p><ul>
+				<li>Newsletters: $newsletterCount</li>
+				<li>Emails: $emailCount</li>
+				<li>Recipient Lists: $recipientListCount</li>
+				<li>Bounce Accounts: $bounceAccountCount</li>
+				<li>Total records count: $recordCount</li>
+				</ul>";
 		}
 		else 
 		{
@@ -130,14 +140,14 @@ class ext_update {
 			if ($this->canImportFromTcdirectmail())
 			{
 				$content .= '<form name="importForm" action="" method ="post">';
-				$content .= '<p>Import all data from TCDirectmail, including newsletter sent, to be send and statistics.</p>';
+				$content .= '<p>Import all data from TCDirectmail, including newsletter sent, to be send and emails (this will NOT import hyperlinks related data).</p>';
 				$content .= '<input type="checkbox" name="deactivate" id="deactivate" checked="checked" /><label for="deactivate">Attempt to deactivate TCDirectmail.</label>';
 				$content .= '<p><input type="submit" name="importtcdirectmail" value ="Import" /></p>';
 				$content .= '</form>';
 			}
 			else
 			{
-				$content .= '<p>TCDirectmail not found, or Newsletter tables non-empty (already imported).</p>';
+				$content .= '<p>Cannot import from TCDirectmail.</p><p>TCDirectmail tables not found, or Newsletter tables non-empty (already imported or started using it).</p>';
 			}
 		}		
 		
