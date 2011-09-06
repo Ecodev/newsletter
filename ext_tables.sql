@@ -129,6 +129,7 @@ CREATE TABLE tx_newsletter_domain_model_linkopened (
 	link int(11) unsigned DEFAULT '0',
 	email int(11) unsigned DEFAULT '0',
 	is_plain tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	
+	open_time int(11) unsigned DEFAULT '0' NOT NULL,
+
 	PRIMARY KEY (uid)
 );
