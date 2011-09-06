@@ -165,31 +165,16 @@ class tx_newsletter_mailer {
 			'/ background="([^"]+)"/',
 		);
 
-		/* Attach */
+		// Attach images if option is set
 		if ($this->extConf['attach_images']) {
 			foreach ($replace_regs as $replace_reg) {
 				preg_match_all($replace_reg, $src, $urls);
 				foreach ($urls[1] as $i => $url) {
-
-					// Find out the URL to use to fetch content, either a path on disk or an absolute URL on external website
-					$getUrl = str_replace($this->siteUrl, '', $url);
-					if (!preg_match('/^(http|https|ftp):/', $getUrl))
-							$getUrl = $this->realPath . $getUrl;
 					
 					// Mark places for embedded files and keep the embed files to be replaced
 					$swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
-					$this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($getUrl);
+					$this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($url);
 					$src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
-				}
-			}
-			/* Or correct link */
-		} else {
-			foreach ($replace_regs as $replace_reg) {
-				preg_match_all($replace_reg, $src, $urls);
-				foreach ($urls[1] as $i => $url) {
-					if (!preg_match('|^http://|', $url)) {
-						$src = str_replace($urls[0][$i], str_replace($url, $this->siteUrl . $url, $urls[0][$i]), $src);
-					}
 				}
 			}
 		}

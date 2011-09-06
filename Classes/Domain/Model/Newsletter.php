@@ -809,15 +809,35 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			$errors []= "Content contains \"wait\" signatures. This must not reach the receivers.";
 		}
 		
+		// Fix relative URL to absolute URL
+		$urlPatterns = array(
+			'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
+			'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
+			'images' => '/ src="(.*)"/Ui',
+			'background images' => '/ background="(.*)"/Ui',
+		);
+		foreach ($urlPatterns as $type => $urlPattern)
+		{
+			preg_match_all($urlPattern, $content, $urls);
+			foreach ($urls[1] as $i => $url) {
+				// If this is already an absolute link, dont replace it
+				if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
+					$replace_url = str_replace($url, "http://$domain/" . $url, $urls[0][$i]);
+					$content = str_replace($urls[0][$i], $replace_url, $content);
+				}
+			}
+			
+			if (count($urls[1])) {
+				$infos[]= "Relative URL for $type converted to absolute URL";
+			}
+		}
+		
 		// Find linked css and convert into a style-tag
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
 		foreach ($urls[1] as $i => $url) {
-			$getUrl = $url;
-			if (!preg_match('/^(http|https|ftp):/', $getUrl))
-				$getUrl = "http://$domain/" . $getUrl;
 
-			$content = str_replace ($urls[0][$i], "<!-- fetched URL: $getUrl -->
-<style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($getUrl) . "\n-->\n</style>", $content);
+			$content = str_replace ($urls[0][$i], "<!-- fetched URL: $url -->
+<style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($url) . "\n-->\n</style>", $content);
 		}
 		if (count($urls[1])) {
 			$infos[] = $LANG->getLL('mail_contains_linked_styles');
@@ -827,19 +847,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
 		if ($count) {
 			$warnings[] = $LANG->getLL('mail_contains_javascript');
-		}
-		
-		// Fix relative links
-		preg_match_all('|<a [^>]*href="(.*)"|Ui', $content, $urls);
-		foreach ($urls[1] as $i => $url) {
-			// If this is already a absolute link, dont replace it
-			if (!preg_match('|^http://|', $url) && !preg_match('|^mailto:|', $url) && !preg_match('|^#|', $url)) {
-				$replace_url = str_replace($url, "http://$domain/" . $url, $urls[0][$i]);
-				$content = str_replace($urls[0][$i], $replace_url, $content);
-			}
-		}
-		if (count($urls[1])) {
-			$infos[]= 'Relative URL for links converted to absolute URL';
 		}
 		
 		// Images in CSS
