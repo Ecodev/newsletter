@@ -136,8 +136,9 @@ class tx_newsletter_mailer {
 	private function setPlain($src) {
 
 		/* Detect what markers we need to substitute later on */
-		preg_match_all('/###[\w]+###/', $src, $fields);
-		$this->plainMarkers = str_replace('###', '', $fields[0]);
+		preg_match_all('/###(\w+)###/', $src, $fields);
+		preg_match_all('|http://(\w+)\s|', $src, $fieldsLinks);
+		$this->plainMarkers = array_merge($fields[1], $fieldsLinks[1]);
 
 		/* Any advanced markers we need to sustitute later on */
 		$this->plainAdvancedMarkers = array();
@@ -249,6 +250,7 @@ class tx_newsletter_mailer {
 
 		if (in_array($name, $this->plainMarkers)) {
 			$this->plain = str_replace("###$name###", $value, $this->plain);
+			$this->plain = str_replace("http://$name", $value, $this->plain);
 		}
 
 		if (in_array($name, $this->titleMarkers)) {
