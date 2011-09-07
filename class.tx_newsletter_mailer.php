@@ -179,11 +179,12 @@ class tx_newsletter_mailer {
 			}
 		}
 
-		/* Detect what markers we need to substitute later on */
-		preg_match_all('/###[\w]+###/', $src, $fields);
-		$this->htmlMarkers = str_replace('###', '', $fields[0]);
+		// Detect what markers we need to substitute later on
+		preg_match_all('/###(\w+)###/', $src, $fields);
+		preg_match_all('|"http://(\w+)"|', $src, $fieldsLinks);
+		$this->htmlMarkers = array_merge($fields[1], $fieldsLinks[1]);
 
-		/* Any advanced IF fields we need to sustitute later on */
+		// Any advanced IF fields we need to sustitute later on
 		$this->htmlAdvancedMarkers = array();
 		preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
 		foreach ($fields[1] as $field) {
@@ -243,6 +244,7 @@ class tx_newsletter_mailer {
 
 		if (in_array($name, $this->htmlMarkers)) {
 			$this->html = str_replace("###$name###", $value, $this->html);
+			$this->html = str_replace("\"http://$name\"", $value, $this->html);
 		}
 
 		if (in_array($name, $this->plainMarkers)) {
