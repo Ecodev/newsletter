@@ -70,6 +70,8 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 	 * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
 	 * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
 	 * @param boolean $enableExtJSQuickTips
+	 * @param string  $extCorePath specifies a path for the ExtCore default NULL (uses the path set in the t3lib_PageRenderer)
+	 * @param string  $extJsPath specifies a path for the ExtJS default NULL (uses the path set in the t3lib_PageRenderer)
 	 * @return string
 	 * @see template
 	 * @see t3lib_PageRenderer
@@ -87,7 +89,9 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 						   $concatenate = TRUE,
 						   $compressJs = TRUE,
 						   $compressCss= TRUE,
-						   $enableExtJSQuickTips = TRUE) {
+						   $enableExtJSQuickTips = TRUE,
+						   $extCorePath = NULL,
+						   $extJsPath = NULL) {
 
 		$doc = $this->getDocInstance();
 
@@ -107,6 +111,12 @@ class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_V
 		}
 		if ($loadScriptaculous === TRUE) {
 			$this->pageRenderer->loadScriptaculous($scriptaculousModule);
+		}
+		if ($extCorePath !== NULL) {
+			$this->pageRenderer->setExtCorePath($extCorePath);
+		}
+		if ($extJsPath !== NULL) {
+			$this->pageRenderer->setExtJsPath($extJsPath);
 		}
 		if ($loadExtJs === TRUE) {
 			$this->pageRenderer->loadExtJS(TRUE, $loadExtJsTheme, $extJsAdapter);

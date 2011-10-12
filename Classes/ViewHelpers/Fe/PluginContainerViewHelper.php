@@ -55,17 +55,19 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 	/**
 	 * Renders the module into a given div container.
 	 *
-	 * @param string $divContainerId title tag of the module. Not required by default, as BE modules are shown in a frame
+	 * @param string  $divContainerId title tag of the module. Not required by default, as BE modules are shown in a frame
 	 * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to TRUE
 	 * @param boolean $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
 	 * @param string  $scriptaculousModule additionales modules for scriptaculous
 	 * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to FALSE
 	 * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to FALSE
-	 * @param string  $extJsAdapter load alternative adapter (prototype is default adapter)
+	 * @param string  $extJsAdapter load alternative adapter (ext-base is default adapter)
 	 * @param boolean $concatenate specifies if the loaded jsFiles should be concatenated into one file. Defaults to TRUE
 	 * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
 	 * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
 	 * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only
+	 * @param string  $extCorePath specifies a path for the ExtCore default NULL (uses the path set in the t3lib_PageRenderer)
+	 * @param string  $extJsPath specifies a path for the ExtJS default NULL (uses the path set in the t3lib_PageRenderer)
 	 * @see t3lib_PageRenderer
 	 */
 	public function render($divContainerId = 'plugin',
@@ -74,11 +76,13 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 						   $scriptaculousModule = '',
 						   $loadExtJs = TRUE,
 						   $loadExtJsTheme = TRUE,
-						   $extJsAdapter = 'prototype',
+						   $extJsAdapter = '',
 						   $concatenate = TRUE,
 						   $compressJs = TRUE,
 						   $compressCss= TRUE,
-						   $enableExtJsDebug = FALSE) {
+						   $enableExtJsDebug = FALSE,
+						   $extCorePath = NULL,
+						   $extJsPath = NULL) {
 		$extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		$controllerName = $this->controllerContext->getRequest()->getControllerName();
 		$this->extJsNamespace = $extensionName . '.' . $controllerName;
@@ -88,6 +92,12 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 		}
 		if ($loadScriptaculous === TRUE) {
 			$this->pageRenderer->loadScriptaculous($scriptaculousModule);
+		}
+		if ($extCorePath !== NULL) {
+			$this->pageRenderer->setExtCorePath($extCorePath);
+		}
+		if ($extJsPath !== NULL) {
+			$this->pageRenderer->setExtJsPath($extJsPath);
 		}
 		if ($loadExtJs === TRUE) {
 			$this->pageRenderer->loadExtJS(TRUE, $loadExtJsTheme, $extJsAdapter);
@@ -102,10 +112,8 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 
 		$this->renderChildren();
 		
-						   if ($compressJs === TRUE) {
+		if ($compressJs === TRUE) {
 			$this->pageRenderer->enableCompressJavaScript();
-				// if compressJs is set, we have to tell the concaneting service to compress its code, too
-			tx_MvcExtjs_PageRenderer_Service::$compress = TRUE;
 		}
 		if ($compressCss === TRUE) {
 			$this->pageRenderer->enableCompressCss();
