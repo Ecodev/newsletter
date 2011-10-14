@@ -123,7 +123,8 @@ abstract class tx_newsletter_tools {
 		/* Get the servers */
 		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
 
-		$recipientList = $newsletter->getRecipientListConcreteInstance();
+		$recipientList = $newsletter->getRecipientList();
+		$recipientList->init();
 		while ($receiver = $recipientList->getRecipient()) {
 			if (!$host = current($hosts)) {
 				reset($hosts);

@@ -8,7 +8,7 @@
 class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
 	
 	function init() {
-		$sql = trim($this->fields['sql_statement']);
+		$sql = trim($this->getSqlStatement());
 		
 		// Inject dummy SQL statement, just for fun !
 		if (!$sql)
@@ -29,11 +29,11 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 		$r = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($this->data);
 		if (is_array($r)) {
 			if (!isset($r['plain_only'])) {
-				$r['plain_only'] = $this->fields['plain_only'];
+				$r['plain_only'] = $this->isPlainOnly();
 			}
 
 			if (!isset($r['L'])) {
-				$r['L'] = $this->fields['lang'];
+				$r['L'] = $this->getLang();
 			}
         
 			return $r;
@@ -60,7 +60,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerBounce($email, $bounce_type) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace(array('###EMAIL###', '###BOUNCE_TYPE###'), array($email, $bounce_type), $this->fields['sql_register_bounce']);
+		$sql = str_replace(array('###EMAIL###', '###BOUNCE_TYPE###'), array($email, $bounce_type), $this->getSqlRegisterBounce());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
@@ -79,7 +79,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerOpen($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->fields['sql_register_open']);
+		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterOpen());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
@@ -98,7 +98,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerClick($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->fields['sql_register_click']);
+		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterClick());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);

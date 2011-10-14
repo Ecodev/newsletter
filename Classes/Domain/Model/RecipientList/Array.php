@@ -16,7 +16,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
      
 		if (is_array($r)) {
 			if (!isset($r['plain_only'])) {
-				$r['plain_only'] = $this->fields['plain_only'];
+				$r['plain_only'] = $this->getPlainOnly();
 			}
       
 			return $r;

@@ -546,6 +546,11 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
 	 */
 	public function getRecipientList() {
+		if (!($this->recipientList instanceof Tx_Newsletter_Domain_Model_RecipientList))
+		{
+			$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+			return $recipientListRepository->findByUid($recipientList);
+		}
 		return $this->recipientList;
 	}
 	
@@ -572,24 +577,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
 		$this->setRecipientList($recipientList);
-	}
-	
-	/**
-	 * Getter for recipientList
-	 *
-	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
-	 */
-	public function getRecipientListConcreteInstance() {
-		$recipientList = $this->getRecipientList();
-		
-		if ($recipientList instanceof Tx_Newsletter_Domain_Model_RecipientList)
-			$recipientList = $recipientList->getUid();
-
-		if (!$recipientList)
-			return null;
-		
-		// TODO cleanup instanciation process for recipientList, see as well self:setRecipientList, RecipientList::getTarget() and RecipientList::loadTarget()
-		return Tx_Newsletter_Domain_Model_RecipientList::loadTarget($recipientList);
 	}
 	
 	/**
@@ -691,7 +678,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	
 	/**
 	 * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
-	 * This may differ from $newsletter->getRecipientListConcreteInstance()->getCount()
+	 * This may differ from $newsletter->getRecipientList()->getCount()
 	 * because the recipientList may change over time.
 	 */
 	public function getEmailCount()

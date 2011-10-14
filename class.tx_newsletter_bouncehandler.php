@@ -140,7 +140,9 @@ class tx_newsletter_bouncehandler
 			if (list($recipientListUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
 				$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 				$this->email = $emailRepository->findByUid($emailUid);
-				$this->recipientList = Tx_Newsletter_Domain_Model_RecipientList::getTarget($recipientListUid);
+				
+				$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+				$this->recipientList = $recipientListRepository->findByUid($recipientListUid);
 			}
 		}
 	}

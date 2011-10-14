@@ -21,7 +21,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Dom
 {
 	function init()
 	{
-		$this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->fields['csv_filename']);
+		$this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->getCsvFilename());
 	}
 
 	/**
@@ -47,8 +47,8 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Dom
 	{
 		$this->data = array();
 		
-		$sepchar = $this->fields['csv_separator'] ? $this->fields['csv_separator'] : ',';
-		$keys = array_map ('trim', explode($sepchar, $this->fields['csv_fields']));
+		$sepchar = $this->getCsvSeparator() ? $this->getCsvSeparator() : ',';
+		$keys = array_map('trim', explode($sepchar, $this->getCsvFields()));
 		
 		if ($csvdata && $sepchar && count($keys))
 		{

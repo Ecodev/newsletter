@@ -561,53 +561,15 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	public function getConfirmedRecipients() {
 		return $this->confirmedRecipients;
 	}
-
 	
-	
-	
-
-	var $fields;
-	var $data;
-   
 	/**
-	 * This is the object factory, without init(), for all newsletter targets.
-	 *
-	 * @final
-	 * @static
-	 * @param     integer     Uid of a Tx_Newsletter_Domain_Model_RecipientList from the database.
-	 * @return    object      Of newsletter_target type.
+	 * Array containing raw data for recipient list. Kinf of cache in memory.
+	 * @var array
 	 */
-	public static function getTarget($uid) {
-		global $TYPO3_DB;
-		$rs = $TYPO3_DB->sql_query("SELECT * FROM tx_newsletter_domain_model_recipientlist WHERE uid = $uid");
-		$fields = $TYPO3_DB->sql_fetch_assoc($rs);
-		$object = new $fields['type'];
-		if (!is_subclass_of($object, 'Tx_Newsletter_Domain_Model_RecipientList'))
-		{
-			die ("Ooops..   $fields[targettype] is not a Tx_Newsletter_Domain_Model_RecipientList child class");
-		}
-		
-		$object->fields = $fields;
-		$object->uid = $uid;
-		return $object;
-	}
+	var $data = array();
    
 	/**
-	 * This is the object factory, with init(), for all newsletter targets.
-	 *
-	 * @final
-	 * @static
-	 * @param     integer     Uid of a Tx_Newsletter_Domain_Model_RecipientList from the database.
-	 * @return    object      Of newsletter_target type.
-	 */
-	public static function loadTarget($uid) {
-		$object = self::getTarget($uid);
-		$object->init();
-		return $object;
-	}
-   
-	/**
-	 * This is the method called when a newsletter_target is produced in the loadTarget factory
+	 * Initializing method to prepare for reading recipients.
 	 *
 	 * @abstract
 	 * @return    void
@@ -714,8 +676,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 				}
 			}
 			
-			
-			$authCode = t3lib_div::stdAuthCode($this->fields);
+			$authCode = t3lib_div::stdAuthCode($this->_getCleanProperties());
 			$out = '<table style="border: 1px grey solid; border-collapse: collapse;">'.$out.'</table>';
 			
 			$out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
@@ -724,7 +685,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 			.')</p>';
 		}
 		
-		$out = '<h4>' . $this->fields['title'] . '</h4>' . $out;
+		$out = '<h4>' . $this->getTitle() . '</h4>' . $out;
 		return $out;
 	}
 	

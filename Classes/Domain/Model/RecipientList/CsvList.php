@@ -5,6 +5,6 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvList extends Tx_Newsletter_Dom
 {
 	function init()
 	{
-		$this->loadCsvFromData($this->fields['csv_values']);
+		$this->loadCsvFromData($this->getCsvValues());
 	}
 }

@@ -29,7 +29,8 @@ else
 	if ($newsletter)
 	{
 		// Find the recipient
-		$recipientList = $newsletter->getRecipientListConcreteInstance();
+		$recipientList = $newsletter->getRecipientList();
+		$recipientList->init();
 		while ($record = $recipientList->getRecipient())
 		{
 			// Got him

@@ -267,8 +267,10 @@ function tx_newsletter_recipientlist_show_recipients($PA, $fObj)
 	$uid = intval($PA['row']['uid']);
 	if ($uid != 0)
 	{
-		$target = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($uid);
-		$result .= $target->getExtract();
+		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+		$recipientList = $recipientListRepository->findByUidInitialized($uid);
+		
+		$result .= $recipientList->getExtract();
 	}
 	
 	return $result;

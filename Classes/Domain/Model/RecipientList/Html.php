@@ -5,8 +5,8 @@ class Tx_Newsletter_Domain_Model_RecipientList_Html extends Tx_Newsletter_Domain
 	{
 		$this->data = array();
 		
-		$htmlurl = $this->fields['html_url'];
-		$htmlfetchtype = $this->fields['html_fetch_type'];
+		$htmlurl = $this->getHtmlFile();
+		$htmlfetchtype = $this->getHtmlFetchType();
 		 
 		$content = t3lib_div::getURL($htmlurl);
 		 
