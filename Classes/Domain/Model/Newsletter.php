@@ -537,7 +537,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setRecipientList(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->recipientList = $recipientList->uid;
+		$this->recipientList = $recipientList;
 	}
 
 	/**
@@ -546,11 +546,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
 	 */
 	public function getRecipientList() {
-		if (!($this->recipientList instanceof Tx_Newsletter_Domain_Model_RecipientList))
-		{
-			$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
-			return $recipientListRepository->findByUid($recipientList);
-		}
 		return $this->recipientList;
 	}
 	

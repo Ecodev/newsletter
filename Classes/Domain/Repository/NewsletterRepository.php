@@ -61,4 +61,30 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 		return $query->execute();
 	}
 	
+	/**
+	 * Returns all newsletter which are ready to be sent now and not yet locked (sending already started)
+	 * @param boolean $onlyTest
+	 * @return Tx_Newsletter_Domain_Model_Newsletter[] 
+	 */
+	public function findAllReadyToSend($onlyTest = false)
+	{
+		if ($onlyTest)
+			$onlyTest = 'AND is_test = 1 ';
+		else
+			$onlyTest = ' ';
+
+		$query = $this->createQuery();
+		$query->statement("SELECT * 
+		                              FROM tx_newsletter_domain_model_newsletter 
+		                              WHERE planned_time <= UNIX_TIMESTAMP() 
+		                              AND planned_time <> 0 
+		                              AND begin_time = 0
+		                              AND deleted = 0
+		                              AND hidden = 0
+		                              $onlyTest
+		                              ");
+		
+		return $query->execute();
+	}
+	
 }
