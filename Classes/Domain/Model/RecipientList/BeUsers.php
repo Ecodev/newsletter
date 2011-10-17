@@ -1,7 +1,40 @@
 <?php
 
-class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql { 
-	var $tableName = 'be_users';
+class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql {
+	
+	/**
+	 * beUsers
+	 *
+	 * @var string $beUsers
+	 */
+	protected $beUsers;
+
+	/**
+	 * Setter for beUsers
+	 *
+	 * @param string $beUsers beUsers
+	 * @return void
+	 */
+	public function setBeUsers($beUsers) {
+		$this->beUsers = $beUsers;
+	}
+
+	/**
+	 * Getter for beUsers
+	 *
+	 * @return string beUsers
+	 */
+	public function getBeUsers() {
+		return $this->beUsers;
+	}
+	
+	/**
+	 * Returns the tablename to work with
+	 * @return string 
+	 */
+	protected function getTableName() {
+		return 'be_users';
+	}
 
 	function init() {
 		$config = explode(',', $this->getBeUsers());

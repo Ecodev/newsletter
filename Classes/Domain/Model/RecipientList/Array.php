@@ -38,11 +38,6 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
 			return "No data fetched";
 		}
 	}
-   
-	function registerBounce($uid, $bounce_type) {
-		/* We dont have something reasonable to do here, since we dont have a table..   maybe it can be extented in some specific setup..  */
-		return false;
-	}
 }
 
 

@@ -6,6 +6,110 @@
  *
  */
 class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
+
+	/**
+	 * sqlStatement
+	 *
+	 * @var string $sqlStatement
+	 */
+	protected $sqlStatement;
+
+	/**
+	 * sqlRegisterBounce
+	 *
+	 * @var string $sqlRegisterBounce
+	 */
+	protected $sqlRegisterBounce;
+
+	/**
+	 * sqlRegisterOpen
+	 *
+	 * @var string $sqlRegisterOpen
+	 */
+	protected $sqlRegisterOpen;
+
+	/**
+	 * sqlRegisterClick
+	 *
+	 * @var string $sqlRegisterClick
+	 */
+	protected $sqlRegisterClick;
+
+	/**
+	 * Setter for sqlStatement
+	 *
+	 * @param string $sqlStatement sqlStatement
+	 * @return void
+	 */
+	public function setSqlStatement($sqlStatement) {
+		$this->sqlStatement = $sqlStatement;
+	}
+
+	/**
+	 * Getter for sqlStatement
+	 *
+	 * @return string sqlStatement
+	 */
+	public function getSqlStatement() {
+		return $this->sqlStatement;
+	}
+
+	/**
+	 * Setter for sqlRegisterBounce
+	 *
+	 * @param string $sqlRegisterBounce sqlRegisterBounce
+	 * @return void
+	 */
+	public function setSqlRegisterBounce($sqlRegisterBounce) {
+		$this->sqlRegisterBounce = $sqlRegisterBounce;
+	}
+
+	/**
+	 * Getter for sqlRegisterBounce
+	 *
+	 * @return string sqlRegisterBounce
+	 */
+	public function getSqlRegisterBounce() {
+		return $this->sqlRegisterBounce;
+	}
+
+	/**
+	 * Setter for sqlRegisterOpen
+	 *
+	 * @param string $sqlRegisterOpen sqlRegisterOpen
+	 * @return void
+	 */
+	public function setSqlRegisterOpen($sqlRegisterOpen) {
+		$this->sqlRegisterOpen = $sqlRegisterOpen;
+	}
+
+	/**
+	 * Getter for sqlRegisterOpen
+	 *
+	 * @return string sqlRegisterOpen
+	 */
+	public function getSqlRegisterOpen() {
+		return $this->sqlRegisterOpen;
+	}
+
+	/**
+	 * Setter for sqlRegisterClick
+	 *
+	 * @param string $sqlRegisterClick sqlRegisterClick
+	 * @return void
+	 */
+	public function setSqlRegisterClick($sqlRegisterClick) {
+		$this->sqlRegisterClick = $sqlRegisterClick;
+	}
+
+	/**
+	 * Getter for sqlRegisterClick
+	 *
+	 * @return string sqlRegisterClick
+	 */
+	public function getSqlRegisterClick() {
+		return $this->sqlRegisterClick;
+	}
 	
 	function init() {
 		$sql = trim($this->getSqlStatement());

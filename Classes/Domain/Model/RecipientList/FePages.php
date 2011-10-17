@@ -1,8 +1,41 @@
 <?php
 
 class Tx_Newsletter_Domain_Model_RecipientList_FePages extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql { 
-	var $tableName = 'fe_users';
+	
+	/**
+	 * fePages
+	 *
+	 * @var string $fePages
+	 */
+	protected $fePages;
 
+	/**
+	 * Setter for fePages
+	 *
+	 * @param string $fePages fePages
+	 * @return void
+	 */
+	public function setFePages($fePages) {
+		$this->fePages = $fePages;
+	}
+
+	/**
+	 * Getter for fePages
+	 *
+	 * @return string fePages
+	 */
+	public function getFePages() {
+		return $this->fePages;
+	}
+
+	/**
+	 * Returns the tablename to work with
+	 * @return string 
+	 */
+	protected function getTableName() {
+		return 'fe_users';
+	}
+	
 	function init () {
 		$config = explode(',', $this->getFePages());
 		$config[] = -1;

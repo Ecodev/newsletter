@@ -19,6 +19,85 @@ if (!function_exists('str_getcsv'))
 
 class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Domain_Model_RecipientList_Array
 {
+
+	/**
+	 * csvSeparator
+	 *
+	 * @var string $csvSeparator
+	 */
+	protected $csvSeparator;
+
+	/**
+	 * csvFields
+	 *
+	 * @var string $csvFields
+	 */
+	protected $csvFields;
+
+	/**
+	 * csvFilename
+	 *
+	 * @var string $csvFilename
+	 */
+	protected $csvFilename;
+
+	/**
+	 * Setter for csvSeparator
+	 *
+	 * @param string $csvSeparator csvSeparator
+	 * @return void
+	 */
+	public function setCsvSeparator($csvSeparator) {
+		$this->csvSeparator = $csvSeparator;
+	}
+
+	/**
+	 * Getter for csvSeparator
+	 *
+	 * @return string csvSeparator
+	 */
+	public function getCsvSeparator() {
+		return $this->csvSeparator;
+	}
+
+	/**
+	 * Setter for csvFields
+	 *
+	 * @param string $csvFields csvFields
+	 * @return void
+	 */
+	public function setCsvFields($csvFields) {
+		$this->csvFields = $csvFields;
+	}
+
+	/**
+	 * Getter for csvFields
+	 *
+	 * @return string csvFields
+	 */
+	public function getCsvFields() {
+		return $this->csvFields;
+	}
+
+	/**
+	 * Setter for csvFilename
+	 *
+	 * @param string $csvFilename csvFilename
+	 * @return void
+	 */
+	public function setCsvFilename($csvFilename) {
+		$this->csvFilename = $csvFilename;
+	}
+
+	/**
+	 * Getter for csvFilename
+	 *
+	 * @return string csvFilename
+	 */
+	public function getCsvFilename() {
+		return $this->csvFilename;
+	}
+	
 	function init()
 	{
 		$this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->getCsvFilename());
@@ -48,14 +127,21 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Dom
 		$this->data = array();
 		
 		$sepchar = $this->getCsvSeparator() ? $this->getCsvSeparator() : ',';
-		$keys = array_map('trim', explode($sepchar, $this->getCsvFields()));
+		$keys = array_unique(array_map('trim', explode($sepchar, $this->getCsvFields())));
 		
 		if ($csvdata && $sepchar && count($keys))
 		{
 			$lines = explode("\n", $csvdata);
 			foreach ($lines as $line)
 			{
+				if (!trim($line))
+					continue;
+				
 				$values = str_getcsv($line, $sepchar);
+				if (count($values) != count($keys))
+				{
+					$this->error = sprintf('Field names count (%1$d) is not equal to values count (%2$d)', count($keys), count($values));
+				}
 				$row = array_combine($keys, $values);
 
 				if ($row)
@@ -66,5 +152,12 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Dom
 		}
 	}
 	
+	public function getError() {
+		
+		if (isset($this->error))
+			return $this->error;
+		
+		parent::getError();
+	}
 }
 

@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_AbstractEntity {
+abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * title
@@ -60,104 +60,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @var string $type
 	 */
 	protected $type;
-
-	/**
-	 * beUsers
-	 *
-	 * @var string $beUsers
-	 */
-	protected $beUsers;
-
-	/**
-	 * feGroups
-	 *
-	 * @var string $feGroups
-	 */
-	protected $feGroups;
-
-	/**
-	 * fePages
-	 *
-	 * @var string $fePages
-	 */
-	protected $fePages;
-
-	/**
-	 * csvUrl
-	 *
-	 * @var string $csvUrl
-	 */
-	protected $csvUrl;
-
-	/**
-	 * csvSeparator
-	 *
-	 * @var string $csvSeparator
-	 */
-	protected $csvSeparator;
-
-	/**
-	 * csvFields
-	 *
-	 * @var string $csvFields
-	 */
-	protected $csvFields;
-
-	/**
-	 * csvFilename
-	 *
-	 * @var string $csvFilename
-	 */
-	protected $csvFilename;
-
-	/**
-	 * csvValues
-	 *
-	 * @var string $csvValues
-	 */
-	protected $csvValues;
-
-	/**
-	 * sqlStatement
-	 *
-	 * @var string $sqlStatement
-	 */
-	protected $sqlStatement;
-
-	/**
-	 * sqlRegisterBounce
-	 *
-	 * @var string $sqlRegisterBounce
-	 */
-	protected $sqlRegisterBounce;
-
-	/**
-	 * sqlRegisterOpen
-	 *
-	 * @var string $sqlRegisterOpen
-	 */
-	protected $sqlRegisterOpen;
-
-	/**
-	 * sqlRegisterClick
-	 *
-	 * @var string $sqlRegisterClick
-	 */
-	protected $sqlRegisterClick;
-
-	/**
-	 * htmlFile
-	 *
-	 * @var string $htmlFile
-	 */
-	protected $htmlFile;
-
-	/**
-	 * htmlFetchType
-	 *
-	 * @var string $htmlFetchType
-	 */
-	protected $htmlFetchType;
 
 	/**
 	 * calculatedRecipients
@@ -259,272 +161,6 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	}
 
 	/**
-	 * Setter for beUsers
-	 *
-	 * @param string $beUsers beUsers
-	 * @return void
-	 */
-	public function setBeUsers($beUsers) {
-		$this->beUsers = $beUsers;
-	}
-
-	/**
-	 * Getter for beUsers
-	 *
-	 * @return string beUsers
-	 */
-	public function getBeUsers() {
-		return $this->beUsers;
-	}
-
-	/**
-	 * Setter for feGroups
-	 *
-	 * @param string $feGroups feGroups
-	 * @return void
-	 */
-	public function setFeGroups($feGroups) {
-		$this->feGroups = $feGroups;
-	}
-
-	/**
-	 * Getter for feGroups
-	 *
-	 * @return string feGroups
-	 */
-	public function getFeGroups() {
-		return $this->feGroups;
-	}
-
-	/**
-	 * Setter for fePages
-	 *
-	 * @param string $fePages fePages
-	 * @return void
-	 */
-	public function setFePages($fePages) {
-		$this->fePages = $fePages;
-	}
-
-	/**
-	 * Getter for fePages
-	 *
-	 * @return string fePages
-	 */
-	public function getFePages() {
-		return $this->fePages;
-	}
-
-	/**
-	 * Setter for csvUrl
-	 *
-	 * @param string $csvUrl csvUrl
-	 * @return void
-	 */
-	public function setCsvUrl($csvUrl) {
-		$this->csvUrl = $csvUrl;
-	}
-
-	/**
-	 * Getter for csvUrl
-	 *
-	 * @return string csvUrl
-	 */
-	public function getCsvUrl() {
-		return $this->csvUrl;
-	}
-
-	/**
-	 * Setter for csvSeparator
-	 *
-	 * @param string $csvSeparator csvSeparator
-	 * @return void
-	 */
-	public function setCsvSeparator($csvSeparator) {
-		$this->csvSeparator = $csvSeparator;
-	}
-
-	/**
-	 * Getter for csvSeparator
-	 *
-	 * @return string csvSeparator
-	 */
-	public function getCsvSeparator() {
-		return $this->csvSeparator;
-	}
-
-	/**
-	 * Setter for csvFields
-	 *
-	 * @param string $csvFields csvFields
-	 * @return void
-	 */
-	public function setCsvFields($csvFields) {
-		$this->csvFields = $csvFields;
-	}
-
-	/**
-	 * Getter for csvFields
-	 *
-	 * @return string csvFields
-	 */
-	public function getCsvFields() {
-		return $this->csvFields;
-	}
-
-	/**
-	 * Setter for csvFilename
-	 *
-	 * @param string $csvFilename csvFilename
-	 * @return void
-	 */
-	public function setCsvFilename($csvFilename) {
-		$this->csvFilename = $csvFilename;
-	}
-
-	/**
-	 * Getter for csvFilename
-	 *
-	 * @return string csvFilename
-	 */
-	public function getCsvFilename() {
-		return $this->csvFilename;
-	}
-
-	/**
-	 * Setter for csvValues
-	 *
-	 * @param string $csvValues csvValues
-	 * @return void
-	 */
-	public function setCsvValues($csvValues) {
-		$this->csvValues = $csvValues;
-	}
-
-	/**
-	 * Getter for csvValues
-	 *
-	 * @return string csvValues
-	 */
-	public function getCsvValues() {
-		return $this->csvValues;
-	}
-
-	/**
-	 * Setter for sqlStatement
-	 *
-	 * @param string $sqlStatement sqlStatement
-	 * @return void
-	 */
-	public function setSqlStatement($sqlStatement) {
-		$this->sqlStatement = $sqlStatement;
-	}
-
-	/**
-	 * Getter for sqlStatement
-	 *
-	 * @return string sqlStatement
-	 */
-	public function getSqlStatement() {
-		return $this->sqlStatement;
-	}
-
-	/**
-	 * Setter for sqlRegisterBounce
-	 *
-	 * @param string $sqlRegisterBounce sqlRegisterBounce
-	 * @return void
-	 */
-	public function setSqlRegisterBounce($sqlRegisterBounce) {
-		$this->sqlRegisterBounce = $sqlRegisterBounce;
-	}
-
-	/**
-	 * Getter for sqlRegisterBounce
-	 *
-	 * @return string sqlRegisterBounce
-	 */
-	public function getSqlRegisterBounce() {
-		return $this->sqlRegisterBounce;
-	}
-
-	/**
-	 * Setter for sqlRegisterOpen
-	 *
-	 * @param string $sqlRegisterOpen sqlRegisterOpen
-	 * @return void
-	 */
-	public function setSqlRegisterOpen($sqlRegisterOpen) {
-		$this->sqlRegisterOpen = $sqlRegisterOpen;
-	}
-
-	/**
-	 * Getter for sqlRegisterOpen
-	 *
-	 * @return string sqlRegisterOpen
-	 */
-	public function getSqlRegisterOpen() {
-		return $this->sqlRegisterOpen;
-	}
-
-	/**
-	 * Setter for sqlRegisterClick
-	 *
-	 * @param string $sqlRegisterClick sqlRegisterClick
-	 * @return void
-	 */
-	public function setSqlRegisterClick($sqlRegisterClick) {
-		$this->sqlRegisterClick = $sqlRegisterClick;
-	}
-
-	/**
-	 * Getter for sqlRegisterClick
-	 *
-	 * @return string sqlRegisterClick
-	 */
-	public function getSqlRegisterClick() {
-		return $this->sqlRegisterClick;
-	}
-
-	/**
-	 * Setter for htmlFile
-	 *
-	 * @param string $htmlFile htmlFile
-	 * @return void
-	 */
-	public function setHtmlFile($htmlFile) {
-		$this->htmlFile = $htmlFile;
-	}
-
-	/**
-	 * Getter for htmlFile
-	 *
-	 * @return string htmlFile
-	 */
-	public function getHtmlFile() {
-		return $this->htmlFile;
-	}
-
-	/**
-	 * Setter for htmlFetchType
-	 *
-	 * @param string $htmlFetchType htmlFetchType
-	 * @return void
-	 */
-	public function setHtmlFetchType($htmlFetchType) {
-		$this->htmlFetchType = $htmlFetchType;
-	}
-
-	/**
-	 * Getter for htmlFetchType
-	 *
-	 * @return string htmlFetchType
-	 */
-	public function getHtmlFetchType() {
-		return $this->htmlFetchType;
-	}
-
-	/**
 	 * Setter for calculatedRecipients
 	 *
 	 * @param string $calculatedRecipients calculatedRecipients
@@ -563,20 +199,17 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	}
 	
 	/**
-	 * Array containing raw data for recipient list. Kinf of cache in memory.
+	 * Array or mysql result containing raw data for recipient list. Kinf of cache in memory.
 	 * @var array
 	 */
-	var $data = array();
+	var $data = null;
    
 	/**
 	 * Initializing method to prepare for reading recipients.
 	 *
-	 * @abstract
 	 * @return    void
 	 */
-	function init() {
-		die ('You need to implement the init-method.');
-	}
+	abstract public function init();
 
 	/**
 	 * Fetch one receiver record from the newsletter target. 
@@ -586,9 +219,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @abstract
 	 * @return   array      Assoc array with fields for the receiver
 	 */
-	function getRecipient() {
-		die ('You need to implement the getRecipient-method.');
-	}
+	abstract public function getRecipient();
    
 	/**
 	 * Get the number of receivers in this newsletter target
@@ -596,9 +227,7 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @abstract
 	 * @return   integer      Numbers of receivers.
 	 */
-	function getCount() {
-		die ('You need to implement the getCount-method.');   
-	}
+	abstract public function getCount();
    
 	/**
 	 * Get error text if the fetching of the newsletter target has somehow failed.
@@ -606,12 +235,10 @@ class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_A
 	 * @abstract
 	 * @return   string      Error text or empty string.
 	 */
-	function getError() {
-		die ('You need to implement the getError-method.');   
-	}
+	abstract public function getError();
 	   
 	/**
-	 * Here you can define an action when an address bounces. This can either be database operations such a a deletion. 
+	 * Here you can define an action when an address bounces. This can either be database operations such as a deletion. 
 	 * For external data-sources, you might consider collecting the addresses for later removal from the foreign system. 
 	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sensible default. "tableName" should also be included 
 	 * for compatibility reasons.

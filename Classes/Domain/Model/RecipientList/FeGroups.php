@@ -1,13 +1,46 @@
 <?php
 
 class Tx_Newsletter_Domain_Model_RecipientList_FeGroups extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql { 
-	var $tableName = 'fe_users';
 
+	/**
+	 * feGroups
+	 *
+	 * @var string $feGroups
+	 */
+	protected $feGroups;
+
+	/**
+	 * Setter for feGroups
+	 *
+	 * @param string $feGroups feGroups
+	 * @return void
+	 */
+	public function setFeGroups($feGroups) {
+		$this->feGroups = $feGroups;
+	}
+
+	/**
+	 * Getter for feGroups
+	 *
+	 * @return string feGroups
+	 */
+	public function getFeGroups() {
+		return $this->feGroups;
+	}
+	
+	/**
+	 * Returns the tablename to work with
+	 * @return string 
+	 */
+	protected function getTableName() {
+		return 'fe_users';
+	}
+	
 	function init () {
 		$groups = explode(',', $this->getFeGroups());
 		$groups[] = -1;
 		$groups = array_filter($groups);
-       
+
        
 		$this->data = $GLOBALS['TYPO3_DB']->sql_query(
 			"SELECT DISTINCT fe_users.uid,name,address,telephone,fax,email,username,fe_users.title,zip,city,country,www,company,fe_groups.title as group_title
