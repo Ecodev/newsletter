@@ -37,6 +37,9 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			button.disable();
 			newsletterStore.addListener('save', function(){button.enable();}, null, {single: true});
 			
+			// If something went wrong on server during saving, remove the failing newsletter
+			newsletterStore.addListener('exception', function(){newsletterStore.removeAt(0);}, null, {single: true});
+			
 			// Write to the store who will make an ajax request via ExtDirect
 			var newsletter = new newsletterStore.recordType(values);
 			newsletterStore.insert(0, newsletter);

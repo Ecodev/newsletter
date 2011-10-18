@@ -112,36 +112,51 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @dontverifyrequesthash
 	 */
 	public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter=null) {
-		$this->newsletterRepository->add($newNewsletter);
-		$this->persistenceManager->persistAll();
 		
-		// If it is test newsletter, send it immediately
-		if ($newNewsletter->getIsTest())
+		$limitTestRecipientCount = 10; // This is a low limit, technically, but it does not make sense to test a newsletter for more people than that anyway
+		$recipientList = $newNewsletter->getRecipientList();
+		$recipientList->init();
+		$count = $recipientList->getCount();
+			
+		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
+		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
-			try {
-				// Fill the spool and run the queue
-				tx_newsletter_tools::createSpool($newNewsletter);
-				tx_newsletter_tools::runSpoolOne($newNewsletter);
-
-				$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
-			}
-			catch (Exception $exception)
-			{
-				$this->flashMessages->add($exception->getMessage(), 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
-			}
+			$this->flashMessages->add("Test newsletter cannot be sent to $count recipients. Maximum allowed is $limitTestRecipientCount.", 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
+			$this->view->assign('success', FALSE);
 		}
 		else
 		{
-			$this->flashMessages->add('Newsletter has been queued and will be sent soon.', 'Newsletter queued', t3lib_FlashMessage::OK);
+			$this->newsletterRepository->add($newNewsletter);
+			$this->persistenceManager->persistAll();
+			$this->view->assign('success', TRUE);
+
+			// If it is test newsletter, send it immediately
+			if ($newNewsletter->getIsTest())
+			{
+				try {
+					// Fill the spool and run the queue
+					tx_newsletter_tools::createSpool($newNewsletter);
+					tx_newsletter_tools::runSpoolOne($newNewsletter);
+
+					$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
+				}
+				catch (Exception $exception)
+				{
+					$this->flashMessages->add($exception->getMessage(), 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
+				}
+			}
+			else
+			{
+				$this->flashMessages->add('Newsletter has been queued and will be sent soon.', 'Newsletter queued', t3lib_FlashMessage::OK);
+			}
 		}
 		
 		
-		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
+		$this->view->setVariablesToRender(array('data', 'success','flashMessages', 'message'));
 		$this->view->setConfiguration(array(
 			'data' =>  self::resolveJsonViewConfiguration()
 		));
 		
-		$this->view->assign('success',TRUE);
 		$this->view->assign('data', $newNewsletter);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
