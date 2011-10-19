@@ -27,7 +27,7 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Template implements Tx_Newslette
 	 * @return  string   Returned data. 
 	 * 
 	 */
-	public static function getURL($url) {
+	protected static function getURL($url) {
 		$content = t3lib_div::getURL($url);
 
 		/* Content should be more that just a few characters. Apache error propably occured */
