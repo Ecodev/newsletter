@@ -152,7 +152,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		}
 		
 		
-		$this->view->setVariablesToRender(array('data', 'success','flashMessages', 'message'));
+		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' =>  self::resolveJsonViewConfiguration()
 		));

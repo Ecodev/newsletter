@@ -16,7 +16,7 @@ if (TYPO3_MODE == 'BE')	{
 			'Email' => 'list',
 			'Link' => 'list',
 			'BounceAccount' => 'list',
-			'RecipientList' => 'list',
+			'RecipientList' => 'list, listRecipient',
 		),
 		array(
 			'access' => 'user,group',

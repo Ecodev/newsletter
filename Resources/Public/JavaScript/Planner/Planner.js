@@ -54,7 +54,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			items: [
 			{
 				xtype: 'tabpanel',
-				activeTab: 0,
+				activeTab: 2,
 				items : [
 				{
 					height: 500,
@@ -242,11 +242,79 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							selectOnFocus: true,
 							autoSelect: true,
 							typeAhead: false,
-							allowBlank: false
+							allowBlank: false,
+							listeners: {
+								
+								/**
+								 * When an uidRecipientList is selected, we update other depending stores (recipients)
+								 * TODO: it should be the depending stores listening to the uidRecipientList, but I couldn't 
+								 * find an easy way to access the uidRecipientList from the stores
+								 */
+								'select' : function(combo, recipientList, index) {
+									
+									var recipientStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient');
+									recipientStore.load({params: {data: recipientList.data.__identity }});
+								}
+							}
+						},
+						{
+							xtype: 'grid',
+							loadMask: true,
+							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient'),
+							height: 200,
+							
+							// When the grid is ready, we add a listener to its store, so we can reconfigure
+							// the grid whenever the store's metadata change, and thus updating available columns for the grid
+							listeners: {
+								'viewready' : function(grid) {
+									grid.getStore().addListener('metachange', function(store, meta) {
+										var columns = [];
+										columns.push({
+											header: Ext.ux.TYPO3.Newsletter.Language.preview,
+											dataIndex: 'email',
+											renderer: function(value, parent, record) {
+														
+												var form = grid.findParentByType('form').getForm();
+												var values = form.getFieldValues();
+												var params = String.format('?pid={0}&uidRecipientList={1}&plainConverter={2}&injectOpenSpy={3}&injectLinksSpy={4}&email={5}',
+													values.pid,
+													values.uidRecipientList,
+													values.plainConverter,
+													values.injectOpenSpy,
+													values.injectLinksSpy,
+													value);
+												
+												return String.format('<a href="/typo3conf/ext/newsletter/web/view.php' + params + '">preview</a>', value);
+											}
+										});
+
+										for (var i = 0; i < meta.fields.length; i++ ) {
+												columns.push( {
+													header: meta.fields[i].name,
+													dataIndex: meta.fields[i].name,
+													type: meta.fields[i].type,
+													width: 150
+												});
+										}
+										
+										grid.reconfigure(store, new Ext.grid.ColumnModel(columns));
+									});
+								}
+							},
+							columns:[	
+								
+								{
+									dataIndex: 'email',
+									header: Ext.ux.TYPO3.Newsletter.Language.recipients,
+									width: 300,
+									sortable: true
+									//renderer: this._renderEmail
+								}
+							]
 						}]
-					},
+					}
 					
-					{
+					,{
 						// Fieldset in Column 1
 						xtype:'fieldset',
 						title: 'Testing',
