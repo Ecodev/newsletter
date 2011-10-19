@@ -253,7 +253,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 								'select' : function(combo, recipientList, index) {
 									
 									var recipientStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient');
-									recipientStore.load({params: {data: recipientList.data.__identity }});
+									recipientStore.load({params: {data: recipientList.data.__identity, start: 0, limit: 20 }});
 								}
 							}
 						},
@@ -301,16 +301,19 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 									});
 								}
 							},
-							columns:[	
-								
-								{
-									dataIndex: 'email',
-									header: Ext.ux.TYPO3.Newsletter.Language.recipients,
-									width: 300,
-									sortable: true
-									//renderer: this._renderEmail
+							columns: [], // No columns when loading, it will be dynamically set when the store is loaded and we know what columns are available
+							//
+							// paging bar on the bottom
+							bbar: new Ext.PagingToolbar({
+								pageSize: 20,
+								store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient'),
+								displayInfo: true,
+								listeners: {
+									'beforechange' : function(pagingToolbar, params) {
+										params.data = 20;
+									}
 								}
-							]
+							})
 						}]
 					}
 					

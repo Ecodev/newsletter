@@ -75,14 +75,26 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 	/**
 	 * Returns the list of recipient for the specified recipientList 
 	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
 	 */
-	public function listRecipientAction($uidRecipientList)
+	public function listRecipientAction($uidRecipientList, $start, $limit)
 	{
 		$recipientLists = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
+		
+		// Gather recipient according to defined limits
+		$i = 0;
 		$recipients = array();
 		while ($recipient = $recipientLists->getRecipient())
 		{
-			$recipients[] = $recipient;
+			if ($i++ >= $start)
+			{
+				$recipients[] = $recipient;
+				if (count($recipients) == $limit)
+				{
+					break;
+				}
+			}
 		}
 		
 		$metaData = array(
@@ -90,11 +102,6 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 			'successProperty' => 'success',
 			'idProperty' => 'uid',
 			'root' => 'data',
-			// used by store to set its sortInfo
-			'sortInfo' => array (
-				'field' => 'email',
-				'direction' => 'ASC'
-			),
 			'fields' => array(),
 		);
 		

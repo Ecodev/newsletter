@@ -22,7 +22,7 @@ Ext.ux.TYPO3.Newsletter.Store.Recipient = function() {
 					read: Ext.ux.TYPO3.Newsletter.Remote.RecipientListController.listRecipientAction
 				},
 				paramOrder: {
-					read: ['data']
+					read: ['data', 'start', 'limit']
 				}
 			});
 		}
