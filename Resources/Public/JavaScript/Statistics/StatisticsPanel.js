@@ -26,14 +26,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 					itemId: 'overviewTab'
 				},
 				{
-					title: Ext.ux.TYPO3.Newsletter.Language.links_tab,
-					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab',
-					itemId: 'linkTab'
-				},
-				{
 					title: Ext.ux.TYPO3.Newsletter.Language.emails_tab,
 					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab',
 					itemId: 'emailTab'
+				},
+				{
+					title: Ext.ux.TYPO3.Newsletter.Language.links_tab,
+					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab',
+					itemId: 'linkTab'
 				}
 			]
 		};

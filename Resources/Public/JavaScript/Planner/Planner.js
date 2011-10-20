@@ -54,7 +54,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			items: [
 			{
 				xtype: 'tabpanel',
-				activeTab: 2,
+				activeTab: 0,
 				items : [
 				{
 					height: 500,
@@ -244,7 +244,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							listeners: {
 								
 								// Forward event when the store is loaded to simulate that first item is selected (and then load recipient list in grid)
-								afterrender: function(combo) {
+								added: function(combo) {
 
 									var store = combo.getStore();
 									store.addListener('load', function(store, records) {
@@ -258,7 +258,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 								 * find an easy way to access the uidRecipientList from the stores
 								 */
 								select: function(combo, recipientList, index) {
-								console.log('select event');
 									var recipientStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient');
 									recipientStore.load({params: {data: recipientList.data.__identity, start: 0, limit: 20 }});
 								}
@@ -273,8 +272,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							// When the grid is ready, we add a listener to its store, so we can reconfigure
 							// the grid whenever the store's metadata change, and thus updating available columns for the grid
 							listeners: {
-								'viewready' : function(grid) {
-									grid.getStore().addListener('metachange', function(store, meta) {
+								added: function(grid) {
+									grid.getStore().addListener('metachange', function(store, meta) {	
 										var columns = [];
 										columns.push({
 											header: Ext.ux.TYPO3.Newsletter.Language.preview,
@@ -316,15 +315,14 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 								store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient'),
 								displayInfo: true,
 								listeners: {
-									'beforechange' : function(pagingToolbar, params) {
+									beforechange: function(pagingToolbar, params) {
 										params.data = 20;
 									}
 								}
 							})
 						}]
-					}
-					
-					,{
+					},
+					{
 						// Fieldset in Column 1
 						xtype:'fieldset',
 						title: 'Testing',
@@ -371,7 +369,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 
 			listeners: 
 			{
-				'afterrender': function(formPanel){
+				afterrender: function(formPanel){
 					formPanel.getForm().doAction('directload');
 				}
 			}

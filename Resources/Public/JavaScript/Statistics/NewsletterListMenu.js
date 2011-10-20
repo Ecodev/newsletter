@@ -11,7 +11,7 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
  *
  * $Id$
  */
-Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.ComboBox, {
+Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.GridPanel, {
 
 	initComponent: function() {
 		var thisNewsletterListMenu = this;
@@ -21,7 +21,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 		// but somehow the flag autoSelect does not work, even if the store is load *after* the combo is rendered
 		newsletterStore.on('load', function(store, records, options) { 
 			if (records.length > 0) {
-				thisNewsletterListMenu.fireEvent('select', thisNewsletterListMenu, records[0], 0);
+				thisNewsletterListMenu.getSelectionModel().selectFirstRow();
 			}
 		});
 		
@@ -29,18 +29,64 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 			emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
 			id: 'newsletterListMenu',
 			store: newsletterStore,
-			displayField: 'fullTitle',
-			valueField: '__identity',
-			width: 400,
+			height: 200,
 			mode: 'local',
-			forceSelection: true,
-			triggerAction: 'all',
-			selectOnFocus: true,
-			autoSelect: true,
-			typeAhead: false,
-			listeners: {
-				select: this.onNewsletterSelected
-			}
+			stripeRows: true,
+			selModel: new Ext.grid.RowSelectionModel({
+				singleSelect:true,
+				listeners:{
+					rowselect: function(selectionModel, rowIndex, newsletter){thisNewsletterListMenu.onNewsletterSelected(newsletter);}
+				}
+			}),
+			columns: [
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.title,
+					dataIndex: 'title',
+					width: 300,
+					sortable: true
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
+					dataIndex: 'isTest',
+					width: 50,
+					sortable: true,
+					renderer: function(value){return value ? '✔' : ''; }
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_planned_time,
+					dataIndex: 'plannedTime',
+					width: 150,
+					sortable: true,
+					renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_begin_time,
+					dataIndex: 'beginTime',
+					width: 150,
+					sortable: true,
+					renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.recipients,
+					dataIndex: 'emailCount',
+					width: 70,
+					sortable: true
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.opened,
+					dataIndex: 'emailOpenedCount',
+					width: 70,
+					sortable: true
+				},
+				{
+					header: Ext.ux.TYPO3.Newsletter.Language.bounced,
+					dataIndex: 'emailBouncedCount',
+					width: 70,
+					sortable: true
+				},
+				
+			]
+			
 		};
 		
 		Ext.apply(this, config);
@@ -55,7 +101,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 	 * TODO: it should be the depending stores listening to the newsletterList, but I couldn't 
 	 * find an easy way to access the newsletterList from the stores
 	 */
-	onNewsletterSelected: function(combo, newsletter, index) {
+	onNewsletterSelected: function(newsletter) {
 		var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
 		selectedNewsletterStore.loadData({data: [newsletter.data] });
 		
