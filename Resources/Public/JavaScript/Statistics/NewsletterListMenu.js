@@ -21,7 +21,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 			emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
 			id: 'newsletterListMenu',
 			store: newsletterStore,
-			height: 200,
+			height: 160,
 			mode: 'local',
 			stripeRows: true,
 			selModel: new Ext.grid.RowSelectionModel({

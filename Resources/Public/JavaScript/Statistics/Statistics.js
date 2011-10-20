@@ -15,13 +15,17 @@ Ext.ux.TYPO3.Newsletter.Statistics.Statistics = Ext.extend(Ext.Container, {
 
 	initComponent: function() {
 		var config = {
+			layout: 'border',
 			title: Ext.ux.TYPO3.Newsletter.Language.statistics_button,
 			items: [
 			{
+				split: true,
+				region: 'north',
 				xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu',
 				ref: 'newsletterListMenu'
 			},
 			{
+				region: 'center',
 				xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel',
 				ref: 'statisticsPanel'
 			}
