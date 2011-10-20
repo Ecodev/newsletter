@@ -21,7 +21,6 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 		// but somehow the flag autoSelect does not work, even if the store is load *after* the combo is rendered
 		newsletterStore.on('load', function(store, records, options) { 
 			if (records.length > 0) {
-				thisNewsletterListMenu.setValue(records[0].data.__identity);
 				thisNewsletterListMenu.fireEvent('select', thisNewsletterListMenu, records[0], 0);
 			}
 		});
@@ -40,7 +39,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.form.Comb
 			autoSelect: true,
 			typeAhead: false,
 			listeners: {
-				'select' : this.onNewsletterSelected
+				select: this.onNewsletterSelected
 			}
 		};
 		

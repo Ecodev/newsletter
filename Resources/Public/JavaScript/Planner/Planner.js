@@ -93,10 +93,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						xtype:'fieldset',
 						columnWidth: 0.5,
 						title: 'Sender',
-						collapsible: true,
-						titleCollapse: true,
-						// collapsed: true, // fieldset initially collapsed
-
 						defaults: {
 							anchor: '-20'
 						},// leave room for error icon
@@ -124,9 +120,9 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						xtype:'fieldset',
 						columnWidth: 0.5,
 						title: 'Advanced settings',
-						collapsible: true,
 						titleCollapse: true,
-						//collapsed: true, // fieldset initially collapsed
+						collapsed: true,
+						collapsible: true,
 						autoHeight:true,
 						defaults: {
 							anchor: '-20'  // leave room for error icon
@@ -165,10 +161,11 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							}),
 							value: 0,
 							mode:'local',
-							forceSelection:true,
-							triggerAction : 'all',
+							forceSelection: true,
+							triggerAction: 'all',
 							valueField: 'value',
-							displayField: 'name'
+							displayField: 'name',
+							editable: false
 						},
 						{
 							xtype: 'combo',
@@ -194,8 +191,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							triggerAction : 'all',
 							valueField: 'value',
 							displayField: 'name',
-							allowBlank: false
-
+							allowBlank: false,
+							editable: false
 						},
 						{
 							xtype: 'checkbox',
@@ -243,15 +240,25 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							autoSelect: true,
 							typeAhead: false,
 							allowBlank: false,
+							editable: false,
 							listeners: {
 								
+								// Forward event when the store is loaded to simulate that first item is selected (and then load recipient list in grid)
+								afterrender: function(combo) {
+
+									var store = combo.getStore();
+									store.addListener('load', function(store, records) {
+										if (records.length > 0) combo.fireEvent('select', combo, records[0], 0);
+									}, null, {single: true});
+								},
+
 								/**
 								 * When an uidRecipientList is selected, we update other depending stores (recipients)
 								 * TODO: it should be the depending stores listening to the uidRecipientList, but I couldn't 
 								 * find an easy way to access the uidRecipientList from the stores
 								 */
-								'select' : function(combo, recipientList, index) {
-									
+								select: function(combo, recipientList, index) {
+								console.log('select event');
 									var recipientStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient');
 									recipientStore.load({params: {data: recipientList.data.__identity, start: 0, limit: 20 }});
 								}
