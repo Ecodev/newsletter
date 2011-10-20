@@ -17,14 +17,6 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 		var thisNewsletterListMenu = this;
 		var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
 		
-		// TODO: It should not be necessary to manually select the first item after the store is loaded,
-		// but somehow the flag autoSelect does not work, even if the store is load *after* the combo is rendered
-		newsletterStore.on('load', function(store, records, options) { 
-			if (records.length > 0) {
-				thisNewsletterListMenu.getSelectionModel().selectFirstRow();
-			}
-		});
-		
 		var config = {
 			emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
 			id: 'newsletterListMenu',
@@ -38,6 +30,10 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 					rowselect: function(selectionModel, rowIndex, newsletter){thisNewsletterListMenu.onNewsletterSelected(newsletter);}
 				}
 			}),
+			listeners: {
+				// Select the first item after the everything is loaded
+				viewready: function(grid){ grid.getSelectionModel().selectFirstRow(); }
+			},
 			columns: [
 				{
 					header: Ext.ux.TYPO3.Newsletter.Language.title,

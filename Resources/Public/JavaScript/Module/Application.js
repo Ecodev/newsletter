@@ -51,7 +51,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 			items: [{
 				id: 'main-tabs',
 				xtype: 'tabpanel',
-				activeTab: 1,
+				activeTab: 0,
 				items: [{
 					xtype: 'Ext.ux.TYPO3.Newsletter.Planner.Planner',
 					iconCls: 't3-newsletter-button-planner',

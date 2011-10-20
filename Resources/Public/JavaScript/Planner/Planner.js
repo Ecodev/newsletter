@@ -259,7 +259,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 								 */
 								select: function(combo, recipientList, index) {
 									var recipientStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient');
-									recipientStore.load({params: {data: recipientList.data.__identity, start: 0, limit: 20 }});
+									recipientStore.load({params: {data: recipientList.data.__identity, start: 0, limit: 50 }});
 								}
 							}
 						},
@@ -311,12 +311,14 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							//
 							// paging bar on the bottom
 							bbar: new Ext.PagingToolbar({
-								pageSize: 20,
+								pageSize: 50,
 								store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient'),
 								displayInfo: true,
 								listeners: {
 									beforechange: function(pagingToolbar, params) {
-										params.data = 20;
+										var form = pagingToolbar.findParentByType('form').getForm();
+										var uidRecipientList = form.findField('uidRecipientList').getValue();
+										params.data = uidRecipientList;
 									}
 								}
 							})
