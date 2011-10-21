@@ -12,7 +12,7 @@ if (TYPO3_MODE == 'BE')	{
 		'before:info',           // Position
 		array(
 			'Module' => 'index',
-			'Newsletter' => 'list, listPlanned, create',
+			'Newsletter' => 'list, listPlanned, create, statistics',
 			'Email' => 'list',
 			'Link' => 'list',
 			'BounceAccount' => 'list',

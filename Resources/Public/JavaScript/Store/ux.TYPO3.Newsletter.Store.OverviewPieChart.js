@@ -37,32 +37,6 @@ Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 				}
 				]
 			});
-
-			return;
-			// Empties records firstly
-			this.removeAll();
-
-			//  Adds records from the currently selected newsletter
-			this.add(new Ext.data.Record({
-				label: Ext.ux.TYPO3.Newsletter.Language.not_sent,
-				data: newsletter.json.emailNotSendCount
-			})
-			);
-			this.add(new Ext.data.Record({
-				label: Ext.ux.TYPO3.Newsletter.Language.sent,
-				data: newsletter.json.emailSentCount
-			})
-			);
-			this.add(new Ext.data.Record({
-				label: Ext.ux.TYPO3.Newsletter.Language.opened,
-				data: newsletter.json.emailOpenedCount
-			})
-			);
-			this.add(new Ext.data.Record({
-				label: Ext.ux.TYPO3.Newsletter.Language.bounced,
-				data: newsletter.json.emailBouncedCount
-			})
-			);
 		},
 		store
 		);

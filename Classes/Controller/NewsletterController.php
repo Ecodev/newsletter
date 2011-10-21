@@ -162,6 +162,29 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	}
 	
 	/**
+	 * Returns statistics to be used for timeline chart
+	 * @param integer $uidNewsletter 
+	 */
+	public function statisticsAction($uidNewsletter) {
+		$newsletter = $this->newsletterRepository->findByUid($uidNewsletter);
+		
+		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$stats = $emailRepository->getStatistics($uidNewsletter);
+		
+		$stats = array(array('time' => 0, 'not_sent' => $newsletter->getEmailCount())) + $stats;
+		$stats = array_values($stats); // Not a good idea to output JSON with number as keys, so reset all keys here
+		
+		$this->view->setVariablesToRender(array('data', 'success', 'total'));
+		$this->view->setConfiguration(array(
+			'data'
+		));
+		
+		$this->view->assign('total', count($stats));
+		$this->view->assign('success', true);
+		$this->view->assign('data', $stats);
+	}
+	
+	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
 	 * a Newsletter record.
 	 * 

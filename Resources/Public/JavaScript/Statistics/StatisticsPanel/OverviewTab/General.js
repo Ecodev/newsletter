@@ -18,6 +18,38 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 			layout: 'column',
 			items: [{
 				items:[{
+					width: 1000,
+					height: 300,
+					xtype: 'linechart',
+					store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
+					xField: 'time',
+					series: [
+						{
+							yField: 'not_sent',
+							displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
+							style: { color: '#CCCCCC' }
+						}
+						,
+						{
+							yField: 'sent',
+							displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
+							style: { color: '#25CDF2' }
+						},
+						{
+							yField: 'opened',
+							displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
+							style: { color: '#078207' }
+						},
+						{
+							yField: 'bounced',
+							displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
+							style: { color: '#E01B4C' }
+						}
+					]
+				}
+				]
+			},{
+				items:[{
 					width: 300,
 					height: 300,
 					xtype: 'piechart',
