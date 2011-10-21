@@ -214,9 +214,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 					xtype:'panel',
 					title: 'Sending', // title, header, or checkboxToggle
 					header: false, // Do not want double title in tab + panel
-					// creates fieldset header
-					autoHeight:true,
-					layout:'anchor',
 					items :[
 					{
 						xtype: 'fieldset',
@@ -325,40 +322,55 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						}]
 					},
 					{
-						// Fieldset in Column 1
-						xtype:'fieldset',
-						title: 'Testing',
-						autoHeight:true,
+						height: 120,
+						layout: {
+							type:'hbox',
+							align: 'stretch'
+						},
+						
 						items: [
 						{
-							xtype: 'displayfield',
-							html: '<p>Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.</p><p>Also test newsletters will be ignored by default in statistics.</p>'
+							flex: 0.5,
+							xtype:'fieldset',
+							title: 'Testing',
+							items: [
+							{
+								xtype: 'panel',
+								items: [
+								{
+									xtype: 'displayfield',
+									html: '<p>Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.</p><p>Also test newsletters will be ignored by default in statistics.</p>'
+								}]
+							},
+							{
+								xtype: 'button',
+								text: 'Send test emails now',
+								label: 'asds',
+								handler: function(button, event) {
+									createNewsletter(button, true);
+								}
+							}
+							]
 						},
 						{
-							xtype: 'button',
-							text: 'Sent test emails now',
-							handler: function(button, event) {
-								createNewsletter(button, true);
+							flex: 0.5,
+							xtype: 'fieldset',
+							title: 'Planning',
+							items: [
+							{
+								xtype: 'xdatetime',
+								fieldLabel: 'Date to start sending',
+								name: 'plannedTime',
+								hiddenFormat: 'c'
+							},
+							{
+								xtype: 'button',
+								text: 'Add to queue',
+								handler: function(button, event) {
+									createNewsletter(button, false);
+								}
 							}
-						}
-						]
-					},
-					{
-						xtype: 'fieldset',
-						title: 'Planning',
-						items: [
-						{
-							xtype: 'xdatetime',
-							fieldLabel: 'Date to start sending',
-							name: 'plannedTime',
-							hiddenFormat: 'c'
-						},
-						{
-							xtype: 'button',
-							text: 'Add to queue',
-							handler: function(button, event) {
-								createNewsletter(button, false);
-							}
+							]
 						}
 						]
 					}
