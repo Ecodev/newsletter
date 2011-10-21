@@ -48,7 +48,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 		var config = {
 			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_button,
 			height: 700,
-			//			standardSubmit: true,
+			layout: 'fit',
 			clientValidation: false,
 			
 			items: [
@@ -211,13 +211,15 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 
 				,{
 					// Fieldset in Column 2 - Panel inside
-					xtype:'panel',
+					layout: 'border',
 					title: 'Sending', // title, header, or checkboxToggle
 					header: false, // Do not want double title in tab + panel
 					items :[
 					{
+						region: 'center',
 						xtype: 'fieldset',
 						title: 'Recipients',
+						layout: {type: 'vbox', align: 'stretch'},
 						defaults: {
 							anchor: '-20'  // leave room for error icon
 						},
@@ -264,7 +266,9 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							xtype: 'grid',
 							loadMask: true,
 							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Recipient'),
-							height: 200,
+							flex: 1,
+							stripeRows: true,
+							disableSelection: true,
 							
 							// When the grid is ready, we add a listener to its store, so we can reconfigure
 							// the grid whenever the store's metadata change, and thus updating available columns for the grid
@@ -322,6 +326,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						}]
 					},
 					{
+						split: true,
+						region: 'south',
 						height: 120,
 						layout: {
 							type:'hbox',
