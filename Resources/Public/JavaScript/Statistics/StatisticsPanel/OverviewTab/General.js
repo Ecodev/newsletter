@@ -15,43 +15,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 
 	initComponent: function() {
 		var config = {
-			layout: 'column',
+			layout: 'border',
 			items: [{
+				region: 'north',
+				split: true,
+				layout: 'hbox',
 				items:[{
-					width: 1000,
-					height: 300,
-					xtype: 'linechart',
-					store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
-					xField: 'time',
-					series: [
-						{
-							yField: 'not_sent',
-							displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
-							style: { color: '#CCCCCC' }
-						}
-						,
-						{
-							yField: 'sent',
-							displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
-							style: { color: '#25CDF2' }
-						},
-						{
-							yField: 'opened',
-							displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
-							style: { color: '#078207' }
-						},
-						{
-							yField: 'bounced',
-							displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
-							style: { color: '#E01B4C' }
-						}
-					]
-				}
-				]
-			},{
-				items:[{
-					width: 300,
-					height: 300,
+					width: 350,
+					height: 200,
 					xtype: 'piechart',
 					store: Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart,
 					dataField: 'data',
@@ -70,12 +41,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 							color: '#EFEFF4'
 						}
 					}
-				}
-				]
-			},
-			{
-				columnWidth: 1,
-				items:[{
+				},
+				{
 					xtype: 'dataview',
 					store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter'),
 					emptyText: 'No text to display',
@@ -94,7 +61,39 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 						'</div>',
 						'</tpl>'
 						)
-				}]
+				}
+				]
+			},		
+			{
+				loadMask: true,
+				region: 'center',
+				id:'qqqq',
+				height: 200,
+				xtype: 'linechart',
+				store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
+				xField: 'time',
+				series: [
+					{
+						yField: 'not_sent',
+						displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
+						style: { color: '#CCCCCC' }
+					},
+					{
+						yField: 'sent',
+						displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
+						style: { color: '#25CDF2' }
+					},
+					{
+						yField: 'opened',
+						displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
+						style: { color: '#078207' }
+					},
+					{
+						yField: 'bounced',
+						displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
+						style: { color: '#E01B4C' }
+					}
+				]
 			}]
 		};
 		Ext.apply(this, config);
