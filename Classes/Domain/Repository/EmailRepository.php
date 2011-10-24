@@ -76,44 +76,45 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 	public function getStatistics($uidNewsletter) {
 		global $TYPO3_DB;
 		$uidNewsletter = (int)$uidNewsletter;
-		$rs = $TYPO3_DB->sql_query($query = "
-			SELECT ((MIN(min))) AS min, ((MAX(max))) AS max FROM
-			(
-				(SELECT DISTINCT MIN(bounce_time) AS min,  MAX(bounce_time) AS max FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND bounce_time)
-				UNION
-				(SELECT DISTINCT MIN(open_time) AS min, MAX(open_time) AS max FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND open_time)
-				UNION
-				(SELECT DISTINCT MIN(end_time) AS min, MAX(end_time) AS max FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND end_time)
-			) AS tmp
-			");
-		
-		$values = $TYPO3_DB->sql_fetch_assoc($rs);
-		$min = $values['min'];
-		$max = $values['max'];
-		$min = strtotime(date('Y-m-d H:00:00', $min)); // Round down to the hour
-		$max = strtotime(date('Y-m-d H:00:00', strtotime('+1 hour', $max))); // Round up to the hour
-		
-		$result = array();
-		foreach (range($min, $max, 60 * 60) as $time)
-		{
-			
-			$query = "
-				SELECT
-					COUNT(*) AS count, 
-					IF(bounce_time AND bounce_time < $time, 'bounced', IF(open_time AND open_time < $time, 'opened', IF(end_time AND end_time < $time, 'sent', 'not_sent'))) AS status
-				FROM `tx_newsletter_domain_model_email`
-				WHERE newsletter = $uidNewsletter
-				GROUP BY status";
-			$rs = $TYPO3_DB->sql_query($query);
-			
-			$niceTime = date('Y-m-d H:00:00', $time);
-			while ($row = $TYPO3_DB->sql_fetch_assoc($rs))
-			{
-				$result[$niceTime]['time'] = $niceTime;
-				$result[$niceTime][$row['status']] = $row['count'];
-			}
+	
+		// Build an SQL query which will retrieve statistics for all emails everytime an event happened to one email (sent, opened, or bounced)
+		$union = array();
+		foreach (array('end_time', 'open_time', 'bounce_time') as $fieldEvent) {
+			$union []= "
+(SELECT
+	time.$fieldEvent AS time,
+	COUNT(IF(email.end_time NOT BETWEEN 1 AND time.$fieldEvent, 1, NULL)) AS not_sent,
+	COUNT(IF(email.end_time BETWEEN 1 AND time.$fieldEvent AND email.open_time NOT BETWEEN 1 AND time.$fieldEvent AND email.bounce_time NOT BETWEEN 1 AND time.$fieldEvent , email.end_time, NULL)) AS sent,
+	COUNT(IF(email.open_time BETWEEN 1 AND time.$fieldEvent AND email.bounce_time NOT BETWEEN 1 AND time.$fieldEvent, email.open_time, NULL)) AS opened,
+	COUNT(IF(email.bounce_time BETWEEN 1 AND time.$fieldEvent, email.bounce_time, NULL)) AS bounced,
+	COUNT(*) AS total
+FROM `tx_newsletter_domain_model_email` AS time
+JOIN `tx_newsletter_domain_model_email` AS email ON (email.newsletter = $uidNewsletter)
+WHERE
+	time.newsletter = $uidNewsletter AND 
+	time.$fieldEvent != 0
+GROUP BY time.uid)";
 		}
-		//var_dump($result);
+		$union = join(' UNION ', $union);
+		$query = "SELECT DISTINCT * FROM ($union) AS tmp ORDER BY time ASC";
+		
+		$rs = $TYPO3_DB->sql_query($query);
+		
+		$totalEmailCount = $this->getCount($uidNewsletter);
+		$result = array();	
+		while ($row = $TYPO3_DB->sql_fetch_assoc($rs))
+		{	
+			// Compute percentage
+			foreach (array('not_sent', 'sent', 'opened', 'bounced') as $status)
+			{
+				$row[$status . '_percentage'] = $row[$status] / $totalEmailCount * 100;
+			}
+
+			$niceTime = date('Y-m-d H:i:s', $row['time']);
+			$row['time'] = $niceTime;
+			$result[$niceTime] = $row;
+		}
+		
 		return $result;
 	}
 }

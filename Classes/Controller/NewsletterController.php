@@ -171,8 +171,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		$stats = $emailRepository->getStatistics($uidNewsletter);
 		
-		$stats = array(array('time' => 0, 'not_sent' => $newsletter->getEmailCount())) + $stats;
-		$stats = array_values($stats); // Not a good idea to output JSON with number as keys, so reset all keys here
+		$stats = array(array('time' => $newsletter->getPlannedTime()->format('Y-m-d H:i:s'), 'not_sent_percentage' => 100)) + $stats;
+		$stats = array_values($stats); // Not a good idea to output JSON with weird keys, so reset all keys here
 		
 		$this->view->setVariablesToRender(array('data', 'success', 'total'));
 		$this->view->setConfiguration(array(

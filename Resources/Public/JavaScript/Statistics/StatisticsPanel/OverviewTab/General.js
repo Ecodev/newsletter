@@ -65,31 +65,35 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 				]
 			},		
 			{
-				loadMask: true,
 				region: 'center',
-				id:'qqqq',
-				height: 200,
 				xtype: 'linechart',
 				store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
 				xField: 'time',
+				
+				yAxis: new Ext.chart.NumericAxis({
+					majorUnit: 20
+				}),
+				xAxis: new Ext.chart.TimeAxis({
+					labelRenderer: function(date) { return date.format("Y-m-d H:i:s"); }
+				}),
 				series: [
 					{
-						yField: 'not_sent',
+						yField: 'not_sent_percentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
 						style: { color: '#CCCCCC' }
 					},
 					{
-						yField: 'sent',
+						yField: 'sent_percentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
 						style: { color: '#25CDF2' }
 					},
 					{
-						yField: 'opened',
+						yField: 'opened_percentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
 						style: { color: '#078207' }
 					},
 					{
-						yField: 'bounced',
+						yField: 'bounced_percentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
 						style: { color: '#E01B4C' }
 					}

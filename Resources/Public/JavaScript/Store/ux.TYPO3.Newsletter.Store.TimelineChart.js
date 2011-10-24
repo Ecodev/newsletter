@@ -15,11 +15,15 @@ var timelineChartStore = null;
 					idProperty: 'time',
 					root: 'data',
 					fields:[
-					    {name: 'time', type: 'string'},
+					    {name: 'time', type: 'date', dateFormat: 'Y-m-d H:i:s'},
 					    {name: 'not_sent', type: 'float'},
 					    {name: 'sent', type: 'float'},
 					    {name: 'opened', type: 'float'},
-					    {name: 'bounced', type: 'float'}
+					    {name: 'bounced', type: 'float'},
+					    {name: 'not_sent_percentage', type: 'float'},
+					    {name: 'sent_percentage', type: 'float'},
+					    {name: 'opened_percentage', type: 'float'},
+					    {name: 'bounced_percentage', type: 'float'}
 //					    {name: 'clicked', type: 'float'},
 					]
 				}),
