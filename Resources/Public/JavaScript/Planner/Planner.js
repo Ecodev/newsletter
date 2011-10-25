@@ -306,8 +306,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 									});
 								}
 							},
-							columns: [], // No columns when loading, it will be dynamically set when the store is loaded and we know what columns are available
-							//
+							columns: [{header: '&nbsp;', width: 0, sortable: false, fixed: true, menuDisabled: true}], // No columns when loading, it will be dynamically set when the store is loaded and we know what columns are available
+							
 							// paging bar on the bottom
 							bbar: new Ext.PagingToolbar({
 								pageSize: 50,
