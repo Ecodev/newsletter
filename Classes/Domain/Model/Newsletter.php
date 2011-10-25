@@ -148,6 +148,8 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
 		$this->setRepetition(0);
 		$this->setPlannedTime(new DateTime());
+		$this->setInjectOpenSpy(true);
+		$this->setInjectLinksSpy(true);
 	}
 	
 	/**
