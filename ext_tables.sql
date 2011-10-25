@@ -7,7 +7,7 @@ CREATE TABLE be_users (
 );
 
 CREATE TABLE tx_newsletter_domain_model_newsletter (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	planned_time int(11) unsigned DEFAULT '0' NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 );
 
 CREATE TABLE tx_newsletter_domain_model_bounceaccount (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	email varchar(255) DEFAULT '' NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 );
 
 CREATE TABLE tx_newsletter_domain_model_recipientlist (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	title varchar(255) DEFAULT '' NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 );
 
 CREATE TABLE tx_newsletter_domain_model_email (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	begin_time int(11) unsigned DEFAULT '0' NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 );
 
 CREATE TABLE tx_newsletter_domain_model_link (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
 	url varchar(255) DEFAULT '' NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE tx_newsletter_domain_model_link (
 );
 
 CREATE TABLE tx_newsletter_domain_model_linkopened (
-	uid int(11) NOT NULL AUTO_INCREMENT,
+	uid int(11) NOT NULL auto_increment,
 
 	link int(11) unsigned DEFAULT '0',
 	email int(11) unsigned DEFAULT '0',
