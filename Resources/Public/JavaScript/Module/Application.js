@@ -24,6 +24,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 	 * This method is called automatically.
 	 */
 	bootstrap: function() {
+		Ext.chart.Chart.CHART_URL = '/typo3/contrib/extjs/resources/charts.swf';
+		
 		Ext.QuickTips.init();
 
 		// init Flashmessage
