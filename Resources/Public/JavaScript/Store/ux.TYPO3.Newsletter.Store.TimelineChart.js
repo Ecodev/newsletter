@@ -20,11 +20,12 @@ var timelineChartStore = null;
 					    {name: 'sent', type: 'float'},
 					    {name: 'opened', type: 'float'},
 					    {name: 'bounced', type: 'float'},
+					    {name: 'linkopened', type: 'float'},
 					    {name: 'not_sent_percentage', type: 'float'},
 					    {name: 'sent_percentage', type: 'float'},
 					    {name: 'opened_percentage', type: 'float'},
-					    {name: 'bounced_percentage', type: 'float'}
-//					    {name: 'clicked', type: 'float'},
+					    {name: 'bounced_percentage', type: 'float'},
+					    {name: 'linkopened_percentage', type: 'float'}
 					]
 				}),
 				api: {

@@ -96,6 +96,11 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab.General = Ext.ext
 						yField: 'bounced_percentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
 						style: { color: '#E01B4C' }
+					},
+					{
+						yField: 'linkopened_percentage',
+						displayName: Ext.ux.TYPO3.Newsletter.Language.links_tab,
+						style: { color: '#FFB61B' }
 					}
 				]
 			}]
