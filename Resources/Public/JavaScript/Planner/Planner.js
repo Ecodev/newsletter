@@ -47,7 +47,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 		
 		var config = {
 			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_button,
-			height: 700,
 			layout: 'fit',
 			clientValidation: false,
 			
@@ -242,13 +241,12 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							editable: false,
 							listeners: {
 								
-								// Forward event when the store is loaded to simulate that first item is selected (and then load recipient list in grid)
-								added: function(combo) {
-
-									var store = combo.getStore();
-									store.addListener('load', function(store, records) {
-										if (records.length > 0) combo.fireEvent('select', combo, records[0], 0);
-									}, null, {single: true});
+								// When the combo is shown, simulate the selection of item (if any value exist) to also load the recipientList details
+								afterrender: function(combo) {
+									var recipientList = combo.getStore().getById(combo.getValue());
+							
+									if (recipientList)
+										combo.fireEvent('select', combo, recipientList, 0);
 								},
 
 								/**
