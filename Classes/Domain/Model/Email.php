@@ -181,7 +181,7 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 * @param DateTime $openTime openTime
 	 * @return void
 	 */
-	public function setOpened(DateTime $openTime) {
+	public function setOpenTime(DateTime $openTime) {
 		$this->openTime = $openTime;
 	}
 

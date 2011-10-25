@@ -88,6 +88,8 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 					'_descend' => array(
 						'beginTime' => array(),
 						'endTime' => array(),
+						'openTime' => array(),
+						'bounceTime' => array(),
 					)
 				);
 	}

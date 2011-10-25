@@ -48,7 +48,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_email_open_time,
 					xtype: 'datecolumn',
 					format: 'Y-m-d h:m:s',
-					width: 100,
+					width: 150,
 					sortable: true
 				},
 				{
@@ -56,7 +56,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_email_bounce_time,
 					xtype: 'datecolumn',
 					format: 'Y-m-d h:m:s',
-					width: 100,
+					width: 150,
 					sortable: true
 				},
 				{
