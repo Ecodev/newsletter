@@ -771,26 +771,26 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		
 		$errors = array();
 		$warnings = array();
-		$infos = array('URL used to fetch content is ' . $url);
+		$infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
 		
 		// Content should be more that just a few characters. Apache error propably occured
 		if (strlen($content) < 200) {
-			$errors []= "Content too short. The content must be at least 200 chars long to be considered valid.";
+			$errors []= $LANG->getLL('validation_mail_too_short');
 		}
 
 		// Content should not contain PHP-Warnings
 		if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-			$errors []= "Content contains PHP Warnings. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_contains_php_warnings');
 		}
 
 		// Content should not contain PHP-Warnings
 		if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-			$errors []= "Content contains PHP Fatal errors. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_contains_php_errors');
 		}
 
 		// If the page contains a "Pages is being generared" text... this is bad too
 		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-			$errors []= "Content contains \"wait\" signatures. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_being_generated');
 		}
 		
 		// Fix relative URL to absolute URL
@@ -812,7 +812,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			}
 			
 			if (count($urls[1])) {
-				$infos[]= "Relative URL for $type converted to absolute URL";
+				$infos[]= sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
 			}
 		}
 		
@@ -824,23 +824,23 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 <style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($url) . "\n-->\n</style>", $content);
 		}
 		if (count($urls[1])) {
-			$infos[] = $LANG->getLL('mail_contains_linked_styles');
+			$infos[] = $LANG->getLL('validation_mail_contains_linked_styles');
 		}
 
 		// We cant very well have attached javascript in a newsmail ... removing
 		$content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
 		if ($count) {
-			$warnings[] = $LANG->getLL('mail_contains_javascript');
+			$warnings[] = $LANG->getLL('validation_mail_contains_javascript');
 		}
 		
 		// Images in CSS
 		if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
-			$errors[] = $LANG->getLL('mail_contains_css_images');
+			$errors[] = $LANG->getLL('validation_mail_contains_css_images');
 		}
 		
 		// CSS-classes
 		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
-			$warnings[] = $LANG->getLL('mail_contains_css_classes');
+			$warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
 		}
 		
 		// Positioning & element sizes in CSS
@@ -850,7 +850,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 				foreach ($forbiddenCssProperties as $property)
 				{
 					if (strpos($stylepart, 'width') !== false) {
-						$warnings[] = str_replace('###PROPERTY###', $property, $LANG->getLL('mail_contains_css_some_property'));
+						$warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
 					}
 				}
 			}

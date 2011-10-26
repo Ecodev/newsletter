@@ -46,7 +46,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 		}
 		
 		var config = {
-			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_button,
+			title: Ext.ux.TYPO3.Newsletter.Language.newsletter_tab,
 			layout: 'fit',
 			clientValidation: false,
 			
@@ -71,7 +71,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							'<tpl for=".">',
 							'<div>',
 							'<h2>Recent activity</h2><p>{status}</p>',
-							'<h2>Newsletter validity</h3>',
+							'<h2>' + Ext.ux.TYPO3.Newsletter.Language.newsletter_validity + '</h3>',
 							'<h3>Errors</h3>{errors}',
 							'<h3>Warnings</h3>{warnings}',
 							'<h3>Infos</h3>{infos}',
@@ -281,15 +281,15 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 														
 												var form = grid.findParentByType('form').getForm();
 												var values = form.getFieldValues();
-												var params = String.format('?pid={0}&uidRecipientList={1}&plainConverter={2}&injectOpenSpy={3}&injectLinksSpy={4}&email={5}',
+												var url = String.format('/typo3conf/ext/newsletter/web/view.php?pid={0}&uidRecipientList={1}&plainConverter={2}&injectOpenSpy={3}&injectLinksSpy={4}&email={5}',
 													values.pid,
 													values.uidRecipientList,
 													values.plainConverter,
 													values.injectOpenSpy,
 													values.injectLinksSpy,
 													value);
-												
-												return String.format('<a href="/typo3conf/ext/newsletter/web/view.php' + params + '">preview</a>', value);
+													
+												return String.format('<a href="{0}">{1}</a> | <a href="{0}&plain=1">{2}</a>', url, Ext.ux.TYPO3.Newsletter.Language.preview_html, Ext.ux.TYPO3.Newsletter.Language.preview_plain);
 											}
 										});
 

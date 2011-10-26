@@ -16,7 +16,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 	initComponent: function() {
 		var config = {
 			loadMask: true,
-			
+			autoExpandColumn: 'url',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
 
@@ -44,6 +44,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 					css: 'text-align: center;'
 				},
 				{
+					id: 'url',
 					dataIndex: 'url',
 					header: 'URL',
 					sortable: true,

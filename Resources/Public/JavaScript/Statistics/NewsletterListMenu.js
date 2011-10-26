@@ -21,6 +21,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 			emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
 			id: 'newsletterListMenu',
 			store: newsletterStore,
+			autoExpandColumn: 'title',
 			height: 160,
 			mode: 'local',
 			stripeRows: true,
@@ -36,7 +37,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 			},
 			columns: [
 				{
-					header: Ext.ux.TYPO3.Newsletter.Language.title,
+					id: 'title',
+					header: Ext.ux.TYPO3.Newsletter.Language.newsletter,
 					dataIndex: 'title',
 					width: 300,
 					sortable: true

@@ -99,7 +99,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 					},
 					{
 						yField: 'linkopened_percentage',
-						displayName: Ext.ux.TYPO3.Newsletter.Language.links_tab,
+						displayName: Ext.ux.TYPO3.Newsletter.Language.links_opened,
 						style: { color: '#FFB61B' }
 					}
 				]

@@ -17,6 +17,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 
 		var config = {
 			loadMask: true,
+			autoExpandColumn: 'recipientAddress',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
 
@@ -29,6 +30,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 					width: 40
 				},
 				{
+					id: 'recipientAddress',
 					dataIndex: 'recipientAddress',
 					header: Ext.ux.TYPO3.Newsletter.Language.recipients,
 					width: 300,
@@ -61,7 +63,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 				},
 				{
 					dataIndex: 'authCode',
-					header: Ext.ux.TYPO3.Newsletter.Language.preview,
+					header: Ext.ux.TYPO3.Newsletter.Language.view,
 					width: 100,
 					sortable: true,
 					renderer: this._renderPreview
@@ -88,7 +90,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 	},
 	
 	_renderPreview: function(value, parent, record) {
-		return String.format('<a href="/typo3conf/ext/newsletter/web/view.php?c={0}">view</a>', value);
+		return String.format('<a href="/typo3conf/ext/newsletter/web/view.php?c={0}">{1}</a>', value, Ext.ux.TYPO3.Newsletter.Language.view);
 	}
 
 });
