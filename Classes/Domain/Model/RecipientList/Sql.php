@@ -194,7 +194,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	}
 
 	/**
-	 * Execute the SQL defined by the user to when ever the recipient has clicked a link via click.php
+	 * Execute the SQL defined by the user to whenever the recipient has clicked a link via click.php
 	 *
 	 * @param string $email the email address of the recipient
 	 * @return	void

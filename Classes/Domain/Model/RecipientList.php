@@ -252,7 +252,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	}
 
 	/**
-	 * Here you can implement some action to take when ever the user has opened the mail via beenthere.php
+	 * Here you can implement some action to take whenever the user has opened the mail via beenthere.php
 	 *
 	 * @param string $email the email address of the recipient (who opened the mail)
 	 * @return	void
@@ -261,7 +261,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	}
 
 	/**
-	 * Here you can implement some action to take when ever the user has clicked a link via click.php
+	 * Here you can implement some action to take whenever the user has clicked a link via click.php
 	 *
 	 * @param string $email the email address of the recipient
 	 * @return	void
