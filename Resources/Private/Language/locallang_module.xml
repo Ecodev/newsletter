@@ -6,25 +6,6 @@
 			<label index="mlang_tabs_tab">Newsletter</label>
 			<label index="mlang_labels_tabdescr">Newsletter control module. This module allows you to control the newsletter settings.</label>
 		</languageKey>
-		<languageKey index="dk" type="array">
-			<label index="mlang_labels_tablabel">Nyhedsbrev</label>
-			<label index="mlang_tabs_tab">Nyhedsbrev</label>
-			<label index="mlang_labels_tabdescr">Nyhedsbrevsindstillinger. Dette module lader dig se status p&amp;aring; og kontrollere forskellig funktioner ved nyhedsbrevet.</label>
-		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="mlang_labels_tablabel">Newsletter</label>
-			<label index="mlang_tabs_tab">Newsletter</label>
-			<label index="mlang_labels_tabdescr">Newsletter-Kontrollmodul</label>
-		</languageKey>
-		<languageKey index="it" type="array">
-			<label index="mlang_labels_tablabel">Newsletter</label>
-			<label index="mlang_tabs_tab">Newsletter</label>
-			<label index="mlang_labels_tabdescr">Modulo di controllo Newsletter</label>
-		</languageKey>
-		<languageKey index="nl" type="array">
-			<label index="mlang_labels_tablabel">Nieuwsbrief</label>
-			<label index="mlang_tabs_tab">Nieuwsbrief</label>
-			<label index="mlang_labels_tabdescr">Nieuwsmodule</label>
-		</languageKey>
+		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_module.xml</languageKey>
 	</data>
 </T3locallang>

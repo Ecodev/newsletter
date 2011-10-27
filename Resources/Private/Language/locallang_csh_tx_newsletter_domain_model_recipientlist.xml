@@ -25,5 +25,6 @@
 			<label index="calculated_recipients.description">calculatedRecipients</label>
 			<label index="confirmed_recipients.description">confirmedRecipients</label>
 		</languageKey>
+		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_csh_tx_newsletter_domain_model_recipientlist.xml</languageKey>
     </data>
 </T3locallang>

@@ -870,19 +870,23 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getStatus()
 	{
+		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
+		global $LANG;
+		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+		
 		$plannedTime = $this->getPlannedTime();
 		$beginTime = $this->getBeginTime();
 		$endTime = $this->getEndTime();
 		
 		// If we don't have UID, it means we are a "fake model" newsletter not saved yet
 		if (!($this->getUid() > 0))
-			return "This newsletter is not planned";
+			return $LANG->getLL('newsletter_status_not_planned');
 		
 		if ($plannedTime && !$beginTime)
-			return sprintf('This newsletter is planned to be sent on %1$s', $plannedTime->format(DateTime::ISO8601));
+			return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
 		
 		if ($beginTime && !$endTime)
-			return "Emails for this newsletter are being generated";
+			return $LANG->getLL('newsletter_status_generating_emails');
 		
 		if ($beginTime && $endTime)
 		{
@@ -890,9 +894,9 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			$emailNotSentCount = $this->getEmailNotSentCount();
 			
 			if ($emailNotSentCount)
-				return sprintf('Emails for this newsletter are being sent: %1$d/%2$d', $emailCount - $emailNotSentCount, $emailCount);
+				return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
 			else
-				return sprintf('This newsletter was sent on %1$s', $endTime->format(DateTime::ISO8601));
+				return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
 		}
 		
 		return "unexpected status";

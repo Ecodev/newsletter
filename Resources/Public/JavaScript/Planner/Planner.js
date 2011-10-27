@@ -59,7 +59,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 					height: 500,
 					// Fieldset in Column 1
 					xtype:'fieldset',
-					title: 'Status',
+					title: Ext.ux.TYPO3.Newsletter.Language.status,
 	
 					items:[
 					{
@@ -70,11 +70,11 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						tpl: new Ext.XTemplate(
 							'<tpl for=".">',
 							'<div>',
-							'<h2>Recent activity</h2><p>{status}</p>',
+							'<h2>' + Ext.ux.TYPO3.Newsletter.Language.recent_activity + '</h2><p>{status}</p>',
 							'<h2>' + Ext.ux.TYPO3.Newsletter.Language.newsletter_validity + '</h3>',
-							'<h3>Errors</h3>{errors}',
-							'<h3>Warnings</h3>{warnings}',
-							'<h3>Infos</h3>{infos}',
+							'<h3>' + Ext.ux.TYPO3.Newsletter.Language.errors + '</h3>{errors}',
+							'<h3>' + Ext.ux.TYPO3.Newsletter.Language.warnings + '</h3>{warnings}',
+							'<h3>' + Ext.ux.TYPO3.Newsletter.Language.infos + '</h3>{infos}',
 							'</div>',
 							'</tpl>'
 							)
@@ -82,7 +82,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 				},
 
 				{
-					title: 'Settings',
+					title: Ext.ux.TYPO3.Newsletter.Language.settings,
 					xtype: 'panel',
 					height: 700,
 					items: 
@@ -91,7 +91,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						// Fieldset in Column 1
 						xtype:'fieldset',
 						columnWidth: 0.5,
-						title: 'Sender',
+						title: Ext.ux.TYPO3.Newsletter.Language.sender,
 						defaults: {
 							anchor: '-20'
 						},// leave room for error icon
@@ -103,12 +103,12 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 							name: 'pid'
 						},
 						{
-							fieldLabel: 'Name',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_sender_name,
 							name: 'senderName',
 							allowBlank:false
 						},
 						{
-							fieldLabel: 'Email address',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_sender_email,
 							name: 'senderEmail',
 							allowBlank:false
 						}
@@ -118,7 +118,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						// Fieldset in Column 1
 						xtype:'fieldset',
 						columnWidth: 0.5,
-						title: 'Advanced settings',
+						title: Ext.ux.TYPO3.Newsletter.Language.advanced_settings,
 						titleCollapse: true,
 						collapsed: true,
 						collapsible: true,
@@ -132,7 +132,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						[
 						{
 							xtype: 'combo',
-							fieldLabel: 'Bounce account',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_bounce_account,
 							name: 'uidBounceAccount',
 							store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_BounceAccount'),
 							displayField: 'fullName',
@@ -146,7 +146,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						},
 						{
 							xtype: 'combo',
-							fieldLabel: 'Plain text method',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_plain_converter,
 							name: 'plainConverter',
 							allowBlank:false,
 							store: new Ext.data.ArrayStore({
@@ -168,7 +168,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						},
 						{
 							xtype: 'combo',
-							fieldLabel: 'Repeat periodically',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_repetition,
 							name: 'repetition',
 							store: new Ext.data.ArrayStore({
 								idIndex: 0,
@@ -195,12 +195,12 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						},
 						{
 							xtype: 'checkbox',
-							fieldLabel: 'Detect opened emails',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_inject_open_spy,
 							name: 'injectOpenSpy'           
 						},
 						{
 							xtype: 'checkbox',
-							fieldLabel: 'Detect clicked links',
+							fieldLabel: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_inject_links_spy,
 							name: 'injectLinksSpy'          
 						}
 						]
@@ -211,13 +211,13 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 				,{
 					// Fieldset in Column 2 - Panel inside
 					layout: 'border',
-					title: 'Sending', // title, header, or checkboxToggle
+					title: Ext.ux.TYPO3.Newsletter.Language.sending,
 					header: false, // Do not want double title in tab + panel
 					items :[
 					{
 						region: 'center',
 						xtype: 'fieldset',
-						title: 'Recipients',
+						title: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_recipientlist,
 						layout: {type: 'vbox', align: 'stretch'},
 						defaults: {
 							anchor: '-20'  // leave room for error icon
@@ -336,20 +336,19 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						{
 							flex: 0.5,
 							xtype:'fieldset',
-							title: 'Testing',
+							title: Ext.ux.TYPO3.Newsletter.Language.testing,
 							items: [
 							{
 								xtype: 'panel',
 								items: [
 								{
 									xtype: 'displayfield',
-									html: '<p>Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.</p><p>Also test newsletters will be ignored by default in statistics.</p>'
+									html: Ext.ux.TYPO3.Newsletter.Language.testing_explanation
 								}]
 							},
 							{
 								xtype: 'button',
-								text: 'Send test emails now',
-								label: 'asds',
+								text: Ext.ux.TYPO3.Newsletter.Language.send_test_now,
 								handler: function(button, event) {
 									createNewsletter(button, true);
 								}
@@ -359,17 +358,17 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 						{
 							flex: 0.5,
 							xtype: 'fieldset',
-							title: 'Planning',
+							title: Ext.ux.TYPO3.Newsletter.Language.planning,
 							items: [
 							{
 								xtype: 'xdatetime',
-								fieldLabel: 'Date to start sending',
+								fieldLabel: Ext.ux.TYPO3.Newsletter.Language.date_start_sending,
 								name: 'plannedTime',
 								hiddenFormat: 'c'
 							},
 							{
 								xtype: 'button',
-								text: 'Add to queue',
+								text: Ext.ux.TYPO3.Newsletter.Language.add_to_queue,
 								handler: function(button, event) {
 									createNewsletter(button, false);
 								}

@@ -46,7 +46,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 				{
 					id: 'url',
 					dataIndex: 'url',
-					header: 'URL',
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_link_url,
 					sortable: true,
 					width: 600,
 					renderer: this._renderUrl

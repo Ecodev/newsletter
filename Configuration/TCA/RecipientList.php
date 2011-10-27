@@ -154,7 +154,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		
 		'csv_values' => array (
 		    'exclude' => 1,
-		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_data',
+		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_values',
 		    'config' => array(
 			'type' => 'text',
 			'cols' => 40,
@@ -236,7 +236,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 
 	
         'calculated_recipients' => array (
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.actual_receivers',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:preview',
             'config' => array (
                 'type' => 'user',
                 'userFunc' => 'tx_newsletter_recipientlist_show_recipients',
@@ -263,7 +263,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 
 function tx_newsletter_recipientlist_show_recipients($PA, $fObj)
 {
-	$result = '<strong>Preview</strong>';
+	$result = '';
 	$uid = intval($PA['row']['uid']);
 	if ($uid != 0)
 	{

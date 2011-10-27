@@ -21,5 +21,6 @@
 			<label index="bounce_account.description">bounceAccount</label>
 			<label index="recipient_list.description">recipientList</label>
 		</languageKey>
+		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_csh_tx_newsletter_domain_model_newsletter.xml</languageKey>
     </data>
 </T3locallang>
