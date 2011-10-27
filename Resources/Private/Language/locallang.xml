@@ -12,17 +12,16 @@
 			<label index="validation_mail_too_short">Content too short. The content must be at least 200 chars long to be considered valid.</label>
 			<label index="validation_mail_contains_php_warnings">Content contains PHP Warnings. This must not reach the receivers.</label>
 			<label index="validation_mail_contains_php_errors">Content contains PHP Fatal errors. This must not reach the receivers.</label>
-			<label index="validation_mail_being_generated">Content contains "wait" signatures. This must not reach the receivers.</label>
+			<label index="validation_mail_being_generated">Content contains &quot;wait&quot; signatures. This must not reach the receivers.</label>
 			<label index="validation_mail_contains_javascript">Your mail seems to contain JavaScript-code. This is generally considered bad style and will probably generate warnings either in your users MUAs or spamfilters. I have taken the liberty to try and remove the JavaScript-code from you mail.</label>
 			<label index="validation_mail_converted_relative_url">Relative URL for %1$s converted to absolute URL</label>
 			<label index="validation_mail_contains_linked_styles">Your mail seem to link to an external style-sheet. Your style sheet will be included in the mail, since most MUAs does not cope well on external style-sheets.</label>
 			<label index="validation_mail_contains_css_images">You have used images linked to by CSS in your mail. This will break your layout with most MUAs</label>
-			<label index="validation_mail_contains_css_classes">The styling in you mail is made by using CSS classes. This works fine on "real" MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</label>
-			<label index="validation_mail_contains_css_some_property">Layout is done by the "%1$s" CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</label>
+			<label index="validation_mail_contains_css_classes">The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</label>
+			<label index="validation_mail_contains_css_some_property">Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</label>
 			<label index="none">none</label>
 			<label index="preview_html">Html</label>
 			<label index="preview_plain">Plain</label>
-			<label index="num_fields">Fields in record</label>
 			<label index="missing_fields">Missing fields</label>
 			<label index="preview">Preview</label>
 			<label index="view">View</label>
@@ -65,13 +64,7 @@
 			<label index="planning">Planning</label>
 			<label index="date_start_sending">Date to start sending</label>
 			<label index="add_to_queue">Add to queue</label>
-			<label index=""></label>
-			<label index=""></label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
 	</data>
-	<orig_hash type="array">
-	</orig_hash>
-	<orig_text type="array">
-	</orig_text>
 </T3locallang>

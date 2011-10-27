@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-    <meta type="array">
-        <description>Context Sensitive Help (CSH) for table tx_newsletter_domain_model_recipientlist</description>
-        <type>CSH</type>
-        <csh_table>tx_newsletter_domain_model_recipientlist</csh_table>
-    </meta>
-    <data type="array">
-        <languageKey index="default" type="array">
+	<meta type="array">
+		<description>Context Sensitive Help (CSH) for table tx_newsletter_domain_model_recipientlist</description>
+		<type>CSH</type>
+		<csh_table>tx_newsletter_domain_model_recipientlist</csh_table>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
 			<label index="title.description">title</label>
 			<label index="plain_only.description">plainOnly</label>
 			<label index="lang.description">lang</label>

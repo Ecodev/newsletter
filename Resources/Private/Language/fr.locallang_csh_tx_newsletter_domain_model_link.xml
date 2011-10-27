@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="fr" type="array">
+			<label index="url.description">URL</label>
+			<label index="opened.description">Nombre de fois que le lien a été cliqué</label>
+			<label index="newsletter.description">Newsletter à qui appartient ce lien</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="fr" type="array">
+			<label index="url.description" type="integer">91411684</label>
+			<label index="opened.description" type="integer">61148254</label>
+			<label index="newsletter.description" type="integer">13123415</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="fr" type="array">
+			<label index="url.description">url</label>
+			<label index="opened.description">opened</label>
+			<label index="newsletter.description">email</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

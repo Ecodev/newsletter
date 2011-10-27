@@ -45,11 +45,11 @@
 			<label index="tx_newsletter_domain_model_recipientlist.be_users">Be Users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fe_groups">Fe Groups</label>
 			<label index="tx_newsletter_domain_model_recipientlist.fe_pages">Fe Pages</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_url">Csv URL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_separator">Csv Separator</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">Csv Fields</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">Csv Filename</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_values">Csv Values</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_url">CSV URL</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_separator">CSV Separator</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">CSV Fields</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">CSV Filename</label>
+			<label index="tx_newsletter_domain_model_recipientlist.csv_values">CSV Values</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">SQL to select recipients</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_bounce">SQL to register a bounced email</label>
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_open">SQL to register an opened email</label>
@@ -66,9 +66,7 @@
 			<label index="tx_newsletter_domain_model_recipientlist.type_csv_list">CSV list</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_csv_url">CSV URL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_html">HTML</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_mailto">Anchor tags with mailto:</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_regex">Match email addresses</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto">Email links with "mailto:"</label>
+			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto">Email links with &quot;mailto:&quot;</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_regex">Match email addresses</label>
 			<label index="tx_newsletter_domain_model_email">Email</label>
 			<label index="tx_newsletter_domain_model_email.begin_time">Start Time</label>
