@@ -121,7 +121,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
 		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
-			$this->flashMessages->add("Test newsletter cannot be sent to $count recipients. Maximum allowed is $limitTestRecipientCount.", 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
+			$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		else
@@ -138,16 +138,16 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 					tx_newsletter_tools::createSpool($newNewsletter);
 					tx_newsletter_tools::runSpoolOne($newNewsletter);
 
-					$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
+					$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
 				}
 				catch (Exception $exception)
 				{
-					$this->flashMessages->add($exception->getMessage(), 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
+					$this->flashMessages->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
 				}
 			}
 			else
 			{
-				$this->flashMessages->add('Newsletter has been queued and will be sent soon.', 'Newsletter queued', t3lib_FlashMessage::OK);
+				$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
 			}
 		}
 		

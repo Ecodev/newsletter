@@ -59,6 +59,13 @@
 			<label index="planning">Plannification</label>
 			<label index="date_start_sending">Date pour commencer l'envoi</label>
 			<label index="add_to_queue">Ajouter à la file d'attente</label>
+			<label index="flashmessage_test_maximum_recipients">Une newsletter de test ne peut pas être envoyé à %1$d destinataires. Le maximum permit est de %2$d.</label>
+			<label index="flashmessage_test_maximum_recipients_title">Erreur d'envoi de la newsletter de test</label>
+			<label index="flashmessage_test_newsletter_sent">La newsletter de test a été envoyée.</label>
+			<label index="flashmessage_test_newsletter_sent_title">Newsletter de test envoyée</label>
+			<label index="flashmessage_test_newsletter_error">Erreur d'envoi de la newsletter de test</label>
+			<label index="flashmessage_newsletter_queued">La newsletter a été ajoutée à la file d'attente.</label>
+			<label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

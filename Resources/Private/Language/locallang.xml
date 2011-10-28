@@ -64,6 +64,14 @@
 			<label index="planning">Planning</label>
 			<label index="date_start_sending">Date to start sending</label>
 			<label index="add_to_queue">Add to queue</label>
+			<label index="flashmessage_test_maximum_recipients">Test newsletter cannot be sent to %1$d recipients. Maximum allowed is %2$d</label>
+			<label index="flashmessage_test_maximum_recipients_title">Error while sending test newsletter</label>
+			<label index="flashmessage_test_newsletter_sent">Test newsletter has been sent.</label>
+			<label index="flashmessage_test_newsletter_sent_title">Test newsletter sent</label>
+			<label index="flashmessage_test_newsletter_error">Error while sending test newsletter</label>
+			<label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
+			<label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
+			<label index=""></label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
 	</data>
