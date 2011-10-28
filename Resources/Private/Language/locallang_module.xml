@@ -6,66 +6,6 @@
 			<label index="mlang_tabs_tab">Newsletter</label>
 			<label index="mlang_labels_tabdescr">Newsletter control module. This module allows you to control the newsletter settings.</label>
 		</languageKey>
-		<languageKey index="dk" type="array">
-			<label index="mlang_labels_tablabel">Nyhedsbrev</label>
-			<label index="mlang_tabs_tab">Nyhedsbrev</label>
-			<label index="mlang_labels_tabdescr">Nyhedsbrevsindstillinger. Dette module lader dig se status p&amp;aring; og kontrollere forskellig funktioner ved nyhedsbrevet.</label>
-		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="mlang_labels_tablabel">Newsletter</label>
-			<label index="mlang_tabs_tab">Newsletter</label>
-			<label index="mlang_labels_tabdescr">Newsletter-Kontrollmodul</label>
-		</languageKey>
-		<languageKey index="no"></languageKey>
-		<languageKey index="it" type="array">
-			<label index="mlang_labels_tablabel">Newsletter</label>
-			<label index="mlang_tabs_tab">Newsletter</label>
-			<label index="mlang_labels_tabdescr">Modulo di controllo Newsletter</label>
-		</languageKey>
-		<languageKey index="fr"></languageKey>
-		<languageKey index="es"></languageKey>
-		<languageKey index="nl" type="array">
-			<label index="mlang_labels_tablabel">Nieuwsbrief</label>
-			<label index="mlang_tabs_tab">Nieuwsbrief</label>
-			<label index="mlang_labels_tabdescr">Nieuwsmodule</label>
-		</languageKey>
-		<languageKey index="cz"></languageKey>
-		<languageKey index="pl"></languageKey>
-		<languageKey index="si"></languageKey>
-		<languageKey index="fi"></languageKey>
-		<languageKey index="tr"></languageKey>
-		<languageKey index="se"></languageKey>
-		<languageKey index="pt"></languageKey>
-		<languageKey index="ru"></languageKey>
-		<languageKey index="ro"></languageKey>
-		<languageKey index="ch"></languageKey>
-		<languageKey index="sk"></languageKey>
-		<languageKey index="lt"></languageKey>
-		<languageKey index="is"></languageKey>
-		<languageKey index="hr"></languageKey>
-		<languageKey index="hu"></languageKey>
-		<languageKey index="gl"></languageKey>
-		<languageKey index="th"></languageKey>
-		<languageKey index="gr"></languageKey>
-		<languageKey index="hk"></languageKey>
-		<languageKey index="eu"></languageKey>
-		<languageKey index="bg"></languageKey>
-		<languageKey index="br"></languageKey>
-		<languageKey index="et"></languageKey>
-		<languageKey index="ar"></languageKey>
-		<languageKey index="he"></languageKey>
-		<languageKey index="ua"></languageKey>
-		<languageKey index="lv"></languageKey>
-		<languageKey index="jp"></languageKey>
-		<languageKey index="vn"></languageKey>
-		<languageKey index="ca"></languageKey>
-		<languageKey index="ba"></languageKey>
-		<languageKey index="kr"></languageKey>
-		<languageKey index="eo"></languageKey>
-		<languageKey index="my"></languageKey>
-		<languageKey index="hi"></languageKey>
-		<languageKey index="fo"></languageKey>
-		<languageKey index="fa"></languageKey>
-		<languageKey index="sr"></languageKey>
+		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_module.xml</languageKey>
 	</data>
 </T3locallang>

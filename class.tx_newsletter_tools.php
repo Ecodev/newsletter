@@ -76,25 +76,11 @@ abstract class tx_newsletter_tools {
 	 * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
 	 */
 	static public function createAllSpool($onlyTest = false) {
-		global $TYPO3_DB;
-
-		if ($onlyTest)
-			$onlyTest = 'AND is_test = 1 ';
-		else
-			$onlyTest = ' ';
-
-		// Get a ready-to-send page which is not locked (sending already started)
-		$rs = $TYPO3_DB->sql_query("SELECT * 
-		                              FROM tx_newsletter_domain_model_newsletter 
-		                              WHERE planned_time <= UNIX_TIMESTAMP() 
-		                              AND planned_time <> 0 
-		                              AND begin_time = 0
-		                              AND deleted = 0
-		                              AND hidden = 0
-		                              $onlyTest
-		                              ");
-
-		while ($newsletter = $TYPO3_DB->sql_fetch_assoc($rs)) {
+		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		
+		$newsletters = $newsletterRepository->findAllReadyToSend($onlyTest);
+		foreach ($newsletters as $newsletter)
+		{
 			tx_newsletter_tools::createSpool($newsletter);
 		}
 	}
@@ -123,7 +109,8 @@ abstract class tx_newsletter_tools {
 		/* Get the servers */
 		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
 
-		$recipientList = $newsletter->getRecipientListConcreteInstance();
+		$recipientList = $newsletter->getRecipientList();
+		$recipientList->init();
 		while ($receiver = $recipientList->getRecipient()) {
 			if (!$host = current($hosts)) {
 				reset($hosts);

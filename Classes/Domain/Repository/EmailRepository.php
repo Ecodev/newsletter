@@ -67,4 +67,58 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 		
 		return $query->execute();
 	}
+	
+	/**
+	 * Returns statistics to be used for timeline chart
+	 * @param integer $uidNewsletter 
+	 * @return array eg: array(array(time, not_sent, sent, opened, bounced))
+	 */
+	public function getStatistics($uidNewsletter) {
+		global $TYPO3_DB;
+		$uidNewsletter = (int)$uidNewsletter;
+	
+		// SQL query which will retrieve statistics for all emails and links everytime an event happened to one email (sent, opened, or bounced) or one link (opened)
+		// So in one (big) query, we get each step of the complete history of the newsletter
+		$query= "
+SELECT
+	FROM_UNIXTIME(time.time) AS time,
+	COUNT(DISTINCT IF(email.end_time NOT BETWEEN 1 AND time.time, email.uid, NULL)) AS not_sent,
+	COUNT(DISTINCT IF(email.end_time BETWEEN 1 AND time.time AND email.open_time NOT BETWEEN 1 AND time.time AND email.bounce_time NOT BETWEEN 1 AND time.time , email.uid, NULL)) AS sent,
+	COUNT(DISTINCT IF(email.open_time BETWEEN 1 AND time.time AND email.bounce_time NOT BETWEEN 1 AND time.time, email.uid, NULL)) AS opened,
+	COUNT(DISTINCT IF(email.bounce_time BETWEEN 1 AND time.time, email.uid, NULL)) AS bounced,
+	COUNT(DISTINCT IF(linkopened.open_time BETWEEN 1 AND time.time, linkopened.uid, NULL)) AS linkopened,
+	COUNT(DISTINCT email.uid) AS total,
+	COUNT(DISTINCT link.uid) AS linktotal
+FROM (
+	(SELECT end_time AS time FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND end_time)
+	UNION
+	(SELECT open_time AS time FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND open_time)
+	UNION
+	(SELECT bounce_time AS time FROM `tx_newsletter_domain_model_email` WHERE newsletter = $uidNewsletter AND bounce_time)
+	UNION
+	(SELECT time.open_time AS time FROM `tx_newsletter_domain_model_linkopened` AS time INNER JOIN `tx_newsletter_domain_model_email` AS email ON (time.email = email.uid AND email.newsletter = $uidNewsletter) WHERE time.open_time)
+) AS time
+JOIN `tx_newsletter_domain_model_email` AS email ON (email.newsletter = $uidNewsletter)
+JOIN `tx_newsletter_domain_model_email` AS email_linkopened ON (email.newsletter = $uidNewsletter)
+JOIN `tx_newsletter_domain_model_linkopened` AS linkopened ON (linkopened.email = email_linkopened.uid)
+JOIN `tx_newsletter_domain_model_link` AS link ON (link.newsletter = $uidNewsletter)
+GROUP BY time.time
+ORDER BY time.time ASC";
+		
+		$result = array();
+		$rs = $TYPO3_DB->sql_query($query);
+		while ($row = $TYPO3_DB->sql_fetch_assoc($rs))
+		{	
+			// Compute percentage
+			foreach (array('not_sent', 'sent', 'opened', 'bounced') as $status)
+			{
+				$row[$status . '_percentage'] = $row[$status] / $row['total'] * 100;
+			}
+			$row['linkopened_percentage'] = $row['linkopened'] / ($row['linktotal'] * $row['total']) * 100;
+			
+			$result[] = $row;
+		}
+		
+		return $result;
+	}
 }

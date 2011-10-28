@@ -112,27 +112,43 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @dontverifyrequesthash
 	 */
 	public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter=null) {
-		$this->newsletterRepository->add($newNewsletter);
-		$this->persistenceManager->persistAll();
 		
-		// If it is test newsletter, send it immediately
-		if ($newNewsletter->getIsTest())
+		$limitTestRecipientCount = 10; // This is a low limit, technically, but it does not make sense to test a newsletter for more people than that anyway
+		$recipientList = $newNewsletter->getRecipientList();
+		$recipientList->init();
+		$count = $recipientList->getCount();
+			
+		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
+		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
-			try {
-				// Fill the spool and run the queue
-				tx_newsletter_tools::createSpool($newNewsletter);
-				tx_newsletter_tools::runSpoolOne($newNewsletter);
-
-				$this->flashMessages->add('Test newsletter has been sent.', 'Test newsletter sent', t3lib_FlashMessage::OK);
-			}
-			catch (Exception $exception)
-			{
-				$this->flashMessages->add($exception->getMessage(), 'Error while sending test newsletter', t3lib_FlashMessage::ERROR);
-			}
+			$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->view->assign('success', FALSE);
 		}
 		else
 		{
-			$this->flashMessages->add('Newsletter has been queued and will be sent soon.', 'Newsletter queued', t3lib_FlashMessage::OK);
+			$this->newsletterRepository->add($newNewsletter);
+			$this->persistenceManager->persistAll();
+			$this->view->assign('success', TRUE);
+
+			// If it is test newsletter, send it immediately
+			if ($newNewsletter->getIsTest())
+			{
+				try {
+					// Fill the spool and run the queue
+					tx_newsletter_tools::createSpool($newNewsletter);
+					tx_newsletter_tools::runSpoolOne($newNewsletter);
+
+					$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
+				}
+				catch (Exception $exception)
+				{
+					$this->flashMessages->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
+				}
+			}
+			else
+			{
+				$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
+			}
 		}
 		
 		
@@ -141,9 +157,31 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			'data' =>  self::resolveJsonViewConfiguration()
 		));
 		
-		$this->view->assign('success',TRUE);
 		$this->view->assign('data', $newNewsletter);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+	}
+	
+	/**
+	 * Returns statistics to be used for timeline chart
+	 * @param integer $uidNewsletter 
+	 */
+	public function statisticsAction($uidNewsletter) {
+		$newsletter = $this->newsletterRepository->findByUid($uidNewsletter);
+		
+		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$stats = $emailRepository->getStatistics($uidNewsletter);
+		
+		// At the begining of time, there was nothing, and then no email were sent
+		$stats = array(array('time' => $newsletter->getPlannedTime()->format('Y-m-d H:i:s'), 'not_sent_percentage' => 100)) + $stats;
+		
+		$this->view->setVariablesToRender(array('data', 'success', 'total'));
+		$this->view->setConfiguration(array(
+			'data'
+		));
+		
+		$this->view->assign('total', count($stats));
+		$this->view->assign('success', true);
+		$this->view->assign('data', $stats);
 	}
 	
 	/**

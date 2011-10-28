@@ -21,7 +21,7 @@ if (@$_GET['c'])
 		$newsletter = $email->getNewsletter();
 		if ($newsletter)
 		{
-			$recipientList = $newsletter->getRecipientListConcreteInstance();			
+			$recipientList = $newsletter->getRecipientList();			
 			$recipientList->registerBounce($email->getRecipientAddress() , tx_newsletter_bouncehandler::NEWSLETTER_UNSUBSCRIBE);
 			die('unsubscribed ' . $email->getRecipientAddress() . ' successfully.');
 		}

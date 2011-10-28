@@ -20,10 +20,11 @@ WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_mode
 LIMIT 1");
 
 if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
-	$target = Tx_Newsletter_Domain_Model_RecipientList::getTarget($recipientListUid);
-	if ($target)
+	$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+	$recipientList = $recipientListRepository->findByUid($recipientListUid);
+	if ($recipientList)
 	{
-		$target->registerOpen($emailAddress);
+		$recipientList->registerOpen($emailAddress);
 	}
 }
 

@@ -12,4 +12,60 @@ config.tx_extbase {
 			className = Tx_Newsletter_Persistence_BackendPidFriendly
 		}
 	}
+
+	persistence.classes {
+
+		# Defines all possibles subclasses of recipientList
+		Tx_Newsletter_Domain_Model_RecipientList.subclasses {
+			Tx_Newsletter_Domain_Model_RecipientList_BeUsers = Tx_Newsletter_Domain_Model_RecipientList_BeUsers
+			Tx_Newsletter_Domain_Model_RecipientList_FeGroups = Tx_Newsletter_Domain_Model_RecipientList_FeGroups
+			Tx_Newsletter_Domain_Model_RecipientList_FePages = Tx_Newsletter_Domain_Model_RecipientList_FePages
+			Tx_Newsletter_Domain_Model_RecipientList_Sql = Tx_Newsletter_Domain_Model_RecipientList_Sql
+			Tx_Newsletter_Domain_Model_RecipientList_CsvFile = Tx_Newsletter_Domain_Model_RecipientList_CsvFile
+			Tx_Newsletter_Domain_Model_RecipientList_CsvList = Tx_Newsletter_Domain_Model_RecipientList_CsvList
+			Tx_Newsletter_Domain_Model_RecipientList_CsvUrl = Tx_Newsletter_Domain_Model_RecipientList_CsvUrl
+			Tx_Newsletter_Domain_Model_RecipientList_Html = Tx_Newsletter_Domain_Model_RecipientList_Html
+		}
+
+		# For all types, defines what class will used for the recordType, and what table will be used for storage
+		Tx_Newsletter_Domain_Model_RecipientList_BeUsers.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_BeUsers
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_FeGroups.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_FeGroups
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_FePages.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_FePages
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_Sql.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_Sql
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_CsvFile.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvFile
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_CsvList.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvList
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_CsvUrl.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvUrl
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+
+		Tx_Newsletter_Domain_Model_RecipientList_Html.mapping {
+				recordType = Tx_Newsletter_Domain_Model_RecipientList_Html
+				tableName = tx_newsletter_domain_model_recipientlist
+		}
+	}
 }

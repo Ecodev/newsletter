@@ -6,9 +6,113 @@
  *
  */
 class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
+
+	/**
+	 * sqlStatement
+	 *
+	 * @var string $sqlStatement
+	 */
+	protected $sqlStatement;
+
+	/**
+	 * sqlRegisterBounce
+	 *
+	 * @var string $sqlRegisterBounce
+	 */
+	protected $sqlRegisterBounce;
+
+	/**
+	 * sqlRegisterOpen
+	 *
+	 * @var string $sqlRegisterOpen
+	 */
+	protected $sqlRegisterOpen;
+
+	/**
+	 * sqlRegisterClick
+	 *
+	 * @var string $sqlRegisterClick
+	 */
+	protected $sqlRegisterClick;
+
+	/**
+	 * Setter for sqlStatement
+	 *
+	 * @param string $sqlStatement sqlStatement
+	 * @return void
+	 */
+	public function setSqlStatement($sqlStatement) {
+		$this->sqlStatement = $sqlStatement;
+	}
+
+	/**
+	 * Getter for sqlStatement
+	 *
+	 * @return string sqlStatement
+	 */
+	public function getSqlStatement() {
+		return $this->sqlStatement;
+	}
+
+	/**
+	 * Setter for sqlRegisterBounce
+	 *
+	 * @param string $sqlRegisterBounce sqlRegisterBounce
+	 * @return void
+	 */
+	public function setSqlRegisterBounce($sqlRegisterBounce) {
+		$this->sqlRegisterBounce = $sqlRegisterBounce;
+	}
+
+	/**
+	 * Getter for sqlRegisterBounce
+	 *
+	 * @return string sqlRegisterBounce
+	 */
+	public function getSqlRegisterBounce() {
+		return $this->sqlRegisterBounce;
+	}
+
+	/**
+	 * Setter for sqlRegisterOpen
+	 *
+	 * @param string $sqlRegisterOpen sqlRegisterOpen
+	 * @return void
+	 */
+	public function setSqlRegisterOpen($sqlRegisterOpen) {
+		$this->sqlRegisterOpen = $sqlRegisterOpen;
+	}
+
+	/**
+	 * Getter for sqlRegisterOpen
+	 *
+	 * @return string sqlRegisterOpen
+	 */
+	public function getSqlRegisterOpen() {
+		return $this->sqlRegisterOpen;
+	}
+
+	/**
+	 * Setter for sqlRegisterClick
+	 *
+	 * @param string $sqlRegisterClick sqlRegisterClick
+	 * @return void
+	 */
+	public function setSqlRegisterClick($sqlRegisterClick) {
+		$this->sqlRegisterClick = $sqlRegisterClick;
+	}
+
+	/**
+	 * Getter for sqlRegisterClick
+	 *
+	 * @return string sqlRegisterClick
+	 */
+	public function getSqlRegisterClick() {
+		return $this->sqlRegisterClick;
+	}
 	
 	function init() {
-		$sql = trim($this->fields['sql_statement']);
+		$sql = trim($this->getSqlStatement());
 		
 		// Inject dummy SQL statement, just for fun !
 		if (!$sql)
@@ -29,11 +133,11 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 		$r = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($this->data);
 		if (is_array($r)) {
 			if (!isset($r['plain_only'])) {
-				$r['plain_only'] = $this->fields['plain_only'];
+				$r['plain_only'] = $this->isPlainOnly();
 			}
 
 			if (!isset($r['L'])) {
-				$r['L'] = $this->fields['lang'];
+				$r['L'] = $this->getLang();
 			}
         
 			return $r;
@@ -60,7 +164,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerBounce($email, $bounce_type) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace(array('###EMAIL###', '###BOUNCE_TYPE###'), array($email, $bounce_type), $this->fields['sql_register_bounce']);
+		$sql = str_replace(array('###EMAIL###', '###BOUNCE_TYPE###'), array($email, $bounce_type), $this->getSqlRegisterBounce());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
@@ -79,7 +183,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerOpen($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->fields['sql_register_open']);
+		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterOpen());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
@@ -90,7 +194,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	}
 
 	/**
-	 * Execute the SQL defined by the user to when ever the recipient has clicked a link via click.php
+	 * Execute the SQL defined by the user to whenever the recipient has clicked a link via click.php
 	 *
 	 * @param string $email the email address of the recipient
 	 * @return	void
@@ -98,7 +202,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerClick($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->fields['sql_register_click']);
+		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterClick());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);

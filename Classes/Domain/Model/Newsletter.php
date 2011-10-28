@@ -148,6 +148,8 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
 		$this->setRepetition(0);
 		$this->setPlannedTime(new DateTime());
+		$this->setInjectOpenSpy(true);
+		$this->setInjectLinksSpy(true);
 	}
 	
 	/**
@@ -537,7 +539,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setRecipientList(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->recipientList = $recipientList->uid;
+		$this->recipientList = $recipientList;
 	}
 
 	/**
@@ -572,24 +574,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
 		$this->setRecipientList($recipientList);
-	}
-	
-	/**
-	 * Getter for recipientList
-	 *
-	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
-	 */
-	public function getRecipientListConcreteInstance() {
-		$recipientList = $this->getRecipientList();
-		
-		if ($recipientList instanceof Tx_Newsletter_Domain_Model_RecipientList)
-			$recipientList = $recipientList->getUid();
-
-		if (!$recipientList)
-			return null;
-		
-		// TODO cleanup instanciation process for recipientList, see as well self:setRecipientList, RecipientList::getTarget() and RecipientList::loadTarget()
-		return Tx_Newsletter_Domain_Model_RecipientList::loadTarget($recipientList);
 	}
 	
 	/**
@@ -691,7 +675,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	
 	/**
 	 * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
-	 * This may differ from $newsletter->getRecipientListConcreteInstance()->getCount()
+	 * This may differ from $newsletter->getRecipientList()->getCount()
 	 * because the recipientList may change over time.
 	 */
 	public function getEmailCount()
@@ -787,26 +771,26 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		
 		$errors = array();
 		$warnings = array();
-		$infos = array('URL used to fetch content is ' . $url);
+		$infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
 		
 		// Content should be more that just a few characters. Apache error propably occured
 		if (strlen($content) < 200) {
-			$errors []= "Content too short. The content must be at least 200 chars long to be considered valid.";
+			$errors []= $LANG->getLL('validation_mail_too_short');
 		}
 
 		// Content should not contain PHP-Warnings
 		if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-			$errors []= "Content contains PHP Warnings. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_contains_php_warnings');
 		}
 
 		// Content should not contain PHP-Warnings
 		if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-			$errors []= "Content contains PHP Fatal errors. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_contains_php_errors');
 		}
 
 		// If the page contains a "Pages is being generared" text... this is bad too
 		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-			$errors []= "Content contains \"wait\" signatures. This must not reach the receivers.";
+			$errors []= $LANG->getLL('validation_mail_being_generated');
 		}
 		
 		// Fix relative URL to absolute URL
@@ -828,7 +812,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			}
 			
 			if (count($urls[1])) {
-				$infos[]= "Relative URL for $type converted to absolute URL";
+				$infos[]= sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
 			}
 		}
 		
@@ -840,23 +824,23 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 <style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($url) . "\n-->\n</style>", $content);
 		}
 		if (count($urls[1])) {
-			$infos[] = $LANG->getLL('mail_contains_linked_styles');
+			$infos[] = $LANG->getLL('validation_mail_contains_linked_styles');
 		}
 
 		// We cant very well have attached javascript in a newsmail ... removing
 		$content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
 		if ($count) {
-			$warnings[] = $LANG->getLL('mail_contains_javascript');
+			$warnings[] = $LANG->getLL('validation_mail_contains_javascript');
 		}
 		
 		// Images in CSS
 		if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
-			$errors[] = $LANG->getLL('mail_contains_css_images');
+			$errors[] = $LANG->getLL('validation_mail_contains_css_images');
 		}
 		
 		// CSS-classes
 		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
-			$warnings[] = $LANG->getLL('mail_contains_css_classes');
+			$warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
 		}
 		
 		// Positioning & element sizes in CSS
@@ -866,7 +850,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 				foreach ($forbiddenCssProperties as $property)
 				{
 					if (strpos($stylepart, 'width') !== false) {
-						$warnings[] = str_replace('###PROPERTY###', $property, $LANG->getLL('mail_contains_css_some_property'));
+						$warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
 					}
 				}
 			}
@@ -886,19 +870,23 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getStatus()
 	{
+		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
+		global $LANG;
+		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+		
 		$plannedTime = $this->getPlannedTime();
 		$beginTime = $this->getBeginTime();
 		$endTime = $this->getEndTime();
 		
 		// If we don't have UID, it means we are a "fake model" newsletter not saved yet
 		if (!($this->getUid() > 0))
-			return "This newsletter is not planned";
+			return $LANG->getLL('newsletter_status_not_planned');
 		
 		if ($plannedTime && !$beginTime)
-			return sprintf('This newsletter is planned to be sent on %1$s', $plannedTime->format(DateTime::ISO8601));
+			return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
 		
 		if ($beginTime && !$endTime)
-			return "Emails for this newsletter are being generated";
+			return $LANG->getLL('newsletter_status_generating_emails');
 		
 		if ($beginTime && $endTime)
 		{
@@ -906,9 +894,9 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			$emailNotSentCount = $this->getEmailNotSentCount();
 			
 			if ($emailNotSentCount)
-				return sprintf('Emails for this newsletter are being sent: %1$d/%2$d', $emailCount - $emailNotSentCount, $emailCount);
+				return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
 			else
-				return sprintf('This newsletter was sent on %1$s', $endTime->format(DateTime::ISO8601));
+				return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
 		}
 		
 		return "unexpected status";

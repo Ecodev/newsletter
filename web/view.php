@@ -20,16 +20,22 @@ if (@$_GET['c'])
 		$newsletter = $email->getNewsletter();
 	}
 }
-// Otherwise it's a preview of an email which was not sent yet, we will simulate it
+// Otherwise it's a preview of an email which was not sent yet, we will simulate it the best we can
 else
 {
-	$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-	$newsletter = $newsletterRepository->findByUid(@$_GET['newsletter']);
+	// Get the latest newsletter sent for this PID with, hopefully, similar settings
+	$newsletter = new Tx_Newsletter_Domain_Model_Newsletter();
+	$newsletter->setPid(@$_GET['pid']);
+	$newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
+	if (isset($_GET['plainConverter'])) $newsletter->setPlainConverter($_GET['plainConverter']);
+	$newsletter->setInjectOpenSpy(@$_GET['injectOpenSpy']);
+	$newsletter->setInjectLinksSpy(@$_GET['injectLinksSpy']);
 	
 	if ($newsletter)
 	{
 		// Find the recipient
-		$recipientList = $newsletter->getRecipientListConcreteInstance();
+		$recipientList = $newsletter->getRecipientList();
+		$recipientList->init();
 		while ($record = $recipientList->getRecipient())
 		{
 			// Got him
@@ -50,7 +56,7 @@ if ($newsletter && $email)
 	$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter);
 	$mailer->prepare($email);
 
-	if (@$_GET['type'] == 'plain') {
+	if (@$_GET['plain']) {
 		echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><pre>';
 		echo $mailer->getPlain();
 		echo '</pre></body></html>';

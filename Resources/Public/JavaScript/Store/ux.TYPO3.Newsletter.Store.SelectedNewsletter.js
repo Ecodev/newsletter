@@ -22,6 +22,7 @@ Ext.ux.TYPO3.Newsletter.Store.SelectedNewsletter = function() {
 			});
 		}
 	}
+	
 	/**
 	 * Public API of this singleton.
 	 */

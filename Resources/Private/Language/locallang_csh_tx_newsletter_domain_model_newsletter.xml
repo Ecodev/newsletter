@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-    <meta type="array">
-        <description>Context Sensitive Help (CSH) for table tx_newsletter_domain_model_newsletter</description>
-        <type>CSH</type>
-        <csh_table>tx_newsletter_domain_model_newsletter</csh_table>
-    </meta>
-    <data type="array">
-        <languageKey index="default" type="array">
+	<meta type="array">
+		<description>Context Sensitive Help (CSH) for table tx_newsletter_domain_model_newsletter</description>
+		<type>CSH</type>
+		<csh_table>tx_newsletter_domain_model_newsletter</csh_table>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
 			<label index="planned_time.description">When the newsletter will start sending emails</label>
 			<label index="begin_time.description">beginTime</label>
 			<label index="end_time.description">endTime</label>
@@ -21,5 +21,6 @@
 			<label index="bounce_account.description">bounceAccount</label>
 			<label index="recipient_list.description">recipientList</label>
 		</languageKey>
+		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_csh_tx_newsletter_domain_model_newsletter.xml</languageKey>
     </data>
 </T3locallang>

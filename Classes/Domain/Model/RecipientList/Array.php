@@ -16,7 +16,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
      
 		if (is_array($r)) {
 			if (!isset($r['plain_only'])) {
-				$r['plain_only'] = $this->fields['plain_only'];
+				$r['plain_only'] = $this->getPlainOnly();
 			}
       
 			return $r;
@@ -37,11 +37,6 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newslet
 		if (count($this->data) == 0) {
 			return "No data fetched";
 		}
-	}
-   
-	function registerBounce($uid, $bounce_type) {
-		/* We dont have something reasonable to do here, since we dont have a table..   maybe it can be extented in some specific setup..  */
-		return false;
 	}
 }
 

@@ -2,13 +2,17 @@
 
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
- * on the $this->tableName table.
+ * on the $this->getTableName() table.
  *
  * @abstract
  */
 abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
 	
-	protected $tableName = '!undefinedtable!';
+	/**
+	 * Returns the tablename to work with
+	 * @return string 
+	 */
+	abstract protected function getTableName();
 	
 	/**
 	 * This increases the bounce-counter each time a mail has bounced.
@@ -37,7 +41,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 		
 		if ($increment)
 		{
-			$TYPO3_DB->sql_query("UPDATE $this->tableName 
+			$TYPO3_DB->sql_query("UPDATE " . $this->getTableName() . "
 						SET tx_newsletter_bounce = tx_newsletter_bounce + $increment
 						WHERE email = '$email'");
 			return $TYPO3_DB->sql_affected_rows();
@@ -54,7 +58,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	 * @param string $email the email address of the recipient
 	 */
 	function registerClick($email) {
-		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
+		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE " . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
 	}
@@ -65,10 +69,8 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	 * @param string $email the email address of the recipient
 	 */
 	function registerOpen($email) {
-		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE $this->tableName
+		$GLOBALS['TYPO3_DB']->sql_query ("UPDATE " . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
 	}
 }
-
-

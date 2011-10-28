@@ -154,7 +154,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		
 		'csv_values' => array (
 		    'exclude' => 1,
-		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_data',
+		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_values',
 		    'config' => array(
 			'type' => 'text',
 			'cols' => 40,
@@ -168,7 +168,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		    'config' => array(
 	                'type' => 'group',
 			'internal_type' => 'file',
-			'allowed' => 'txt,csv_',    
+			'allowed' => 'csv,txt',
 			'max_size' => 500,    
 			'uploadfolder' => 'uploads/tx_newsletter',
 			'size' => 1,    
@@ -235,8 +235,8 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 
 	
-        'calculated_recipients' => array (
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.actual_receivers',
+        'recipients_preview' => array (
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:preview',
             'config' => array (
                 'type' => 'user',
                 'userFunc' => 'tx_newsletter_recipientlist_show_recipients',
@@ -246,14 +246,14 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
     
     'types' => array (
         '0' => array('showitem' => 'hidden;;1;;1-1-1, title, type'),    
-		'Tx_Newsletter_Domain_Model_RecipientList_BeUsers' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, be_users, ;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_FeGroups' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, fe_groups,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_FePages' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, fe_pages,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_Sql' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, sql_statement, sql_register_bounce, sql_register_open, sql_register_click,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_filename,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_CsvList' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_values,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_url,;;;;2-2-2, calculated_recipients'),
-		'Tx_Newsletter_Domain_Model_RecipientList_Html' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, html_url, html_fetch_type,;;;;2-2-2, calculated_recipients'),
+		'Tx_Newsletter_Domain_Model_RecipientList_BeUsers' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, be_users, ;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_FeGroups' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, fe_groups,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_FePages' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, fe_pages,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_Sql' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, sql_statement, sql_register_bounce, sql_register_open, sql_register_click,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_filename,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_CsvList' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_values,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, type, csv_separator, csv_fields, csv_url,;;;;2-2-2, recipients_preview'),
+		'Tx_Newsletter_Domain_Model_RecipientList_Html' => array('showitem' => 'hidden;;1;;1-1-1, title, plain_only, lang, type, html_url, html_fetch_type,;;;;2-2-2, recipients_preview'),
     ),
     'palettes' => array (
          '1' => array('showitem' => ''),
@@ -263,12 +263,14 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 
 function tx_newsletter_recipientlist_show_recipients($PA, $fObj)
 {
-	$result = '<strong>Preview</strong>';
+	$result = '';
 	$uid = intval($PA['row']['uid']);
 	if ($uid != 0)
 	{
-		$target = Tx_Newsletter_Domain_Model_RecipientList::loadTarget($uid);
-		$result .= $target->getExtract();
+		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+		$recipientList = $recipientListRepository->findByUidInitialized($uid);
+		
+		$result .= $recipientList->getExtract();
 	}
 	
 	return $result;

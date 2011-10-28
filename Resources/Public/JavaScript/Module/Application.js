@@ -24,6 +24,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 	 * This method is called automatically.
 	 */
 	bootstrap: function() {
+		Ext.chart.Chart.CHART_URL = '/typo3/contrib/extjs/resources/charts.swf';
+		
 		Ext.QuickTips.init();
 
 		// init Flashmessage
@@ -31,7 +33,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer.initialize({
 			minDelay: 5,
 			maxDelay: 15,
-			logLevel: -2,
+			logLevel: -1,
 			opacity: 1
 		});
 
@@ -79,6 +81,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.ux.TYPO3.Newsletter.Store.Link.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.BounceAccount.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.RecipientList.initialize();
+		Ext.ux.TYPO3.Newsletter.Store.Recipient.initialize();
+		Ext.ux.TYPO3.Newsletter.Store.TimelineChart.initialize();
 		
 		// pie chart depends on SelectedNewsletter store so it must be initialized after it
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();

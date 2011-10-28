@@ -72,6 +72,54 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 	}
 	
+	/**
+	 * Returns the list of recipient for the specified recipientList 
+	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
+	 */
+	public function listRecipientAction($uidRecipientList, $start, $limit)
+	{
+		$recipientLists = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
+		
+		// Gather recipient according to defined limits
+		$i = 0;
+		$recipients = array();
+		while ($recipient = $recipientLists->getRecipient())
+		{
+			if ($i++ >= $start)
+			{
+				$recipients[] = $recipient;
+				if (count($recipients) == $limit)
+				{
+					break;
+				}
+			}
+		}
+		
+		$metaData = array(
+			'totalProperty' => 'total',
+			'successProperty' => 'success',
+			'idProperty' => 'uid',
+			'root' => 'data',
+			'fields' => array(),
+		);
+		
+		foreach (array_keys(reset($recipients)) as $field)
+		{
+			$metaData['fields'][] = array('name' => $field, 'type' =>  'string');
+		}
+		
+		$this->flashMessages->add('Loaded Recipients from Server side.','Recipients loaded successfully', t3lib_FlashMessage::NOTICE);
+		
+		$this->view->assign('metaData', $metaData);
+		$this->view->assign('total', $recipientLists->getCount());
+		$this->view->assign('data', $recipients);
+		$this->view->assign('success', true);
+		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->setVariablesToRender(array('metaData', 'total', 'data', 'success','flashMessages'));
+	}
+	
 
 	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for

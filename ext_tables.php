@@ -12,11 +12,11 @@ if (TYPO3_MODE == 'BE')	{
 		'before:info',           // Position
 		array(
 			'Module' => 'index',
-			'Newsletter' => 'list, listPlanned, create',
+			'Newsletter' => 'list, listPlanned, create, statistics',
 			'Email' => 'list',
 			'Link' => 'list',
 			'BounceAccount' => 'list',
-			'RecipientList' => 'list',
+			'RecipientList' => 'list, listRecipient',
 		),
 		array(
 			'access' => 'user,group',
@@ -27,6 +27,9 @@ if (TYPO3_MODE == 'BE')	{
 
 }
 
+// Includes typoscript files
+t3lib_extMgm::addTypoScriptSetup('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/setup.txt">');
+t3lib_extMgm::addTypoScriptConstants('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/constants.txt">');
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Newsletter');
 
@@ -81,7 +84,8 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 			'disabled' => 'hidden'
 			),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/RecipientList.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif'
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif',
+		'type' => 'type' // this tells extbase to respect the "type" column for Single Table Inheritance
 	)
 );
 

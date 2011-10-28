@@ -309,38 +309,4 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 		);
 	}
 	
-	/**
-	 * @test
-	 */
-	public function getCalculatedRecipientsReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setCalculatedRecipientsForStringSetsCalculatedRecipients() { 
-		$this->fixture->setCalculatedRecipients('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getCalculatedRecipients()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getConfirmedRecipientsReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setConfirmedRecipientsForStringSetsConfirmedRecipients() { 
-		$this->fixture->setConfirmedRecipients('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getConfirmedRecipients()
-		);
-	}
-	
 }

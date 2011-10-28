@@ -14,10 +14,6 @@ $Id: newsletter.css 48671 2011-06-13 15:13:44Z acrivelli $
 	padding-left: 20px !important;
 }
 
-#newsletterListMenu {
-	margin-bottom: 10px;
-}
-
 .t3-newsletter-statistic {
 	margin-left: 1em;
 	font-size: 120%;
@@ -43,7 +39,6 @@ $Id: newsletter.css 48671 2011-06-13 15:13:44Z acrivelli $
 }
 
 .t3-newsletter-statistic .sent {
-	/*color: #83CAFF;*/
 	color: #000;
 }
 
@@ -79,4 +74,21 @@ ul.errors li.none,
 ul.warnings li.none,
 ul.infos li.none {
 	list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/ok.png");
+}
+
+/*
+ * It seems that TYPO3 does not declare a nice enough CSS for selected row in grid, so we do it here
+ */
+.x-grid3-row-selected {
+	font-weight: bold;
+	background-color: #EBEBEB;
+}
+
+.x-grid3-row-selected.x-grid3-row-over {
+	background-color: #DEDEDE;
+}
+
+#newsletterListMenu .x-grid3-row
+{
+	cursor: pointer;
 }

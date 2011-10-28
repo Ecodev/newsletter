@@ -28,4 +28,18 @@
  */
 class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
+	/**
+	 * Returns a RecipientList already initialized
+	 * @return Tx_Newsletter_Domain_Model_RecipientList
+	 */
+	public function findByUidInitialized($uidRecipientlist)
+	{
+		$recipientList = $this->findByUid($uidRecipientlist);
+		if ($recipientList)
+		{
+			$recipientList->init();
+		}
+		
+		return $recipientList;
+	}
 }

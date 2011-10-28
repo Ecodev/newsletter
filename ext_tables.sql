@@ -42,7 +42,7 @@ CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 	protocol varchar(255) DEFAULT '' NOT NULL,
 	username varchar(255) DEFAULT '' NOT NULL,
 	password varchar(255) DEFAULT '' NOT NULL,
-
+	
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
@@ -55,7 +55,6 @@ CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-	
 	
 	title varchar(255) DEFAULT '' NOT NULL,
 	plain_only tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -75,8 +74,6 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	sql_register_click varchar(255) DEFAULT '' NOT NULL,
 	html_url varchar(255) DEFAULT '' NOT NULL,
 	html_fetch_type varchar(255) DEFAULT '' NOT NULL,
-	calculated_recipients varchar(255) DEFAULT '' NOT NULL,
-	confirmed_recipients varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -90,7 +87,6 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 CREATE TABLE tx_newsletter_domain_model_email (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-	
 	
 	begin_time int(11) unsigned DEFAULT '0' NOT NULL,
 	end_time int(11) unsigned DEFAULT '0' NOT NULL,
@@ -107,7 +103,11 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
-	KEY parent (pid)
+	KEY parent (pid),
+	KEY newsletter (newsletter),
+	KEY newsletter_end_time (newsletter,end_time),
+	KEY newsletter_open_time (newsletter,open_time),
+	KEY newsletter_bounce_time (newsletter,bounce_time),
 );
 
 CREATE TABLE tx_newsletter_domain_model_link (
@@ -117,11 +117,10 @@ CREATE TABLE tx_newsletter_domain_model_link (
 	url varchar(255) DEFAULT '' NOT NULL,
 	newsletter int(11) unsigned DEFAULT '0',
 	opened_count int(11) unsigned NOT NULL DEFAULT '0',
-
+	
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
-
 
 CREATE TABLE tx_newsletter_domain_model_linkopened (
 	uid int(11) NOT NULL auto_increment,
@@ -130,6 +129,7 @@ CREATE TABLE tx_newsletter_domain_model_linkopened (
 	email int(11) unsigned DEFAULT '0',
 	is_plain tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	open_time int(11) unsigned DEFAULT '0' NOT NULL,
-
-	PRIMARY KEY (uid)
+	
+	PRIMARY KEY (uid),
+	KEY email_open_time (email,open_time)
 );
