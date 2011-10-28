@@ -105,9 +105,9 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY newsletter (newsletter),
-	KEY newsletter_end_time (newsletter, end_time),
-	KEY newsletter_open_time (newsletter, open_time),
-	KEY newsletter_bounce_time (newsletter, bounce_time),
+	KEY newsletter_end_time (newsletter,end_time),
+	KEY newsletter_open_time (newsletter,open_time),
+	KEY newsletter_bounce_time (newsletter,bounce_time),
 );
 
 CREATE TABLE tx_newsletter_domain_model_link (
@@ -131,5 +131,5 @@ CREATE TABLE tx_newsletter_domain_model_linkopened (
 	open_time int(11) unsigned DEFAULT '0' NOT NULL,
 	
 	PRIMARY KEY (uid),
-	KEY email_open_time (email, open_time)
+	KEY email_open_time (email,open_time)
 );
