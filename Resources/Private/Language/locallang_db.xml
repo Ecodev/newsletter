@@ -56,8 +56,6 @@
 			<label index="tx_newsletter_domain_model_recipientlist.sql_register_click">SQL to register a link clicked</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_url">Html URL</label>
 			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
-			<label index="tx_newsletter_domain_model_recipientlist.calculated_recipients">Calculated Recipients</label>
-			<label index="tx_newsletter_domain_model_recipientlist.confirmed_recipients">Confirmed Recipients</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_be_users">BE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_fe_groups">FE-groups with FE-users</label>
 			<label index="tx_newsletter_domain_model_recipientlist.type_fe_pages">Pages with FE-users</label>

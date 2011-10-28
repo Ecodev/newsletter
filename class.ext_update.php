@@ -41,10 +41,10 @@ class ext_update {
 
 		// Recipient lists
 		"INSERT INTO tx_newsletter_domain_model_recipientlist (
-			uid, pid, title, plain_only, lang, type, be_users, fe_groups, fe_pages, csv_url, csv_separator, csv_fields, csv_filename, csv_values, sql_statement, html_url, html_fetch_type, calculated_recipients, tstamp, crdate, deleted, hidden
+			uid, pid, title, plain_only, lang, type, be_users, fe_groups, fe_pages, csv_url, csv_separator, csv_fields, csv_filename, csv_values, sql_statement, html_url, html_fetch_type, tstamp, crdate, deleted, hidden
 		) SELECT uid, pid, title, plain_only, lang, 
 		CONCAT( 'Tx_Newsletter_Domain_Model_RecipientList_', CONCAT( UPPER( LEFT( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 1 ) ) , SUBSTRING( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 2 ) ) ),
-		beusers, fegroups, fepages, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, calculated_receivers, tstamp, crdate, deleted, hidden
+		beusers, fegroups, fepages, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, tstamp, crdate, deleted, hidden
 		FROM tx_tcdirectmail_targets;",
 		
 		// Bounce accounts

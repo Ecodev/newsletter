@@ -62,20 +62,6 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	protected $type;
 
 	/**
-	 * calculatedRecipients
-	 *
-	 * @var string $calculatedRecipients
-	 */
-	protected $calculatedRecipients;
-
-	/**
-	 * confirmedRecipients
-	 *
-	 * @var string $confirmedRecipients
-	 */
-	protected $confirmedRecipients;
-
-	/**
 	 * Setter for title
 	 *
 	 * @param string $title title
@@ -158,44 +144,6 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 */
 	public function getType() {
 		return $this->type;
-	}
-
-	/**
-	 * Setter for calculatedRecipients
-	 *
-	 * @param string $calculatedRecipients calculatedRecipients
-	 * @return void
-	 */
-	public function setCalculatedRecipients($calculatedRecipients) {
-		$this->calculatedRecipients = $calculatedRecipients;
-	}
-
-	/**
-	 * Getter for calculatedRecipients
-	 *
-	 * @return string calculatedRecipients
-	 */
-	public function getCalculatedRecipients() {
-		return $this->calculatedRecipients;
-	}
-
-	/**
-	 * Setter for confirmedRecipients
-	 *
-	 * @param string $confirmedRecipients confirmedRecipients
-	 * @return void
-	 */
-	public function setConfirmedRecipients($confirmedRecipients) {
-		$this->confirmedRecipients = $confirmedRecipients;
-	}
-
-	/**
-	 * Getter for confirmedRecipients
-	 *
-	 * @return string confirmedRecipients
-	 */
-	public function getConfirmedRecipients() {
-		return $this->confirmedRecipients;
 	}
 	
 	/**

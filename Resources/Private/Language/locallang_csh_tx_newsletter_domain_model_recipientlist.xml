@@ -22,8 +22,6 @@
 			<label index="sql_statement.description">sql</label>
 			<label index="html_url.description">htmlFile</label>
 			<label index="html_fetch_type.description">htmlFetchType</label>
-			<label index="calculated_recipients.description">calculatedRecipients</label>
-			<label index="confirmed_recipients.description">confirmedRecipients</label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_csh_tx_newsletter_domain_model_recipientlist.xml</languageKey>
     </data>
