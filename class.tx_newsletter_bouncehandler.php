@@ -88,29 +88,22 @@ class tx_newsletter_bouncehandler
 	protected function analyze($mailsource)
 	{
 		$this->mailsource = $mailsource;
-		/* Calculate the bounce-score */
-		$this->score = 0;
+		
+		// We first assume it is not a bounce
+		$this->status = self::NEWSLETTER_NOT_A_BOUNCE;
 
-		/* Test the soft-bounce level */
+		// Test the soft-bounce level
 		foreach ($this->soft as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
-				$this->score++;
 				$this->status = self::NEWSLETTER_SOFTBOUNCE;
 			}
 		}
 
-		/* Test the hard-bounce level */
+		// Test the hard-bounce level
 		foreach ($this->hard as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
-				$this->score++;
 				$this->status = self::NEWSLETTER_HARDBOUNCE;
 			}
-		}
-
-		/* If nothing scored, it must be a non-bounce mail. Just stop now */
-		if ($this->score == 0) {
-			$this->status = self::NEWSLETTER_NOT_A_BOUNCE;
-			return;
 		}
 	}
 	
@@ -158,24 +151,16 @@ class tx_newsletter_bouncehandler
 		if (!$this->email)
 			return;
 			
-		switch ($bounce->status)
+		if ($this->status != self::NEWSLETTER_NOT_A_BOUNCE)
 		{
-			case self::NEWSLETTER_UNSUBSCRIBE:
-			case self::NEWSLETTER_HARDBOUNCE:
-			case self::NEWSLETTER_SOFTBOUNCE:
-				if ($this->recipientList)
-				{
-					$this->recipientList->registerBounce($this->email->getRecipientAddress(), $this->status);
-				}
-				
-				$this->email->setBounced(true);
-				$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
-				$emailRepository->updateNow($this->email);
-				break;
-				
-			default:
-				// Nothing to be done for other bounce types.
-				break;
+			if ($this->recipientList)
+			{
+				$this->recipientList->registerBounce($this->email->getRecipientAddress(), $this->status);
+			}
+
+			$this->email->setBounceTime(new DateTime());
+			$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+			$emailRepository->updateNow($this->email);
 		}
 	}
 }
