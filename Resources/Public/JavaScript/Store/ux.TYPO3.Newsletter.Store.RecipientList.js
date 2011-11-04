@@ -25,7 +25,8 @@ Ext.ux.TYPO3.Newsletter.Store.RecipientList = function() {
 						{name: 'plainOnly', type: 'boolean'},
 						{name: 'lang', type: 'string'},
 						{name: 'type', type: 'string'},
-					    {name: 'fullName', convert: function(v, recipientList) { return String.format('{0} ({1})', recipientList.title, recipientList.type); }}
+						{name: 'count', type: 'integer'},
+					    {name: 'fullName', convert: function(v, recipientList) { return String.format('{0} ({1})', recipientList.title, recipientList.count); }}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

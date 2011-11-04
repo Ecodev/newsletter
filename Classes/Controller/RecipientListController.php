@@ -57,6 +57,12 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 	public function listAction() {
 		$recipientLists = $this->recipientListRepository->findAll();
 		
+		// We init recipientLists so we can getCount() on them
+		foreach ($recipientLists as $recipientList)
+		{
+			$recipientList->init();
+		}
+		
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' => array(
@@ -135,6 +141,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 						'plainOnly',
 						'lang',
 						'type',
+						'count',
 					)
 				);
 	}
