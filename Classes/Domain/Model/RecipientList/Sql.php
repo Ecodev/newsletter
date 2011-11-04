@@ -180,7 +180,6 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 			),
 			$this->getSqlRegisterBounce());
 		
-	      die($sql);
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
 			return $TYPO3_DB->sql_affected_rows();
