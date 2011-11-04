@@ -164,8 +164,23 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerBounce($email, $bounce_type) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace(array('###EMAIL###', '###BOUNCE_TYPE###'), array($email, $bounce_type), $this->getSqlRegisterBounce());
-	      
+		$sql = str_replace(array(
+				'###EMAIL###',
+				'###BOUNCE_TYPE###',
+				'###BOUNCE_TYPE_SOFT###',
+				'###BOUNCE_TYPE_HARD###',
+				'###BOUNCE_TYPE_UNSUBSCRIBE###',
+			),
+			array(
+				$TYPO3_DB->fullQuoteStr($email),
+				$bounce_type,
+				tx_newsletter_bouncehandler::NEWSLETTER_SOFTBOUNCE,
+				tx_newsletter_bouncehandler::NEWSLETTER_HARDBOUNCE,
+				tx_newsletter_bouncehandler::NEWSLETTER_UNSUBSCRIBE,
+			),
+			$this->getSqlRegisterBounce());
+		
+	      die($sql);
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
 			return $TYPO3_DB->sql_affected_rows();
@@ -183,7 +198,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerOpen($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterOpen());
+		$sql = str_replace('###EMAIL###', $TYPO3_DB->fullQuoteStr($email), $this->getSqlRegisterOpen());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
@@ -202,7 +217,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	function registerClick($email) {
 		global $TYPO3_DB;
 		
-		$sql = str_replace('###EMAIL###', $email, $this->getSqlRegisterClick());
+		$sql = str_replace('###EMAIL###', $TYPO3_DB->fullQuoteStr($email), $this->getSqlRegisterClick());
 	      
 		if ($sql) {
 			$TYPO3_DB->sql_query($sql);
