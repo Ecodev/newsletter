@@ -43,6 +43,10 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_MvcExtjs_ViewH
 			$result = array();
 			foreach ($LOCAL_LANG[$LANG->lang] as $key => $value)
 			{
+				// TYPO3 4.6 compatibility, because $LOCAL_LANG array structure changed
+				if (isset($value[0]['target'])) $value = $value[0]['target'];
+				
+				// Replace '.' in key because it would break JSON
 				$key = str_replace('.', '_', $key);
 				$result[$key] = $value;
 			}
