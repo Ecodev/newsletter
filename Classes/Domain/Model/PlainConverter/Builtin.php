@@ -1,10 +1,24 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter').'/3dparty/class.html2text.inc');
+require_once(t3lib_extMgm::extPath('newsletter') . '/3dparty/class.html2text.inc');
 
 class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implements Tx_Newsletter_Domain_Model_IPlainConverter
 {	
 	private $links = array();
+	
+	public function __construct()
+	{	
+		/**
+		 * Replace Unknown/unhandled entities regexp, with a stricter version: only replace if the unknown entities is made of either only aplha, or only digits
+		 * This allows '&' in URL followed by inline inlie CSS such as:
+		 *   <a href="http://www.broken.com/">http://www.broken.com/?a=1&b=2</a><div style="border-top:1px solid #00579F;margin-top:10px;"></div>
+		 */
+		$key = array_search('/&[^&;]+;/i', $this->search);
+		if ($key)
+		{
+			$this->search[$key] = '/&([[:alpha:]]+|[[:digit:]]+);/i';
+		}
+	}
 	
 	public function setContent($content, $contentUrl, $baseUrl)
 	{
@@ -13,7 +27,7 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implem
 	}
 	
 	public function getPlainText()
-	{	
+	{
 		return $this->get_text();
 	}
 	
