@@ -609,12 +609,28 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 				}
 			}
 		}
+		
+		// Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
+		if (!$domain)
+		{
+			$rootLine = t3lib_befunc::BEgetRootLine($this->pid);
+			$parser = t3lib_div::makeInstance("t3lib_tsparser_ext");	// Defined global here!
+			$parser->tt_track = 0;	// Do not log time-performance information
+			$parser->init();
+			$parser->runThroughTemplates($rootLine);	// This generates the constants/config + hierarchy info for the template.
+			$parser->generateConfig();
+			if (isset($parser->flatSetup['config.domain']))
+			{
+				$domain = $parser->flatSetup['config.domain'];
+			}
+		}
 
 		// Else, we try the HTTP_HOST value (not great, but better than nothing)
 		if (!$domain)
 		{
 			$domain = @$_SERVER['HTTP_HOST'];
 		}
+		
 		
 		// If still no domain, can't continue
 		if (!$domain)
