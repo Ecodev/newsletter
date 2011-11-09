@@ -74,6 +74,52 @@ class tx_newsletter_bouncehandler
 	);
 
 	/**
+	 * Fetch all email from Bounce Accounts and pipe each of them to cli/bounce.php
+	 */
+	public static function fetchBouncedEmails()
+	{
+		global $TYPO3_DB, $TYPO3_CONF_VARS;
+		
+		// Find all bounce accounts we need to check
+		$contents = '';
+		$servers = array();
+		$rs = $TYPO3_DB->sql_query("SELECT protocol, server, username, password FROM tx_newsletter_domain_model_bounceaccount
+										WHERE hidden = 0 
+										AND deleted = 0");
+		while (list($protocol, $server, $username, $passwd) = $TYPO3_DB->sql_fetch_row($rs)) {
+		   $contents .= "poll $server proto $protocol username \"$username\" password \"$passwd\"\n";
+		   $servers[] = $server;
+		}
+
+		// Write a new fetchmailrc based on bounce accounts found
+		$fetchmailhome = PATH_site . 'uploads/tx_newsletter';
+		$fetchmailfile = "$fetchmailhome/fetchmailrc";
+		file_put_contents($fetchmailfile, $contents);
+		chmod($fetchmailfile, 0600); 
+
+		// Find fetchmail itself
+		putenv("FETCHMAILHOME=$fetchmailhome");
+		$theconf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
+		$fetchmail = $theconf['path_to_fetchmail'];
+
+		// Keep messages on server
+		if ($theconf['keep_messages']) {
+			$keep = '--keep ';
+		}
+		
+		// Execute fetchtmail and ask him to pipe emails to our cli/bounce.php
+		$cli_dispatcher = PATH_typo3 . 'cli_dispatch.phpsh'; // This is supposed to be the absolute path of /typo3/cli_dispatch.phpsh
+		foreach ($servers as $server) {
+
+			$cmd = "$fetchmail -s $keep -m \"$cli_dispatcher newsletter_bounce\" $server";
+			echo $cmd . "\n";
+			//exec($cmd);
+		}
+
+		unlink($fetchmailfile);
+	}
+	
+	/**
 	 * Constructor for bounce handler
 	 * @param string $mailsource
 	 */

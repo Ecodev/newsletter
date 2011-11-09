@@ -22,7 +22,6 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require_once('clirun.php');
 
 tx_newsletter_tools::runSpoolOneAll();
 

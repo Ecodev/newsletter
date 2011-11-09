@@ -1,4 +1,3 @@
-#! /usr/bin/php -q
 <?php
 /*************************************************************** 
 *  Copyright notice 
@@ -22,37 +21,20 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require_once('clirun.php');
+require_once(t3lib_extMgm::extPath('newsletter') . 'class.tx_newsletter_bouncehandler.php');
 
-/* Write a new fetchmailrc */
-$fetchmailhome = PATH_site.'uploads/tx_newsletter';
-$fetchmailfile = "$fetchmailhome/fetchmailrc";
-$servers = array();
-$rs = $TYPO3_DB->sql_query("SELECT protocol, server, username, password FROM tx_newsletter_domain_model_bounceaccount
-                                WHERE hidden = 0 
-                                AND deleted = 0");
 
-while (list($protocol, $server, $username, $passwd) = $TYPO3_DB->sql_fetch_row($rs)) {
-   $contents .= "poll $server proto $protocol username \"$username\" password \"$passwd\"\n";
-   $servers[] = $server;
+// If nothing is piped to this script, we fetch bounce emails from servers (who will then be piped to this script)
+if (ftell(STDIN) === false)
+{
+	tx_newsletter_bouncehandler::fetchBouncedEmails();
 }
-file_put_contents($fetchmailfile, $contents);
+// Else, an email was piped, we dispatch it to analyze its bounce level an take appropriate action
+else
+{
+	// Read piped email raw source
+	$content = file_get_contents('php://stdin');
 
-chmod($fetchmailfile, 0600); 
-
-putenv("FETCHMAILHOME=$fetchmailhome");
-
-$theconf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
-$fetchmail = $theconf['path_to_fetchmail'];
-
-/* Keep messages on server */
-if ($theconf['keep_messages']) {
-    $keep = '--keep ';
+	$bounceHandler = new tx_newsletter_bouncehandler($content);
+	$bounceHandler->dispatch();
 }
-
-
-foreach ($servers as $server) {
-   exec($fetchmail.' -m '.dirname(__FILE__).'/readmail.php -s '.$keep.$server, $result);
-}
-
-unlink($fetchmailfile);

@@ -34,6 +34,8 @@ require_once(t3lib_extMgm::extPath('newsletter') . 'class.tx_newsletter_mailer.p
  */
 abstract class tx_newsletter_tools {
 	
+	protected static $configuration;
+	
 	/**
 	 * Get a newsletter-conf-template parameter
 	 *
@@ -41,11 +43,11 @@ abstract class tx_newsletter_tools {
 	 * @return   mixed    Parameter value
 	 */
 	public static function confParam($key) {
-		if (!is_array($GLOBALS['NEWSLETTER_CONF'])) {
-			$GLOBALS['NEWSLETTER_CONF'] = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
+		if (!is_array(self::$configuration)) {
+			self::$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
 		}
 
-		return $GLOBALS['NEWSLETTER_CONF'][$key];
+		return self::$configuration[$key];
 	}
 
 	/**
@@ -156,12 +158,12 @@ abstract class tx_newsletter_tools {
 
 		/* Get the machines hostname.. it can be supplied on the commandline, or we read the hostname.
 		  This does absolutely only work on Unix machines without safe_mode */
-		if ($_SERVER['argv'][1]) {
+		if (isset($_SERVER['argv'][1])) {
 			$hostname = $_SERVER['argv'][1];
 		} else {
 			$hostname = trim(exec('hostname'));
 		}
-
+		
 		/* Try to detect if a spool is already running
 		  If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
 		  If there are newer records, then stop here, and assume the running mailer will take care of it.

@@ -1,4 +1,3 @@
-#! /usr/bin/php -q
 <?php
 /*************************************************************** 
 *  Copyright notice 
@@ -22,8 +21,6 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-
-require_once('clirun.php');
 
 /***************** Send script ********************/
 
