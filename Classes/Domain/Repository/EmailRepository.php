@@ -99,8 +99,8 @@ FROM (
 	(SELECT time.open_time AS time FROM `tx_newsletter_domain_model_linkopened` AS time INNER JOIN `tx_newsletter_domain_model_email` AS email ON (time.email = email.uid AND email.newsletter = $uidNewsletter) WHERE time.open_time)
 ) AS time
 JOIN `tx_newsletter_domain_model_email` AS email ON (email.newsletter = $uidNewsletter)
-JOIN `tx_newsletter_domain_model_email` AS email_linkopened ON (email.newsletter = $uidNewsletter)
-JOIN `tx_newsletter_domain_model_linkopened` AS linkopened ON (linkopened.email = email_linkopened.uid)
+JOIN `tx_newsletter_domain_model_email` AS email_linkopened ON (email_linkopened.newsletter = $uidNewsletter)
+LEFT JOIN `tx_newsletter_domain_model_linkopened` AS linkopened ON (linkopened.email = email_linkopened.uid)
 JOIN `tx_newsletter_domain_model_link` AS link ON (link.newsletter = $uidNewsletter)
 GROUP BY time.time
 ORDER BY time.time ASC";
