@@ -2,17 +2,16 @@
 
 // DO NOT REMOVE OR CHANGE THESE LINES:
 define('TYPO3_MOD_PATH', '../typo3conf/ext/newsletter/web/');
-$BACK_PATH = '../../../../typo3/';
 define('TYPO3_MODE', 'FE');
 define('TYPO3_PROCEED_IF_NO_USER', TRUE);
 define('PATH_thisScript', $_SERVER['SCRIPT_FILENAME']); // Here we cannot use __FILE__ if the extension is symlinked (see https://bugs.php.net/bug.php?id=46260)
 
-require(dirname(__FILE__) . '/../../../../typo3/init.php');
+require(dirname(dirname(dirname(dirname(dirname(PATH_thisScript))))) . "/typo3/init.php"); // Here we cannot use traditional '../../' if extension is symlinked and shared between different TYPO3 core versions
 
 
 function initTSFE($pageUid = 1, $overrule = FALSE) {
 	// declare
-	$temp_TSFEclassName = t3lib_div::makeInstanceClassName('tslib_fe');
+	$temp_TSFEclassName = t3lib_div::makeInstance('tslib_fe');
 
 	// begin
 	if (!is_object($GLOBALS['TT']) || $overrule === TRUE) {
