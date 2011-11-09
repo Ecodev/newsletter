@@ -404,10 +404,9 @@ class tx_newsletter_mailer {
 	}
 
 	/**
-	 * The regular send method. Use this to send a normal personalized mail.
+	 * The regular send method. Use this to send a normal, personalized mail.
 	 *
-	 * @param   array      Record with receivers information as name => value pairs.
-	 * @param   array      Array with extra headers to apply to mails as name => value pairs.
+	 * @param Tx_Newsletter_Domain_Model_Email $email The email object containing recipient email address and extra data for markers
 	 * @return   void
 	 */
 	public function send(Tx_Newsletter_Domain_Model_Email $email) {

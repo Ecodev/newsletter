@@ -39,7 +39,7 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implem
 	
 	/**
 	 * Override parent function to make links unique
-	 * @see 3dparty/html2text::_build_link_list()
+	 * @see html2text::_build_link_list()
 	 */
 	function _build_link_list( $link, $display )
     {

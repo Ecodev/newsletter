@@ -35,7 +35,8 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 
 	/**
 	 * Returns the latest newsletter for the given page
-	 * @param integer $pid
+	 * @param string $authcode
+	 * @return Tx_Newsletter_Domain_Model_Email
 	 */
 	public function findByAuthcode($authcode)
 	{

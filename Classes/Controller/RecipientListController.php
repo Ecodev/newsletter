@@ -80,7 +80,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 	
 	/**
 	 * Returns the list of recipient for the specified recipientList 
-	 * @param integer $uidNewsletter
+	 * @param integer $uidRecipientList
 	 * @param integer $start
 	 * @param integer $limit
 	 */

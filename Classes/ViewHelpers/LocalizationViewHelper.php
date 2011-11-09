@@ -6,7 +6,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_MvcExtjs_ViewH
 	/**
 	 * Calls addJsFile on the Instance of t3lib_pagerenderer.
 	 * 
-	 * @param string|array $names the file to include
+	 * @param string $name the list of file to include separated by coma
 	 * @param string $extKey the extension, where the file is located
 	 * @param string $pathInsideExt the path to the file relative to the ext-folder
 	 * @return void

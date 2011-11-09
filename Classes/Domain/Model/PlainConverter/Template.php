@@ -23,8 +23,8 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Template implements Tx_Newslette
 	 * error-filled content being sent to the receivers. This is only used for fetching dynamic text or html content with. It should *not*
 	 * be used to fetch CSS, images or other static content.
 	 * 
-	 * @param   string   URL of content
-	 * @return  string   Returned data. 
+	 * @param string $url URL of content
+	 * @return string Returned content
 	 * 
 	 */
 	protected static function getURL($url) {

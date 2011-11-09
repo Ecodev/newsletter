@@ -76,10 +76,10 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Setter for newsletter
 	 *
-	 * @param Tx_Newsletter_Domain_Model_Email $email email
+	 * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter newsletter
 	 * @return void
 	 */
-	public function setEmail(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
+	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
 		$this->newsletter = $newsletter;
 	}
 

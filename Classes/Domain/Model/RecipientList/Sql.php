@@ -157,11 +157,11 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 	/**
 	 * Execute the SQL defined by the user to disable a recipient.
 	 *
-	 * @param string $email of the address that has failed.
-	 * @param integer Status of the bounce
-	 * @return bool Status of the success of the removal.
+	 * @param string $email the email address of the recipient
+	 * @param integer $bounceLevel Level of bounce, @see tx_newsletter_bouncehandler for possible values
+	 * @return boolean Status of the success of the removal.
 	 */
-	function registerBounce($email, $bounce_type) {
+	function registerBounce($email, $bounceLevel) {
 		global $TYPO3_DB;
 		
 		$sql = str_replace(array(
@@ -173,7 +173,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
 			),
 			array(
 				$TYPO3_DB->fullQuoteStr($email),
-				$bounce_type,
+				$bounceLevel,
 				tx_newsletter_bouncehandler::NEWSLETTER_SOFTBOUNCE,
 				tx_newsletter_bouncehandler::NEWSLETTER_HARDBOUNCE,
 				tx_newsletter_bouncehandler::NEWSLETTER_UNSUBSCRIBE,

@@ -20,14 +20,14 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 	 * You should be able to reset then in the backend
 	 *
 	 * @param string $email the email address of the recipient
-	 * @param	integer		This is the level of the bounce.
-	 * @return	bool		Success of the bounce-handling.
+	 * @param integer $bounceLevel This is the level of the bounce.
+	 * @return boolean Success of the bounce-handling.
 	 */
-	function registerBounce($email, $bounce_level) {
+	function registerBounce($email, $bounceLevel) {
 		global $TYPO3_DB;
 		
 		$increment = 0;
-		switch ($bounce_level) {
+		switch ($bounceLevel) {
 			case tx_newsletter_bouncehandler::NEWSLETTER_UNSUBSCRIBE:
 				$increment = 10;
 				break;
