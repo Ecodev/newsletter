@@ -13,6 +13,7 @@ $email = null;
 // If we have an authentification code, look for the original email which was already sent
 if (@$_GET['c'])
 {
+	$isPreview = false;
 	$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 	$email = $emailRepository->findByAuthcode($_GET['c']);
 	if ($email)
@@ -23,7 +24,9 @@ if (@$_GET['c'])
 // Otherwise it's a preview of an email which was not sent yet, we will simulate it the best we can
 else
 {
-	// Get the latest newsletter sent for this PID with, hopefully, similar settings
+	$isPreview = true;
+	
+	// Create a fake newsletter and configured it with given parameters
 	$newsletter = new Tx_Newsletter_Domain_Model_Newsletter();
 	$newsletter->setPid(@$_GET['pid']);
 	$newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
@@ -54,7 +57,7 @@ else
 if ($newsletter && $email)
 {
 	$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter);
-	$mailer->prepare($email);
+	$mailer->prepare($email, $isPreview);
 
 	if (@$_GET['plain']) {
 		echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><pre>';

@@ -44,6 +44,7 @@ class tx_newsletter_mailer {
 	private $homeUrl;
 	private $attachments = array();
 	private $attachmentsEmbedded = array();
+	private $linksCache = array();
 
 	/**
 	 * Constructor that set up basic internal datastructures. Do not call directly
@@ -72,6 +73,7 @@ class tx_newsletter_mailer {
 	}
 
 	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null) {
+		$this->linksCache = array();
 		$this->newsletter = $newsletter;
 		$domain = $newsletter->getDomain();
 		$this->siteUrl = "http://$domain/";
@@ -317,27 +319,40 @@ class tx_newsletter_mailer {
 		}
 	}
 
-	private function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPlainText = false) {
+	private function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPreview, $isPlainText = false) {
 		global $TYPO3_DB;
 		$url = html_entity_decode($url);
 
-		// Look for the link datbase, it may already exist
-		$res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = "' . $url . '" AND newsletter = ' . $this->newsletter->getUid() . ' LIMIT 1');
-		$row = $TYPO3_DB->sql_fetch_row($res);
-		if ($row) {
-			$linkId = $row[0];
+		// First check in our local cache
+		if (isset($this->linksCache[$url])) {
+			$linkId = $this->linksCache[$url];
 		}
-		// Otherwise create it
+		// Otherwise if we are preparing a preview, just generate incremental ID and do not touch database at all
+		elseif ($isPreview) {
+			$linkId = count($this->linksCache);
+		}
+		// Finally if we it's not a preview and link was not in cache, check database
 		else {
-			$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', array(
-				'pid' => $this->newsletter->getPid(),
-				'url' => $url,
-				'newsletter' => $this->newsletter->getUid(),
-			));
+			// Look for the link database, it may already exist
+			$res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = "' . $url . '" AND newsletter = ' . $this->newsletter->getUid() . ' LIMIT 1');
+			$row = $TYPO3_DB->sql_fetch_row($res);
+			if ($row) {
+				$linkId = $row[0];
+			}
+			// Otherwise create it
+			else {
+				$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', array(
+					'pid' => $this->newsletter->getPid(),
+					'url' => $url,
+					'newsletter' => $this->newsletter->getUid(),
+				));
 
-			$linkId = $TYPO3_DB->sql_insert_id();
+				$linkId = $TYPO3_DB->sql_insert_id();
+			}
 		}
-
+		
+		// Store link in cache
+		$this->linksCache[$url] = $linkId;
 
 		$authCode = md5($email->getAuthCode() . $linkId);
 		$newUrl = $this->homeUrl . 'web/click.php?url=' . urlencode($url) . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
@@ -348,14 +363,15 @@ class tx_newsletter_mailer {
 	/**
 	 * Replace all links in the mail to make spy links.
 	 *
-	 * @param    string     Encryption code for the links
-	 * @return   array      Data structure with original links.
+	 * @param Tx_Newsletter_Domain_Model_Email $email The email to prepare the newsletter for
+	 * @param boolean $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
+	 * @return   void
 	 */
-	private function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email) {
+	private function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email, $isPreview) {
 		/* Exchange all http:// links  html */
 		preg_match_all('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
 		foreach ($urls[1] as $i => $url) {
-			$newUrl = $this->getLinkAuthCode($email, $url);
+			$newUrl = $this->getLinkAuthCode($email, $url, $isPreview);
 
 			/* Two step replace to be as precise as possible */
 			$link = str_replace($url, $newUrl, $urls[0][$i]);
@@ -365,13 +381,18 @@ class tx_newsletter_mailer {
 		/* Exchange all http:// links plaintext */
 		preg_match_all('|http://[^ \r\n\)]*|i', $this->plain, $urls);
 		foreach ($urls[0] as $i => $url) {
-			$newUrl = $this->getLinkAuthCode($email, $url);
+			$newUrl = $this->getLinkAuthCode($email, $url, $isPreview, true);
 
 			$this->plain = str_replace($url, $newUrl, $this->plain);
 		}
 	}
 
-	public function prepare(Tx_Newsletter_Domain_Model_Email $email) {
+	/**
+	 * Prepare the newsletter content for the specified email (substitute markers and insert spies)
+	 * @param Tx_Newsletter_Domain_Model_Email $email
+	 * @param boolean $isPreview whether we are preparing a preview version of the newsletter
+	 */
+	public function prepare(Tx_Newsletter_Domain_Model_Email $email, $isPreview = false) {
 		$this->resetMarkers();
 		$this->substituteMarkers($email);
 
@@ -379,7 +400,7 @@ class tx_newsletter_mailer {
 			$this->insertSpy($email);
 
 		if ($this->newsletter->getInjectLinksSpy())
-			$this->makeClickLinks($email);
+			$this->makeClickLinks($email, $isPreview);
 	}
 
 	/**
