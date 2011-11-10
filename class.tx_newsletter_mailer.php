@@ -82,7 +82,6 @@ class tx_newsletter_mailer {
 		$this->senderEmail = $newsletter->getSenderEmail();
 		$bounceAccount = $newsletter->getBounceAccount();
 		$this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
-		$this->setTitle($newsletter->getTitle());
 
 		// Build html
 		$validatedContent = $newsletter->getValidatedContent($language);
@@ -91,6 +90,9 @@ class tx_newsletter_mailer {
 			throw new Exception('The newsletter HTML content does not validate. The sending is aborted. See errors: ' . serialize($validatedContent['errors']));
 		}
 		$this->setHtml($validatedContent['content']);
+		
+		// Build title from HTML source (we cannot use $newsletter->getTitle(), because it is NOT localized)
+		$this->setTitle($validatedContent['content']);
 
 		// Build plaintext
 		$plain = $newsletter->getPlainConverterInstance();
@@ -108,25 +110,27 @@ class tx_newsletter_mailer {
 	}
 
 	/**
-	 * Set the title text of the mail
-	 *
-	 * @param   string      The title
-	 * @return   void
+	 * Extract the title from <title></title> HTML tags
+	 * @param string $htmlSrc 
 	 */
-	private function setTitle($src) {
+	private function setTitle($htmlSrc) {
+		// Extract title from HTML
+		preg_match('|<title[^>]*>(.*)</title>|i', $htmlSrc, $m);
+		$title = trim($m[1]);
+		
 		/* Detect what markers we need to substitute later on */
-		preg_match_all('/###[\w]+###/', $src, $fields);
+		preg_match_all('/###[\w]+###/', $title, $fields);
 		$this->titleMarkers = str_replace('###', '', $fields[0]);
 
 		/* Any advanced markers we need to sustitute later on */
 		$this->titleAdvancedMarkers = array();
-		preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
+		preg_match_all('/###:IF: (\w+) ###/U', $title, $fields);
 		foreach ($fields[1] as $field) {
 			$this->titleAdvancedMarkers[] = $field;
 		}
 
-		$this->title_tpl = $src;
-		$this->title = $src;
+		$this->title_tpl = $title;
+		$this->title = $title;
 	}
 
 	/**

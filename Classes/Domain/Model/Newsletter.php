@@ -642,7 +642,8 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	}
 	
 	/**
-	 * Returns the title of the page sent by this newsletter
+	 * Returns the title, NOT localized, of the page sent by this newsletter.
+	 * This should only used for BE, because newsletter recipients need localized title
 	 * @return string the title
 	 */
 	function getTitle()
