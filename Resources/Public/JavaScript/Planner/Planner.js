@@ -288,6 +288,10 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 													encodeURIComponent(values.injectOpenSpy),
 													encodeURIComponent(values.injectLinksSpy),
 													encodeURIComponent(value));
+												
+												// Append language if defined
+												if (record.json.L)
+													url += '&L=' + record.json.L;
 													
 												return String.format('<a href="{0}">{1}</a> | <a href="{0}&plain=1">{2}</a>', url, Ext.ux.TYPO3.Newsletter.Language.preview_html, Ext.ux.TYPO3.Newsletter.Language.preview_plain);
 											}
