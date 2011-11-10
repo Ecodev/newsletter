@@ -782,7 +782,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 		
 		$domain = $this->getDomain();
-		$url = $this->getContentUrl();
+		$url = $this->getContentUrl($language);
 		$content= t3lib_div::getURL($url);
 		
 		$errors = array();

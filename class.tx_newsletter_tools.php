@@ -54,13 +54,14 @@ abstract class tx_newsletter_tools {
 	 * Create a configured mailer from a newsletter page record.
 	 * This mailer will have both plain and html content applied as well as files attached.
 	 *
-	 * @param    Tx_Newsletter_Domain_Model_Newsletter       Page record.
-	 * @return   object      tx_newsletter_mailer object preconfigured for sending.
+	 * @param Tx_Newsletter_Domain_Model_Newsletter The newsletter
+	 * @param integer $language
+	 * @return tx_newsletter_mailer preconfigured mailer for sending
 	 */
-	public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $lang = '') {
+	public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null) {
 		// Configure the mailer
 		$mailer = new tx_newsletter_mailer();
-		$mailer->setNewsletter($newsletter, $lang);
+		$mailer->setNewsletter($newsletter, $language);
 
 		// hook for modifing the mailer before finish preconfiguring
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {

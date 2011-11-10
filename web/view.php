@@ -56,7 +56,7 @@ else
 // If we found everything needed, we can render the email
 if ($newsletter && $email)
 {
-	$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter);
+	$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter, @$_GET['L']);
 	$mailer->prepare($email, $isPreview);
 
 	if (@$_GET['plain']) {
