@@ -285,8 +285,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 													encodeURIComponent(values.pid),
 													encodeURIComponent(values.uidRecipientList),
 													encodeURIComponent(values.plainConverter),
-													encodeURIComponent(values.injectOpenSpy),
-													encodeURIComponent(values.injectLinksSpy),
+													encodeURIComponent(values.injectOpenSpy ? '1' : '0'),
+													encodeURIComponent(values.injectLinksSpy ? '1' : '0'),
 													encodeURIComponent(value));
 												
 												// Append language if defined
