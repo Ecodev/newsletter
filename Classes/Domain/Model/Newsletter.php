@@ -782,7 +782,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		global $LANG;
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 		
-		$domain = $this->getDomain();
 		$url = $this->getContentUrl($language);
 		$content= t3lib_div::getURL($url);
 		
@@ -810,6 +809,18 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			$errors []= $LANG->getLL('validation_mail_being_generated');
 		}
 		
+		
+		// Find out the absolute domain. If specified in HTML source, use it as is.
+		if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match))
+		{
+			$absoluteDomain = $match[1];
+		}
+		// Otherwise try our best to guess what it is
+		else 
+		{
+			$absoluteDomain = 'http://' . $this->getDomain() . '/';
+		}
+	
 		// Fix relative URL to absolute URL
 		$urlPatterns = array(
 			'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
@@ -823,7 +834,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			foreach ($urls[1] as $i => $url) {
 				// If this is already an absolute link, dont replace it
 				if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
-					$replace_url = str_replace($url, "http://$domain/" . $url, $urls[0][$i]);
+					$replace_url = str_replace($url, $absoluteDomain . $url, $urls[0][$i]);
 					$content = str_replace($urls[0][$i], $replace_url, $content);
 				}
 			}
