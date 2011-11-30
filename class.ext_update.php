@@ -84,13 +84,15 @@ class ext_update {
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Beusers';",
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FeGroups' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fegroups';",
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FePages' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fepages';",
-		"DELETE FROM tx_newsletter_domain_model_recipientlist WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Ttaddress';", 
-		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Sql' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Sql';", 
+		"DELETE FROM tx_newsletter_domain_model_recipientlist WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Ttaddress';", // ttaddress is not supported anymore
+		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Sql' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Rawsql';", 
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvfile';", 
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvList' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvlist';", 
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvurl';", 
 		"UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Html' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_html';",
-	
+		
+		// Convert tcdirectmail pages to standard pages
+		"UPDATE pages SET doktype = 1 WHERE doktype = 189;",
 	);
 
 	/**
