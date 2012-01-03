@@ -33,4 +33,18 @@
  
 class Tx_Newsletter_Domain_Repository_BounceAccountRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
+	/**
+	 * Returns the first BounceAccount or null if none at all
+	 * @return type 
+	 */
+	public function findFirst() 
+	{
+		$query = $this->createQuery();
+		
+		$bounceAccount = $query->setLimit(1)
+			->execute()
+			->getFirst();
+		
+		return $bounceAccount;
+	}
 }
