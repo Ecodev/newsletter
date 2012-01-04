@@ -116,7 +116,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	/**
 	 * bounceAccount
-	 *
+	 * @lazy
 	 * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
 	 */
 	protected $bounceAccount;
@@ -129,7 +129,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	/**
 	 * recipientList
-	 *
+	 * @lazy
 	 * @var Tx_Newsletter_Domain_Model_RecipientList $recipientList
 	 */
 	protected $recipientList;
