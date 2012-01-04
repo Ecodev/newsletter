@@ -23,7 +23,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			)
 		),
 		'planned_time' => array(
-			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.planned_time',
 			'config'	=> array(
 				'type' => 'input',
@@ -32,7 +31,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'begin_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.begin_time',
 			'config'	=> array(
 				'type' => 'input',
@@ -42,7 +40,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'end_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.end_time',
 			'config'	=> array(
 				'type' => 'input',
@@ -52,7 +49,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'repetition' => array(
-			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.repetition',
 			'config'	=> array(
 				'type' => 'select',
@@ -71,7 +67,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'plain_converter' => array(
-			'exclude'	=> 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter',
 			'config'	=> array(
 			'type' => 'select',
@@ -85,7 +80,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'is_test' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.is_test',
 			'config'	=> array(
 				'type' => 'check',
@@ -93,7 +87,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'attachments' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.attachments',
 			'config'	=> array(
 				'type' => 'group',
@@ -108,7 +101,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
         	),
 		),
 		'sender_name' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.sender_name',
 			'config'	=> array(
 				'type' => 'input',
@@ -117,7 +109,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'sender_email' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.sender_email',
 			'config'	=> array(
 				'type' => 'input',
@@ -126,7 +117,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'inject_open_spy' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.inject_open_spy',
 			'config'	=> array(
 				'type' => 'check',
@@ -134,7 +124,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'inject_links_spy' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.inject_links_spy',
 			'config'	=> array(
 				'type' => 'check',
@@ -142,7 +131,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'bounce_account' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.bounce_account',
 			'config'	=> array(
 				'type' => 'select',
@@ -159,7 +147,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
 			),
 		),
 		'recipient_list' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.recipient_list',
 			'config'	=> array(
 				'type' => 'select',

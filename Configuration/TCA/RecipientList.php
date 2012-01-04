@@ -11,7 +11,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
     'feInterface' => $TCA['tx_newsletter_domain_model_recipientlist']['feInterface'],
     'columns' => array (
         'hidden' => array (        
-            'exclude' => 1,    
+            'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
             'config' => array (
                 'type' => 'check',
@@ -28,8 +28,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
             )
         ),
 
-        'plain_only' => array (        
-            'exclude' => 1,    
+        'plain_only' => array (
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.plain_only',
             'config' => array (
                 'type' => 'check',
@@ -38,7 +37,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
         ),
 	
 		'lang' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:lang/locallang_tca.php:sys_language',
 		    'config' => array (
 	                'type' => 'select',    
@@ -55,7 +53,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'be_users' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.be_users',
 		    'config' => array (
 	                'type' => 'select',    
@@ -68,7 +65,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'fe_groups' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.fe_groups',
 		    'config' => array (
 	                'type' => 'group',    
@@ -81,7 +77,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'fe_pages' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.fe_pages',
 		    'config' => array (
 	                'type' => 'group',    
@@ -95,7 +90,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 	
 		
 		'sql_statement' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.sql_statement',
 		    'config' => array (
 			'type' => 'text',
@@ -105,7 +99,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'sql_register_bounce' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.sql_register_bounce',
 		    'config' => array (
 			'type' => 'text',
@@ -115,7 +108,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'sql_register_open' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.sql_register_open',
 		    'config' => array (
 			'type' => 'text',
@@ -125,7 +117,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 	
 		'sql_register_click' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.sql_register_click',
 		    'config' => array (
 			'type' => 'text',
@@ -135,7 +126,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'csv_separator' => array (
-		    'exclude' => 1,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_separator',
 		    'config' => array(
 			'type' => 'input',
@@ -144,7 +134,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'csv_fields' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_fields',
 		    'config' => array(
 			'type' => 'input',
@@ -153,7 +142,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 		
 		'csv_values' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_values',
 		    'config' => array(
 			'type' => 'text',
@@ -163,7 +151,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 	
 		'csv_filename' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_file',
 		    'config' => array(
 	                'type' => 'group',
@@ -177,9 +164,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		    ),	
 		),
 	
-	
 		'csv_url' => array(
-	            'exclude' => 1,
 	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.csv_url',
 	            'config' => array(
 	                'type' => 'input',
@@ -190,7 +175,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 	
 	
 		'type' => array (
-		    'exclude' => 1,
 		    'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.type',
 		    'config' => array(
 				'type' => 'select',
@@ -211,7 +195,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 	
 		'html_url' => array(
-	            'exclude' => 1,
 	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.html_url',
 	            'config' => array(
 	                'type' => 'input',
@@ -221,7 +204,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array (
 		),
 	
 		'html_fetch_type' => array (
-	            'exclude' => 1,
 	            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_recipientlist.html_fetch_type',
 	            'config' => array(
 	                'type' => 'select',

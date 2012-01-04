@@ -23,7 +23,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			)
 		),
 		'begin_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.begin_time',
 			'config'	=> array(
 				'type' => 'input',
@@ -33,7 +32,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'end_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.end_time',
 			'config'	=> array(
 				'type' => 'input',
@@ -43,7 +41,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'recipient_address' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_address',
 			'config'	=> array(
 				'type' => 'input',
@@ -52,7 +49,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'recipient_data' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_data',
 			'config'	=> array(
 				'type' => 'user',
@@ -63,7 +59,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'open_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.open_time',
 			'config'	=> array(
 				'type' => 'check',
@@ -72,7 +67,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'bounce_time' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.bounce_time',
 			'config'	=> array(
 				'type' => 'check',
@@ -81,7 +75,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'host' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.host',
 			'config'	=> array(
 				'type' => 'input',
@@ -90,7 +83,6 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			),
 		),
 		'newsletter' => array(
-			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.newsletter',
 			'config'	=> array(
 				'type' => 'inline',
