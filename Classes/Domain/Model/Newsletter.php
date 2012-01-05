@@ -697,6 +697,14 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getEmailCount()
 	{
+		// If the newsletter didn't start, we rely on recipientList to tell us how many email there will be
+		if (!$this->getBeginTime())
+		{
+			$recipientList = $this->getRecipientList();
+			$recipientList->init();
+			return $recipientList->getCount();
+		}
+		
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		return $emailRepository->getCount($this->uid);
 	}
@@ -706,6 +714,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getEmailNotSentCount() {
 		global $TYPO3_DB;
+		
+		// If the newsletter didn't start, then it means all emails are "not sent"
+		if (!$this->getBeginTime())
+		{
+			return $this->getEmailCount();
+		}
 		
 		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
 
