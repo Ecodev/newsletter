@@ -137,6 +137,13 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		}
 		else
 		{
+			// If it's a test newsletter, it's planned to be sent right now
+			if ($newNewsletter->getIsTest())
+			{
+				$newNewsletter->setPlannedTime(new DateTime());
+			}
+			
+			// Save the new newsletter
 			$this->newsletterRepository->add($newNewsletter);
 			$this->persistenceManager->persistAll();
 			$this->view->assign('success', TRUE);

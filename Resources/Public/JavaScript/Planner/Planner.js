@@ -25,9 +25,6 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			// Tweak values for newsletter testing
 			var values = form.getFieldValues();
 			values.isTest = isTest;
-			if (values.isTest) {
-				values.plannedTime = new Date();
-			}
 			if (values.uidBounceAccount == null) {
 				values.uidBounceAccount = 0;
 			}
