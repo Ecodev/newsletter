@@ -193,7 +193,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$plannedTime = $newsletter->getPlannedTime();
 		if ($plannedTime)
 		{
-			$stats = array(array('time' => $plannedTime->format('Y-m-d H:i:s'), 'not_sent_percentage' => 100)) + $stats;
+			$stats = array(array('time' => $plannedTime->format('U'), 'not_sent_percentage' => 100)) + $stats;
 		}
 		
 		$this->view->setVariablesToRender(array('data', 'success', 'total'));

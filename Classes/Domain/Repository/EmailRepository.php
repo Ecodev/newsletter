@@ -92,7 +92,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 		// SQL query which will retrieve statistics for all emails and links everytime an event happened to one email (sent, opened, or bounced) or one link (opened)
 		// So in one (big) query, we get each step of the complete history of the newsletter
 		$query = "-- This outer-query will join results from email, opened links and total links statistics
-SELECT FROM_UNIXTIME(email.time) AS time, not_sent, sent, opened, bounced, total, linkopened, linktotal
+SELECT email.time AS time, not_sent, sent, opened, bounced, total, linkopened, linktotal
 FROM
 	-- This first subquery will count email status for each timestep found
 	(SELECT

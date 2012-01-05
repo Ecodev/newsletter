@@ -15,7 +15,7 @@ var timelineChartStore = null;
 					idProperty: 'time',
 					root: 'data',
 					fields:[
-					    {name: 'time', type: 'date', dateFormat: 'Y-m-d H:i:s'},
+					    {name: 'time', type: 'date', dateFormat: 'timestamp'},
 					    {name: 'not_sent', type: 'float'},
 					    {name: 'sent', type: 'float'},
 					    {name: 'opened', type: 'float'},
