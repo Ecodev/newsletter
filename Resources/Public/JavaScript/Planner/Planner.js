@@ -28,7 +28,11 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			if (values.uidBounceAccount == null) {
 				values.uidBounceAccount = 0;
 			}
-
+			
+			// We specifically convert dates to ISO 8061 format to include client timezone,
+			// so the server can correctly convert to his own timezone
+			values.plannedTime = values.plannedTime.format('c');
+			
 			// Disable the button while processing request to avoid double-submit
 			var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
 			button.disable();
