@@ -11,7 +11,7 @@ $url = @$_REQUEST['url'];
 // Insert an email-link record to register which user clicked on which link
 $TYPO3_DB->sql_query("
 INSERT INTO tx_newsletter_domain_model_linkopened (link, email, is_plain, open_time)
-SELECT tx_newsletter_domain_model_link.uid AS link, tx_newsletter_domain_model_email.uid AS email, $isPlain AS is_plain, UNIX_TIMESTAMP() AS open_time
+SELECT tx_newsletter_domain_model_link.uid AS link, tx_newsletter_domain_model_email.uid AS email, $isPlain AS is_plain, " . time() . " AS open_time
 FROM tx_newsletter_domain_model_email
 LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 LEFT JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)

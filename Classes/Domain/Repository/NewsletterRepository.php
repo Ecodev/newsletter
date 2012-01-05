@@ -76,7 +76,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 		$query = $this->createQuery();
 		$query->statement("SELECT * 
 		                              FROM tx_newsletter_domain_model_newsletter 
-		                              WHERE planned_time <= UNIX_TIMESTAMP() 
+		                              WHERE planned_time <= " . time() . "
 		                              AND planned_time <> 0 
 		                              AND begin_time = 0
 		                              AND deleted = 0
