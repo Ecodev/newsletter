@@ -183,7 +183,11 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$stats = $emailRepository->getStatistics($uidNewsletter);
 		
 		// At the begining of time, there was nothing, and then no email were sent
-		$stats = array(array('time' => $newsletter->getPlannedTime()->format('Y-m-d H:i:s'), 'not_sent_percentage' => 100)) + $stats;
+		$plannedTime = $newsletter->getPlannedTime();
+		if ($plannedTime)
+		{
+			$stats = array(array('time' => $plannedTime->format('Y-m-d H:i:s'), 'not_sent_percentage' => 100)) + $stats;
+		}
 		
 		$this->view->setVariablesToRender(array('data', 'success', 'total'));
 		$this->view->setConfiguration(array(
