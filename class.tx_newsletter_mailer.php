@@ -207,7 +207,7 @@ class tx_newsletter_mailer {
 	 *
 	 * @return   void
 	 */
-	private function insertSpy(Tx_Newsletter_Domain_Model_Email $email) {
+	private function injectOpenSpy(Tx_Newsletter_Domain_Model_Email $email) {
 		$this->html = str_ireplace(
 						'</body>',
 						'<div><img src="' . $this->homeUrl . 'web/beenthere.php?c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>',
@@ -371,7 +371,7 @@ class tx_newsletter_mailer {
 	 * @param boolean $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
 	 * @return   void
 	 */
-	private function makeClickLinks(Tx_Newsletter_Domain_Model_Email $email, $isPreview) {
+	private function injectLinksSpy(Tx_Newsletter_Domain_Model_Email $email, $isPreview) {
 		/* Exchange all http:// links  html */
 		preg_match_all('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -398,13 +398,17 @@ class tx_newsletter_mailer {
 	 */
 	public function prepare(Tx_Newsletter_Domain_Model_Email $email, $isPreview = false) {
 		$this->resetMarkers();
-		$this->substituteMarkers($email);
 
 		if ($this->newsletter->getInjectOpenSpy())
-			$this->insertSpy($email);
+			$this->injectOpenSpy($email);
 
 		if ($this->newsletter->getInjectLinksSpy())
-			$this->makeClickLinks($email, $isPreview);
+			$this->injectLinksSpy($email, false);
+		
+		// We substitute markers last because we don't want to spy each links to view/unsubscribe 
+		// (created via markers) for each recipient. Only the generic marker is enough.
+		// Otherwise we would mess up opened link statistics
+		$this->substituteMarkers($email);
 	}
 
 	/**
