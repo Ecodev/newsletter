@@ -85,6 +85,6 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.ux.TYPO3.Newsletter.Store.TimelineChart.initialize();
 		
 		// pie chart depends on SelectedNewsletter store so it must be initialized after it
-		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart = Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart();
+		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart.initialize();
 	}
 });

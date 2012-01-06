@@ -24,7 +24,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 					width: 350,
 					height: 200,
 					xtype: 'piechart',
-					store: Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart,
+					store: Ext.StoreMgr.get('Tx_Newsletter_Overview_Pie_Chart'),
 					dataField: 'data',
 					categoryField: 'label',
 					seriesStyles: {
