@@ -92,10 +92,10 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 		selectedNewsletterStore.load({params: {data: newsletter.data.__identity }});
 		
 		var linkStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link');
-		linkStore.load({params: {data: newsletter.data.__identity }});
+		linkStore.load({params: {data: newsletter.data.__identity, start: 0, limit: 50 }});
 		
 		var linkEmail = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email');
-		linkEmail.load({params: {data: newsletter.data.__identity }});
+		linkEmail.load({params: {data: newsletter.data.__identity, start: 0, limit: 50 }});
 	}
 });
 

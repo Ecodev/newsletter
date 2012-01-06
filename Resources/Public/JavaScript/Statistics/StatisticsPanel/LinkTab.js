@@ -19,7 +19,23 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 			autoExpandColumn: 'url',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
-
+			
+			// paging bar on the bottom
+			bbar: new Ext.PagingToolbar({
+				pageSize: 50,
+				store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
+				displayInfo: true,
+				listeners: {
+					
+					// Before we change page, we inject the currently selected newsletter as params for Ajax request
+					beforechange: function(pagingToolbar, params) {
+						var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+						var newsletter = selectedNewsletterStore.getAt(0);
+						params.data = newsletter.data.__identity;
+					}
+				}
+			}),
+			
 			// column model
 			columns:[
 				{

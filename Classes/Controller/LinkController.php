@@ -54,10 +54,12 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	 * Displays all Links
 	 *
 	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
 	 * @return string The rendered list view
 	 */
-	public function listAction($uidNewsletter) {
-		$links = $this->linkRepository->findAllByNewsletter($uidNewsletter);
+	public function listAction($uidNewsletter, $start, $limit) {
+		$links = $this->linkRepository->findAllByNewsletter($uidNewsletter, $start, $limit);
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
@@ -68,7 +70,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 		
 		$this->flashMessages->add('Loaded all Links from Server side.','Links loaded successfully', t3lib_FlashMessage::NOTICE);
 		
-		$this->view->assign('total', $links->count());
+		$this->view->assign('total', $this->linkRepository->getCount($uidNewsletter));
 		$this->view->assign('data', $links);
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());

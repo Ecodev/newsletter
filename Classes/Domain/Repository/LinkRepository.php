@@ -33,15 +33,35 @@
  
 class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 	
-	public function findAllByNewsletter($uidNewsletter)
+	/**
+	 * Returns all links for a given newsletter
+	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
+	 * @return Tx_Newsletter_Domain_Model_Link[] 
+	 */
+	public function findAllByNewsletter($uidNewsletter, $start, $limit)
 	{
 		if ($uidNewsletter < 1)
 			return $this->findAll();
 		
 		$query = $this->createQuery();
 		$query->matching($query->equals('newsletter', $uidNewsletter));
+		$query->setLimit($limit);
+		$query->setOffset($start);
 		
 		return $query->execute();
 	}
 	
+	/**
+	 * Returns the count of links for a given newsletter
+	 * @param integer $uidNewsletter
+	 */
+	public function getCount($uidNewsletter)
+	{
+		global $TYPO3_DB;
+		$count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'newsletter = ' . $uidNewsletter);
+		
+		return (int)$count;
+	}
 }

@@ -70,15 +70,19 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 	/**
 	 * Returns all email for a given newsletter
 	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
 	 * @return Tx_Newsletter_Domain_Model_Email[] 
 	 */
-	public function findAllByNewsletter($uidNewsletter)
+	public function findAllByNewsletter($uidNewsletter, $start, $limit)
 	{
 		if ($uidNewsletter < 1)
 			return $this->findAll();
 		
 		$query = $this->createQuery();
 		$query->matching($query->equals('newsletter', $uidNewsletter));
+		$query->setLimit($limit);
+		$query->setOffset($start);
 		
 		return $query->execute();
 	}

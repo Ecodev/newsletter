@@ -37,10 +37,7 @@ Ext.ux.TYPO3.Newsletter.Store.Link = function() {
 					create: Ext.ux.TYPO3.Newsletter.Remote.LinkController.createAction
 				},
 				paramOrder: {
-					read: ['data'],
-					update: ['data'],
-					create: ['data'],
-					destroy: ['data']
+					read: ['data', 'start', 'limit']
 				}
 			});
 		}

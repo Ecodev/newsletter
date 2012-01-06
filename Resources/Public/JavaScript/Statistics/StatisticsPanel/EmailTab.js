@@ -20,6 +20,22 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 			autoExpandColumn: 'recipientAddress',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
+			
+			// paging bar on the bottom
+			bbar: new Ext.PagingToolbar({
+				pageSize: 50,
+				store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
+				displayInfo: true,
+				listeners: {
+					
+					// Before we change page, we inject the currently selected newsletter as params for Ajax request
+					beforechange: function(pagingToolbar, params) {
+						var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+						var newsletter = selectedNewsletterStore.getAt(0);
+						params.data = newsletter.data.__identity;
+					}
+				}
+			}),
 
 			// column model
 			columns:[

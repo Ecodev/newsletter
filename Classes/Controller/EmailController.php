@@ -54,10 +54,12 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	 * Displays all Emails
 	 *
 	 * @param integer $uidNewsletter
+	 * @param integer $start
+	 * @param integer $limit
 	 * @return string The rendered list view
 	 */
-	public function listAction($uidNewsletter) {
-		$emails = $this->emailRepository->findAllByNewsletter($uidNewsletter);
+	public function listAction($uidNewsletter, $start, $limit) {
+		$emails = $this->emailRepository->findAllByNewsletter($uidNewsletter, $start, $limit);
 		
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
@@ -67,8 +69,8 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		));
 		
 		$this->flashMessages->add('Loaded all Emails from Server side.','Emails loaded successfully', t3lib_FlashMessage::NOTICE);
-		
-		$this->view->assign('total', $emails->count());
+		;
+		$this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
 		$this->view->assign('data', $emails);
 		$this->view->assign('success', true);
 		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());

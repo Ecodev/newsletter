@@ -41,10 +41,7 @@ Ext.ux.TYPO3.Newsletter.Store.Email = function() {
 					create: Ext.ux.TYPO3.Newsletter.Remote.EmailController.createAction
 				},
 				paramOrder: {
-					read: ['data'],
-					update: ['data'],
-					create: ['data'],
-					destroy: ['data']
+					read: ['data', 'start', 'limit']
 				}
 			});
 		}
