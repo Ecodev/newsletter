@@ -53,6 +53,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 								'<p><span class="sent">{[values.statistics[values.statistics.length - 1].emailCount]}</span> ' + Ext.ux.TYPO3.Newsletter.Language.recipients + '</p>',
 								'<p><span class="opened">{[Math.round(values.statistics[values.statistics.length - 1].emailOpenedPercentage)]}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_opened + '</p>',
 								'<p><span class="bounced">{[Math.round(values.statistics[values.statistics.length - 1].emailBouncedPercentage)]}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.emails_bounced + '</p>',
+								'<p><span class="link-opened">{[values.statistics[values.statistics.length - 1].linkOpenedPercentage.toFixed(2)]}%</span> ' + Ext.ux.TYPO3.Newsletter.Language.links_opened + '</p>',
 							'</div>',
 							'<div class="t3-newsletter-statistic-group">',
 								'<p>' +  Ext.ux.TYPO3.Newsletter.Language.planned_to_be_sent_on + ' <span class="plannedTime">{[values.plannedTime ? values.plannedTime.format("l Y-m-d H:i:s") : ""]}</span></p>',
@@ -99,7 +100,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 					},
 					{
 						yField: 'linkOpenedPercentage',
-						displayName: Ext.ux.TYPO3.Newsletter.Language.links_opened,
+						displayName: Ext.ux.TYPO3.Newsletter.Language.link_opened,
 						style: { color: '#FFB61B' }
 					}
 				]

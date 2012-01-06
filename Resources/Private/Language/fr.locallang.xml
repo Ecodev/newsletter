@@ -30,7 +30,9 @@
 			<label index="sent">Envoyé</label>
 			<label index="opened">Ouvert</label>
 			<label index="bounced">Rebondit</label>
-			<label index="links_opened">Liens cliqué</label>
+			<label index="links_opened"></label>
+			<label index="link_opened">Liens cliqué</label>
+			<label index="links_opened">liens cliqué</label>
 			<label index="emails_opened">emails ouvert</label>
 			<label index="emails_bounced">emails rebondit</label>
 			<label index="started">Commencé d'envoyer le</label>
@@ -159,7 +161,8 @@
 			<label index="sent">Sent</label>
 			<label index="opened">Opened</label>
 			<label index="bounced">Bounced</label>
-			<label index="links_opened">Clicked links</label>
+			<label index="link_opened">Clicked links</label>
+			<label index="links_opened">clicked links</label>
 			<label index="emails_opened">emails opened</label>
 			<label index="emails_bounced">emails bounced</label>
 			<label index="started">Started sending on</label>

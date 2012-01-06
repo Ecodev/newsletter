@@ -35,7 +35,8 @@
 			<label index="sent">Sent</label>
 			<label index="opened">Opened</label>
 			<label index="bounced">Bounced</label>
-			<label index="links_opened">Clicked links</label>
+			<label index="link_opened">Clicked links</label>
+			<label index="links_opened">clicked links</label>
 			<label index="emails_opened">emails opened</label>
 			<label index="emails_bounced">emails bounced</label>
 			<label index="started">Started sending on</label>
