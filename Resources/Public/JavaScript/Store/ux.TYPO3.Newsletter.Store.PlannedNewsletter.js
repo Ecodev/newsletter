@@ -35,27 +35,7 @@ Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter = function() {
 						{name: 'warnings', convert: function(v, newsletter) { return convertMessages(newsletter, 'warnings'); }},
 						{name: 'infos', convert: function(v, newsletter) { return convertMessages(newsletter, 'infos'); }}
 					]
-				}),
-				writer: new Ext.data.JsonWriter({
-					encode:false,
-					writeAllFields:false
-				}),
-				api: {
-					read: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.listPlannedAction,
-					update: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.updateAction,
-					destroy: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.deleteAction,
-					create: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.createAction
-				},
-				paramOrder: {
-					read: [],
-					update: ['data'],
-					create: ['data'],
-					destroy: ['data']
-				},
-				autoLoad: true,
-				restful: false,
-				batch: false,
-				remoteSort: false
+				})
 			});
 		}
 	}

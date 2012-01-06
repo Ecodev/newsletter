@@ -392,7 +392,17 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 			listeners: 
 			{
 				afterrender: function(formPanel){
-					formPanel.getForm().doAction('directload');
+					formPanel.getForm().doAction('directload', {
+						
+						// When the form loaded its data, we also store those data in our store 
+						// so they can be also be used by the dataview to display newsletter status
+						success: function(form, action) {
+							var plannedNewsletter = action.result.data;
+							var plannedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_PlannedNewsletter');
+							
+							plannedNewsletterStore.loadData({data: plannedNewsletter});
+						}
+					});
 				}
 			}
 		};
