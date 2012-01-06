@@ -33,6 +33,8 @@
  
 class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 
+	protected static $emailCountCache = array();
+	
 	/**
 	 * Returns the email corresponsding to the authCode
 	 * @param string $authcode
@@ -52,9 +54,16 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 	 */
 	public function getCount($uidNewsletter)
 	{
+		// If we have cached result return directly that value to avoid X query for X Links per newsletter
+		if (isset(self::$emailCountCache[$uidNewsletter]))
+		{
+			return self::$emailCountCache[$uidNewsletter];
+		}
+		
 		global $TYPO3_DB;
 		$count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
-
+		self::$emailCountCache[$uidNewsletter] = $count;
+		
 		return (int)$count;
 	}
 	
