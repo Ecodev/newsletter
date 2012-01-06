@@ -16,16 +16,16 @@ var timelineChartStore = null;
 					root: 'data',
 					fields:[
 					    {name: 'time', type: 'date', dateFormat: 'timestamp'},
-					    {name: 'not_sent', type: 'float'},
-					    {name: 'sent', type: 'float'},
-					    {name: 'opened', type: 'float'},
-					    {name: 'bounced', type: 'float'},
-					    {name: 'linkopened', type: 'float'},
-					    {name: 'not_sent_percentage', type: 'float'},
-					    {name: 'sent_percentage', type: 'float'},
-					    {name: 'opened_percentage', type: 'float'},
-					    {name: 'bounced_percentage', type: 'float'},
-					    {name: 'linkopened_percentage', type: 'float'}
+					    {name: 'emailNotSentCount', type: 'float'},
+					    {name: 'emailSentCount', type: 'float'},
+					    {name: 'emailOpenedCount', type: 'float'},
+					    {name: 'emailBouncedCount', type: 'float'},
+					    {name: 'linkOpenedCount', type: 'float'},
+					    {name: 'emailNotSentPercentage', type: 'float'},
+					    {name: 'emailSentPercentage', type: 'float'},
+					    {name: 'emailOpenedPercentage', type: 'float'},
+					    {name: 'emailBouncedPercentage', type: 'float'},
+					    {name: 'linkOpenedPercentage', type: 'float'}
 					]
 				}),
 				api: {
@@ -40,12 +40,15 @@ var timelineChartStore = null;
 			});
 			
 			
-			// When a newsletter is selected, we update the data for the pie chart
+			// When a newsletter is selected, we update the data for the timeline chart
 			Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter').on(
 				'datachanged',
 				function (selectedNewsletterStore) {
-					var newsletter = selectedNewsletterStore.getAt(0);	
-					this.load({params: {data: newsletter.json.__identity }});
+					var newsletter = selectedNewsletterStore.getAt(0);
+					this.loadData({
+						data: newsletter.json.statistics
+					});					
+
 				},
 				timelineChartStore
 				);

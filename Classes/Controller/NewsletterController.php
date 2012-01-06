@@ -180,30 +180,24 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	}
 	
 	/**
-	 * Returns statistics to be used for timeline chart
+	 * Returns the newsletter with included statistics to be used for timeline chart
 	 * @param integer $uidNewsletter 
 	 */
 	public function statisticsAction($uidNewsletter) {
 		$newsletter = $this->newsletterRepository->findByUid($uidNewsletter);
 		
-		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
-		$stats = $emailRepository->getStatistics($uidNewsletter);
-		
-		// At the begining of time, there was nothing, and then no email were sent
-		$plannedTime = $newsletter->getPlannedTime();
-		if ($plannedTime)
-		{
-			$stats = array(array('time' => $plannedTime->format('U'), 'not_sent_percentage' => 100)) + $stats;
-		}
-		
 		$this->view->setVariablesToRender(array('data', 'success', 'total'));
+		
+		$conf = self::resolveJsonViewConfiguration();
+		$conf['_only'][] = 'statistics';
+		$conf['_descend'][] = 'statistics';
 		$this->view->setConfiguration(array(
-			'data'
+			'data' => $conf
 		));
 		
-		$this->view->assign('total', count($stats));
+		$this->view->assign('total', 1);
 		$this->view->assign('success', true);
-		$this->view->assign('data', $stats);
+		$this->view->assign('data', $newsletter);
 	}
 	
 	/**
@@ -230,15 +224,12 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						'senderName',
 						'title',
 						'emailCount',
-						'emailNotSentCount',
-						'emailSentCount',
-						'emailOpenedCount',
-						'emailBouncedCount',
 					),
 					'_descend' => array(
 						'beginTime' => array(),
 						'endTime' => array(),
 						'plannedTime' => array(),
+						'statistics' => array(),
 						)
 				);
 	}

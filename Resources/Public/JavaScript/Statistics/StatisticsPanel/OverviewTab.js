@@ -78,27 +78,27 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 				}),
 				series: [
 					{
-						yField: 'not_sent_percentage',
+						yField: 'emailNotSentPercentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
 						style: { color: '#CCCCCC' }
 					},
 					{
-						yField: 'sent_percentage',
+						yField: 'emailSentPercentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
 						style: { color: '#25CDF2' }
 					},
 					{
-						yField: 'opened_percentage',
+						yField: 'emailOpenedPercentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
 						style: { color: '#078207' }
 					},
 					{
-						yField: 'bounced_percentage',
+						yField: 'emailBouncedPercentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
 						style: { color: '#E01B4C' }
 					},
 					{
-						yField: 'linkopened_percentage',
+						yField: 'linkOpenedPercentage',
 						displayName: Ext.ux.TYPO3.Newsletter.Language.links_opened,
 						style: { color: '#FFB61B' }
 					}

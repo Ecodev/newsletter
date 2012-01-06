@@ -44,13 +44,6 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 					sortable: true
 				},
 				{
-					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
-					dataIndex: 'isTest',
-					width: 50,
-					sortable: true,
-					renderer: function(value){return value ? '✔' : ''; }
-				},
-				{
 					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_planned_time,
 					dataIndex: 'plannedTime',
 					width: 150,
@@ -67,22 +60,16 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 				{
 					header: Ext.ux.TYPO3.Newsletter.Language.recipients,
 					dataIndex: 'emailCount',
-					width: 70,
+					width: 100,
 					sortable: true
 				},
 				{
-					header: Ext.ux.TYPO3.Newsletter.Language.opened,
-					dataIndex: 'emailOpenedCount',
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
+					dataIndex: 'isTest',
 					width: 70,
-					sortable: true
-				},
-				{
-					header: Ext.ux.TYPO3.Newsletter.Language.bounced,
-					dataIndex: 'emailBouncedCount',
-					width: 70,
-					sortable: true
-				},
-				
+					sortable: true,
+					renderer: function(value){return value ? '✔' : ''; }
+				}			
 			]
 			
 		};
@@ -100,8 +87,9 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
 	 * find an easy way to access the newsletterList from the stores
 	 */
 	onNewsletterSelected: function(newsletter) {
+		
 		var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
-		selectedNewsletterStore.loadData({data: [newsletter.data] });
+		selectedNewsletterStore.load({params: {data: newsletter.data.__identity }});
 		
 		var linkStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link');
 		linkStore.load({params: {data: newsletter.data.__identity }});

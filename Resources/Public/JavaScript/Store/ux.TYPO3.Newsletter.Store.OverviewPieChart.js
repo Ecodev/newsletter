@@ -17,23 +17,25 @@ Ext.ux.TYPO3.Newsletter.Store.initOverviewPieChart = function() {
 		'datachanged',
 		function (selectedNewsletterStore) {
 			var newsletter = selectedNewsletterStore.getAt(0);
+			var mostRecentState = newsletter.json.statistics[newsletter.json.statistics.length - 1];
+			
 			this.loadData({
 				data:[
 				{
 					label: Ext.ux.TYPO3.Newsletter.Language.not_sent,
-					data: newsletter.json.emailNotSentCount
+					data: mostRecentState.emailNotSentCount
 				},
 				{
 					label: Ext.ux.TYPO3.Newsletter.Language.sent,
-					data: newsletter.json.emailSentCount
+					data: mostRecentState.emailSentCount
 				}, 
 				{
 					label: Ext.ux.TYPO3.Newsletter.Language.opened,
-					data: newsletter.json.emailOpenedCount
+					data: mostRecentState.emailOpenedCount
 				},
 				{
 					label: Ext.ux.TYPO3.Newsletter.Language.bounced,
-					data: newsletter.json.emailBouncedCount
+					data: mostRecentState.emailBouncedCount
 				}
 				]
 			});

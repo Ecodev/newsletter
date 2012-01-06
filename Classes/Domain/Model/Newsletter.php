@@ -678,7 +678,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			case 6: $month += 6; break;
 			case 7: $year += 1; break;
 		}
-		$newPlannedTime = mktime ($hour, $minute, 0, $month, $day, $year);
+		$newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
 
 		
 		// Clone this newsletter and give the new plannedTime
@@ -686,8 +686,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		global $TYPO3_DB;		
 		$TYPO3_DB->sql_query("INSERT tx_newsletter_domain_model_newsletter 
 		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . " AS tstamp, " . time() . " AS crdate, deleted, hidden
-		 FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
-		
+		FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
 	}
 	
 	/**
@@ -724,48 +723,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
 
 		return (int)$numberOfNotSent;
-	}
-	
-	/**
-	 * Get the number of sent email for a newsletter
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return int count of email already sent
-	 */
-	public function getEmailSentCount() {
-		global $TYPO3_DB;
-		
-		$numberOfSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time != 0 AND open_time = 0 AND bounce_time = 0 AND newsletter = ' . $this->getUid());
-
-		return (int)$numberOfSent;
-	}
-
-	/**
-	 * Get the number of opened email.
-	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return int count of opened emails
-	 */
-	public function getEmailOpenedCount() {
-		global $TYPO3_DB;
-		
-		$numberOfOpened = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'open_time != 0 AND bounce_time = 0 AND newsletter = ' . $this->getUid());
-		
-		return (int)$numberOfOpened;
-	}
-
-	/**
-	 * Get the number of bounced email.
-	 * Temporarily relies on TYPO3_DB. The code must be refactored towards a query against a content repository
-	 *
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return int $numberOfBounce
-	 */
-	public function getEmailBouncedCount() {
-		global $TYPO3_DB;
-
-		$numberOfBounce = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'bounce_time != 0 AND newsletter = ' . $this->getUid());
-		
-		return (int)$numberOfBounce;
 	}
 	
 	/**
@@ -920,7 +877,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$beginTime = $this->getBeginTime();
 		$endTime = $this->getEndTime();
 		
-		// If we don't have UID, it means we are a "fake model" newsletter not saved yet
+		// If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
 		if (!($this->getUid() > 0))
 			return $LANG->getLL('newsletter_status_not_planned');
 		
@@ -944,4 +901,33 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		return "unexpected status";
 	}
 	
+	public function getStatistics()
+	{
+		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$stats = $newsletterRepository->getStatistics($this->getUid());
+		
+		// If there is no stats at all, it means the newsletter didn't start, we manually fill statistics
+		if (!count($stats))
+		{
+			$plannedTime = $this->getPlannedTime();
+			$emailCount = $this->getEmailCount();
+			$stats = array(array(
+				'time' => $plannedTime ? $plannedTime->format('U') : null,
+				'emailNotSentCount' => $emailCount,
+				'emailSentCount' => 0,
+				'emailOpenedCount' => 0,
+				'emailBouncedCount' => 0,
+				'emailCount' => $emailCount,
+				'linkOpenedCount' => 0,
+				'linkCount' => 0,
+				'emailNotSentPercentage' => 100,
+				'emailSentPercentage' => 0,
+				'emailOpenedPercentage' => 0,
+				'emailBouncedPercentage' => 0,
+				'linkOpenedPercentage' => 0,
+			));
+		}
+		
+		return $stats;
+	}
 }

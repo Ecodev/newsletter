@@ -18,7 +18,16 @@ Ext.ux.TYPO3.Newsletter.Store.SelectedNewsletter = function() {
 				
 				// Here we use the same JsonReader as NewsletterStore to 
 				// get the exact same definition of fields as both store have same RecordType
-				reader: newsletterStore.reader
+				reader: newsletterStore.reader,
+				api: {
+					read: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.statisticsAction
+				},
+				paramOrder: {
+					read: ['data']
+				},
+				restful: false,
+				batch: false,
+				remoteSort: false
 			});
 		}
 	}

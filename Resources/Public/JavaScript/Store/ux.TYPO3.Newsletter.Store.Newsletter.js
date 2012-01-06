@@ -35,14 +35,7 @@ Ext.ux.TYPO3.Newsletter.Store.Newsletter = function() {
 						{name: 'uidBounceAccount', type: 'int'},
 						{name: 'uidRecipientList', type: 'int'},
 						{name: 'emailCount', type: 'int'},
-						{name: 'emailNotSentCount', type: 'int'},
-						{name: 'emailSentCount', type: 'int'},
-						{name: 'emailOpenedCount', type: 'int'},
-						{name: 'emailBouncedCount', type: 'int'},
-						{name: 'emailNotSentPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailNotSentCount / newsletter.emailCount) : 0;}},
-						{name: 'emailSentPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailSentCount / newsletter.emailCount) : 0;}},
-						{name: 'emailOpenedPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailOpenedCount / newsletter.emailCount) : 0;}},
-						{name: 'emailBouncedPercentage', convert: function(v, newsletter) {return newsletter.emailCount ? Math.round(100 * newsletter.emailBouncedCount / newsletter.emailCount) : 0;}},
+						{name: 'statistics'}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({
