@@ -227,16 +227,16 @@ class tx_newsletter_mailer {
 
 	/**
 	 * Replace a named marker with a suppied value. 
-	 * A marker can have the form of a simple string marker ###marker###
-	 * Or a advanced boolean marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
+	 * A marker can have the form of a simple string marker ###marker###, or http://marker
+	 * Or an advanced conditionnal marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
 	 *
 	 * @param   string      Name of the marker to replace
 	 * @param   string      Value to replace marker with.
 	 * @return   void
 	 */
 	private function substituteMarker($name, $value) {
-		/* For each marker, only substitute if the field is registered as a marker. This approach has shown to
-		  speed up things quite a bit. */
+		// For each marker, only substitute if the field is registered as a marker. 
+		// This approach has shown to speed up things quite a bit.
 		if (in_array($name, $this->htmlAdvancedMarkers)) {
 			$this->html = self::advancedSubstituteMarker($this->html, $name, $value);
 		}
@@ -249,18 +249,29 @@ class tx_newsletter_mailer {
 			$this->title = self::advancedSubstituteMarker($this->title, $name, $value);
 		}
 
+		// All variants of the marker to search
+		$search = array(
+			"###$name###",
+			"http://$name",
+			urlencode("http://$name"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
+		);
+		
+		$replace = array(
+			$value,
+			$value,
+			urlencode($value), // We need to replace with urlencoded value
+		);
+		
 		if (in_array($name, $this->htmlMarkers)) {
-			$this->html = str_replace("###$name###", $value, $this->html);
-			$this->html = str_replace("\"http://$name\"", $value, $this->html);
+			$this->html = str_replace($search, $replace, $this->html);
 		}
 
 		if (in_array($name, $this->plainMarkers)) {
-			$this->plain = str_replace("###$name###", $value, $this->plain);
-			$this->plain = str_replace("http://$name", $value, $this->plain);
+			$this->plain = str_replace($search, $replace, $this->plain);
 		}
 
 		if (in_array($name, $this->titleMarkers)) {
-			$this->title = str_replace("###$name###", $value, $this->title);
+			$this->title = str_replace($search, $replace, $this->title);
 		}
 	}
 
@@ -302,23 +313,23 @@ class tx_newsletter_mailer {
 	 * @return   void
 	 */
 	private function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email) {
-		$record = $email->getRecipientData();
+		$markers = $email->getRecipientData();
 		
 		// Add predefined markers
 		$authCode = $email->getAuthCode();
-		$record['newsletter_view_url'] = $this->homeUrl . 'web/view.php?c=' . $authCode;
-		$record['newsletter_unsubscribe_url'] = $this->homeUrl . 'web/unsubscribe.php?c=' . $authCode;
+		$markers['newsletter_view_url'] = $this->homeUrl . 'web/view.php?c=' . $authCode;
+		$markers['newsletter_unsubscribe_url'] = $this->homeUrl . 'web/unsubscribe.php?c=' . $authCode;
 		
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
 				$_procObj = & t3lib_div::getUserObj($_classRef);
-				$this->html = $_procObj->substituteMarkersHook($this->html, 'html', $record);
-				$this->plain = $_procObj->substituteMarkersHook($this->plain, 'plain', $record);
-				$this->title = $_procObj->substituteMarkersHook($this->title, 'title', $record);
+				$this->html = $_procObj->substituteMarkersHook($this->html, 'html', $markers);
+				$this->plain = $_procObj->substituteMarkersHook($this->plain, 'plain', $markers);
+				$this->title = $_procObj->substituteMarkersHook($this->title, 'title', $markers);
 			}
 		}
 
-		foreach ($record as $name => $value) {
+		foreach ($markers as $name => $value) {
 			$this->substituteMarker($name, $value);
 		}
 	}
@@ -403,7 +414,7 @@ class tx_newsletter_mailer {
 			$this->injectOpenSpy($email);
 
 		if ($this->newsletter->getInjectLinksSpy())
-			$this->injectLinksSpy($email, false);
+			$this->injectLinksSpy($email, $isPreview);
 		
 		// We substitute markers last because we don't want to spy each links to view/unsubscribe 
 		// (created via markers) for each recipient. Only the generic marker is enough.

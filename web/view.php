@@ -19,6 +19,10 @@ if (@$_GET['c'])
 	if ($email)
 	{
 		$newsletter = $email->getNewsletter();
+		
+		// Here we need to ensure that we have real newsletter instance because the of type hinting on tx_newsletter_tools::getConfiguredMailer()
+		if ($newsletter instanceof Tx_Extbase_Persistence_LazyLoadingProxy)
+			$newsletter = $newsletter->_loadRealInstance();
 	}
 }
 // Otherwise it's a preview of an email which was not sent yet, we will simulate it the best we can
