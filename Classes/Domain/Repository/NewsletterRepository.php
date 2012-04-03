@@ -157,7 +157,11 @@ ORDER BY email.time ASC
 			{
 				$row[$status . 'Percentage'] = $row[$status . 'Count'] / $row['emailCount'] * 100;
 			}
-			$row['linkOpenedPercentage'] = $row['linkOpenedCount'] / ($row['linkCount'] * $row['emailCount']) * 100;
+			
+			if ($row['linkCount'] && $row['emailCount'])
+				$row['linkOpenedPercentage'] = $row['linkOpenedCount'] / ($row['linkCount'] * $row['emailCount']) * 100;
+			else
+				$row['linkOpenedPercentage'] = 0;
 			
 			$result[] = $row;
 		}
