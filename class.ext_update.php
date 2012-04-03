@@ -56,7 +56,7 @@ class ext_update {
 		// Migrate newsletter from page and tx_tcdirectmail_lock to its own table tx_newsletter_domain_model_newsletter
 		"INSERT INTO tx_newsletter_domain_model_newsletter (
 			pid, planned_time, begin_time, end_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
-		) SELECT pages.uid, tx_tcdirectmail_senttime, tx_tcdirectmail_lock.begintime, tx_tcdirectmail_lock.stoptime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, 
+		) SELECT pages.uid, IF(tx_tcdirectmail_senttime, tx_tcdirectmail_senttime, tx_tcdirectmail_lock.begintime), tx_tcdirectmail_lock.begintime, tx_tcdirectmail_lock.stoptime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail, 
 		CONCAT( 'Tx_Newsletter_Domain_Model_PlainConverter_', CONCAT( UPPER( LEFT( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 1 ) ) , SUBSTRING( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 2 ) ) ),
 		tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
 		FROM pages
