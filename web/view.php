@@ -9,34 +9,15 @@ $TYPO3_CONF_VARS['EXT']['extConf']['newsletter'] = serialize($theConf);
 
 $newsletter = null;
 $email = null;
+$isPreview = empty($_GET['c']); // If we don't have an authentification code, we are in preview mode
 
-// If we have an authentification code, look for the original email which was already sent
-if (@$_GET['c'])
+// If it's a preview of an email which was not sent yet, we will simulate it the best we can
+if ($isPreview)
 {
-	$isPreview = false;
-	$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
-	$email = $emailRepository->findByAuthcode($_GET['c']);
-	if ($email)
-	{
-		$newsletter = $email->getNewsletter();
-		
-		// Here we need to ensure that we have real newsletter instance because the of type hinting on tx_newsletter_tools::getConfiguredMailer()
-		if ($newsletter instanceof Tx_Extbase_Persistence_LazyLoadingProxy)
-			$newsletter = $newsletter->_loadRealInstance();
-	}
-}
-// Otherwise it's a preview of an email which was not sent yet, we will simulate it the best we can
-else
-{
-	$isPreview = true;
-	
-	// Create a fake newsletter and configured it with given parameters
+	// Create a fake newsletter and configure it with given parameters
 	$newsletter = new Tx_Newsletter_Domain_Model_Newsletter();
 	$newsletter->setPid(@$_GET['pid']);
 	$newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
-	if (isset($_GET['plainConverter'])) $newsletter->setPlainConverter($_GET['plainConverter']);
-	$newsletter->setInjectOpenSpy(@$_GET['injectOpenSpy']);
-	$newsletter->setInjectLinksSpy(@$_GET['injectLinksSpy']);
 	
 	if ($newsletter)
 	{
@@ -56,10 +37,31 @@ else
 		}
 	}
 }
+// Otherwise look for the original email which was already sent
+else
+{
+	$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+	$email = $emailRepository->findByAuthcode($_GET['c']);
+	if ($email)
+	{
+		$newsletter = $email->getNewsletter();
+		
+		// Here we need to ensure that we have real newsletter instance because of type hinting on tx_newsletter_tools::getConfiguredMailer()
+		if ($newsletter instanceof Tx_Extbase_Persistence_LazyLoadingProxy)
+			$newsletter = $newsletter->_loadRealInstance();
+	}
+}
 
 // If we found everything needed, we can render the email
 if ($newsletter && $email)
 {
+	// Override some configuration
+	// so we can customise the preview according to selected settings via JS,
+	// and we can also prevent fake statistics when admin 'view' a sent email
+	if (isset($_GET['plainConverter'])) $newsletter->setPlainConverter($_GET['plainConverter']);
+	if (isset($_GET['injectOpenSpy'])) $newsletter->setInjectOpenSpy($_GET['injectOpenSpy']);
+	if (isset($_GET['injectLinksSpy'])) $newsletter->setInjectLinksSpy($_GET['injectLinksSpy']);
+	
 	$mailer = tx_newsletter_tools::getConfiguredMailer($newsletter, @$_GET['L']);
 	$mailer->prepare($email, $isPreview);
 
