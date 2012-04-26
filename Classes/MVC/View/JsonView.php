@@ -95,21 +95,21 @@ class Tx_MvcExtjs_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView {
 	protected $configuration = array();
 
 	/**
-	 * @var Tx_Extbase_Persistence_PersistenceManagerInterface
+	 * @var Tx_Extbase_Persistence_ManagerInterface
 	 * @inject
 	 */
 	protected $persistenceManager;
-	
+
 	/**
 	 * Injects the PersistenceManager.
-	 * 
+	 *
 	 * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
 	 * @return void
 	 */
 	public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager) {
 		$this->persistenceManager = $persistenceManager;
 	}
-	
+
 	/**
 	 * Specifies which variables this JsonView should render
 	 * By default only the variable 'value' will be rendered

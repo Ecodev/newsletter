@@ -31,7 +31,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 
 	/**
 	 * @inject
-	 * @var Tx_Extbase_Reflection_ReflectionService
+	 * @var Tx_Extbase_Reflection_Service
 	 */
 	protected $reflectionService;
 
@@ -40,7 +40,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */
 	protected $objectManager;
-	
+
 	/**
 	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
 	 */
@@ -98,7 +98,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 		$this->data = $data;
 		$this->tid = $tid;
 	}
-	
+
 	/**
 	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
@@ -106,7 +106,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
-	
+
 	/**
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
 	 * @return void
@@ -114,7 +114,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 	}
-	
+
 	/**
 	 * Injects the Reflection Service
 	 *
@@ -223,7 +223,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	public function getControllerActionName() {
 		return str_replace('Action','',$this->method);
 	}
-	
+
 	/**
 	 * Ext Direct does not provide named arguments by now, so we have
 	 * to map them by reflecting on the action parameters.
