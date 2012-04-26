@@ -19,7 +19,7 @@ attach_images = 1
   # cat=basic; type=string; label=String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template.
 append_url =  
 
-  # cat=basic; type=string; label=Domain or domain + path from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
+  # cat=basic; type=string; label=Domain or domain + path (without "http") from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path = 
 
   # cat=basic; type=integer; label=Number of mailer per round. This can be used to limit the rate on which TC Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
