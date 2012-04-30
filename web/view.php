@@ -11,7 +11,7 @@ $newsletter = null;
 $email = null;
 $isPreview = empty($_GET['c']); // If we don't have an authentification code, we are in preview mode
 
-// If it's a preview of an email which was not sent yet, we will simulate it the best we can
+// If it's a preview, an email which was not sent yet, we will simulate it the best we can
 if ($isPreview)
 {
 	// Create a fake newsletter and configure it with given parameters

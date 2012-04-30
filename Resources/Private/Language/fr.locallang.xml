@@ -68,6 +68,7 @@
 			<label index="flashmessage_test_newsletter_error">Erreur d'envoi de la newsletter de test</label>
 			<label index="flashmessage_newsletter_queued">La newsletter a été ajoutée à la file d'attente.</label>
 			<label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
+			<label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

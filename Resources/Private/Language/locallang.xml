@@ -72,6 +72,7 @@
 			<label index="flashmessage_test_newsletter_error">Error while sending test newsletter</label>
 			<label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
 			<label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
+			<label index="flashmessage_newsletter_invalid">Error while validating newsletter</label>
 			<label index=""></label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>

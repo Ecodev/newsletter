@@ -128,11 +128,18 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$recipientList = $newNewsletter->getRecipientList();
 		$recipientList->init();
 		$count = $recipientList->getCount();
-			
+		$validatedContent = $newNewsletter->getValidatedContent($language);
+		
 		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
 		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
 			$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->view->assign('success', FALSE);
+		}
+		// If we attempt to create a newsletter which contains errors, abort and don't save in DB
+		elseif (count($validatedContent['errors']))
+		{
+			$this->flashMessages->add('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_invalid', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		else

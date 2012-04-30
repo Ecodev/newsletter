@@ -251,12 +251,6 @@ abstract class tx_newsletter_tools {
 		$oldNewsletterUid = null;
 		while (list($newsletterUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
 
-			$email = $emailRepository->findByUid($emailUid);
-
-			// Mark it as started sending
-			$email->setBeginTime(new DateTime());
-			$emailRepository->updateNow($email);
-
 			/* For the page, this way we can support multiple pages in one spool session */
 			if ($newsletterUid != $oldNewsletterUid) {
 				$oldNewsletterUid = $newsletterUid;
@@ -266,6 +260,7 @@ abstract class tx_newsletter_tools {
 			}
 
 			// Define the language of email
+			$email = $emailRepository->findByUid($emailUid);
 			$recipientData = $email->getRecipientData();
 			$L = $recipientData['L'];
 
@@ -273,6 +268,10 @@ abstract class tx_newsletter_tools {
 			if (!is_object($mailers[$L])) {
 				$mailers[$L] = &tx_newsletter_tools::getConfiguredMailer($newsletter, $L);
 			}
+
+			// Mark it as started sending
+			$email->setBeginTime(new DateTime());
+			$emailRepository->updateNow($email);
 
 			// Send the email
 			$mailers[$L]->send($email);

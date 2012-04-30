@@ -745,7 +745,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * is also "fixed" automatically when possible.
 	 * @global type $LANG
 	 * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
-	 * @return array
+	 * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
 	 */
 	public function getValidatedContent($language = null)
 	{	
