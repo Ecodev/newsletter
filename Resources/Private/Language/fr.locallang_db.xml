@@ -69,7 +69,6 @@
 			<label index="tx_newsletter_domain_model_email.recipient_data">Donnée du destinataire</label>
 			<label index="tx_newsletter_domain_model_email.open_time">Date d'ouverture</label>
 			<label index="tx_newsletter_domain_model_email.bounce_time">Date de rebont</label>
-			<label index="tx_newsletter_domain_model_email.host">Hôte</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Lien</label>
 			<label index="tx_newsletter_domain_model_link.url">URL</label>
@@ -146,7 +145,6 @@
 			<label index="tx_newsletter_domain_model_email.recipient_data" type="integer">144173542</label>
 			<label index="tx_newsletter_domain_model_email.open_time" type="integer">50856557</label>
 			<label index="tx_newsletter_domain_model_email.bounce_time" type="integer">110460811</label>
-			<label index="tx_newsletter_domain_model_email.host" type="integer">204251501</label>
 			<label index="tx_newsletter_domain_model_email.newsletter" type="integer">268140134</label>
 			<label index="tx_newsletter_domain_model_link" type="integer">159284378</label>
 			<label index="tx_newsletter_domain_model_link.url" type="integer">241907994</label>
@@ -223,7 +221,6 @@
 			<label index="tx_newsletter_domain_model_email.recipient_data">Recipient Data</label>
 			<label index="tx_newsletter_domain_model_email.open_time">Open time</label>
 			<label index="tx_newsletter_domain_model_email.bounce_time">Bounce time</label>
-			<label index="tx_newsletter_domain_model_email.host">Host</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>
 			<label index="tx_newsletter_domain_model_link.url">URL</label>

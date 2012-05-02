@@ -169,23 +169,6 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getHostReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setHostForStringSetsHost() { 
-		$this->fixture->setHost('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getHost()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
 	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() { 
 		$this->assertEquals(
 			NULL,

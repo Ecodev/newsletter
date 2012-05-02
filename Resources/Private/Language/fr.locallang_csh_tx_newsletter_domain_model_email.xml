@@ -8,7 +8,6 @@
 			<label index="recipient_data.description">Donnée du destinataire qui peuvent être utilisée dans le corp de l'email via des markers</label>
 			<label index="opened.description">Si l'email a été ouvert</label>
 			<label index="bounced.description">Si l'email a rebondit</label>
-			<label index="host.description">Hôte par lequel l'email a été envoyé</label>
 			<label index="newsletter.description">Newsletter à qui appartient cet email</label>
 		</languageKey>
 	</data>
@@ -20,7 +19,6 @@
 			<label index="recipient_data.description" type="integer">58771658</label>
 			<label index="opened.description" type="integer">61148254</label>
 			<label index="bounced.description" type="integer">179418369</label>
-			<label index="host.description" type="integer">108740026</label>
 			<label index="newsletter.description" type="integer">165951704</label>
 		</languageKey>
 	</orig_hash>
@@ -32,7 +30,6 @@
 			<label index="recipient_data.description">recipientData</label>
 			<label index="opened.description">opened</label>
 			<label index="bounced.description">bounced</label>
-			<label index="host.description">host</label>
 			<label index="newsletter.description">newsletter</label>
 		</languageKey>
 	</orig_text>

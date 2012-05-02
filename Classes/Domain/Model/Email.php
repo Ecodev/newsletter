@@ -77,13 +77,6 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	protected $bounceTime;
 
 	/**
-	 * host
-	 *
-	 * @var string $host
-	 */
-	protected $host;
-
-	/**
 	 * newsletter
 	 * @lazy
 	 * @var Tx_Newsletter_Domain_Model_Newsletter $newsletter
@@ -229,25 +222,6 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function isBounced() {
 		return $this->getBounceTime() > 0;
-	}
-
-	/**
-	 * Setter for host
-	 *
-	 * @param string $host host
-	 * @return void
-	 */
-	public function setHost($host) {
-		$this->host = $host;
-	}
-
-	/**
-	 * Getter for host
-	 *
-	 * @return string host
-	 */
-	public function getHost() {
-		return $this->host;
 	}
 
 	/**

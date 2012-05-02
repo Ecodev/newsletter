@@ -109,25 +109,16 @@ abstract class tx_newsletter_tools {
 		$newsletter->setBeginTime($begintime);
 		$newsletterRepository->updateNow($newsletter);
 
-		/* Get the servers */
-		$hosts = array_map('trim', explode(',', tx_newsletter_tools::confParam('lb_hosts')));
-
 		$recipientList = $newsletter->getRecipientList();
 		$recipientList->init();
 		while ($receiver = $recipientList->getRecipient()) {
-			if (!$host = current($hosts)) {
-				reset($hosts);
-				$host = current($hosts);
-			}
-			next($hosts);
-
+			
 			// Register the receiver
 			if (t3lib_div::validEmail($receiver['email'])) {
 				$TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
 					'pid' => $newsletter->getPid(),
 					'recipient_address' => $receiver['email'],
 					'recipient_data' => serialize($receiver),
-					'host' => $host,
 					'pid' => $newsletter->getPid(),
 					'newsletter' => $newsletter->getUid(),
 				));
@@ -156,21 +147,11 @@ abstract class tx_newsletter_tools {
 		else
 			$onlyTest = ' ';
 
-
-		/* Get the machines hostname.. it can be supplied on the commandline, or we read the hostname.
-		  This does absolutely only work on Unix machines without safe_mode */
-		if (isset($_SERVER['argv'][1])) {
-			$hostname = $_SERVER['argv'][1];
-		} else {
-			$hostname = trim(exec('hostname'));
-		}
-		
 		/* Try to detect if a spool is already running
 		  If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
 		  If there are newer records, then stop here, and assume the running mailer will take care of it.
 		 */
-		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15)
-						. " AND (host = '$hostname' OR host = '')");
+		$rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
 
 		list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
 		if ($num_records <> 0) {
@@ -186,8 +167,7 @@ abstract class tx_newsletter_tools {
 		$rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid 
 						FROM tx_newsletter_domain_model_email 
 						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid) 
-						WHERE (host = '$hostname' OR host = '')
-						AND tx_newsletter_domain_model_email.begin_time = 0
+						WHERE tx_newsletter_domain_model_email.begin_time = 0
 						$onlyTest
 						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
 
@@ -218,8 +198,7 @@ abstract class tx_newsletter_tools {
 		$rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid 
 						FROM tx_newsletter_domain_model_email 
 						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid) 
-						WHERE host = ''
-						AND tx_newsletter_domain_model_newsletter.uid = " . $newsletter->getUid() . "
+						WHERE tx_newsletter_domain_model_newsletter.uid = " . $newsletter->getUid() . "
 						AND tx_newsletter_domain_model_email.begin_time = 0
 						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
 

@@ -65,8 +65,8 @@ class ext_update {
 		
 		// Emails matching an existing newsletter
 		"INSERT INTO tx_newsletter_domain_model_email (
-			pid, begin_time, end_time, recipient_address, recipient_data, open_time, bounce_time, host, newsletter
-		) SELECT tx_tcdirectmail_sentlog.pid, begintime, sendtime, receiver, userdata, IF(beenthere, sendtime, 0), IF(bounced, sendtime, 0), host, tx_newsletter_domain_model_newsletter.uid
+			pid, begin_time, end_time, recipient_address, recipient_data, open_time, bounce_time, newsletter
+		) SELECT tx_tcdirectmail_sentlog.pid, begintime, sendtime, receiver, userdata, IF(beenthere, sendtime, 0), IF(bounced, sendtime, 0), tx_newsletter_domain_model_newsletter.uid
 		FROM tx_tcdirectmail_sentlog
 		INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_tcdirectmail_sentlog.pid = tx_newsletter_domain_model_newsletter.pid AND tx_tcdirectmail_sentlog.begintime = tx_newsletter_domain_model_newsletter.begin_time);",	
 		
