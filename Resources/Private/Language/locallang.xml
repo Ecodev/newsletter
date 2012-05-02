@@ -73,7 +73,8 @@
 			<label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
 			<label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
 			<label index="flashmessage_newsletter_invalid">Error while validating newsletter</label>
-			<label index=""></label>
+			<label index="unsubscribe_notification_subject">Newsletter unsubscription</label>
+			<label index="unsubscribe_notification_body">&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href="%2$s"&gt;%1$s&lt;/a&gt; unsubscribed from list "&lt;a href="%4$s"&gt;%3$s&lt;/a&gt;" when he received "&lt;a href="%6$s"&gt;%5$s&lt;/a&gt;".&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
 	</data>

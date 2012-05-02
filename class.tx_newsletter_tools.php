@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('newsletter') . 'class.tx_newsletter_mailer.p
  */
 abstract class tx_newsletter_tools {
 	
-	protected static $configuration;
+	protected static $configuration = null;
 	
 	/**
 	 * Get a newsletter-conf-template parameter

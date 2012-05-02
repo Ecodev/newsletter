@@ -69,6 +69,8 @@
 			<label index="flashmessage_newsletter_queued">La newsletter a été ajoutée à la file d'attente.</label>
 			<label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
 			<label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
+			<label index="unsubscribe_notification_subject">Désincription de Newsletter</label>
+			<label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href="%2$s"&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste "&lt;a href="%4$s"&gt;%3$s&lt;/a&gt;" quand il a reçut "&lt;a href="%6$s"&gt;%5$s&lt;/a&gt;".&lt;/p&gt;&lt;p&Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
