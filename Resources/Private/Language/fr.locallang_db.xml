@@ -70,6 +70,7 @@
 			<label index="tx_newsletter_domain_model_email.open_time">Date d'ouverture</label>
 			<label index="tx_newsletter_domain_model_email.bounce_time">Date de rebont</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
+			<label index="tx_newsletter_domain_model_email.unsubscribed">Désinscrit</label>
 			<label index="tx_newsletter_domain_model_link">Lien</label>
 			<label index="tx_newsletter_domain_model_link.url">URL</label>
 			<label index="tx_newsletter_domain_model_link.opened_count">Nombre de fois ouvert</label>

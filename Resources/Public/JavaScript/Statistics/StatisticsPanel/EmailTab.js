@@ -78,9 +78,16 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 					sortable: true
 				},
 				{
+					dataIndex: 'unsubscribed',
+					header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_email_unsubscribed,
+					width: 100,
+					sortable: true,
+					renderer: function(value){ return value ? '✔' : ''; }
+				},
+				{
 					dataIndex: 'authCode',
 					header: Ext.ux.TYPO3.Newsletter.Language.view,
-					width: 100,
+					width: 70,
 					sortable: true,
 					renderer: this._renderPreview
 				},

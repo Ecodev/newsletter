@@ -65,6 +65,10 @@ if (@$_GET['c'])
 	$email = $emailRepository->findByAuthcode($_GET['c']);
 	if ($email)
 	{
+		// Mark the email as requested to be unsubscribed
+		$email->setUnsubscribed(TRUE);
+		$emailRepository->update($email);
+		
 		$newsletter = $email->getNewsletter();
 		if ($newsletter)
 		{

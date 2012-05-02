@@ -74,6 +74,7 @@
 			<label index="tx_newsletter_domain_model_email.open_time">Open time</label>
 			<label index="tx_newsletter_domain_model_email.bounce_time">Bounce time</label>
 			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
+			<label index="tx_newsletter_domain_model_email.unsubscribed">Unsubscribed</label>
 			<label index="tx_newsletter_domain_model_link">Link</label>
 			<label index="tx_newsletter_domain_model_link.url">URL</label>
 			<label index="tx_newsletter_domain_model_link.opened_count">Opened count</label>

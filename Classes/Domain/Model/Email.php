@@ -84,6 +84,14 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 	protected $newsletter;
 
 	/**
+	 * Whether the recipient of this email requested to unsubscribe.
+	 *
+	 * @var boolean $unsubscribed
+	 * @validate NotEmpty
+	 */
+	protected $unsubscribed;
+
+	/**
 	 * Setter for beginTime
 	 *
 	 * @param DateTime $beginTime beginTime
@@ -243,4 +251,22 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
 		return $this->newsletter;
 	}
 
+	/**
+	 * Setter for unsubscribed
+	 *
+	 * @param boolean $unsubscribed Whether the recipient of this email requested to unsubscribe.
+	 * @return void
+	 */
+	public function setUnsubscribed($unsubscribed) {
+		$this->unsubscribed = $unsubscribed;
+	}
+
+	/**
+	 * Getter for unsubscribed
+	 *
+	 * @return boolean Whether the recipient of this email requested to unsubscribe.
+	 */
+	public function getUnsubscribed() {
+		return $this->unsubscribed;
+	}
 }

@@ -95,6 +95,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	recipient_address varchar(255) DEFAULT '' NOT NULL,
 	recipient_data varchar(255) DEFAULT '' NOT NULL,
 	newsletter int(11) unsigned DEFAULT '0',
+	unsubscribed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

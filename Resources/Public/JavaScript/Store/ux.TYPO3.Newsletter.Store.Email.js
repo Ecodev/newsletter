@@ -28,6 +28,7 @@ Ext.ux.TYPO3.Newsletter.Store.Email = function() {
 						{name: 'bounceTime', type: 'date'},
 						{name: 'authCode', type: 'string'},
 						{name: 'recipientAddress', type: 'string'},
+						{name: 'unsubscribed', type: 'boolean'}
 					]
 				}),
 				writer: new Ext.data.JsonWriter({

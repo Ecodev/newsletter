@@ -86,7 +86,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	static public function resolveJsonViewConfiguration() {
 		return array(
 					'_exposeObjectIdentifier' => TRUE,
-					'_only' => array('beginTime', 'endTime', 'authCode', 'bounceTime', 'openTime', 'recipientAddress'),
+					'_only' => array('beginTime', 'endTime', 'authCode', 'bounceTime', 'openTime', 'recipientAddress', 'unsubscribed'),
 					'_descend' => array(
 						'beginTime' => array(),
 						'endTime' => array(),
