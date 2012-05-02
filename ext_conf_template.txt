@@ -1,30 +1,29 @@
-  # cat=basic; type=string; label=Path to fetchmail program. This a the standard unix mail-retrieval program. It is used to collect bounce mails with.
-path_to_fetchmail = /usr/bin/fetchmail
-
-  # cat=basic; type=string; label=Path to Lynx CLI browser. This program is not required, but can be used by TC Newsletter to produce an acceptable plaintext conversion with no efford at all.
-path_to_lynx = /usr/bin/lynx
-
-  # cat=basic; type=string; label=Sender email. Specify how the sender email is resolved, if it is not specified on the page record. "user" for the be_user owning the email or supply a valid emailaddress directly here. If everything is blank, the system will default to generic settings for the site or the system.
-sender_email = user
-
-  # cat=basic; type=string; label=Sender name. Specify how the sender name is resolved, if it is not specified on the page record. "user" for the be_user owning the email or supply a name directly here. If everything is blank, the system will default to the site name from $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'].
+# cat=basic; type=string; label=Default sender name: Specify default value for sender name. Can be overridden for each newsletter. If "user", the be_user owning the newsletter will be used. If blank, will default to the site name from $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']. Otherwise can be any string.
 sender_name = user
 
-  # cat=basic; type=boolean; label=Keep bounce messages on the ingoing mail server. Checking this option will leave bounce messages on the ingoing server. Default behaviour is to *delete* bounce messages, once they have been processed.
-keep_messages = 0
+# cat=basic; type=string; label=Default sender email: Specify default value for sender email. Can be overridden for each newsletter. If "user", the be_user owning the newsletter will be used. If blank, will default to generic settings for the site or the system. Otherwise must be a valid email address.
+sender_email = user
 
-  # cat=basic; type=boolean; label=Attach images. Leave this checked to enable attached, inline images. This will normally improve you viewers experience, but reduces the performance of the mailer, since it has to deliver much more (binary) data. Uncheckit to instead link to the images online.
-attach_images = 1
+# cat=basic; type=string; label=Notification email: Specify a valid address email to receive notification when recipients unsubscribe. If "user", the be_user owning the newsletter will be used. If blank, no notification will be sent. Otherwise must be a valid email address.
+notification_email = user
 
-  # cat=basic; type=string; label=String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template.
-append_url =  
-
-  # cat=basic; type=string; label=Domain or domain + path (without "http") from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
+# cat=basic; type=string; label=Domain: Domain or domain + path (without "http") from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path = 
 
-  # cat=basic; type=integer; label=Number of mailer per round. This can be used to limit the rate on which TC Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
+# cat=basic; type=string; label=Append parameters: String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template.
+append_url =  
+
+# cat=basic; type=string; label=Path to Lynx CLI browser: This program is not required, but can be used by Newsletter to produce an acceptable plaintext conversion.
+path_to_lynx = /usr/bin/lynx
+
+# cat=basic; type=string; label=Path to fetchmail program: This a standard unix mail-retrieval program. It is used to collect bounced emails with.
+path_to_fetchmail = /usr/bin/fetchmail
+
+# cat=basic; type=boolean; label=Keep bounced emails on server: Checking this option will leave bounced emails on the server. Default behaviour is to *delete* bounce messages, once they have been processed.
+keep_messages = 0
+
+# cat=basic; type=boolean; label=Attach images: Leave this checked to enable attached, inline images. This will normally improve you viewers experience, but reduces the performance of the mailer, since it has to deliver much more (binary) data. Uncheck it to instead link to the images online.
+attach_images = 1
+
+# cat=basic; type=integer; label=Number of mailer per round: This can be used to limit the rate on which Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
 mails_per_round = 100
-
-  # cat=basic; type=string; label=Host tags for use on a load balanced servers, seperate with ",". This allows you to send out newsletters from several loadbalanced servers. Consult the manuals "Advanced" section on what this is, and how to use it. 
-lb_hosts = 
-
