@@ -18,6 +18,7 @@
 			<label index="none">aucun</label>
 			<label index="preview_html">Html</label>
 			<label index="preview_plain">Texte</label>
+			<label index="missing_fields">Champs manquant</label>
 			<label index="preview">Prévisualisation</label>
 			<label index="view">Voir</label>
 			<label index="newsletter_tab">Newsletter</label>
@@ -30,8 +31,7 @@
 			<label index="sent">Envoyé</label>
 			<label index="opened">Ouvert</label>
 			<label index="bounced">Rebondit</label>
-			<label index="links_opened"></label>
-			<label index="link_opened">Liens cliqué</label>
+			<label index="link_opened">Liens ouvert</label>
 			<label index="links_opened">liens cliqué</label>
 			<label index="emails_opened">emails ouvert</label>
 			<label index="emails_bounced">emails rebondit</label>
@@ -70,7 +70,7 @@
 			<label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
 			<label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
 			<label index="unsubscribe_notification_subject">Désincription de Newsletter</label>
-			<label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href="%2$s"&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste "&lt;a href="%4$s"&gt;%3$s&lt;/a&gt;" quand il a reçut "&lt;a href="%6$s"&gt;%5$s&lt;/a&gt;".&lt;/p&gt;&lt;p&Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
+			<label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; quand il a reçut &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
@@ -103,7 +103,7 @@
 			<label index="sent" type="integer">133742632</label>
 			<label index="opened" type="integer">27335450</label>
 			<label index="bounced" type="integer">106508084</label>
-			<label index="links_opened" type="integer">119397981</label>
+			<label index="links_opened" type="integer">266645565</label>
 			<label index="emails_opened" type="integer">176156044</label>
 			<label index="emails_bounced" type="integer">187899690</label>
 			<label index="started" type="integer">16926850</label>
@@ -132,6 +132,18 @@
 			<label index="planning" type="integer">35465386</label>
 			<label index="date_start_sending" type="integer">154469676</label>
 			<label index="add_to_queue" type="integer">267969072</label>
+			<label index="flashmessage_test_maximum_recipients" type="integer">204302738</label>
+			<label index="flashmessage_test_maximum_recipients_title" type="integer">258957131</label>
+			<label index="flashmessage_test_newsletter_sent" type="integer">210914609</label>
+			<label index="flashmessage_test_newsletter_sent_title" type="integer">84175771</label>
+			<label index="flashmessage_test_newsletter_error" type="integer">258957131</label>
+			<label index="flashmessage_newsletter_queued" type="integer">134414338</label>
+			<label index="flashmessage_newsletter_queued_title" type="integer">12280817</label>
+			<label index="flashmessage_newsletter_invalid" type="integer">256314965</label>
+			<label index="unsubscribe_notification_subject" type="integer">260752590</label>
+			<label index="unsubscribe_notification_body" type="integer">150203798</label>
+			<label index="missing_fields" type="integer">20837752</label>
+			<label index="link_opened" type="integer">119397981</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -164,7 +176,6 @@
 			<label index="sent">Sent</label>
 			<label index="opened">Opened</label>
 			<label index="bounced">Bounced</label>
-			<label index="link_opened">Clicked links</label>
 			<label index="links_opened">clicked links</label>
 			<label index="emails_opened">emails opened</label>
 			<label index="emails_bounced">emails bounced</label>
@@ -194,6 +205,18 @@
 			<label index="planning">Planning</label>
 			<label index="date_start_sending">Date to start sending</label>
 			<label index="add_to_queue">Add to queue</label>
+			<label index="flashmessage_test_maximum_recipients">Test newsletter cannot be sent to %1$d recipients. Maximum allowed is %2$d</label>
+			<label index="flashmessage_test_maximum_recipients_title">Error while sending test newsletter</label>
+			<label index="flashmessage_test_newsletter_sent">Test newsletter has been sent.</label>
+			<label index="flashmessage_test_newsletter_sent_title">Test newsletter sent</label>
+			<label index="flashmessage_test_newsletter_error">Error while sending test newsletter</label>
+			<label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
+			<label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
+			<label index="flashmessage_newsletter_invalid">Error while validating newsletter</label>
+			<label index="unsubscribe_notification_subject">Newsletter unsubscription</label>
+			<label index="unsubscribe_notification_body">&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</label>
+			<label index="missing_fields">Missing fields</label>
+			<label index="link_opened">Clicked links</label>
 		</languageKey>
 	</orig_text>
 </T3locallangExt>
