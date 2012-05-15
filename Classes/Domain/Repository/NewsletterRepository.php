@@ -139,10 +139,10 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			'linkOpenedPercentage' => 0,
 		);
 		
-		// Find out what the best grouping step is according to number of events
+		// Find out what the best grouping step is according to number of states
 		$stateCount = count($stateDifferences);
 		if ($stateCount > 5000)
-			$groupingTimestep =  60 * 60; // 1 hour
+			$groupingTimestep =  15 * 60; // 15 minutes
 		elseif ($stateCount > 500)
 			$groupingTimestep =  5 * 60; // 5 minutes
 		elseif ($stateCount > 50)
