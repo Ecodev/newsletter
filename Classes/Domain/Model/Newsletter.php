@@ -904,29 +904,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getStatistics()
 	{
 		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-		$stats = $newsletterRepository->getStatistics($this->getUid());
-		
-		// If there is no stats at all, it means the newsletter didn't start, we manually fill statistics
-		if (!count($stats))
-		{
-			$plannedTime = $this->getPlannedTime();
-			$emailCount = $this->getEmailCount();
-			$stats = array(array(
-				'time' => $plannedTime ? $plannedTime->format('U') : null,
-				'emailNotSentCount' => $emailCount,
-				'emailSentCount' => 0,
-				'emailOpenedCount' => 0,
-				'emailBouncedCount' => 0,
-				'emailCount' => $emailCount,
-				'linkOpenedCount' => 0,
-				'linkCount' => 0,
-				'emailNotSentPercentage' => 100,
-				'emailSentPercentage' => 0,
-				'emailOpenedPercentage' => 0,
-				'emailBouncedPercentage' => 0,
-				'linkOpenedPercentage' => 0,
-			));
-		}
+		$stats = $newsletterRepository->getStatistics($this);
 		
 		return $stats;
 	}
