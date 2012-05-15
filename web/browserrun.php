@@ -9,17 +9,16 @@ define('PATH_thisScript', $_SERVER['SCRIPT_FILENAME']); // Here we cannot use __
 require(dirname(dirname(dirname(dirname(dirname(PATH_thisScript))))) . "/typo3/init.php"); // Here we cannot use traditional '../../' if extension is symlinked and shared between different TYPO3 core versions
 
 
-function initTSFE($pageUid = 1, $overrule = FALSE) {
+function initTSFE($pageUid = 1) {
 	// declare
 	$temp_TSFEclassName = t3lib_div::makeInstance('tslib_fe');
-
 	// begin
-	if (!is_object($GLOBALS['TT']) || $overrule === TRUE) {
+	if (!is_object($GLOBALS['TT'])) {
 		$GLOBALS['TT'] = new t3lib_timeTrack;
 		$GLOBALS['TT']->start();
 	}
 
-	if ((!is_object($GLOBALS['TSFE']) || $overrule === TRUE) && is_int($pageUid))
+	if ((!is_object($GLOBALS['TSFE'])) && is_int($pageUid))
 	{
 		// builds TSFE object
 		$GLOBALS['TSFE'] = new $temp_TSFEclassName($GLOBALS['TYPO3_CONF_VARS'],
@@ -52,6 +51,8 @@ function initTSFE($pageUid = 1, $overrule = FALSE) {
 		}
 		// builds a cObj
 		$GLOBALS['TSFE']->newCObj();
+		
+		$GLOBALS['BE_USER'] = $GLOBALS['TSFE']->initializeBackendUser();
 	}
 }
 initTSFE();
