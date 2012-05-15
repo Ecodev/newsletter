@@ -52,7 +52,8 @@ function initTSFE($pageUid = 1) {
 		// builds a cObj
 		$GLOBALS['TSFE']->newCObj();
 		
-		$GLOBALS['BE_USER'] = $GLOBALS['TSFE']->initializeBackendUser();
+		if (is_callable(array($GLOBALS['TSFE'], 'initializeBackendUser')))
+			$GLOBALS['BE_USER'] = $GLOBALS['TSFE']->initializeBackendUser();
 	}
 }
 initTSFE();
