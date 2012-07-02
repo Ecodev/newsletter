@@ -8,8 +8,6 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
  * @extends Ext.Container
  *
  * Class for statistic container
- *
- * $Id$
  */
 Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.Container, {
 
@@ -64,13 +62,13 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
 						)
 				}
 				]
-			},		
+			},
 			{
 				region: 'center',
 				xtype: 'linechart',
 				store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
 				xField: 'time',
-				
+
 				yAxis: new Ext.chart.NumericAxis({
 					majorUnit: 20
 				}),

@@ -34,8 +34,6 @@ t3lib_extMgm::addTypoScriptConstants('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:news
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Newsletter');
 
 
-
-
 t3lib_extMgm::addLLrefForTCAdescr('tx_newsletter_domain_model_newsletter', 'EXT:newsletter/Resources/Private/Language/locallang_csh_tx_newsletter_domain_model_newsletter.xml');
 t3lib_extMgm::allowTableOnStandardPages('tx_newsletter_domain_model_newsletter');
 $TCA['tx_newsletter_domain_model_newsletter'] = array (

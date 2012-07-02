@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com> 
+*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,21 +28,20 @@
  * @category    Controller
  * @package     TYPO3
  * @subpackage  tx_newsletter
- * @author      Dennis Ahrens <dennis.ahrens@googlemail.com> 
+ * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id: ModuleController.php 45285 2011-03-19 13:19:40Z deaddivinity $
  */
 class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController {
-	
+
 	/**
 	 * index action for the module controller
 	 * This will render the HTML needed for ExtJS application
-	 * 
+	 *
 	 * @return void
 	 */
 	public function indexAction() {
 		// Nothing to do here
 	}
-	
+
 }
 

@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,7 +26,6 @@
 /**
  * Link
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -39,21 +38,21 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var string $url
 	 */
 	protected $url;
-	
+
 	/**
 	 * newsletter
 	 * @lazy
 	 * @var integer $newsletter
 	 */
 	protected $newsletter;
-	
+
 	/**
 	 * opened count
 	 *
 	 * @var integer $openedCount
 	 */
 	protected $openedCount;
-	
+
 	/**
 	 * Setter for url
 	 *
@@ -110,16 +109,16 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function getOpenedCount() {
 		return $this->openedCount;
-		
+
 	}
-	
+
 	public function getOpenedPercentage() {
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		$emailCount = $emailRepository->getCount($this->newsletter);
-	
+
 		if ($emailCount == 0)
 			return 0;
-		
+
 		return round($this->getOpenedCount() * 100 / $emailCount, 2);
 	}
 }

@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,7 +26,6 @@
 /**
  * Newsletter represents a page to be sent to a specific time to several recipients.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -120,7 +119,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
 	 */
 	protected $bounceAccount;
-	
+
 	/**
 	 * UID of the bounce account. Only exist for ease of use with ExtJS
 	 * @var integer $uidBounceAccount
@@ -151,7 +150,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setInjectOpenSpy(true);
 		$this->setInjectLinksSpy(true);
 	}
-	
+
 	/**
 	 * Setter for uid
 	 * @param integer $uid
@@ -256,7 +255,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getPlainConverter() {
 		return $this->plainConverter;
 	}
-	
+
 	/**
 	 * Returns an instance of plain converter
 	 * @throws Exception
@@ -267,12 +266,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$class = $this->getPlainConverter();
 		if (!class_exists($class))
 			throw new Exception("Plain text converter of class '$class' not found");
-			
+
 		$converter = new $class();
-		 
+
 		if (!($converter instanceof Tx_Newsletter_Domain_Model_IPlainConverter))
 			throw new Exception("$class does not implement Tx_Newsletter_Domain_Model_IPlainConverter");
-			
+
 		return $converter;
 	}
 
@@ -349,13 +348,13 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if ($this->senderName) {
 			return $this->senderName;
 		}
-		
+
 		// Return the senderName defined in extension configuration
 		$sender = tx_newsletter_tools::confParam('sender_name');
 		if ($sender == 'user')
 		{
 			// Use the page-owner as user
-			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName 
+			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName
 							  FROM be_users
 							  LEFT JOIN pages ON be_users.uid = pages.perms_userid
 							  WHERE pages.uid = $this->pid");
@@ -370,7 +369,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		{
 			return $sender;
 		}
-		
+
 		// If none of above, just use the sitename
 		return $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
 	}
@@ -405,10 +404,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		}
 
 		/* Anything in typo3_conf_vars? */
-		$email = tx_newsletter_tools::confParam('sender_email');        
+		$email = tx_newsletter_tools::confParam('sender_email');
 		if ($email == 'user') {
 			/* Use the page-owner as user */
-			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email 
+			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email
 			FROM be_users bu
 			LEFT JOIN pages p ON bu.uid = p.perms_userid
 			WHERE p.uid = $this->pid");
@@ -510,7 +509,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		else
 			return null;
 	}
-	
+
 	/**
 	 * Setter for bounceAccount's UID
 	 *
@@ -522,7 +521,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
 		$this->setBounceAccount($bounceAccount);
 	}
-	
+
 	/**
 	 * Getter for bounceAccount
 	 *
@@ -550,7 +549,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getRecipientList() {
 		return $this->recipientList;
 	}
-	
+
 	/**
 	 * Getter for recipientList's UID
 	 *
@@ -563,7 +562,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		else
 			return null;
 	}
-	
+
 	/**
 	 * Setter for recipientList's UID
 	 *
@@ -575,7 +574,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
 		$this->setRecipientList($recipientList);
 	}
-	
+
 	/**
 	 * Function to fetch the proper domain from which to fetch content for newsletter.
 	 * This is either a sys_domain record from the page tree or the fetch_path property.
@@ -609,7 +608,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 				}
 			}
 		}
-		
+
 		// Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
 		if (!$domain)
 		{
@@ -630,17 +629,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		{
 			$domain = @$_SERVER['HTTP_HOST'];
 		}
-		
-		
+
+
 		// If still no domain, can't continue
 		if (!$domain)
 		{
 			throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
 		}
-		
+
 		return $domain;
 	}
-	
+
 	/**
 	 * Returns the title, NOT localized, of the page sent by this newsletter.
 	 * This should only used for BE, because newsletter recipients need localized title
@@ -655,10 +654,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if ($TYPO3_DB->sql_num_rows($rs)) {
 			list($title) = $TYPO3_DB->sql_fetch_row($rs);
 		}
-		
+
 		return $title;
 	}
-	
+
 
 	/**
 	 * Schedule the next newsletter if it defined to be repeated
@@ -680,15 +679,15 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		}
 		$newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
 
-		
+
 		// Clone this newsletter and give the new plannedTime
 		// We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
-		global $TYPO3_DB;		
-		$TYPO3_DB->sql_query("INSERT tx_newsletter_domain_model_newsletter 
+		global $TYPO3_DB;
+		$TYPO3_DB->sql_query("INSERT tx_newsletter_domain_model_newsletter
 		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . " AS tstamp, " . time() . " AS crdate, deleted, hidden
 		FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
 	}
-	
+
 	/**
 	 * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
 	 * This may differ from $newsletter->getRecipientList()->getCount()
@@ -703,28 +702,28 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			$recipientList->init();
 			return $recipientList->getCount();
 		}
-		
+
 		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 		return $emailRepository->getCount($this->uid);
 	}
-	
+
 	/**
 	 * Get the number of not yet sent email
 	 */
 	public function getEmailNotSentCount() {
 		global $TYPO3_DB;
-		
+
 		// If the newsletter didn't start, then it means all emails are "not sent"
 		if (!$this->getBeginTime())
 		{
 			return $this->getEmailCount();
 		}
-		
+
 		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
 
 		return (int)$numberOfNotSent;
 	}
-	
+
 	/**
 	 * Returns the URL of the content of this newsletter
 	 * @return string
@@ -732,14 +731,14 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getContentUrl($language = null) {
 		$append_url = tx_newsletter_tools::confParam('append_url');
 		$domain = $this->getDomain();
-		
+
 		if (!is_null($language)) {
 			$language = '&L=' . $language;
 		}
-		
+
 		return "http://$domain/index.php?no_cache=1&id=" . $this->getPid() . $language . $append_url;
 	}
-	
+
 	/**
 	 * Returns the content of this newsletter with validation messages. The content
 	 * is also "fixed" automatically when possible.
@@ -748,18 +747,18 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
 	 */
 	public function getValidatedContent($language = null)
-	{	
+	{
 		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
 		global $LANG;
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
-		
+
 		$url = $this->getContentUrl($language);
 		$content= t3lib_div::getURL($url);
-		
+
 		$errors = array();
 		$warnings = array();
 		$infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
-		
+
 		// Content should be more that just a few characters. Apache error propably occured
 		if (strlen($content) < 200) {
 			$errors []= $LANG->getLL('validation_mail_too_short');
@@ -779,19 +778,19 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
 			$errors []= $LANG->getLL('validation_mail_being_generated');
 		}
-		
-		
+
+
 		// Find out the absolute domain. If specified in HTML source, use it as is.
 		if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match))
 		{
 			$absoluteDomain = $match[1];
 		}
 		// Otherwise try our best to guess what it is
-		else 
+		else
 		{
 			$absoluteDomain = 'http://' . $this->getDomain() . '/';
 		}
-	
+
 		// Fix relative URL to absolute URL
 		$urlPatterns = array(
 			'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
@@ -809,12 +808,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 					$content = str_replace($urls[0][$i], $replace_url, $content);
 				}
 			}
-			
+
 			if (count($urls[1])) {
 				$infos[]= sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
 			}
 		}
-		
+
 		// Find linked css and convert into a style-tag
 		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
 		foreach ($urls[1] as $i => $url) {
@@ -831,17 +830,17 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if ($count) {
 			$warnings[] = $LANG->getLL('validation_mail_contains_javascript');
 		}
-		
+
 		// Images in CSS
 		if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
 			$errors[] = $LANG->getLL('validation_mail_contains_css_images');
 		}
-		
+
 		// CSS-classes
 		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
 			$warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
 		}
-		
+
 		// Positioning & element sizes in CSS
 		$forbiddenCssProperties = array('width', 'margin', 'height', 'padding', 'position');
 		if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
@@ -854,7 +853,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 				}
 			}
 		}
-		
+
 		return array(
 			'content' => $content,
 			'errors' => $errors,
@@ -862,7 +861,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			'infos' => $infos,
 		);
 	}
-	
+
 	/**
 	 * Return a human readable status for the newsletter
 	 * @return string
@@ -872,40 +871,40 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
 		global $LANG;
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
-		
+
 		$plannedTime = $this->getPlannedTime();
 		$beginTime = $this->getBeginTime();
 		$endTime = $this->getEndTime();
-		
+
 		// If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
 		if (!($this->getUid() > 0))
 			return $LANG->getLL('newsletter_status_not_planned');
-		
+
 		if ($plannedTime && !$beginTime)
 			return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
-		
+
 		if ($beginTime && !$endTime)
 			return $LANG->getLL('newsletter_status_generating_emails');
-		
+
 		if ($beginTime && $endTime)
 		{
 			$emailCount = $this->getEmailCount();
 			$emailNotSentCount = $this->getEmailNotSentCount();
-			
+
 			if ($emailNotSentCount)
 				return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
 			else
 				return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
 		}
-		
+
 		return "unexpected status";
 	}
-	
+
 	public function getStatistics()
 	{
 		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$stats = $newsletterRepository->getStatistics($this);
-		
+
 		return $stats;
 	}
 }
