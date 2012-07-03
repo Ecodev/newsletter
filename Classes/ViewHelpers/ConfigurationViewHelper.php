@@ -32,13 +32,6 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_MvcExtjs_ViewH
 		$this->pageRenderer->addJsInlineCode($filePath, $javascript);
 	}
 
-	/**
-	 * Returns localization variables within an array
-	 *
-	 * @param $filePath
-	 * @return array
-	 * @throws Exception
-	 */
 	protected function getLocalizations($filePath)
 	{
 		global $LANG;
