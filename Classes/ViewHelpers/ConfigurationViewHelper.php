@@ -1,60 +1,38 @@
 <?php
 
 
-class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_ConfigurationViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
 	/**
-	 * Calls addJsFile on the Instance of t3lib_pagerenderer.
+	 * Generates some more JS to be registered / delegated to the page renderer
 	 *
-	 * @param string $name the list of file to include separated by coma
-	 * @param string $extKey the extension, where the file is located
-	 * @param string $pathInsideExt the path to the file relative to the ext-folder
+	 * @param array $configuration the list of configuration for the JS
 	 * @return void
 	 */
-	public function render($name = 'locallang.xml', $extKey = NULL, $pathInsideExt = 'Resources/Private/Language/') {
-		$names = explode(',', $name);
+	public function render($configuration = array()) {
 
-		if ($extKey == NULL) {
-			$extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
-		}
-		$extPath = t3lib_extMgm::extPath($extKey);
+		$configuration['pageType'] = $this->getPageType($configuration['pageId']);
 
-		$localizations = array();
-		foreach ($names as $name)
-		{
-			$filePath = $extPath . $pathInsideExt . $name;
-			$localizations = array_merge($localizations, $this->getLocalizations($filePath));
-		}
+		$configuration = json_encode($configuration);
+		$javascript = "Ext.ux.TYPO3.Newsletter.Configuration = $configuration;";
 
-		$localizations = json_encode($localizations);
-		$javascript = "Ext.ux.TYPO3.Newsletter.Language = $localizations;";
-
-		$this->pageRenderer->addJsInlineCode($filePath, $javascript);
+		$this->pageRenderer->addJsInlineCode("Ext.ux.TYPO3.Newsletter.Configuration", $javascript);
 	}
 
-	protected function getLocalizations($filePath)
-	{
-		global $LANG;
-		global $LOCAL_LANG;
-
-		// Language inclusion
-		$LANG->includeLLFile($filePath);
-		if (isset($LOCAL_LANG[$LANG->lang]) && !empty($LOCAL_LANG[$LANG->lang])) {
-			$result = array();
-			foreach ($LOCAL_LANG[$LANG->lang] as $key => $value)
-			{
-				// TYPO3 4.6 compatibility, because $LOCAL_LANG array structure changed
-				if (isset($value[0]['target'])) $value = $value[0]['target'];
-
-				// Replace '.' in key because it would break JSON
-				$key = str_replace('.', '_', $key);
-				$result[$key] = $value;
-			}
-
-			return $result;
+	/**
+	 * Returns the page type. Possible values: empty value, page, folder
+	 *
+	 * @param int $pid
+	 * @return string
+	 */
+	protected function getPageType($pageId = 0) {
+		$pageType = '';
+		$record = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('doktype', 'pages', 'uid =' . $pageId);
+		if (! empty($record['doktype']) && $record['doktype'] == 254) {
+			$pageType = 'folder';
+		} elseif (! empty($record['doktype'])) {
+			$pageType = 'page';
 		}
-		else {
-			throw new Exception('No language file has been found', 1276451853);
-		}
+		return $pageType;
 	}
 }

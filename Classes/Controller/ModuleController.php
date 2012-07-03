@@ -34,13 +34,30 @@
 class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
+	 * @var int
+	 */
+	protected $pageId;
+
+	/**
+	 * Initializes the controller before invoking an action method.
+	 *
+	 * @return void
+	 */
+	protected function initializeAction() {
+		$this->pageId = intval(t3lib_div::_GP('id'));
+	}
+
+	/**
 	 * index action for the module controller
 	 * This will render the HTML needed for ExtJS application
 	 *
 	 * @return void
 	 */
 	public function indexAction() {
-		// Nothing to do here
+		$configuration = array(
+			'pageId' => $this->pageId,
+		);
+		$this->view->assign('configuration', $configuration);
 	}
 
 }

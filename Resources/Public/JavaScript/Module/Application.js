@@ -35,9 +35,11 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 			opacity: 1
 		});
 
-		if (this.checkIfLoadable()) {
+		if (this.checkIfPage()) {
 			this.initStore();
 			this.initGui();
+		} else if (this.checkIfPageIsFolder()){
+			this.initFolderGui();
 		} else {
 			this.initHelpGui();
 		}
@@ -48,21 +50,17 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 	 *
 	 * @return {Boolean}
 	 */
-	checkIfLoadable: function() {
+	checkIfPage: function() {
+		return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'page';
+	},
 
-		var parts, query, result;
-
-		result = false;
-
-		// Detect whether parameter id is present
-		parts = document.location.href.split('?');
-		if (parts.length > 0) {
-			query = Ext.urlDecode(parts[1]);
-			if (query.id > 0) {
-				result = true;
-			}
-		}
-		return result;
+	/**
+	 * Check if the application can be loaded
+	 *
+	 * @return {Boolean}
+	 */
+	checkIfPageIsFolder:function () {
+		return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'folder';
 	},
 
 	/**
@@ -112,7 +110,35 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 	},
 
 	/**
-	 * Init help message
+	 * Init folder GUI
+	 */
+	initFolderGui:function () {
+
+		new Ext.Viewport({
+			layout: 'fit',
+			renderTo: Ext.getBody(),
+			items: [
+				{
+					height: 500,
+					xtype: 'panel',
+					html: [
+						'<div id="typo3-docheader">',
+						'<div id="typo3-docheader-row1">&nbsp;</div>',
+						'<div id="typo3-docheader-row2">&nbsp;</div>',
+						'</div>',
+						'<div id="typo3-docbody">',
+						'<div id="typo3-inner-docbody">',
+						'<h2>' + Ext.ux.TYPO3.Newsletter.Language.message_title_page_selected + '</h2>',
+						'<p>' + Ext.ux.TYPO3.Newsletter.Language.message_page_selected + '</p>',
+						'</div>',
+						'</div>'
+					]
+				}
+			]
+		});
+	},
+	/**
+	 * Init help Gui
 	 */
 	initHelpGui:function () {
 
