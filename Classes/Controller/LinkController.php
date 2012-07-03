@@ -67,12 +67,12 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 			)
 		));
 
-		$this->flashMessages->add('Loaded all Links from Server side.','Links loaded successfully', t3lib_FlashMessage::NOTICE);
+		$this->flashMessageContainer->add('Loaded all Links from Server side.','Links loaded successfully', t3lib_FlashMessage::NOTICE);
 
 		$this->view->assign('total', $this->linkRepository->getCount($uidNewsletter));
 		$this->view->assign('data', $links);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 

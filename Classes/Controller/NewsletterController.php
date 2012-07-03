@@ -85,12 +85,12 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			)
 		));
 
-		$this->flashMessages->add('Loaded Newsletters from Server side.','Newsletters loaded successfully', t3lib_FlashMessage::NOTICE);
+		$this->flashMessageContainer->add('Loaded Newsletters from Server side.','Newsletters loaded successfully', t3lib_FlashMessage::NOTICE);
 
 		$this->view->assign('total', $newsletters->count());
 		$this->view->assign('data', $newsletters);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$this->view->assign('total', 1);
 		$this->view->assign('data', $newsletter);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 	/**
@@ -139,13 +139,13 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
 		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
-			$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		// If we attempt to create a newsletter which contains errors, abort and don't save in DB
 		elseif (count($validatedContent['errors']))
 		{
-			$this->flashMessages->add('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_invalid', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->flashMessageContainer->add('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_invalid', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		else
@@ -169,16 +169,16 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 					tx_newsletter_tools::createSpool($newNewsletter);
 					tx_newsletter_tools::runSpoolOne($newNewsletter);
 
-					$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
+					$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
 				}
 				catch (Exception $exception)
 				{
-					$this->flashMessages->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
+					$this->flashMessageContainer->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
 				}
 			}
 			else
 			{
-				$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
+				$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
 			}
 		}
 
@@ -189,7 +189,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		));
 
 		$this->view->assign('data', $newNewsletter);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 	/**

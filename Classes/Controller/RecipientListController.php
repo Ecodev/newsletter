@@ -69,12 +69,12 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 			)
 		));
 
-		$this->flashMessages->add('Loaded RecipientLists from Server side.','RecipientLists loaded successfully', t3lib_FlashMessage::NOTICE);
+		$this->flashMessageContainer->add('Loaded RecipientLists from Server side.','RecipientLists loaded successfully', t3lib_FlashMessage::NOTICE);
 
 		$this->view->assign('total', $recipientLists->count());
 		$this->view->assign('data', $recipientLists);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 	/**
@@ -115,13 +115,13 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 			$metaData['fields'][] = array('name' => $field, 'type' =>  'string');
 		}
 
-		$this->flashMessages->add('Loaded Recipients from Server side.','Recipients loaded successfully', t3lib_FlashMessage::NOTICE);
+		$this->flashMessageContainer->add('Loaded Recipients from Server side.','Recipients loaded successfully', t3lib_FlashMessage::NOTICE);
 
 		$this->view->assign('metaData', $metaData);
 		$this->view->assign('total', $recipientLists->getCount());
 		$this->view->assign('data', $recipients);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 		$this->view->setVariablesToRender(array('metaData', 'total', 'data', 'success','flashMessages'));
 	}
 

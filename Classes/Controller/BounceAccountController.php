@@ -63,12 +63,12 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 			)
 		));
 
-		$this->flashMessages->add('Loaded BounceAccounts from Server side.','BounceAccounts loaded successfully', t3lib_FlashMessage::NOTICE);
+		$this->flashMessageContainer->add('Loaded BounceAccounts from Server side.','BounceAccounts loaded successfully', t3lib_FlashMessage::NOTICE);
 
 		$this->view->assign('total', $bounceAccounts->count());
 		$this->view->assign('data', $bounceAccounts);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
 
