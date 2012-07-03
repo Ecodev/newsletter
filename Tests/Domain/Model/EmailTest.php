@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,13 +26,12 @@
 /**
  * Testcase for class Tx_Newsletter_Domain_Model_Email.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage Newsletter
- * 
+ *
  */
 class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
@@ -47,8 +46,8 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -57,7 +56,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setStartTimeForStringSetsStartTime() { 
+	public function setStartTimeForStringSetsStartTime() {
 		$this->fixture->setStartTime('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -65,7 +64,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getStartTime()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -74,7 +73,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setEndTimeForStringSetsEndTime() { 
+	public function setEndTimeForStringSetsEndTime() {
 		$this->fixture->setEndTime('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -82,7 +81,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getEndTime()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -91,7 +90,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setRecipientAddressForStringSetsRecipientAddress() { 
+	public function setRecipientAddressForStringSetsRecipientAddress() {
 		$this->fixture->setRecipientAddress('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -99,7 +98,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getRecipientAddress()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -108,7 +107,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setRecipientDataForStringSetsRecipientData() { 
+	public function setRecipientDataForStringSetsRecipientData() {
 		$this->fixture->setRecipientData('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -116,7 +115,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getRecipientData()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -125,7 +124,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getOpenedReturnsInitialValueForBoolean() { 
+	public function getOpenedReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			TRUE,
 			$this->fixture->getOpened()
@@ -135,7 +134,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setOpenedForBooleanSetsOpened() { 
+	public function setOpenedForBooleanSetsOpened() {
 		$this->fixture->setOpened(TRUE);
 
 		$this->assertSame(
@@ -143,11 +142,11 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getOpened()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getBouncedReturnsInitialValueForBoolean() { 
+	public function getBouncedReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			TRUE,
 			$this->fixture->getBounced()
@@ -157,7 +156,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setBouncedForBooleanSetsBounced() { 
+	public function setBouncedForBooleanSetsBounced() {
 		$this->fixture->setBounced(TRUE);
 
 		$this->assertSame(
@@ -165,11 +164,11 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getBounced()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() { 
+	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() {
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getNewsletter()
@@ -179,7 +178,7 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setNewsletterForTx_Newsletter_Domain_Model_NewsletterSetsNewsletter() { 
+	public function setNewsletterForTx_Newsletter_Domain_Model_NewsletterSetsNewsletter() {
 		$dummyObject = new Tx_Newsletter_Domain_Model_Newsletter();
 		$this->fixture->setNewsletter($dummyObject);
 
@@ -188,5 +187,5 @@ class Tx_Newsletter_Domain_Model_EmailTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getNewsletter()
 		);
 	}
-	
+
 }

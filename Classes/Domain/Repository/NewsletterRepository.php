@@ -26,7 +26,6 @@
 /**
  * Repository for Tx_Newsletter_Domain_Model_Newsletter
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -96,7 +95,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 	public function getStatistics(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
 	{
 		$uidNewsletter = $newsletter->getUid();
-		
+
 		$stateDifferences = array();
 		$emailCount = $this->fillStateDifferences(
 			$stateDifferences,
@@ -108,7 +107,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 				'bounce_time' => array('increment' => 'emailBouncedCount', 'decrement' => 'emailSentCount'),
 			)
 		);
-		
+
 		$linkRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_LinkRepository');
 		$linkCount = $linkRepository->getCount($uidNewsletter);
 		$this->fillStateDifferences(
@@ -119,7 +118,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 				'open_time' => array('increment' => 'linkOpenedCount'),
 			)
 		);
-		
+
 		// Find out the very first event (when the newsletter was planned)
 		$plannedTime = $newsletter ? $newsletter->getPlannedTime() : null;
 		$emailCount = $newsletter ? $newsletter->getEmailCount() : $emailCount; // We re-calculate email count so get correct number if newsletter is not sent yet
@@ -138,7 +137,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			'emailBouncedPercentage' => 0,
 			'linkOpenedPercentage' => 0,
 		);
-		
+
 		// Find out what the best grouping step is according to number of states
 		$stateCount = count($stateDifferences);
 		if ($stateCount > 5000)
@@ -149,7 +148,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			$groupingTimestep =  1 * 60; // 1 minutes
 		else
 			$groupingTimestep = 0; // no grouping at all
-		
+
 		$states = array($previousState);
 		ksort($stateDifferences);
 		$minimumTimeToInsert = 0; // First state must always be not grouped, so we don't increment here
@@ -157,25 +156,25 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 		{
 			$newState = $previousState;
 			$newState['time'] = $time;
-			
+
 			// Apply diff to previous state to get new state's absolute values
 			foreach ($diff as $key => $value)
 			{
 				$newState[$key] += $value;
 			}
-			
+
 			// Compute percentage for email states
 			foreach (array('emailNotSent', 'emailSent', 'emailOpened', 'emailBounced') as $key)
 			{
 				$newState[$key . 'Percentage'] = $newState[$key . 'Count'] / $newState['emailCount'] * 100;
 			}
-			
+
 			// Compute percentage for link states
 			if ($newState['linkCount'] && $newState['emailCount'])
 				$newState['linkOpenedPercentage'] = $newState['linkOpenedCount'] / ($newState['linkCount'] * $newState['emailCount']) * 100;
 			else
 				$newState['linkOpenedPercentage'] = 0;
-			
+
 			// Insert the state only if grouping allows it
 			if ($time >= $minimumTimeToInsert)
 			{
@@ -184,16 +183,16 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			}
 			$previousState = $newState;
 		}
-		
+
 		// Don't forget to always add the very last state, if not already inserted
 		if (!($time >= $minimumTimeToInsert))
 		{
 			$states[]= $newState;
 		}
-		
+
 		return $states;
 	}
-	
+
 	/**
 	 * Fills the $stateDifferences array with incremental difference that the state introduce.
 	 * It supports merging with existing diff in the array and several states on the same time.
@@ -214,7 +213,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			'emailBouncedCount' => 0,
 			'linkOpenedCount' => 0,
 		);
-		
+
 		/** @var $TYPO3_DB t3lib_DB */
 		global $TYPO3_DB;
 
@@ -238,7 +237,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			$count++;
 		}
 		$TYPO3_DB->sql_free_result($rs);
-		
+
 		return $count;
 	}
 }

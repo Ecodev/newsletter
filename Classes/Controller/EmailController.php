@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,16 +25,15 @@
 /**
  * Controller for the Email object
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
 class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
-	
+
 	/**
 	 * emailRepository
-	 * 
+	 *
 	 * @var Tx_Newsletter_Domain_Repository_EmailRepository
 	 */
 	protected $emailRepository;
@@ -48,8 +47,8 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		parent::initializeAction();
 		$this->emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
 	}
-	
-		
+
+
 	/**
 	 * Displays all Emails
 	 *
@@ -60,27 +59,27 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	 */
 	public function listAction($uidNewsletter, $start, $limit) {
 		$emails = $this->emailRepository->findAllByNewsletter($uidNewsletter, $start, $limit);
-		
+
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' => array(
 				'_descendAll' => self::resolveJsonViewConfiguration()
 			)
 		));
-		
-		$this->flashMessages->add('Loaded all Emails from Server side.','Emails loaded successfully', t3lib_FlashMessage::NOTICE);
+
+		$this->flashMessageContainer->add('Loaded all Emails from Server side.','Emails loaded successfully', t3lib_FlashMessage::NOTICE);
 		;
 		$this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
 		$this->view->assign('data', $emails);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
-	
+
 
 	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
 	 * a Email record.
-	 * 
+	 *
 	 * @return array
 	 */
 	static public function resolveJsonViewConfiguration() {
