@@ -46,6 +46,13 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	protected $bounceAccountRepository;
 
 	/**
+	 * Parent id
+	 *
+	 * @var int
+	 */
+	protected $pid;
+
+	/**
 	 * Initializes the current action
 	 *
 	 * @return void
