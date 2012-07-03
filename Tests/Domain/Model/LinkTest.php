@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,13 +26,12 @@
 /**
  * Testcase for class Tx_Newsletter_Domain_Model_Link.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage Newsletter
- * 
+ *
  */
 class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
@@ -47,8 +46,8 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -57,7 +56,7 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function setTypeForStringSetsType() { 
+	public function setTypeForStringSetsType() {
 		$this->fixture->setType('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -65,7 +64,7 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 			$this->fixture->getType()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -74,7 +73,7 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function setUrlForStringSetsUrl() { 
+	public function setUrlForStringSetsUrl() {
 		$this->fixture->setUrl('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -82,11 +81,11 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 			$this->fixture->getUrl()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() { 
+	public function getNewsletterReturnsInitialValueForTx_Newsletter_Domain_Model_Newsletter() {
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getNewsletter()
@@ -96,7 +95,7 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function setNewsletterForTx_Newsletter_Domain_Model_NewsletterSetsNewsletter() { 
+	public function setNewsletterForTx_Newsletter_Domain_Model_NewsletterSetsNewsletter() {
 		$dummyObject = new Tx_Newsletter_Domain_Model_Newsletter();
 		$this->fixture->setNewsletter($dummyObject);
 
@@ -105,5 +104,5 @@ class Tx_Newsletter_Domain_Model_LinkTest extends Tx_Extbase_Tests_Unit_BaseTest
 			$this->fixture->getNewsletter()
 		);
 	}
-	
+
 }

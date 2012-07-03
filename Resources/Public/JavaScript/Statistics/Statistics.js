@@ -8,8 +8,6 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
  * @extends Ext.Container
  *
  * Class for statistic container
- *
- * $Id$
  */
 Ext.ux.TYPO3.Newsletter.Statistics.Statistics = Ext.extend(Ext.Container, {
 

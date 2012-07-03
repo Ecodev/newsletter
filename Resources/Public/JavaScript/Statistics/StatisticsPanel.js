@@ -8,18 +8,16 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
  * @extends Ext.TabPanel
  *
  * Class for statistic tab panel
- *
- * $Id$
  */
 Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
 
 	initComponent: function() {
-		
+
 		var config = {
 			activeTab: 0,
 			border: false,
 			items: [
-				
+
 				{
 					title: Ext.ux.TYPO3.Newsletter.Language.overview_tab,
 					xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab',

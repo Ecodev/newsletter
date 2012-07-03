@@ -5,7 +5,7 @@ This container handles the pageRenderer in the background
 Specifiy which js librarys should be loaded
 -->
 <ext:Be.moduleContainer pageTitle="Newsletter" loadExtJs="true" loadExtJsTheme="true">
-	
+
 	<!-- load needed CSS Files -->
 	<ext:includeCssFile name="module.css" />
 	<ext:includeCssFile name="flashmessages.css" />
@@ -22,11 +22,12 @@ Specifiy which js librarys should be loaded
 	<ext:includeJsFolder name="Statistics/" recursive="true" />
 
 	<ext:ExtDirectProvider name="descriptor" namespace="Ext.ux.TYPO3.Newsletter.Remote" cache="false" />
-	
+
 	<!-- create inline JS based on the Domain Model Definitions -->
 	<ext:includeExtOnReadyFromFile name="ExtOnReady.js" />
 	<newsletter:localization name="locallang.xml,locallang_db.xml"/>
-	
+	<newsletter:configuration configuration="{configuration}"/>
+
 	<!-- Additional HTML required for ExtJS -->
 	<ext:includeModuleBody>
 		<!-- Fields required for history management -->

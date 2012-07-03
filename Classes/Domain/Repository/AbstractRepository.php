@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,16 +26,15 @@
 /**
  * Abstract repository to workaround difficulties (or misunderstanding?) with extbase.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
- 
+
 abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Extbase_Persistence_Repository {
-	
+
 	/**
-	 * Override parent method to set default settings to ignore storagePid because we did 
-	 * not understand how to use it. And we usually don't want to be tied to a 
+	 * Override parent method to set default settings to ignore storagePid because we did
+	 * not understand how to use it. And we usually don't want to be tied to a
 	 * specific pid anyway, so we prefer to do it manually when necessary.
 	 * TODO this method should be destroyed once we understand how to properly work with storagePid
 	 */
@@ -43,19 +42,19 @@ abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Ext
 	{
 		$query = parent::createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		
+
 		return $query;
 	}
-	
+
 	/**
 	 * Update the object immediately in DB. This is used for time-sensitive operation such as locks.
 	 * @param object $modifiedObject
 	 */
 	public function updateNow($modifiedObject) {
 		parent::update($modifiedObject);
-		$this->persistenceManager->persistAll();	
+		$this->persistenceManager->persistAll();
 	}
-	
+
 	/**
 	 * Override parent method to update the object and persist changes immediately. By commiting immediately
 	 * stay compatible with raw sql query via $TYPO3_DB.

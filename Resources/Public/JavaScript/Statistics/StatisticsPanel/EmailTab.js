@@ -8,8 +8,6 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
  * @extends Ext.Container
  *
  * Class for statistic container
- *
- * $Id$
  */
 Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.grid.GridPanel, {
 
@@ -20,14 +18,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 			autoExpandColumn: 'recipientAddress',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
-			
+
 			// paging bar on the bottom
 			bbar: new Ext.PagingToolbar({
 				pageSize: 50,
 				store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email'),
 				displayInfo: true,
 				listeners: {
-					
+
 					// Before we change page, we inject the currently selected newsletter as params for Ajax request
 					beforechange: function(pagingToolbar, params) {
 						var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
@@ -97,7 +95,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 		Ext.apply(this, config);
 		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab.superclass.initComponent.call(this);
 	},
-	
+
 	/**
 	 * Renders the "called from" column
 	 *
@@ -111,7 +109,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 	_renderEmail: function(value, parent, record) {
 		return String.format('<a href="mailto:{0}">{0}</a>', value);
 	},
-	
+
 	_renderPreview: function(value, parent, record) {
 		return String.format('<a href="/typo3conf/ext/newsletter/web/view.php?injectOpenSpy=0&injectLinksSpy=0&c={0}">{1}</a>', value, Ext.ux.TYPO3.Newsletter.Language.view);
 	}

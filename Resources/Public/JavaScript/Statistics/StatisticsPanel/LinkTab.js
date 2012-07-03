@@ -8,8 +8,6 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
  * @extends Ext.Container
  *
  * Class for statistic container
- *
- * $Id$
  */
 Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid.GridPanel, {
 
@@ -19,14 +17,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 			autoExpandColumn: 'url',
 			// store
 			store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
-			
+
 			// paging bar on the bottom
 			bbar: new Ext.PagingToolbar({
 				pageSize: 50,
 				store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
 				displayInfo: true,
 				listeners: {
-					
+
 					// Before we change page, we inject the currently selected newsletter as params for Ajax request
 					beforechange: function(pagingToolbar, params) {
 						var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
@@ -35,7 +33,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 					}
 				}
 			}),
-			
+
 			// column model
 			columns:[
 				{
@@ -73,7 +71,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
 		Ext.apply(this, config);
 		Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.superclass.initComponent.call(this);
 	},
-	
+
 	/**
 	 * Renders the "called from" column
 	 *

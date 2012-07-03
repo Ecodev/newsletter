@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,33 +26,32 @@
 /**
  * Repository for Tx_Newsletter_Domain_Model_Link
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
- 
+
 class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
-	
+
 	/**
 	 * Returns all links for a given newsletter
 	 * @param integer $uidNewsletter
 	 * @param integer $start
 	 * @param integer $limit
-	 * @return Tx_Newsletter_Domain_Model_Link[] 
+	 * @return Tx_Newsletter_Domain_Model_Link[]
 	 */
 	public function findAllByNewsletter($uidNewsletter, $start, $limit)
 	{
 		if ($uidNewsletter < 1)
 			return $this->findAll();
-		
+
 		$query = $this->createQuery();
 		$query->matching($query->equals('newsletter', $uidNewsletter));
 		$query->setLimit($limit);
 		$query->setOffset($start);
-		
+
 		return $query->execute();
 	}
-	
+
 	/**
 	 * Returns the count of links for a given newsletter
 	 * @param integer $uidNewsletter
@@ -61,7 +60,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
 	{
 		global $TYPO3_DB;
 		$count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'newsletter = ' . $uidNewsletter);
-		
+
 		return (int)$count;
 	}
 }

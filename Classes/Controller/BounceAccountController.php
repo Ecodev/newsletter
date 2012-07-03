@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,16 +25,15 @@
 /**
  * Controller for the BounceAccount object
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
 class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
-	
+
 	/**
 	 * bounceAccountRepository
-	 * 
+	 *
 	 * @var Tx_Newsletter_Domain_Repository_BounceAccountRepository
 	 */
 	protected $bounceAccountRepository;
@@ -47,8 +46,8 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 	protected function initializeAction() {
 		$this->bounceAccountRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
 	}
-	
-	
+
+
 	/**
 	 * Displays all BounceAccounts
 	 *
@@ -56,27 +55,27 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 	 */
 	public function listAction() {
 		$bounceAccounts = $this->bounceAccountRepository->findAll();
-		
+
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' => array(
 				'_descendAll' => self::resolveJsonViewConfiguration()
 			)
 		));
-		
-		$this->flashMessages->add('Loaded BounceAccounts from Server side.','BounceAccounts loaded successfully', t3lib_FlashMessage::NOTICE);
-		
+
+		$this->flashMessageContainer->add('Loaded BounceAccounts from Server side.','BounceAccounts loaded successfully', t3lib_FlashMessage::NOTICE);
+
 		$this->view->assign('total', $bounceAccounts->count());
 		$this->view->assign('data', $bounceAccounts);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
-	
+
 
 	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
 	 * a BounceAccount record.
-	 * 
+	 *
 	 * @return array
 	 */
 	static public function resolveJsonViewConfiguration() {

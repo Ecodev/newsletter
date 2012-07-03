@@ -12,8 +12,6 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
  * This is the main event handler of the application.
  *
  * @singleton
- *
- * $Id$
  */
 
 Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable(), {
@@ -25,7 +23,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 	 */
 	bootstrap: function() {
 		Ext.chart.Chart.CHART_URL = '/typo3/contrib/extjs/resources/charts.swf';
-		
+
 		Ext.QuickTips.init();
 
 		// init Flashmessage
@@ -37,16 +35,39 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 			opacity: 1
 		});
 
-		this.initStore();
-		this.initGui();
-		
+		if (this.checkIfPage()) {
+			this.initStore();
+			this.initGui();
+		} else if (this.checkIfPageIsFolder()){
+			this.initFolderGui();
+		} else {
+			this.initHelpGui();
+		}
 	},
-	
+
+	/**
+	 * Check if the application can be loaded
+	 *
+	 * @return {Boolean}
+	 */
+	checkIfPage: function() {
+		return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'page';
+	},
+
+	/**
+	 * Check if the application can be loaded
+	 *
+	 * @return {Boolean}
+	 */
+	checkIfPageIsFolder:function () {
+		return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'folder';
+	},
+
 	/**
 	 * Init menus and content area
 	 */
 	initGui: function() {
-		
+
 		new Ext.Viewport({
 			layout: 'fit',
 			renderTo: Ext.getBody(),
@@ -83,8 +104,65 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.ux.TYPO3.Newsletter.Store.RecipientList.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.Recipient.initialize();
 		Ext.ux.TYPO3.Newsletter.Store.TimelineChart.initialize();
-		
+
 		// pie chart depends on SelectedNewsletter store so it must be initialized after it
 		Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart.initialize();
+	},
+
+	/**
+	 * Init folder GUI
+	 */
+	initFolderGui:function () {
+
+		new Ext.Viewport({
+			layout: 'fit',
+			renderTo: Ext.getBody(),
+			items: [
+				{
+					height: 500,
+					xtype: 'panel',
+					html: [
+						'<div id="typo3-docheader">',
+						'<div id="typo3-docheader-row1">&nbsp;</div>',
+						'<div id="typo3-docheader-row2">&nbsp;</div>',
+						'</div>',
+						'<div id="typo3-docbody">',
+						'<div id="typo3-inner-docbody">',
+						'<h2>' + Ext.ux.TYPO3.Newsletter.Language.message_title_page_selected + '</h2>',
+						'<p>' + Ext.ux.TYPO3.Newsletter.Language.message_page_selected + '</p>',
+						'</div>',
+						'</div>'
+					]
+				}
+			]
+		});
+	},
+	/**
+	 * Init help Gui
+	 */
+	initHelpGui:function () {
+
+		new Ext.Viewport({
+			layout:'fit',
+			renderTo:Ext.getBody(),
+			items:[
+				{
+					height:500,
+					xtype:'panel',
+					html:[
+						'<div id="typo3-docheader">',
+						'<div id="typo3-docheader-row1">&nbsp;</div>',
+						'<div id="typo3-docheader-row2">&nbsp;</div>',
+						'</div>',
+						'<div id="typo3-docbody">',
+						'<div id="typo3-inner-docbody">',
+						'<h2>' + Ext.ux.TYPO3.Newsletter.Language.message_title_no_pid_selected + '</h2>',
+						'<p>' + Ext.ux.TYPO3.Newsletter.Language.message_no_pid_selected + '</p>',
+						'</div>',
+						'</div>'
+					]
+				}
+			]
+		});
 	}
 });

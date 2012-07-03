@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,7 +26,6 @@
 /**
  * RecipientList
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -145,13 +144,13 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	public function getType() {
 		return $this->type;
 	}
-	
+
 	/**
 	 * Array or mysql result containing raw data for recipient list. Kinf of cache in memory.
 	 * @var array
 	 */
 	var $data = null;
-   
+
 	/**
 	 * Initializing method to prepare for reading recipients.
 	 *
@@ -160,7 +159,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	abstract public function init();
 
 	/**
-	 * Fetch one receiver record from the newsletter target. 
+	 * Fetch one receiver record from the newsletter target.
 	 * The record MUST contain an "email"-field. Without this one this mailtarget is useless.
 	 * For compatibility with various subscription systems, the record can contain "tableName"-field.
 	 *
@@ -168,7 +167,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 * @return   array      Assoc array with fields for the receiver
 	 */
 	abstract public function getRecipient();
-   
+
 	/**
 	 * Get the number of receivers in this newsletter target
 	 *
@@ -176,7 +175,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 * @return   integer      Numbers of receivers.
 	 */
 	abstract public function getCount();
-   
+
 	/**
 	 * Get error text if the fetching of the newsletter target has somehow failed.
 	 *
@@ -184,11 +183,11 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 * @return   string      Error text or empty string.
 	 */
 	abstract public function getError();
-	   
+
 	/**
-	 * Here you can define an action when an address bounces. This can either be database operations such as a deletion. 
-	 * For external data-sources, you might consider collecting the addresses for later removal from the foreign system. 
-	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sensible default. "tableName" should also be included 
+	 * Here you can define an action when an address bounces. This can either be database operations such as a deletion.
+	 * For external data-sources, you might consider collecting the addresses for later removal from the foreign system.
+	 * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sensible default. "tableName" should also be included
 	 * for compatibility reasons.
 	 *
 	 * @param string $email the email address of the recipient
@@ -216,7 +215,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 */
 	function registerClick($email) {
 	}
-	
+
 	/**
 	 * Return HTML code showing an extract of recipients (first X recipients)
 	 */
@@ -239,31 +238,31 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 					}
 					$out .= '</tr>';
 				}
-		
+
 				$out .= '<tr style="border: 1px grey solid; border-collapse: collapse;">';
 				foreach ($row as $field) {
 					$out .= '<td style="padding-right: 1em;">' . $field .'</td>';
 				}
 				$out .= '</tr>';
-		
+
 				if (++$i == $limit) {
 					break;
 				}
 			}
-			
+
 			$authCode = t3lib_div::stdAuthCode($this->_getCleanProperties());
 			$out = '<table style="border: 1px grey solid; border-collapse: collapse;">'.$out.'</table>';
-			
+
 			$out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
 			(<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export XML</a>, "
 			.'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export CSV</a>"
 			.')</p>';
 		}
-		
+
 		$out = '<h4>' . $this->getTitle() . '</h4>' . $out;
 		return $out;
 	}
-	
+
 	/**
 	 * Returns the fieldname style according to validation
 	 * Green => special field recognized

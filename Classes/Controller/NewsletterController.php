@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,6 @@
 /**
  * Controller for the Newsletter object
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -34,17 +33,24 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 
 	/**
 	 * newsletterRepository
-	 * 
+	 *
 	 * @var Tx_Newsletter_Domain_Repository_NewsletterRepository
 	 */
 	protected $newsletterRepository;
-	
+
 	/**
 	 * bounceAccountRepository
-	 * 
+	 *
 	 * @var Tx_Newsletter_Domain_Repository_BounceAccountRepository
 	 */
 	protected $bounceAccountRepository;
+
+	/**
+	 * Parent id
+	 *
+	 * @var int
+	 */
+	protected $pid;
 
 	/**
 	 * Initializes the current action
@@ -63,7 +69,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		}
 		parent::initializeAction();
 	}
-		
+
 	/**
 	 * Displays all Newsletters
 	 *
@@ -71,22 +77,22 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 */
 	public function listAction() {
 		$newsletters = $this->newsletterRepository->findAllByPid($this->pid);
-		
+
 		$this->view->setVariablesToRender(array('total', 'data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' => array(
 				'_descendAll' => self::resolveJsonViewConfiguration()
 			)
 		));
-		
-		$this->flashMessages->add('Loaded Newsletters from Server side.','Newsletters loaded successfully', t3lib_FlashMessage::NOTICE);
-		
+
+		$this->flashMessageContainer->add('Loaded Newsletters from Server side.','Newsletters loaded successfully', t3lib_FlashMessage::NOTICE);
+
 		$this->view->assign('total', $newsletters->count());
 		$this->view->assign('data', $newsletters);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
-	
+
 	/**
 	 * Displays the newsletter used as model for plannification
 	 *
@@ -99,22 +105,22 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
 			$newsletter->setPid($this->pid);
 			$newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
-			
+
 			// Set the first Bounce Account found if any
 			$newsletter->setBounceAccount($this->bounceAccountRepository->findFirst());
 		}
-		
+
 		$this->view->setVariablesToRender(array('total', 'data', 'success'));
 		$this->view->setConfiguration(array(
 			'data' => self::resolvePlannedJsonViewConfiguration()
 		));
-		
+
 		$this->view->assign('total', 1);
 		$this->view->assign('data', $newsletter);
 		$this->view->assign('success', true);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
-		
+
 	/**
 	 * Creates a new Newsletter and forwards to the list action.
 	 *
@@ -123,23 +129,23 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @dontverifyrequesthash
 	 */
 	public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter=null) {
-		
+
 		$limitTestRecipientCount = 10; // This is a low limit, technically, but it does not make sense to test a newsletter for more people than that anyway
 		$recipientList = $newNewsletter->getRecipientList();
 		$recipientList->init();
 		$count = $recipientList->getCount();
 		$validatedContent = $newNewsletter->getValidatedContent($language);
-		
+
 		// If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
 		if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount)
 		{
-			$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), Tx_Extbase_Utility_Localization::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		// If we attempt to create a newsletter which contains errors, abort and don't save in DB
 		elseif (count($validatedContent['errors']))
 		{
-			$this->flashMessages->add('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_invalid', 'newsletter'), t3lib_FlashMessage::ERROR);
+			$this->flashMessageContainer->add('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_invalid', 'newsletter'), t3lib_FlashMessage::ERROR);
 			$this->view->assign('success', FALSE);
 		}
 		else
@@ -149,7 +155,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			{
 				$newNewsletter->setPlannedTime(new DateTime());
 			}
-			
+
 			// Save the new newsletter
 			$this->newsletterRepository->add($newNewsletter);
 			$this->persistenceManager->persistAll();
@@ -163,54 +169,54 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 					tx_newsletter_tools::createSpool($newNewsletter);
 					tx_newsletter_tools::runSpoolOne($newNewsletter);
 
-					$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
+					$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
 				}
 				catch (Exception $exception)
 				{
-					$this->flashMessages->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
+					$this->flashMessageContainer->add($exception->getMessage(), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_error', 'newsletter'), t3lib_FlashMessage::ERROR);
 				}
 			}
 			else
 			{
-				$this->flashMessages->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
+				$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_newsletter_queued_title', 'newsletter'), t3lib_FlashMessage::OK);
 			}
 		}
-		
-		
+
+
 		$this->view->setVariablesToRender(array('data', 'success','flashMessages'));
 		$this->view->setConfiguration(array(
 			'data' =>  self::resolveJsonViewConfiguration()
 		));
-		
+
 		$this->view->assign('data', $newNewsletter);
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
-	
+
 	/**
 	 * Returns the newsletter with included statistics to be used for timeline chart
-	 * @param integer $uidNewsletter 
+	 * @param integer $uidNewsletter
 	 */
 	public function statisticsAction($uidNewsletter) {
 		$newsletter = $this->newsletterRepository->findByUid($uidNewsletter);
-		
+
 		$this->view->setVariablesToRender(array('data', 'success', 'total'));
-		
+
 		$conf = self::resolveJsonViewConfiguration();
 		$conf['_only'][] = 'statistics';
 		$conf['_descend'][] = 'statistics';
 		$this->view->setConfiguration(array(
 			'data' => $conf
 		));
-		
+
 		$this->view->assign('total', 1);
 		$this->view->assign('success', true);
 		$this->view->assign('data', $newsletter);
 	}
-	
+
 	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for
 	 * a Newsletter record.
-	 * 
+	 *
 	 * @return array
 	 */
 	static public function resolveJsonViewConfiguration() {
@@ -240,7 +246,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						)
 				);
 	}
-	
+
 	static public function resolvePlannedJsonViewConfiguration() {
 		return array(
 					'_exposeObjectIdentifier' => TRUE,
@@ -270,7 +276,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 						'validatedContent' => array(
 							'_only'=> array(
 								'errors',
-								'warnings', 
+								'warnings',
 								'infos')
 							),
 						)

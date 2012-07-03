@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,13 +26,12 @@
 /**
  * Testcase for class Tx_Newsletter_Domain_Model_BounceAccount.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage Newsletter
- * 
+ *
  */
 class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
@@ -47,8 +46,8 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -57,7 +56,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setEmailForStringSetsEmail() { 
+	public function setEmailForStringSetsEmail() {
 		$this->fixture->setEmail('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -65,7 +64,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getEmail()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -74,7 +73,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setServerForStringSetsServer() { 
+	public function setServerForStringSetsServer() {
 		$this->fixture->setServer('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -82,7 +81,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getServer()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -91,7 +90,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setProtocolForStringSetsProtocol() { 
+	public function setProtocolForStringSetsProtocol() {
 		$this->fixture->setProtocol('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -99,7 +98,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getProtocol()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -108,7 +107,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setUsernameForStringSetsUsername() { 
+	public function setUsernameForStringSetsUsername() {
 		$this->fixture->setUsername('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -116,7 +115,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getUsername()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -125,7 +124,7 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setPasswordForStringSetsPassword() { 
+	public function setPasswordForStringSetsPassword() {
 		$this->fixture->setPassword('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -133,5 +132,5 @@ class Tx_Newsletter_Domain_Model_BounceAccountTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getPassword()
 		);
 	}
-	
+
 }

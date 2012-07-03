@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,13 +26,12 @@
 /**
  * Testcase for class Tx_Newsletter_Domain_Model_RecipientList.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage Newsletter
- * 
+ *
  */
 class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
@@ -47,8 +46,8 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -57,7 +56,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setTitleForStringSetsTitle() { 
+	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -65,11 +64,11 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getTitle()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getPlainOnlyReturnsInitialValueForBoolean() { 
+	public function getPlainOnlyReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			TRUE,
 			$this->fixture->getPlainOnly()
@@ -79,7 +78,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setPlainOnlyForBooleanSetsPlainOnly() { 
+	public function setPlainOnlyForBooleanSetsPlainOnly() {
 		$this->fixture->setPlainOnly(TRUE);
 
 		$this->assertSame(
@@ -87,7 +86,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getPlainOnly()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -96,7 +95,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setLangForStringSetsLang() { 
+	public function setLangForStringSetsLang() {
 		$this->fixture->setLang('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -104,7 +103,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getLang()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -113,7 +112,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setTypeForStringSetsType() { 
+	public function setTypeForStringSetsType() {
 		$this->fixture->setType('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -121,7 +120,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getType()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -130,7 +129,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setBeUsersForStringSetsBeUsers() { 
+	public function setBeUsersForStringSetsBeUsers() {
 		$this->fixture->setBeUsers('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -138,7 +137,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getBeUsers()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -147,7 +146,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setFeGroupsForStringSetsFeGroups() { 
+	public function setFeGroupsForStringSetsFeGroups() {
 		$this->fixture->setFeGroups('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -155,7 +154,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getFeGroups()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -164,7 +163,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setFePagesForStringSetsFePages() { 
+	public function setFePagesForStringSetsFePages() {
 		$this->fixture->setFePages('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -172,7 +171,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getFePages()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -181,7 +180,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setCsvUrlForStringSetsCsvUrl() { 
+	public function setCsvUrlForStringSetsCsvUrl() {
 		$this->fixture->setCsvUrl('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -189,7 +188,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getCsvUrl()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -198,7 +197,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setCsvSeparatorForStringSetsCsvSeparator() { 
+	public function setCsvSeparatorForStringSetsCsvSeparator() {
 		$this->fixture->setCsvSeparator('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -206,7 +205,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getCsvSeparator()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -215,7 +214,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setCsvFieldsForStringSetsCsvFields() { 
+	public function setCsvFieldsForStringSetsCsvFields() {
 		$this->fixture->setCsvFields('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -223,7 +222,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getCsvFields()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -232,7 +231,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setCsvFilenameForStringSetsCsvFilename() { 
+	public function setCsvFilenameForStringSetsCsvFilename() {
 		$this->fixture->setCsvFilename('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -240,7 +239,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getCsvFilename()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -249,7 +248,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setCsvValuesForStringSetsCsvValues() { 
+	public function setCsvValuesForStringSetsCsvValues() {
 		$this->fixture->setCsvValues('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -257,7 +256,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getCsvValues()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -266,7 +265,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setSqlForStringSetsSql() { 
+	public function setSqlForStringSetsSql() {
 		$this->fixture->setSql('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -274,7 +273,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getSql()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -283,7 +282,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setHtmlFileForStringSetsHtmlFile() { 
+	public function setHtmlFileForStringSetsHtmlFile() {
 		$this->fixture->setHtmlFile('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -291,7 +290,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getHtmlFile()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -300,7 +299,7 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setHtmlFetchTypeForStringSetsHtmlFetchType() { 
+	public function setHtmlFetchTypeForStringSetsHtmlFetchType() {
 		$this->fixture->setHtmlFetchType('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -308,5 +307,5 @@ class Tx_Newsletter_Domain_Model_RecipientListTest extends Tx_Extbase_Tests_Unit
 			$this->fixture->getHtmlFetchType()
 		);
 	}
-	
+
 }
