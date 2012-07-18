@@ -339,6 +339,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
 	 * or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
 	 *
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return string The name of the newsletter sender
 	 */
 	public function getSenderName() {
@@ -350,7 +351,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		}
 
 		// Return the senderName defined in extension configuration
-		$sender = tx_newsletter_tools::confParam('sender_name');
+		$sender = Tx_Newsletter_Tools::confParam('sender_name');
 		if ($sender == 'user')
 		{
 			// Use the page-owner as user
@@ -393,6 +394,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * or the guessed email address of the user running the this process.
 	 * or the no-reply@$_SERVER['HTTP_HOST'].
 	 *
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return string The email of the newsletter sender
 	 */
 	public function getSenderEmail() {
@@ -404,10 +406,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		}
 
 		/* Anything in typo3_conf_vars? */
-		$email = tx_newsletter_tools::confParam('sender_email');
+		$email = Tx_Newsletter_Tools::confParam('sender_email');
 		if ($email == 'user') {
 			/* Use the page-owner as user */
-			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email
+			$rs = $TYPO3_DB->sql_query("SELECT email
 			FROM be_users bu
 			LEFT JOIN pages p ON bu.uid = p.perms_userid
 			WHERE p.uid = $this->pid");
@@ -579,14 +581,15 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * Function to fetch the proper domain from which to fetch content for newsletter.
 	 * This is either a sys_domain record from the page tree or the fetch_path property.
 	 *
-	 * @return   string      Correct domain.
+	 * @global t3lib_DB $TYPO3_DB
+	 * @return string Correct domain.
 	 */
 	public function getDomain()
 	{
 		global $TYPO3_DB;
 
 		// Is anything hardcoded from TYPO3_CONF_VARS ?
-		$domain = tx_newsletter_tools::confParam('fetch_path');
+		$domain = Tx_Newsletter_Tools::confParam('fetch_path');
 
 		// Else we try to resolve a domain in page root line
 		if (!$domain)
@@ -643,6 +646,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	/**
 	 * Returns the title, NOT localized, of the page sent by this newsletter.
 	 * This should only used for BE, because newsletter recipients need localized title
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return string the title
 	 */
 	function getTitle()
@@ -661,6 +665,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	/**
 	 * Schedule the next newsletter if it defined to be repeated
+	 * @global t3lib_DB $TYPO3_DB
 	 */
 	public function scheduleNextNewsletter()
 	{
@@ -709,6 +714,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	/**
 	 * Get the number of not yet sent email
+	 * @global t3lib_DB $TYPO3_DB
 	 */
 	public function getEmailNotSentCount() {
 		global $TYPO3_DB;
@@ -729,7 +735,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return string
 	 */
 	public function getContentUrl($language = null) {
-		$append_url = tx_newsletter_tools::confParam('append_url');
+		$append_url = Tx_Newsletter_Tools::confParam('append_url');
 		$domain = $this->getDomain();
 
 		if (!is_null($language)) {

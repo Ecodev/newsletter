@@ -21,20 +21,18 @@
 * 
 *  This copyright notice MUST APPEAR in all copies of the script! 
 ***************************************************************/
-require_once(t3lib_extMgm::extPath('newsletter') . 'class.tx_newsletter_bouncehandler.php');
+require_once(t3lib_extMgm::extPath('newsletter') . 'Classes/BounceHandler.php');
 
 
-// If nothing is piped to this script, we fetch bounce emails from servers (who will then be piped to this script)
+// If nothing is piped to this script, can't do anything
 if (ftell(STDIN) === false)
 {
-	tx_newsletter_bouncehandler::fetchBouncedEmails();
+	throw new Exception('This script expects a raw email source to be piped from fetchmail');
 }
-// Else, an email was piped, we dispatch it to analyze its bounce level an take appropriate action
-else
-{
-	// Read piped email raw source
-	$content = file_get_contents('php://stdin');
 
-	$bounceHandler = new tx_newsletter_bouncehandler($content);
-	$bounceHandler->dispatch();
-}
+// Read piped email raw source
+$content = file_get_contents('php://stdin');
+
+// Dispatch it to analyze its bounce level an take appropriate action
+$bounceHandler = new Tx_Newsletter_BounceHandler($content);
+$bounceHandler->dispatch();

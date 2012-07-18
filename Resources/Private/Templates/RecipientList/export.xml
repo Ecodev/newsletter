@@ -1,0 +1,5 @@
+<recipientList title="{title}">
+<f:for each="{recipients}" as="recipient">	<recipient>
+	<f:for each="{recipient}" as="value" key="field">		<{field}>{value}</{field}>
+	</f:for></recipient>
+</f:for></recipientList>

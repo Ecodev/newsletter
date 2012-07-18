@@ -191,7 +191,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 	 * for compatibility reasons.
 	 *
 	 * @param string $email the email address of the recipient
-	 * @param integer $bounceLevel Level of bounce, @see tx_newsletter_bouncehandler for possible values
+	 * @param integer $bounceLevel Level of bounce, @see Tx_Newsletter_BounceHandler for possible values
 	 * @return boolean Status of the success of the removal.
 	 */
 	function registerBounce($email, $bounceLevel) {

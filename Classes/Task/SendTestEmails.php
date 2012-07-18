@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2008 Fabien Udriot (fabien.udriot@ecodev.ch)
+*  (c) 2011
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,40 +24,20 @@
 
 
 /**
- * Class "tx_newsletter_NewsletterTask" provides Scheduler integration
- *
- * @author		Fabien Udriot <fabien.udriot@ecodev.ch>
- * @package		TYPO3
- * @subpackage	tx_newsletter
- *
- * $Id: $
+ * Provides Scheduler task to send emails, but only those marked as test
  */
-class tx_newsletter_NewsletterTask extends tx_scheduler_Task {
+class Tx_Newsletter_Task_SendTestEmails extends tx_scheduler_Task {
 
 	/**
-	 * Function executed from the Scheduler.
-	 * Sends an email
+	 * Sends emails for queued newsletter, but only those marked as test
 	 *
-	 * @return	void
+	 * @return boolean	Returns true on successful execution, false on error
 	 */
 	public function execute() {
-		$success = TRUE;
+
+		Tx_Newsletter_Tools::createAllSpool(true);
+		Tx_Newsletter_Tools::runSpoolOneAll(true);
 		
-		// Send email
-		$command = '/usr/bin/php ' . dirname(PATH_thisScript) . 'conf/ext/newsletter/cli/mailer.php';
-		$resultMailer = exec($command);
-		
-		if ($resultMailer != '') {
-			$command = 'echo  "' . $resultMailer . '" >> /tmp/tcdiremail.log';
-			exec($command);
-		}
-		
-		return $success;
+		return true;
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_newslettertask.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/scheduler/examples/class.tx_newsletter_newslettertask.php']);
-}
-
-

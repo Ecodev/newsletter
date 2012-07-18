@@ -1,15 +1,12 @@
 <?php
 /*
  * Register necessary class names with autoloader
- *
- * $Id: $
  */
-
-require_once(t3lib_extMgm::extPath('newsletter', 'debug.php'));
 return array(
-	'tx_newsletter_tools' => t3lib_extMgm::extPath('newsletter', 'class.tx_newsletter_tools.php'),
-	'tx_newsletter_newslettertask' => t3lib_extMgm::extPath('newsletter', 'class.tx_newsletter_newslettertask.php'),
-	'tx_newsletter_newsletterbouncetask' => t3lib_extMgm::extPath('newsletter', 'class.tx_newsletter_newsletterbouncetask.php'),
+	'tx_newsletter_tools' => t3lib_extMgm::extPath('newsletter', '/Classes/Tools.php'),
+	'tx_newsletter_task_sendemails' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/SendEmails.php'),
+	'tx_newsletter_task_sendtestemails' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/SendTestEmails.php'),
+	'tx_newsletter_task_fetchbounces' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/FetchBounces.php'),
 	'tx_newsletter_domain_repository_bounceaccountrepository' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/BounceAccountRepository.php'),
 	'tx_newsletter_domain_repository_emailrepository' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/EmailRepository.php'),
 	'tx_newsletter_domain_repository_newsletterrepository' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Repository/NewsletterRepository.php'),
@@ -36,4 +33,3 @@ return array(
 	'tx_newsletter_domain_model_plainconverter_lynx' => t3lib_extMgm::extPath('newsletter', '/Classes/Domain/Model/PlainConverter/Lynx.php'),
 	'tx_newsletter_persistence_backendpidfriendly' => t3lib_extMgm::extPath('newsletter', '/Classes/Persistence/BackendPidFriendly.php'),
 );
-

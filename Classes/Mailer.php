@@ -29,7 +29,7 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
  * This is the holy inner core of newsletter. 
  * It is normally used in an instance per language to compile MIME 1.0 compatible mails
  */
-class tx_newsletter_mailer {
+class Tx_Newsletter_Mailer {
 
 	private $html;
 	private $html_tpl;

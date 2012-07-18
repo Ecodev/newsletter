@@ -1,6 +1,6 @@
 <?php
 
-class tx_newsletter_bouncehandler
+class Tx_Newsletter_BounceHandler
 {	
 	const NEWSLETTER_NOT_A_BOUNCE = 1;
 	const NEWSLETTER_SOFTBOUNCE = 2;
@@ -9,7 +9,7 @@ class tx_newsletter_bouncehandler
 	
 	/**
 	 * Bounce level of the mail source specified
-	 * @var integer @see tx_newsletter_bouncehandler
+	 * @var integer @see Tx_Newsletter_BounceHandler
 	 */
 	private $status = self::NEWSLETTER_NOT_A_BOUNCE;
 	
@@ -75,6 +75,7 @@ class tx_newsletter_bouncehandler
 
 	/**
 	 * Fetch all email from Bounce Accounts and pipe each of them to cli/bounce.php
+	 * @global t3lib_DB $TYPO3_DB
 	 */
 	public static function fetchBouncedEmails()
 	{
@@ -154,7 +155,8 @@ class tx_newsletter_bouncehandler
 	}
 	
 	/**
-	 * Attempt to find the email in database which were bounced 
+	 * Attempt to find the email in database which were bounced
+	 * @global t3lib_DB $TYPO3_DB
 	 */
 	protected function findEmail()
 	{

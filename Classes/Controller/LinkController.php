@@ -75,6 +75,18 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 		$this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
 	}
 
+	/**
+	 * Register when a link was clicked and redirect to link's URL.
+	 * For this method we don't use extbase parameters system to have an URL as short as possible
+	 */
+	public function clickedAction() {
+		$this->linkRepository->registerClick(@$_REQUEST['l'], $_REQUEST['p']);
+
+		// Finally redirect to the destination URL
+		$url = @$_REQUEST['url'];
+		header("Location: $url");
+		die();
+	}
 
 	/**
 	 * Returns a configuration for the JsonView, that describes which fields should be rendered for

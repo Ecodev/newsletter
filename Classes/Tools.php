@@ -25,14 +25,14 @@
 
 require_once(PATH_t3lib . 'class.t3lib_extmgm.php');
 require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-require_once(t3lib_extMgm::extPath('newsletter') . 'class.tx_newsletter_mailer.php');
+require_once(t3lib_extMgm::extPath('newsletter') . '/Classes/Mailer.php');
 
 /**
  * Toolbox for newsletter and dependant extensions.
  *
  * @static
  */
-abstract class tx_newsletter_tools {
+abstract class Tx_Newsletter_Tools {
 	
 	protected static $configuration = null;
 	
@@ -56,11 +56,11 @@ abstract class tx_newsletter_tools {
 	 *
 	 * @param Tx_Newsletter_Domain_Model_Newsletter The newsletter
 	 * @param integer $language
-	 * @return tx_newsletter_mailer preconfigured mailer for sending
+	 * @return Tx_Newsletter_Mailer preconfigured mailer for sending
 	 */
 	public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null) {
 		// Configure the mailer
-		$mailer = new tx_newsletter_mailer();
+		$mailer = new Tx_Newsletter_Mailer();
 		$mailer->setNewsletter($newsletter, $language);
 
 		// hook for modifing the mailer before finish preconfiguring
@@ -84,13 +84,14 @@ abstract class tx_newsletter_tools {
 		$newsletters = $newsletterRepository->findAllReadyToSend($onlyTest);
 		foreach ($newsletters as $newsletter)
 		{
-			tx_newsletter_tools::createSpool($newsletter);
+			Tx_Newsletter_Tools::createSpool($newsletter);
 		}
 	}
 
 	/**
 	 * Spool a newsletter page out to the real receivers.
 	 * 
+	 * @global t3lib_DB $TYPO3_DB
 	 * @param   array        Newsletter record.
 	 * @param   integer      Actual begin time. 
 	 * @return  void
@@ -136,6 +137,7 @@ abstract class tx_newsletter_tools {
 	/**
 	 * Run the spool on a server.
 	 * 
+	 * @global t3lib_DB $TYPO3_DB
 	 * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
 	 * @return  integer	Number of emails sent.
 	 */
@@ -159,7 +161,7 @@ abstract class tx_newsletter_tools {
 		}
 
 		/* Do we any limit to this session? */
-		if ($mails_per_round = tx_newsletter_tools::confParam('mails_per_round')) {
+		if ($mails_per_round = Tx_Newsletter_Tools::confParam('mails_per_round')) {
 			$limit = " LIMIT 0, $mails_per_round ";
 		}
 
@@ -183,6 +185,7 @@ abstract class tx_newsletter_tools {
 	 * Run the spool from a browser
 	 * This has some limitations. No load balance. Different permissions. And should have a mails_per_round-value
 	 *
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return    void
 	 */
 	static public function runSpoolOne(Tx_Newsletter_Domain_Model_Newsletter $newsletter) {
@@ -190,7 +193,7 @@ abstract class tx_newsletter_tools {
 
 
 		/* Do we any limit to this session? */
-		if ($mails_per_round = tx_newsletter_tools::confParam('mails_per_round')) {
+		if ($mails_per_round = Tx_Newsletter_Tools::confParam('mails_per_round')) {
 			$limit = " LIMIT 0, $mails_per_round ";
 		}
 
@@ -213,8 +216,9 @@ abstract class tx_newsletter_tools {
 	/**
 	 * Method that accually runs the spool
 	 *
-	 * @param   resource      SQL-resultset from a select from tx_newsletter_domain_model_email
-	 * @return  void
+	 * @global t3lib_DB $TYPO3_DB
+	 * @param resource SQL-resultset from a select from tx_newsletter_domain_model_email
+	 * @return void
 	 */
 	private static function runSpool($rs) {
 		global $TYPO3_DB;
@@ -245,7 +249,7 @@ abstract class tx_newsletter_tools {
 
 			// Was a language with this page defined, if not create one 
 			if (!is_object($mailers[$L])) {
-				$mailers[$L] = &tx_newsletter_tools::getConfiguredMailer($newsletter, $L);
+				$mailers[$L] = &Tx_Newsletter_Tools::getConfiguredMailer($newsletter, $L);
 			}
 
 			// Mark it as started sending

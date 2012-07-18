@@ -11,7 +11,7 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Lynx implements Tx_Newsletter_Do
 	
 	public function getPlainText()
 	{
-		exec(tx_newsletter_tools::confParam('path_to_lynx') . ' -dump "' . $this->url . '"', $output);
+		exec(Tx_Newsletter_Tools::confParam('path_to_lynx') . ' -dump "' . $this->url . '"', $output);
 		$plainText = implode("\n", $output);		
 		return $plainText;
 	}

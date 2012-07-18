@@ -95,7 +95,7 @@ class ext_update {
 
 	/**
 	 * Main function, returning the HTML content of the module
-	 *
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return	string	HTML to display
 	 */
 	function main()
@@ -156,6 +156,7 @@ class ext_update {
 
 	/**
 	 * Returns whether an import from tcdirectmail is possible
+	 * @global t3lib_DB $TYPO3_DB
 	 * @return boolean
 	 */
 	private function canImportFromTcdirectmail()
@@ -198,6 +199,7 @@ class ext_update {
 
 	/**
 	 * Import data from tcdirectmail. Assume everything is available for import.
+	 * @global t3lib_DB $TYPO3_DB
 	 */
 	private function importFromTcdirectmail()
 	{

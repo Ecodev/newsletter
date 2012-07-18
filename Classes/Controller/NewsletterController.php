@@ -166,8 +166,8 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 			{
 				try {
 					// Fill the spool and run the queue
-					tx_newsletter_tools::createSpool($newNewsletter);
-					tx_newsletter_tools::runSpoolOne($newNewsletter);
+					Tx_Newsletter_Tools::createSpool($newNewsletter);
+					Tx_Newsletter_Tools::runSpoolOne($newNewsletter);
 
 					$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent', 'newsletter'), Tx_Extbase_Utility_Localization::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), t3lib_FlashMessage::OK);
 				}

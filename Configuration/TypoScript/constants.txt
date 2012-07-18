@@ -1,10 +1,10 @@
 module.tx_newsletter {
 	view {
 			# cat=plugin.tx_newsletter/file; type=string; label=Path to template root (BE)
-		templateRootPath = EXT:newsletter/Resources/Private/Backend/Templates/
+		templateRootPath = EXT:newsletter/Resources/Private/Templates/
 			# cat=plugin.tx_newsletter/file; type=string; label=Path to template partials (BE)
-		partialRootPath = EXT:newsletter/Resources/Private/Backend/Partials/
+		partialRootPath = EXT:newsletter/Resources/Private/Partials/
 			# cat=plugin.tx_newsletter/file; type=string; label=Path to template layouts (BE)
-		layoutRootPath = EXT:newsletter/Resources/Private/Backend/Layouts/
+		layoutRootPath = EXT:newsletter/Resources/Private/Layouts/
 	}
 }
