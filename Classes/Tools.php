@@ -37,6 +37,12 @@ abstract class Tx_Newsletter_Tools {
 	protected static $configuration = null;
 	
 	/**
+	 * UriBuilder
+	 * @var Tx_Extbase_MVC_Web_Routing_UriBuilder
+	 */
+	protected static $uriBuilder = null;
+	
+	/**
 	 * Get a newsletter-conf-template parameter
 	 *
 	 * @param    string   Parameter key
@@ -271,5 +277,69 @@ abstract class Tx_Newsletter_Tools {
 		closelog();
 	}
 
-}
+	/**
+	 * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
+	 * @param type $extensionName
+	 * @param type $pluginName 
+	 * @return Tx_Extbase_MVC_Web_Routing_UriBuilder
+	 */
+	protected static function buildUriBuilder($extensionName, $pluginName) {
+		
+		// If we are in Backend we need to simulate minimal TSFE
+		if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof tslib_fe))
+		{
+			if (!is_object($GLOBALS['TT'])) {
+				$GLOBALS['TT'] = new t3lib_timeTrack;
+				$GLOBALS['TT']->start();
+			}
+			$TSFEclassName = @t3lib_div::makeInstance('tslib_fe');
+			$GLOBALS['TSFE'] = new $TSFEclassName($GLOBALS['TYPO3_CONF_VARS'], 0, '0', 1, '', '', '', '');
+			$GLOBALS['TSFE']->connectToMySQL();
+			$GLOBALS['TSFE']->initFEuser();
+			$GLOBALS['TSFE']->fetch_the_id();
+			$GLOBALS['TSFE']->getPageAndRootline();
+			$GLOBALS['TSFE']->initTemplate();
+			$GLOBALS['TSFE']->tmpl->getFileName_backPath = PATH_site;
+			$GLOBALS['TSFE']->forceTemplateParsing = 1;
+			$GLOBALS['TSFE']->getConfigArray();
+		}
+		
+		// If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof Tx_Extbase_Core_Bootstrap))
+		{
+			$extbaseBootstrap = $objectManager->get('Tx_Extbase_Core_Bootstrap');
+			$extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
+		}
+		
+		return $objectManager->get('Tx_Extbase_MVC_Web_Routing_UriBuilder');
+	}
 
+	/**
+	 * Returns a frontend URI indepently of current context, with or without extbase, and with or without TSFE
+	 * @param string $actionName
+	 * @param array $controllerArguments
+	 * @param string $controllerName
+	 * @param string $extensionName
+	 * @param string $pluginName
+	 * @return string absolute URI 
+	 */
+	public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p') {
+		if (!self::$uriBuilder)
+			self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
+		$controllerArguments['action'] = $actionName;
+		$controllerArguments['controller'] = $controllerName;
+
+		$pluginNamespace = Tx_Extbase_Utility_Extension::getPluginNamespace($extensionName, $pluginName);
+		$arguments = array($pluginNamespace => $controllerArguments);
+
+		
+		self::$uriBuilder
+				->reset()
+				->setUseCacheHash(FALSE)
+				->setCreateAbsoluteUri(TRUE)
+				->setArguments($arguments);
+
+		return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
+	}
+}

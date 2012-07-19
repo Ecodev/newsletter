@@ -249,13 +249,15 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
 					break;
 				}
 			}
-
-			$authCode = t3lib_div::stdAuthCode($this->_getCleanProperties());
 			$out = '<table style="border: 1px grey solid; border-collapse: collapse;">'.$out.'</table>';
-
+			
+			$authCode = t3lib_div::stdAuthCode($this->_getCleanProperties());
+			$uriXml = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
+			$uriCsv = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
+			
 			$out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
-			(<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/xmldownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export XML</a>, "
-			.'<a href="'.t3lib_extMgm::extRelPath('newsletter')."web/csvdownload.php?authCode=$authCode&uid=" . $this->getUid() . "\">export CSV</a>"
+			(<a href="' . $uriXml . "\">export XML</a>, "
+			.'<a href="' . $uriCsv . "\">export CSV</a>"
 			.')</p>';
 		}
 

@@ -69,3 +69,41 @@ config.tx_extbase {
 		}
 	}
 }
+
+
+###############################
+# Declare a page type for blank page where the entire content will be output by ourselve
+###############################
+tx_newsletter_blank_page = PAGE
+tx_newsletter_blank_page {
+    typeNum = 1342671779
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
+    10 = COA_INT
+    10 {
+        10 = USER_INT
+        10 {
+            userFunc = tx_extbase_core_bootstrap->run
+            extensionName = Newsletter
+            pluginName = p
+			switchableControllerActions {
+				Email {
+					1 = show
+					2 = opened
+					3 = unsubscribe
+				}
+
+				Link {
+					1 = clicked
+				}
+
+				RecipientList {
+					1 = export
+				}
+			}
+        }
+    }
+}

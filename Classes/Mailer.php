@@ -210,7 +210,7 @@ class Tx_Newsletter_Mailer {
 	private function injectOpenSpy(Tx_Newsletter_Domain_Model_Email $email) {
 		$this->html = str_ireplace(
 						'</body>',
-						'<div><img src="' . $this->homeUrl . 'web/beenthere.php?c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>',
+						'<div><img src="' . Tx_Newsletter_Tools::buildFrontendUri('opened', array(), 'Email') . '&c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>',
 						$this->html);
 	}
 
@@ -317,8 +317,8 @@ class Tx_Newsletter_Mailer {
 		
 		// Add predefined markers
 		$authCode = $email->getAuthCode();
-		$markers['newsletter_view_url'] = $this->homeUrl . 'web/view.php?c=' . $authCode;
-		$markers['newsletter_unsubscribe_url'] = $this->homeUrl . 'web/unsubscribe.php?c=' . $authCode;
+		$markers['newsletter_view_url'] = Tx_Newsletter_Tools::buildFrontendUri('show', array(), 'Email') . '&c=' . $authCode;
+		$markers['newsletter_unsubscribe_url'] = Tx_Newsletter_Tools::buildFrontendUri('unsubscribe', array(), 'Email') . '&c=' . $authCode;
 		
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
@@ -370,7 +370,7 @@ class Tx_Newsletter_Mailer {
 		$this->linksCache[$url] = $linkId;
 
 		$authCode = md5($email->getAuthCode() . $linkId);
-		$newUrl = $this->homeUrl . 'web/click.php?url=' . urlencode($url) . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+		$newUrl = Tx_Newsletter_Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
 
 		return $newUrl;
 	}

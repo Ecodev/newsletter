@@ -54,9 +54,20 @@ class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controlle
 	 * @return void
 	 */
 	public function indexAction() {
+		$pageType = '';
+		$record = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('doktype', 'pages', 'uid =' . $this->pageId);
+		if (! empty($record['doktype']) && $record['doktype'] == 254) {
+			$pageType = 'folder';
+		} elseif (! empty($record['doktype'])) {
+			$pageType = 'page';
+		}
+		
 		$configuration = array(
 			'pageId' => $this->pageId,
+			'pageType' => $pageType,
+			'emailShowUrl' => Tx_Newsletter_Tools::buildFrontendUri('show', array(), 'Email'),
 		);
+		
 		$this->view->assign('configuration', $configuration);
 	}
 

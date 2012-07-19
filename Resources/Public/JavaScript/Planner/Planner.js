@@ -282,7 +282,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
 														
 												var form = grid.findParentByType('form').getForm();
 												var values = form.getFieldValues();
-												var url = String.format('/typo3conf/ext/newsletter/web/view.php?pid={0}&uidRecipientList={1}&plainConverter={2}&injectOpenSpy={3}&injectLinksSpy={4}&email={5}',
+												var url = String.format('{0}&pid={1}&uidRecipientList={2}&plainConverter={3}&injectOpenSpy={4}&injectLinksSpy={5}&email={6}',
+													Ext.ux.TYPO3.Newsletter.Configuration.emailShowUrl,
 													encodeURIComponent(values.pid),
 													encodeURIComponent(values.uidRecipientList),
 													encodeURIComponent(values.plainConverter),

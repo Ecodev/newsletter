@@ -111,7 +111,8 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.gri
 	},
 
 	_renderPreview: function(value, parent, record) {
-		return String.format('<a href="/typo3conf/ext/newsletter/web/view.php?injectOpenSpy=0&injectLinksSpy=0&c={0}">{1}</a>', value, Ext.ux.TYPO3.Newsletter.Language.view);
+		 
+		return String.format('<a href="{0}&injectOpenSpy=0&injectLinksSpy=0&c={1}">{2}</a>', Ext.ux.TYPO3.Newsletter.Configuration.emailShowUrl, value, Ext.ux.TYPO3.Newsletter.Language.view);
 	}
 
 });
