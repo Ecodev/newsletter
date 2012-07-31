@@ -46,6 +46,26 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	protected $bounceAccountRepository;
 
 	/**
+     * injectNewsletterRepository
+	 *
+	 * @param Tx_Newsletter_Domain_Repository_NewsletterRepository $newsletterRepository
+	 * @return void
+	 */
+	public function injectNewsletterRepository(Tx_Newsletter_Domain_Repository_NewsletterRepository $newsletterRepository) {
+		$this->newsletterRepository = $newsletterRepository;
+	}
+
+	/**
+     * injectBounceAccounRepository
+	 *
+	 * @param Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository
+	 * @return void
+	 */
+	public function injectBounceAccounRepository(Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository) {
+		$this->bounceAccountRepository = $bounceAccountRepository;
+	}
+
+	/**
 	 * Parent id
 	 *
 	 * @var int
@@ -58,10 +78,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 	 * @return void
 	 */
 	protected function initializeAction() {
-		$this->newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-		$this->bounceAccountRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
-
-
 		// Set default value of PID to know where to store/look for newsletter
 		$this->pid = filter_var(t3lib_div::_GET('id'), FILTER_VALIDATE_INT, array("min_range"=> 0));
 		if (!$this->pid) {
@@ -102,7 +118,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Cont
 		$newsletter = $this->newsletterRepository->getLatest($this->pid);
 		if (!$newsletter)
 		{
-			$newsletter = t3lib_div::makeInstance('Tx_Newsletter_Domain_Model_Newsletter');
+			$newsletter = $this->objectManager->create('Tx_Newsletter_Domain_Model_Newsletter');
 			$newsletter->setPid($this->pid);
 			$newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
 

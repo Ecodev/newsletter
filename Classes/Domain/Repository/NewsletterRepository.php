@@ -108,7 +108,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 			)
 		);
 
-		$linkRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_LinkRepository');
+		$linkRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_LinkRepository');
 		$linkCount = $linkRepository->getCount($uidNewsletter);
 		$this->fillStateDifferences(
 			$stateDifferences,

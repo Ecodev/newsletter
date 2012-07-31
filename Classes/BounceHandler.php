@@ -20,6 +20,12 @@ class Tx_Newsletter_BounceHandler
 	private $mailsource = null;
 	
 	/**
+	 * ObjecManager
+	 * @var Tx_Extbase_Object_ObjectManager
+	 */
+	private $objectManager;
+	
+	/**
 	 * The email concerned by the bounce if any
 	 * @var Tx_Newsletter_Domain_Model_Email
 	 */
@@ -125,6 +131,7 @@ class Tx_Newsletter_BounceHandler
 	 * @param string $mailsource
 	 */
 	function __construct($mailsource = '') {
+		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 		$this->analyze($mailsource);
 	}
 	
@@ -179,10 +186,10 @@ class Tx_Newsletter_BounceHandler
 			LIMIT 1");
 				
 			if (list($recipientListUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
-				$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+				$emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 				$this->email = $emailRepository->findByUid($emailUid);
 				
-				$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+				$recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 				$this->recipientList = $recipientListRepository->findByUid($recipientListUid);
 			}
 		}
@@ -207,7 +214,7 @@ class Tx_Newsletter_BounceHandler
 			}
 
 			$this->email->setBounceTime(new DateTime());
-			$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+			$emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 			$emailRepository->updateNow($this->email);
 		}
 	}

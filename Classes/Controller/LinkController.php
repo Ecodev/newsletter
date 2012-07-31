@@ -39,15 +39,13 @@ class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller
 	protected $linkRepository;
 
 	/**
-	 * Initializes the current action
-	 *
+	 * injectLinkRepository
+	 * @param Tx_Newsletter_Domain_Repository_LinkRepository $linkRepository
 	 * @return void
 	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-		$this->linkRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_LinkRepository');
+	public function injectLinkRepository(Tx_Newsletter_Domain_Repository_LinkRepository $linkRepository) {
+		$this->linkRepository = $linkRepository;
 	}
-
 
 	/**
 	 * Displays all Links

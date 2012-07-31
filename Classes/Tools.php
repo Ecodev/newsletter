@@ -85,7 +85,8 @@ abstract class Tx_Newsletter_Tools {
 	 * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
 	 */
 	static public function createAllSpool($onlyTest = false) {
-		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		
 		$newsletters = $newsletterRepository->findAllReadyToSend($onlyTest);
 		foreach ($newsletters as $newsletter)
@@ -109,7 +110,8 @@ abstract class Tx_Newsletter_Tools {
 		if ($newsletter->getBeginTime())
 			return;
 
-		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
 		// Lock the newsletter by setting its begin_time
 		$begintime = new DateTime();
@@ -234,8 +236,9 @@ abstract class Tx_Newsletter_Tools {
 		$numberOfMails = 0;
 		$mailers = array();
 
-		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$emailRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 
 		$oldNewsletterUid = null;
 		while (list($newsletterUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
@@ -279,8 +282,8 @@ abstract class Tx_Newsletter_Tools {
 
 	/**
 	 * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
-	 * @param type $extensionName
-	 * @param type $pluginName 
+	 * @param string $extensionName
+	 * @param string $pluginName 
 	 * @return Tx_Extbase_MVC_Web_Routing_UriBuilder
 	 */
 	protected static function buildUriBuilder($extensionName, $pluginName) {
@@ -316,7 +319,7 @@ abstract class Tx_Newsletter_Tools {
 	}
 
 	/**
-	 * Returns a frontend URI indepently of current context, with or without extbase, and with or without TSFE
+	 * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
 	 * @param string $actionName
 	 * @param array $controllerArguments
 	 * @param string $controllerName

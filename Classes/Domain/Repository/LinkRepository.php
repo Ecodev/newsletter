@@ -114,7 +114,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
 		");
 		
 		if (list($recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
-			$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+			$recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 			$recipientList = $recipientListRepository->findByUid($recipientListUid);
 			if ($recipientList)
 			{

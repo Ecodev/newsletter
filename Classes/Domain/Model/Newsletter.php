@@ -138,7 +138,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @var integer $uidRecipientList
 	 */
 	protected $uidRecipientList;
-
+	
+	/**
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 */
+	protected $objectManager;
+	
 	/**
 	 * Constructor
 	 */
@@ -149,6 +154,11 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setPlannedTime(new DateTime());
 		$this->setInjectOpenSpy(true);
 		$this->setInjectLinksSpy(true);
+	}
+	
+	public function initializeObject()
+	{
+		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 	}
 
 	/**
@@ -519,7 +529,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setUidBounceAccount($uidBounceAccount = null) {
-		$bounceAccountRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+		$bounceAccountRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
 		$bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
 		$this->setBounceAccount($bounceAccount);
 	}
@@ -572,7 +582,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setUidRecipientList($uidRecipientList) {
-		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+		$recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
 		$this->setRecipientList($recipientList);
 	}
@@ -616,7 +626,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		if (!$domain)
 		{
 			$rootLine = t3lib_befunc::BEgetRootLine($this->pid);
-			$parser = t3lib_div::makeInstance("t3lib_tsparser_ext");	// Defined global here!
+			$parser = t3lib_div::makeInstance('t3lib_tsparser_ext');	// Defined global here!
 			$parser->tt_track = 0;	// Do not log time-performance information
 			$parser->init();
 			$parser->runThroughTemplates($rootLine);	// This generates the constants/config + hierarchy info for the template.
@@ -708,7 +718,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			return $recipientList->getCount();
 		}
 
-		$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 		return $emailRepository->getCount($this->uid);
 	}
 
@@ -908,7 +918,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	public function getStatistics()
 	{
-		$newsletterRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$newsletterRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$stats = $newsletterRepository->getStatistics($this);
 
 		return $stats;

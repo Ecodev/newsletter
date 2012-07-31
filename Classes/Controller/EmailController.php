@@ -39,13 +39,13 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	protected $emailRepository;
 
 	/**
-	 * Initializes the current action
+	 * injectEmailRepository
 	 *
+	 * @param Tx_Newsletter_Domain_Repository_EmailRepository $emailRepository
 	 * @return void
 	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-		$this->emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
+	public function injectEmailRepository(Tx_Newsletter_Domain_Repository_EmailRepository $emailRepository) {
+		$this->emailRepository = $emailRepository;
 	}
 
 
@@ -108,7 +108,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		if ($isPreview)
 		{
 			// Create a fake newsletter and configure it with given parameters
-			$newsletter = new Tx_Newsletter_Domain_Model_Newsletter();
+			$newsletter = $this->objectManager->create('Tx_Newsletter_Domain_Model_Newsletter');
 			$newsletter->setPid(@$_GET['pid']);
 			$newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
 
@@ -133,8 +133,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		// Otherwise look for the original email which was already sent
 		else
 		{
-			$emailRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_EmailRepository');
-			$email = $emailRepository->findByAuthcode($_GET['c']);
+			$email = $this->emailRepository->findByAuthcode($_GET['c']);
 			if ($email)
 			{
 				$newsletter = $email->getNewsletter();

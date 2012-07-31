@@ -39,14 +39,14 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 	protected $recipientListRepository;
 
 	/**
-	 * Initializes the current action
+	 * injectRecipientListRepository
 	 *
+	 * @param Tx_Newsletter_Domain_Repository_RecipientListRepository $recipientListRepository
 	 * @return void
 	 */
-	protected function initializeAction() {
-		$this->recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+	public function injectRecipientListRepository(Tx_Newsletter_Domain_Repository_RecipientListRepository $recipientListRepository) {
+		$this->recipientListRepository = $recipientListRepository;
 	}
-
 
 	/**
 	 * Displays all RecipientLists
@@ -143,9 +143,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 			$this->request->setFormat($format);
 		}
 		
-		$recipientListRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_RecipientListRepository');
-		$recipientList = $recipientListRepository->findByUidInitialized($uidRecipientList);
-		
+		$recipientList = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
 		if (t3lib_div::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
 			$this->response->setStatus(401);
 			return 'not authorized !';

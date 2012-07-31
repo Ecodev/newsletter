@@ -39,14 +39,14 @@ class Tx_Newsletter_Controller_BounceAccountController extends Tx_MvcExtjs_MVC_C
 	protected $bounceAccountRepository;
 
 	/**
-	 * Initializes the current action
+     * injectBounceAccounRepository
 	 *
+	 * @param Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository
 	 * @return void
 	 */
-	protected function initializeAction() {
-		$this->bounceAccountRepository = t3lib_div::makeInstance('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+	public function injectBounceAccounRepository(Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository) {
+		$this->bounceAccountRepository = $bounceAccountRepository;
 	}
-
 
 	/**
 	 * Displays all BounceAccounts
