@@ -31,14 +31,14 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_Mailer'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_SendEmails'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run Newsletter',
-        'description'      => 'Send emails',
+        'title'            => 'Send Newsletter',
+        'description'      => 'Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.',
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_newsletter_NewsletterbounceTask'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_FetchBounces'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Run Newsletter Bounce',
-        'description'      => 'Fetch bounce statistic',
+        'title'            => 'Fetch bounced emails',
+        'description'      => 'Fetch bounced emails from bounce account and update statistics accordingly.',
 );

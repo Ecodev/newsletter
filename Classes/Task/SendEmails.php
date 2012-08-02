@@ -49,7 +49,7 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task {
 	 *
 	 * @return	string	Information to display
 	 */
-//	public function getAdditionalInformation() {
-//		return '';
-//	}
+	public function getAdditionalInformation() {
+		return 'stuff';
+	}
 }

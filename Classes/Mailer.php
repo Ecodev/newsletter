@@ -73,10 +73,15 @@ class Tx_Newsletter_Mailer {
 	}
 
 	public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null) {
+		$domain = $newsletter->getDomain();
+		
+		// When sending newsletter via scheduler (so via CLI mode) realurl cannot guess 
+		// the domain name by himself, so we help him by filling HTTP_HOST variable
+		$_SERVER['HTTP_HOST'] = $domain;
+		
+		$this->siteUrl = "http://$domain/";
 		$this->linksCache = array();
 		$this->newsletter = $newsletter;
-		$domain = $newsletter->getDomain();
-		$this->siteUrl = "http://$domain/";
 		$this->homeUrl = $this->siteUrl . t3lib_extMgm::siteRelPath('newsletter');
 		$this->senderName = $newsletter->getSenderName();
 		$this->senderEmail = $newsletter->getSenderEmail();

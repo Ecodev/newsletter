@@ -156,9 +156,16 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 		$this->setInjectLinksSpy(true);
 	}
 	
-	public function initializeObject()
+	/**
+	 * Returns the ObjectManager
+	 * @return Tx_Extbase_Object_ObjectManagerInterface
+	 */
+	protected function getObjectManager()
 	{
-		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		if (!$this->objectManager)
+			$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		
+		return $this->objectManager;
 	}
 
 	/**
@@ -529,7 +536,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setUidBounceAccount($uidBounceAccount = null) {
-		$bounceAccountRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+		$bounceAccountRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
 		$bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
 		$this->setBounceAccount($bounceAccount);
 	}
@@ -582,7 +589,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	 * @return void
 	 */
 	public function setUidRecipientList($uidRecipientList) {
-		$recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+		$recipientListRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
 		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
 		$this->setRecipientList($recipientList);
 	}
@@ -718,7 +725,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			return $recipientList->getCount();
 		}
 
-		$emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+		$emailRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 		return $emailRepository->getCount($this->uid);
 	}
 
@@ -918,7 +925,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
 	public function getStatistics()
 	{
-		$newsletterRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		$newsletterRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		$stats = $newsletterRepository->getStatistics($this);
 
 		return $stats;

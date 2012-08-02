@@ -84,11 +84,11 @@ abstract class Tx_Newsletter_Tools {
 	 * Create the spool for all newsletters who need it
 	 * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
 	 */
-	static public function createAllSpool($onlyTest = false) {
+	static public function createAllSpool() {
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 		$newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 		
-		$newsletters = $newsletterRepository->findAllReadyToSend($onlyTest);
+		$newsletters = $newsletterRepository->findAllReadyToSend();
 		foreach ($newsletters as $newsletter)
 		{
 			Tx_Newsletter_Tools::createSpool($newsletter);
@@ -146,16 +146,10 @@ abstract class Tx_Newsletter_Tools {
 	 * Run the spool on a server.
 	 * 
 	 * @global t3lib_DB $TYPO3_DB
-	 * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
 	 * @return  integer	Number of emails sent.
 	 */
-	public static function runSpoolOneAll($onlyTest = false) {
+	public static function runSpoolOneAll() {
 		global $TYPO3_DB;
-
-		if ($onlyTest)
-			$onlyTest = 'AND is_test = 1 ';
-		else
-			$onlyTest = ' ';
 
 		/* Try to detect if a spool is already running
 		  If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
@@ -178,7 +172,6 @@ abstract class Tx_Newsletter_Tools {
 						FROM tx_newsletter_domain_model_email 
 						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid) 
 						WHERE tx_newsletter_domain_model_email.begin_time = 0
-						$onlyTest
 						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
 
 		/* Do it, if there is any records */

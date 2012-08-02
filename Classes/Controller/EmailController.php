@@ -122,7 +122,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 					if ($record['email'] == $_GET['email'])
 					{
 						// Build a fake email
-						$email = new Tx_Newsletter_Domain_Model_Email();
+						$email = $this->objectManager->create('Tx_Newsletter_Domain_Model_Email');
 						$email->setRecipientAddress($record['email']);
 						$email->setRecipientData($record);
 					}
