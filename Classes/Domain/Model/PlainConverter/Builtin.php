@@ -10,7 +10,7 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implem
 	{	
 		/**
 		 * Replace Unknown/unhandled entities regexp, with a stricter version: only replace if the unknown entities is made of either only aplha, or only digits
-		 * This allows '&' in URL followed by inline inlie CSS such as:
+		 * This allows '&' in URL followed by inline CSS such as:
 		 *   <a href="http://www.broken.com/">http://www.broken.com/?a=1&b=2</a><div style="border-top:1px solid #00579F;margin-top:10px;"></div>
 		 */
 		$key = array_search('/&[^&;]+;/i', $this->search);

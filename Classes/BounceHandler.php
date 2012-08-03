@@ -81,46 +81,50 @@ class Tx_Newsletter_BounceHandler
 
 	/**
 	 * Fetch all email from Bounce Accounts and pipe each of them to cli/bounce.php
-	 * @global t3lib_DB $TYPO3_DB
 	 */
 	public static function fetchBouncedEmails()
 	{
-		global $TYPO3_DB, $TYPO3_CONF_VARS;
+		// Check that th configured fetchmail is actually available
+		$fetchmail = Tx_Newsletter_Tools::confParam('path_to_fetchmail');
+		$foo = $exitStatus = null;
+		exec("$fetchmail --version 2>&1", $foo, $exitStatus);
+		if ($exitStatus)
+		{
+			throw new Exception("fetchmail is not available with path configured via Extension Manager '$fetchmail'. Install fetchmail or update configuration and try again.");
+		}
 		
 		// Find all bounce accounts we need to check
-		$contents = '';
+		$content = '';
 		$servers = array();
-		$rs = $TYPO3_DB->sql_query("SELECT protocol, server, username, password FROM tx_newsletter_domain_model_bounceaccount
-										WHERE hidden = 0 
-										AND deleted = 0");
-		while (list($protocol, $server, $username, $passwd) = $TYPO3_DB->sql_fetch_row($rs)) {
-		   $contents .= "poll $server proto $protocol username \"$username\" password \"$passwd\"\n";
-		   $servers[] = $server;
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$bounceAccountRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+		foreach ($bounceAccountRepository->findAll() as $bounceAccount)
+		{
+			$server = $bounceAccount->getServer();
+			$protocol = $bounceAccount->getProtocol();
+			$username = $bounceAccount->getUsername();
+			$password = $bounceAccount->getPassword();
+			
+			$content .= "poll $server proto $protocol username \"$username\" password \"$password\"\n";
+			$servers[] = $server;
 		}
-
+		
 		// Write a new fetchmailrc based on bounce accounts found
 		$fetchmailhome = PATH_site . 'uploads/tx_newsletter';
 		$fetchmailfile = "$fetchmailhome/fetchmailrc";
-		file_put_contents($fetchmailfile, $contents);
+		file_put_contents($fetchmailfile, $content);
 		chmod($fetchmailfile, 0600); 
-
-		// Find fetchmail itself
 		putenv("FETCHMAILHOME=$fetchmailhome");
-		$theconf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
-		$fetchmail = $theconf['path_to_fetchmail'];
-
+		
 		// Keep messages on server
-		if ($theconf['keep_messages']) {
-			$keep = '--keep ';
-		}
+		$keep = Tx_Newsletter_Tools::confParam('keep_messages') ? '--keep ' : '';
 		
 		// Execute fetchtmail and ask him to pipe emails to our cli/bounce.php
-		$cli_dispatcher = PATH_typo3 . 'cli_dispatch.phpsh'; // This is supposed to be the absolute path of /typo3/cli_dispatch.phpsh
-		foreach ($servers as $server) {
-
+		$cli_dispatcher = PATH_typo3 . 'cli_dispatch.phpsh'; // This needs to be the absolute path of /typo3/cli_dispatch.phpsh
+		foreach ($servers as $server)
+		{
 			$cmd = "$fetchmail -s $keep -m \"$cli_dispatcher newsletter_bounce\" $server";
-			echo $cmd . "\n";
-			//exec($cmd);
+			exec($cmd);
 		}
 
 		unlink($fetchmailfile);
@@ -176,7 +180,7 @@ class Tx_Newsletter_BounceHandler
 			// The last match is the authcode of the email sent
 			$this->authCode = end($match[1]);
 				
-			// Tell the target that he opened the email
+			// Find the recipientList and email UIDs accordin to authcode
 			$rs = $TYPO3_DB->sql_query("
 			SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.uid
 			FROM tx_newsletter_domain_model_email
@@ -219,4 +223,3 @@ class Tx_Newsletter_BounceHandler
 		}
 	}
 }
-
