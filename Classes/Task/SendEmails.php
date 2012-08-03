@@ -53,6 +53,20 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task {
 	 * @return	string	Information to display
 	 */
 	public function getAdditionalInformation() {
-		return 'stuff';
+		
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+		
+		$emailNotSentCount = 0;
+		$newsletters = $newsletterRepository->findAllReadyToSend();
+		$newsletterCount = count($newsletters);
+		foreach ($newsletters as $newsletter)
+		{
+			$emailNotSentCount += $newsletter->getEmailNotSentCount();
+		}
+		
+		$emailsPerRound = Tx_Newsletter_Tools::confParam('mails_per_round');
+		
+		return "It is configured to send $emailsPerRound emails per execution. There is currently an approximative total of $emailNotSentCount emails that needs to be sent for $newsletterCount newsletters";
 	}
 }
