@@ -2,6 +2,12 @@
 
 require_once(t3lib_extMgm::extPath('newsletter') . '/3dparty/class.html2text.inc');
 
+/**
+ * Convert HTML to plain text using builtin html2text tool
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implements Tx_Newsletter_Domain_Model_IPlainConverter
 {	
 	private $links = array();

@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,10 @@
 
 
 /**
- * Provides Scheduler task to send emails 
+ * Provides Scheduler task to send emails
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task {
 

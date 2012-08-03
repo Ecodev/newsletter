@@ -1,6 +1,11 @@
 <?php
 
-
+/**
+ * Format array of values to CSV format
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_ViewHelpers_CsvValuesViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
 
 	/**

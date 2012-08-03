@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 Dennis Ahrens <dennis.ahrens@googlemail.com>
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,11 +25,8 @@
 /**
  * The view based backend module controller for the Newsletter package.
  *
- * @category    Controller
- * @package     TYPO3
- * @subpackage  tx_newsletter
- * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
- * @license     http://www.gnu.org/copyleft/gpl.html
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController {
 

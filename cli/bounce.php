@@ -2,7 +2,7 @@
 /*************************************************************** 
 *  Copyright notice 
 * 
-*  (c) 2008 Daniel Schledermann <daniel@schledermann.net> 
+*  (c) 2012
 *  All rights reserved 
 * 
 *  This script is part of the TYPO3 project. The TYPO3 project is 

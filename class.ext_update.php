@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 Fabien Udriot <fabien.udriot@ecodev.ch>
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the Typo3 project. The Typo3 project is
@@ -25,9 +25,8 @@
 /**
  * Class to import data from legacy tx_tcdirectmail
  *
- * @author		Fabien Udriot <fabien.udriot@ecodev.ch>
- * @package		TYPO3
- * @subpackage	tx_newsletter
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ext_update {
 

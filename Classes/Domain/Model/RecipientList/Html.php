@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Recipient List using any public URL to fetch and parse for emails addresses
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_RecipientList_Html extends Tx_Newsletter_Domain_Model_RecipientList_Array {
 
 	/**

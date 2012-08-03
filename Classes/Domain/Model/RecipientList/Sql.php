@@ -4,6 +4,8 @@
  * This is the basic SQL related newsletter target. Methods implemented with DB calls using SQL query defined by end-user.
  * Extend this class to create newsletter targets which extracts recipients from the database.
  *
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList {
 

@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2006-2008 Daniel Schledermann <daniel@schledermann.net>
+ *  (c) 2012
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,6 +28,9 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
 /**
  * This is the holy inner core of newsletter. 
  * It is normally used in an instance per language to compile MIME 1.0 compatible mails
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Newsletter_Mailer {
 

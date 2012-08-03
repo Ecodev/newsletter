@@ -3,7 +3,7 @@
 /* * ************************************************************* 
  *  Copyright notice 
  * 
- *  (c) 2006-2008 Daniel Schledermann <daniel@schledermann.net> 
+ *  (c) 2012
  *  All rights reserved 
  * 
  *  This script is part of the TYPO3 project. The TYPO3 project is 
@@ -30,7 +30,10 @@ require_once(t3lib_extMgm::extPath('newsletter') . '/Classes/Mailer.php');
 /**
  * Toolbox for newsletter and dependant extensions.
  *
+ * @abstract
  * @static
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class Tx_Newsletter_Tools {
 	

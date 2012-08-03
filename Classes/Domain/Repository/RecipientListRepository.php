@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Fabien Udriot <fabien.udriot@ecodev.ch>
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,10 @@
 ***************************************************************/
 
 /**
- * A repository for recipient
+ * A repository for RecipientList
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository {
 

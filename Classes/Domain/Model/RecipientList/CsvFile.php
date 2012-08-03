@@ -17,6 +17,12 @@ if (!function_exists('str_getcsv'))
 	} 
 }
 
+/**
+ * Recipient List using CSV file
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Domain_Model_RecipientList_Array
 {
 

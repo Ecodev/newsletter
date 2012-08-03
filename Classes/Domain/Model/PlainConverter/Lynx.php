@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Convert HTML to plain text using external lynx program
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_PlainConverter_Lynx implements Tx_Newsletter_Domain_Model_IPlainConverter
 {	
 	private $url = null;

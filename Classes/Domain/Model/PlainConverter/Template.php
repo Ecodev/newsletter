@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Convert HTML to plain text using a specific TYPO3 template (via pageType)
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_PlainConverter_Template implements Tx_Newsletter_Domain_Model_IPlainConverter
 {	
 	private $url = null;

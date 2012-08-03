@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Custom persistence backend to be able to set PID in TYPO3 4.5
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Persistence_BackendPidFriendly extends Tx_Extbase_Persistence_Backend {
 
 	/**

@@ -5,6 +5,8 @@
  * on the $this->getTableName() table.
  *
  * @abstract
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql {
 	

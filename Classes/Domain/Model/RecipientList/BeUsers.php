@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Recipient List using Backend Users
+ * 
+ * @package Newsletter
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
 class Tx_Newsletter_Domain_Model_RecipientList_BeUsers extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql {
 	
 	/**

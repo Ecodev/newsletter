@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,10 +25,9 @@
 /**
  * Controller for the Link object
  *
- * @copyright Copyright belongs to the respective authors
+ * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-
 class Tx_Newsletter_Controller_LinkController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
 
 	/**

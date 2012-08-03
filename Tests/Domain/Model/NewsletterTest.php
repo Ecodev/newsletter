@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011
+*  (c) 2012
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,12 +26,8 @@
 /**
  * Testcase for class Tx_Newsletter_Domain_Model_Newsletter.
  *
- * @copyright Copyright belongs to the respective authors
+ * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- * @package TYPO3
- * @subpackage Newsletter
- *
  */
 class Tx_Newsletter_Domain_Model_NewsletterTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
