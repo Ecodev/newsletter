@@ -58,6 +58,22 @@ abstract class Tx_Newsletter_Tools {
 
 		return self::$configuration[$key];
 	}
+	
+	/**
+	 * Log a message in database table sys_log
+	 * 
+	 * @global t3lib_userAuthGroup $BE_USER
+	 * @param string $message
+	 * @param integer $logLevel 0 = message, 1 = error
+	 */
+	public static function log($message, $logLevel = 0)
+	{
+		global $BE_USER;
+		if ($BE_USER instanceof t3lib_userAuthGroup)
+		{
+			$BE_USER->simplelog($message, 'newsletter', $logLevel);
+		}
+	}
 
 	/**
 	 * Create a configured mailer from a newsletter page record.
@@ -121,6 +137,7 @@ abstract class Tx_Newsletter_Tools {
 		$newsletter->setBeginTime($begintime);
 		$newsletterRepository->updateNow($newsletter);
 
+		$emailSpooledCount = 0;
 		$recipientList = $newsletter->getRecipientList();
 		$recipientList->init();
 		while ($receiver = $recipientList->getRecipient()) {
@@ -134,8 +151,10 @@ abstract class Tx_Newsletter_Tools {
 					'pid' => $newsletter->getPid(),
 					'newsletter' => $newsletter->getUid(),
 				));
+				$emailSpooledCount++;
 			}
 		}
+		Tx_Newsletter_Tools::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
 
 		// Schedule repeated newsletter if any
 		$newsletter->scheduleNextNewsletter();
@@ -227,9 +246,7 @@ abstract class Tx_Newsletter_Tools {
 	private static function runSpool($rs) {
 		global $TYPO3_DB;
 
-		// We will log newsletters progress to the syslog daemon
-		openlog('newsletter', LOG_ODELAY, LOG_MAIL);
-		$numberOfMails = 0;
+		$emailSentCount = 0;
 		$mailers = array();
 
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
@@ -268,12 +285,11 @@ abstract class Tx_Newsletter_Tools {
 			$email->setEndTime(new DateTime());
 			$emailRepository->updateNow($email);
 
-			$numberOfMails++;
+			$emailSentCount++;
 		}
 
-		/* Log numbers to syslog */
-		syslog(LOG_INFO, "Sending $numberOfMails mails from " . $_SERVER['argv'][0]);
-		closelog();
+		// Log numbers to syslog
+		Tx_Newsletter_Tools::log("Sent $emailSentCount emails");
 	}
 
 	/**

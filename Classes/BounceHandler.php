@@ -17,7 +17,7 @@ class Tx_Newsletter_BounceHandler
 	 * Bounce level of the mail source specified
 	 * @var integer @see Tx_Newsletter_BounceHandler
 	 */
-	private $status = self::NEWSLETTER_NOT_A_BOUNCE;
+	private $bounceLevel = self::NEWSLETTER_NOT_A_BOUNCE;
 	
 	/**
 	 * The mail source
@@ -154,19 +154,19 @@ class Tx_Newsletter_BounceHandler
 		$this->mailsource = $mailsource;
 		
 		// We first assume it is not a bounce
-		$this->status = self::NEWSLETTER_NOT_A_BOUNCE;
+		$this->bounceLevel = self::NEWSLETTER_NOT_A_BOUNCE;
 
 		// Test the soft-bounce level
 		foreach ($this->soft as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
-				$this->status = self::NEWSLETTER_SOFTBOUNCE;
+				$this->bounceLevel = self::NEWSLETTER_SOFTBOUNCE;
 			}
 		}
 
 		// Test the hard-bounce level
 		foreach ($this->hard as $reg) {
 			if (preg_match($reg, $this->mailsource)) {
-				$this->status = self::NEWSLETTER_HARDBOUNCE;
+				$this->bounceLevel = self::NEWSLETTER_HARDBOUNCE;
 			}
 		}
 	}
@@ -214,18 +214,23 @@ class Tx_Newsletter_BounceHandler
 		
 		// If couldn't find the original email we cannot do anything
 		if (!$this->email)
+		{
+			Tx_Newsletter_Tools::log("Bounced email found but cannot find corresponding record in database. Skipped.", 1);
 			return;
+		}
 			
-		if ($this->status != self::NEWSLETTER_NOT_A_BOUNCE)
+		if ($this->bounceLevel != self::NEWSLETTER_NOT_A_BOUNCE)
 		{
 			if ($this->recipientList)
 			{
-				$this->recipientList->registerBounce($this->email->getRecipientAddress(), $this->status);
+				$this->recipientList->registerBounce($this->email->getRecipientAddress(), $this->bounceLevel);
 			}
 
 			$this->email->setBounceTime(new DateTime());
 			$emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 			$emailRepository->updateNow($this->email);
 		}
+		
+		Tx_Newsletter_Tools::log("Bounced email found with bounce level " . $this->bounceLevel);
 	}
 }
