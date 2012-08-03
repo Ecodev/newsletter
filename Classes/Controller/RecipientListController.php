@@ -109,9 +109,12 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_MvcExtjs_MVC_C
 			'fields' => array(),
 		);
 
-		foreach (array_keys(reset($recipients)) as $field)
+		if (count($recipients))
 		{
-			$metaData['fields'][] = array('name' => $field, 'type' =>  'string');
+			foreach (array_keys(reset($recipients)) as $field)
+			{
+				$metaData['fields'][] = array('name' => $field, 'type' =>  'string');
+			}
 		}
 
 		$this->flashMessageContainer->add('Loaded Recipients from Server side.','Recipients loaded successfully', t3lib_FlashMessage::NOTICE);
