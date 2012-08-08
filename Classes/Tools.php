@@ -309,7 +309,7 @@ abstract class Tx_Newsletter_Tools {
 			}
 			$TSFEclassName = @t3lib_div::makeInstance('tslib_fe');
 			$GLOBALS['TSFE'] = new $TSFEclassName($GLOBALS['TYPO3_CONF_VARS'], 0, '0', 1, '', '', '', '');
-			$GLOBALS['TSFE']->connectToMySQL();
+//			$GLOBALS['TSFE']->connectToMySQL();
 			$GLOBALS['TSFE']->initFEuser();
 			$GLOBALS['TSFE']->fetch_the_id();
 			$GLOBALS['TSFE']->getPageAndRootline();
