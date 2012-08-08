@@ -33,12 +33,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_SendEmails'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Send Newsletter',
-        'description'      => 'Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.',
+        'title'            => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_title',
+        'description'      => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_description',
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_FetchBounces'] = array(
         'extension'        => $_EXTKEY,
-        'title'            => 'Fetch bounced emails',
-        'description'      => 'Fetch bounced emails from bounce account and update statistics accordingly.',
+        'title'            => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_title',
+        'description'      => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_description',
 );

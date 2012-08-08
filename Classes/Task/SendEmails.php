@@ -67,6 +67,6 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task {
 		
 		$emailsPerRound = Tx_Newsletter_Tools::confParam('mails_per_round');
 		
-		return "It is configured to send $emailsPerRound emails per execution. There is currently an approximative total of $emailNotSentCount emails that needs to be sent for $newsletterCount newsletters";
+		return Tx_Extbase_Utility_Localization::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newsletterCount));
 	}
 }

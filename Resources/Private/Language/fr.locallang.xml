@@ -71,6 +71,15 @@
 			<label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
 			<label index="unsubscribe_notification_subject">Désincription de Newsletter</label>
 			<label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; quand il a reçut &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
+			<label index="message_title_no_pid_selected">Aucune page séléctionnée</label>
+			<label index="message_no_pid_selected">Sélectionnez une page pour plannifier une newsletter ou consulter les statistiques.</label>
+			<label index="message_title_page_selected">Aucune information pour un dossier</label>
+			<label index="message_page_selected">Sélectionnez une page.</label>
+			<label index="task_send_emails_title">Envoyer Newsletter</label>
+			<label index="task_send_emails_description">Envoie un lot d'emails pour les Newsletter plannifiée. Le nombre d'emails envoyé par lot est configurable via Extension Manager.</label>
+			<label index="task_send_emails_additional_information">C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées.</label>
+			<label index="task_fetch_bounces_title">Chercher les emails qui ont rebondits</label>
+			<label index="task_fetch_bounces_description">Va chercher les emails qui ont rebondits dans les comptes de rebond et met à jour les statistiques.</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
@@ -217,6 +226,15 @@
 			<label index="unsubscribe_notification_body">&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</label>
 			<label index="missing_fields">Missing fields</label>
 			<label index="link_opened">Clicked links</label>
+			<label index="message_title_no_pid_selected">No page has been selected</label>
+			<label index="message_no_pid_selected">Select a page to schedule a newsletter or display statistics about past newsletter.</label>
+			<label index="message_title_page_selected">Nothing to display on a folder</label>
+			<label index="message_page_selected">Select a regular page.</label>
+			<label index="task_send_emails_title">Send Newsletter</label>
+			<label index="task_send_emails_description">Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</label>
+			<label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
+			<label index="task_fetch_bounces_title">Fetch bounced emails</label>
+			<label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
 		</languageKey>
 	</orig_text>
 </T3locallangExt>

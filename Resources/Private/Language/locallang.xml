@@ -79,6 +79,11 @@
 			<label index="message_no_pid_selected">Select a page to schedule a newsletter or display statistics about past newsletter.</label>
 			<label index="message_title_page_selected">Nothing to display on a folder</label>
 			<label index="message_page_selected">Select a regular page.</label>
+			<label index="task_send_emails_title">Send Newsletter</label>
+			<label index="task_send_emails_description">Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</label>
+			<label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
+			<label index="task_fetch_bounces_title">Fetch bounced emails</label>
+			<label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
 		</languageKey>
 		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
 	</data>
