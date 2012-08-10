@@ -271,15 +271,15 @@ class Tx_Newsletter_Mailer {
 		);
 		
 		if (in_array($name, $this->htmlMarkers)) {
-			$this->html = str_replace($search, $replace, $this->html);
+			$this->html = str_ireplace($search, $replace, $this->html);
 		}
 
 		if (in_array($name, $this->plainMarkers)) {
-			$this->plain = str_replace($search, $replace, $this->plain);
+			$this->plain = str_ireplace($search, $replace, $this->plain);
 		}
 
 		if (in_array($name, $this->titleMarkers)) {
-			$this->title = str_replace($search, $replace, $this->title);
+			$this->title = str_ireplace($search, $replace, $this->title);
 		}
 	}
 
@@ -296,18 +296,18 @@ class Tx_Newsletter_Mailer {
 		preg_match_all("/###:IF: $name ###([\w\W]*)###:ELSE:###([\w\W]*)###:ENDIF:###/U", $src, $matches);
 		foreach ($matches[0] as $i => $full_mark) {
 			if ($value) {
-				$src = str_replace($full_mark, $matches[1][$i], $src);
+				$src = str_ireplace($full_mark, $matches[1][$i], $src);
 			} else {
-				$src = str_replace($full_mark, $matches[2][$i], $src);
+				$src = str_ireplace($full_mark, $matches[2][$i], $src);
 			}
 		}
 
 		preg_match_all("/###:IF: $name ###([\w\W]*)###:ENDIF:###/U", $src, $matches);
 		foreach ($matches[0] as $i => $full_mark) {
 			if ($value) {
-				$src = str_replace($full_mark, $matches[1][$i], $src);
+				$src = str_ireplace($full_mark, $matches[1][$i], $src);
 			} else {
-				$src = str_replace($full_mark, '', $src);
+				$src = str_ireplace($full_mark, '', $src);
 			}
 		}
 
