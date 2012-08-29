@@ -51,22 +51,24 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_MvcExtjs_ViewH
 
 		// Language inclusion
 		$LANG->includeLLFile($filePath);
-		if (isset($LOCAL_LANG[$LANG->lang]) && !empty($LOCAL_LANG[$LANG->lang])) {
-			$result = array();
-			foreach ($LOCAL_LANG[$LANG->lang] as $key => $value)
-			{
-				// TYPO3 4.6 compatibility, because $LOCAL_LANG array structure changed
-				if (isset($value[0]['target'])) $value = $value[0]['target'];
+		if (!isset($LOCAL_LANG[$LANG->lang]) || empty($LOCAL_LANG[$LANG->lang]))
+			$lang = 'default';
+		else
+			$lang = $LANG->lang;
 
-				// Replace '.' in key because it would break JSON
-				$key = str_replace('.', '_', $key);
-				$result[$key] = $value;
-			}
+		$result = array();
+		foreach ($LOCAL_LANG[$lang] as $key => $value)
+		{
+			// TYPO3 4.6 compatibility, because $LOCAL_LANG array structure changed
+			if (isset($value[0]['target']))
+				$value = $value[0]['target'];
 
-			return $result;
+			// Replace '.' in key because it would break JSON
+			$key = str_replace('.', '_', $key);
+			$result[$key] = $value;
 		}
-		else {
-			throw new Exception('No language file has been found', 1276451853);
-		}
+
+		return $result;
 	}
+
 }
