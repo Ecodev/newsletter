@@ -28,7 +28,19 @@ Ext.ux.TYPO3.MvcExtjs.UriBuilder = function() {
 		var url = 'mod.php?';
 		url += 'M=' + pluginName + '&';
 		Ext.iterate(parameters, function(key, value) {
-			url += parameterPrefix + '[' + key + ']=' + value + '&';
+			if (Ext.isObject(value)) {
+				value = value.__identity;
+			}
+			if (Ext.isArray(value)) {
+				Ext.each(value, function(v, i) {
+					if (Ext.isObject(v)) {
+						v = v.__identity;
+					}
+					url += parameterPrefix + '[' + key + '][' + i + ']=' + v + '&';
+				});
+			} else {
+				url += parameterPrefix + '[' + key + ']=' + value + '&';
+			}
 		});
 		url = url.substr(0,url.length - 1);
 		return url;

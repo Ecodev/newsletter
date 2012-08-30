@@ -80,11 +80,12 @@ class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MV
 				}
 			}
 		}
-
-		$this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
-		$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
-		$this->view->assign('error', $message);
-		$this->view->assign('success', false);
+		if ($this->view instanceof Tx_MvcExtjs_MVC_View_JsonView) {
+			$this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
+			$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+			$this->view->assign('error', $message);
+			$this->view->assign('success', false);
+		}
 	}
 }
 ?>
