@@ -81,6 +81,7 @@ class Tx_Newsletter_Mailer {
 		// When sending newsletter via scheduler (so via CLI mode) realurl cannot guess 
 		// the domain name by himself, so we help him by filling HTTP_HOST variable
 		$_SERVER['HTTP_HOST'] = $domain;
+		$_SERVER['SCRIPT_NAME'] = '/index.php';
 		
 		$this->siteUrl = "http://$domain/";
 		$this->linksCache = array();
