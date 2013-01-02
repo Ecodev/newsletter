@@ -196,7 +196,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 					$recipientList = $newsletter->getRecipientList();			
 					$recipientList->registerBounce($email->getRecipientAddress() , Tx_Newsletter_BounceHandler::NEWSLETTER_UNSUBSCRIBE);
 					$success = TRUE;
-					notifyUnsubscribe($newsletter, $recipientList, $email);
+					$this->notifyUnsubscribe($newsletter, $recipientList, $email);
 				}
 			}
 		}
@@ -207,7 +207,6 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 	
 	/**
 	* Sends an email to the address configured in extension settings when a recipient unsubscribe
-	* @global type $LANG
 	* @param Tx_Newsletter_Domain_Model_Newsletter $newsletter
 	* @param Tx_Newsletter_Domain_Model_RecipientList $recipientList
 	* @param Tx_Newsletter_Domain_Model_Email $email
@@ -234,14 +233,12 @@ class Tx_Newsletter_Controller_EmailController extends Tx_MvcExtjs_MVC_Controlle
 		}
 
 		// Build email texts
-		global $LANG;
-		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 		$baseUrl = 'http://' . $newsletter->getDomain();
 		$urlRecipient =  $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_email][' . $email->getUid() . ']=edit';
 		$urlRecipientList =  $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit';
 		$urlNewsletter =  $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_newsletter][' . $newsletter->getUid() . ']=edit';
-		$subject = sprintf($LANG->getLL('unsubscribe_notification_subject'));
-		$body = sprintf($LANG->getLL('unsubscribe_notification_body'), $email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter);
+		$subject = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_subject', 'newsletter');
+		$body = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
 
 		// Actually sends email
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
