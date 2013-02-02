@@ -403,11 +403,12 @@ class Tx_Newsletter_Mailer {
 		}
 
 		/* Exchange all http:// links plaintext */
-		preg_match_all('|http://[^ \r\n\)]*|i', $this->plain, $urls);
+		preg_match_all('|http://[^ \r\n\)]*|i', $this->plain, $urls, PREG_OFFSET_CAPTURE);
+		$changedOffset = 0;
 		foreach ($urls[0] as $i => $url) {
-			$newUrl = $this->getLinkAuthCode($email, $url, $isPreview, true);
-
-			$this->plain = str_replace($url, $newUrl, $this->plain);
+			$newUrl = $this->getLinkAuthCode($email, $url[0], $isPreview, true);
+			$this->plain = substr_replace($this->plain, $newUrl, $url[1] + $changedOffset, strlen($url[0]));
+			$changedOffset += strlen($newUrl) - strlen($url[0]);
 		}
 	}
 
