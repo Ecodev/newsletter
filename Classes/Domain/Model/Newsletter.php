@@ -771,8 +771,9 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	public function getValidatedContent($language = null)
 	{
 		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
-		global $LANG;
-		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+        /** @var $LANG language */
+        $LANG = t3lib_div::makeInstance('language');
+        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 
 		$url = $this->getContentUrl($language);
 		$content= t3lib_div::getURL($url);
