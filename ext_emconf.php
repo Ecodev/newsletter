@@ -35,7 +35,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'extbase' => '',
 			'fluid' => '',
 			'php' => '5.2.9-0.0.0',
-			'typo3' => '4.5.0-0.0.0',
+			'typo3' => '4.5.0-6.0.99',
 			'mvc_extjs' => '0.2.1',
 			'scheduler' => '1.1.0',
 		),
