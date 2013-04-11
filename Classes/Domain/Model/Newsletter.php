@@ -772,6 +772,14 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 	{
 		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
 		global $LANG;
+		if (is_null($LANG)) {
+			$LANG = t3lib_div::makeInstance('language');	// create language-object
+			$LLkey='default';
+			if ($GLOBALS['TSFE']->config['config']['language'])	{
+				$LLkey = $GLOBALS['TSFE']->config['config']['language'];
+			}
+			$LANG->init($LLkey);	// initalize language-object with actual language
+		}
 		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 
 		$url = $this->getContentUrl($language);
