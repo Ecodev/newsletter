@@ -36,24 +36,24 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 	 * @var Tx_Extbase_Reflection_Service
 	 */
 	protected $reflectionService;
-	
+
 	/**
 	 * @var array
 	 */
 	protected $frameworkConfiguration;
-	
+
 	/**
 	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
-	
+
 	/**
 	 * @var string
 	 */
 	protected $cacheStorageKey;
-	
+
 	/**
-	 * 
+	 *
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
@@ -62,7 +62,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 		$this->frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$this->cacheStorageKey = 'Tx_MvcExtjs_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
 	}
-	
+
 	/**
 	 * Injects the reflection service
 	 *
@@ -72,14 +72,14 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 	public function injectReflectionService(Tx_Extbase_Reflection_Service $reflectionService) {
 		$this->reflectionService = $reflectionService;
 	}
-	
+
 	/**
 	 * Fetches the API from cache_hash or ceates an API
-	 * 
+	 *
 	 * @param string $routeUrl
 	 * @param string $namespace
 	 * @param boolean $readFromCache Should the cache be used when reading the data.
-	 * @param boolean $writeToCache Should the created api be stored in the cache.  
+	 * @param boolean $writeToCache Should the created api be stored in the cache.
 	 * @return array
 	 */
 	public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = TRUE, $writeToCache = TRUE) {
@@ -95,11 +95,11 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 		}
 		return $api;
 	}
-	
+
 	/**
 	 * Creates the remote api based on the module/plugin configuration using the extbase
 	 * reflection features.
-	 * 
+	 *
 	 * @param string $routeUrl
 	 * @param string $namespace
 	 * @return array
@@ -111,6 +111,11 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 		$api['namespace'] = $namespace;
 		$api['actions'] = array();
 
+		if (empty($this->frameworkConfiguration['controllerConfiguration'])) {
+			# @todo improve me! Hack for fetching API of newsletter the hard way!
+			# It looks $this->frameworkConfiguration['controllerConfiguration'] is empty as of TYPO3 6.1. Bug or feature?
+			$this->frameworkConfiguration['controllerConfiguration'] = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['extbase']['extensions']['Newsletter']['modules']['web_NewsletterTxNewsletterM1']['controllers'];
+		}
 		foreach ($this->frameworkConfiguration['controllerConfiguration'] as $controllerName => $allowedControllerActions) {
 			$unstrippedControllerName = $controllerName . 'Controller';
 			$controllerObjectName = 'Tx_' . $this->frameworkConfiguration['extensionName'] . '_Controller_' . $unstrippedControllerName;
