@@ -1,5 +1,5 @@
 <?php
-declare(ENCODING = 'utf-8');
+
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -29,7 +29,7 @@ declare(ENCODING = 'utf-8');
  * @scope prototype
  */
 class Tx_MvcExtjs_MVC_View_ExtDirectView extends Tx_MvcExtjs_MVC_View_JsonView {
-	
+
 	/**
 	 * Renders the Ext Direct view by delegating to the JsonView
 	 * for rendering a serializable array.

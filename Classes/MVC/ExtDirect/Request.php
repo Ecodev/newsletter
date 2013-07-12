@@ -1,5 +1,5 @@
 <?php
-declare(ENCODING = 'utf-8');
+
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -55,10 +55,10 @@ class Tx_MvcExtjs_MVC_ExtDirect_Request {
 	 * @var boolean
 	 */
 	protected $fileUpload = FALSE;
-	
+
 	/**
 	 * Injects the ObjectManager
-	 * 
+	 *
 	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
 	 */

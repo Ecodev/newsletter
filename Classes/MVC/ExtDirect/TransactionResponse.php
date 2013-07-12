@@ -1,5 +1,5 @@
 <?php
-declare(ENCODING = 'utf-8');
+
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "ExtJS".                      *

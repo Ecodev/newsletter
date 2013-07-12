@@ -1,5 +1,5 @@
 <?php
-declare(ENCODING = 'utf-8');
+
 
 /*                                                                        *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -39,27 +39,27 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	 * @var Tx_Extbase_Configuration_ConfigurationManager
 	 */
 	protected $configurationManager;
-	
+
 	/**
 	 * Injects the ObjectManager
-	 * 
+	 *
 	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
 	 */
 	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
-	
+
 /**
 	 * Injects the ConfigurationManager
-	 * 
+	 *
 	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
 	 * @return void
 	 */
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManager $configurationManager) {
 		$this->configurationManager = $configurationManager;
 	}
-	
+
 	/**
 	 * Builds an Ext Direct request
 	 *
@@ -80,8 +80,8 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	 * Builds a Json Ext Direct request by reading the transaction data from
 	 * standard input.
 	 *
-	 * @return Tx_MvcExtjs_ExtDirect_Request The Ext Direct request object
-	 * @throws Tx_MvcExtjs_ExtDirect_Exception_InvalidExtDirectRequestException
+	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The Ext Direct request object
+	 * @throws Exception
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
@@ -89,11 +89,11 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 		$transactionDatas = file_get_contents("php://input");
 
 		if ( ($transactionDatas = json_decode($transactionDatas)) === NULL) {
-			throw new Tx_MvcExtjs_ExtDirect_Exception_InvalidExtDirectRequestException('The request is not a valid Ext Direct request', 1268490738);
+			throw new Exception('The request is not a valid Ext Direct request', 1268490738);
 		}
-		
+
 		if (!is_array($transactionDatas)) $transactionDatas = array($transactionDatas);
-		
+
 		$request = $this->objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_Request');
 		foreach ($transactionDatas as $transactionData) {
 			$request->createAndAddTransaction(
@@ -109,7 +109,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	/**
 	 * Builds a Form Post Ext Direct Request
 	 *
-	 * @return Tx_MvcExtjs_ExtDirect_Request The Ext Direct request object
+	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The Ext Direct request object
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 * @author Robert Lemke <robert@typo3.org>
 	 * @todo Well... make it work, eh?
