@@ -52,7 +52,7 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 
 	/**
 	 * Fetches the pageRenderer from the BE Context.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function initializeBackend() {
@@ -62,7 +62,7 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 	/**
 	 * Fetches the pageRenderer from the FE Context.
 	 * (not tested)
-	 * 
+	 *
 	 * @return void
 	 */
 	public function initializeFrontend() {
@@ -77,6 +77,10 @@ abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_
 	 * @return template $doc
 	 */
 	protected function getDocInstance() {
+		if (!isset($GLOBALS['SOBE'])) {
+			$GLOBALS['SOBE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance
+				('TYPO3\CMS\Backend\Controller\NewRecordController');
+		}
 		if (!isset($GLOBALS['SOBE']->doc)) {
 			$GLOBALS['SOBE']->doc = t3lib_div::makeInstance('template');
 			$GLOBALS['SOBE']->doc->backPath = $GLOBALS['BACK_PATH'];
