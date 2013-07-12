@@ -53,10 +53,9 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 			'label'		=> 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_data',
 			'config'	=> array(
 				'type' => 'user',
-				'userFunc' => 'tx_newsletter_email_show_data',
+				'userFunc' => 'Tx_Newsletter_Tca_EmailTca->render',
 				'size' => 30,
 				'eval' => 'trim',
-				
 			),
 		),
 		'open_time' => array(
@@ -102,31 +101,4 @@ $TCA['tx_newsletter_domain_model_email'] = array(
 	),
 );
 
-/**
- * Returns an HTML table showing recipient_data content
- * @param $PA
- * @param $fObj
- */
-function tx_newsletter_email_show_data($PA, $fObj)
-{
-	$data = unserialize($PA['row']['recipient_data']);	
-	$keys = array_keys($data);
-	
-	$result = '<table style="border: 1px grey solid; border-collapse: collapse;">';
-	$result .= '<tr>';
-	foreach ($keys as $key)
-	{
-		$result .= '<th style="padding-right: 1em;">' . $key . '</th>';
-	}
-	$result .= '</tr>';
-	
-	$result .= '<tr style="border: 1px grey solid; border-collapse: collapse;">';
-	foreach ($data as $value)
-	{
-		$result .= '<td style="padding-right: 1em;">' . $value . '</td>';
-	}
-	$result .= '</tr>';
-	$result .= '</table>';
-	
-	return $result;
-}
+
