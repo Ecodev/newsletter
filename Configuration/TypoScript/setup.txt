@@ -4,6 +4,9 @@ module.tx_newsletter {
 		partialRootPath = {$module.tx_newsletter.view.partialRootPath}
 		layoutRootPath = {$module.tx_newsletter.view.layoutRootPath}
 	}
+	features {
+		rewrittenPropertyMapper = 0
+	}
 }
 
 config.tx_extbase {
