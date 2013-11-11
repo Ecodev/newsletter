@@ -351,17 +351,9 @@ abstract class Tx_Newsletter_Tools
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
 
-        // Use latest classes available from TYPO3 4.6+
-        if (class_exists('Tx_Extbase_Service_ExtensionService')) {
-            $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-            $extensionService = $objectManager->get('Tx_Extbase_Service_ExtensionService');
-
-            $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
-        }
-        // Or fallback to retro compatibility with TYPO3 4.5
-        else {
-            $pluginNamespace = Tx_Extbase_Utility_Extension::getPluginNamespace($extensionName, $pluginName);
-        }
+        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $extensionService = $objectManager->get('Tx_Extbase_Service_ExtensionService');
+        $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
         $arguments = array($pluginNamespace => $controllerArguments);
 

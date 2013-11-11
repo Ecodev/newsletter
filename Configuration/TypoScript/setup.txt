@@ -16,12 +16,6 @@ config.tx_extbase {
 		}
 	}
 
-	objects {
-		Tx_Extbase_Persistence_BackendInterface {
-			className = Tx_Newsletter_Persistence_BackendPidFriendly
-		}
-	}
-
 	persistence.classes {
 
 		# Defines all possibles subclasses of recipientList

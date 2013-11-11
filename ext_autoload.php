@@ -39,7 +39,6 @@ return array(
     'tx_newsletter_domain_repository_linkrepository' => $extensionClassesPath . 'Domain/Repository/LinkRepository.php',
     'tx_newsletter_domain_repository_newsletterrepository' => $extensionClassesPath . 'Domain/Repository/NewsletterRepository.php',
     'tx_newsletter_domain_repository_recipientlistrepository' => $extensionClassesPath . 'Domain/Repository/RecipientListRepository.php',
-    'tx_newsletter_persistence_backendpidfriendly' => $extensionClassesPath . 'Persistence/BackendPidFriendly.php',
     'tx_newsletter_task_fetchbounces' => $extensionClassesPath . 'Task/FetchBounces.php',
     'tx_newsletter_task_sendemails' => $extensionClassesPath . 'Task/SendEmails.php',
     'tx_newsletter_viewhelpers_configurationviewhelper' => $extensionClassesPath . 'ViewHelpers/ConfigurationViewHelper.php',
