@@ -1,240 +1,240 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallangExt>
-	<data type="array">
-		<languageKey index="fr" type="array">
-			<label index="newsletter">Newsletter</label>
-			<label index="newsletter_validity">Validité de la Newsletter</label>
-			<label index="validation_content_url">L'URL utilisé pour le contenu est %1$s</label>
-			<label index="validation_mail_too_short">Contenu trop court. Le contenu doit être d'au moins 200 caractères pour être considéré valide.</label>
-			<label index="validation_mail_contains_php_warnings">Le contenu contient des warnings PHP. Cela ne doit pas être envoyé aux destinataires.</label>
-			<label index="validation_mail_contains_php_errors">Le contenu contient des erreurs PHP. Cela ne doit pas être envoyé aux destinataires.</label>
-			<label index="validation_mail_being_generated">Le contenu contient des message de génération en cours. Cela ne doit pas être envoyé aux destinataires.</label>
-			<label index="validation_mail_contains_javascript">Le contenu semble contenir du code JavaScript. C'est considéré comme mauvaise manière et générera probablement des alertes dans le MUA du destinataire ou dans le filtre anti-spam.</label>
-			<label index="validation_mail_converted_relative_url">Les URL relatives pour %1$s ont été convertie en URL absolues</label>
-			<label index="validation_mail_contains_linked_styles">Le contenu semble faire appel à une feuille de style (CSS) externe ce qui est mal supporté par la plupart des MUA. Les feuilles de styles externes ont été inclues directement dans l'email.</label>
-			<label index="validation_mail_contains_css_images">Le contenu utilise des image via CSS. Cela casse la mise en page dans la plupart des MUA.</label>
-			<label index="validation_mail_contains_css_classes">Des classes CSS sont utilisées. Cela fonctionne bien dans les &quot;vrais&quot; MUA (Outlook, Thunderbird), mais pas dans les webmail (Gmail, Hotmail).</label>
-			<label index="validation_mail_contains_css_some_property">La proprieté CSS &quot;%1$s&quot; est utilisée. Cela casse la mise en page dans la plupart des MUA. L'utilisation de mise en page en HTML &quot;à l'ancienne&quot; est recommandée.</label>
-			<label index="none">aucun</label>
-			<label index="preview_html">Html</label>
-			<label index="preview_plain">Texte</label>
-			<label index="missing_fields">Champs manquant</label>
-			<label index="preview">Prévisualisation</label>
-			<label index="view">Voir</label>
-			<label index="newsletter_tab">Newsletter</label>
-			<label index="statistics_tab">Statistiques</label>
-			<label index="overview_tab">Aperçu</label>
-			<label index="links_tab">Liens</label>
-			<label index="emails_tab">Emails</label>
-			<label index="recipients">destinataires</label>
-			<label index="not_sent">Pas encore envoyé</label>
-			<label index="sent">Envoyé</label>
-			<label index="opened">Ouvert</label>
-			<label index="bounced">Rebondit</label>
-			<label index="link_opened">Liens ouvert</label>
-			<label index="links_opened">liens cliqué</label>
-			<label index="emails_opened">emails ouvert</label>
-			<label index="emails_bounced">emails rebondit</label>
-			<label index="started">Commencé d'envoyer le</label>
-			<label index="planned_to_be_sent_on">Plannifié pour envoyer le</label>
-			<label index="percentage_of_opened">% ouvert</label>
-			<label index="number_of_opened"># ouvert</label>
-			<label index="link_id">#</label>
-			<label index="no_statistics">Aucune statistiques disponible.</label>
-			<label index="status">Etat</label>
-			<label index="recent_activity">Activité récente</label>
-			<label index="errors">Erreurs</label>
-			<label index="warnings">Alertes</label>
-			<label index="infos">Infos</label>
-			<label index="newsletter_status_not_planned">Cette newsletter n'est pas plannifiée</label>
-			<label index="newsletter_status_planned">Cette newsletter est plannifiée pour être envoyé le %1$s</label>
-			<label index="newsletter_status_generating_emails">Les emails de cette newsletter sont entrain d'être généré</label>
-			<label index="newsletter_status_sending">Les emails de cette newsletter sont en cours d'envoi: %1$d/%2$d</label>
-			<label index="newsletter_status_was_sent">Cette newsletter a été envoyée le %1$s</label>
-			<label index="settings">Paramètres</label>
-			<label index="advanced_settings">Paramètres avancé</label>
-			<label index="sender">Expéditeur</label>
-			<label index="sending">Envoi</label>
-			<label index="testing">Test</label>
-			<label index="testing_explanation">&lt;p&gt;Les newsletter de test sont envoyée immédiatement. Parce que le système de queue est court-circuité, il n'est pas possible d'envoyer beaucoup d'email d'un coup&lt;/p&gt;</label>
-			<label index="send_test_now">Envoyer un test maintenant</label>
-			<label index="planning">Plannification</label>
-			<label index="date_start_sending">Date pour commencer l'envoi</label>
-			<label index="add_to_queue">Ajouter à la file d'attente</label>
-			<label index="flashmessage_test_maximum_recipients">Une newsletter de test ne peut pas être envoyé à %1$d destinataires. Le maximum permit est de %2$d.</label>
-			<label index="flashmessage_test_maximum_recipients_title">Erreur d'envoi de la newsletter de test</label>
-			<label index="flashmessage_test_newsletter_sent">La newsletter de test a été envoyée.</label>
-			<label index="flashmessage_test_newsletter_sent_title">Newsletter de test envoyée</label>
-			<label index="flashmessage_test_newsletter_error">Erreur d'envoi de la newsletter de test</label>
-			<label index="flashmessage_newsletter_queued">La newsletter a été ajoutée à la file d'attente.</label>
-			<label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
-			<label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
-			<label index="unsubscribe_notification_subject">Désincription de Newsletter</label>
-			<label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; quand il a reçut &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
-			<label index="message_title_no_pid_selected">Aucune page séléctionnée</label>
-			<label index="message_no_pid_selected">Sélectionnez une page pour plannifier une newsletter ou consulter les statistiques.</label>
-			<label index="message_title_page_selected">Aucune information pour un dossier</label>
-			<label index="message_page_selected">Sélectionnez une page.</label>
-			<label index="task_send_emails_title">Envoyer Newsletter</label>
-			<label index="task_send_emails_description">Envoie un lot d'emails pour les Newsletter plannifiée. Le nombre d'emails envoyé par lot est configurable via Extension Manager.</label>
-			<label index="task_send_emails_additional_information">C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées.</label>
-			<label index="task_fetch_bounces_title">Chercher les emails qui ont rebondits</label>
-			<label index="task_fetch_bounces_description">Va chercher les emails qui ont rebondits dans les comptes de rebond et met à jour les statistiques.</label>
-		</languageKey>
-	</data>
-	<orig_hash type="array">
-		<languageKey index="fr" type="array">
-			<label index="newsletter" type="integer">268140134</label>
-			<label index="newsletter_validity" type="integer">211313421</label>
-			<label index="validation_content_url" type="integer">102429766</label>
-			<label index="validation_mail_too_short" type="integer">7571816</label>
-			<label index="validation_mail_contains_php_warnings" type="integer">93290305</label>
-			<label index="validation_mail_contains_php_errors" type="integer">17647847</label>
-			<label index="validation_mail_being_generated" type="integer">254664935</label>
-			<label index="validation_mail_contains_javascript" type="integer">244768289</label>
-			<label index="validation_mail_converted_relative_url" type="integer">172128515</label>
-			<label index="validation_mail_contains_linked_styles" type="integer">107556244</label>
-			<label index="validation_mail_contains_css_images" type="integer">265762325</label>
-			<label index="validation_mail_contains_css_classes" type="integer">161846191</label>
-			<label index="validation_mail_contains_css_some_property" type="integer">71466302</label>
-			<label index="none" type="integer">53789860</label>
-			<label index="preview_html" type="integer">51601216</label>
-			<label index="preview_plain" type="integer">80577555</label>
-			<label index="preview" type="integer">52420219</label>
-			<label index="view" type="integer">70589694</label>
-			<label index="newsletter_tab" type="integer">268140134</label>
-			<label index="statistics_tab" type="integer">204727300</label>
-			<label index="overview_tab" type="integer">62421031</label>
-			<label index="links_tab" type="integer">198772955</label>
-			<label index="emails_tab" type="integer">158927728</label>
-			<label index="recipients" type="integer">158510953</label>
-			<label index="not_sent" type="integer">147407482</label>
-			<label index="sent" type="integer">133742632</label>
-			<label index="opened" type="integer">27335450</label>
-			<label index="bounced" type="integer">106508084</label>
-			<label index="links_opened" type="integer">266645565</label>
-			<label index="emails_opened" type="integer">176156044</label>
-			<label index="emails_bounced" type="integer">187899690</label>
-			<label index="started" type="integer">16926850</label>
-			<label index="planned_to_be_sent_on" type="integer">194331769</label>
-			<label index="percentage_of_opened" type="integer">37101876</label>
-			<label index="number_of_opened" type="integer">253436397</label>
-			<label index="link_id" type="integer">1753031</label>
-			<label index="no_statistics" type="integer">232360198</label>
-			<label index="status" type="integer">247806604</label>
-			<label index="recent_activity" type="integer">259844785</label>
-			<label index="errors" type="integer">99552371</label>
-			<label index="warnings" type="integer">236453302</label>
-			<label index="infos" type="integer">52879447</label>
-			<label index="newsletter_status_not_planned" type="integer">124560926</label>
-			<label index="newsletter_status_planned" type="integer">255914523</label>
-			<label index="newsletter_status_generating_emails" type="integer">35859323</label>
-			<label index="newsletter_status_sending" type="integer">141551881</label>
-			<label index="newsletter_status_was_sent" type="integer">11621586</label>
-			<label index="settings" type="integer">256864370</label>
-			<label index="advanced_settings" type="integer">266651301</label>
-			<label index="sender" type="integer">145411646</label>
-			<label index="sending" type="integer">239799339</label>
-			<label index="testing" type="integer">262579619</label>
-			<label index="testing_explanation" type="integer">40116613</label>
-			<label index="send_test_now" type="integer">162114709</label>
-			<label index="planning" type="integer">35465386</label>
-			<label index="date_start_sending" type="integer">154469676</label>
-			<label index="add_to_queue" type="integer">267969072</label>
-			<label index="flashmessage_test_maximum_recipients" type="integer">204302738</label>
-			<label index="flashmessage_test_maximum_recipients_title" type="integer">258957131</label>
-			<label index="flashmessage_test_newsletter_sent" type="integer">210914609</label>
-			<label index="flashmessage_test_newsletter_sent_title" type="integer">84175771</label>
-			<label index="flashmessage_test_newsletter_error" type="integer">258957131</label>
-			<label index="flashmessage_newsletter_queued" type="integer">134414338</label>
-			<label index="flashmessage_newsletter_queued_title" type="integer">12280817</label>
-			<label index="flashmessage_newsletter_invalid" type="integer">256314965</label>
-			<label index="unsubscribe_notification_subject" type="integer">260752590</label>
-			<label index="unsubscribe_notification_body" type="integer">150203798</label>
-			<label index="missing_fields" type="integer">20837752</label>
-			<label index="link_opened" type="integer">119397981</label>
-		</languageKey>
-	</orig_hash>
-	<orig_text type="array">
-		<languageKey index="fr" type="array">
-			<label index="newsletter">Newsletter</label>
-			<label index="newsletter_validity">Newsletter validity</label>
-			<label index="validation_content_url">URL used to fetch content is %1$s</label>
-			<label index="validation_mail_too_short">Content too short. The content must be at least 200 chars long to be considered valid.</label>
-			<label index="validation_mail_contains_php_warnings">Content contains PHP Warnings. This must not reach the receivers.</label>
-			<label index="validation_mail_contains_php_errors">Content contains PHP Fatal errors. This must not reach the receivers.</label>
-			<label index="validation_mail_being_generated">Content contains &quot;wait&quot; signatures. This must not reach the receivers.</label>
-			<label index="validation_mail_contains_javascript">Your mail seems to contain JavaScript-code. This is generally considered bad style and will probably generate warnings either in your users MUAs or spamfilters. I have taken the liberty to try and remove the JavaScript-code from you mail.</label>
-			<label index="validation_mail_converted_relative_url">Relative URL for %1$s converted to absolute URL</label>
-			<label index="validation_mail_contains_linked_styles">Your mail seem to link to an external style-sheet. Your style sheet will be included in the mail, since most MUAs does not cope well on external style-sheets.</label>
-			<label index="validation_mail_contains_css_images">You have used images linked to by CSS in your mail. This will break your layout with most MUAs</label>
-			<label index="validation_mail_contains_css_classes">The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</label>
-			<label index="validation_mail_contains_css_some_property">Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</label>
-			<label index="none">none</label>
-			<label index="preview_html">Html</label>
-			<label index="preview_plain">Plain</label>
-			<label index="preview">Preview</label>
-			<label index="view">View</label>
-			<label index="newsletter_tab">Newsletter</label>
-			<label index="statistics_tab">Statistics</label>
-			<label index="overview_tab">Overview</label>
-			<label index="links_tab">Links</label>
-			<label index="emails_tab">Emails</label>
-			<label index="recipients">recipients</label>
-			<label index="not_sent">Not yet sent</label>
-			<label index="sent">Sent</label>
-			<label index="opened">Opened</label>
-			<label index="bounced">Bounced</label>
-			<label index="links_opened">clicked links</label>
-			<label index="emails_opened">emails opened</label>
-			<label index="emails_bounced">emails bounced</label>
-			<label index="started">Started sending on</label>
-			<label index="planned_to_be_sent_on">Planned to be sent on</label>
-			<label index="percentage_of_opened">% of opened</label>
-			<label index="number_of_opened"># of opened</label>
-			<label index="link_id">#</label>
-			<label index="no_statistics">No statistics available for this page.</label>
-			<label index="status">Status</label>
-			<label index="recent_activity">Recent activity</label>
-			<label index="errors">Errors</label>
-			<label index="warnings">Warnings</label>
-			<label index="infos">Infos</label>
-			<label index="newsletter_status_not_planned">This newsletter is not planned</label>
-			<label index="newsletter_status_planned">This newsletter is planned to be sent on %1$s</label>
-			<label index="newsletter_status_generating_emails">Emails for this newsletter are being generated</label>
-			<label index="newsletter_status_sending">Emails for this newsletter are being sent: %1$d/%2$d</label>
-			<label index="newsletter_status_was_sent">This newsletter was sent on %1$s</label>
-			<label index="settings">Settings</label>
-			<label index="advanced_settings">Advanced settings</label>
-			<label index="sender">Sender</label>
-			<label index="sending">Sending</label>
-			<label index="testing">Testing</label>
-			<label index="testing_explanation">&lt;p&gt;Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.&lt;/p&gt;&lt;p&gt;Also test newsletters will be ignored by default in statistics.&lt;/p&gt;</label>
-			<label index="send_test_now">Send test emails now</label>
-			<label index="planning">Planning</label>
-			<label index="date_start_sending">Date to start sending</label>
-			<label index="add_to_queue">Add to queue</label>
-			<label index="flashmessage_test_maximum_recipients">Test newsletter cannot be sent to %1$d recipients. Maximum allowed is %2$d</label>
-			<label index="flashmessage_test_maximum_recipients_title">Error while sending test newsletter</label>
-			<label index="flashmessage_test_newsletter_sent">Test newsletter has been sent.</label>
-			<label index="flashmessage_test_newsletter_sent_title">Test newsletter sent</label>
-			<label index="flashmessage_test_newsletter_error">Error while sending test newsletter</label>
-			<label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
-			<label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
-			<label index="flashmessage_newsletter_invalid">Error while validating newsletter</label>
-			<label index="unsubscribe_notification_subject">Newsletter unsubscription</label>
-			<label index="unsubscribe_notification_body">&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</label>
-			<label index="missing_fields">Missing fields</label>
-			<label index="link_opened">Clicked links</label>
-			<label index="message_title_no_pid_selected">No page has been selected</label>
-			<label index="message_no_pid_selected">Select a page to schedule a newsletter or display statistics about past newsletter.</label>
-			<label index="message_title_page_selected">Nothing to display on a folder</label>
-			<label index="message_page_selected">Select a regular page.</label>
-			<label index="task_send_emails_title">Send Newsletter</label>
-			<label index="task_send_emails_description">Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</label>
-			<label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
-			<label index="task_fetch_bounces_title">Fetch bounced emails</label>
-			<label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
-		</languageKey>
-	</orig_text>
+    <data type="array">
+        <languageKey index="fr" type="array">
+            <label index="newsletter">Newsletter</label>
+            <label index="newsletter_validity">Validité de la Newsletter</label>
+            <label index="validation_content_url">L'URL utilisé pour le contenu est %1$s</label>
+            <label index="validation_mail_too_short">Contenu trop court. Le contenu doit être d'au moins 200 caractères pour être considéré valide.</label>
+            <label index="validation_mail_contains_php_warnings">Le contenu contient des warnings PHP. Cela ne doit pas être envoyé aux destinataires.</label>
+            <label index="validation_mail_contains_php_errors">Le contenu contient des erreurs PHP. Cela ne doit pas être envoyé aux destinataires.</label>
+            <label index="validation_mail_being_generated">Le contenu contient des message de génération en cours. Cela ne doit pas être envoyé aux destinataires.</label>
+            <label index="validation_mail_contains_javascript">Le contenu semble contenir du code JavaScript. C'est considéré comme mauvaise manière et générera probablement des alertes dans le MUA du destinataire ou dans le filtre anti-spam.</label>
+            <label index="validation_mail_converted_relative_url">Les URL relatives pour %1$s ont été convertie en URL absolues</label>
+            <label index="validation_mail_contains_linked_styles">Le contenu semble faire appel à une feuille de style (CSS) externe ce qui est mal supporté par la plupart des MUA. Les feuilles de styles externes ont été inclues directement dans l'email.</label>
+            <label index="validation_mail_contains_css_images">Le contenu utilise des image via CSS. Cela casse la mise en page dans la plupart des MUA.</label>
+            <label index="validation_mail_contains_css_classes">Des classes CSS sont utilisées. Cela fonctionne bien dans les &quot;vrais&quot; MUA (Outlook, Thunderbird), mais pas dans les webmail (Gmail, Hotmail).</label>
+            <label index="validation_mail_contains_css_some_property">La proprieté CSS &quot;%1$s&quot; est utilisée. Cela casse la mise en page dans la plupart des MUA. L'utilisation de mise en page en HTML &quot;à l'ancienne&quot; est recommandée.</label>
+            <label index="none">aucun</label>
+            <label index="preview_html">Html</label>
+            <label index="preview_plain">Texte</label>
+            <label index="missing_fields">Champs manquant</label>
+            <label index="preview">Prévisualisation</label>
+            <label index="view">Voir</label>
+            <label index="newsletter_tab">Newsletter</label>
+            <label index="statistics_tab">Statistiques</label>
+            <label index="overview_tab">Aperçu</label>
+            <label index="links_tab">Liens</label>
+            <label index="emails_tab">Emails</label>
+            <label index="recipients">destinataires</label>
+            <label index="not_sent">Pas encore envoyé</label>
+            <label index="sent">Envoyé</label>
+            <label index="opened">Ouvert</label>
+            <label index="bounced">Rebondit</label>
+            <label index="link_opened">Liens ouvert</label>
+            <label index="links_opened">liens cliqué</label>
+            <label index="emails_opened">emails ouvert</label>
+            <label index="emails_bounced">emails rebondit</label>
+            <label index="started">Commencé d'envoyer le</label>
+            <label index="planned_to_be_sent_on">Plannifié pour envoyer le</label>
+            <label index="percentage_of_opened">% ouvert</label>
+            <label index="number_of_opened"># ouvert</label>
+            <label index="link_id">#</label>
+            <label index="no_statistics">Aucune statistiques disponible.</label>
+            <label index="status">Etat</label>
+            <label index="recent_activity">Activité récente</label>
+            <label index="errors">Erreurs</label>
+            <label index="warnings">Alertes</label>
+            <label index="infos">Infos</label>
+            <label index="newsletter_status_not_planned">Cette newsletter n'est pas plannifiée</label>
+            <label index="newsletter_status_planned">Cette newsletter est plannifiée pour être envoyé le %1$s</label>
+            <label index="newsletter_status_generating_emails">Les emails de cette newsletter sont entrain d'être généré</label>
+            <label index="newsletter_status_sending">Les emails de cette newsletter sont en cours d'envoi: %1$d/%2$d</label>
+            <label index="newsletter_status_was_sent">Cette newsletter a été envoyée le %1$s</label>
+            <label index="settings">Paramètres</label>
+            <label index="advanced_settings">Paramètres avancé</label>
+            <label index="sender">Expéditeur</label>
+            <label index="sending">Envoi</label>
+            <label index="testing">Test</label>
+            <label index="testing_explanation">&lt;p&gt;Les newsletter de test sont envoyée immédiatement. Parce que le système de queue est court-circuité, il n'est pas possible d'envoyer beaucoup d'email d'un coup&lt;/p&gt;</label>
+            <label index="send_test_now">Envoyer un test maintenant</label>
+            <label index="planning">Plannification</label>
+            <label index="date_start_sending">Date pour commencer l'envoi</label>
+            <label index="add_to_queue">Ajouter à la file d'attente</label>
+            <label index="flashmessage_test_maximum_recipients">Une newsletter de test ne peut pas être envoyé à %1$d destinataires. Le maximum permit est de %2$d.</label>
+            <label index="flashmessage_test_maximum_recipients_title">Erreur d'envoi de la newsletter de test</label>
+            <label index="flashmessage_test_newsletter_sent">La newsletter de test a été envoyée.</label>
+            <label index="flashmessage_test_newsletter_sent_title">Newsletter de test envoyée</label>
+            <label index="flashmessage_test_newsletter_error">Erreur d'envoi de la newsletter de test</label>
+            <label index="flashmessage_newsletter_queued">La newsletter a été ajoutée à la file d'attente.</label>
+            <label index="flashmessage_newsletter_queued_title">Newsletter en attente d'envoi</label>
+            <label index="flashmessage_newsletter_invalid">Erreur de validation de la newsletter</label>
+            <label index="unsubscribe_notification_subject">Désincription de Newsletter</label>
+            <label index="unsubscribe_notification_body">&lt;p&gt;Bonjour,&lt;/p&gt;&lt;p&gt;Le destinataire &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; s'est désinscrit de la liste &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; quand il a reçut &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Selon votre configuration, aucune autre action n'est nécessaire. En cas de doutes, contactez votre webmaster.&lt;/p&gt;</label>
+            <label index="message_title_no_pid_selected">Aucune page séléctionnée</label>
+            <label index="message_no_pid_selected">Sélectionnez une page pour plannifier une newsletter ou consulter les statistiques.</label>
+            <label index="message_title_page_selected">Aucune information pour un dossier</label>
+            <label index="message_page_selected">Sélectionnez une page.</label>
+            <label index="task_send_emails_title">Envoyer Newsletter</label>
+            <label index="task_send_emails_description">Envoie un lot d'emails pour les Newsletter plannifiée. Le nombre d'emails envoyé par lot est configurable via Extension Manager.</label>
+            <label index="task_send_emails_additional_information">C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées.</label>
+            <label index="task_fetch_bounces_title">Chercher les emails qui ont rebondits</label>
+            <label index="task_fetch_bounces_description">Va chercher les emails qui ont rebondits dans les comptes de rebond et met à jour les statistiques.</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="fr" type="array">
+            <label index="newsletter" type="integer">268140134</label>
+            <label index="newsletter_validity" type="integer">211313421</label>
+            <label index="validation_content_url" type="integer">102429766</label>
+            <label index="validation_mail_too_short" type="integer">7571816</label>
+            <label index="validation_mail_contains_php_warnings" type="integer">93290305</label>
+            <label index="validation_mail_contains_php_errors" type="integer">17647847</label>
+            <label index="validation_mail_being_generated" type="integer">254664935</label>
+            <label index="validation_mail_contains_javascript" type="integer">244768289</label>
+            <label index="validation_mail_converted_relative_url" type="integer">172128515</label>
+            <label index="validation_mail_contains_linked_styles" type="integer">107556244</label>
+            <label index="validation_mail_contains_css_images" type="integer">265762325</label>
+            <label index="validation_mail_contains_css_classes" type="integer">161846191</label>
+            <label index="validation_mail_contains_css_some_property" type="integer">71466302</label>
+            <label index="none" type="integer">53789860</label>
+            <label index="preview_html" type="integer">51601216</label>
+            <label index="preview_plain" type="integer">80577555</label>
+            <label index="preview" type="integer">52420219</label>
+            <label index="view" type="integer">70589694</label>
+            <label index="newsletter_tab" type="integer">268140134</label>
+            <label index="statistics_tab" type="integer">204727300</label>
+            <label index="overview_tab" type="integer">62421031</label>
+            <label index="links_tab" type="integer">198772955</label>
+            <label index="emails_tab" type="integer">158927728</label>
+            <label index="recipients" type="integer">158510953</label>
+            <label index="not_sent" type="integer">147407482</label>
+            <label index="sent" type="integer">133742632</label>
+            <label index="opened" type="integer">27335450</label>
+            <label index="bounced" type="integer">106508084</label>
+            <label index="links_opened" type="integer">266645565</label>
+            <label index="emails_opened" type="integer">176156044</label>
+            <label index="emails_bounced" type="integer">187899690</label>
+            <label index="started" type="integer">16926850</label>
+            <label index="planned_to_be_sent_on" type="integer">194331769</label>
+            <label index="percentage_of_opened" type="integer">37101876</label>
+            <label index="number_of_opened" type="integer">253436397</label>
+            <label index="link_id" type="integer">1753031</label>
+            <label index="no_statistics" type="integer">232360198</label>
+            <label index="status" type="integer">247806604</label>
+            <label index="recent_activity" type="integer">259844785</label>
+            <label index="errors" type="integer">99552371</label>
+            <label index="warnings" type="integer">236453302</label>
+            <label index="infos" type="integer">52879447</label>
+            <label index="newsletter_status_not_planned" type="integer">124560926</label>
+            <label index="newsletter_status_planned" type="integer">255914523</label>
+            <label index="newsletter_status_generating_emails" type="integer">35859323</label>
+            <label index="newsletter_status_sending" type="integer">141551881</label>
+            <label index="newsletter_status_was_sent" type="integer">11621586</label>
+            <label index="settings" type="integer">256864370</label>
+            <label index="advanced_settings" type="integer">266651301</label>
+            <label index="sender" type="integer">145411646</label>
+            <label index="sending" type="integer">239799339</label>
+            <label index="testing" type="integer">262579619</label>
+            <label index="testing_explanation" type="integer">40116613</label>
+            <label index="send_test_now" type="integer">162114709</label>
+            <label index="planning" type="integer">35465386</label>
+            <label index="date_start_sending" type="integer">154469676</label>
+            <label index="add_to_queue" type="integer">267969072</label>
+            <label index="flashmessage_test_maximum_recipients" type="integer">204302738</label>
+            <label index="flashmessage_test_maximum_recipients_title" type="integer">258957131</label>
+            <label index="flashmessage_test_newsletter_sent" type="integer">210914609</label>
+            <label index="flashmessage_test_newsletter_sent_title" type="integer">84175771</label>
+            <label index="flashmessage_test_newsletter_error" type="integer">258957131</label>
+            <label index="flashmessage_newsletter_queued" type="integer">134414338</label>
+            <label index="flashmessage_newsletter_queued_title" type="integer">12280817</label>
+            <label index="flashmessage_newsletter_invalid" type="integer">256314965</label>
+            <label index="unsubscribe_notification_subject" type="integer">260752590</label>
+            <label index="unsubscribe_notification_body" type="integer">150203798</label>
+            <label index="missing_fields" type="integer">20837752</label>
+            <label index="link_opened" type="integer">119397981</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="fr" type="array">
+            <label index="newsletter">Newsletter</label>
+            <label index="newsletter_validity">Newsletter validity</label>
+            <label index="validation_content_url">URL used to fetch content is %1$s</label>
+            <label index="validation_mail_too_short">Content too short. The content must be at least 200 chars long to be considered valid.</label>
+            <label index="validation_mail_contains_php_warnings">Content contains PHP Warnings. This must not reach the receivers.</label>
+            <label index="validation_mail_contains_php_errors">Content contains PHP Fatal errors. This must not reach the receivers.</label>
+            <label index="validation_mail_being_generated">Content contains &quot;wait&quot; signatures. This must not reach the receivers.</label>
+            <label index="validation_mail_contains_javascript">Your mail seems to contain JavaScript-code. This is generally considered bad style and will probably generate warnings either in your users MUAs or spamfilters. I have taken the liberty to try and remove the JavaScript-code from you mail.</label>
+            <label index="validation_mail_converted_relative_url">Relative URL for %1$s converted to absolute URL</label>
+            <label index="validation_mail_contains_linked_styles">Your mail seem to link to an external style-sheet. Your style sheet will be included in the mail, since most MUAs does not cope well on external style-sheets.</label>
+            <label index="validation_mail_contains_css_images">You have used images linked to by CSS in your mail. This will break your layout with most MUAs</label>
+            <label index="validation_mail_contains_css_classes">The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</label>
+            <label index="validation_mail_contains_css_some_property">Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</label>
+            <label index="none">none</label>
+            <label index="preview_html">Html</label>
+            <label index="preview_plain">Plain</label>
+            <label index="preview">Preview</label>
+            <label index="view">View</label>
+            <label index="newsletter_tab">Newsletter</label>
+            <label index="statistics_tab">Statistics</label>
+            <label index="overview_tab">Overview</label>
+            <label index="links_tab">Links</label>
+            <label index="emails_tab">Emails</label>
+            <label index="recipients">recipients</label>
+            <label index="not_sent">Not yet sent</label>
+            <label index="sent">Sent</label>
+            <label index="opened">Opened</label>
+            <label index="bounced">Bounced</label>
+            <label index="links_opened">clicked links</label>
+            <label index="emails_opened">emails opened</label>
+            <label index="emails_bounced">emails bounced</label>
+            <label index="started">Started sending on</label>
+            <label index="planned_to_be_sent_on">Planned to be sent on</label>
+            <label index="percentage_of_opened">% of opened</label>
+            <label index="number_of_opened"># of opened</label>
+            <label index="link_id">#</label>
+            <label index="no_statistics">No statistics available for this page.</label>
+            <label index="status">Status</label>
+            <label index="recent_activity">Recent activity</label>
+            <label index="errors">Errors</label>
+            <label index="warnings">Warnings</label>
+            <label index="infos">Infos</label>
+            <label index="newsletter_status_not_planned">This newsletter is not planned</label>
+            <label index="newsletter_status_planned">This newsletter is planned to be sent on %1$s</label>
+            <label index="newsletter_status_generating_emails">Emails for this newsletter are being generated</label>
+            <label index="newsletter_status_sending">Emails for this newsletter are being sent: %1$d/%2$d</label>
+            <label index="newsletter_status_was_sent">This newsletter was sent on %1$s</label>
+            <label index="settings">Settings</label>
+            <label index="advanced_settings">Advanced settings</label>
+            <label index="sender">Sender</label>
+            <label index="sending">Sending</label>
+            <label index="testing">Testing</label>
+            <label index="testing_explanation">&lt;p&gt;Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.&lt;/p&gt;&lt;p&gt;Also test newsletters will be ignored by default in statistics.&lt;/p&gt;</label>
+            <label index="send_test_now">Send test emails now</label>
+            <label index="planning">Planning</label>
+            <label index="date_start_sending">Date to start sending</label>
+            <label index="add_to_queue">Add to queue</label>
+            <label index="flashmessage_test_maximum_recipients">Test newsletter cannot be sent to %1$d recipients. Maximum allowed is %2$d</label>
+            <label index="flashmessage_test_maximum_recipients_title">Error while sending test newsletter</label>
+            <label index="flashmessage_test_newsletter_sent">Test newsletter has been sent.</label>
+            <label index="flashmessage_test_newsletter_sent_title">Test newsletter sent</label>
+            <label index="flashmessage_test_newsletter_error">Error while sending test newsletter</label>
+            <label index="flashmessage_newsletter_queued">Newsletter has been queued and will be sent soon.</label>
+            <label index="flashmessage_newsletter_queued_title">Newsletter queued</label>
+            <label index="flashmessage_newsletter_invalid">Error while validating newsletter</label>
+            <label index="unsubscribe_notification_subject">Newsletter unsubscription</label>
+            <label index="unsubscribe_notification_body">&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</label>
+            <label index="missing_fields">Missing fields</label>
+            <label index="link_opened">Clicked links</label>
+            <label index="message_title_no_pid_selected">No page has been selected</label>
+            <label index="message_no_pid_selected">Select a page to schedule a newsletter or display statistics about past newsletter.</label>
+            <label index="message_title_page_selected">Nothing to display on a folder</label>
+            <label index="message_page_selected">Select a regular page.</label>
+            <label index="task_send_emails_title">Send Newsletter</label>
+            <label index="task_send_emails_description">Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</label>
+            <label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
+            <label index="task_fetch_bounces_title">Fetch bounced emails</label>
+            <label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
+        </languageKey>
+    </orig_text>
 </T3locallangExt>

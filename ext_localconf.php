@@ -1,8 +1,9 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
+
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
 }
-   
+
 // Includes typoscript files
 t3lib_extMgm::addTypoScriptSetup('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/setup.txt">');
 t3lib_extMgm::addTypoScriptConstants('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:newsletter/Configuration/TypoScript/constants.txt">');
@@ -17,28 +18,25 @@ $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['newsletter_bounce'] = array
  * Configure FE plugin element "TABLE"
  */
 Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
-	'p',
-	array( // list of controller
-		'Email' => 'show, opened',
-		'Link' => 'clicked',
-		'RecipientList' => 'unsubscribe, export',
-	),
-	array( // non-cacheable controller
-		'Email' => 'show, opened, unsubscribe',
-		'Link' => 'clicked',
-		'RecipientList' => 'export',
-	)
+        $_EXTKEY, 'p', array(// list of controller
+    'Email' => 'show, opened',
+    'Link' => 'clicked',
+    'RecipientList' => 'unsubscribe, export',
+        ), array(// non-cacheable controller
+    'Email' => 'show, opened, unsubscribe',
+    'Link' => 'clicked',
+    'RecipientList' => 'export',
+        )
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_SendEmails'] = array(
-        'extension'        => $_EXTKEY,
-        'title'            => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_title',
-        'description'      => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_description',
+    'extension' => $_EXTKEY,
+    'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_title',
+    'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_send_emails_description',
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_FetchBounces'] = array(
-        'extension'        => $_EXTKEY,
-        'title'            => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_title',
-        'description'      => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_description',
+    'extension' => $_EXTKEY,
+    'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_title',
+    'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xml:task_fetch_bounces_description',
 );

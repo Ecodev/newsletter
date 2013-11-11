@@ -1,7 +1,6 @@
 <?php
 
-
-/*                                                                        *
+/* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
@@ -27,59 +26,63 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_ExtDirect_TransactionResponse extends Tx_Extbase_MVC_Web_Response {
+class Tx_Newsletter_MVC_ExtDirect_TransactionResponse extends Tx_Extbase_MVC_Web_Response
+{
 
-	/**
-	 * The Ext Direct result that will be JSON encoded
-	 *
-	 * @var mixed
-	 */
-	protected $result;
+    /**
+     * The Ext Direct result that will be JSON encoded
+     *
+     * @var mixed
+     */
+    protected $result;
 
-	/**
-	 * The Ext Direct success code. Defaults to TRUE.
-	 *
-	 * @var boolean
-	 */
-	protected $success = TRUE;
+    /**
+     * The Ext Direct success code. Defaults to TRUE.
+     *
+     * @var boolean
+     */
+    protected $success = TRUE;
 
-	/**
-	 * Setter for the transaction result.
-	 *
-	 * @param mixed $result The result of the called action
-	 * @return void
-	 */
-	public function setResult($result) {
-		$this->result = $result;
-	}
+    /**
+     * Setter for the transaction result.
+     *
+     * @param mixed $result The result of the called action
+     * @return void
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+    }
 
-	/**
-	 * Sette for success.
-	 *
-	 * @param boolean $success The success of the called action
-	 * @return void
-	 */
-	public function setSuccess($success) {
-		$this->success = $success;
-	}
+    /**
+     * Sette for success.
+     *
+     * @param boolean $success The success of the called action
+     * @return void
+     */
+    public function setSuccess($success)
+    {
+        $this->success = $success;
+    }
 
+    /**
+     * Returns the result of the transaction.
+     *
+     * @return mixed The result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
 
-	/**
-	 * Returns the result of the transaction.
-	 *
-	 * @return mixed The result
-	 */
-	public function getResult() {
-		return $this->result;
-	}
+    /**
+     * Returns the state (success/fail) of the transaction.
+     *
+     * @return boolean The success
+     */
+    public function getSuccess()
+    {
+        return $this->success;
+    }
 
-	/**
-	 * Returns the state (success/fail) of the transaction.
-	 *
-	 * @return boolean The success
-	 */
-	public function getSuccess() {
-		return $this->success;
-	}
 }
-?>

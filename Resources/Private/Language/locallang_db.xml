@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-	<meta type="array">
-		<type>database</type>
-		<description>Language labels for database tables/fields belonging to extension 'newsletter'</description>
-	</meta>
-	<data type="array">
-		<languageKey index="default" type="array">
-			<label index="tx_newsletter_domain_model_newsletter">Newsletter</label>
-			<label index="tx_newsletter_domain_model_newsletter.planned_time">Planned Time</label>
-			<label index="tx_newsletter_domain_model_newsletter.begin_time">Begin Time</label>
-			<label index="tx_newsletter_domain_model_newsletter.end_time">End Time</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition">Repetition</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_none">Do not repeat</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_daily">One day</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_weekly">One week</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_biweekly">Two weeks</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_monthly">One month</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_quarterly">Three months</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly">Six months</label>
-			<label index="tx_newsletter_domain_model_newsletter.repetition_yearly">One year</label>
-			<label index="tx_newsletter_domain_model_newsletter.plain_converter">Plain Text Converter</label>
-			<label index="tx_newsletter_domain_model_newsletter.plain_converter_template">Plain text template (&amp;type=99)</label>
-			<label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx">Lynx cli-browser</label>
-			<label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin">Builtin html converter</label>
-			<label index="tx_newsletter_domain_model_newsletter.is_test">Is Test</label>
-			<label index="tx_newsletter_domain_model_newsletter.attachments">Attachments</label>
-			<label index="tx_newsletter_domain_model_newsletter.sender_name">Sender Name</label>
-			<label index="tx_newsletter_domain_model_newsletter.sender_email">Sender Email</label>
-			<label index="tx_newsletter_domain_model_newsletter.inject_open_spy">Detect opened emails</label>
-			<label index="tx_newsletter_domain_model_newsletter.inject_links_spy">Detect clicked links</label>
-			<label index="tx_newsletter_domain_model_newsletter.bounce_account">Bounce Account</label>
-			<label index="tx_newsletter_domain_model_newsletter.recipient_list">Recipient List</label>
-			<label index="tx_newsletter_domain_model_bounceaccount">Bounce Account</label>
-			<label index="tx_newsletter_domain_model_bounceaccount.email">Email</label>
-			<label index="tx_newsletter_domain_model_bounceaccount.server">Server</label>
-			<label index="tx_newsletter_domain_model_bounceaccount.protocol">Protocol</label>
-			<label index="tx_newsletter_domain_model_bounceaccount.username">Username</label>
-			<label index="tx_newsletter_domain_model_bounceaccount.password">Password</label>
-			<label index="tx_newsletter_domain_model_recipientlist">Recipient List</label>
-			<label index="tx_newsletter_domain_model_recipientlist.title">Title</label>
-			<label index="tx_newsletter_domain_model_recipientlist.plain_only">Plain Only</label>
-			<label index="tx_newsletter_domain_model_recipientlist.lang">Lang</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type">Type</label>
-			<label index="tx_newsletter_domain_model_recipientlist.be_users">Be Users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.fe_groups">Fe Groups</label>
-			<label index="tx_newsletter_domain_model_recipientlist.fe_pages">Fe Pages</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_url">CSV URL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_separator">CSV Separator</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_fields">CSV Fields</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_filename">CSV Filename</label>
-			<label index="tx_newsletter_domain_model_recipientlist.csv_values">CSV Values</label>
-			<label index="tx_newsletter_domain_model_recipientlist.sql_statement">SQL to select recipients</label>
-			<label index="tx_newsletter_domain_model_recipientlist.sql_register_bounce">SQL to register a bounced email</label>
-			<label index="tx_newsletter_domain_model_recipientlist.sql_register_open">SQL to register an opened email</label>
-			<label index="tx_newsletter_domain_model_recipientlist.sql_register_click">SQL to register a link clicked</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_url">Html URL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_be_users">BE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_fe_groups">FE-groups with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_fe_pages">Pages with FE-users</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_sql">SQL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_csv_file">CSV file</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_csv_list">CSV list</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_csv_url">CSV URL</label>
-			<label index="tx_newsletter_domain_model_recipientlist.type_html">HTML</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto">Email links with &quot;mailto:&quot;</label>
-			<label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_regex">Match email addresses</label>
-			<label index="tx_newsletter_domain_model_email">Email</label>
-			<label index="tx_newsletter_domain_model_email.begin_time">Start Time</label>
-			<label index="tx_newsletter_domain_model_email.end_time">End Time</label>
-			<label index="tx_newsletter_domain_model_email.recipient_address">Recipient Address</label>
-			<label index="tx_newsletter_domain_model_email.recipient_data">Recipient Data</label>
-			<label index="tx_newsletter_domain_model_email.open_time">Open time</label>
-			<label index="tx_newsletter_domain_model_email.bounce_time">Bounce time</label>
-			<label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
-			<label index="tx_newsletter_domain_model_email.unsubscribed">Unsubscribed</label>
-			<label index="tx_newsletter_domain_model_link">Link</label>
-			<label index="tx_newsletter_domain_model_link.url">URL</label>
-			<label index="tx_newsletter_domain_model_link.opened_count">Opened count</label>
-			<label index="tx_newsletter_domain_model_link.newsletter">Newsletter</label>
-		</languageKey>
-		<languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_db.xml</languageKey>
-	</data>
+    <meta type="array">
+        <type>database</type>
+        <description>Language labels for database tables/fields belonging to extension 'newsletter'</description>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_newsletter_domain_model_newsletter">Newsletter</label>
+            <label index="tx_newsletter_domain_model_newsletter.planned_time">Planned Time</label>
+            <label index="tx_newsletter_domain_model_newsletter.begin_time">Begin Time</label>
+            <label index="tx_newsletter_domain_model_newsletter.end_time">End Time</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition">Repetition</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_none">Do not repeat</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_daily">One day</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_weekly">One week</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_biweekly">Two weeks</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_monthly">One month</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_quarterly">Three months</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly">Six months</label>
+            <label index="tx_newsletter_domain_model_newsletter.repetition_yearly">One year</label>
+            <label index="tx_newsletter_domain_model_newsletter.plain_converter">Plain Text Converter</label>
+            <label index="tx_newsletter_domain_model_newsletter.plain_converter_template">Plain text template (&amp;type=99)</label>
+            <label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx">Lynx cli-browser</label>
+            <label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin">Builtin html converter</label>
+            <label index="tx_newsletter_domain_model_newsletter.is_test">Is Test</label>
+            <label index="tx_newsletter_domain_model_newsletter.attachments">Attachments</label>
+            <label index="tx_newsletter_domain_model_newsletter.sender_name">Sender Name</label>
+            <label index="tx_newsletter_domain_model_newsletter.sender_email">Sender Email</label>
+            <label index="tx_newsletter_domain_model_newsletter.inject_open_spy">Detect opened emails</label>
+            <label index="tx_newsletter_domain_model_newsletter.inject_links_spy">Detect clicked links</label>
+            <label index="tx_newsletter_domain_model_newsletter.bounce_account">Bounce Account</label>
+            <label index="tx_newsletter_domain_model_newsletter.recipient_list">Recipient List</label>
+            <label index="tx_newsletter_domain_model_bounceaccount">Bounce Account</label>
+            <label index="tx_newsletter_domain_model_bounceaccount.email">Email</label>
+            <label index="tx_newsletter_domain_model_bounceaccount.server">Server</label>
+            <label index="tx_newsletter_domain_model_bounceaccount.protocol">Protocol</label>
+            <label index="tx_newsletter_domain_model_bounceaccount.username">Username</label>
+            <label index="tx_newsletter_domain_model_bounceaccount.password">Password</label>
+            <label index="tx_newsletter_domain_model_recipientlist">Recipient List</label>
+            <label index="tx_newsletter_domain_model_recipientlist.title">Title</label>
+            <label index="tx_newsletter_domain_model_recipientlist.plain_only">Plain Only</label>
+            <label index="tx_newsletter_domain_model_recipientlist.lang">Lang</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type">Type</label>
+            <label index="tx_newsletter_domain_model_recipientlist.be_users">Be Users</label>
+            <label index="tx_newsletter_domain_model_recipientlist.fe_groups">Fe Groups</label>
+            <label index="tx_newsletter_domain_model_recipientlist.fe_pages">Fe Pages</label>
+            <label index="tx_newsletter_domain_model_recipientlist.csv_url">CSV URL</label>
+            <label index="tx_newsletter_domain_model_recipientlist.csv_separator">CSV Separator</label>
+            <label index="tx_newsletter_domain_model_recipientlist.csv_fields">CSV Fields</label>
+            <label index="tx_newsletter_domain_model_recipientlist.csv_filename">CSV Filename</label>
+            <label index="tx_newsletter_domain_model_recipientlist.csv_values">CSV Values</label>
+            <label index="tx_newsletter_domain_model_recipientlist.sql_statement">SQL to select recipients</label>
+            <label index="tx_newsletter_domain_model_recipientlist.sql_register_bounce">SQL to register a bounced email</label>
+            <label index="tx_newsletter_domain_model_recipientlist.sql_register_open">SQL to register an opened email</label>
+            <label index="tx_newsletter_domain_model_recipientlist.sql_register_click">SQL to register a link clicked</label>
+            <label index="tx_newsletter_domain_model_recipientlist.html_url">Html URL</label>
+            <label index="tx_newsletter_domain_model_recipientlist.html_fetch_type">Html Fetch Type</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_be_users">BE-users</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_fe_groups">FE-groups with FE-users</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_fe_pages">Pages with FE-users</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_sql">SQL</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_csv_file">CSV file</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_csv_list">CSV list</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_csv_url">CSV URL</label>
+            <label index="tx_newsletter_domain_model_recipientlist.type_html">HTML</label>
+            <label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto">Email links with &quot;mailto:&quot;</label>
+            <label index="tx_newsletter_domain_model_recipientlist.html_fetch_type_regex">Match email addresses</label>
+            <label index="tx_newsletter_domain_model_email">Email</label>
+            <label index="tx_newsletter_domain_model_email.begin_time">Start Time</label>
+            <label index="tx_newsletter_domain_model_email.end_time">End Time</label>
+            <label index="tx_newsletter_domain_model_email.recipient_address">Recipient Address</label>
+            <label index="tx_newsletter_domain_model_email.recipient_data">Recipient Data</label>
+            <label index="tx_newsletter_domain_model_email.open_time">Open time</label>
+            <label index="tx_newsletter_domain_model_email.bounce_time">Bounce time</label>
+            <label index="tx_newsletter_domain_model_email.newsletter">Newsletter</label>
+            <label index="tx_newsletter_domain_model_email.unsubscribed">Unsubscribed</label>
+            <label index="tx_newsletter_domain_model_link">Link</label>
+            <label index="tx_newsletter_domain_model_link.url">URL</label>
+            <label index="tx_newsletter_domain_model_link.opened_count">Opened count</label>
+            <label index="tx_newsletter_domain_model_link.newsletter">Newsletter</label>
+        </languageKey>
+        <languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_db.xml</languageKey>
+    </data>
 </T3locallang>

@@ -1,27 +1,27 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2012
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
 
+/* * *************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2012
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ * ************************************************************* */
 
 /**
  * Newsletter represents a page to be sent to a specific time to several recipients.
@@ -29,591 +29,623 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_AbstractEntity
+{
 
-	/**
-	 * When the newsletter will start sending emails
-	 *
-	 * @var DateTime $plannedTime
-	 * @validate NotEmpty
-	 */
-	protected $plannedTime;
+    /**
+     * When the newsletter will start sending emails
+     *
+     * @var DateTime $plannedTime
+     * @validate NotEmpty
+     */
+    protected $plannedTime;
 
-	/**
-	 * beginTime
-	 *
-	 * @var DateTime $beginTime
-	 */
-	protected $beginTime;
+    /**
+     * beginTime
+     *
+     * @var DateTime $beginTime
+     */
+    protected $beginTime;
 
-	/**
-	 * endTime
-	 *
-	 * @var DateTime $endTime
-	 */
-	protected $endTime;
+    /**
+     * endTime
+     *
+     * @var DateTime $endTime
+     */
+    protected $endTime;
 
-	/**
-	 * 0-7 values to indicates when this newsletter will repeat
-	 *
-	 * @var integer $repetition
-	 */
-	protected $repetition;
+    /**
+     * 0-7 values to indicates when this newsletter will repeat
+     *
+     * @var integer $repetition
+     */
+    protected $repetition;
 
-	/**
-	 * Tool used to convert to plain text
-	 *
-	 * @var string $plainConverter
-	 */
-	protected $plainConverter;
+    /**
+     * Tool used to convert to plain text
+     *
+     * @var string $plainConverter
+     */
+    protected $plainConverter;
 
-	/**
-	 * Whether this newsletter is for test purpose. If it is it will be ignored in statistics
-	 *
-	 * @var boolean $isTest
-	 * @validate NotEmpty
-	 */
-	protected $isTest;
+    /**
+     * Whether this newsletter is for test purpose. If it is it will be ignored in statistics
+     *
+     * @var boolean $isTest
+     * @validate NotEmpty
+     */
+    protected $isTest;
 
-	/**
-	 * List of files to be attached (comma separated list
-	 *
-	 * @var string $attachments
-	 */
-	protected $attachments;
+    /**
+     * List of files to be attached (comma separated list
+     *
+     * @var string $attachments
+     */
+    protected $attachments;
 
-	/**
-	 * The name of the newsletter sender
-	 *
-	 * @var string $senderName
-	 * @validate NotEmpty
-	 */
-	protected $senderName;
+    /**
+     * The name of the newsletter sender
+     *
+     * @var string $senderName
+     * @validate NotEmpty
+     */
+    protected $senderName;
 
-	/**
-	 * The email of the newsletter sender
-	 *
-	 * @var string $senderEmail
-	 * @validate NotEmpty
-	 */
-	protected $senderEmail;
+    /**
+     * The email of the newsletter sender
+     *
+     * @var string $senderEmail
+     * @validate NotEmpty
+     */
+    protected $senderEmail;
 
-	/**
-	 * injectOpenSpy
-	 *
-	 * @var boolean $injectOpenSpy
-	 */
-	protected $injectOpenSpy;
+    /**
+     * injectOpenSpy
+     *
+     * @var boolean $injectOpenSpy
+     */
+    protected $injectOpenSpy;
 
-	/**
-	 * injectLinksSpy
-	 *
-	 * @var boolean $injectLinksSpy
-	 */
-	protected $injectLinksSpy;
+    /**
+     * injectLinksSpy
+     *
+     * @var boolean $injectLinksSpy
+     */
+    protected $injectLinksSpy;
 
-	/**
-	 * bounceAccount
-	 * @lazy
-	 * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
-	 */
-	protected $bounceAccount;
+    /**
+     * bounceAccount
+     * @lazy
+     * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
+     */
+    protected $bounceAccount;
 
-	/**
-	 * UID of the bounce account. Only exist for ease of use with ExtJS
-	 * @var integer $uidBounceAccount
-	 */
-	protected $uidBounceAccount;
+    /**
+     * UID of the bounce account. Only exist for ease of use with ExtJS
+     * @var integer $uidBounceAccount
+     */
+    protected $uidBounceAccount;
 
-	/**
-	 * recipientList
-	 * @lazy
-	 * @var Tx_Newsletter_Domain_Model_RecipientList $recipientList
-	 */
-	protected $recipientList;
+    /**
+     * recipientList
+     * @lazy
+     * @var Tx_Newsletter_Domain_Model_RecipientList $recipientList
+     */
+    protected $recipientList;
 
-	/**
-	 * UID of the bounce account. Only exist for ease of use with ExtJS
-	 * @var integer $uidRecipientList
-	 */
-	protected $uidRecipientList;
-	
-	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
-	 */
-	protected $objectManager;
-	
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		// Set default values for new newsletter
-		$this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
-		$this->setRepetition(0);
-		$this->setPlannedTime(new DateTime());
-		$this->setInjectOpenSpy(true);
-		$this->setInjectLinksSpy(true);
-	}
-	
-	/**
-	 * Returns the ObjectManager
-	 * @return Tx_Extbase_Object_ObjectManagerInterface
-	 */
-	protected function getObjectManager()
-	{
-		if (!$this->objectManager)
-			$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		
-		return $this->objectManager;
-	}
+    /**
+     * UID of the bounce account. Only exist for ease of use with ExtJS
+     * @var integer $uidRecipientList
+     */
+    protected $uidRecipientList;
 
-	/**
-	 * Setter for uid
-	 * @param integer $uid
-	 * @return void
-	 */
-	public function setUid($uid)
-	{
-		$this->uid = $uid;
-	}
+    /**
+     * @var Tx_Extbase_Object_ObjectManagerInterface
+     */
+    protected $objectManager;
 
-	/**
-	 * Setter for plannedTime
-	 *
-	 * @param DateTime $plannedTime When the newsletter will start sending emails
-	 * @return void
-	 */
-	public function setPlannedTime(DateTime $plannedTime) {
-		$this->plannedTime = $plannedTime;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        // Set default values for new newsletter
+        $this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
+        $this->setRepetition(0);
+        $this->setPlannedTime(new DateTime());
+        $this->setInjectOpenSpy(true);
+        $this->setInjectLinksSpy(true);
+    }
 
-	/**
-	 * Getter for plannedTime
-	 *
-	 * @return DateTime When the newsletter will start sending emails
-	 */
-	public function getPlannedTime() {
-		return $this->plannedTime;
-	}
+    /**
+     * Returns the ObjectManager
+     * @return Tx_Extbase_Object_ObjectManagerInterface
+     */
+    protected function getObjectManager()
+    {
+        if (!$this->objectManager)
+            $this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 
-	/**
-	 * Setter for beginTime
-	 *
-	 * @param DateTime $beginTime beginTime
-	 * @return void
-	 */
-	public function setBeginTime(DateTime $beginTime) {
-		$this->beginTime = $beginTime;
-	}
+        return $this->objectManager;
+    }
 
-	/**
-	 * Getter for beginTime
-	 *
-	 * @return DateTime beginTime
-	 */
-	public function getBeginTime() {
-		return $this->beginTime;
-	}
+    /**
+     * Setter for uid
+     * @param integer $uid
+     * @return void
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+    }
 
-	/**
-	 * Setter for endTime
-	 *
-	 * @param DateTime $endTime endTime
-	 * @return void
-	 */
-	public function setEndTime(DateTime $endTime) {
-		$this->endTime = $endTime;
-	}
+    /**
+     * Setter for plannedTime
+     *
+     * @param DateTime $plannedTime When the newsletter will start sending emails
+     * @return void
+     */
+    public function setPlannedTime(DateTime $plannedTime)
+    {
+        $this->plannedTime = $plannedTime;
+    }
 
-	/**
-	 * Getter for endTime
-	 *
-	 * @return DateTime endTime
-	 */
-	public function getEndTime() {
-		return $this->endTime;
-	}
+    /**
+     * Getter for plannedTime
+     *
+     * @return DateTime When the newsletter will start sending emails
+     */
+    public function getPlannedTime()
+    {
+        return $this->plannedTime;
+    }
 
-	/**
-	 * Setter for repetition
-	 *
-	 * @param integer $repetition 0-7 values to indicates when this newsletter will repeat
-	 * @return void
-	 */
-	public function setRepetition($repetition) {
-		$this->repetition = $repetition;
-	}
+    /**
+     * Setter for beginTime
+     *
+     * @param DateTime $beginTime beginTime
+     * @return void
+     */
+    public function setBeginTime(DateTime $beginTime)
+    {
+        $this->beginTime = $beginTime;
+    }
 
-	/**
-	 * Getter for repetition
-	 *
-	 * @return integer 0-7 values to indicates when this newsletter will repeat
-	 */
-	public function getRepetition() {
-		return $this->repetition;
-	}
+    /**
+     * Getter for beginTime
+     *
+     * @return DateTime beginTime
+     */
+    public function getBeginTime()
+    {
+        return $this->beginTime;
+    }
 
-	/**
-	 * Setter for plainConverter
-	 *
-	 * @param string $plainConverter Tool used to convert to plain text
-	 * @return void
-	 */
-	public function setPlainConverter($plainConverter) {
-		$this->plainConverter = $plainConverter;
-	}
+    /**
+     * Setter for endTime
+     *
+     * @param DateTime $endTime endTime
+     * @return void
+     */
+    public function setEndTime(DateTime $endTime)
+    {
+        $this->endTime = $endTime;
+    }
 
-	/**
-	 * Getter for plainConverter
-	 *
-	 * @return string Tool used to convert to plain text
-	 */
-	public function getPlainConverter() {
-		return $this->plainConverter;
-	}
+    /**
+     * Getter for endTime
+     *
+     * @return DateTime endTime
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
 
-	/**
-	 * Returns an instance of plain converter
-	 * @throws Exception
-	 * @return Tx_Newsletter_Domain_Model_IPlainConverter
-	 */
-	public function getPlainConverterInstance()
-	{
-		$class = $this->getPlainConverter();
-		if (!class_exists($class))
-			throw new Exception("Plain text converter of class '$class' not found");
+    /**
+     * Setter for repetition
+     *
+     * @param integer $repetition 0-7 values to indicates when this newsletter will repeat
+     * @return void
+     */
+    public function setRepetition($repetition)
+    {
+        $this->repetition = $repetition;
+    }
 
-		$converter = new $class();
+    /**
+     * Getter for repetition
+     *
+     * @return integer 0-7 values to indicates when this newsletter will repeat
+     */
+    public function getRepetition()
+    {
+        return $this->repetition;
+    }
 
-		if (!($converter instanceof Tx_Newsletter_Domain_Model_IPlainConverter))
-			throw new Exception("$class does not implement Tx_Newsletter_Domain_Model_IPlainConverter");
+    /**
+     * Setter for plainConverter
+     *
+     * @param string $plainConverter Tool used to convert to plain text
+     * @return void
+     */
+    public function setPlainConverter($plainConverter)
+    {
+        $this->plainConverter = $plainConverter;
+    }
 
-		return $converter;
-	}
+    /**
+     * Getter for plainConverter
+     *
+     * @return string Tool used to convert to plain text
+     */
+    public function getPlainConverter()
+    {
+        return $this->plainConverter;
+    }
 
-	/**
-	 * Setter for isTest
-	 *
-	 * @param boolean $isTest Whether this newsletter is for test purpose. If it is it will be ignored in statistics
-	 * @return void
-	 */
-	public function setIsTest($isTest) {
-		$this->isTest = $isTest;
-	}
+    /**
+     * Returns an instance of plain converter
+     * @throws Exception
+     * @return Tx_Newsletter_Domain_Model_IPlainConverter
+     */
+    public function getPlainConverterInstance()
+    {
+        $class = $this->getPlainConverter();
+        if (!class_exists($class))
+            throw new Exception("Plain text converter of class '$class' not found");
 
-	/**
-	 * Getter for isTest
-	 *
-	 * @return boolean Whether this newsletter is for test purpose. If it is it will be ignored in statistics
-	 */
-	public function getIsTest() {
-		return $this->isTest;
-	}
+        $converter = new $class();
 
-	/**
-	 * Returns the state of isTest
-	 *
-	 * @return boolean the state of isTest
-	 */
-	public function isIsTest() {
-		return $this->getIsTest();
-	}
+        if (!($converter instanceof Tx_Newsletter_Domain_Model_IPlainConverter))
+            throw new Exception("$class does not implement Tx_Newsletter_Domain_Model_IPlainConverter");
 
-	/**
-	 * Setter for attachments
-	 *
-	 * @param string $attachments List of files to be attached (comma separated list
-	 * @return void
-	 */
-	public function setAttachments($attachments) {
-		$this->attachments = join(',', $attachments);
-	}
+        return $converter;
+    }
 
-	/**
-	 * Getter for attachments
-	 *
-	 * @return string List of files to be attached (comma separated list
-	 */
-	public function getAttachments() {
-		return explode(',', $this->attachments);
-	}
+    /**
+     * Setter for isTest
+     *
+     * @param boolean $isTest Whether this newsletter is for test purpose. If it is it will be ignored in statistics
+     * @return void
+     */
+    public function setIsTest($isTest)
+    {
+        $this->isTest = $isTest;
+    }
 
-	/**
-	 * Setter for senderName
-	 *
-	 * @param string $senderName The name of the newsletter sender
-	 * @return void
-	 */
-	public function setSenderName($senderName) {
-		$this->senderName = $senderName;
-	}
+    /**
+     * Getter for isTest
+     *
+     * @return boolean Whether this newsletter is for test purpose. If it is it will be ignored in statistics
+     */
+    public function getIsTest()
+    {
+        return $this->isTest;
+    }
 
-	/**
-	 * Gets the correct sendername for a newsletter.
-	 * This is either:
-	 * The sender name defined on the newsletter record.
-	 * or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
-	 * or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
-	 *
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return string The name of the newsletter sender
-	 */
-	public function getSenderName() {
-		global $TYPO3_DB;
+    /**
+     * Returns the state of isTest
+     *
+     * @return boolean the state of isTest
+     */
+    public function isIsTest()
+    {
+        return $this->getIsTest();
+    }
 
-		// Return the senderName defined on the newsletter
-		if ($this->senderName) {
-			return $this->senderName;
-		}
+    /**
+     * Setter for attachments
+     *
+     * @param string $attachments List of files to be attached (comma separated list
+     * @return void
+     */
+    public function setAttachments($attachments)
+    {
+        $this->attachments = join(',', $attachments);
+    }
 
-		// Return the senderName defined in extension configuration
-		$sender = Tx_Newsletter_Tools::confParam('sender_name');
-		if ($sender == 'user')
-		{
-			// Use the page-owner as user
-			$rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName
+    /**
+     * Getter for attachments
+     *
+     * @return string List of files to be attached (comma separated list
+     */
+    public function getAttachments()
+    {
+        return explode(',', $this->attachments);
+    }
+
+    /**
+     * Setter for senderName
+     *
+     * @param string $senderName The name of the newsletter sender
+     * @return void
+     */
+    public function setSenderName($senderName)
+    {
+        $this->senderName = $senderName;
+    }
+
+    /**
+     * Gets the correct sendername for a newsletter.
+     * This is either:
+     * The sender name defined on the newsletter record.
+     * or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
+     * or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
+     *
+     * @global t3lib_DB $TYPO3_DB
+     * @return string The name of the newsletter sender
+     */
+    public function getSenderName()
+    {
+        global $TYPO3_DB;
+
+        // Return the senderName defined on the newsletter
+        if ($this->senderName) {
+            return $this->senderName;
+        }
+
+        // Return the senderName defined in extension configuration
+        $sender = Tx_Newsletter_Tools::confParam('sender_name');
+        if ($sender == 'user') {
+            // Use the page-owner as user
+            $rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName
 							  FROM be_users
 							  LEFT JOIN pages ON be_users.uid = pages.perms_userid
 							  WHERE pages.uid = $this->pid");
 
-			list($sender) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
-			if ($sender) {
-				return $sender;
-			}
-		}
-		// Returns the name as defined in configuration
-		elseif ($sender)
-		{
-			return $sender;
-		}
+            list($sender) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
+            if ($sender) {
+                return $sender;
+            }
+        }
+        // Returns the name as defined in configuration
+        elseif ($sender) {
+            return $sender;
+        }
 
-		// If none of above, just use the sitename
-		return $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
-	}
+        // If none of above, just use the sitename
+        return $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
+    }
 
-	/**
-	 * Setter for senderEmail
-	 *
-	 * @param string $senderEmail The email of the newsletter sender
-	 * @return void
-	 */
-	public function setSenderEmail($senderEmail) {
-		$this->senderEmail = $senderEmail;
-	}
+    /**
+     * Setter for senderEmail
+     *
+     * @param string $senderEmail The email of the newsletter sender
+     * @return void
+     */
+    public function setSenderEmail($senderEmail)
+    {
+        $this->senderEmail = $senderEmail;
+    }
 
-	/**
-	 * Gets the correct sender email address for a newsletter.
-	 * This is either:
-	 * The sender email address defined on the page record.
-	 * or the email address (if any) of the be_user owning the page.
-	 * or the email address defined in extConf
-	 * or the guessed email address of the user running the this process.
-	 * or the no-reply@$_SERVER['HTTP_HOST'].
-	 *
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return string The email of the newsletter sender
-	 */
-	public function getSenderEmail() {
-		global $TYPO3_DB;
+    /**
+     * Gets the correct sender email address for a newsletter.
+     * This is either:
+     * The sender email address defined on the page record.
+     * or the email address (if any) of the be_user owning the page.
+     * or the email address defined in extConf
+     * or the guessed email address of the user running the this process.
+     * or the no-reply@$_SERVER['HTTP_HOST'].
+     *
+     * @global t3lib_DB $TYPO3_DB
+     * @return string The email of the newsletter sender
+     */
+    public function getSenderEmail()
+    {
+        global $TYPO3_DB;
 
-		/* The sender defined on the page? */
-		if (t3lib_div::validEmail($this->senderEmail)) {
-			return $this->senderEmail;
-		}
+        /* The sender defined on the page? */
+        if (t3lib_div::validEmail($this->senderEmail)) {
+            return $this->senderEmail;
+        }
 
-		/* Anything in typo3_conf_vars? */
-		$email = Tx_Newsletter_Tools::confParam('sender_email');
-		if ($email == 'user') {
-			/* Use the page-owner as user */
-			$rs = $TYPO3_DB->sql_query("SELECT email
+        /* Anything in typo3_conf_vars? */
+        $email = Tx_Newsletter_Tools::confParam('sender_email');
+        if ($email == 'user') {
+            /* Use the page-owner as user */
+            $rs = $TYPO3_DB->sql_query("SELECT email
 			FROM be_users bu
 			LEFT JOIN pages p ON bu.uid = p.perms_userid
 			WHERE p.uid = $this->pid");
 
-			list($email) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
-			if (t3lib_div::validEmail($email)) {
-				return $email;
-			}
-		}
+            list($email) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
+            if (t3lib_div::validEmail($email)) {
+                return $email;
+            }
+        }
 
-		/* Maybe it was a hardcoded email address? */
-		if (t3lib_div::validEmail($email)) {
-			return $email;
-		}
+        /* Maybe it was a hardcoded email address? */
+        if (t3lib_div::validEmail($email)) {
+            return $email;
+        }
 
-		/* If this did not yield an email address, try to use the system-user */
-		if( ini_get('safe_mode') || TYPO3_OS == 'WIN'){
-			return  "no-reply@".$_SERVER['HTTP_HOST'];
-		}
+        /* If this did not yield an email address, try to use the system-user */
+        if (ini_get('safe_mode') || TYPO3_OS == 'WIN') {
+            return "no-reply@" . $_SERVER['HTTP_HOST'];
+        }
 
-		return  trim(exec('whoami')).'@'.trim(exec('hostname'));
-	}
+        return trim(exec('whoami')) . '@' . trim(exec('hostname'));
+    }
 
-	/**
-	 * Setter for injectOpenSpy
-	 *
-	 * @param boolean $injectOpenSpy injectOpenSpy
-	 * @return void
-	 */
-	public function setInjectOpenSpy($injectOpenSpy) {
-		$this->injectOpenSpy = $injectOpenSpy;
-	}
+    /**
+     * Setter for injectOpenSpy
+     *
+     * @param boolean $injectOpenSpy injectOpenSpy
+     * @return void
+     */
+    public function setInjectOpenSpy($injectOpenSpy)
+    {
+        $this->injectOpenSpy = $injectOpenSpy;
+    }
 
-	/**
-	 * Getter for injectOpenSpy
-	 *
-	 * @return boolean injectOpenSpy
-	 */
-	public function getInjectOpenSpy() {
-		return $this->injectOpenSpy;
-	}
+    /**
+     * Getter for injectOpenSpy
+     *
+     * @return boolean injectOpenSpy
+     */
+    public function getInjectOpenSpy()
+    {
+        return $this->injectOpenSpy;
+    }
 
-	/**
-	 * Returns the state of injectOpenSpy
-	 *
-	 * @return boolean the state of injectOpenSpy
-	 */
-	public function isInjectOpenSpy() {
-		return $this->getInjectOpenSpy();
-	}
+    /**
+     * Returns the state of injectOpenSpy
+     *
+     * @return boolean the state of injectOpenSpy
+     */
+    public function isInjectOpenSpy()
+    {
+        return $this->getInjectOpenSpy();
+    }
 
-	/**
-	 * Setter for injectLinksSpy
-	 *
-	 * @param boolean $injectLinksSpy injectLinksSpy
-	 * @return void
-	 */
-	public function setInjectLinksSpy($injectLinksSpy) {
-		$this->injectLinksSpy = $injectLinksSpy;
-	}
+    /**
+     * Setter for injectLinksSpy
+     *
+     * @param boolean $injectLinksSpy injectLinksSpy
+     * @return void
+     */
+    public function setInjectLinksSpy($injectLinksSpy)
+    {
+        $this->injectLinksSpy = $injectLinksSpy;
+    }
 
-	/**
-	 * Getter for injectLinksSpy
-	 *
-	 * @return boolean injectLinksSpy
-	 */
-	public function getInjectLinksSpy() {
-		return $this->injectLinksSpy;
-	}
+    /**
+     * Getter for injectLinksSpy
+     *
+     * @return boolean injectLinksSpy
+     */
+    public function getInjectLinksSpy()
+    {
+        return $this->injectLinksSpy;
+    }
 
-	/**
-	 * Returns the state of injectLinksSpy
-	 *
-	 * @return boolean the state of injectLinksSpy
-	 */
-	public function isInjectLinksSpy() {
-		return $this->getInjectLinksSpy();
-	}
+    /**
+     * Returns the state of injectLinksSpy
+     *
+     * @return boolean the state of injectLinksSpy
+     */
+    public function isInjectLinksSpy()
+    {
+        return $this->getInjectLinksSpy();
+    }
 
-	/**
-	 * Setter for bounceAccount
-	 *
-	 * @param Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount bounceAccount
-	 * @return void
-	 */
-	public function setBounceAccount(Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount = null) {
-		$this->bounceAccount = $bounceAccount;
-	}
+    /**
+     * Setter for bounceAccount
+     *
+     * @param Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount bounceAccount
+     * @return void
+     */
+    public function setBounceAccount(Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount = null)
+    {
+        $this->bounceAccount = $bounceAccount;
+    }
 
-	/**
-	 * Getter for bounceAccount's UID
-	 *
-	 * @return integer uidBounceAccount
-	 */
-	public function getUidBounceAccount() {
-		$bounceAccount = $this->getBounceAccount();
-		if ($bounceAccount)
-			return $bounceAccount->getUid();
-		else
-			return null;
-	}
+    /**
+     * Getter for bounceAccount's UID
+     *
+     * @return integer uidBounceAccount
+     */
+    public function getUidBounceAccount()
+    {
+        $bounceAccount = $this->getBounceAccount();
+        if ($bounceAccount)
+            return $bounceAccount->getUid();
+        else
+            return null;
+    }
 
-	/**
-	 * Setter for bounceAccount's UID
-	 *
-	 * @param integer $uidBounceAccount
-	 * @return void
-	 */
-	public function setUidBounceAccount($uidBounceAccount = null) {
-		$bounceAccountRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
-		$bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
-		$this->setBounceAccount($bounceAccount);
-	}
+    /**
+     * Setter for bounceAccount's UID
+     *
+     * @param integer $uidBounceAccount
+     * @return void
+     */
+    public function setUidBounceAccount($uidBounceAccount = null)
+    {
+        $bounceAccountRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+        $bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
+        $this->setBounceAccount($bounceAccount);
+    }
 
-	/**
-	 * Getter for bounceAccount
-	 *
-	 * @return Tx_Newsletter_Domain_Model_BounceAccount bounceAccount
-	 */
-	public function getBounceAccount() {
-		return $this->bounceAccount;
-	}
+    /**
+     * Getter for bounceAccount
+     *
+     * @return Tx_Newsletter_Domain_Model_BounceAccount bounceAccount
+     */
+    public function getBounceAccount()
+    {
+        return $this->bounceAccount;
+    }
 
-	/**
-	 * Setter for recipientList
-	 *
-	 * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList recipientList
-	 * @return void
-	 */
-	public function setRecipientList(Tx_Newsletter_Domain_Model_RecipientList $recipientList) {
-		$this->recipientList = $recipientList;
-	}
+    /**
+     * Setter for recipientList
+     *
+     * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList recipientList
+     * @return void
+     */
+    public function setRecipientList(Tx_Newsletter_Domain_Model_RecipientList $recipientList)
+    {
+        $this->recipientList = $recipientList;
+    }
 
-	/**
-	 * Getter for recipientList
-	 *
-	 * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
-	 */
-	public function getRecipientList() {
-		return $this->recipientList;
-	}
+    /**
+     * Getter for recipientList
+     *
+     * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
+     */
+    public function getRecipientList()
+    {
+        return $this->recipientList;
+    }
 
-	/**
-	 * Getter for recipientList's UID
-	 *
-	 * @return integer uidRecipientList
-	 */
-	public function getUidRecipientList() {
-		$recipientList = $this->getRecipientList();
-		if ($recipientList)
-			return $recipientList->getUid();
-		else
-			return null;
-	}
+    /**
+     * Getter for recipientList's UID
+     *
+     * @return integer uidRecipientList
+     */
+    public function getUidRecipientList()
+    {
+        $recipientList = $this->getRecipientList();
+        if ($recipientList)
+            return $recipientList->getUid();
+        else
+            return null;
+    }
 
-	/**
-	 * Setter for recipientList's UID
-	 *
-	 * @param integer $uidRecipientList
-	 * @return void
-	 */
-	public function setUidRecipientList($uidRecipientList) {
-		$recipientListRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
-		$recipientList = $recipientListRepository->findByUid($uidRecipientList);
-		$this->setRecipientList($recipientList);
-	}
+    /**
+     * Setter for recipientList's UID
+     *
+     * @param integer $uidRecipientList
+     * @return void
+     */
+    public function setUidRecipientList($uidRecipientList)
+    {
+        $recipientListRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+        $recipientList = $recipientListRepository->findByUid($uidRecipientList);
+        $this->setRecipientList($recipientList);
+    }
 
-	/**
-	 * Function to fetch the proper domain from which to fetch content for newsletter.
-	 * This is either a sys_domain record from the page tree or the fetch_path property.
-	 *
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return string Correct domain.
-	 */
-	public function getDomain()
-	{
-		global $TYPO3_DB;
+    /**
+     * Function to fetch the proper domain from which to fetch content for newsletter.
+     * This is either a sys_domain record from the page tree or the fetch_path property.
+     *
+     * @global t3lib_DB $TYPO3_DB
+     * @return string Correct domain.
+     */
+    public function getDomain()
+    {
+        global $TYPO3_DB;
 
-		// Is anything hardcoded from TYPO3_CONF_VARS ?
-		$domain = Tx_Newsletter_Tools::confParam('fetch_path');
+        // Is anything hardcoded from TYPO3_CONF_VARS ?
+        $domain = Tx_Newsletter_Tools::confParam('fetch_path');
 
-		// Else we try to resolve a domain in page root line
-		if (!$domain)
-		{
-			$pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
-			foreach ($pids as $page) {
-				/* Domains */
-				$rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
+        // Else we try to resolve a domain in page root line
+        if (!$domain) {
+            $pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
+            foreach ($pids as $page) {
+                /* Domains */
+                $rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
 								INNER JOIN pages ON sys_domain.pid = pages.uid
 								WHERE NOT sys_domain.hidden
 								AND NOT pages.hidden
@@ -622,319 +654,317 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 								ORDER BY sys_domain.sorting
 								LIMIT 0,1");
 
-				if ($TYPO3_DB->sql_num_rows($rs)) {
-					list($domain) = $TYPO3_DB->sql_fetch_row($rs);
-				}
-			}
-		}
+                if ($TYPO3_DB->sql_num_rows($rs)) {
+                    list($domain) = $TYPO3_DB->sql_fetch_row($rs);
+                }
+            }
+        }
 
-		// Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
-		if (!$domain)
-		{
-			$rootLine = t3lib_befunc::BEgetRootLine($this->pid);
-			$parser = t3lib_div::makeInstance('t3lib_tsparser_ext');	// Defined global here!
-			$parser->tt_track = 0;	// Do not log time-performance information
-			$parser->init();
-			$parser->runThroughTemplates($rootLine);	// This generates the constants/config + hierarchy info for the template.
-			$parser->generateConfig();
-			if (isset($parser->flatSetup['config.domain']))
-			{
-				$domain = $parser->flatSetup['config.domain'];
-			}
-		}
+        // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
+        if (!$domain) {
+            $rootLine = t3lib_befunc::BEgetRootLine($this->pid);
+            $parser = t3lib_div::makeInstance('t3lib_tsparser_ext'); // Defined global here!
+            $parser->tt_track = 0; // Do not log time-performance information
+            $parser->init();
+            $parser->runThroughTemplates($rootLine); // This generates the constants/config + hierarchy info for the template.
+            $parser->generateConfig();
+            if (isset($parser->flatSetup['config.domain'])) {
+                $domain = $parser->flatSetup['config.domain'];
+            }
+        }
 
-		// Else, we try the HTTP_HOST value (not great, but better than nothing)
-		if (!$domain)
-		{
-			$domain = @$_SERVER['HTTP_HOST'];
-		}
+        // Else, we try the HTTP_HOST value (not great, but better than nothing)
+        if (!$domain) {
+            $domain = @$_SERVER['HTTP_HOST'];
+        }
 
 
-		// If still no domain, can't continue
-		if (!$domain)
-		{
-			throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
-		}
+        // If still no domain, can't continue
+        if (!$domain) {
+            throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
+        }
 
-		return $domain;
-	}
+        return $domain;
+    }
 
-	/**
-	 * Returns the title, NOT localized, of the page sent by this newsletter.
-	 * This should only used for BE, because newsletter recipients need localized title
-	 * @global t3lib_DB $TYPO3_DB
-	 * @return string the title
-	 */
-	function getTitle()
-	{
-		global $TYPO3_DB;
-		$rs = $TYPO3_DB->sql_query("SELECT title FROM pages WHERE uid = $this->pid");
+    /**
+     * Returns the title, NOT localized, of the page sent by this newsletter.
+     * This should only used for BE, because newsletter recipients need localized title
+     * @global t3lib_DB $TYPO3_DB
+     * @return string the title
+     */
+    function getTitle()
+    {
+        global $TYPO3_DB;
+        $rs = $TYPO3_DB->sql_query("SELECT title FROM pages WHERE uid = $this->pid");
 
-		$title = '';
-		if ($TYPO3_DB->sql_num_rows($rs)) {
-			list($title) = $TYPO3_DB->sql_fetch_row($rs);
-		}
+        $title = '';
+        if ($TYPO3_DB->sql_num_rows($rs)) {
+            list($title) = $TYPO3_DB->sql_fetch_row($rs);
+        }
 
-		return $title;
-	}
+        return $title;
+    }
+
+    /**
+     * Schedule the next newsletter if it defined to be repeated
+     * @global t3lib_DB $TYPO3_DB
+     */
+    public function scheduleNextNewsletter()
+    {
+        $plannedTime = $this->getPlannedTime();
+        list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->format('U')));
+
+        switch ($this->getRepetition()) {
+            case 0: return;
+            case 1: $day += 1;
+                break;
+            case 2: $day += 7;
+                break;
+            case 3: $day += 14;
+                break;
+            case 4: $month += 1;
+                break;
+            case 5: $month += 3;
+                break;
+            case 6: $month += 6;
+                break;
+            case 7: $year += 1;
+                break;
+        }
+        $newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
 
 
-	/**
-	 * Schedule the next newsletter if it defined to be repeated
-	 * @global t3lib_DB $TYPO3_DB
-	 */
-	public function scheduleNextNewsletter()
-	{
-		$plannedTime = $this->getPlannedTime();
-		list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->format('U')));
-
-		switch ($this->getRepetition()) {
-			case 0: return;
-			case 1: $day += 1; break;
-			case 2: $day += 7; break;
-			case 3: $day += 14; break;
-			case 4: $month += 1; break;
-			case 5: $month += 3; break;
-			case 6: $month += 6; break;
-			case 7: $year += 1; break;
-		}
-		$newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
-
-
-		// Clone this newsletter and give the new plannedTime
-		// We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
-		global $TYPO3_DB;
-		$TYPO3_DB->sql_query("INSERT tx_newsletter_domain_model_newsletter
+        // Clone this newsletter and give the new plannedTime
+        // We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
+        global $TYPO3_DB;
+        $TYPO3_DB->sql_query("INSERT tx_newsletter_domain_model_newsletter
 		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . " AS tstamp, " . time() . " AS crdate, deleted, hidden
 		FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
-	}
+    }
 
-	/**
-	 * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
-	 * This may differ from $newsletter->getRecipientList()->getCount()
-	 * because the recipientList may change over time.
-	 */
-	public function getEmailCount()
-	{
-		// If the newsletter didn't start, we rely on recipientList to tell us how many email there will be
-		if (!$this->getBeginTime())
-		{
-			$recipientList = $this->getRecipientList();
-			$recipientList->init();
-			return $recipientList->getCount();
-		}
+    /**
+     * Returns the count of recipient to which the newsletter was actually sent (or going to be sent if the process is not finished yet).
+     * This may differ from $newsletter->getRecipientList()->getCount()
+     * because the recipientList may change over time.
+     */
+    public function getEmailCount()
+    {
+        // If the newsletter didn't start, we rely on recipientList to tell us how many email there will be
+        if (!$this->getBeginTime()) {
+            $recipientList = $this->getRecipientList();
+            $recipientList->init();
+            return $recipientList->getCount();
+        }
 
-		$emailRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_EmailRepository');
-		return $emailRepository->getCount($this->uid);
-	}
+        $emailRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+        return $emailRepository->getCount($this->uid);
+    }
 
-	/**
-	 * Get the number of not yet sent email
-	 * @global t3lib_DB $TYPO3_DB
-	 */
-	public function getEmailNotSentCount() {
-		global $TYPO3_DB;
+    /**
+     * Get the number of not yet sent email
+     * @global t3lib_DB $TYPO3_DB
+     */
+    public function getEmailNotSentCount()
+    {
+        global $TYPO3_DB;
 
-		// If the newsletter didn't start, then it means all emails are "not sent"
-		if (!$this->getBeginTime())
-		{
-			return $this->getEmailCount();
-		}
+        // If the newsletter didn't start, then it means all emails are "not sent"
+        if (!$this->getBeginTime()) {
+            return $this->getEmailCount();
+        }
 
-		$numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
+        $numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
 
-		return (int)$numberOfNotSent;
-	}
+        return (int) $numberOfNotSent;
+    }
 
-	/**
-	 * Returns the URL of the content of this newsletter
-	 * @return string
-	 */
-	public function getContentUrl($language = null) {
-		$append_url = Tx_Newsletter_Tools::confParam('append_url');
-		$domain = $this->getDomain();
+    /**
+     * Returns the URL of the content of this newsletter
+     * @return string
+     */
+    public function getContentUrl($language = null)
+    {
+        $append_url = Tx_Newsletter_Tools::confParam('append_url');
+        $domain = $this->getDomain();
 
-		if (!is_null($language)) {
-			$language = '&L=' . $language;
-		}
+        if (!is_null($language)) {
+            $language = '&L=' . $language;
+        }
 
-		return "http://$domain/index.php?no_cache=1&id=" . $this->getPid() . $language . $append_url;
-	}
+        return "http://$domain/index.php?no_cache=1&id=" . $this->getPid() . $language . $append_url;
+    }
 
-	/**
-	 * Returns the content of this newsletter with validation messages. The content
-	 * is also "fixed" automatically when possible.
-	 * @global type $LANG
-	 * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
-	 * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
-	 */
-	public function getValidatedContent($language = null)
-	{
-		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
-		global $LANG;
-		if (is_null($LANG)) {
-			$LANG = t3lib_div::makeInstance('language');	// create language-object
-			$LLkey='default';
-			if ($GLOBALS['TSFE']->config['config']['language'])	{
-				$LLkey = $GLOBALS['TSFE']->config['config']['language'];
-			}
-			$LANG->init($LLkey);	// initalize language-object with actual language
-		}
-		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+    /**
+     * Returns the content of this newsletter with validation messages. The content
+     * is also "fixed" automatically when possible.
+     * @global type $LANG
+     * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
+     * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
+     */
+    public function getValidatedContent($language = null)
+    {
+        // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
+        global $LANG;
+        if (is_null($LANG)) {
+            $LANG = t3lib_div::makeInstance('language'); // create language-object
+            $LLkey = 'default';
+            if ($GLOBALS['TSFE']->config['config']['language']) {
+                $LLkey = $GLOBALS['TSFE']->config['config']['language'];
+            }
+            $LANG->init($LLkey); // initalize language-object with actual language
+        }
+        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 
-		$url = $this->getContentUrl($language);
-		$content= t3lib_div::getURL($url);
+        $url = $this->getContentUrl($language);
+        $content = t3lib_div::getURL($url);
 
-		$errors = array();
-		$warnings = array();
-		$infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
+        $errors = array();
+        $warnings = array();
+        $infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
 
-		// Content should be more that just a few characters. Apache error propably occured
-		if (strlen($content) < 200) {
-			$errors []= $LANG->getLL('validation_mail_too_short');
-		}
+        // Content should be more that just a few characters. Apache error propably occured
+        if (strlen($content) < 200) {
+            $errors [] = $LANG->getLL('validation_mail_too_short');
+        }
 
-		// Content should not contain PHP-Warnings
-		if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-			$errors []= $LANG->getLL('validation_mail_contains_php_warnings');
-		}
+        // Content should not contain PHP-Warnings
+        if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
+            $errors [] = $LANG->getLL('validation_mail_contains_php_warnings');
+        }
 
-		// Content should not contain PHP-Warnings
-		if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-			$errors []= $LANG->getLL('validation_mail_contains_php_errors');
-		}
+        // Content should not contain PHP-Warnings
+        if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
+            $errors [] = $LANG->getLL('validation_mail_contains_php_errors');
+        }
 
-		// If the page contains a "Pages is being generared" text... this is bad too
-		if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-			$errors []= $LANG->getLL('validation_mail_being_generated');
-		}
+        // If the page contains a "Pages is being generared" text... this is bad too
+        if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
+            $errors [] = $LANG->getLL('validation_mail_being_generated');
+        }
 
 
-		// Find out the absolute domain. If specified in HTML source, use it as is.
-		if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match))
-		{
-			$absoluteDomain = $match[1];
-		}
-		// Otherwise try our best to guess what it is
-		else
-		{
-			$absoluteDomain = 'http://' . $this->getDomain() . '/';
-		}
+        // Find out the absolute domain. If specified in HTML source, use it as is.
+        if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match)) {
+            $absoluteDomain = $match[1];
+        }
+        // Otherwise try our best to guess what it is
+        else {
+            $absoluteDomain = 'http://' . $this->getDomain() . '/';
+        }
 
-		// Fix relative URL to absolute URL
-		$urlPatterns = array(
-			'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
-			'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
-			'images' => '/ src="(.*)"/Ui',
-			'background images' => '/ background="(.*)"/Ui',
-		);
-		foreach ($urlPatterns as $type => $urlPattern)
-		{
-			preg_match_all($urlPattern, $content, $urls);
-			foreach ($urls[1] as $i => $url) {
-				// If this is already an absolute link, dont replace it
-				if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
-					$replace_url = str_replace($url, $absoluteDomain . $url, $urls[0][$i]);
-					$content = str_replace($urls[0][$i], $replace_url, $content);
-				}
-			}
+        // Fix relative URL to absolute URL
+        $urlPatterns = array(
+            'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
+            'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
+            'images' => '/ src="(.*)"/Ui',
+            'background images' => '/ background="(.*)"/Ui',
+        );
+        foreach ($urlPatterns as $type => $urlPattern) {
+            preg_match_all($urlPattern, $content, $urls);
+            foreach ($urls[1] as $i => $url) {
+                // If this is already an absolute link, dont replace it
+                if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
+                    $replace_url = str_replace($url, $absoluteDomain . $url, $urls[0][$i]);
+                    $content = str_replace($urls[0][$i], $replace_url, $content);
+                }
+            }
 
-			if (count($urls[1])) {
-				$infos[]= sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
-			}
-		}
+            if (count($urls[1])) {
+                $infos[] = sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
+            }
+        }
 
-		// Find linked css and convert into a style-tag
-		preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
-		foreach ($urls[1] as $i => $url) {
+        // Find linked css and convert into a style-tag
+        preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
+        foreach ($urls[1] as $i => $url) {
 
-			$content = str_replace ($urls[0][$i], "<!-- fetched URL: $url -->
+            $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
 <style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($url) . "\n-->\n</style>", $content);
-		}
-		if (count($urls[1])) {
-			$infos[] = $LANG->getLL('validation_mail_contains_linked_styles');
-		}
+        }
+        if (count($urls[1])) {
+            $infos[] = $LANG->getLL('validation_mail_contains_linked_styles');
+        }
 
-		// We cant very well have attached javascript in a newsmail ... removing
-		$content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
-		if ($count) {
-			$warnings[] = $LANG->getLL('validation_mail_contains_javascript');
-		}
+        // We cant very well have attached javascript in a newsmail ... removing
+        $content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
+        if ($count) {
+            $warnings[] = $LANG->getLL('validation_mail_contains_javascript');
+        }
 
-		// Images in CSS
-		if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
-			$errors[] = $LANG->getLL('validation_mail_contains_css_images');
-		}
+        // Images in CSS
+        if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
+            $errors[] = $LANG->getLL('validation_mail_contains_css_images');
+        }
 
-		// CSS-classes
-		if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
-			$warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
-		}
+        // CSS-classes
+        if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
+            $warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
+        }
 
-		// Positioning & element sizes in CSS
-		$forbiddenCssProperties = array('width', 'margin', 'height', 'padding', 'position');
-		if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
-			foreach ($matches[1] as $stylepart) {
-				foreach ($forbiddenCssProperties as $property)
-				{
-					if (strpos($stylepart, 'width') !== false) {
-						$warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
-					}
-				}
-			}
-		}
+        // Positioning & element sizes in CSS
+        $forbiddenCssProperties = array('width', 'margin', 'height', 'padding', 'position');
+        if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
+            foreach ($matches[1] as $stylepart) {
+                foreach ($forbiddenCssProperties as $property) {
+                    if (strpos($stylepart, 'width') !== false) {
+                        $warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
+                    }
+                }
+            }
+        }
 
-		return array(
-			'content' => $content,
-			'errors' => $errors,
-			'warnings' => $warnings,
-			'infos' => $infos,
-		);
-	}
+        return array(
+            'content' => $content,
+            'errors' => $errors,
+            'warnings' => $warnings,
+            'infos' => $infos,
+        );
+    }
 
-	/**
-	 * Return a human readable status for the newsletter
-	 * @return string
-	 */
-	public function getStatus()
-	{
-		// Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
-		global $LANG;
-		$LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+    /**
+     * Return a human readable status for the newsletter
+     * @return string
+     */
+    public function getStatus()
+    {
+        // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
+        global $LANG;
+        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 
-		$plannedTime = $this->getPlannedTime();
-		$beginTime = $this->getBeginTime();
-		$endTime = $this->getEndTime();
+        $plannedTime = $this->getPlannedTime();
+        $beginTime = $this->getBeginTime();
+        $endTime = $this->getEndTime();
 
-		// If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
-		if (!($this->getUid() > 0))
-			return $LANG->getLL('newsletter_status_not_planned');
+        // If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
+        if (!($this->getUid() > 0))
+            return $LANG->getLL('newsletter_status_not_planned');
 
-		if ($plannedTime && !$beginTime)
-			return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
+        if ($plannedTime && !$beginTime)
+            return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
 
-		if ($beginTime && !$endTime)
-			return $LANG->getLL('newsletter_status_generating_emails');
+        if ($beginTime && !$endTime)
+            return $LANG->getLL('newsletter_status_generating_emails');
 
-		if ($beginTime && $endTime)
-		{
-			$emailCount = $this->getEmailCount();
-			$emailNotSentCount = $this->getEmailNotSentCount();
+        if ($beginTime && $endTime) {
+            $emailCount = $this->getEmailCount();
+            $emailNotSentCount = $this->getEmailNotSentCount();
 
-			if ($emailNotSentCount)
-				return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
-			else
-				return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
-		}
+            if ($emailNotSentCount)
+                return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
+            else
+                return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
+        }
 
-		return "unexpected status";
-	}
+        return "unexpected status";
+    }
 
-	public function getStatistics()
-	{
-		$newsletterRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-		$stats = $newsletterRepository->getStatistics($this);
+    public function getStatistics()
+    {
+        $newsletterRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $stats = $newsletterRepository->getStatistics($this);
 
-		return $stats;
-	}
+        return $stats;
+    }
+
 }

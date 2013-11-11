@@ -1,5 +1,6 @@
 <?php
-/*                                                                        *
+
+/* *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
@@ -33,19 +34,21 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  *
  */
-class Tx_Newsletter_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper
+{
 
-	protected $objectAccessorPostProcessorEnabled = FALSE;
-	protected $escapingInterceptorEnabled = FALSE;
+    protected $objectAccessorPostProcessorEnabled = FALSE;
+    protected $escapingInterceptorEnabled = FALSE;
 
-	/**
-	 * Render without processing
-	 *
-	 * @param string $content
-	 * @return string
-	 */
-	public function render($content = '') {
-		return $content;
-	}
+    /**
+     * Render without processing
+     *
+     * @param string $content
+     * @return string
+     */
+    public function render($content = '')
+    {
+        return $content;
+    }
+
 }
-?>

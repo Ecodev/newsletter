@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallangExt>
-	<data type="array">
-		<languageKey index="fr" type="array">
-			<label index="email.description">Adresse email du compte de rebont qui sera inclut dans le champ &quot;reply-to&quot; des emails envoyés</label>
-			<label index="server.description">Nom d'hôte du serveur email sur lequel récupéré les emails rebondit</label>
-			<label index="protocol.description">Protocole du serveur email</label>
-			<label index="username.description">Nom d'utilistateur du serveur email</label>
-			<label index="password.description">Mot de passe du serveur email</label>
-		</languageKey>
-	</data>
-	<orig_hash type="array">
-		<languageKey index="fr" type="array">
-			<label index="email.description" type="integer">13123415</label>
-			<label index="server.description" type="integer">217180353</label>
-			<label index="protocol.description" type="integer">135760058</label>
-			<label index="username.description" type="integer">21777158</label>
-			<label index="password.description" type="integer">99933379</label>
-		</languageKey>
-	</orig_hash>
-	<orig_text type="array">
-		<languageKey index="fr" type="array">
-			<label index="email.description">email</label>
-			<label index="server.description">server</label>
-			<label index="protocol.description">protocol</label>
-			<label index="username.description">username</label>
-			<label index="password.description">password</label>
-		</languageKey>
-	</orig_text>
+    <data type="array">
+        <languageKey index="fr" type="array">
+            <label index="email.description">Adresse email du compte de rebont qui sera inclut dans le champ &quot;reply-to&quot; des emails envoyés</label>
+            <label index="server.description">Nom d'hôte du serveur email sur lequel récupéré les emails rebondit</label>
+            <label index="protocol.description">Protocole du serveur email</label>
+            <label index="username.description">Nom d'utilistateur du serveur email</label>
+            <label index="password.description">Mot de passe du serveur email</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="fr" type="array">
+            <label index="email.description" type="integer">13123415</label>
+            <label index="server.description" type="integer">217180353</label>
+            <label index="protocol.description" type="integer">135760058</label>
+            <label index="username.description" type="integer">21777158</label>
+            <label index="password.description" type="integer">99933379</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="fr" type="array">
+            <label index="email.description">email</label>
+            <label index="server.description">server</label>
+            <label index="protocol.description">protocol</label>
+            <label index="username.description">username</label>
+            <label index="password.description">password</label>
+        </languageKey>
+    </orig_text>
 </T3locallangExt>

@@ -1,7 +1,6 @@
 <?php
 
-
-/*                                                                        *
+/* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
@@ -26,7 +25,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Newsletter_MVC_ExtDirect_Exception_InvalidExtDirectRequestException extends Tx_Newsletter_Exception {
+class Tx_Newsletter_MVC_ExtDirect_Exception_InvalidExtDirectRequestException extends Tx_Newsletter_Exception
+{
 
 }
-?>

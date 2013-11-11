@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -46,24 +47,26 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Newsletter_ViewHelpers_RawViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_RawViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper
+{
 
-	/**
-	 * Disable Fluid interceptors for this ViewHelper
-	 * @var boolean
-	 */
-	protected $escapingInterceptorEnabled = FALSE;
+    /**
+     * Disable Fluid interceptors for this ViewHelper
+     * @var boolean
+     */
+    protected $escapingInterceptorEnabled = FALSE;
 
-	/**
-	 * @param mixed $value The value to output
-	 * @return string
-	 */
-	public function render($value = NULL) {
-		if ($value === NULL) {
-			return $this->renderChildren();
-		} else {
-			return $value;
-		}
-	}
+    /**
+     * @param mixed $value The value to output
+     * @return string
+     */
+    public function render($value = NULL)
+    {
+        if ($value === NULL) {
+            return $this->renderChildren();
+        } else {
+            return $value;
+        }
+    }
 
 }

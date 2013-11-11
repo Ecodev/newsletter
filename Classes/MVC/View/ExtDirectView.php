@@ -1,7 +1,6 @@
 <?php
 
-
-/*                                                                        *
+/* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
@@ -28,43 +27,46 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_View_ExtDirectView extends Tx_Newsletter_MVC_View_JsonView {
+class Tx_Newsletter_MVC_View_ExtDirectView extends Tx_Newsletter_MVC_View_JsonView
+{
 
-	/**
-	 * Renders the Ext Direct view by delegating to the JsonView
-	 * for rendering a serializable array.
-	 *
-	 * @return string An empty string
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
-	 */
-	public function render() {
-		$result = $this->renderArray();
-		$this->controllerContext->getResponse()->setResult($result);
-		$this->controllerContext->getResponse()->setSuccess(TRUE);
-	}
+    /**
+     * Renders the Ext Direct view by delegating to the JsonView
+     * for rendering a serializable array.
+     *
+     * @return string An empty string
+     * @author Christopher Hlubek <hlubek@networkteam.com>
+     */
+    public function render()
+    {
+        $result = $this->renderArray();
+        $this->controllerContext->getResponse()->setResult($result);
+        $this->controllerContext->getResponse()->setSuccess(TRUE);
+    }
 
-	/**
-	 * Assigns errors to the view and converts them to a format that Ext JS
-	 * understands.
-	 *
-	 * @param array $errors Errors e.g. from mapping results
-	 * @author Christopher Hlubek <hlubek@networkteam.com>
-	 */
-	public function assignErrors(array $errors) {
-		$result = array();
-		foreach ($errors as $argumentName => $argumentError) {
-			foreach ($argumentError->getErrors() as $propertyName => $propertyError) {
-				$message = '';
-				foreach ($propertyError->getErrors() as $error) {
-					$message .= $error->getMessage();
-				}
-				$result[$propertyName] = $message;
-			}
-		}
-		$this->assign('value', array(
-			'errors' => $result,
-			'success' => FALSE
-		));
-	}
+    /**
+     * Assigns errors to the view and converts them to a format that Ext JS
+     * understands.
+     *
+     * @param array $errors Errors e.g. from mapping results
+     * @author Christopher Hlubek <hlubek@networkteam.com>
+     */
+    public function assignErrors(array $errors)
+    {
+        $result = array();
+        foreach ($errors as $argumentName => $argumentError) {
+            foreach ($argumentError->getErrors() as $propertyName => $propertyError) {
+                $message = '';
+                foreach ($propertyError->getErrors() as $error) {
+                    $message .= $error->getMessage();
+                }
+                $result[$propertyName] = $message;
+            }
+        }
+        $this->assign('value', array(
+            'errors' => $result,
+            'success' => FALSE
+        ));
+    }
+
 }
-?>

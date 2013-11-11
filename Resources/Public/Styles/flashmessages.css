@@ -5,24 +5,24 @@
  */
 
 .flashmessage h3 {
-	background-repeat: no-repeat;
-	padding-left: 20px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
 }
 
 div.flashmessage {
-	margin-top : 10px;
-	border : 2px solid #AEB6C1; 
-	-webkit-border-radius: 7px;
-	-moz-border-radius: 7px;
-	border-radius: 7px;
+    margin-top : 10px;
+    border : 2px solid #AEB6C1;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
 }
 
 div.messenge-box {
-	padding : 5px 10px; 
-	background-color : #FFFFFF;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    padding : 5px 10px;
+    background-color : #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 div.messenge-box h3 {margin-bottom : 10px; background-color: #FFFFFF;}

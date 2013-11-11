@@ -6,34 +6,34 @@ Specifiy which js librarys should be loaded
 -->
 <ext:Be.moduleContainer pageTitle="Newsletter" loadExtJs="true" loadExtJsTheme="true">
 
-	<!-- load needed CSS Files -->
-	<ext:includeCssFile name="module.css" />
-	<ext:includeCssFile name="flashmessages.css" />
+    <!-- load needed CSS Files -->
+    <ext:includeCssFile name="module.css" />
+    <ext:includeCssFile name="flashmessages.css" />
 
-	<!-- load needed JS Files -->
-	<ext:includeJsFile name="ux.TYPO3.Newsletter.UriBuilder.js" />
-	<ext:includeJsFile name="ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.js" />
+    <!-- load needed JS Files -->
+    <ext:includeJsFile name="ux.TYPO3.Newsletter.UriBuilder.js" />
+    <ext:includeJsFile name="ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.js" />
 
-	<!-- load all our JS Files -->
-	<ext:includeJsFolder name="Module/" recursive="true" />
-	<ext:includeJsFolder name="Store/" recursive="true" />
-	<ext:includeJsFolder name="Override/" recursive="true" />
-	<ext:includeJsFolder name="Planner/" recursive="true" />
-	<ext:includeJsFolder name="Statistics/" recursive="true" />
+    <!-- load all our JS Files -->
+    <ext:includeJsFolder name="Module/" recursive="true" />
+    <ext:includeJsFolder name="Store/" recursive="true" />
+    <ext:includeJsFolder name="Override/" recursive="true" />
+    <ext:includeJsFolder name="Planner/" recursive="true" />
+    <ext:includeJsFolder name="Statistics/" recursive="true" />
 
-	<ext:ExtDirectProvider name="descriptor" namespace="Ext.ux.TYPO3.Newsletter.Remote" cache="false" />
+    <ext:ExtDirectProvider name="descriptor" namespace="Ext.ux.TYPO3.Newsletter.Remote" cache="false" />
 
-	<!-- create inline JS based on the Domain Model Definitions -->
-	<ext:includeExtOnReadyFromFile name="ExtOnReady.js" />
-	<newsletter:localization name="locallang.xml,locallang_db.xml"/>
-	<newsletter:configuration configuration="{configuration}"/>
+    <!-- create inline JS based on the Domain Model Definitions -->
+    <ext:includeExtOnReadyFromFile name="ExtOnReady.js" />
+    <newsletter:localization name="locallang.xml,locallang_db.xml"/>
+    <newsletter:configuration configuration="{configuration}"/>
 
-	<!-- Additional HTML required for ExtJS -->
-	<ext:includeModuleBody>
-		<!-- Fields required for history management -->
-		<form id="history-form" class="x-hidden">
-			<input type="hidden" id="x-history-field" />
-			<iframe id="x-history-frame"></iframe>
-		</form>
-	</ext:includeModuleBody>
+    <!-- Additional HTML required for ExtJS -->
+    <ext:includeModuleBody>
+        <!-- Fields required for history management -->
+        <form id="history-form" class="x-hidden">
+            <input type="hidden" id="x-history-field" />
+            <iframe id="x-history-frame"></iframe>
+        </form>
+    </ext:includeModuleBody>
 </ext:Be.moduleContainer>

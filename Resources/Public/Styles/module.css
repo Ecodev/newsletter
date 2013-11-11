@@ -4,28 +4,28 @@ Newsletter style
 - - - - - - - - - - - - - - - - - - - - - */
 
 .t3-newsletter-button-planner {
-	background: url("../Icons/tx_newsletter.png") 0 50% no-repeat !important;
-	padding-left: 20px !important;
+    background: url("../Icons/tx_newsletter.png") 0 50% no-repeat !important;
+    padding-left: 20px !important;
 }
 
 .t3-newsletter-button-statistics {
-	background: url("../Icons/chart_bar.png") 0 50% no-repeat !important;
-	padding-left: 20px !important;
+    background: url("../Icons/chart_bar.png") 0 50% no-repeat !important;
+    padding-left: 20px !important;
 }
 
 .t3-newsletter-statistic {
-	margin-left: 1em;
-	font-size: 120%;
-	line-height: normal;
+    margin-left: 1em;
+    font-size: 120%;
+    line-height: normal;
 }
 .t3-newsletter-statistic-group {
-	margin-top: 2em;
-	margin-bottom: 1em;
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
 
 .t3-newsletter-statistic .beginTime,
 .t3-newsletter-statistic .plannedTime {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .t3-newsletter-statistic .not-sent,
@@ -34,65 +34,65 @@ Newsletter style
 .t3-newsletter-statistic .bounced,
 .t3-newsletter-statistic .link-opened
 {
-	font-weight: bold;
-	font-size: 150%;
+    font-weight: bold;
+    font-size: 150%;
 }
 
 .t3-newsletter-statistic .sent {
-	color: #000;
+    color: #000;
 }
 
 .t3-newsletter-statistic .opened {
-	color: #078207;
+    color: #078207;
 }
 
 .t3-newsletter-statistic .not-opened {
-	color: #25CDF2;
+    color: #25CDF2;
 }
 
 .t3-newsletter-statistic .bounced {
-	color: #E01B4C;
+    color: #E01B4C;
 }
 
 .t3-newsletter-statistic .link-opened {
-	color: #FFB61B;
+    color: #FFB61B;
 }
 
 ul.errors li,
 ul.warnings li,
 ul.infos li {
-	list-style-position: inside;
+    list-style-position: inside;
 }
 
 ul.errors li {
-	list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/error.png");
+    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/error.png");
 }
 ul.warnings li {
-	list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
+    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
 }
 ul.infos li {
-	list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
+    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
 }
 
 ul.errors li.none,
 ul.warnings li.none,
 ul.infos li.none {
-	list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/ok.png");
+    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/ok.png");
 }
 
 /*
  * It seems that TYPO3 does not declare a nice enough CSS for selected row in grid, so we do it here
  */
 .x-grid3-row-selected {
-	font-weight: bold;
-	background-color: #EBEBEB;
+    font-weight: bold;
+    background-color: #EBEBEB;
 }
 
 .x-grid3-row-selected.x-grid3-row-over {
-	background-color: #DEDEDE;
+    background-color: #DEDEDE;
 }
 
 #newsletterListMenu .x-grid3-row
 {
-	cursor: pointer;
+    cursor: pointer;
 }

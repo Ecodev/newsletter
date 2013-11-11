@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallangExt>
-	<data type="array">
-		<languageKey index="fr" type="array">
-			<label index="begin_time.description">Date de début d'envoi de l'email</label>
-			<label index="end_time.description">Date de fin d'envoi de l'email</label>
-			<label index="recipient_address.description">Adresse email du destinataire</label>
-			<label index="recipient_data.description">Donnée du destinataire qui peuvent être utilisée dans le corp de l'email via des markers</label>
-			<label index="opened.description">Si l'email a été ouvert</label>
-			<label index="bounced.description">Si l'email a rebondit</label>
-			<label index="newsletter.description">Newsletter à qui appartient cet email</label>
-		</languageKey>
-	</data>
-	<orig_hash type="array">
-		<languageKey index="fr" type="array">
-			<label index="begin_time.description" type="integer">95593849</label>
-			<label index="end_time.description" type="integer">207312784</label>
-			<label index="recipient_address.description" type="integer">235715145</label>
-			<label index="recipient_data.description" type="integer">58771658</label>
-			<label index="opened.description" type="integer">61148254</label>
-			<label index="bounced.description" type="integer">179418369</label>
-			<label index="newsletter.description" type="integer">165951704</label>
-		</languageKey>
-	</orig_hash>
-	<orig_text type="array">
-		<languageKey index="fr" type="array">
-			<label index="begin_time.description">startTime</label>
-			<label index="end_time.description">endTime</label>
-			<label index="recipient_address.description">recipientAddress</label>
-			<label index="recipient_data.description">recipientData</label>
-			<label index="opened.description">opened</label>
-			<label index="bounced.description">bounced</label>
-			<label index="newsletter.description">newsletter</label>
-		</languageKey>
-	</orig_text>
+    <data type="array">
+        <languageKey index="fr" type="array">
+            <label index="begin_time.description">Date de début d'envoi de l'email</label>
+            <label index="end_time.description">Date de fin d'envoi de l'email</label>
+            <label index="recipient_address.description">Adresse email du destinataire</label>
+            <label index="recipient_data.description">Donnée du destinataire qui peuvent être utilisée dans le corp de l'email via des markers</label>
+            <label index="opened.description">Si l'email a été ouvert</label>
+            <label index="bounced.description">Si l'email a rebondit</label>
+            <label index="newsletter.description">Newsletter à qui appartient cet email</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="fr" type="array">
+            <label index="begin_time.description" type="integer">95593849</label>
+            <label index="end_time.description" type="integer">207312784</label>
+            <label index="recipient_address.description" type="integer">235715145</label>
+            <label index="recipient_data.description" type="integer">58771658</label>
+            <label index="opened.description" type="integer">61148254</label>
+            <label index="bounced.description" type="integer">179418369</label>
+            <label index="newsletter.description" type="integer">165951704</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="fr" type="array">
+            <label index="begin_time.description">startTime</label>
+            <label index="end_time.description">endTime</label>
+            <label index="recipient_address.description">recipientAddress</label>
+            <label index="recipient_data.description">recipientData</label>
+            <label index="opened.description">opened</label>
+            <label index="bounced.description">bounced</label>
+            <label index="newsletter.description">newsletter</label>
+        </languageKey>
+    </orig_text>
 </T3locallangExt>
