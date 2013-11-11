@@ -13,12 +13,16 @@ Basic extension configuration
    optionally to fetch bounced emails
 #. Configure mail transport in ``LocalConfiguration.php`` (more info in
    `API documentation`_):
-   
+
 .. code:: php
 
  <?php
- $TYPO3_CONF_VARS['MAIL']['transport'] = 'smtp';
- $TYPO3_CONF_VARS['MAIL']['transport_smtp_server'] = 'smtp.example.com:587';
+     return array(
+         'MAIL' => array(
+             'transport' => 'smtp',
+             'transport_smtp_server' => 'smtp.example.com:587',
+         ),
+     );
 
 Send your first newsletter
 --------------------------
@@ -157,7 +161,7 @@ markers like this:
 
 :code:`###:IF: name ###<p>Bla bla bla</p>###:ENDIF:###`
 
-The :code:`<p>Bla bla bla</p>` will only be shown if the “name” field evaluates 
+The :code:`<p>Bla bla bla</p>` will only be shown if the “name” field evaluates
 to true in PHP. You can also make an else-branch:
 
 :code:`###:IF: name ###<h1>Foo</h1>###:ELSE:###<h1>Bar</h1>###:ENDIF:###`
