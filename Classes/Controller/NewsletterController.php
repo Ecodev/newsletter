@@ -28,7 +28,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_NewsletterController extends Tx_MvcExtjs_MVC_Controller_ExtDirectActionController {
+class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Controller_ExtDirectActionController {
 
 	/**
 	 * newsletterRepository

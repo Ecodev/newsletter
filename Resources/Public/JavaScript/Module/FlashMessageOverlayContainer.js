@@ -1,7 +1,7 @@
 Ext.ns('Ext.ux.TYPO3.Newsletter');
 /**
- * 
- * 
+ *
+ *
  * @class Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer
  * @singleton
  */
@@ -32,7 +32,7 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
 	var TYPE_INFO = -1;
 	var TYPE_ERROR = 2;
 	var TYPE_NOTICE = -2;
-	
+
 	var config = {
 		minDelay: 3,
 		maxDelay: 9,
@@ -40,7 +40,7 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
 		opacity: 0.9,
 		logLevel: 0
 	};
-	
+
 	/**
 	 * Create needed stuff in DOM and register at the FlashMessageDispatcher
 	 * to receive incoming Messages.
@@ -52,9 +52,9 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
         msgCt.setStyle('z-index', 9999);
         msgCt.setWidth(config.width);
         msgCt.setOpacity(config.opacity);
-        Ext.ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.on('new',handleMessages);
+        Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.on('new',handleMessages);
 	}
-	
+
 	/**
 	 * React on incoming Messages.
 	 */
@@ -63,10 +63,10 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
 			addMessage(message);
 		});
 	}
-	
+
 	/***
      * Adds a message to queue.
-     * 
+     *
      * @param {String} msg
      * @param {Bool} status
      */
@@ -79,14 +79,14 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
     	message.tstamp = new Date();
     	messageStore.addSorted(new messageStore.recordType(message));
     };
-    
+
     /**
      * creates a msgbox for a incoming message and shows it for while
      * based on the text length.
      */
     var showMessageBox = function(type, title, msg) {
     	if (type < config.logLevel) return;
-    	var delay = config.minDelay; 
+    	var delay = config.minDelay;
         delay = msg.length / 13.3;
         if (delay < config.minDelay) {
             delay = config.minDelay;
@@ -98,7 +98,7 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
         html = buildMessageBox(type, title, String.format.apply(String, Array.prototype.slice.call(arguments, 2)));
         Ext.DomHelper.append(msgCt, {html: html}, true).slideIn('t').pause(delay).ghost('t', {remove:true});
     }
-    
+
     /***
      * buildMessageBox
      */
@@ -133,10 +133,10 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
             '</div>'
         ].join('');
     };
-    
+
     var getMessageGrid = function() {
     	var id;
-    	
+
     	if (!Ext.ComponentMgr.get(id))
     	var grid = new Ext.grid.GridPanel({
     		store: messageStore,

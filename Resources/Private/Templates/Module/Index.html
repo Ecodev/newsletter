@@ -1,4 +1,4 @@
-{namespace ext=Tx_MvcExtjs_ViewHelpers}
+{namespace ext=Tx_Newsletter_ViewHelpers}
 {namespace newsletter=Tx_Newsletter_ViewHelpers}
 <!--
 This container handles the pageRenderer in the background
@@ -11,8 +11,8 @@ Specifiy which js librarys should be loaded
 	<ext:includeCssFile name="flashmessages.css" />
 
 	<!-- load needed JS Files -->
-	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.UriBuilder.js" extKey="mvc_extjs" />
-	<ext:includeJsFile name="ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.js" extKey="mvc_extjs" />
+	<ext:includeJsFile name="ux.TYPO3.Newsletter.UriBuilder.js" />
+	<ext:includeJsFile name="ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.js" />
 
 	<!-- load all our JS Files -->
 	<ext:includeJsFolder name="Module/" recursive="true" />

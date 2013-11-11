@@ -10,6 +10,12 @@ module.tx_newsletter {
 }
 
 config.tx_extbase {
+	mvc {
+		requestHandlers {
+			Tx_Newsletter_MVC_ExtDirect_RequestHandler = Tx_Newsletter_MVC_ExtDirect_RequestHandler
+		}
+	}
+
 	objects {
 		Tx_Extbase_Persistence_BackendInterface {
 			className = Tx_Newsletter_Persistence_BackendPidFriendly

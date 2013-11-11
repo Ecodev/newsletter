@@ -27,7 +27,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
 		Ext.QuickTips.init();
 
 		// init Flashmessage
-		Ext.ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.initialize();
+		Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.initialize();
 		Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer.initialize({
 			minDelay: 5,
 			maxDelay: 15,
