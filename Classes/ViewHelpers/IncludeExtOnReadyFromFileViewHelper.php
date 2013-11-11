@@ -25,7 +25,7 @@
 /**
  * View helper which allows you to include inline JS code into a module Container.
  * Note: This feature is experimental!
- * Note: You MUST wrap this Helper with <newsletter:Be.moduleContainer>-Tags or <newsletter:Fe.pluginContainer>-Tags
+ * Note: You MUST wrap this Helper with <newsletter:Be.moduleContainer>-Tags
  *
  * = Examples =
  *
