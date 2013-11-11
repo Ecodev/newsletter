@@ -28,7 +28,7 @@
  * @scope prototype
  * @api
  */
-class Tx_MvcExtjs_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView {
+class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView {
 
 	/**
 	 * @var Tx_Extbase_MVC_Controller_ControllerContext

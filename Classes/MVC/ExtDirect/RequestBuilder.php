@@ -26,7 +26,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
+class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 
 	/**
 	 * @inject
@@ -63,12 +63,12 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	/**
 	 * Builds an Ext Direct request
 	 *
-	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The built request
+	 * @return Tx_Newsletter_MVC_ExtDirect_Request The built request
 	 */
 	public function build() {
 		$postArguments = $_POST;
 		if (isset($postArguments['extAction'])) {
-			throw new Tx_MvcExtjs_Exception('Form Post Request building is not yet implemented.', 1281379502);
+			throw new Tx_Newsletter_Exception('Form Post Request building is not yet implemented.', 1281379502);
 			$request = $this->buildFormPostRequest($postArguments);
 		} else {
 			$request = $this->buildJsonRequest();
@@ -80,7 +80,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	 * Builds a Json Ext Direct request by reading the transaction data from
 	 * standard input.
 	 *
-	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The Ext Direct request object
+	 * @return Tx_Newsletter_MVC_ExtDirect_Request The Ext Direct request object
 	 * @throws Exception
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 * @author Robert Lemke <robert@typo3.org>
@@ -94,7 +94,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 
 		if (!is_array($transactionDatas)) $transactionDatas = array($transactionDatas);
 
-		$request = $this->objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_Request');
+		$request = $this->objectManager->create('Tx_Newsletter_MVC_ExtDirect_Request');
 		foreach ($transactionDatas as $transactionData) {
 			$request->createAndAddTransaction(
 				$transactionData->action,
@@ -109,7 +109,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_RequestBuilder implements t3lib_Singleton {
 	/**
 	 * Builds a Form Post Ext Direct Request
 	 *
-	 * @return Tx_MvcExtjs_MVC_ExtDirect_Request The Ext Direct request object
+	 * @return Tx_Newsletter_MVC_ExtDirect_Request The Ext Direct request object
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 * @author Robert Lemke <robert@typo3.org>
 	 * @todo Well... make it work, eh?

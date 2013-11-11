@@ -30,7 +30,7 @@
  * = Examples =
  *
  * <code title="Simple">
- * {namespace ext=Tx_MvcExtjs_ViewHelpers}
+ * {namespace ext=Tx_Newsletter_ViewHelpers}
  * <ext:be.container>your additional viewhelpers inside</ext:be.container>
  * </code>
  *
@@ -39,19 +39,18 @@
  * Default backend CSS styles and JavaScript will be included
  *
  * <code title="All options">
- * {namespace ext=Tx_MvcExtjs_ViewHelpers}
+ * {namespace ext=Tx_Newsletter_ViewHelpers}
  * <ext:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
  * </code>
  *
  * @category    ViewHelpers
- * @package     MvcExtjs
+ * @package     Newsletter
  * @subpackage  ViewHelpers_Be
  * @author      Bastian Waidelich <bastian@typo3.org>
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Renders start page with template.php and pageTitle.

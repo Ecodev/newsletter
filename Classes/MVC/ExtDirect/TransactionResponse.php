@@ -27,7 +27,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_MvcExtjs_MVC_ExtDirect_TransactionResponse extends Tx_Extbase_MVC_Web_Response {
+class Tx_Newsletter_MVC_ExtDirect_TransactionResponse extends Tx_Extbase_MVC_Web_Response {
 
 	/**
 	 * The Ext Direct result that will be JSON encoded

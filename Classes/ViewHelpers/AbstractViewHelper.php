@@ -27,12 +27,11 @@
  *
  * @category    ViewHelpers
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-abstract class Tx_MvcExtjs_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+abstract class Tx_Newsletter_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * @var t3lib_PageRenderer

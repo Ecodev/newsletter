@@ -27,7 +27,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
+class Tx_Newsletter_MVC_ExtDirect_Transaction {
 
 	/**
 	 * @inject
@@ -49,7 +49,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	/**
 	 * The direct request this transaction belongs to
 	 *
-	 * @var Tx_MvcExtjs_MVC_ExtDirect_Request
+	 * @var Tx_Newsletter_MVC_ExtDirect_Request
 	 */
 	protected $request;
 
@@ -84,14 +84,14 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	/**
 	 * Constructs the Transaction
 	 *
-	 * @param Tx_MvcExtjs_MVC_ExtDirect_Request $request The direct request this transaction belongs to
+	 * @param Tx_Newsletter_MVC_ExtDirect_Request $request The direct request this transaction belongs to
 	 * @param string $action The "action" – the "controller object name" in FLOW3 terms
 	 * @param string $method The "method" – the "action name" in FLOW3 terms
 	 * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method
 	 * @param mixed $tid The ExtDirect transaction id
 	 * @author Robert Lemke <robert@typo3.org>
 	 */
-	public function __construct(Tx_MvcExtjs_MVC_ExtDirect_Request $request, $action, $method, array $data, $tid) {
+	public function __construct(Tx_Newsletter_MVC_ExtDirect_Request $request, $action, $method, array $data, $tid) {
 		$this->request = $request;
 		$this->action = $action;
 		$this->method = $method;
@@ -145,11 +145,11 @@ class Tx_MvcExtjs_MVC_ExtDirect_Transaction {
 	/**
 	 * Build a response for dispatching this Ext Direct transaction
 	 *
-	 * @return Tx_MvcExtjs_ExtDirect_TransactionResponse A response for dispatching this transaction
+	 * @return Tx_Newsletter_ExtDirect_TransactionResponse A response for dispatching this transaction
 	 * @author Christopher Hlubek <hlubek@networkteam.com>
 	 */
 	public function buildResponse() {
-		return $this->objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_TransactionResponse');
+		return $this->objectManager->create('Tx_Newsletter_MVC_ExtDirect_TransactionResponse');
 	}
 
 	/**

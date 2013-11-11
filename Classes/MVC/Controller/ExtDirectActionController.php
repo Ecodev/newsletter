@@ -25,13 +25,12 @@
 /**
  * A Controller used for answering via AJAX speaking JSON
  *
- * @package     MvcExtjs
+ * @package     Newsletter
  * @subpackage  MVC/Controller
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Newsletter_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 * @var Tx_Extbase_Persistence_ManagerInterface
@@ -50,13 +49,13 @@ class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MV
 	}
 
 	/**
-	 * Initializes the View to be a Tx_MvcExtjs_ExtDirect_View that renders json without Template Files.
+	 * Initializes the View to be a Tx_Newsletter_ExtDirect_View that renders json without Template Files.
 	 *
 	 * @return void
 	 */
 	public function initializeView() {
 		if ($this->request->getFormat() === 'extdirect') {
-			$this->view = $this->objectManager->create('Tx_MvcExtjs_MVC_View_ExtDirectView');
+			$this->view = $this->objectManager->create('Tx_Newsletter_MVC_View_ExtDirectView');
 			$this->view->setControllerContext($this->controllerContext);
 		}
 	}
@@ -80,7 +79,7 @@ class Tx_MvcExtjs_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MV
 				}
 			}
 		}
-		if ($this->view instanceof Tx_MvcExtjs_MVC_View_JsonView) {
+		if ($this->view instanceof Tx_Newsletter_MVC_View_JsonView) {
 			$this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
 			$this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
 			$this->view->assign('error', $message);

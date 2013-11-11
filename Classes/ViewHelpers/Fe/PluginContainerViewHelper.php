@@ -30,7 +30,7 @@
  * = Examples =
  *
  * <code title="Simple">
- * <mvcextjs:fe.pluginContainer> your additional viewhelpers inside </mvcextjs:fe.pluginContainer>
+ * <newsletter:fe.pluginContainer> your additional viewhelpers inside </newsletter:fe.pluginContainer>
  * </code>
  *
  * Output:
@@ -38,19 +38,18 @@
  * Default backend CSS styles and JavaScript will be included
  *
  * <code title="All options">
- * {namespace mvcextjs=Tx_MvcExtjs_ViewHelpers}
- * <mvcextjs:fe.pluginContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true">your module content</mvcextjs:fe.pluginContainer>
+ * {namespace newsletter=Tx_Newsletter_ViewHelpers}
+ * <newsletter:fe.pluginContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true">your module content</newsletter:fe.pluginContainer>
  * </code>
  *
  * @category    ViewHelpers
- * @package     MvcExtjs
+ * @package     Newsletter
  * @subpackage  ViewHelpers_Be
  * @author      Bastian Waidelich <bastian@typo3.org>
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Renders the module into a given div container.
@@ -111,7 +110,7 @@ class Tx_MvcExtjs_ViewHelpers_Fe_PluginContainerViewHelper extends Tx_MvcExtjs_V
 		$this->pageRenderer->addJsInlineCode('extjs Namespace for the Plugin',$jsNS);
 
 		$this->renderChildren();
-		
+
 		if ($compressJs === TRUE) {
 			$this->pageRenderer->enableCompressJavaScript();
 		}

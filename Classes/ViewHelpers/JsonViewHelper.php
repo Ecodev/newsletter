@@ -26,28 +26,27 @@
  * A ViewHelper which returns its input as a json-encoded string.
  *
  * = Examples =
- * 
+ *
  * <f:json>{anyArray}</f:json>
- * 
- * 
+ *
+ *
  * @category    ViewHelpers
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author      Xavier Perseguers <typo3@perseguers.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_JsonViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_JsonViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * Render a json-encoded string.
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function render() {
 		$items = $this->renderChildren();
-		$arr = Tx_MvcExtjs_ExtJS_Utility::encodeArrayForJSON($items);
-		return Tx_MvcExtjs_ExtJS_Utility::getJSON($arr);
+		$arr = Tx_Newsletter_ExtJS_Utility::encodeArrayForJSON($items);
+		return Tx_Newsletter_ExtJS_Utility::getJSON($arr);
 	}
 
 }

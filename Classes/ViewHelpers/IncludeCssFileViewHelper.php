@@ -25,30 +25,29 @@
 /**
  * View helper which allows you to include a CSS File.
  * Note: This feature is experimental!
- * Note: You MUST wrap this Helper with <mvcextjs:Be.moduleContainer>-Tags or <mvcextjs:Fe.pluginContainer>-Tags
+ * Note: You MUST wrap this Helper with <newsletter:Be.moduleContainer>-Tags or <newsletter:Fe.pluginContainer>-Tags
  *
  * = Examples =
  *
- * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="true" loadScriptaculous="false" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="prototype" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:includeCssFile name="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
- * </mvcextjs:be.moduleContainer>
+ * <newsletter:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="true" loadScriptaculous="false" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="prototype" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
+ * 	<newsletter:includeCssFile name="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ * </newsletter:be.moduleContainer>
  *
  * @category    ViewHelpers
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_IncludeCssFileViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_IncludeCssFileViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Calls addCssFile on the Instance of t3lib_pagerenderer.
-	 * 
+	 *
 	 * @param string $name the file to include
 	 * @param string $extKey the extension, where the file is located
 	 * @param string $pathInsideExt the path to the file relative to the ext-folder
-	 * @return string the link 
+	 * @return string the link
 	 */
 	public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/Styles/') {
 		if ($extKey === NULL) {

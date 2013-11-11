@@ -28,7 +28,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_MvcExtjs_MVC_View_ExtDirectView extends Tx_MvcExtjs_MVC_View_JsonView {
+class Tx_Newsletter_MVC_View_ExtDirectView extends Tx_Newsletter_MVC_View_JsonView {
 
 	/**
 	 * Renders the Ext Direct view by delegating to the JsonView

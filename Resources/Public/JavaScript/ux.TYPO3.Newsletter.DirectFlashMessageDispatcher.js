@@ -1,16 +1,16 @@
-Ext.ns('Ext.ux.TYPO3.MvcExtjs');
+Ext.ns('Ext.ux.TYPO3.Newsletter');
 /**
  * This class fetches Ext.Direct events, fires a event if
  * new FlashMessages are available and removes the messages from the
  * Ext.Direct response event.
  * 
  * Register your FlashMessage-processing ExtJS component like this:
- * Ext.ux.TYPO3.MvcExtjs.DirectFlashMessages.on('new',function(flashMessages) {
+ * Ext.ux.TYPO3.Newsletter.DirectFlashMessages.on('new',function(flashMessages) {
  * 		//do something with incoming FlashMessages
  * });
  * 
  */
-Ext.ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher = function(){
+Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher = function(){
 	/**
 	 * @class Ext.util.Observable
 	 */

@@ -23,46 +23,45 @@
 ***************************************************************/
 
 /**
- * View helper which allows 
+ * View helper which allows
  *
  * = Examples =
  *
- * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:includeDirectApi />
- * </mvcextjs:be.moduleContainer>
+ * <newsletter:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
+ * 	<newsletter:includeDirectApi />
+ * </newsletter:be.moduleContainer>
  *
  * @category    ViewHelpers
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id: IncludeInlineJsFromFileViewHelper.php 30242 2010-02-20 14:32:48Z xperseguers $
  */
-class Tx_MvcExtjs_ViewHelpers_ExtDirectProviderViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
-	
+class Tx_Newsletter_ViewHelpers_ExtDirectProviderViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper {
+
 	/**
-	 * @var Tx_MvcExtjs_ExtDirect_Api
+	 * @var Tx_Newsletter_ExtDirect_Api
 	 */
 	protected $apiService;
-	
+
 	/**
 	 * @see Classes/Core/ViewHelper/Tx_Fluid_Core_ViewHelper_AbstractViewHelper#initializeArguments()
 	 */
 	public function initializeArguments() {
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		$this->apiService = $objectManager->create('Tx_MvcExtjs_MVC_ExtDirect_Api');
+		$this->apiService = $objectManager->create('Tx_Newsletter_MVC_ExtDirect_Api');
 	}
-	
+
 	/**
 	 * Generates a Ext.Direct API descriptor and adds it to the pagerenderer.
 	 * Also calls Ext.Direct.addProvider() on itself (at js side).
 	 * The remote API is directly useable.
-	 * 
+	 *
 	 * @param string $name The name for the javascript variable.
 	 * @param string $namespace The namespace the variable is placed.
 	 * @param string $routeUrl You can specify a URL that acts as router.
 	 * @param boolean $cache
-	 * 
+	 *
 	 * @return void
 	 */
 	public function render($name = 'remoteDescriptor',
@@ -70,13 +69,13 @@ class Tx_MvcExtjs_ViewHelpers_ExtDirectProviderViewHelper extends Tx_MvcExtjs_Vi
 						   $routeUrl = NULL,
 						   $cache = TRUE
 						   ) {
-		
+
 		if ($routeUrl === NULL) {
-			$routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Tx_MvcExtjs_ExtDirectRequest=1';
+			$routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Tx_Newsletter_ExtDirectRequest=1';
 		}
-		
+
 		$api = $this->apiService->getApi($routeUrl,$namespace,$cache);
-		
+
 			// prepare output variable
 		$jsCode = '';
 		$descriptor = $namespace . '.' . $name;

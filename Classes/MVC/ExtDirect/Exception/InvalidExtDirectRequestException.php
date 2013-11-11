@@ -26,7 +26,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_MvcExtjs_MVC_ExtDirect_Exception_InvalidExtDirectRequestException extends Tx_MvcExtjs_Exception {
+class Tx_Newsletter_MVC_ExtDirect_Exception_InvalidExtDirectRequestException extends Tx_Newsletter_Exception {
 
 }
 ?>

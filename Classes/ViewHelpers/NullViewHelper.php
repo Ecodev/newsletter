@@ -28,13 +28,12 @@
  *
  *
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author Steffen Kamper <info@sk-typo3.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id:
  *
  */
-class Tx_MvcExtjs_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	protected $objectAccessorPostProcessorEnabled = FALSE;
 	protected $escapingInterceptorEnabled = FALSE;

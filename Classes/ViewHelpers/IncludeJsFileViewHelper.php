@@ -25,30 +25,29 @@
 /**
  * View helper which allows you to include a JS File.
  * Note: This feature is experimental!
- * Note: You MUST wrap this Helper with <mvcextjs:Be.moduleContainer>-Tags or <mvcextjs:Fe.pluginContainer>-Tags
+ * Note: You MUST wrap this Helper with <newsletter:Be.moduleContainer>-Tags or <newsletter:Fe.pluginContainer>-Tags
  *
  * = Examples =
  *
- * <mvcextjs:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
- * 	<mvcextjs:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
- * </mvcextjs:be.moduleContainer>
+ * <newsletter:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" enableExtJsDebug="true" addCssFile="{f:uri.resource(path:'styles/backend.css')}" addJsFile="{f:uri.resource('scripts/main.js')}">
+ * 	<newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ * </newsletter:be.moduleContainer>
  *
  * @category    ViewHelpers
  * @package     TYPO3
- * @subpackage  tx_mvcextjs
+ * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_ViewHelpers_IncludeJsFileViewHelper extends Tx_MvcExtjs_ViewHelpers_AbstractViewHelper {
+class Tx_Newsletter_ViewHelpers_IncludeJsFileViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper {
 
 	/**
 	 * Calls addJsFile on the Instance of t3lib_pagerenderer.
-	 * 
+	 *
 	 * @param string $name the file to include
 	 * @param string $extKey the extension, where the file is located
 	 * @param string $pathInsideExt the path to the file relative to the ext-folder
-	 * @return string the link 
+	 * @return string the link
 	 */
 	public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/') {
 		if ($extKey == NULL) {

@@ -1,8 +1,8 @@
-Ext.ns('Ext.ux.TYPO3.MvcExtjs');
+Ext.ns('Ext.ux.TYPO3.Newsletter');
 /**
  * 
  */
-Ext.ux.TYPO3.MvcExtjs.FlashMessagesTabPanel = function(){
+Ext.ux.TYPO3.Newsletter.FlashMessagesTabPanel = function(){
 	
 	var oldMessages;
 	var newMessages;
@@ -64,7 +64,7 @@ Ext.ux.TYPO3.MvcExtjs.FlashMessagesTabPanel = function(){
 		oldMessages = new Ext.util.MixedCollection();
 		newMessages = new Ext.util.MixedCollection();
 		tabPanel = createTabPanel(config);
-		Ext.ux.TYPO3.MvcExtjs.DirectFlashMessageDispatcher.on('new',addMessages);
+		Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.on('new',addMessages);
 		
 	};
 	

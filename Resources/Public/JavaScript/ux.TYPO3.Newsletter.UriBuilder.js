@@ -1,13 +1,13 @@
-Ext.ns('Ext.ux.TYPO3.MvcExtjs');
+Ext.ns('Ext.ux.TYPO3.Newsletter');
 /**
  * Creates URL's to call controller/actions
  * 
  * TODO: make FE url's available
  * 
- * @class Ext.ux.TYPO3.MvcExtjs.UriBuilder
+ * @class Ext.ux.TYPO3.Newsletter.UriBuilder
  * @singleton
  */
-Ext.ux.TYPO3.MvcExtjs.UriBuilder = function() {
+Ext.ux.TYPO3.Newsletter.UriBuilder = function() {
 	/**
 	 * Private data and logic
 	 */

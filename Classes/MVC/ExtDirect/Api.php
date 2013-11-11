@@ -25,12 +25,11 @@
 /**
  * A Service that provides the Ext.Direct Api
  *
- * @package     MvcExtjs
+ * @package     Newsletter
  * @subpackage  ExtJS
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
- * @version     SVN: $Id$
  */
-class Tx_MvcExtjs_MVC_ExtDirect_Api {
+class Tx_Newsletter_MVC_ExtDirect_Api {
 
 	/**
 	 * @var Tx_Extbase_Reflection_Service
@@ -60,7 +59,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 		$this->frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$this->cacheStorageKey = 'Tx_MvcExtjs_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
+		$this->cacheStorageKey = 'Tx_Newsletter_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
 	}
 
 	/**
@@ -130,7 +129,7 @@ class Tx_MvcExtjs_MVC_ExtDirect_Api {
 					);
 				} catch (ReflectionException $re) {
 					if ($unstrippedActionName !== 'extObjAction') {
-						t3lib_div::sysLog('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.','MvcExtjs',1);
+						t3lib_div::sysLog('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.','Newsletter',1);
 					}
 				}
 			}
