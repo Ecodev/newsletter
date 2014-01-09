@@ -159,12 +159,12 @@ Advanced substitutions
 You can also use the fields as a boolean evaluation. If you write the
 markers like this:
 
-:code:`###:IF: name ###<p>Bla bla bla</p>###:ENDIF:###`
+:code:`###:IF: my_field ###<p>Bla bla bla</p>###:ENDIF:###`
 
-The :code:`<p>Bla bla bla</p>` will only be shown if the “name” field evaluates
+The :code:`<p>Bla bla bla</p>` will only be shown if the “my_field” field evaluates
 to true in PHP. You can also make an else-branch:
 
-:code:`###:IF: name ###<h1>Foo</h1>###:ELSE:###<h1>Bar</h1>###:ENDIF:###`
+:code:`###:IF: my_field ###<h1>Foo</h1>###:ELSE:###<h1>Bar</h1>###:ENDIF:###`
 
 This can be useful to present different content to different recipients.
 
