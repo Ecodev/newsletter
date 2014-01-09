@@ -26,14 +26,11 @@ class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implem
         }
     }
 
-    public function setContent($content, $contentUrl, $baseUrl)
+    public function getPlainText($content, $baseUrl)
     {
         $this->set_base_url($baseUrl);
         $this->set_html($content);
-    }
 
-    public function getPlainText()
-    {
         return $this->get_text();
     }
 

@@ -22,7 +22,6 @@ return array(
     'tx_newsletter_domain_model_recipientlist' => $extensionClassesPath . 'Domain/Model/RecipientList.php',
     'tx_newsletter_domain_model_plainconverter_builtin' => $extensionClassesPath . 'Domain/Model/PlainConverter/Builtin.php',
     'tx_newsletter_domain_model_plainconverter_lynx' => $extensionClassesPath . 'Domain/Model/PlainConverter/Lynx.php',
-    'tx_newsletter_domain_model_plainconverter_template' => $extensionClassesPath . 'Domain/Model/PlainConverter/Template.php',
     'tx_newsletter_domain_model_recipientlist_array' => $extensionClassesPath . 'Domain/Model/RecipientList/Array.php',
     'tx_newsletter_domain_model_recipientlist_beusers' => $extensionClassesPath . 'Domain/Model/RecipientList/BeUsers.php',
     'tx_newsletter_domain_model_recipientlist_csvfile' => $extensionClassesPath . 'Domain/Model/RecipientList/CsvFile.php',

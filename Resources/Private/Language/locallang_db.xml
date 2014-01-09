@@ -20,7 +20,6 @@
             <label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly">Six months</label>
             <label index="tx_newsletter_domain_model_newsletter.repetition_yearly">One year</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter">Plain Text Converter</label>
-            <label index="tx_newsletter_domain_model_newsletter.plain_converter_template">Plain text template (&amp;type=99)</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx">Lynx cli-browser</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin">Builtin html converter</label>
             <label index="tx_newsletter_domain_model_newsletter.is_test">Is Test</label>

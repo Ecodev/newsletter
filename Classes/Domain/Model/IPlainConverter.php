@@ -31,17 +31,10 @@ interface Tx_Newsletter_Domain_Model_IPlainConverter
 {
 
     /**
-     * Set the data to be converted. Either $content or $contentUrl should be used
-     * for the convertion. If one of them is useless just ignore it.
-     * @param string $content HTML content to be converted to plain text
-     * @param string $contentUrl URL of the content to be converted
-     * @param string $baseUrl base URL which should be used for relative links
-     */
-    public function setContent($content, $contentUrl, $baseUrl);
-
-    /**
      * Returns the plain text version of the content
+     * @param string $content HTML content to be converted to plain text
+     * @param string $baseUrl base URL which should be used for relative links
      * @return string the converted content
      */
-    public function getPlainText();
+    public function getPlainText($content, $baseUrl);
 }

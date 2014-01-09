@@ -16,7 +16,6 @@
             <label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly">Six mois</label>
             <label index="tx_newsletter_domain_model_newsletter.repetition_yearly">Une année</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter">Convertisseur en texte</label>
-            <label index="tx_newsletter_domain_model_newsletter.plain_converter_template">Template de texte (&amp;type=99)</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx">Lynx cli-browser</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin">Convertisseur integré</label>
             <label index="tx_newsletter_domain_model_newsletter.is_test">Est un test</label>
@@ -93,7 +92,6 @@
             <label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly" type="integer">146677935</label>
             <label index="tx_newsletter_domain_model_newsletter.repetition_yearly" type="integer">14968501</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter" type="integer">163044881</label>
-            <label index="tx_newsletter_domain_model_newsletter.plain_converter_template" type="integer">19594602</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx" type="integer">66030997</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin" type="integer">201394950</label>
             <label index="tx_newsletter_domain_model_newsletter.is_test" type="integer">225853095</label>
@@ -169,7 +167,6 @@
             <label index="tx_newsletter_domain_model_newsletter.repetition_semiyearly">Six months</label>
             <label index="tx_newsletter_domain_model_newsletter.repetition_yearly">One year</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter">Plain Text Converter</label>
-            <label index="tx_newsletter_domain_model_newsletter.plain_converter_template">Plain text template (&amp;type=99)</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_lynx">Lynx cli-browser</label>
             <label index="tx_newsletter_domain_model_newsletter.plain_converter_builtin">Builtin html converter</label>
             <label index="tx_newsletter_domain_model_newsletter.is_test">Is Test</label>

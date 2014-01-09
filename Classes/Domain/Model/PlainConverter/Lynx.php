@@ -9,17 +9,16 @@
 class Tx_Newsletter_Domain_Model_PlainConverter_Lynx implements Tx_Newsletter_Domain_Model_IPlainConverter
 {
 
-    private $url = null;
-
-    public function setContent($content, $contentUrl, $baseUrl)
+    public function getPlainText($content, $baseUrl)
     {
-        $this->url = $contentUrl;
-    }
+        $tmpFile = tempnam(sys_get_temp_dir(), 'html');
+        file_put_contents($tmpFile, $content);
 
-    public function getPlainText()
-    {
-        exec(Tx_Newsletter_Tools::confParam('path_to_lynx') . ' -dump "' . $this->url . '"', $output);
+        $cmd = escapeshellcmd(Tx_Newsletter_Tools::confParam('path_to_lynx')) . ' -dump -stdin < ' . escapeshellarg($tmpFile);
+        exec($cmd, $output);
+        unlink($tmpFile);
         $plainText = implode("\n", $output);
+
         return $plainText;
     }
 

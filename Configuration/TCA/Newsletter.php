@@ -73,7 +73,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
                 'type' => 'select',
                 'items' => array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Tx_Newsletter_Domain_Model_PlainConverter_Builtin'),
-                    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_template', 'Tx_Newsletter_Domain_Model_PlainConverter_Template'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Tx_Newsletter_Domain_Model_PlainConverter_Lynx'),
                 ),
                 'size' => 1,

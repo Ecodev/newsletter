@@ -35,10 +35,12 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
 class Tx_Newsletter_Mailer
 {
 
+    /**
+     * @var Tx_Newsletter_Domain_Model_Newsletter $newsletter
+     */
+    private $newsletter;
     private $html;
     private $html_tpl;
-    private $plain;
-    private $plain_tpl;
     private $title;
     private $title_tpl;
     private $senderName;
@@ -76,7 +78,10 @@ class Tx_Newsletter_Mailer
      */
     public function getPlain()
     {
-        return $this->plain;
+        $plainConverter = $this->newsletter->getPlainConverterInstance();
+        $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->domain);
+        
+        return $plainText;
     }
 
     public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null)
@@ -106,11 +111,6 @@ class Tx_Newsletter_Mailer
 
         // Build title from HTML source (we cannot use $newsletter->getTitle(), because it is NOT localized)
         $this->setTitle($validatedContent['content']);
-
-        // Build plaintext
-        $plain = $newsletter->getPlainConverterInstance();
-        $plain->setContent($validatedContent['content'], $newsletter->getContentUrl($language), $this->domain);
-        $this->setPlain($plain->getPlaintext());
 
         // Attaching files
         $files = $newsletter->getAttachments();
@@ -145,31 +145,6 @@ class Tx_Newsletter_Mailer
 
         $this->title_tpl = $title;
         $this->title = $title;
-    }
-
-    /**
-     * Set the plain text content on the mail
-     *
-     * @param   string      The plain text content of the mail
-     * @return   void
-     */
-    private function setPlain($src)
-    {
-
-        /* Detect what markers we need to substitute later on */
-        preg_match_all('/###(\w+)###/', $src, $fields);
-        preg_match_all('|http://(\w+)\s|', $src, $fieldsLinks);
-        $this->plainMarkers = array_merge($fields[1], $fieldsLinks[1]);
-
-        /* Any advanced markers we need to sustitute later on */
-        $this->plainAdvancedMarkers = array();
-        preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
-        foreach ($fields[1] as $field) {
-            $this->plainAdvancedMarkers[] = $field;
-        }
-
-        $this->plain_tpl = $src;
-        $this->plain = $src;
     }
 
     /**
@@ -237,7 +212,6 @@ class Tx_Newsletter_Mailer
     private function resetMarkers()
     {
         $this->html = $this->html_tpl;
-        $this->plain = $this->plain_tpl;
         $this->title = $this->title_tpl;
     }
 
@@ -256,10 +230,6 @@ class Tx_Newsletter_Mailer
         // This approach has shown to speed up things quite a bit.
         if (in_array($name, $this->htmlAdvancedMarkers)) {
             $this->html = self::advancedSubstituteMarker($this->html, $name, $value);
-        }
-
-        if (in_array($name, $this->plainAdvancedMarkers)) {
-            $this->plain = self::advancedSubstituteMarker($this->plain, $name, $value);
         }
 
         if (in_array($name, $this->titleAdvancedMarkers)) {
@@ -281,10 +251,6 @@ class Tx_Newsletter_Mailer
 
         if (in_array($name, $this->htmlMarkers)) {
             $this->html = str_ireplace($search, $replace, $this->html);
-        }
-
-        if (in_array($name, $this->plainMarkers)) {
-            $this->plain = str_ireplace($search, $replace, $this->plain);
         }
 
         if (in_array($name, $this->titleMarkers)) {
@@ -343,7 +309,6 @@ class Tx_Newsletter_Mailer
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
                 $_procObj = & t3lib_div::getUserObj($_classRef);
                 $this->html = $_procObj->substituteMarkersHook($this->html, 'html', $markers);
-                $this->plain = $_procObj->substituteMarkersHook($this->plain, 'plain', $markers);
                 $this->title = $_procObj->substituteMarkersHook($this->title, 'title', $markers);
             }
         }
@@ -413,15 +378,6 @@ class Tx_Newsletter_Mailer
             $link = str_replace($url, $newUrl, $urls[0][$i]);
             $this->html = str_replace($urls[0][$i], $link, $this->html);
         }
-
-        /* Exchange all http:// links plaintext */
-        preg_match_all('|https?://[^ \r\n\)]*|i', $this->plain, $urls, PREG_OFFSET_CAPTURE);
-        $changedOffset = 0;
-        foreach ($urls[0] as $i => $url) {
-            $newUrl = $this->getLinkAuthCode($email, $url[0], $isPreview, true);
-            $this->plain = substr_replace($this->plain, $newUrl, $url[1] + $changedOffset, strlen($url[0]));
-            $changedOffset += strlen($newUrl) - strlen($url[0]);
-        }
     }
 
     /**
@@ -485,19 +441,22 @@ class Tx_Newsletter_Mailer
         $msgId = $message->getHeaders()->get('Message-ID');
         $msgId->setId($email->getAuthCode() . '@' . $this->newsletter->getDomain());
 
+        // Build plaintext
+        $plain = $this->getPlain();
+
         $recipientData = $email->getRecipientData();
         if ($recipientData['plain_only']) {
-            $message->setBody($this->plain, 'text/plain');
+            $message->setBody($plain, 'text/plain');
         } else {
             // Attach inline files and replace markers used for URL
             foreach ($this->attachmentsEmbedded as $marker => $attachment) {
                 $embeddedSrc = $message->embed($attachment);
-                $this->plain = str_replace($marker, $embeddedSrc, $this->plain);
+                $plain = str_replace($marker, $embeddedSrc, $plain);
                 $this->html = str_replace($marker, $embeddedSrc, $this->html);
             }
 
             $message->setBody($this->html, 'text/html');
-            $message->addPart($this->plain, 'text/plain');
+            $message->addPart($plain, 'text/plain');
         }
 
         $message->send();
