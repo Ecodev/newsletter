@@ -390,7 +390,7 @@ class Tx_Newsletter_Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $newUrl = Tx_Newsletter_Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+        $newUrl = Tx_Newsletter_Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
 
         return $newUrl;
     }

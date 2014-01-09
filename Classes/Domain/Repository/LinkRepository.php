@@ -69,24 +69,31 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
      * Register a clicked link in database and forward the event to RecipientList
      * so it can optionnally do something more
      * @global t3lib_DB $TYPO3_DB
+     * @param integer|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param boolean $isPlain
      */
-    public function registerClick($authCode, $isPlain)
+    public function registerClick($newsletterUid, $authCode, $isPlain)
     {
         global $TYPO3_DB;
 
         // Minimal sanitization before SQL
         $authCode = addslashes($authCode);
         $isPlain = $isPlain ? '1' : '0';
+        if ($newsletterUid) {
+            $limitNewsletter = 'AND tx_newsletter_domain_model_newsletter.uid = ' . (int) $newsletterUid;
+        } else {
+            $limitNewsletter = '';
+        }
 
         // Attempt to find back records in database based on given authCode
         $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
-        FROM tx_newsletter_domain_model_email
-		INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+        FROM tx_newsletter_domain_model_newsletter
+		INNER JOIN tx_newsletter_domain_model_email ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		INNER JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		WHERE
-		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authCode'");
+		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authCode'
+        $limitNewsletter");
 
         if (list($linkUid, $emailUid, $recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
 

@@ -82,7 +82,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_Newsletter_MVC_Controll
      */
     public function clickedAction()
     {
-        $this->linkRepository->registerClick(@$_REQUEST['l'], $_REQUEST['p']);
+        $this->linkRepository->registerClick(@$_REQUEST['n'], @$_REQUEST['l'], @$_REQUEST['p']);
 
         // Finally redirect to the destination URL
         $url = @$_REQUEST['url'];
