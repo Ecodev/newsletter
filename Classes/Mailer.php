@@ -405,7 +405,7 @@ class Tx_Newsletter_Mailer
     private function injectLinksSpy(Tx_Newsletter_Domain_Model_Email $email, $isPreview)
     {
         /* Exchange all http:// links  html */
-        preg_match_all('|<a [^>]*href="(http://[^"]*)"|Ui', $this->html, $urls);
+        preg_match_all('|<a [^>]*href="(https?://[^"]*)"|Ui', $this->html, $urls);
         foreach ($urls[1] as $i => $url) {
             $newUrl = $this->getLinkAuthCode($email, $url, $isPreview);
 
@@ -415,7 +415,7 @@ class Tx_Newsletter_Mailer
         }
 
         /* Exchange all http:// links plaintext */
-        preg_match_all('|http://[^ \r\n\)]*|i', $this->plain, $urls, PREG_OFFSET_CAPTURE);
+        preg_match_all('|https?://[^ \r\n\)]*|i', $this->plain, $urls, PREG_OFFSET_CAPTURE);
         $changedOffset = 0;
         foreach ($urls[0] as $i => $url) {
             $newUrl = $this->getLinkAuthCode($email, $url[0], $isPreview, true);
