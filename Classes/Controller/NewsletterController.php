@@ -269,7 +269,6 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
                 'beginTime',
                 'uidBounceAccount',
                 'uidRecipientList',
-                'domain',
                 'endTime',
                 'injectLinksSpy',
                 'injectOpenSpy',

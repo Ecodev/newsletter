@@ -673,12 +673,6 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
             }
         }
 
-        // Else, we try the HTTP_HOST value (not great, but better than nothing)
-        if (!$domain) {
-            $domain = @$_SERVER['HTTP_HOST'];
-        }
-
-
         // If still no domain, can't continue
         if (!$domain) {
             throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
@@ -816,7 +810,19 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         }
         $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
 
-        $url = $this->getContentUrl($language);
+        // We need to catch the exception if domain was not found/configured properly
+        try {
+            $url = $this->getContentUrl($language);
+        } catch (Exception $e) {
+
+            return array(
+                'content' => '',
+                'errors' => array($e->getMessage()),
+                'warnings' => array(),
+                'infos' => array(),
+            );
+        }
+
         $content = t3lib_div::getURL($url);
 
         $errors = array();
