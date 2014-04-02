@@ -23,9 +23,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once(PATH_t3lib . 'class.t3lib_extmgm.php');
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-require_once(t3lib_extMgm::extPath('newsletter') . '/Classes/Mailer.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/Classes/Mailer.php');
 
 /**
  * Toolbox for newsletter and dependant extensions.
@@ -93,7 +91,7 @@ abstract class Tx_Newsletter_Tools
         // hook for modifing the mailer before finish preconfiguring
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
-                $_procObj = & t3lib_div::getUserObj($_classRef);
+                $_procObj = & \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
                 $mailer = $_procObj->getConfiguredMailerHook($mailer, $newsletter);
             }
         }
