@@ -44,7 +44,7 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFileViewHelper extends Tx_Newsletter_Vi
 {
 
     /**
-     * Calls addJsFile on the Instance of t3lib_pagerenderer.
+     * Calls addJsFile on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located

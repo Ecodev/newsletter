@@ -36,7 +36,7 @@ abstract class Tx_Newsletter_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Cor
 {
 
     /**
-     * @var t3lib_PageRenderer
+     * @var TYPO3\CMS\Core\Page\PageRenderer
      */
     protected $pageRenderer;
 
