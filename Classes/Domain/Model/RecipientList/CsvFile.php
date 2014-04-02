@@ -124,7 +124,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Dom
     {
         $csvdata = null;
         if ($filename) {
-            $csvdata = t3lib_div::getURL($filename);
+            $csvdata = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($filename);
         }
 
         $this->loadCsvFromData($csvdata);

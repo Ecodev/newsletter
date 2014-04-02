@@ -143,7 +143,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
         }
 
         $recipientList = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
-        if (t3lib_div::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
             $this->response->setStatus(401);
             return 'not authorized !';
         }

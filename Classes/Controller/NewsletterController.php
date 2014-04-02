@@ -83,7 +83,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
     protected function initializeAction()
     {
         // Set default value of PID to know where to store/look for newsletter
-        $this->pid = filter_var(t3lib_div::_GET('id'), FILTER_VALIDATE_INT, array("min_range" => 0));
+        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, array("min_range" => 0));
         if (!$this->pid) {
             $this->pid = 0;
         }

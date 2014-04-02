@@ -261,7 +261,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
             }
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
-            $authCode = t3lib_div::stdAuthCode($this->_getCleanProperties());
+            $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
             $uriXml = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
             $uriCsv = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
 

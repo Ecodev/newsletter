@@ -44,7 +44,7 @@ class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controlle
      */
     protected function initializeAction()
     {
-        $this->pageId = intval(t3lib_div::_GP('id'));
+        $this->pageId = intval(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id'));
     }
 
     /**

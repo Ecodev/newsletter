@@ -66,12 +66,12 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFolderViewHelper extends Tx_Newsletter_
         $absFolderPath = $extPath . $pathInsideExt . $name;
         // $files will include all files relative to $pathInsideExt
         if ($recursive === FALSE) {
-            $files = t3lib_div::getFilesInDir($absFolderPath);
+            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getFilesInDir($absFolderPath);
             foreach ($files as $hash => $filename) {
                 $files[$hash] = $name . $filename;
             }
         } else {
-            $files = t3lib_div::getAllFilesAndFoldersInPath(array(), $absFolderPath, '', 0, 99, '\\.svn');
+            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getAllFilesAndFoldersInPath(array(), $absFolderPath, '', 0, 99, '\\.svn');
             foreach ($files as $hash => $absPath) {
                 $files[$hash] = str_replace($extPath . $pathInsideExt, '', $absPath);
             }

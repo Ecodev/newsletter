@@ -18,7 +18,7 @@ class Tx_Newsletter_ViewHelpers_CsvValuesViewHelper extends Tx_Newsletter_ViewHe
     public function render(array $values)
     {
 
-        return t3lib_div::csvValues($values);
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::csvValues($values);
     }
 
 }

@@ -135,7 +135,7 @@ class Tx_Newsletter_MVC_ExtDirect_Api
                     );
                 } catch (ReflectionException $re) {
                     if ($unstrippedActionName !== 'extObjAction') {
-                        t3lib_div::sysLog('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.', 'Newsletter', 1);
+                        \TYPO3\CMS\Core\Utility\GeneralUtility::sysLog('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.', 'Newsletter', 1);
                     }
                 }
             }

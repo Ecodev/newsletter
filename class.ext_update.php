@@ -97,14 +97,14 @@ class ext_update
         global $TYPO3_DB;
 
         // Action! Makes the necessary update
-        $update = t3lib_div::_GP('importtcdirectmail');
+        $update = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('importtcdirectmail');
 
         // The update button was clicked
         if (!empty($update) && $this->canImportFromTcdirectmail()) {
             $content .= '<h2>Import successfull</h2>';
 
             // Attempt to deactivate tcdirectmail via a URL loaded within iframe
-            if (t3lib_div::_GP('deactivate')) {
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('deactivate')) {
                 $content .= '<p>Deactivated TCDirectmail.</p>';
                 $content .= '<iframe style="border: none; height: 0; width: 0;" src="/typo3/mod.php?M=tools_em&CMD[showExt]=tcdirectmail&CMD[remove]=1" width="0" height="0"></iframe>';
             }

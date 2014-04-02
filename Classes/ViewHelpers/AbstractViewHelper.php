@@ -87,7 +87,7 @@ abstract class Tx_Newsletter_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Cor
                             ('TYPO3\CMS\Backend\Controller\NewRecordController');
         }
         if (!isset($GLOBALS['SOBE']->doc)) {
-            $GLOBALS['SOBE']->doc = t3lib_div::makeInstance('template');
+            $GLOBALS['SOBE']->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('template');
             $GLOBALS['SOBE']->doc->backPath = $GLOBALS['BACK_PATH'];
         }
         return $GLOBALS['SOBE']->doc;

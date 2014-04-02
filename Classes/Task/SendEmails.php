@@ -57,7 +57,7 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
     public function getAdditionalInformation()
     {
 
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
         $emailNotSentCount = 0;

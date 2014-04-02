@@ -63,7 +63,7 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
      */
     public function initializeObject()
     {
-        $this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
     }
 
     /**
