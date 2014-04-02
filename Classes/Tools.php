@@ -308,7 +308,7 @@ abstract class Tx_Newsletter_Tools
         // If we are in Backend we need to simulate minimal TSFE
         if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof tslib_fe)) {
             if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new t3lib_timeTrack;
+                $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker;
                 $GLOBALS['TT']->start();
             }
             $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_fe');
