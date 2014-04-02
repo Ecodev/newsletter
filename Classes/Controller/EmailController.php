@@ -238,7 +238,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         $body = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
 
         // Actually sends email
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_mail_Message');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($notificationEmail)
                 ->setFrom(array($newsletter->getSenderEmail() => $newsletter->getSenderName()))
                 ->setSubject($subject)

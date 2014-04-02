@@ -423,7 +423,7 @@ class Tx_Newsletter_Mailer
      */
     private function raw_send(Tx_Newsletter_Domain_Model_Email $email)
     {
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_mail_Message');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($email->getRecipientAddress())
                 ->setFrom(array($this->senderEmail => $this->senderName))
                 ->setSubject($this->title)
