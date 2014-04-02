@@ -666,7 +666,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
         if (!$domain) {
             $rootLine = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid);
-            $parser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_tsparser_ext'); // Defined global here!
+            $parser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(' TYPO3\\CMS\\Core\\TypoScript\\ExtendedTemplateService'); // Defined global here!
             $parser->tt_track = 0; // Do not log time-performance information
             $parser->init();
             $parser->runThroughTemplates($rootLine); // This generates the constants/config + hierarchy info for the template.
