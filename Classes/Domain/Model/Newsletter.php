@@ -645,7 +645,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
         // Else we try to resolve a domain in page root line
         if (!$domain) {
-            $pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
+            $pids = array_reverse(\TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid));
             foreach ($pids as $page) {
                 /* Domains */
                 $rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
@@ -665,7 +665,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
         // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
         if (!$domain) {
-            $rootLine = t3lib_befunc::BEgetRootLine($this->pid);
+            $rootLine = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid);
             $parser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('t3lib_tsparser_ext'); // Defined global here!
             $parser->tt_track = 0; // Do not log time-performance information
             $parser->init();
