@@ -88,13 +88,13 @@ class Tx_Newsletter_MVC_ExtDirect_Api
     public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = TRUE, $writeToCache = TRUE)
     {
         $cacheHash = md5($this->cacheStorageKey . serialize($this->frameworkConfiguration['controllerConfiguration']));
-        $cachedApi = ($readFromCache) ? t3lib_pageSelect::getHash($cacheHash) : FALSE;
+        $cachedApi = ($readFromCache) ? \TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash) : FALSE;
         if ($cachedApi) {
-            $api = unserialize(t3lib_pageSelect::getHash($cacheHash));
+            $api = unserialize(\TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash));
         } else {
             $api = $this->createApi($routeUrl, $namespace);
             if ($writeToCache) {
-                t3lib_pageSelect::storeHash($cacheHash, serialize($api), $this->cacheStorageKey);
+                \TYPO3\CMS\Frontend\Page\PageRepository::storeHash($cacheHash, serialize($api), $this->cacheStorageKey);
             }
         }
         return $api;
