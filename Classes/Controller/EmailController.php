@@ -74,7 +74,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
         $this->view->assign('data', $emails);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**

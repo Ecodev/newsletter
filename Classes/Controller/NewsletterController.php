@@ -111,7 +111,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
         $this->view->assign('total', $newsletters->count());
         $this->view->assign('data', $newsletters);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
@@ -138,7 +138,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
         $this->view->assign('total', 1);
         $this->view->assign('data', $newsletter);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
@@ -200,7 +200,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
         ));
 
         $this->view->assign('data', $newNewsletter);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**

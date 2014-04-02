@@ -76,7 +76,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
         $this->view->assign('total', $recipientLists->count());
         $this->view->assign('data', $recipientLists);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
@@ -121,7 +121,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
         $this->view->assign('total', $recipientLists->getCount());
         $this->view->assign('data', $recipients);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
         $this->view->setVariablesToRender(array('metaData', 'total', 'data', 'success', 'flashMessages'));
     }
 

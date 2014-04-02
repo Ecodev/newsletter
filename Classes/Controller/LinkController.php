@@ -73,7 +73,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_Newsletter_MVC_Controll
         $this->view->assign('total', $this->linkRepository->getCount($uidNewsletter));
         $this->view->assign('data', $links);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
