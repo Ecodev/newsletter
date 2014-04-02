@@ -62,14 +62,14 @@ abstract class Tx_Newsletter_Tools
     /**
      * Log a message in database table sys_log
      *
-     * @global t3lib_userAuthGroup $BE_USER
+     * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
      * @param string $message
      * @param integer $logLevel 0 = message, 1 = error
      */
     public static function log($message, $logLevel = 0)
     {
         global $BE_USER;
-        if ($BE_USER instanceof t3lib_userAuthGroup) {
+        if ($BE_USER instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication) {
             $BE_USER->simplelog($message, 'newsletter', $logLevel);
         }
     }
