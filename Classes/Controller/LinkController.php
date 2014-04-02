@@ -68,7 +68,7 @@ class Tx_Newsletter_Controller_LinkController extends Tx_Newsletter_MVC_Controll
             )
         ));
 
-        $this->flashMessageContainer->add('Loaded all Links from Server side.', 'Links loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded all Links from Server side.', 'Links loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
         $this->view->assign('total', $this->linkRepository->getCount($uidNewsletter));
         $this->view->assign('data', $links);

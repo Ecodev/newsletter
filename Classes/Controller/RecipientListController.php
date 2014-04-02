@@ -71,7 +71,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
             )
         ));
 
-        $this->flashMessageContainer->add('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
         $this->view->assign('total', $recipientLists->count());
         $this->view->assign('data', $recipientLists);
@@ -115,7 +115,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
             }
         }
 
-        $this->flashMessageContainer->add('Loaded Recipients from Server side.', 'Recipients loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded Recipients from Server side.', 'Recipients loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
         $this->view->assign('metaData', $metaData);
         $this->view->assign('total', $recipientLists->getCount());
