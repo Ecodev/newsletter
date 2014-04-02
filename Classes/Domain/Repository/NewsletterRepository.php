@@ -175,7 +175,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
     /**
      * Fills the $stateDifferences array with incremental difference that the state introduce.
      * It supports merging with existing diff in the array and several states on the same time.
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param array $stateDifferences
      * @param string $from
      * @param string $where
@@ -193,7 +193,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
             'linkOpenedCount' => 0,
         );
 
-        /** @var $TYPO3_DB t3lib_DB */
+        /** @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
         global $TYPO3_DB;
 
         $rs = $TYPO3_DB->exec_SELECTquery(join(', ', array_keys($stateConfiguration)), $from, $where);

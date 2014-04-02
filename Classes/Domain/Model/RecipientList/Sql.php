@@ -171,7 +171,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
     /**
      * Execute the SQL defined by the user to disable a recipient.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
      * @param integer $bounceLevel Level of bounce, @see Tx_Newsletter_BounceHandler for possible values
      * @return boolean Status of the success of the removal.
@@ -205,7 +205,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
     /**
      * Execute the SQL defined by the user to register that the email was open
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient (who opened the mail)
      * @return	void
      */
@@ -226,7 +226,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
     /**
      * Execute the SQL defined by the user to whenever the recipient has clicked a link via click.php
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
      * @return	void
      */

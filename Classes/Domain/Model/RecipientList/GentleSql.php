@@ -22,7 +22,7 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
      * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled.
      * You should be able to reset then in the backend
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
      * @param integer $bounceLevel This is the level of the bounce.
      * @return boolean Success of the bounce-handling.

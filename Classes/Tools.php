@@ -117,7 +117,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Spool a newsletter page out to the real receivers.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param   array        Newsletter record.
      * @param   integer      Actual begin time.
      * @return  void
@@ -168,7 +168,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Run the spool on a server.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return  integer	Number of emails sent.
      */
     public static function runSpoolOneAll()
@@ -210,7 +210,7 @@ abstract class Tx_Newsletter_Tools
      * Run the spool from a browser
      * This has some limitations. No load balance. Different permissions. And should have a mails_per_round-value
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return    void
      */
     static public function runSpoolOne(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
@@ -242,7 +242,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Method that accually runs the spool
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param resource SQL-resultset from a select from tx_newsletter_domain_model_email
      * @return void
      */

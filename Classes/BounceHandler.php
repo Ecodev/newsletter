@@ -172,7 +172,7 @@ class Tx_Newsletter_BounceHandler
 
     /**
      * Attempt to find the email in database which were bounced
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     protected function findEmail()
     {
