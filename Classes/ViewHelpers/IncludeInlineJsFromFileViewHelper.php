@@ -56,7 +56,7 @@ class Tx_Newsletter_ViewHelpers_IncludeInlineJsFromFileViewHelper extends Tx_New
         if ($extKey == NULL) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = t3lib_extMgm::extPath($extKey);
+        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
 
         $filePath = $extPath . $pathInsideExt . $name;
 

@@ -57,10 +57,10 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFileViewHelper extends Tx_Newsletter_Vi
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         if (TYPO3_MODE === 'FE') {
-            $extPath = t3lib_extMgm::extPath($extKey);
+            $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
             $extRelPath = substr($extPath, strlen(PATH_site));
         } else {
-            $extRelPath = t3lib_extMgm::extRelPath($extKey);
+            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         }
         $this->pageRenderer->addJsFile($extRelPath . $pathInsideExt . $name);
     }

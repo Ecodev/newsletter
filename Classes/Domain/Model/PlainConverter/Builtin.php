@@ -1,6 +1,6 @@
 <?php
 
-require_once(t3lib_extMgm::extPath('newsletter') . '/3dparty/class.html2text.inc');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/class.html2text.inc');
 
 /**
  * Convert HTML to plain text using builtin html2text tool

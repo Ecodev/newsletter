@@ -88,7 +88,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
 
         // Send one transparent pixel, so the end-user sees nothing at all
         header('Content-type: image/gif');
-        readfile(t3lib_extMgm::extPath('newsletter', '/Resources/Private/clear.gif'));
+        readfile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter', '/Resources/Private/clear.gif'));
         die();
     }
 

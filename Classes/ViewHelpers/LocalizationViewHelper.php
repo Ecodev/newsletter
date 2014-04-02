@@ -24,7 +24,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_Vie
         if ($extKey == NULL) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = t3lib_extMgm::extPath($extKey);
+        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
 
         $localizations = array();
         foreach ($names as $name) {

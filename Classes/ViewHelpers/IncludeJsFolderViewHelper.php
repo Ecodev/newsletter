@@ -57,11 +57,11 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFolderViewHelper extends Tx_Newsletter_
         if ($extKey == NULL) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = t3lib_extMgm::extPath($extKey);
+        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
         if (TYPO3_MODE === 'FE') {
             $extRelPath = substr($extPath, strlen(PATH_site));
         } else {
-            $extRelPath = t3lib_extMgm::extRelPath($extKey);
+            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         }
         $absFolderPath = $extPath . $pathInsideExt . $name;
         // $files will include all files relative to $pathInsideExt

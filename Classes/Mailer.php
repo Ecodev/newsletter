@@ -96,7 +96,7 @@ class Tx_Newsletter_Mailer
         $this->siteUrl = "http://$domain/";
         $this->linksCache = array();
         $this->newsletter = $newsletter;
-        $this->homeUrl = $this->siteUrl . t3lib_extMgm::siteRelPath('newsletter');
+        $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
         $this->senderEmail = $newsletter->getSenderEmail();
         $bounceAccount = $newsletter->getBounceAccount();
