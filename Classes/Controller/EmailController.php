@@ -69,7 +69,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
             )
         ));
 
-        $this->flashMessageContainer->add('Loaded all Emails from Server side.', 'Emails loaded successfully', t3lib_FlashMessage::NOTICE);
+        $this->flashMessageContainer->add('Loaded all Emails from Server side.', 'Emails loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
         ;
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
         $this->view->assign('data', $emails);
