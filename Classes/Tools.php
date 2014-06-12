@@ -145,8 +145,12 @@ abstract class Tx_Newsletter_Tools
         $recipientList->init();
         while ($receiver = $recipientList->getRecipient()) {
 
+            // Remove spaces before and after the address, because t3lib_div::validEmail return FALSE
+            // if an email contains a trailing space
+            $cleanEmail = trim($receiver['email']);
+
             // Register the receiver
-            if (t3lib_div::validEmail($receiver['email'])) {
+            if (t3lib_div::validEmail($cleanEmail)) {
                 $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
                     'pid' => $newsletter->getPid(),
                     'recipient_address' => $receiver['email'],
