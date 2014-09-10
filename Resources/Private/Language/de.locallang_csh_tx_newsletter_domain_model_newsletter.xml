@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <data type="array">
+        <languageKey index="de" type="array">
+            <label index="planned_time.description">Ab wann der Newsletter zu senden beginnt</label>
+            <label index="begin_time.description">startZeit</label>
+            <label index="end_time.description">endZeit</label>
+            <label index="repetition.description">0-7 Werte um zu definieren wann dieser Newsletter wiederholt wird</label>
+            <label index="plain_converter.description">Tool um in Plain-Text zu konvertieren</label>
+            <label index="is_test.description">Ob dieser Newsletter für Tests gedacht ist. Falls ja, wird er in den Statistiken ignoriert.</label>
+            <label index="attachments.description">Dateien die als Anhang mitgesendet werden sollen (komma-separierte Liste)</label>
+            <label index="sender_name.description">Name des Newsletter Absenders</label>
+            <label index="sender_email.description">E-Mail des Newsletter Absenders</label>
+            <label index="inject_open_spy.description">injectOpenSpy</label>
+            <label index="inject_links_spy.description">injectLinksSpy</label>
+            <label index="bounce_account.description">bounceAccount</label>
+            <label index="recipient_list.description">recipientList</label>
+        </languageKey>
+    </data>
+</T3locallang>
