@@ -97,6 +97,10 @@ queries) upon specific event (bounced email, unsubscribe). Thus we
 **strongly recommend the use of SQL Recipient List** and to read the
 [[SQL examples for Recipient List]].
 
+For CSV, when asked for ``CSV Fields``, you should enter the column names,
+eg: ``email,firstname,lastname``. Then file/list/url should only contains
+the values without any column headers, eg: ``me@example.com,John,Connor``.
+
 Bounce account
 --------------
 
