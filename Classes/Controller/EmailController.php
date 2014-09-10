@@ -99,6 +99,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
     public function showAction()
     {
         // Override settings to NOT embed images inlines (doesn't make sense for web display)
+        global $TYPO3_CONF_VARS;
         $theConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
         $theConf['attach_images'] = false;
         $TYPO3_CONF_VARS['EXT']['extConf']['newsletter'] = serialize($theConf);
