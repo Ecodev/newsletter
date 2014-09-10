@@ -184,12 +184,12 @@ class Tx_Newsletter_BounceHandler
             // The last match is the authcode of the email sent
             $this->authCode = end($match[1]);
 
-            // Find the recipientList and email UIDs accordin to authcode
+            // Find the recipientList and email UIDs according to authcode
             $rs = $TYPO3_DB->sql_query("
 			SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.uid
 			FROM tx_newsletter_domain_model_email
-			LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
-			LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
+			INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+			INNER JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
 			WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = '$this->authCode' AND recipient_list IS NOT NULL
 			LIMIT 1");
 
