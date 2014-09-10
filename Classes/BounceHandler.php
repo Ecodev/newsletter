@@ -61,7 +61,7 @@ class Tx_Newsletter_BounceHandler
      *  Matches for hard bounces
      */
     protected $hard = array(
-        /* Any where in the mail */
+        /* Anywhere in the mail */
         '/User unknown/',
         '/sorry to have to inform you that your message could not be delivered to one or more recipients./i',
         '/Delivery to the following recipients failed/i',
@@ -72,6 +72,7 @@ class Tx_Newsletter_BounceHandler
         '/550 unknown/i',
         '/550 Invalid recipient/i',
         '/550 Host unknown/i',
+        '/550 Address invalid/i',
         '/unknown or illegal alias/i',
         '/Unrouteable address/i',
         '/The following addresses had permanent fatal errors/i',
