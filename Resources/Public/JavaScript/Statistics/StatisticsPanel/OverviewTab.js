@@ -1,7 +1,5 @@
 "use strict";
-
 Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
-
 /**
  * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab
  * @namespace Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel
@@ -20,24 +18,9 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
                     items: [{
                             width: 350,
                             height: 200,
-                            xtype: 'piechart',
-                            store: Ext.StoreMgr.get('Tx_Newsletter_Overview_Pie_Chart'),
-                            dataField: 'data',
-                            categoryField: 'label',
-                            seriesStyles: {
-                                colors: ['#CCCCCC', '#25CDF2', '#078207', '#E01B4C']
-                            },
-                            //extra styles get applied to the chart defaults
-                            extraStyle:
-                                    {
-                                        legend:
-                                                {
-                                                    display: 'bottom'
-                                                },
-                                        background: {
-                                            color: '#EFEFF4'
-                                        }
-                                    }
+                            xtype: 'dataview',
+                            tpl: new Ext.XTemplate('<div id="pieChartContainer"><svg id="pieChart"></svg></div>'),
+                            store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter')
                         },
                         {
                             xtype: 'dataview',
@@ -64,44 +47,14 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab = Ext.extend(Ext.
                 },
                 {
                     region: 'center',
-                    xtype: 'linechart',
-                    store: Ext.StoreMgr.get('Tx_Newsletter_Timeline_Chart'),
-                    xField: 'time',
-                    yAxis: new Ext.chart.NumericAxis({
-                        majorUnit: 20
-                    }),
-                    xAxis: new Ext.chart.TimeAxis({
-                        labelRenderer: function(date) {
-                            return date.format("Y-m-d H:i:s");
+                    xtype: 'panel',
+                    html: '<div id="timelineChartContainer"><svg id="timelineChart"></svg></div>',
+                    listeners: {
+                        resize: function() {
+                            var store = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+                            store.resizeChart();
                         }
-                    }),
-                    series: [
-                        {
-                            yField: 'emailNotSentPercentage',
-                            displayName: Ext.ux.TYPO3.Newsletter.Language.not_sent,
-                            style: {color: '#CCCCCC'}
-                        },
-                        {
-                            yField: 'emailSentPercentage',
-                            displayName: Ext.ux.TYPO3.Newsletter.Language.sent,
-                            style: {color: '#25CDF2'}
-                        },
-                        {
-                            yField: 'emailOpenedPercentage',
-                            displayName: Ext.ux.TYPO3.Newsletter.Language.opened,
-                            style: {color: '#078207'}
-                        },
-                        {
-                            yField: 'emailBouncedPercentage',
-                            displayName: Ext.ux.TYPO3.Newsletter.Language.bounced,
-                            style: {color: '#E01B4C'}
-                        },
-                        {
-                            yField: 'linkOpenedPercentage',
-                            displayName: Ext.ux.TYPO3.Newsletter.Language.link_opened,
-                            style: {color: '#FFB61B'}
-                        }
-                    ]
+                    }
                 }]
         };
         Ext.apply(this, config);

@@ -96,3 +96,9 @@ ul.infos li.none {
 {
     cursor: pointer;
 }
+
+#pieChartContainer,
+#timelineChartContainer
+{
+    height: 100%;
+}

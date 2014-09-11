@@ -98,10 +98,6 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
         Ext.ux.TYPO3.Newsletter.Store.BounceAccount.initialize();
         Ext.ux.TYPO3.Newsletter.Store.RecipientList.initialize();
         Ext.ux.TYPO3.Newsletter.Store.Recipient.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.TimelineChart.initialize();
-
-        // pie chart depends on SelectedNewsletter store so it must be initialized after it
-        Ext.ux.TYPO3.Newsletter.Store.OverviewPieChart.initialize();
     },
     /**
      * Init folder GUI
