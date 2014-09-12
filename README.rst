@@ -1,5 +1,8 @@
-Newsletter
-==========
+Newsletter |badge| 
+==================
+
+.. |badge| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/quality-score.png?b=master
+
 
 .. image:: Documentation/img/Statistics_-_Overview_-_small.png
    :align: right
