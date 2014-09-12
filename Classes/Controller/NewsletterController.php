@@ -147,6 +147,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
      * @param Tx_Newsletter_Domain_Model_Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
      * @return void
      * @dontverifyrequesthash
+     * @dontvalidate $newNewsletter
      */
     public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter = null)
     {
