@@ -2,6 +2,7 @@ Newsletter |badge|
 ==================
 
 .. |badge| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
 
 
 .. image:: Documentation/img/Statistics_-_Overview_-_small.png
