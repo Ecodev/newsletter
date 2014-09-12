@@ -86,5 +86,6 @@
             <label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
         </languageKey>
         <languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
+        <languageKey index="de">EXT:newsletter/Resources/Private/Language/de.locallang.xml</languageKey>
     </data>
 </T3locallang>

@@ -7,5 +7,6 @@
             <label index="mlang_labels_tabdescr">Newsletter control module. This module allows you to control the newsletter settings.</label>
         </languageKey>
         <languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_module.xml</languageKey>
+        <languageKey index="de">EXT:newsletter/Resources/Private/Language/de.locallang_module.xml</languageKey>
     </data>
 </T3locallang>
