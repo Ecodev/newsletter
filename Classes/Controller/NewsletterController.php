@@ -148,6 +148,7 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
      * @return void
      * @dontverifyrequesthash
      * @dontvalidate $newNewsletter
+     * @ignorevalidation $newNewsletter
      */
     public function createAction(Tx_Newsletter_Domain_Model_Newsletter $newNewsletter = null)
     {
