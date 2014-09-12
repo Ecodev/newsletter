@@ -14,6 +14,7 @@
             <label index="password.description">password</label>
         </languageKey>
         <languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang_csh_tx_newsletter_domain_model_bounceaccount.xml</languageKey>
+        <languageKey index="de">EXT:newsletter/Resources/Private/Language/de.locallang_csh_tx_newsletter_domain_model_bounceaccount.xml</languageKey>
     </data>
     <orig_hash type="array">
     </orig_hash>
