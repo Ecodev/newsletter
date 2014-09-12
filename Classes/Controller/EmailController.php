@@ -69,12 +69,12 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
             )
         ));
 
-        $this->flashMessageContainer->add('Loaded all Emails from Server side.', 'Emails loaded successfully', t3lib_FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded all Emails from Server side.', 'Emails loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
         ;
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
         $this->view->assign('data', $emails);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
@@ -88,7 +88,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
 
         // Send one transparent pixel, so the end-user sees nothing at all
         header('Content-type: image/gif');
-        readfile(t3lib_extMgm::extPath('newsletter', '/Resources/Private/clear.gif'));
+        readfile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter', '/Resources/Private/clear.gif'));
         die();
     }
 
@@ -226,7 +226,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         }
 
         // If cannot find valid email, don't send any notification
-        if (!t3lib_div::validEmail($notificationEmail)) {
+        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($notificationEmail)) {
             return;
         }
 
@@ -239,7 +239,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         $body = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
 
         // Actually sends email
-        $message = t3lib_div::makeInstance('t3lib_mail_Message');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($notificationEmail)
                 ->setFrom(array($newsletter->getSenderEmail() => $newsletter->getSenderName()))
                 ->setSubject($subject)

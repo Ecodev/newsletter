@@ -10,7 +10,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_Vie
 {
 
     /**
-     * Calls addJsFile on the Instance of t3lib_pagerenderer.
+     * Calls addJsFile on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *
      * @param string $name the list of file to include separated by coma
      * @param string $extKey the extension, where the file is located
@@ -24,7 +24,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_Vie
         if ($extKey == NULL) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = t3lib_extMgm::extPath($extKey);
+        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
 
         $localizations = array();
         foreach ($names as $name) {

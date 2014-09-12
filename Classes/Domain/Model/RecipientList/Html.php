@@ -69,7 +69,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Html extends Tx_Newsletter_Domain
     {
         $this->data = array();
 
-        $content = t3lib_div::getURL($this->getHtmlUrl());
+        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($this->getHtmlUrl());
 
         switch ($this->getHtmlFetchType()) {
             case 'mailto':

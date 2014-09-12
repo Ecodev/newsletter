@@ -71,12 +71,12 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
             )
         ));
 
-        $this->flashMessageContainer->add('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', t3lib_FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
         $this->view->assign('total', $recipientLists->count());
         $this->view->assign('data', $recipientLists);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 
     /**
@@ -115,13 +115,13 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
             }
         }
 
-        $this->flashMessageContainer->add('Loaded Recipients from Server side.', 'Recipients loaded successfully', t3lib_FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded Recipients from Server side.', 'Recipients loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
         $this->view->assign('metaData', $metaData);
         $this->view->assign('total', $recipientLists->getCount());
         $this->view->assign('data', $recipients);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->flashMessageContainer->getAllMessagesAndFlush());
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
         $this->view->setVariablesToRender(array('metaData', 'total', 'data', 'success', 'flashMessages'));
     }
 
@@ -143,7 +143,7 @@ class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC
         }
 
         $recipientList = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
-        if (t3lib_div::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
             $this->response->setStatus(401);
             return 'not authorized !';
         }

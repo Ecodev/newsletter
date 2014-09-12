@@ -88,7 +88,7 @@ class ext_update
 
     /**
      * Main function, returning the HTML content of the module
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return	string	HTML to display
      */
     function main()
@@ -97,14 +97,14 @@ class ext_update
         global $TYPO3_DB;
 
         // Action! Makes the necessary update
-        $update = t3lib_div::_GP('importtcdirectmail');
+        $update = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('importtcdirectmail');
 
         // The update button was clicked
         if (!empty($update) && $this->canImportFromTcdirectmail()) {
             $content .= '<h2>Import successfull</h2>';
 
             // Attempt to deactivate tcdirectmail via a URL loaded within iframe
-            if (t3lib_div::_GP('deactivate')) {
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('deactivate')) {
                 $content .= '<p>Deactivated TCDirectmail.</p>';
                 $content .= '<iframe style="border: none; height: 0; width: 0;" src="/typo3/mod.php?M=tools_em&CMD[showExt]=tcdirectmail&CMD[remove]=1" width="0" height="0"></iframe>';
             }
@@ -142,7 +142,7 @@ class ext_update
 
     /**
      * Returns whether an import from tcdirectmail is possible
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return boolean
      */
     private function canImportFromTcdirectmail()
@@ -184,7 +184,7 @@ class ext_update
 
     /**
      * Import data from tcdirectmail. Assume everything is available for import.
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     private function importFromTcdirectmail()
     {

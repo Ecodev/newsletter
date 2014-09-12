@@ -71,11 +71,11 @@ class Tx_Newsletter_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_Newslett
      * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
      * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
      * @param boolean $enableExtJSQuickTips
-     * @param string  $extCorePath specifies a path for the ExtCore default NULL (uses the path set in the t3lib_PageRenderer)
-     * @param string  $extJsPath specifies a path for the ExtJS default NULL (uses the path set in the t3lib_PageRenderer)
+     * @param string  $extCorePath specifies a path for the ExtCore default NULL (uses the path set in the TYPO3\CMS\Core\Page\PageRenderer)
+     * @param string  $extJsPath specifies a path for the ExtJS default NULL (uses the path set in the TYPO3\CMS\Core\Page\PageRenderer)
      * @return string
      * @see template
-     * @see t3lib_PageRenderer
+     * @see TYPO3\CMS\Core\Page\PageRenderer
      */
     public function render($pageTitle = '', $enableJumpToUrl = FALSE, $loadPrototype = FALSE, $loadScriptaculous = FALSE, $scriptaculousModule = '', $loadExtJs = TRUE, $loadExtCore = FALSE, $loadExtJsTheme = TRUE, $extJsAdapter = '', $enableExtJsDebug = FALSE, $concatenate = TRUE, $compressJs = TRUE, $compressCss = TRUE, $enableExtJSQuickTips = TRUE, $extCorePath = NULL, $extJsPath = NULL)
     {

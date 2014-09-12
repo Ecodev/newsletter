@@ -23,9 +23,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once(PATH_t3lib . 'class.t3lib_extmgm.php');
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-require_once(t3lib_extMgm::extPath('newsletter') . '/Classes/Mailer.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/Classes/Mailer.php');
 
 /**
  * Toolbox for newsletter and dependant extensions.
@@ -64,14 +62,14 @@ abstract class Tx_Newsletter_Tools
     /**
      * Log a message in database table sys_log
      *
-     * @global t3lib_userAuthGroup $BE_USER
+     * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
      * @param string $message
      * @param integer $logLevel 0 = message, 1 = error
      */
     public static function log($message, $logLevel = 0)
     {
         global $BE_USER;
-        if ($BE_USER instanceof t3lib_userAuthGroup) {
+        if ($BE_USER instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication) {
             $BE_USER->simplelog($message, 'newsletter', $logLevel);
         }
     }
@@ -93,7 +91,7 @@ abstract class Tx_Newsletter_Tools
         // hook for modifing the mailer before finish preconfiguring
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
-                $_procObj = & t3lib_div::getUserObj($_classRef);
+                $_procObj = & \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
                 $mailer = $_procObj->getConfiguredMailerHook($mailer, $newsletter);
             }
         }
@@ -107,7 +105,7 @@ abstract class Tx_Newsletter_Tools
      */
     static public function createAllSpool()
     {
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
@@ -119,7 +117,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Spool a newsletter page out to the real receivers.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param   array        Newsletter record.
      * @param   integer      Actual begin time.
      * @return  void
@@ -132,7 +130,7 @@ abstract class Tx_Newsletter_Tools
         if ($newsletter->getBeginTime())
             return;
 
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
         // Lock the newsletter by setting its begin_time
@@ -146,7 +144,7 @@ abstract class Tx_Newsletter_Tools
         while ($receiver = $recipientList->getRecipient()) {
 
             // Register the receiver
-            if (t3lib_div::validEmail($receiver['email'])) {
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($receiver['email'])) {
                 $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
                     'pid' => $newsletter->getPid(),
                     'recipient_address' => $receiver['email'],
@@ -170,7 +168,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Run the spool on a server.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return  integer	Number of emails sent.
      */
     public static function runSpoolOneAll()
@@ -212,7 +210,7 @@ abstract class Tx_Newsletter_Tools
      * Run the spool from a browser
      * This has some limitations. No load balance. Different permissions. And should have a mails_per_round-value
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return    void
      */
     static public function runSpoolOne(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
@@ -244,7 +242,7 @@ abstract class Tx_Newsletter_Tools
     /**
      * Method that accually runs the spool
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param resource SQL-resultset from a select from tx_newsletter_domain_model_email
      * @return void
      */
@@ -255,7 +253,7 @@ abstract class Tx_Newsletter_Tools
         $emailSentCount = 0;
         $mailers = array();
 
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
         $emailRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
 
@@ -310,10 +308,10 @@ abstract class Tx_Newsletter_Tools
         // If we are in Backend we need to simulate minimal TSFE
         if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof tslib_fe)) {
             if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new t3lib_timeTrack;
+                $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker;
                 $GLOBALS['TT']->start();
             }
-            $TSFEclassName = @t3lib_div::makeInstance('tslib_fe');
+            $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_fe');
             $GLOBALS['TSFE'] = new $TSFEclassName($GLOBALS['TYPO3_CONF_VARS'], 0, '0', 1, '', '', '', '');
 //			$GLOBALS['TSFE']->connectToMySQL();
             $GLOBALS['TSFE']->initFEuser();
@@ -326,7 +324,7 @@ abstract class Tx_Newsletter_Tools
         }
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof Tx_Extbase_Core_Bootstrap)) {
             $extbaseBootstrap = $objectManager->get('Tx_Extbase_Core_Bootstrap');
             $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
@@ -351,7 +349,7 @@ abstract class Tx_Newsletter_Tools
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
 
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $extensionService = $objectManager->get('Tx_Extbase_Service_ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 

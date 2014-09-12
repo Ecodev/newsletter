@@ -164,7 +164,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     protected function getObjectManager()
     {
         if (!$this->objectManager)
-            $this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
 
         return $this->objectManager;
     }
@@ -376,7 +376,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      * or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
      * or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string The name of the newsletter sender
      */
     public function getSenderName()
@@ -431,7 +431,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      * or the guessed email address of the user running the this process.
      * or the no-reply@$_SERVER['HTTP_HOST'].
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string The email of the newsletter sender
      */
     public function getSenderEmail()
@@ -439,7 +439,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         global $TYPO3_DB;
 
         /* The sender defined on the page? */
-        if (t3lib_div::validEmail($this->senderEmail)) {
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($this->senderEmail)) {
             return $this->senderEmail;
         }
 
@@ -453,13 +453,13 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 			WHERE p.uid = $this->pid");
 
             list($email) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
-            if (t3lib_div::validEmail($email)) {
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($email)) {
                 return $email;
             }
         }
 
         /* Maybe it was a hardcoded email address? */
-        if (t3lib_div::validEmail($email)) {
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($email)) {
             return $email;
         }
 
@@ -633,7 +633,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      * Function to fetch the proper domain from which to fetch content for newsletter.
      * This is either a sys_domain record from the page tree or the fetch_path property.
      *
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string Correct domain.
      */
     public function getDomain()
@@ -645,7 +645,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
         // Else we try to resolve a domain in page root line
         if (!$domain) {
-            $pids = array_reverse(t3lib_befunc::BEgetRootLine($this->pid));
+            $pids = array_reverse(\TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid));
             foreach ($pids as $page) {
                 /* Domains */
                 $rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
@@ -665,8 +665,8 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
         // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
         if (!$domain) {
-            $rootLine = t3lib_befunc::BEgetRootLine($this->pid);
-            $parser = t3lib_div::makeInstance('t3lib_tsparser_ext'); // Defined global here!
+            $rootLine = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid);
+            $parser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\ExtendedTemplateService'); // Defined global here!
             $parser->tt_track = 0; // Do not log time-performance information
             $parser->init();
             $parser->runThroughTemplates($rootLine); // This generates the constants/config + hierarchy info for the template.
@@ -687,7 +687,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Returns the title, NOT localized, of the page sent by this newsletter.
      * This should only used for BE, because newsletter recipients need localized title
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string the title
      */
     function getTitle()
@@ -705,7 +705,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
     /**
      * Schedule the next newsletter if it defined to be repeated
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function scheduleNextNewsletter()
     {
@@ -760,7 +760,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
     /**
      * Get the number of not yet sent email
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function getEmailNotSentCount()
     {
@@ -804,7 +804,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
         global $LANG;
         if (is_null($LANG)) {
-            $LANG = t3lib_div::makeInstance('language'); // create language-object
+            $LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('language'); // create language-object
             $LLkey = 'default';
             if ($GLOBALS['TSFE']->config['config']['language']) {
                 $LLkey = $GLOBALS['TSFE']->config['config']['language'];
@@ -826,7 +826,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
             );
         }
 
-        $content = t3lib_div::getURL($url);
+        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
 
         $errors = array();
         $warnings = array();
@@ -889,7 +889,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         foreach ($urls[1] as $i => $url) {
 
             $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
-<style type=\"text/css\">\n<!--\n" . t3lib_div::getURL($url) . "\n-->\n</style>", $content);
+<style type=\"text/css\">\n<!--\n" . \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url) . "\n-->\n</style>", $content);
         }
         if (count($urls[1])) {
             $infos[] = $LANG->getLL('validation_mail_contains_linked_styles');

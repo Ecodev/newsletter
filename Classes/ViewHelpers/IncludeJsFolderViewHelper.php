@@ -44,7 +44,7 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFolderViewHelper extends Tx_Newsletter_
 {
 
     /**
-     * Calls addJsFile for each file in the given folder on the Instance of t3lib_pagerenderer.
+     * Calls addJsFile for each file in the given folder on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
@@ -57,21 +57,21 @@ class Tx_Newsletter_ViewHelpers_IncludeJsFolderViewHelper extends Tx_Newsletter_
         if ($extKey == NULL) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = t3lib_extMgm::extPath($extKey);
+        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
         if (TYPO3_MODE === 'FE') {
             $extRelPath = substr($extPath, strlen(PATH_site));
         } else {
-            $extRelPath = t3lib_extMgm::extRelPath($extKey);
+            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         }
         $absFolderPath = $extPath . $pathInsideExt . $name;
         // $files will include all files relative to $pathInsideExt
         if ($recursive === FALSE) {
-            $files = t3lib_div::getFilesInDir($absFolderPath);
+            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getFilesInDir($absFolderPath);
             foreach ($files as $hash => $filename) {
                 $files[$hash] = $name . $filename;
             }
         } else {
-            $files = t3lib_div::getAllFilesAndFoldersInPath(array(), $absFolderPath, '', 0, 99, '\\.svn');
+            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getAllFilesAndFoldersInPath(array(), $absFolderPath, '', 0, 99, '\\.svn');
             foreach ($files as $hash => $absPath) {
                 $files[$hash] = str_replace($extPath . $pathInsideExt, '', $absPath);
             }

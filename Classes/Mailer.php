@@ -96,7 +96,7 @@ class Tx_Newsletter_Mailer
         $this->siteUrl = "http://$domain/";
         $this->linksCache = array();
         $this->newsletter = $newsletter;
-        $this->homeUrl = $this->siteUrl . t3lib_extMgm::siteRelPath('newsletter');
+        $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
         $this->senderEmail = $newsletter->getSenderEmail();
         $bounceAccount = $newsletter->getBounceAccount();
@@ -307,7 +307,7 @@ class Tx_Newsletter_Mailer
 
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
-                $_procObj = & t3lib_div::getUserObj($_classRef);
+                $_procObj = & \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
                 $this->html = $_procObj->substituteMarkersHook($this->html, 'html', $markers);
                 $this->title = $_procObj->substituteMarkersHook($this->title, 'title', $markers);
             }
@@ -423,7 +423,7 @@ class Tx_Newsletter_Mailer
      */
     private function raw_send(Tx_Newsletter_Domain_Model_Email $email)
     {
-        $message = t3lib_div::makeInstance('t3lib_mail_Message');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($email->getRecipientAddress())
                 ->setFrom(array($this->senderEmail => $this->senderName))
                 ->setSubject($this->title)

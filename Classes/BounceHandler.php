@@ -103,7 +103,7 @@ class Tx_Newsletter_BounceHandler
         // Find all bounce accounts we need to check
         $content = '';
         $servers = array();
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $bounceAccountRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
             $server = $bounceAccount->getServer();
@@ -141,7 +141,7 @@ class Tx_Newsletter_BounceHandler
      */
     function __construct($mailsource = '')
     {
-        $this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $this->analyze($mailsource);
     }
 
@@ -173,7 +173,7 @@ class Tx_Newsletter_BounceHandler
 
     /**
      * Attempt to find the email in database which were bounced
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     protected function findEmail()
     {

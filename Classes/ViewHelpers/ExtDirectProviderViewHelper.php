@@ -51,8 +51,8 @@ class Tx_Newsletter_ViewHelpers_ExtDirectProviderViewHelper extends Tx_Newslette
      */
     public function initializeArguments()
     {
-        $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $this->apiService = $objectManager->create('Tx_Newsletter_MVC_ExtDirect_Api');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $this->apiService = $objectManager->get('Tx_Newsletter_MVC_ExtDirect_Api');
     }
 
     /**

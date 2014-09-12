@@ -20,7 +20,7 @@ class Tx_Newsletter_Tca_RecipientListTca
         $result = '';
         $uid = intval($PA['row']['uid']);
         if ($uid != 0) {
-            $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
             $recipientListRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
             $recipientList = $recipientListRepository->findByUidInitialized($uid);
 

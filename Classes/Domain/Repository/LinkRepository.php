@@ -54,7 +54,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
 
     /**
      * Returns the count of links for a given newsletter
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param integer $uidNewsletter
      */
     public function getCount($uidNewsletter)
@@ -68,7 +68,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
     /**
      * Register a clicked link in database and forward the event to RecipientList
      * so it can optionnally do something more
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param integer|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param boolean $isPlain

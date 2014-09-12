@@ -86,7 +86,7 @@ class Tx_Newsletter_MVC_Controller_ExtDirectActionController extends Tx_Extbase_
         }
         if ($this->view instanceof Tx_Newsletter_MVC_View_JsonView) {
             $this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
-            $this->view->assign('flashMessages', $this->flashMessages->getAllMessagesAndFlush());
+            $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
             $this->view->assign('error', $message);
             $this->view->assign('success', false);
         }

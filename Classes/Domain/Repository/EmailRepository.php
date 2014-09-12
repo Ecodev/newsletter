@@ -49,7 +49,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 
     /**
      * Returns the count of emails for a given newsletter
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param integer $uidNewsletter
      */
     public function getCount($uidNewsletter)
@@ -89,7 +89,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
     /**
      * Register an open email in database and forward the event to RecipientList
      * so it can optionnally do something more
-     * @global t3lib_DB $TYPO3_DB
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $authCode
      */
     public function registerOpen($authCode)
