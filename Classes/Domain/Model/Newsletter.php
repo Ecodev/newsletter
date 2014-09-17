@@ -912,14 +912,24 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         }
 
         // Positioning & element sizes in CSS
-        $forbiddenCssProperties = array('width', 'margin', 'height', 'padding', 'position');
+        $forbiddenCssProperties = array(
+            'width' => '((min|max)+-)?width',
+            'height' => '((min|max)+-)?height',
+            'margin' => 'margin(-(bottom|left|right|top)+)?',
+            'padding' => 'padding(-(bottom|left|right|top)+)?',
+            'position' => 'position'
+        );
+        $forbiddenCssPropertiesWarnings = array();
         if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
             foreach ($matches[1] as $stylepart) {
-                foreach ($forbiddenCssProperties as $property) {
-                    if (strpos($stylepart, 'width') !== false) {
-                        $warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
+                foreach ($forbiddenCssProperties as $property => $regex) {
+                    if (preg_match('/[^-]\b' . $regex . '\b[^-]/', $stylepart)) {
+                        $forbiddenCssPropertiesWarnings[$property] = $property;
                     }
                 }
+            }
+            foreach ($forbiddenCssPropertiesWarnings as $property) {
+                $warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
             }
         }
 
