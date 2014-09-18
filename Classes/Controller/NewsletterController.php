@@ -130,6 +130,9 @@ class Tx_Newsletter_Controller_NewsletterController extends Tx_Newsletter_MVC_Co
             $newsletter->setBounceAccount($this->bounceAccountRepository->findFirst());
         }
 
+        // Default planned time is right now
+        $newsletter->setPlannedTime(new DateTime());
+
         $this->view->setVariablesToRender(array('total', 'data', 'success'));
         $this->view->setConfiguration(array(
             'data' => self::resolvePlannedJsonViewConfiguration()
