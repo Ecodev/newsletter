@@ -85,6 +85,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
                         {
                             title: Ext.ux.TYPO3.Newsletter.Language.settings,
                             xtype: 'panel',
+                            labelWidth: 170,
                             height: 700,
                             items:
                                     [
@@ -363,7 +364,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
                                                     xtype: 'xdatetime',
                                                     fieldLabel: Ext.ux.TYPO3.Newsletter.Language.date_start_sending,
                                                     name: 'plannedTime',
-                                                    hiddenFormat: 'c'
+                                                    hiddenFormat: 'c',
+                                                    labelStyle: 'width: auto;'
                                                 },
                                                 {
                                                     xtype: 'button',
