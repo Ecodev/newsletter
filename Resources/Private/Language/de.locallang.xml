@@ -80,6 +80,8 @@
             <label index="task_send_emails_additional_information">Eingerichtet sind %1$s E-Mails je Versand-Zyklus. Momentan sind ca. %2$s E-Mails die für %3$s geplante Newsletter zu versenden.</label>
             <label index="task_fetch_bounces_title">Bounce E-Mails holen</label>
             <label index="task_fetch_bounces_description">Bounce E-Mails abrufen und in der Statistik nachführen.</label>
+            <label index="view_newsletter_not_found">Der Newsletter konnte nicht gefunden werden.</label>
+            <label index="view_could_not_unsubscribe">Newsletter-Abmeldung konnte nicht durchgeführt werden.</label>
         </languageKey>
 
     </data>
