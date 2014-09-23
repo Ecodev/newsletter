@@ -57,6 +57,8 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
                 {
                     xtype: 'tabpanel',
                     activeTab: 0,
+                    padding: '10px',
+                    border: false,
                     items: [
                         {
                             height: 500,

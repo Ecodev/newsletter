@@ -102,3 +102,55 @@ ul.infos li.none {
 {
     height: 100%;
 }
+
+.typo3-docheader-functions {
+    position: absolute;
+    width: 100%;
+}
+.typo3-docheader-buttons {
+    position: absolute;
+    width: 100%;
+    top: 27px;
+}
+
+/* ExtJS mods */
+.t3-newsletter-docbody {
+    background: transparent;
+}
+/* Correct space between tabs to match TYPO3-look (should be solved in global ExtJS-theme!) */
+ul.x-tab-strip li {
+    margin-right: 1px;
+}
+/* Set border around panels and newsletterListMenu */
+#newsletterListMenu .x-panel-body,
+.t3-newsletter-docbody .x-tab-panel-body {
+    border: 1px solid #adadad;
+    border-top-width: 0;
+}
+/* Remove padding around tab-text to make it look like TYPO3 */
+/* Set fixed height for 6.1 */
+.x-tab-strip span.x-tab-strip-text,
+.x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
+    padding: 0;
+    height: 18px;
+}
+/* Set different margins for tabpanels */
+.t3-newsletter-docheader ul.x-tab-strip-top {
+    margin: 17px 24px;
+}
+.t3-newsletter-docbody ul.x-tab-strip-top {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+/* Correct background-color in border-layout */
+.x-border-layout-ct {
+    background-color: transparent;
+}
+/* Correct background-color for pagination in RecipientList */
+.x-toolbar {
+    background: none;
+}
+/* Correct background-color of tabpanels */
+.x-tab-panel-header {
+    background: none;
+}
