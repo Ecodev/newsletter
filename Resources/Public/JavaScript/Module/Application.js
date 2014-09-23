@@ -37,6 +37,9 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
         if (this.checkIfPage()) {
             this.initStore();
             this.initGui();
+            /* Insert typo3-docheaders to get a consistent backend-module-look */
+            Ext.get('main-tabs').insertHtml('beforeBegin','<div class="typo3-docheader-functions"></div>');
+            Ext.get('main-tabs').insertHtml('beforeBegin','<div class="typo3-docheader-buttons"></div>');
         } else if (this.checkIfPageIsFolder()) {
             this.initFolderGui();
         } else {
@@ -71,6 +74,10 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
                     id: 'main-tabs',
                     xtype: 'tabpanel',
                     activeTab: 0,
+                    border: false,
+                    headerCssClass: 't3-newsletter-docheader',
+                    bodyCssClass: 't3-newsletter-docbody',
+                    padding: '0 20px 10px 24px',
                     items: [{
                             xtype: 'Ext.ux.TYPO3.Newsletter.Planner.Planner',
                             iconCls: 't3-newsletter-button-planner',
