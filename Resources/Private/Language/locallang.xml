@@ -84,6 +84,8 @@
             <label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
             <label index="task_fetch_bounces_title">Fetch bounced emails</label>
             <label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
+            <label index="view_newsletter_not_found">The newsletter could not be found :-(</label>
+            <label index="view_could_not_unsubscribe">Could not unsubscribe.</label>
         </languageKey>
         <languageKey index="fr">EXT:newsletter/Resources/Private/Language/fr.locallang.xml</languageKey>
         <languageKey index="de">EXT:newsletter/Resources/Private/Language/de.locallang.xml</languageKey>
