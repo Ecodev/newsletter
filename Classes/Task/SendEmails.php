@@ -56,20 +56,25 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
      */
     public function getAdditionalInformation()
     {
-
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
         $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
 
+        $newslettersToSend = $newsletterRepository->findAllReadyToSend();
+        $newslettersBeingSent = $newsletterRepository->findAllBeingSent();
+        $newslettersToSendCount = count($newslettersToSend);
+        $newslettersBeingSentCount = count($newslettersBeingSent);
+
         $emailNotSentCount = 0;
-        $newsletters = $newsletterRepository->findAllReadyToSend();
-        $newsletterCount = count($newsletters);
-        foreach ($newsletters as $newsletter) {
+        foreach ($newslettersToSend as $newsletter) {
+            $emailNotSentCount += $newsletter->getEmailNotSentCount();
+        }
+        foreach ($newslettersBeingSent as $newsletter) {
             $emailNotSentCount += $newsletter->getEmailNotSentCount();
         }
 
         $emailsPerRound = Tx_Newsletter_Tools::confParam('mails_per_round');
 
-        return Tx_Extbase_Utility_Localization::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newsletterCount));
+        return Tx_Extbase_Utility_Localization::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount));
     }
 
 }

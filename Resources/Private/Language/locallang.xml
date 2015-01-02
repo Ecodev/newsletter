@@ -81,7 +81,7 @@
             <label index="message_page_selected">Select a regular page.</label>
             <label index="task_send_emails_title">Send Newsletter</label>
             <label index="task_send_emails_description">Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</label>
-            <label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters.</label>
+            <label index="task_send_emails_additional_information">It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</label>
             <label index="task_fetch_bounces_title">Fetch bounced emails</label>
             <label index="task_fetch_bounces_description">Fetch bounced emails from bounce account and update statistics accordingly.</label>
             <label index="view_newsletter_not_found">The newsletter could not be found :-(</label>

@@ -77,6 +77,18 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
     }
 
     /**
+     * Returns all newsletter which are currently being sent
+     * @return Tx_Newsletter_Domain_Model_Newsletter[]
+     */
+    public function findAllBeingSent()
+    {
+        $query = $this->createQuery();
+        $query->statement('SELECT * FROM `tx_newsletter_domain_model_newsletter` WHERE uid IN (SELECT newsletter FROM `tx_newsletter_domain_model_email` WHERE end_time = 0)');
+
+        return $query->execute()->toArray();
+    }
+
+    /**
      * Returns newsletter statistics to be used for pie and timeline chart
      * We will get the full state for each time when something happened
      * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter

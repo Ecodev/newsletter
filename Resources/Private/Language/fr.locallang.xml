@@ -77,7 +77,7 @@
             <label index="message_page_selected">Sélectionnez une page.</label>
             <label index="task_send_emails_title">Envoyer Newsletter</label>
             <label index="task_send_emails_description">Envoie un lot d'emails pour les Newsletter plannifiée. Le nombre d'emails envoyé par lot est configurable via Extension Manager.</label>
-            <label index="task_send_emails_additional_information">C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées.</label>
+            <label index="task_send_emails_additional_information">C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées et %4$s newsletters en cours d'envoi.</label>
             <label index="task_fetch_bounces_title">Chercher les emails qui ont rebondits</label>
             <label index="task_fetch_bounces_description">Va chercher les emails qui ont rebondits dans les comptes de rebond et met à jour les statistiques.</label>
             <label index="view_newsletter_not_found">La newsletter n'a pas pu être trouvée :-(</label>

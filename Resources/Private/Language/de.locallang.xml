@@ -77,7 +77,7 @@
             <label index="message_page_selected">Wählen Sie eine normale Seite aus.</label>
             <label index="task_send_emails_title">Newsletter senden.</label>
             <label index="task_send_emails_description">Ein block geplanter Newsletter E-Mails werden versendet. Die Anzahl E-Mails je Block können im Extension Manager eingestellt werden.</label>
-            <label index="task_send_emails_additional_information">Eingerichtet sind %1$s E-Mails je Versand-Zyklus. Momentan sind ca. %2$s E-Mails die für %3$s geplante Newsletter zu versenden.</label>
+            <label index="task_send_emails_additional_information">Eingerichtet sind %1$s E-Mails je Versand-Zyklus. Momentan sind ca. %2$s E-Mails die für %3$s geplante Newsletter und %4$s gesendet werden Newsletter zu versenden.</label>
             <label index="task_fetch_bounces_title">Bounce E-Mails holen</label>
             <label index="task_fetch_bounces_description">Bounce E-Mails abrufen und in der Statistik nachführen.</label>
             <label index="view_newsletter_not_found">Der Newsletter konnte nicht gefunden werden.</label>
