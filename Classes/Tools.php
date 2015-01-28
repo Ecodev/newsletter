@@ -191,10 +191,10 @@ abstract class Tx_Newsletter_Tools
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
-        /* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
+        // Find the uid of emails and newsletters that need to be sent
         $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid
 						FROM tx_newsletter_domain_model_email
-						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 						WHERE tx_newsletter_domain_model_email.begin_time = 0
 						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
 
@@ -223,10 +223,10 @@ abstract class Tx_Newsletter_Tools
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
-        /* Find the receivers, select userdata, uid of target, uid of page, uid of logrecord */
+        // Find the uid of emails and newsletters that need to be sent
         $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid
 						FROM tx_newsletter_domain_model_email
-						LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 						WHERE tx_newsletter_domain_model_newsletter.uid = " . $newsletter->getUid() . "
 						AND tx_newsletter_domain_model_email.begin_time = 0
 						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
