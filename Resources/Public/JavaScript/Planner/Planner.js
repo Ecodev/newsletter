@@ -329,7 +329,7 @@ Ext.ux.TYPO3.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
                                 {
                                     split: true,
                                     region: 'south',
-                                    height: 120,
+                                    height: 150,
                                     layout: {
                                         type: 'hbox',
                                         align: 'stretch'

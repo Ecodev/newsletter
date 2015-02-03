@@ -211,7 +211,7 @@
             <label index="sender">Sender</label>
             <label index="sending">Sending</label>
             <label index="testing">Testing</label>
-            <label index="testing_explanation">&lt;p&gt;Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.&lt;/p&gt;&lt;p&gt;Also test newsletters will be ignored by default in statistics.&lt;/p&gt;</label>
+            <label index="testing_explanation">&lt;p&gt;Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.&lt;/p&gt;</label>
             <label index="send_test_now">Send test emails now</label>
             <label index="planning">Planning</label>
             <label index="date_start_sending">Date to start sending</label>
