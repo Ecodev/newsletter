@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2015-02-12T03:33:11Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="planned_time.description" xml:space="preserve" approved="yes">
+                <source>When the newsletter will start sending emails</source>
+                <target>Quand la newsletter va commencer d'envoyer des emails</target>
+            </trans-unit>
+            <trans-unit id="begin_time.description" xml:space="preserve" approved="yes">
+                <source>beginTime</source>
+                <target>Quand la newsletter a vraiment commencé d'envoyer des emails</target>
+            </trans-unit>
+            <trans-unit id="end_time.description" xml:space="preserve" approved="yes">
+                <source>endTime</source>
+                <target>La date de fin de génération des emails (avant l'envoi proprement dit)</target>
+            </trans-unit>
+            <trans-unit id="repetition.description" xml:space="preserve" approved="yes">
+                <source>0-7 values to indicates when this newsletter will repeat</source>
+                <target>Répétition automatique de la newsletter</target>
+            </trans-unit>
+            <trans-unit id="plain_converter.description" xml:space="preserve" approved="yes">
+                <source>Tool used to convert to plain text</source>
+                <target>Outil utilisé pour convertir le contenu de l'email en texte non-formaté</target>
+            </trans-unit>
+            <trans-unit id="is_test.description" xml:space="preserve" approved="yes">
+                <source>Whether this newsletter is for test purpose. If it is it will be ignored in statistics</source>
+                <target>Si cette newsletter est un test</target>
+            </trans-unit>
+            <trans-unit id="attachments.description" xml:space="preserve" approved="yes">
+                <source>List of files to be attached (comma separated list</source>
+                <target>Liste des fichiers à attacher à l'email (liste séparé par une virgule)</target>
+            </trans-unit>
+            <trans-unit id="sender_name.description" xml:space="preserve" approved="yes">
+                <source>The name of the newsletter sender</source>
+                <target>Le nom de l'expéditeur de la newsletter</target>
+            </trans-unit>
+            <trans-unit id="sender_email.description" xml:space="preserve" approved="yes">
+                <source>The email of the newsletter sender</source>
+                <target>L'adresse email de l'expéditeur de la newsletter</target>
+            </trans-unit>
+            <trans-unit id="inject_open_spy.description" xml:space="preserve" approved="yes">
+                <source>injectOpenSpy</source>
+                <target>Essaie de détecter l'ouverture de l'email en injectant une image &quot;espion&quot; dans le corps de l'email</target>
+            </trans-unit>
+            <trans-unit id="inject_links_spy.description" xml:space="preserve" approved="yes">
+                <source>injectLinksSpy</source>
+                <target>Détecte les liens qui sont cliqués</target>
+            </trans-unit>
+            <trans-unit id="bounce_account.description" xml:space="preserve" approved="yes">
+                <source>bounceAccount</source>
+                <target>Compte pour la gestion des rebond d'email</target>
+            </trans-unit>
+            <trans-unit id="recipient_list.description" xml:space="preserve" approved="yes">
+                <source>recipientList</source>
+                <target>Liste de destinataires auquels la newsletter sera envoyée</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

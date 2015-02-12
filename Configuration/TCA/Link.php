@@ -18,13 +18,13 @@ $TCA['tx_newsletter_domain_model_link'] = array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             )
         ),
         'url' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_link.url',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.url',
             'config' => array(
                 'type' => 'input',
                 'size' => 40,
@@ -33,7 +33,7 @@ $TCA['tx_newsletter_domain_model_link'] = array(
             ),
         ),
         'opened_count' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_link.opened_count',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.opened_count',
             'config' => array(
                 'type' => 'input',
                 'size' => 4,
@@ -42,7 +42,7 @@ $TCA['tx_newsletter_domain_model_link'] = array(
             ),
         ),
         'newsletter' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_link.newsletter',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.newsletter',
             'config' => array(
                 'readOnly' => true,
                 'type' => 'inline',

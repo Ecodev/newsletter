@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2015-02-12T03:33:14Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="title.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>title</target>
+            </trans-unit>
+            <trans-unit id="plain_only.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>plainOnly</target>
+            </trans-unit>
+            <trans-unit id="lang.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>lang</target>
+            </trans-unit>
+            <trans-unit id="type.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>type</target>
+            </trans-unit>
+            <trans-unit id="be_users.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>beUsers</target>
+            </trans-unit>
+            <trans-unit id="fe_groups.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>feGroups</target>
+            </trans-unit>
+            <trans-unit id="fe_pages.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>fePages</target>
+            </trans-unit>
+            <trans-unit id="csv_url.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>csvUrl</target>
+            </trans-unit>
+            <trans-unit id="csv_separator.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>csvSeparator</target>
+            </trans-unit>
+            <trans-unit id="csv_fields.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>csvFields</target>
+            </trans-unit>
+            <trans-unit id="csv_filename.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>csvFilename</target>
+            </trans-unit>
+            <trans-unit id="csv_values.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>csvValues</target>
+            </trans-unit>
+            <trans-unit id="sql_statement.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>sql</target>
+            </trans-unit>
+            <trans-unit id="html_url.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>htmlFile</target>
+            </trans-unit>
+            <trans-unit id="html_fetch_type.description" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>htmlFetchType</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

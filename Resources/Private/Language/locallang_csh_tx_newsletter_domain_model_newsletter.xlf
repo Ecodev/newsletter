@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-02-12T03:33:11Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="planned_time.description" xml:space="preserve">
+                <source>When the newsletter will start sending emails</source>
+            </trans-unit>
+            <trans-unit id="begin_time.description" xml:space="preserve">
+                <source>beginTime</source>
+            </trans-unit>
+            <trans-unit id="end_time.description" xml:space="preserve">
+                <source>endTime</source>
+            </trans-unit>
+            <trans-unit id="repetition.description" xml:space="preserve">
+                <source>0-7 values to indicates when this newsletter will repeat</source>
+            </trans-unit>
+            <trans-unit id="plain_converter.description" xml:space="preserve">
+                <source>Tool used to convert to plain text</source>
+            </trans-unit>
+            <trans-unit id="is_test.description" xml:space="preserve">
+                <source>Whether this newsletter is for test purpose. If it is it will be ignored in statistics</source>
+            </trans-unit>
+            <trans-unit id="attachments.description" xml:space="preserve">
+                <source>List of files to be attached (comma separated list</source>
+            </trans-unit>
+            <trans-unit id="sender_name.description" xml:space="preserve">
+                <source>The name of the newsletter sender</source>
+            </trans-unit>
+            <trans-unit id="sender_email.description" xml:space="preserve">
+                <source>The email of the newsletter sender</source>
+            </trans-unit>
+            <trans-unit id="inject_open_spy.description" xml:space="preserve">
+                <source>injectOpenSpy</source>
+            </trans-unit>
+            <trans-unit id="inject_links_spy.description" xml:space="preserve">
+                <source>injectLinksSpy</source>
+            </trans-unit>
+            <trans-unit id="bounce_account.description" xml:space="preserve">
+                <source>bounceAccount</source>
+            </trans-unit>
+            <trans-unit id="recipient_list.description" xml:space="preserve">
+                <source>recipientList</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

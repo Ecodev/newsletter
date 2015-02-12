@@ -18,13 +18,13 @@ $TCA['tx_newsletter_domain_model_email'] = array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             )
         ),
         'begin_time' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.begin_time',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.begin_time',
             'config' => array(
                 'type' => 'input',
                 'size' => 12,
@@ -33,7 +33,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'end_time' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.end_time',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.end_time',
             'config' => array(
                 'type' => 'input',
                 'size' => 12,
@@ -42,7 +42,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'recipient_address' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_address',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.recipient_address',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -51,7 +51,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'recipient_data' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.recipient_data',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.recipient_data',
             'config' => array(
                 'type' => 'user',
                 'userFunc' => 'Tx_Newsletter_Tca_EmailTca->render',
@@ -60,7 +60,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'open_time' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.open_time',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.open_time',
             'config' => array(
                 'type' => 'check',
                 'default' => 0,
@@ -68,7 +68,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'bounce_time' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.bounce_time',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.bounce_time',
             'config' => array(
                 'type' => 'check',
                 'default' => 0,
@@ -76,7 +76,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'newsletter' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.newsletter',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.newsletter',
             'config' => array(
                 'type' => 'inline',
                 'foreign_table' => 'tx_newsletter_domain_model_newsletter',
@@ -92,7 +92,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             ),
         ),
         'unsubscribed' => array(
-            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xml:tx_newsletter_domain_model_email.unsubscribed',
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.unsubscribed',
             'config' => array(
                 'type' => 'check',
                 'default' => 0,

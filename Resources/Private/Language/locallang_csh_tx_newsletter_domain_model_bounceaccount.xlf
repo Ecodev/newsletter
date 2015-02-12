@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-02-12T03:33:02Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="email.description" xml:space="preserve">
+                <source>email</source>
+            </trans-unit>
+            <trans-unit id="server.description" xml:space="preserve">
+                <source>server</source>
+            </trans-unit>
+            <trans-unit id="protocol.description" xml:space="preserve">
+                <source>protocol</source>
+            </trans-unit>
+            <trans-unit id="username.description" xml:space="preserve">
+                <source>username</source>
+            </trans-unit>
+            <trans-unit id="password.description" xml:space="preserve">
+                <source>password</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

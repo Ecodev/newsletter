@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-02-12T03:33:08Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="url.description" xml:space="preserve" approved="yes">
+                <source>url</source>
+                <target>url</target>
+            </trans-unit>
+            <trans-unit id="opened.description" xml:space="preserve" approved="yes">
+                <source>opened</source>
+                <target>geöffnet</target>
+            </trans-unit>
+            <trans-unit id="newsletter.description" xml:space="preserve" approved="yes">
+                <source>email</source>
+                <target>email</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

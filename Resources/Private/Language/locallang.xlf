@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-02-12T03:32:39Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="newsletter" xml:space="preserve">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="newsletter_validity" xml:space="preserve">
+                <source>Newsletter validity</source>
+            </trans-unit>
+            <trans-unit id="validation_content_url" xml:space="preserve">
+                <source>URL used to fetch content is %1$s</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_too_short" xml:space="preserve">
+                <source>Content too short. The content must be at least 200 chars long to be considered valid.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_php_warnings" xml:space="preserve">
+                <source>Content contains PHP Warnings. This must not reach the receivers.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_php_errors" xml:space="preserve">
+                <source>Content contains PHP Fatal errors. This must not reach the receivers.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_being_generated" xml:space="preserve">
+                <source>Content contains &quot;wait&quot; signatures. This must not reach the receivers.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_javascript" xml:space="preserve">
+                <source>Your mail seems to contain JavaScript-code. This is generally considered bad style and will probably generate warnings either in your users MUAs or spamfilters. I have taken the liberty to try and remove the JavaScript-code from you mail.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_converted_relative_url" xml:space="preserve">
+                <source>Relative URL for %1$s converted to absolute URL</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_linked_styles" xml:space="preserve">
+                <source>Your mail seem to link to an external style-sheet. Your style sheet will be included in the mail, since most MUAs does not cope well on external style-sheets.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_css_images" xml:space="preserve">
+                <source>You have used images linked to by CSS in your mail. This will break your layout with most MUAs</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_css_classes" xml:space="preserve">
+                <source>The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_css_some_property" xml:space="preserve">
+                <source>Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</source>
+            </trans-unit>
+            <trans-unit id="none" xml:space="preserve">
+                <source>none</source>
+            </trans-unit>
+            <trans-unit id="preview_html" xml:space="preserve">
+                <source>Html</source>
+            </trans-unit>
+            <trans-unit id="preview_plain" xml:space="preserve">
+                <source>Plain</source>
+            </trans-unit>
+            <trans-unit id="missing_fields" xml:space="preserve">
+                <source>Missing fields</source>
+            </trans-unit>
+            <trans-unit id="preview" xml:space="preserve">
+                <source>Preview</source>
+            </trans-unit>
+            <trans-unit id="view" xml:space="preserve">
+                <source>View</source>
+            </trans-unit>
+            <trans-unit id="newsletter_tab" xml:space="preserve">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="statistics_tab" xml:space="preserve">
+                <source>Statistics</source>
+            </trans-unit>
+            <trans-unit id="overview_tab" xml:space="preserve">
+                <source>Overview</source>
+            </trans-unit>
+            <trans-unit id="links_tab" xml:space="preserve">
+                <source>Links</source>
+            </trans-unit>
+            <trans-unit id="emails_tab" xml:space="preserve">
+                <source>Emails</source>
+            </trans-unit>
+            <trans-unit id="recipients" xml:space="preserve">
+                <source>recipients</source>
+            </trans-unit>
+            <trans-unit id="not_sent" xml:space="preserve">
+                <source>Not yet sent</source>
+            </trans-unit>
+            <trans-unit id="sent" xml:space="preserve">
+                <source>Sent</source>
+            </trans-unit>
+            <trans-unit id="opened" xml:space="preserve">
+                <source>Opened</source>
+            </trans-unit>
+            <trans-unit id="bounced" xml:space="preserve">
+                <source>Bounced</source>
+            </trans-unit>
+            <trans-unit id="link_opened" xml:space="preserve">
+                <source>Clicked links</source>
+            </trans-unit>
+            <trans-unit id="links_opened" xml:space="preserve">
+                <source>clicked links</source>
+            </trans-unit>
+            <trans-unit id="emails_opened" xml:space="preserve">
+                <source>emails opened</source>
+            </trans-unit>
+            <trans-unit id="emails_bounced" xml:space="preserve">
+                <source>emails bounced</source>
+            </trans-unit>
+            <trans-unit id="started" xml:space="preserve">
+                <source>Started sending on</source>
+            </trans-unit>
+            <trans-unit id="planned_to_be_sent_on" xml:space="preserve">
+                <source>Planned to be sent on</source>
+            </trans-unit>
+            <trans-unit id="percentage_of_opened" xml:space="preserve">
+                <source>% of opened</source>
+            </trans-unit>
+            <trans-unit id="number_of_opened" xml:space="preserve">
+                <source># of opened</source>
+            </trans-unit>
+            <trans-unit id="link_id" xml:space="preserve">
+                <source>#</source>
+            </trans-unit>
+            <trans-unit id="no_statistics" xml:space="preserve">
+                <source>No statistics available for this page.</source>
+            </trans-unit>
+            <trans-unit id="status" xml:space="preserve">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="recent_activity" xml:space="preserve">
+                <source>Recent activity</source>
+            </trans-unit>
+            <trans-unit id="errors" xml:space="preserve">
+                <source>Errors</source>
+            </trans-unit>
+            <trans-unit id="warnings" xml:space="preserve">
+                <source>Warnings</source>
+            </trans-unit>
+            <trans-unit id="infos" xml:space="preserve">
+                <source>Infos</source>
+            </trans-unit>
+            <trans-unit id="newsletter_status_not_planned" xml:space="preserve">
+                <source>This newsletter is not planned</source>
+            </trans-unit>
+            <trans-unit id="newsletter_status_planned" xml:space="preserve">
+                <source>This newsletter is planned to be sent on %1$s</source>
+            </trans-unit>
+            <trans-unit id="newsletter_status_generating_emails" xml:space="preserve">
+                <source>Emails for this newsletter are being generated</source>
+            </trans-unit>
+            <trans-unit id="newsletter_status_sending" xml:space="preserve">
+                <source>Emails for this newsletter are being sent: %1$d/%2$d</source>
+            </trans-unit>
+            <trans-unit id="newsletter_status_was_sent" xml:space="preserve">
+                <source>This newsletter was sent on %1$s</source>
+            </trans-unit>
+            <trans-unit id="settings" xml:space="preserve">
+                <source>Settings</source>
+            </trans-unit>
+            <trans-unit id="advanced_settings" xml:space="preserve">
+                <source>Advanced settings</source>
+            </trans-unit>
+            <trans-unit id="sender" xml:space="preserve">
+                <source>Sender</source>
+            </trans-unit>
+            <trans-unit id="sending" xml:space="preserve">
+                <source>Sending</source>
+            </trans-unit>
+            <trans-unit id="testing" xml:space="preserve">
+                <source>Testing</source>
+            </trans-unit>
+            <trans-unit id="testing_explanation" xml:space="preserve">
+                <source>&lt;p&gt;Test newsletter are sent immediately. Because the queue system is bypassed, it cannot send many emails at once.&lt;/p&gt;</source>
+            </trans-unit>
+            <trans-unit id="send_test_now" xml:space="preserve">
+                <source>Send test emails now</source>
+            </trans-unit>
+            <trans-unit id="planning" xml:space="preserve">
+                <source>Planning</source>
+            </trans-unit>
+            <trans-unit id="date_start_sending" xml:space="preserve">
+                <source>Date to start sending</source>
+            </trans-unit>
+            <trans-unit id="add_to_queue" xml:space="preserve">
+                <source>Add to queue</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_test_maximum_recipients" xml:space="preserve">
+                <source>Test newsletter cannot be sent to %1$d recipients. Maximum allowed is %2$d</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_test_maximum_recipients_title" xml:space="preserve">
+                <source>Error while sending test newsletter</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_test_newsletter_sent" xml:space="preserve">
+                <source>Test newsletter has been sent.</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_test_newsletter_sent_title" xml:space="preserve">
+                <source>Test newsletter sent</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_test_newsletter_error" xml:space="preserve">
+                <source>Error while sending test newsletter</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_newsletter_queued" xml:space="preserve">
+                <source>Newsletter has been queued and will be sent soon.</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_newsletter_queued_title" xml:space="preserve">
+                <source>Newsletter queued</source>
+            </trans-unit>
+            <trans-unit id="flashmessage_newsletter_invalid" xml:space="preserve">
+                <source>Error while validating newsletter</source>
+            </trans-unit>
+            <trans-unit id="unsubscribe_notification_subject" xml:space="preserve">
+                <source>Newsletter unsubscription</source>
+            </trans-unit>
+            <trans-unit id="unsubscribe_notification_body" xml:space="preserve">
+                <source>&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</source>
+            </trans-unit>
+            <trans-unit id="message_title_no_pid_selected" xml:space="preserve">
+                <source>No page has been selected</source>
+            </trans-unit>
+            <trans-unit id="message_no_pid_selected" xml:space="preserve">
+                <source>Select a page to schedule a newsletter or display statistics about past newsletter.</source>
+            </trans-unit>
+            <trans-unit id="message_title_page_selected" xml:space="preserve">
+                <source>Nothing to display on a folder</source>
+            </trans-unit>
+            <trans-unit id="message_page_selected" xml:space="preserve">
+                <source>Select a regular page.</source>
+            </trans-unit>
+            <trans-unit id="task_send_emails_title" xml:space="preserve">
+                <source>Send Newsletter</source>
+            </trans-unit>
+            <trans-unit id="task_send_emails_description" xml:space="preserve">
+                <source>Send one round of emails for planned Newsletter. The number of email sent by round can be configured via Extension Manager.</source>
+            </trans-unit>
+            <trans-unit id="task_send_emails_additional_information" xml:space="preserve">
+                <source>It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</source>
+            </trans-unit>
+            <trans-unit id="task_fetch_bounces_title" xml:space="preserve">
+                <source>Fetch bounced emails</source>
+            </trans-unit>
+            <trans-unit id="task_fetch_bounces_description" xml:space="preserve">
+                <source>Fetch bounced emails from bounce account and update statistics accordingly.</source>
+            </trans-unit>
+            <trans-unit id="view_newsletter_not_found" xml:space="preserve">
+                <source>The newsletter could not be found :-(</source>
+            </trans-unit>
+            <trans-unit id="view_could_not_unsubscribe" xml:space="preserve">
+                <source>Could not unsubscribe.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

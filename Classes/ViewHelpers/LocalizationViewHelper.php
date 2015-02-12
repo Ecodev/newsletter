@@ -17,7 +17,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_Vie
      * @param string $pathInsideExt the path to the file relative to the ext-folder
      * @return void
      */
-    public function render($name = 'locallang.xml', $extKey = NULL, $pathInsideExt = 'Resources/Private/Language/')
+    public function render($name = 'locallang.xlf', $extKey = NULL, $pathInsideExt = 'Resources/Private/Language/')
     {
         $names = explode(',', $name);
 

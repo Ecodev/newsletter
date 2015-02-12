@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2015-02-12T03:33:05Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="begin_time.description" xml:space="preserve" approved="yes">
+                <source>startTime</source>
+                <target>Date de début d'envoi de l'email</target>
+            </trans-unit>
+            <trans-unit id="end_time.description" xml:space="preserve" approved="yes">
+                <source>endTime</source>
+                <target>Date de fin d'envoi de l'email</target>
+            </trans-unit>
+            <trans-unit id="recipient_address.description" xml:space="preserve" approved="yes">
+                <source>recipientAddress</source>
+                <target>Adresse email du destinataire</target>
+            </trans-unit>
+            <trans-unit id="recipient_data.description" xml:space="preserve" approved="yes">
+                <source>recipientData</source>
+                <target>Donnée du destinataire qui peuvent être utilisée dans le corp de l'email via des markers</target>
+            </trans-unit>
+            <trans-unit id="opened.description" xml:space="preserve" approved="yes">
+                <source>opened</source>
+                <target>Si l'email a été ouvert</target>
+            </trans-unit>
+            <trans-unit id="bounced.description" xml:space="preserve" approved="yes">
+                <source>bounced</source>
+                <target>Si l'email a rebondit</target>
+            </trans-unit>
+            <trans-unit id="newsletter.description" xml:space="preserve" approved="yes">
+                <source>newsletter</source>
+                <target>Newsletter à qui appartient cet email</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

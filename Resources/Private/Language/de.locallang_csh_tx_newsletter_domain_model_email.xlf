@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-02-12T03:33:05Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="begin_time.description" xml:space="preserve" approved="yes">
+                <source>startTime</source>
+                <target>Start Zeit</target>
+            </trans-unit>
+            <trans-unit id="end_time.description" xml:space="preserve" approved="yes">
+                <source>endTime</source>
+                <target>End Zeit</target>
+            </trans-unit>
+            <trans-unit id="recipient_address.description" xml:space="preserve" approved="yes">
+                <source>recipientAddress</source>
+                <target>Empfänger Adresse</target>
+            </trans-unit>
+            <trans-unit id="recipient_data.description" xml:space="preserve" approved="yes">
+                <source>recipientData</source>
+                <target>Empfänger Daten</target>
+            </trans-unit>
+            <trans-unit id="opened.description" xml:space="preserve" approved="yes">
+                <source>opened</source>
+                <target>geöffnet</target>
+            </trans-unit>
+            <trans-unit id="bounced.description" xml:space="preserve" approved="yes">
+                <source>bounced</source>
+                <target>zurückgekommen</target>
+            </trans-unit>
+            <trans-unit id="newsletter.description" xml:space="preserve" approved="yes">
+                <source>newsletter</source>
+                <target>Newsletter</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

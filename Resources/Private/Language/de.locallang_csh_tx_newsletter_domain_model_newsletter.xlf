@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-02-12T03:33:11Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="planned_time.description" xml:space="preserve" approved="yes">
+                <source>When the newsletter will start sending emails</source>
+                <target>Ab wann der Newsletter zu senden beginnt</target>
+            </trans-unit>
+            <trans-unit id="begin_time.description" xml:space="preserve" approved="yes">
+                <source>beginTime</source>
+                <target>startZeit</target>
+            </trans-unit>
+            <trans-unit id="end_time.description" xml:space="preserve" approved="yes">
+                <source>endTime</source>
+                <target>endZeit</target>
+            </trans-unit>
+            <trans-unit id="repetition.description" xml:space="preserve" approved="yes">
+                <source>0-7 values to indicates when this newsletter will repeat</source>
+                <target>0-7 Werte um zu definieren wann dieser Newsletter wiederholt wird</target>
+            </trans-unit>
+            <trans-unit id="plain_converter.description" xml:space="preserve" approved="yes">
+                <source>Tool used to convert to plain text</source>
+                <target>Tool um in Plain-Text zu konvertieren</target>
+            </trans-unit>
+            <trans-unit id="is_test.description" xml:space="preserve" approved="yes">
+                <source>Whether this newsletter is for test purpose. If it is it will be ignored in statistics</source>
+                <target>Ob dieser Newsletter für Tests gedacht ist. Falls ja, wird er in den Statistiken ignoriert.</target>
+            </trans-unit>
+            <trans-unit id="attachments.description" xml:space="preserve" approved="yes">
+                <source>List of files to be attached (comma separated list</source>
+                <target>Dateien die als Anhang mitgesendet werden sollen (komma-separierte Liste)</target>
+            </trans-unit>
+            <trans-unit id="sender_name.description" xml:space="preserve" approved="yes">
+                <source>The name of the newsletter sender</source>
+                <target>Name des Newsletter Absenders</target>
+            </trans-unit>
+            <trans-unit id="sender_email.description" xml:space="preserve" approved="yes">
+                <source>The email of the newsletter sender</source>
+                <target>E-Mail des Newsletter Absenders</target>
+            </trans-unit>
+            <trans-unit id="inject_open_spy.description" xml:space="preserve" approved="yes">
+                <source>injectOpenSpy</source>
+                <target>injectOpenSpy</target>
+            </trans-unit>
+            <trans-unit id="inject_links_spy.description" xml:space="preserve" approved="yes">
+                <source>injectLinksSpy</source>
+                <target>injectLinksSpy</target>
+            </trans-unit>
+            <trans-unit id="bounce_account.description" xml:space="preserve" approved="yes">
+                <source>bounceAccount</source>
+                <target>bounceAccount</target>
+            </trans-unit>
+            <trans-unit id="recipient_list.description" xml:space="preserve" approved="yes">
+                <source>recipientList</source>
+                <target>recipientList</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

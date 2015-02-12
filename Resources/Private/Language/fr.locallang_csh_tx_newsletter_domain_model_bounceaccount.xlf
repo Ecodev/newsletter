@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2015-02-12T03:33:02Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="email.description" xml:space="preserve" approved="yes">
+                <source>email</source>
+                <target>Adresse email du compte de rebont qui sera inclut dans le champ &quot;reply-to&quot; des emails envoyés</target>
+            </trans-unit>
+            <trans-unit id="server.description" xml:space="preserve" approved="yes">
+                <source>server</source>
+                <target>Nom d'hôte du serveur email sur lequel récupéré les emails rebondit</target>
+            </trans-unit>
+            <trans-unit id="protocol.description" xml:space="preserve" approved="yes">
+                <source>protocol</source>
+                <target>Protocole du serveur email</target>
+            </trans-unit>
+            <trans-unit id="username.description" xml:space="preserve" approved="yes">
+                <source>username</source>
+                <target>Nom d'utilistateur du serveur email</target>
+            </trans-unit>
+            <trans-unit id="password.description" xml:space="preserve" approved="yes">
+                <source>password</source>
+                <target>Mot de passe du serveur email</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-02-12T03:33:19Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="tx_newsletter_domain_model_newsletter" xml:space="preserve">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.planned_time" xml:space="preserve">
+                <source>Planned Time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.begin_time" xml:space="preserve">
+                <source>Begin Time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.end_time" xml:space="preserve">
+                <source>End Time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition" xml:space="preserve">
+                <source>Repetition</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_none" xml:space="preserve">
+                <source>Do not repeat</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_daily" xml:space="preserve">
+                <source>One day</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_weekly" xml:space="preserve">
+                <source>One week</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_biweekly" xml:space="preserve">
+                <source>Two weeks</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_monthly" xml:space="preserve">
+                <source>One month</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_quarterly" xml:space="preserve">
+                <source>Three months</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_semiyearly" xml:space="preserve">
+                <source>Six months</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_yearly" xml:space="preserve">
+                <source>One year</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter" xml:space="preserve">
+                <source>Plain Text Converter</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter_lynx" xml:space="preserve">
+                <source>Lynx cli-browser</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter_builtin" xml:space="preserve">
+                <source>Builtin html converter</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.is_test" xml:space="preserve">
+                <source>Is Test</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.attachments" xml:space="preserve">
+                <source>Attachments</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.sender_name" xml:space="preserve">
+                <source>Sender Name</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.sender_email" xml:space="preserve">
+                <source>Sender Email</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.inject_open_spy" xml:space="preserve">
+                <source>Detect opened emails</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.inject_links_spy" xml:space="preserve">
+                <source>Detect clicked links</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.bounce_account" xml:space="preserve">
+                <source>Bounce Account</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.recipient_list" xml:space="preserve">
+                <source>Recipient List</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount" xml:space="preserve">
+                <source>Bounce Account</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.email" xml:space="preserve">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.server" xml:space="preserve">
+                <source>Server</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.protocol" xml:space="preserve">
+                <source>Protocol</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.username" xml:space="preserve">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.password" xml:space="preserve">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist" xml:space="preserve">
+                <source>Recipient List</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.title" xml:space="preserve">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.plain_only" xml:space="preserve">
+                <source>Plain Only</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.lang" xml:space="preserve">
+                <source>Lang</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type" xml:space="preserve">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.be_users" xml:space="preserve">
+                <source>Be Users</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.fe_groups" xml:space="preserve">
+                <source>Fe Groups</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.fe_pages" xml:space="preserve">
+                <source>Fe Pages</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_url" xml:space="preserve">
+                <source>CSV URL</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_separator" xml:space="preserve">
+                <source>CSV Separator</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_fields" xml:space="preserve">
+                <source>CSV Fields</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_filename" xml:space="preserve">
+                <source>CSV Filename</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_values" xml:space="preserve">
+                <source>CSV Values</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_statement" xml:space="preserve">
+                <source>SQL to select recipients</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_bounce" xml:space="preserve">
+                <source>SQL to register a bounced email</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_open" xml:space="preserve">
+                <source>SQL to register an opened email</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_click" xml:space="preserve">
+                <source>SQL to register a link clicked</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_url" xml:space="preserve">
+                <source>Html URL</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type" xml:space="preserve">
+                <source>Html Fetch Type</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_be_users" xml:space="preserve">
+                <source>BE-users</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_fe_groups" xml:space="preserve">
+                <source>FE-groups with FE-users</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_fe_pages" xml:space="preserve">
+                <source>Pages with FE-users</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_sql" xml:space="preserve">
+                <source>SQL</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_file" xml:space="preserve">
+                <source>CSV file</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_list" xml:space="preserve">
+                <source>CSV list</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_url" xml:space="preserve">
+                <source>CSV URL</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_html" xml:space="preserve">
+                <source>HTML</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto" xml:space="preserve">
+                <source>Email links with &quot;mailto:&quot;</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type_regex" xml:space="preserve">
+                <source>Match email addresses</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email" xml:space="preserve">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.begin_time" xml:space="preserve">
+                <source>Start Time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.end_time" xml:space="preserve">
+                <source>End Time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.recipient_address" xml:space="preserve">
+                <source>Recipient Address</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.recipient_data" xml:space="preserve">
+                <source>Recipient Data</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.open_time" xml:space="preserve">
+                <source>Open time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.bounce_time" xml:space="preserve">
+                <source>Bounce time</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.newsletter" xml:space="preserve">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.unsubscribed" xml:space="preserve">
+                <source>Unsubscribed</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link" xml:space="preserve">
+                <source>Link</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.url" xml:space="preserve">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.opened_count" xml:space="preserve">
+                <source>Opened count</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.newsletter" xml:space="preserve">
+                <source>Newsletter</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

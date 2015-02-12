@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-02-12T03:33:19Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="tx_newsletter_domain_model_newsletter" xml:space="preserve" approved="yes">
+                <source>Newsletter</source>
+                <target>Newsletter</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.planned_time" xml:space="preserve" approved="yes">
+                <source>Planned Time</source>
+                <target>Geplante Zeit</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.begin_time" xml:space="preserve" approved="yes">
+                <source>Begin Time</source>
+                <target>Zeit gestartet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.end_time" xml:space="preserve" approved="yes">
+                <source>End Time</source>
+                <target>Zeit beendet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition" xml:space="preserve" approved="yes">
+                <source>Repetition</source>
+                <target>Wiederholungen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_none" xml:space="preserve" approved="yes">
+                <source>Do not repeat</source>
+                <target>Nicht wiederholen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_daily" xml:space="preserve" approved="yes">
+                <source>One day</source>
+                <target>Jeden Tag</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_weekly" xml:space="preserve" approved="yes">
+                <source>One week</source>
+                <target>Jede Woche</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_biweekly" xml:space="preserve" approved="yes">
+                <source>Two weeks</source>
+                <target>Alle zwei Wochen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_monthly" xml:space="preserve" approved="yes">
+                <source>One month</source>
+                <target>Jeden Monat</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_quarterly" xml:space="preserve" approved="yes">
+                <source>Three months</source>
+                <target>Alle drei Monate</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_semiyearly" xml:space="preserve" approved="yes">
+                <source>Six months</source>
+                <target>Alle sechs Monate</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.repetition_yearly" xml:space="preserve" approved="yes">
+                <source>One year</source>
+                <target>Jedes Jahr</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter" xml:space="preserve" approved="yes">
+                <source>Plain Text Converter</source>
+                <target>Plain Text Konverter</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter_template" xml:space="preserve" approved="yes">
+                <source></source>
+                <target>Plain Text Vorlage (&amp;type=99)</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter_lynx" xml:space="preserve" approved="yes">
+                <source>Lynx cli-browser</source>
+                <target>Lynx cli-browser</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.plain_converter_builtin" xml:space="preserve" approved="yes">
+                <source>Builtin html converter</source>
+                <target>Builtin html converter</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.is_test" xml:space="preserve" approved="yes">
+                <source>Is Test</source>
+                <target>Ist ein Test</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.attachments" xml:space="preserve" approved="yes">
+                <source>Attachments</source>
+                <target>Anhänge</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.sender_name" xml:space="preserve" approved="yes">
+                <source>Sender Name</source>
+                <target>Sender Name</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.sender_email" xml:space="preserve" approved="yes">
+                <source>Sender Email</source>
+                <target>Sender E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.inject_open_spy" xml:space="preserve" approved="yes">
+                <source>Detect opened emails</source>
+                <target>Erkenne geöffnete E-Mails</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.inject_links_spy" xml:space="preserve" approved="yes">
+                <source>Detect clicked links</source>
+                <target>Erkenne geklickte Links</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.bounce_account" xml:space="preserve" approved="yes">
+                <source>Bounce Account</source>
+                <target>Bounce Account</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.recipient_list" xml:space="preserve" approved="yes">
+                <source>Recipient List</source>
+                <target>Empfängerliste</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount" xml:space="preserve" approved="yes">
+                <source>Bounce Account</source>
+                <target>Bounce Account</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.email" xml:space="preserve" approved="yes">
+                <source>Email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.server" xml:space="preserve" approved="yes">
+                <source>Server</source>
+                <target>Server</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.protocol" xml:space="preserve" approved="yes">
+                <source>Protocol</source>
+                <target>Protokoll</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.username" xml:space="preserve" approved="yes">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.password" xml:space="preserve" approved="yes">
+                <source>Password</source>
+                <target>Kennwort</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist" xml:space="preserve" approved="yes">
+                <source>Recipient List</source>
+                <target>Empfängerliste</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.title" xml:space="preserve" approved="yes">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.plain_only" xml:space="preserve" approved="yes">
+                <source>Plain Only</source>
+                <target>Nur Plain-Text</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.lang" xml:space="preserve" approved="yes">
+                <source>Lang</source>
+                <target>Sprache</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type" xml:space="preserve" approved="yes">
+                <source>Type</source>
+                <target>Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.be_users" xml:space="preserve" approved="yes">
+                <source>Be Users</source>
+                <target>Be Benutzer</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.fe_groups" xml:space="preserve" approved="yes">
+                <source>Fe Groups</source>
+                <target>Fe Gruppen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.fe_pages" xml:space="preserve" approved="yes">
+                <source>Fe Pages</source>
+                <target>Fe Seiten</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_url" xml:space="preserve" approved="yes">
+                <source>CSV URL</source>
+                <target>CSV URL</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_separator" xml:space="preserve" approved="yes">
+                <source>CSV Separator</source>
+                <target>CSV Trennzeichen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_fields" xml:space="preserve" approved="yes">
+                <source>CSV Fields</source>
+                <target>CSV Felder</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_filename" xml:space="preserve" approved="yes">
+                <source>CSV Filename</source>
+                <target>CSV Dateiname</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.csv_values" xml:space="preserve" approved="yes">
+                <source>CSV Values</source>
+                <target>CSV Values</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_statement" xml:space="preserve" approved="yes">
+                <source>SQL to select recipients</source>
+                <target>SQL Select für Empfänger</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_bounce" xml:space="preserve" approved="yes">
+                <source>SQL to register a bounced email</source>
+                <target>SQL um Bounce E-Mails zu registrieren</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_open" xml:space="preserve" approved="yes">
+                <source>SQL to register an opened email</source>
+                <target>SQL um geöffnete E-Mails zu registrieren</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.sql_register_click" xml:space="preserve" approved="yes">
+                <source>SQL to register a link clicked</source>
+                <target>SQL um geklickte Links zu registrieren</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_url" xml:space="preserve" approved="yes">
+                <source>Html URL</source>
+                <target>HTML URL</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type" xml:space="preserve" approved="yes">
+                <source>Html Fetch Type</source>
+                <target>HTML Fetch Type</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_be_users" xml:space="preserve" approved="yes">
+                <source>BE-users</source>
+                <target>BE-Benutzer</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_fe_groups" xml:space="preserve" approved="yes">
+                <source>FE-groups with FE-users</source>
+                <target>FE-Gruppen mit FE-Benutzer</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_fe_pages" xml:space="preserve" approved="yes">
+                <source>Pages with FE-users</source>
+                <target>Pages with FE-users</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_sql" xml:space="preserve" approved="yes">
+                <source>SQL</source>
+                <target>SQL</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_file" xml:space="preserve" approved="yes">
+                <source>CSV file</source>
+                <target>CSV Datei</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_list" xml:space="preserve" approved="yes">
+                <source>CSV list</source>
+                <target>CSV Liste</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_csv_url" xml:space="preserve" approved="yes">
+                <source>CSV URL</source>
+                <target>CSV URL</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.type_html" xml:space="preserve" approved="yes">
+                <source>HTML</source>
+                <target>HTML</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto" xml:space="preserve" approved="yes">
+                <source>Email links with &quot;mailto:&quot;</source>
+                <target>Email Links mit &quot;mailto:&quot;</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_recipientlist.html_fetch_type_regex" xml:space="preserve" approved="yes">
+                <source>Match email addresses</source>
+                <target>Passende E-Mail Adressen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email" xml:space="preserve" approved="yes">
+                <source>Email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.begin_time" xml:space="preserve" approved="yes">
+                <source>Start Time</source>
+                <target>Zeit gestartet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.end_time" xml:space="preserve" approved="yes">
+                <source>End Time</source>
+                <target>Zeit beendet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.recipient_address" xml:space="preserve" approved="yes">
+                <source>Recipient Address</source>
+                <target>Empfänger Adresse</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.recipient_data" xml:space="preserve" approved="yes">
+                <source>Recipient Data</source>
+                <target>Empfänger Daten</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.open_time" xml:space="preserve" approved="yes">
+                <source>Open time</source>
+                <target>Zeit geöffnet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.bounce_time" xml:space="preserve" approved="yes">
+                <source>Bounce time</source>
+                <target>Zeit zurückgekommen</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.newsletter" xml:space="preserve" approved="yes">
+                <source>Newsletter</source>
+                <target>Newsletter</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.unsubscribed" xml:space="preserve" approved="yes">
+                <source>Unsubscribed</source>
+                <target>Abgemeldet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link" xml:space="preserve" approved="yes">
+                <source>Link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.url" xml:space="preserve" approved="yes">
+                <source>URL</source>
+                <target>URL</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.opened_count" xml:space="preserve" approved="yes">
+                <source>Opened count</source>
+                <target>Anzahl geöffnet</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_link.newsletter" xml:space="preserve" approved="yes">
+                <source>Newsletter</source>
+                <target>Newsletter</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

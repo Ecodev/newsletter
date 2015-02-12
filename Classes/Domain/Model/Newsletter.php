@@ -811,7 +811,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
             }
             $LANG->init($LLkey); // initalize language-object with actual language
         }
-        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xlf');
 
         // We need to catch the exception if domain was not found/configured properly
         try {
@@ -949,7 +949,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     {
         // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
         global $LANG;
-        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xml');
+        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xlf');
 
         $plannedTime = $this->getPlannedTime();
         $beginTime = $this->getBeginTime();
