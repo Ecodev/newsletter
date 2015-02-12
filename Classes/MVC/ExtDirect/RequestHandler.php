@@ -1,5 +1,18 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface;
+use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use \TYPO3\CMS\Extbase\Mvc\Dispatcher;
+use Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder;
+use \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer;
+use Exception;
+use Ecodev\Newsletter\MVC\ExtDirect\Request;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -25,26 +38,26 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Newsletter_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_RequestHandlerInterface
+class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 {
 
     /**
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var Tx_Extbase_MVC_Dispatcher
+     * @var \TYPO3\CMS\Extbase\Mvc\Dispatcher
      */
     protected $dispatcher;
 
     /**
-     * @var Tx_Extbase_MVC_Controller_FlashMessages
+     * @var \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer
      */
     protected $flashMessages;
 
     /**
-     * @var Tx_Newsletter_MVC_ExtDirect_RequestBuilder
+     * @var Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder
      */
     protected $requestBuilder;
 
@@ -57,13 +70,13 @@ class Tx_Newsletter_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Reque
     /**
      * Constructs the Ext Direct Request Handler
      *
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager A reference to the object factory
-     * @param Tx_Extbase_MVC_Dispatcher $dispatcher The request dispatcher
-     * @param Tx_Newsletter_MVC_ExtDirect_RequestBuilder $requestBuilder
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager A reference to the object factory
+     * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher The request dispatcher
+     * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
      * @author Robert Lemke <robert@typo3.org>
      */
     public function __construct(
-    Tx_Extbase_Object_ObjectManagerInterface $objectManager, Tx_Extbase_MVC_Dispatcher $dispatcher, Tx_Newsletter_MVC_ExtDirect_RequestBuilder $requestBuilder)
+    \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager, \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher, RequestBuilder $requestBuilder)
     {
         $this->objectManager = $objectManager;
         $this->dispatcher = $dispatcher;
@@ -71,37 +84,37 @@ class Tx_Newsletter_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Reque
     }
 
     /**
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
-     * @param Tx_Extbase_MVC_Controller_FlashMessages $objectManager
+     * @param \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer $objectManager
      * @return void
      */
-    public function injectFlashMessages(Tx_Extbase_MVC_Controller_FlashMessages $flashMessages)
+    public function injectFlashMessages(\TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer $flashMessages)
     {
         $this->flashMessages = $flashMessages;
     }
 
     /**
-     * @param Tx_Extbase_MVC_Dispatcher $dispatcher
+     * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher
      * @return void
      */
-    public function injectDispatcher(Tx_Extbase_MVC_Dispatcher $dispatcher)
+    public function injectDispatcher(\TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
 
     /**
-     * @param Tx_Newsletter_MVC_ExtDirect_RequestBuilder $requestBuilder
+     * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
      * @return void
      */
-    public function injectRequestBuilder(Tx_Newsletter_MVC_ExtDirect_RequestBuilder $requestBuilder)
+    public function injectRequestBuilder(RequestBuilder $requestBuilder)
     {
         $this->requestBuilder = $requestBuilder;
     }
@@ -153,7 +166,7 @@ class Tx_Newsletter_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Reque
      */
     public function canHandleRequest()
     {
-        return isset($_GET['Tx_Newsletter_ExtDirectRequest']);
+        return isset($_GET['Ecodev\\Newsletter\\ExtDirectRequest']);
     }
 
     /**
@@ -172,13 +185,13 @@ class Tx_Newsletter_MVC_ExtDirect_RequestHandler implements Tx_Extbase_MVC_Reque
      * Sends the response
      *
      * @param array $results The collected results from the transaction requests
-     * @param Tx_Newsletter_MVC_ExtDirect_Request $extDirectRequest
+     * @param Ecodev\Newsletter\MVC\ExtDirect\Request $extDirectRequest
      * @return void
      * @author Robert Lemke <robert@typo3.org>
      */
-    protected function sendResponse(array $results, Tx_Newsletter_MVC_ExtDirect_Request $extDirectRequest)
+    protected function sendResponse(array $results, Request $extDirectRequest)
     {
-        $response = $this->objectManager->create('Tx_Extbase_MVC_Web_Response');
+        $response = $this->objectManager->create('\TYPO3\CMS\Extbase\Mvc\Web\Response');
         $jsonResponse = json_encode(count($results) === 1 ? $results[0] : $results);
         if ($extDirectRequest->isFormPost() && $extDirectRequest->isFileUpload()) {
             $response->setHeader('Content-Type', 'text/html');

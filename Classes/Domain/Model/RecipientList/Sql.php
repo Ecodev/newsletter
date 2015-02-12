@@ -1,5 +1,13 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList;
+use Ecodev\Newsletter\BounceHandler;
+
+
+
 /**
  * This is the basic SQL related newsletter target. Methods implemented with DB calls using SQL query defined by end-user.
  * Extend this class to create newsletter targets which extracts recipients from the database.
@@ -7,7 +15,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_Model_RecipientList
+class Sql extends RecipientList
 {
 
     /**
@@ -173,7 +181,7 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
-     * @param integer $bounceLevel Level of bounce, @see Tx_Newsletter_BounceHandler for possible values
+     * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
      * @return boolean Status of the success of the removal.
      */
     function registerBounce($email, $bounceLevel)
@@ -189,9 +197,9 @@ class Tx_Newsletter_Domain_Model_RecipientList_Sql extends Tx_Newsletter_Domain_
                 ), array(
             $TYPO3_DB->fullQuoteStr($email, 'tx_newsletter_domain_model_recipientlist'), // Here we assume the SQL table to recipientList, but it could be something different.
             $bounceLevel,
-            Tx_Newsletter_BounceHandler::NEWSLETTER_SOFTBOUNCE,
-            Tx_Newsletter_BounceHandler::NEWSLETTER_HARDBOUNCE,
-            Tx_Newsletter_BounceHandler::NEWSLETTER_UNSUBSCRIBE,
+            BounceHandler::NEWSLETTER_SOFTBOUNCE,
+            BounceHandler::NEWSLETTER_HARDBOUNCE,
+            BounceHandler::NEWSLETTER_UNSUBSCRIBE,
                 ), $this->getSqlRegisterBounce());
 
         if ($sql) {

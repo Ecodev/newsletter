@@ -1,12 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql;
+
+
+
 /**
  * Recipient List using Frontend Groups
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_RecipientList_FeGroups extends Tx_Newsletter_Domain_Model_RecipientList_GentleSql
+class FeGroups extends GentleSql
 {
 
     /**

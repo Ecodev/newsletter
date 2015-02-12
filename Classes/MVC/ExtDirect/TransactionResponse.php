@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use \TYPO3\CMS\Extbase\Mvc\Web\Response;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -26,7 +33,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_ExtDirect_TransactionResponse extends Tx_Extbase_MVC_Web_Response
+class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
 {
 
     /**

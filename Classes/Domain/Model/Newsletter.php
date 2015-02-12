@@ -1,5 +1,17 @@
 <?php
 
+namespace Ecodev\Newsletter\Domain\Model;
+
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use DateTime;
+use GeneralUtility;
+use Ecodev\Newsletter\Domain\Model\IPlainConverter;
+use Exception;
+use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Domain\Model\BounceAccount;
+use Ecodev\Newsletter\Domain\Model\RecipientList;
+use BackendUtility;
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,9 +41,8 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_AbstractEntity
+class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * When the newsletter will start sending emails
      *
@@ -116,7 +127,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * bounceAccount
      * @lazy
-     * @var Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount
+     * @var \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount
      */
     protected $bounceAccount;
 
@@ -129,7 +140,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * recipientList
      * @lazy
-     * @var Tx_Newsletter_Domain_Model_RecipientList $recipientList
+     * @var \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
      */
     protected $recipientList;
 
@@ -140,7 +151,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     protected $uidRecipientList;
 
     /**
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -150,7 +161,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     public function __construct()
     {
         // Set default values for new newsletter
-        $this->setPlainConverter('Tx_Newsletter_Domain_Model_PlainConverter_Builtin');
+        $this->setPlainConverter('Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin');
         $this->setRepetition(0);
         $this->setPlannedTime(new DateTime());
         $this->setInjectOpenSpy(true);
@@ -159,12 +170,12 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
     /**
      * Returns the ObjectManager
-     * @return Tx_Extbase_Object_ObjectManagerInterface
+     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected function getObjectManager()
     {
         if (!$this->objectManager)
-            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
+            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
 
         return $this->objectManager;
     }
@@ -287,21 +298,22 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Returns an instance of plain converter
      * @throws Exception
-     * @return Tx_Newsletter_Domain_Model_IPlainConverter
+     * @return \Ecodev\Newsletter\Domain\Model\IPlainConverter
      */
     public function getPlainConverterInstance()
     {
         $class = $this->getPlainConverter();
 
-        // Fallback to builtin converter
-        if (!class_exists($class)) {
-            $class = 'Tx_Newsletter_Domain_Model_PlainConverter_Builtin';
+        // Instantiate converter or fallback to builtin
+        if (class_exists($class)) {
+            $converter = new $class();
+        } else {
+            $converter = new PlainConverter\Builtin();
         }
 
-        $converter = new $class();
-
-        if (!($converter instanceof Tx_Newsletter_Domain_Model_IPlainConverter))
-            throw new Exception("$class does not implement Tx_Newsletter_Domain_Model_IPlainConverter");
+        if (!($converter instanceof IPlainConverter)) {
+            throw new Exception("$class does not implement \Ecodev\Newsletter\Domain\Model\IPlainConverter");
+        }
 
         return $converter;
     }
@@ -389,7 +401,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         }
 
         // Return the senderName defined in extension configuration
-        $sender = Tx_Newsletter_Tools::confParam('sender_name');
+        $sender = Tools::confParam('sender_name');
         if ($sender == 'user') {
             // Use the page-owner as user
             $rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName
@@ -444,7 +456,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         }
 
         /* Anything in typo3_conf_vars? */
-        $email = Tx_Newsletter_Tools::confParam('sender_email');
+        $email = Tools::confParam('sender_email');
         if ($email == 'user') {
             /* Use the page-owner as user */
             $rs = $TYPO3_DB->sql_query("SELECT email
@@ -536,10 +548,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Setter for bounceAccount
      *
-     * @param Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount bounceAccount
+     * @param \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount bounceAccount
      * @return void
      */
-    public function setBounceAccount(Tx_Newsletter_Domain_Model_BounceAccount $bounceAccount = null)
+    public function setBounceAccount(BounceAccount $bounceAccount = null)
     {
         $this->bounceAccount = $bounceAccount;
     }
@@ -566,7 +578,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      */
     public function setUidBounceAccount($uidBounceAccount = null)
     {
-        $bounceAccountRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+        $bounceAccountRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
         $bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
         $this->setBounceAccount($bounceAccount);
     }
@@ -574,7 +586,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Getter for bounceAccount
      *
-     * @return Tx_Newsletter_Domain_Model_BounceAccount bounceAccount
+     * @return \Ecodev\Newsletter\Domain\Model\BounceAccount bounceAccount
      */
     public function getBounceAccount()
     {
@@ -584,10 +596,10 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Setter for recipientList
      *
-     * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList recipientList
+     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList recipientList
      * @return void
      */
-    public function setRecipientList(Tx_Newsletter_Domain_Model_RecipientList $recipientList)
+    public function setRecipientList(RecipientList $recipientList)
     {
         $this->recipientList = $recipientList;
     }
@@ -595,7 +607,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
     /**
      * Getter for recipientList
      *
-     * @return Tx_Newsletter_Domain_Model_RecipientList recipientList
+     * @return \Ecodev\Newsletter\Domain\Model\RecipientList recipientList
      */
     public function getRecipientList()
     {
@@ -624,7 +636,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      */
     public function setUidRecipientList($uidRecipientList)
     {
-        $recipientListRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+        $recipientListRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
         $recipientList = $recipientListRepository->findByUid($uidRecipientList);
         $this->setRecipientList($recipientList);
     }
@@ -641,7 +653,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
         global $TYPO3_DB;
 
         // Is anything hardcoded from TYPO3_CONF_VARS ?
-        $domain = Tx_Newsletter_Tools::confParam('fetch_path');
+        $domain = Tools::confParam('fetch_path');
 
         // Else we try to resolve a domain in page root line
         if (!$domain) {
@@ -754,7 +766,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
             return $recipientList->getCount();
         }
 
-        $emailRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+        $emailRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
         return $emailRepository->getCount($this->uid);
     }
 
@@ -782,7 +794,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
      */
     public function getContentUrl($language = null)
     {
-        $append_url = Tx_Newsletter_Tools::confParam('append_url');
+        $append_url = Tools::confParam('append_url');
         $domain = $this->getDomain();
 
         if (!is_null($language)) {
@@ -980,7 +992,7 @@ class Tx_Newsletter_Domain_Model_Newsletter extends Tx_Extbase_DomainObject_Abst
 
     public function getStatistics()
     {
-        $newsletterRepository = $this->getObjectManager()->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $newsletterRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $stats = $newsletterRepository->getStatistics($this);
 
         return $stats;

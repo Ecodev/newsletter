@@ -12,62 +12,62 @@ module.tx_newsletter {
 config.tx_extbase {
 	mvc {
 		requestHandlers {
-			Tx_Newsletter_MVC_ExtDirect_RequestHandler = Tx_Newsletter_MVC_ExtDirect_RequestHandler
+			Ecodev\Newsletter\MVC\ExtDirect\RequestHandler = Ecodev\Newsletter\MVC\ExtDirect\RequestHandler
 		}
 	}
 
 	persistence.classes {
 
 		# Defines all possibles subclasses of recipientList
-		Tx_Newsletter_Domain_Model_RecipientList.subclasses {
-			Tx_Newsletter_Domain_Model_RecipientList_BeUsers = Tx_Newsletter_Domain_Model_RecipientList_BeUsers
-			Tx_Newsletter_Domain_Model_RecipientList_FeGroups = Tx_Newsletter_Domain_Model_RecipientList_FeGroups
-			Tx_Newsletter_Domain_Model_RecipientList_FePages = Tx_Newsletter_Domain_Model_RecipientList_FePages
-			Tx_Newsletter_Domain_Model_RecipientList_Sql = Tx_Newsletter_Domain_Model_RecipientList_Sql
-			Tx_Newsletter_Domain_Model_RecipientList_CsvFile = Tx_Newsletter_Domain_Model_RecipientList_CsvFile
-			Tx_Newsletter_Domain_Model_RecipientList_CsvList = Tx_Newsletter_Domain_Model_RecipientList_CsvList
-			Tx_Newsletter_Domain_Model_RecipientList_CsvUrl = Tx_Newsletter_Domain_Model_RecipientList_CsvUrl
-			Tx_Newsletter_Domain_Model_RecipientList_Html = Tx_Newsletter_Domain_Model_RecipientList_Html
+		Ecodev\Newsletter\Domain\Model\RecipientList.subclasses {
+			Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers = Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers
+			Ecodev\Newsletter\Domain\Model\RecipientList\FeGroups = Ecodev\Newsletter\Domain\Model\RecipientList\FeGroups
+			Ecodev\Newsletter\Domain\Model\RecipientList\FePages = Ecodev\Newsletter\Domain\Model\RecipientList\FePages
+			Ecodev\Newsletter\Domain\Model\RecipientList\Sql = Ecodev\Newsletter\Domain\Model\RecipientList\Sql
+			Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile = Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile
+			Ecodev\Newsletter\Domain\Model\RecipientList\CsvList = Ecodev\Newsletter\Domain\Model\RecipientList\CsvList
+			Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl = Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl
+			Ecodev\Newsletter\Domain\Model\RecipientList\Html = Ecodev\Newsletter\Domain\Model\RecipientList\Html
 		}
 
 		# For all types, defines what class will used for the recordType, and what table will be used for storage
-		Tx_Newsletter_Domain_Model_RecipientList_BeUsers.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_BeUsers
+		Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_FeGroups.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_FeGroups
+		Ecodev\Newsletter\Domain\Model\RecipientList\FeGroups.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\FeGroups
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_FePages.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_FePages
+		Ecodev\Newsletter\Domain\Model\RecipientList\FePages.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\FePages
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_Sql.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_Sql
+		Ecodev\Newsletter\Domain\Model\RecipientList\Sql.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\Sql
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_CsvFile.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvFile
+		Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_CsvList.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvList
+		Ecodev\Newsletter\Domain\Model\RecipientList\CsvList.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\CsvList
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_CsvUrl.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_CsvUrl
+		Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 
-		Tx_Newsletter_Domain_Model_RecipientList_Html.mapping {
-				recordType = Tx_Newsletter_Domain_Model_RecipientList_Html
+		Ecodev\Newsletter\Domain\Model\RecipientList\Html.mapping {
+				recordType = Ecodev\Newsletter\Domain\Model\RecipientList\Html
 				tableName = tx_newsletter_domain_model_recipientlist
 		}
 	}
@@ -89,7 +89,7 @@ tx_newsletter_blank_page {
     10 {
         10 = USER_INT
         10 {
-            userFunc = tx_extbase_core_bootstrap->run
+            userFunc = \TYPO3\CMS\Extbase\Core\Bootstrap->run
             extensionName = Newsletter
             pluginName = p
 			switchableControllerActions {

@@ -1,19 +1,19 @@
 "use strict";
 
-Ext.ns('Ext.ux.TYPO3.Newsletter.Store');
+Ext.ns('Ext.ux.Ecodev.Newsletter.Store');
 
 /**
  * A Store for the recipientList model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.Store.RecipientList = function() {
+Ext.ux.Ecodev.Newsletter.Store.RecipientList = function() {
 
     var recipientListStore = null;
 
     var initialize = function() {
         if (recipientListStore == null) {
             recipientListStore = new Ext.data.DirectStore({
-                storeId: 'Tx_Newsletter_Domain_Model_RecipientList',
+                storeId: 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList',
                 reader: new Ext.data.JsonReader({
                     totalProperty: 'total',
                     successProperty: 'success',
@@ -36,10 +36,10 @@ Ext.ux.TYPO3.Newsletter.Store.RecipientList = function() {
                     writeAllFields: false
                 }),
                 api: {
-                    read: Ext.ux.TYPO3.Newsletter.Remote.RecipientListController.listAction,
-                    update: Ext.ux.TYPO3.Newsletter.Remote.RecipientListController.updateAction,
-                    destroy: Ext.ux.TYPO3.Newsletter.Remote.RecipientListController.destroyAction,
-                    create: Ext.ux.TYPO3.Newsletter.Remote.RecipientListController.createAction
+                    read: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.listAction,
+                    update: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.updateAction,
+                    destroy: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.destroyAction,
+                    create: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.createAction
                 },
                 paramOrder: {
                     read: [],

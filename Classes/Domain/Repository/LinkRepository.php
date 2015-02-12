@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Repository;
+
+use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -24,12 +31,12 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Newsletter_Domain_Model_Link
+ * Repository for \Ecodev\Newsletter\Domain\Model\Link
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository
+class LinkRepository extends AbstractRepository
 {
 
     /**
@@ -37,7 +44,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
      * @param integer $uidNewsletter
      * @param integer $start
      * @param integer $limit
-     * @return Tx_Newsletter_Domain_Model_Link[]
+     * @return \Ecodev\Newsletter\Domain\Model\Link[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
     {
@@ -112,7 +119,7 @@ class Tx_Newsletter_Domain_Repository_LinkRepository extends Tx_Newsletter_Domai
             ");
 
             // Forward which user clicked the link to the recipientList so the recipientList may take appropriate action
-            $recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+            $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
             $recipientList = $recipientListRepository->findByUid($recipientListUid);
             if ($recipientList) {
                 $recipientList->registerClick($email);

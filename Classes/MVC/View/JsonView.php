@@ -1,5 +1,17 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\View;
+
+use \TYPO3\CMS\Extbase\Mvc\View\AbstractView;
+use \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use ArrayAccess;
+use DateTime;
+use \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
+
+
 /* *
  * This script belongs to the FLOW3 framework.                            *
  *                                                                        *
@@ -27,11 +39,11 @@
  * @scope prototype
  * @api
  */
-class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView
+class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
 {
 
     /**
-     * @var Tx_Extbase_MVC_Controller_ControllerContext
+     * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
      */
     protected $controllerContext;
 
@@ -95,7 +107,7 @@ class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView
     protected $configuration = array();
 
     /**
-     * @var Tx_Extbase_Persistence_ManagerInterface
+     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
      * @inject
      */
     protected $persistenceManager;
@@ -103,10 +115,10 @@ class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView
     /**
      * Injects the PersistenceManager.
      *
-     * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
+     * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
      * @return void
      */
-    public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager)
+    public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
     }
@@ -227,10 +239,10 @@ class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView
             return $object->format('c');
         }
         // load LayzyLoadingProxy instances
-        if ($object instanceof Tx_Extbase_Persistence_LazyLoadingProxy) {
+        if ($object instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
             $object = $object->_loadRealInstance();
         }
-        $propertyNames = Tx_Extbase_Reflection_ObjectAccess::getGettablePropertyNames($object);
+        $propertyNames = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($object);
         $propertiesToRender = array();
         foreach ($propertyNames as $propertyName) {
             if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only']))
@@ -238,7 +250,7 @@ class Tx_Newsletter_MVC_View_JsonView extends Tx_Extbase_MVC_View_AbstractView
             if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude']))
                 continue;
 
-            $propertyValue = Tx_Extbase_Reflection_ObjectAccess::getProperty($object, $propertyName);
+            $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($object, $propertyName);
 
             if (!is_array($propertyValue) && !is_object($propertyValue)) {
                 $propertiesToRender[$propertyName] = $propertyValue;

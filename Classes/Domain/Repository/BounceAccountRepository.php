@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Repository;
+
+use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -24,12 +31,12 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Newsletter_Domain_Model_BounceAccount
+ * Repository for \Ecodev\Newsletter\Domain\Model\BounceAccount
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Repository_BounceAccountRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository
+class BounceAccountRepository extends AbstractRepository
 {
 
     /**

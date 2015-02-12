@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Controller;
+
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
+use FlashMessage;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,23 +38,23 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_BounceAccountController extends Tx_Newsletter_MVC_Controller_ExtDirectActionController
+class BounceAccountController extends ExtDirectActionController
 {
 
     /**
      * bounceAccountRepository
      *
-     * @var Tx_Newsletter_Domain_Repository_BounceAccountRepository
+     * @var Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository
      */
     protected $bounceAccountRepository;
 
     /**
      * injectBounceAccounRepository
      *
-     * @param Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository
+     * @param Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository $bounceAccountRepository
      * @return void
      */
-    public function injectBounceAccounRepository(Tx_Newsletter_Domain_Repository_BounceAccountRepository $bounceAccountRepository)
+    public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
     {
         $this->bounceAccountRepository = $bounceAccountRepository;
     }

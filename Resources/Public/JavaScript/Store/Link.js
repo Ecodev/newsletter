@@ -1,19 +1,19 @@
 "use strict";
 
-Ext.ns('Ext.ux.TYPO3.Newsletter.Store');
+Ext.ns('Ext.ux.Ecodev.Newsletter.Store');
 
 /**
  * A Store for the link model using ExtDirect to communicate with the
  * server side extbase framework.
  */
-Ext.ux.TYPO3.Newsletter.Store.Link = function() {
+Ext.ux.Ecodev.Newsletter.Store.Link = function() {
 
     var linkStore = null;
 
     var initialize = function() {
         if (linkStore == null) {
             linkStore = new Ext.data.DirectStore({
-                storeId: 'Tx_Newsletter_Domain_Model_Link',
+                storeId: 'Ecodev\\Newsletter\\Domain\\Model\\Link',
                 reader: new Ext.data.JsonReader({
                     totalProperty: 'total',
                     successProperty: 'success',
@@ -31,10 +31,10 @@ Ext.ux.TYPO3.Newsletter.Store.Link = function() {
                     writeAllFields: false
                 }),
                 api: {
-                    read: Ext.ux.TYPO3.Newsletter.Remote.LinkController.listAction,
-                    update: Ext.ux.TYPO3.Newsletter.Remote.LinkController.updateAction,
-                    destroy: Ext.ux.TYPO3.Newsletter.Remote.LinkController.destroyAction,
-                    create: Ext.ux.TYPO3.Newsletter.Remote.LinkController.createAction
+                    read: Ext.ux.Ecodev.Newsletter.Remote.LinkController.listAction,
+                    update: Ext.ux.Ecodev.Newsletter.Remote.LinkController.updateAction,
+                    destroy: Ext.ux.Ecodev.Newsletter.Remote.LinkController.destroyAction,
+                    create: Ext.ux.Ecodev.Newsletter.Remote.LinkController.createAction
                 },
                 paramOrder: {
                     read: ['data', 'start', 'limit']

@@ -1,12 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+
+
+
 /**
  * Makes an array of configuration available in JavaScript
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_ViewHelpers_ConfigurationViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class ConfigurationViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -19,9 +26,9 @@ class Tx_Newsletter_ViewHelpers_ConfigurationViewHelper extends Tx_Newsletter_Vi
     {
 
         $configuration = json_encode($configuration);
-        $javascript = "Ext.ux.TYPO3.Newsletter.Configuration = $configuration;";
+        $javascript = "Ext.ux.Ecodev.Newsletter.Configuration = $configuration;";
 
-        $this->pageRenderer->addJsInlineCode("Ext.ux.TYPO3.Newsletter.Configuration", $javascript);
+        $this->pageRenderer->addJsInlineCode("Ext.ux.Ecodev.Newsletter.Configuration", $javascript);
     }
 
 }

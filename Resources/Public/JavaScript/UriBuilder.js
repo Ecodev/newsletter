@@ -1,13 +1,13 @@
-Ext.ns('Ext.ux.TYPO3.Newsletter');
+Ext.ns('Ext.ux.Ecodev.Newsletter');
 /**
  * Creates URL's to call controller/actions
  *
  * TODO: make FE url's available
  *
- * @class Ext.ux.TYPO3.Newsletter.UriBuilder
+ * @class Ext.ux.Ecodev.Newsletter.UriBuilder
  * @singleton
  */
-Ext.ux.TYPO3.Newsletter.UriBuilder = function() {
+Ext.ux.Ecodev.Newsletter.UriBuilder = function() {
     /**
      * Private data and logic
      */

@@ -1,11 +1,11 @@
-Ext.ns('Ext.ux.TYPO3.Newsletter');
+Ext.ns('Ext.ux.Ecodev.Newsletter');
 /**
  *
  *
- * @class Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer
+ * @class Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer
  * @singleton
  */
-Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
+Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer = function() {
     /**
      * Container in the DOM to show Messages.
      */
@@ -53,7 +53,7 @@ Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer = function() {
         msgCt.setStyle('z-index', 9999);
         msgCt.setWidth(config.width);
         msgCt.setOpacity(config.opacity);
-        Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.on('new', handleMessages);
+        Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher.on('new', handleMessages);
     }
 
     /**

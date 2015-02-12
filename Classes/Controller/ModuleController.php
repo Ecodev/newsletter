@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Controller;
+
+use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use GeneralUtility;
+use Ecodev\Newsletter\Tools;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +38,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController
+class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**
@@ -66,7 +75,7 @@ class Tx_Newsletter_Controller_ModuleController extends Tx_Extbase_MVC_Controlle
         $configuration = array(
             'pageId' => $this->pageId,
             'pageType' => $pageType,
-            'emailShowUrl' => Tx_Newsletter_Tools::buildFrontendUri('show', array(), 'Email'),
+            'emailShowUrl' => Tools::buildFrontendUri('show', array(), 'Email'),
         );
 
         $this->view->assign('configuration', $configuration);

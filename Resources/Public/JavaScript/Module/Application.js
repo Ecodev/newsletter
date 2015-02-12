@@ -1,10 +1,10 @@
 "use strict";
 
-Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
+Ext.ns("Ext.ux.Ecodev.Newsletter.Module");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Module.Application
- * @namespace Ext.ux.TYPO3.Newsletter.Module
+ * @class Ext.ux.Ecodev.Newsletter.Module.Application
+ * @namespace Ext.ux.Ecodev.Newsletter.Module
  * @extends Ext.util.Observable
  *
  * The main entry point which controls the lifecycle of the application.
@@ -14,20 +14,18 @@ Ext.ns("Ext.ux.TYPO3.Newsletter.Module");
  * @singleton
  */
 
-Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable(), {
+Ext.ux.Ecodev.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable(), {
     /**
      * Main bootstrap. This is called by Ext.onReady.
      *
      * This method is called automatically.
      */
     bootstrap: function() {
-        Ext.chart.Chart.CHART_URL = '/typo3/contrib/extjs/resources/charts.swf';
-
         Ext.QuickTips.init();
 
         // init Flashmessage
-        Ext.ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.initialize();
-        Ext.ux.TYPO3.Newsletter.FlashMessageOverlayContainer.initialize({
+        Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher.initialize();
+        Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer.initialize({
             minDelay: 5,
             maxDelay: 15,
             logLevel: -1,
@@ -52,7 +50,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
      * @return {Boolean}
      */
     checkIfPage: function() {
-        return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'page';
+        return Ext.ux.Ecodev.Newsletter.Configuration.pageType == 'page';
     },
     /**
      * Check if the application can be loaded
@@ -60,7 +58,7 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
      * @return {Boolean}
      */
     checkIfPageIsFolder: function() {
-        return Ext.ux.TYPO3.Newsletter.Configuration.pageType == 'folder';
+        return Ext.ux.Ecodev.Newsletter.Configuration.pageType == 'folder';
     },
     /**
      * Init menus and content area
@@ -79,15 +77,15 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
                     bodyCssClass: 't3-newsletter-docbody',
                     padding: '0 20px 10px 24px',
                     items: [{
-                            xtype: 'Ext.ux.TYPO3.Newsletter.Planner.Planner',
+                            xtype: 'Ext.ux.Ecodev.Newsletter.Planner.Planner',
                             iconCls: 't3-newsletter-button-planner',
                             api: {
-                                load: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.listPlannedAction,
-                                submit: Ext.ux.TYPO3.Newsletter.Remote.NewsletterController.createAction
+                                load: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.listPlannedAction,
+                                submit: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.createAction
                             }
 
                         }, {
-                            xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.Statistics',
+                            xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.Statistics',
                             iconCls: 't3-newsletter-button-statistics'
                         }]
                 }]
@@ -97,14 +95,14 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
      * Init ExtDirect stores
      */
     initStore: function() {
-        Ext.ux.TYPO3.Newsletter.Store.Newsletter.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.SelectedNewsletter.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.PlannedNewsletter.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.Email.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.Link.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.BounceAccount.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.RecipientList.initialize();
-        Ext.ux.TYPO3.Newsletter.Store.Recipient.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.Newsletter.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.SelectedNewsletter.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.PlannedNewsletter.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.Email.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.Link.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.BounceAccount.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.RecipientList.initialize();
+        Ext.ux.Ecodev.Newsletter.Store.Recipient.initialize();
     },
     /**
      * Init folder GUI
@@ -125,8 +123,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
                         '</div>',
                         '<div id="typo3-docbody">',
                         '<div id="typo3-inner-docbody">',
-                        '<h2>' + Ext.ux.TYPO3.Newsletter.Language.message_title_page_selected + '</h2>',
-                        '<p>' + Ext.ux.TYPO3.Newsletter.Language.message_page_selected + '</p>',
+                        '<h2>' + Ext.ux.Ecodev.Newsletter.Language.message_title_page_selected + '</h2>',
+                        '<p>' + Ext.ux.Ecodev.Newsletter.Language.message_page_selected + '</p>',
                         '</div>',
                         '</div>'
                     ]
@@ -153,8 +151,8 @@ Ext.ux.TYPO3.Newsletter.Module.Application = Ext.apply(new Ext.util.Observable()
                         '</div>',
                         '<div id="typo3-docbody">',
                         '<div id="typo3-inner-docbody">',
-                        '<h2>' + Ext.ux.TYPO3.Newsletter.Language.message_title_no_pid_selected + '</h2>',
-                        '<p>' + Ext.ux.TYPO3.Newsletter.Language.message_no_pid_selected + '</p>',
+                        '<h2>' + Ext.ux.Ecodev.Newsletter.Language.message_title_no_pid_selected + '</h2>',
+                        '<p>' + Ext.ux.Ecodev.Newsletter.Language.message_no_pid_selected + '</p>',
                         '</div>',
                         '</div>'
                     ]

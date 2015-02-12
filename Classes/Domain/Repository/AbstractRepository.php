@@ -1,5 +1,7 @@
 <?php
 
+namespace Ecodev\Newsletter\Domain\Repository;
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,9 +31,8 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tx_Newsletter_Domain_Repository_AbstractRepository extends Tx_Extbase_Persistence_Repository
+abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Override parent method to set default settings to ignore storagePid because we did
      * not understand how to use it. And we usually don't want to be tied to a

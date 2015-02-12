@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "Fluid".                      *
  *                                                                        *
@@ -34,7 +41,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  *
  */
-class Tx_Newsletter_ViewHelpers_NullViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper
+class NullViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
     protected $objectAccessorPostProcessorEnabled = FALSE;

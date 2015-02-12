@@ -1,12 +1,20 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+use ExtensionManagementUtility;
+
+
+
 /**
  * Make localization files available in JavaScript
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class LocalizationViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -33,7 +41,7 @@ class Tx_Newsletter_ViewHelpers_LocalizationViewHelper extends Tx_Newsletter_Vie
         }
 
         $localizations = json_encode($localizations);
-        $javascript = "Ext.ux.TYPO3.Newsletter.Language = $localizations;";
+        $javascript = "Ext.ux.Ecodev.Newsletter.Language = $localizations;";
 
         $this->pageRenderer->addJsInlineCode($filePath, $javascript);
     }

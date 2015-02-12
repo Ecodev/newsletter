@@ -1,5 +1,11 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model;
+
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -27,7 +33,7 @@
  * Interface for Plain Text Converter. Converter may use either HTML
  * source or URL from where to fetch HTML source.
  */
-interface Tx_Newsletter_Domain_Model_IPlainConverter
+interface IPlainConverter
 {
 
     /**

@@ -1,5 +1,12 @@
 <?php
 
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use Ecodev\Newsletter\MVC\ExtDirect\Request;
+use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use \TYPO3\CMS\Extbase\Reflection\ReflectionService;
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -26,30 +33,29 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_ExtDirect_Transaction
+class Transaction
 {
-
     /**
      * @inject
-     * @var Tx_Extbase_Reflection_Service
+     * @var \TYPO3\CMS\Extbase\Reflection\ReflectionService
      */
     protected $reflectionService;
 
     /**
      * @inject
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      */
     protected $configurationManager;
 
     /**
      * The direct request this transaction belongs to
      *
-     * @var Tx_Newsletter_MVC_ExtDirect_Request
+     * @var Ecodev\Newsletter\MVC\ExtDirect\Request
      */
     protected $request;
 
@@ -84,14 +90,14 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
     /**
      * Constructs the Transaction
      *
-     * @param Tx_Newsletter_MVC_ExtDirect_Request $request The direct request this transaction belongs to
+     * @param Ecodev\Newsletter\MVC\ExtDirect\Request $request The direct request this transaction belongs to
      * @param string $action The "action" – the "controller object name" in FLOW3 terms
      * @param string $method The "method" – the "action name" in FLOW3 terms
      * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method
      * @param mixed $tid The ExtDirect transaction id
      * @author Robert Lemke <robert@typo3.org>
      */
-    public function __construct(Tx_Newsletter_MVC_ExtDirect_Request $request, $action, $method, array $data, $tid)
+    public function __construct(Request $request, $action, $method, array $data, $tid)
     {
         $this->request = $request;
         $this->action = $action;
@@ -101,19 +107,19 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
     }
 
     /**
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
-     * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
      * @return void
      */
-    public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -121,10 +127,10 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
     /**
      * Injects the Reflection Service
      *
-     * @param Tx_Extbase_Reflection_Service $reflectionService
+     * @param \TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService
      * @return void
      */
-    public function injectReflectionService(Tx_Extbase_Reflection_Service $reflectionService)
+    public function injectReflectionService(\TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService)
     {
         $this->reflectionService = $reflectionService;
     }
@@ -132,13 +138,13 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
     /**
      * Build a web request for dispatching this Ext Direct transaction
      *
-     * @return Tx_Extbase_MVC_Web_Request A web request for this transaction
+     * @return \TYPO3\CMS\Extbase\Mvc\Web\Request A web request for this transaction
      * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function buildRequest()
     {
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $request = $this->objectManager->create('Tx_Extbase_MVC_Web_Request');
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $request = $this->objectManager->create('\TYPO3\CMS\Extbase\Mvc\Web\Request');
         $request->setControllerObjectName($this->getControllerObjectName());
         $request->setControllerActionName($this->getControllerActionName());
         $request->setPluginName($frameworkConfiguration['pluginName']);
@@ -150,12 +156,12 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
     /**
      * Build a response for dispatching this Ext Direct transaction
      *
-     * @return Tx_Newsletter_ExtDirect_TransactionResponse A response for dispatching this transaction
+     * @return TransactionResponse A response for dispatching this transaction
      * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function buildResponse()
     {
-        return $this->objectManager->create('Tx_Newsletter_MVC_ExtDirect_TransactionResponse');
+        return $this->objectManager->create('Ecodev\Newsletter\MVC\ExtDirect\TransactionResponse');
     }
 
     /**
@@ -221,8 +227,8 @@ class Tx_Newsletter_MVC_ExtDirect_Transaction
      */
     public function getControllerObjectName()
     {
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        return 'Tx_' . $frameworkConfiguration['extensionName'] . '_Controller_' . $this->action;
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        return 'Ecodev\\Newsletter\\Controller\\' . $this->action;
     }
 
     /**

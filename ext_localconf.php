@@ -17,8 +17,8 @@ $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['newsletter_bounce'] = array
 /**
  * Configure FE plugin element "TABLE"
  */
-Tx_Extbase_Utility_Extension::configurePlugin(
-        $_EXTKEY, 'p', array(// list of controller
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Ecodev.' . $_EXTKEY, 'p', array(// list of controller
     'Email' => 'show, opened',
     'Link' => 'clicked',
     'RecipientList' => 'unsubscribe, export',
@@ -29,13 +29,13 @@ Tx_Extbase_Utility_Extension::configurePlugin(
         )
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_SendEmails'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Ecodev\\Newsletter\\Task\\SendEmails'] = array(
     'extension' => $_EXTKEY,
     'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_send_emails_title',
     'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_send_emails_description',
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Tx_Newsletter_Task_FetchBounces'] = array(
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Ecodev\\Newsletter\\Task\\FetchBounces'] = array(
     'extension' => $_EXTKEY,
     'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_fetch_bounces_title',
     'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_fetch_bounces_description',

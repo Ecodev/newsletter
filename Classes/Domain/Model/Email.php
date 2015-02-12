@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model;
+
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use DateTime;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +38,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractEntity
+class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
@@ -78,7 +87,7 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
     /**
      * newsletter
      * @lazy
-     * @var Tx_Newsletter_Domain_Model_Newsletter $newsletter
+     * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      */
     protected $newsletter;
 
@@ -249,10 +258,10 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
     /**
      * Setter for newsletter
      *
-     * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
      * @return void
      */
-    public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
+    public function setNewsletter(Newsletter $newsletter)
     {
         $this->newsletter = $newsletter;
     }
@@ -260,7 +269,7 @@ class Tx_Newsletter_Domain_Model_Email extends Tx_Extbase_DomainObject_AbstractE
     /**
      * Getter for newsletter
      *
-     * @return Tx_Newsletter_Domain_Model_Newsletter newsletter
+     * @return \Ecodev\Newsletter\Domain\Model\Newsletter newsletter
      */
     public function getNewsletter()
     {

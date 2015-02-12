@@ -41,7 +41,7 @@ class ext_update
         "INSERT INTO tx_newsletter_domain_model_recipientlist (
 			uid, pid, title, plain_only, lang, type, be_users, fe_groups, fe_pages, csv_url, csv_separator, csv_fields, csv_filename, csv_values, sql_statement, html_url, html_fetch_type, tstamp, crdate, deleted, hidden
 		) SELECT uid, pid, title, plain_only, lang,
-		CONCAT( 'Tx_Newsletter_Domain_Model_RecipientList_', CONCAT( UPPER( LEFT( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 1 ) ) , SUBSTRING( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 2 ) ) ),
+		CONCAT( '\Ecodev\Newsletter\Domain\Model\RecipientList_', CONCAT( UPPER( LEFT( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 1 ) ) , SUBSTRING( REPLACE( targettype, 'tx_tcdirectmail_target_', '' ) , 2 ) ) ),
 		beusers, fegroups, fepages, csvurl, csvseparator, csvfields, csvfilename, csvvalues, rawsql, htmlfile, htmlfetchtype, tstamp, crdate, deleted, hidden
 		FROM tx_tcdirectmail_targets;",
         // Bounce accounts
@@ -53,7 +53,7 @@ class ext_update
         "INSERT INTO tx_newsletter_domain_model_newsletter (
 			pid, planned_time, begin_time, end_time, recipient_list, repetition, sender_name, sender_email, plain_converter, attachments, inject_open_spy, inject_links_spy, bounce_account
 		) SELECT pages.uid, IF(tx_tcdirectmail_senttime, tx_tcdirectmail_senttime, tx_tcdirectmail_lock.begintime), tx_tcdirectmail_lock.begintime, tx_tcdirectmail_lock.stoptime, tx_tcdirectmail_real_target, tx_tcdirectmail_repeat, tx_tcdirectmail_sendername, tx_tcdirectmail_senderemail,
-		CONCAT( 'Tx_Newsletter_Domain_Model_PlainConverter_', CONCAT( UPPER( LEFT( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 1 ) ) , SUBSTRING( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 2 ) ) ),
+		CONCAT( '\Ecodev\Newsletter\Domain\Model\PlainConverter\', CONCAT( UPPER( LEFT( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 1 ) ) , SUBSTRING( REPLACE( tx_tcdirectmail_plainconvert, 'tx_tcdirectmail_plain_', '' ) , 2 ) ) ),
 		tx_tcdirectmail_attachfiles, tx_tcdirectmail_spy, tx_tcdirectmail_register_clicks, tx_tcdirectmail_bounceaccount
 		FROM pages
 		INNER JOIN tx_tcdirectmail_lock ON (pages.uid = tx_tcdirectmail_lock.pid)
@@ -73,15 +73,15 @@ class ext_update
         "UPDATE fe_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
         "UPDATE be_users SET tx_newsletter_bounce = tx_tcdirectmail_bounce WHERE tx_newsletter_bounce = 0;",
         // Normalize case
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_BeUsers' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Beusers';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FeGroups' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fegroups';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_FePages' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Fepages';",
-        "DELETE FROM tx_newsletter_domain_model_recipientlist WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Ttaddress';", // ttaddress is not supported anymore
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Sql' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Rawsql';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvFile' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvfile';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvList' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvlist';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_CsvUrl' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_Csvurl';",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = 'Tx_Newsletter_Domain_Model_RecipientList_Html' WHERE type = 'Tx_Newsletter_Domain_Model_RecipientList_html';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_BeUsers' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Beusers';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_FeGroups' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Fegroups';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_FePages' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Fepages';",
+        "DELETE FROM tx_newsletter_domain_model_recipientlist WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Ttaddress';", // ttaddress is not supported anymore
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Sql' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Rawsql';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_CsvFile' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Csvfile';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_CsvList' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Csvlist';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_CsvUrl' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Csvurl';",
+        "UPDATE tx_newsletter_domain_model_recipientlist SET type = '\Ecodev\Newsletter\Domain\Model\RecipientList_Html' WHERE type = '\Ecodev\Newsletter\Domain\Model\RecipientList_html';",
         // Convert tcdirectmail pages to standard pages
         "UPDATE pages SET doktype = 1 WHERE doktype = 189;",
     );

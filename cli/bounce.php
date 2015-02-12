@@ -34,5 +34,5 @@ if (ftell(STDIN) === false) {
 $content = file_get_contents('php://stdin');
 
 // Dispatch it to analyze its bounce level an take appropriate action
-$bounceHandler = new Tx_Newsletter_BounceHandler($content);
+$bounceHandler = new \Ecodev\Newsletter\BounceHandler($content);
 $bounceHandler->dispatch();

@@ -1,5 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use TYPO3;
+use CMS;
+use Core;
+use SingletonInterface;
+use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use \TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use Ecodev\Newsletter\Exception as EcodevNewsletterException;
+use Exception as Exception;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -25,28 +39,28 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
+class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
      * @inject
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
      * @inject
-     * @var Tx_Extbase_Configuration_ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
      */
     protected $configurationManager;
 
     /**
      * Injects the ObjectManager
      *
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -54,10 +68,10 @@ class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\Singl
     /**
      * Injects the ConfigurationManager
      *
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManager $configurationManager)
+    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -65,13 +79,13 @@ class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\Singl
     /**
      * Builds an Ext Direct request
      *
-     * @return Tx_Newsletter_MVC_ExtDirect_Request The built request
+     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The built request
      */
     public function build()
     {
         $postArguments = $_POST;
         if (isset($postArguments['extAction'])) {
-            throw new Tx_Newsletter_Exception('Form Post Request building is not yet implemented.', 1281379502);
+            throw new EcodevNewsletterException('Form Post Request building is not yet implemented.', 1281379502);
             $request = $this->buildFormPostRequest($postArguments);
         } else {
             $request = $this->buildJsonRequest();
@@ -83,7 +97,7 @@ class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\Singl
      * Builds a Json Ext Direct request by reading the transaction data from
      * standard input.
      *
-     * @return Tx_Newsletter_MVC_ExtDirect_Request The Ext Direct request object
+     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
      * @throws Exception
      * @author Christopher Hlubek <hlubek@networkteam.com>
      * @author Robert Lemke <robert@typo3.org>
@@ -99,7 +113,7 @@ class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\Singl
         if (!is_array($transactionDatas))
             $transactionDatas = array($transactionDatas);
 
-        $request = $this->objectManager->create('Tx_Newsletter_MVC_ExtDirect_Request');
+        $request = $this->objectManager->create('Ecodev\Newsletter\MVC\ExtDirect\Request');
         foreach ($transactionDatas as $transactionData) {
             $request->createAndAddTransaction(
                     $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : array(), $transactionData->tid
@@ -111,7 +125,7 @@ class Tx_Newsletter_MVC_ExtDirect_RequestBuilder implements TYPO3\CMS\Core\Singl
     /**
      * Builds a Form Post Ext Direct Request
      *
-     * @return Tx_Newsletter_MVC_ExtDirect_Request The Ext Direct request object
+     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
      * @author Christopher Hlubek <hlubek@networkteam.com>
      * @author Robert Lemke <robert@typo3.org>
      * @todo Well... make it work, eh?

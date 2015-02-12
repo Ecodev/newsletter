@@ -1,5 +1,13 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Task;
+
+use tx_scheduler_Task;
+use Ecodev\Newsletter\BounceHandler;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +37,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Task_FetchBounces extends tx_scheduler_Task
+class FetchBounces extends tx_scheduler_Task
 {
 
     /**
@@ -40,7 +48,7 @@ class Tx_Newsletter_Task_FetchBounces extends tx_scheduler_Task
     public function execute()
     {
 
-        Tx_Newsletter_BounceHandler::fetchBouncedEmails();
+        BounceHandler::fetchBouncedEmails();
 
         return TRUE;
     }

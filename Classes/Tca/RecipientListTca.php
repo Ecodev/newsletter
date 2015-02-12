@@ -1,14 +1,17 @@
 <?php
 
+namespace Ecodev\Newsletter\Tca;
+
+use GeneralUtility;
+
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Tca_RecipientListTca
+class RecipientListTca
 {
-
     /**
      * Returns an HTML table showing recipient_data content
      *
@@ -20,8 +23,8 @@ class Tx_Newsletter_Tca_RecipientListTca
         $result = '';
         $uid = intval($PA['row']['uid']);
         if ($uid != 0) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-            $recipientListRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+            $recipientListRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
             $recipientList = $recipientListRepository->findByUidInitialized($uid);
 
             $result .= $recipientList->getExtract();

@@ -1,5 +1,13 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+use GeneralUtility;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -38,21 +46,21 @@
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Newsletter_ViewHelpers_ExtDirectProviderViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class ExtDirectProviderViewHelper extends AbstractViewHelper
 {
 
     /**
-     * @var Tx_Newsletter_ExtDirect_Api
+     * @var \Ecodev\Newsletter\MVC\ExtDirect\Api
      */
     protected $apiService;
 
     /**
-     * @see Classes/Core/ViewHelper/Tx_Fluid_Core_ViewHelper_AbstractViewHelper#initializeArguments()
+     * @see Classes/Core/ViewHelper/\TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper#initializeArguments()
      */
     public function initializeArguments()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $this->apiService = $objectManager->get('Tx_Newsletter_MVC_ExtDirect_Api');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $this->apiService = $objectManager->get('Ecodev\Newsletter\MVC\ExtDirect\Api');
     }
 
     /**
@@ -72,7 +80,7 @@ class Tx_Newsletter_ViewHelpers_ExtDirectProviderViewHelper extends Tx_Newslette
     {
 
         if ($routeUrl === NULL) {
-            $routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Tx_Newsletter_ExtDirectRequest=1';
+            $routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Ecodev\\Newsletter\\ExtDirectRequest=1';
         }
 
         $api = $this->apiService->getApi($routeUrl, $namespace, $cache);

@@ -1,42 +1,41 @@
-{namespace ext=Tx_Newsletter_ViewHelpers}
-{namespace newsletter=Tx_Newsletter_ViewHelpers}
+{namespace newsletter=Ecodev\Newsletter\ViewHelpers}
 <!--
 This container handles the pageRenderer in the background
 Specifiy which js librarys should be loaded
 -->
-<ext:Be.moduleContainer pageTitle="Newsletter" loadExtJs="true" loadExtJsTheme="true">
+<newsletter:Be.moduleContainer pageTitle="Newsletter" loadExtJs="true" loadExtJsTheme="true">
 
     <!-- load needed CSS Files -->
-    <ext:includeCssFile name="module.css" />
-    <ext:includeCssFile name="flashmessages.css" />
-    <ext:includeCssFile name="nv.d3.css" />
+    <newsletter:includeCssFile name="module.css" />
+    <newsletter:includeCssFile name="flashmessages.css" />
+    <newsletter:includeCssFile name="nv.d3.css" />
 
     <!-- load needed JS Files -->
-    <ext:includeJsFile name="ux.TYPO3.Newsletter.UriBuilder.js" />
-    <ext:includeJsFile name="ux.TYPO3.Newsletter.DirectFlashMessageDispatcher.js" />
+    <newsletter:includeJsFile name="UriBuilder.js" />
+    <newsletter:includeJsFile name="DirectFlashMessageDispatcher.js" />
 
     <!-- load all our JS Files -->
-    <ext:includeJsFile name="NVD3/d3.v3.js" />
-    <ext:includeJsFile name="NVD3/nv.d3.js" />
-    <ext:includeJsFolder name="Module/" recursive="true" />
-    <ext:includeJsFolder name="Store/" recursive="true" />
-    <ext:includeJsFolder name="Override/" recursive="true" />
-    <ext:includeJsFolder name="Planner/" recursive="true" />
-    <ext:includeJsFolder name="Statistics/" recursive="true" />
+    <newsletter:includeJsFile name="NVD3/d3.v3.js" />
+    <newsletter:includeJsFile name="NVD3/nv.d3.js" />
+    <newsletter:includeJsFolder name="Module/" recursive="true" />
+    <newsletter:includeJsFolder name="Store/" recursive="true" />
+    <newsletter:includeJsFolder name="Override/" recursive="true" />
+    <newsletter:includeJsFolder name="Planner/" recursive="true" />
+    <newsletter:includeJsFolder name="Statistics/" recursive="true" />
 
-    <ext:ExtDirectProvider name="descriptor" namespace="Ext.ux.TYPO3.Newsletter.Remote" cache="false" />
+    <newsletter:ExtDirectProvider name="descriptor" namespace="Ext.ux.Ecodev.Newsletter.Remote" cache="false" />
 
     <!-- create inline JS based on the Domain Model Definitions -->
-    <ext:includeExtOnReadyFromFile name="ExtOnReady.js" />
+    <newsletter:includeExtOnReadyFromFile name="ExtOnReady.js" />
     <newsletter:localization name="locallang.xlf,locallang_db.xlf"/>
     <newsletter:configuration configuration="{configuration}"/>
 
     <!-- Additional HTML required for ExtJS -->
-    <ext:includeModuleBody>
+    <newsletter:includeModuleBody>
         <!-- Fields required for history management -->
         <form id="history-form" class="x-hidden">
             <input type="hidden" id="x-history-field" />
             <iframe id="x-history-frame"></iframe>
         </form>
-    </ext:includeModuleBody>
-</ext:Be.moduleContainer>
+    </newsletter:includeModuleBody>
+</newsletter:Be.moduleContainer>

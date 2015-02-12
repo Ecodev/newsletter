@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers\Be;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -31,7 +38,7 @@
  * = Examples =
  *
  * <code title="Simple">
- * {namespace ext=Tx_Newsletter_ViewHelpers}
+ * {namespace ext=Ecodev\Newsletter\ViewHelpers}
  * <ext:be.container>your additional viewhelpers inside</ext:be.container>
  * </code>
  *
@@ -40,7 +47,7 @@
  * Default backend CSS styles and JavaScript will be included
  *
  * <code title="All options">
- * {namespace ext=Tx_Newsletter_ViewHelpers}
+ * {namespace ext=Ecodev\Newsletter\ViewHelpers}
  * <ext:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
  * </code>
  *
@@ -51,7 +58,7 @@
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Newsletter_ViewHelpers_Be_ModuleContainerViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class ModuleContainerViewHelper extends AbstractViewHelper
 {
 
     /**

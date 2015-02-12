@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Repository;
+
+use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,12 +36,12 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Repository_RecipientListRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository
+class RecipientListRepository extends AbstractRepository
 {
 
     /**
      * Returns a RecipientList already initialized
-     * @return Tx_Newsletter_Domain_Model_RecipientList
+     * @return \Ecodev\Newsletter\Domain\Model\RecipientList
      */
     public function findByUidInitialized($uidRecipientlist)
     {

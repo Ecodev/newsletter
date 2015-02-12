@@ -1,5 +1,15 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Task;
+
+use tx_scheduler_Task;
+use Ecodev\Newsletter\Tools;
+use GeneralUtility;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +39,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
+class SendEmails extends tx_scheduler_Task
 {
 
     /**
@@ -40,8 +50,8 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
     public function execute()
     {
 
-        Tx_Newsletter_Tools::createAllSpool();
-        Tx_Newsletter_Tools::runSpoolOneAll();
+        Tools::createAllSpool();
+        Tools::runSpoolOneAll();
 
         return true;
     }
@@ -56,8 +66,8 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
      */
     public function getAdditionalInformation()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
 
         $newslettersToSend = $newsletterRepository->findAllReadyToSend();
         $newslettersBeingSent = $newsletterRepository->findAllBeingSent();
@@ -72,9 +82,9 @@ class Tx_Newsletter_Task_SendEmails extends tx_scheduler_Task
             $emailNotSentCount += $newsletter->getEmailNotSentCount();
         }
 
-        $emailsPerRound = Tx_Newsletter_Tools::confParam('mails_per_round');
+        $emailsPerRound = Tools::confParam('mails_per_round');
 
-        return Tx_Extbase_Utility_Localization::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount));
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount));
     }
 
 }

@@ -1,15 +1,15 @@
 "use strict";
 
-Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel
- * @namespace Ext.ux.TYPO3.Newsletter.Statistics
+ * @class Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel
+ * @namespace Ext.ux.Ecodev.Newsletter.Statistics
  * @extends Ext.TabPanel
  *
  * Class for statistic tab panel
  */
-Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
+Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
     initComponent: function() {
 
         var config = {
@@ -17,26 +17,26 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
             border: false,
             items: [
                 {
-                    title: Ext.ux.TYPO3.Newsletter.Language.overview_tab,
-                    xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.OverviewTab',
+                    title: Ext.ux.Ecodev.Newsletter.Language.overview_tab,
+                    xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.OverviewTab',
                     itemId: 'overviewTab'
                 },
                 {
-                    title: Ext.ux.TYPO3.Newsletter.Language.emails_tab,
-                    xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.EmailTab',
+                    title: Ext.ux.Ecodev.Newsletter.Language.emails_tab,
+                    xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.EmailTab',
                     itemId: 'emailTab'
                 },
                 {
-                    title: Ext.ux.TYPO3.Newsletter.Language.links_tab,
-                    xtype: 'Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab',
+                    title: Ext.ux.Ecodev.Newsletter.Language.links_tab,
+                    xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab',
                     itemId: 'linkTab'
                 }
             ]
         };
         Ext.apply(this, config);
-        Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
+        Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
     }
 
 });
 
-Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel);
+Ext.reg('Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel', Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel);

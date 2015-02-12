@@ -1,5 +1,17 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\Controller;
+
+use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use \TYPO3\CMS\Extbase\Validation\PropertyError;
+use Ecodev\Newsletter\MVC\View\JsonView;
+use AbstractMessage;
+use GeneralUtility;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -31,11 +43,11 @@
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Newsletter_MVC_Controller_ExtDirectActionController extends Tx_Extbase_MVC_Controller_ActionController
+class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**
-     * @var Tx_Extbase_Persistence_ManagerInterface
+     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
      * @inject
      */
     protected $persistenceManager;
@@ -43,23 +55,23 @@ class Tx_Newsletter_MVC_Controller_ExtDirectActionController extends Tx_Extbase_
     /**
      * Injects the PersistenceManager.
      *
-     * @param Tx_Extbase_Persistence_ManagerInterface $persistenceManager
+     * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
      * @return void
      */
-    public function injectPersistenceManager(Tx_Extbase_Persistence_ManagerInterface $persistenceManager)
+    public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
     }
 
     /**
-     * Initializes the View to be a Tx_Newsletter_ExtDirect_View that renders json without Template Files.
+     * Initializes the View to be a \Ecodev\Newsletter\ExtDirect\View\ExtDirectView that renders json without Template Files.
      *
      * @return void
      */
     public function initializeView()
     {
         if ($this->request->getFormat() === 'extdirect') {
-            $this->view = $this->objectManager->create('Tx_Newsletter_MVC_View_ExtDirectView');
+            $this->view = $this->objectManager->create('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
             $this->view->setControllerContext($this->controllerContext);
         }
     }
@@ -78,13 +90,13 @@ class Tx_Newsletter_MVC_Controller_ExtDirectActionController extends Tx_Extbase_
         // Append detail of properties if available
         // Message layout is not optimal, but at least we avoid code duplication
         foreach ($this->argumentsMappingResults->getErrors() as $error) {
-            if ($error instanceof Tx_Extbase_Validation_PropertyError) {
+            if ($error instanceof \TYPO3\CMS\Extbase\Validation\PropertyError) {
                 foreach ($error->getErrors() as $subError) {
                     $message .= 'Error:   ' . $subError->getMessage() . PHP_EOL;
                 }
             }
         }
-        if ($this->view instanceof Tx_Newsletter_MVC_View_JsonView) {
+        if ($this->view instanceof JsonView) {
             $this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
             $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
             $this->view->assign('error', $message);

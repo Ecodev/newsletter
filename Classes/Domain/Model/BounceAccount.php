@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model;
+
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +36,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_BounceAccount extends Tx_Extbase_DomainObject_AbstractEntity
+class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**

@@ -1,30 +1,30 @@
 "use strict";
 
-Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel");
+Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab
- * @namespace Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel
+ * @class Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab
+ * @namespace Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel
  * @extends Ext.Container
  *
  * Class for statistic container
  */
-Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid.GridPanel, {
+Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid.GridPanel, {
     initComponent: function() {
         var config = {
             loadMask: true,
             autoExpandColumn: 'url',
             // store
-            store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
+            store: Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Link'),
             // paging bar on the bottom
             bbar: new Ext.PagingToolbar({
                 pageSize: 50,
-                store: Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link'),
+                store: Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Link'),
                 displayInfo: true,
                 listeners: {
                     // Before we change page, we inject the currently selected newsletter as params for Ajax request
                     beforechange: function(pagingToolbar, params) {
-                        var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+                        var selectedNewsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\SelectedNewsletter');
                         var newsletter = selectedNewsletterStore.getAt(0);
                         params.data = newsletter.data.__identity;
                     }
@@ -34,13 +34,13 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
             columns: [
                 {
                     dataIndex: '__identity',
-                    header: Ext.ux.TYPO3.Newsletter.Language.link_id,
+                    header: Ext.ux.Ecodev.Newsletter.Language.link_id,
                     sortable: true,
                     width: 40
                 },
                 {
                     dataIndex: 'openedPercentage',
-                    header: Ext.ux.TYPO3.Newsletter.Language.percentage_of_opened,
+                    header: Ext.ux.Ecodev.Newsletter.Language.percentage_of_opened,
                     width: 100,
                     sortable: true,
                     css: 'text-align: center;',
@@ -48,7 +48,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
                 },
                 {
                     dataIndex: 'openedCount',
-                    header: Ext.ux.TYPO3.Newsletter.Language.number_of_opened,
+                    header: Ext.ux.Ecodev.Newsletter.Language.number_of_opened,
                     width: 100,
                     sortable: true,
                     css: 'text-align: center;'
@@ -56,7 +56,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
                 {
                     id: 'url',
                     dataIndex: 'url',
-                    header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_link_url,
+                    header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_link_url,
                     sortable: true,
                     width: 600,
                     renderer: this._renderUrl
@@ -65,7 +65,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
         }; // eo config object
 
         Ext.apply(this, config);
-        Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab.superclass.initComponent.call(this);
+        Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab.superclass.initComponent.call(this);
     },
     /**
      * Renders the "called from" column
@@ -85,4 +85,4 @@ Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab = Ext.extend(Ext.grid
     }
 });
 
-Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab', Ext.ux.TYPO3.Newsletter.Statistics.StatisticsPanel.LinkTab);
+Ext.reg('Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab', Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab);

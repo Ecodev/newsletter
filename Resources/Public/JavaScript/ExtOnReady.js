@@ -1,1 +1,1 @@
-Ext.ux.TYPO3.Newsletter.Module.Application.bootstrap();
+Ext.ux.Ecodev.Newsletter.Module.Application.bootstrap();

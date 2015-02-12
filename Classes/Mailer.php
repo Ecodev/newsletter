@@ -1,5 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter;
+
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use ExtensionManagementUtility;
+use Exception;
+use Swift_Attachment;
+use Swift_EmbeddedFile;
+use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Tools;
+use GeneralUtility;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -32,11 +46,11 @@ require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Mailer
+class Mailer
 {
 
     /**
-     * @var Tx_Newsletter_Domain_Model_Newsletter $newsletter
+     * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      */
     private $newsletter;
     private $html;
@@ -84,7 +98,7 @@ class Tx_Newsletter_Mailer
         return $plainText;
     }
 
-    public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null)
+    public function setNewsletter(Newsletter $newsletter, $language = null)
     {
         $domain = $newsletter->getDomain();
 
@@ -198,10 +212,10 @@ class Tx_Newsletter_Mailer
      *
      * @return   void
      */
-    private function injectOpenSpy(Tx_Newsletter_Domain_Model_Email $email)
+    private function injectOpenSpy(Email $email)
     {
         $this->html = str_ireplace(
-                '</body>', '<div><img src="' . Tx_Newsletter_Tools::buildFrontendUri('opened', array(), 'Email') . '&c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>', $this->html);
+                '</body>', '<div><img src="' . Tools::buildFrontendUri('opened', array(), 'Email') . '&c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>', $this->html);
     }
 
     /**
@@ -296,14 +310,14 @@ class Tx_Newsletter_Mailer
      * @param   array      Assoc array with name => value pairs.
      * @return   void
      */
-    private function substituteMarkers(Tx_Newsletter_Domain_Model_Email $email)
+    private function substituteMarkers(Email $email)
     {
         $markers = $email->getRecipientData();
 
         // Add predefined markers
         $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = Tx_Newsletter_Tools::buildFrontendUri('show', array(), 'Email') . '&c=' . $authCode;
-        $markers['newsletter_unsubscribe_url'] = Tx_Newsletter_Tools::buildFrontendUri('unsubscribe', array(), 'Email') . '&c=' . $authCode;
+        $markers['newsletter_view_url'] = Tools::buildFrontendUri('show', array(), 'Email') . '&c=' . $authCode;
+        $markers['newsletter_unsubscribe_url'] = Tools::buildFrontendUri('unsubscribe', array(), 'Email') . '&c=' . $authCode;
 
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
@@ -318,7 +332,7 @@ class Tx_Newsletter_Mailer
         }
     }
 
-    private function getLinkAuthCode(Tx_Newsletter_Domain_Model_Email $email, $url, $isPreview, $isPlainText = false)
+    private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
     {
         global $TYPO3_DB;
         $url = html_entity_decode($url);
@@ -355,7 +369,7 @@ class Tx_Newsletter_Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $newUrl = Tx_Newsletter_Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+        $newUrl = Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
 
         return $newUrl;
     }
@@ -363,11 +377,11 @@ class Tx_Newsletter_Mailer
     /**
      * Replace all links in the mail to make spy links.
      *
-     * @param Tx_Newsletter_Domain_Model_Email $email The email to prepare the newsletter for
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email to prepare the newsletter for
      * @param boolean $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
      * @return   void
      */
-    private function injectLinksSpy(Tx_Newsletter_Domain_Model_Email $email, $isPreview)
+    private function injectLinksSpy(Email $email, $isPreview)
     {
         /* Exchange all http:// links  html */
         preg_match_all('|<a [^>]*href="(https?://[^"]*)"|Ui', $this->html, $urls);
@@ -382,10 +396,10 @@ class Tx_Newsletter_Mailer
 
     /**
      * Prepare the newsletter content for the specified email (substitute markers and insert spies)
-     * @param Tx_Newsletter_Domain_Model_Email $email
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email
      * @param boolean $isPreview whether we are preparing a preview version of the newsletter
      */
-    public function prepare(Tx_Newsletter_Domain_Model_Email $email, $isPreview = false)
+    public function prepare(Email $email, $isPreview = false)
     {
         $this->resetMarkers();
 
@@ -404,10 +418,10 @@ class Tx_Newsletter_Mailer
     /**
      * The regular send method. Use this to send a normal, personalized mail.
      *
-     * @param Tx_Newsletter_Domain_Model_Email $email The email object containing recipient email address and extra data for markers
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email object containing recipient email address and extra data for markers
      * @return   void
      */
-    public function send(Tx_Newsletter_Domain_Model_Email $email)
+    public function send(Email $email)
     {
         $this->prepare($email);
         $this->raw_send($email);
@@ -421,7 +435,7 @@ class Tx_Newsletter_Mailer
      * @param   array      Array with extra headers to apply to mails as name => value pairs.
      * @return   void
      */
-    private function raw_send(Tx_Newsletter_Domain_Model_Email $email)
+    private function raw_send(Email $email)
     {
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($email->getRecipientAddress())

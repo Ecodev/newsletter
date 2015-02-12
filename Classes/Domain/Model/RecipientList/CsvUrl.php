@@ -1,12 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile;
+
+
+
 /**
  * Recipient List using CSV url to retrieve a CSV file
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_RecipientList_CsvUrl extends Tx_Newsletter_Domain_Model_RecipientList_CsvFile
+class CsvUrl extends CsvFile
 {
 
     /**

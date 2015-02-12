@@ -1,12 +1,19 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile;
+
+
+
 /**
  * Recipient List using CSV list (values directly input in TYPO3 Backend)
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_RecipientList_CsvList extends Tx_Newsletter_Domain_Model_RecipientList_CsvFile
+class CsvList extends CsvFile
 {
 
     /**

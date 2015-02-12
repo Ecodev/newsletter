@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model;
+
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use GeneralUtility;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +38,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEntity
+class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
@@ -54,7 +63,7 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
     protected $openedCount;
 
     /**
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -63,7 +72,7 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
      */
     public function initializeObject()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
     }
 
     /**
@@ -90,10 +99,10 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
     /**
      * Setter for newsletter
      *
-     * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
      * @return void
      */
-    public function setNewsletter(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
+    public function setNewsletter(Newsletter $newsletter)
     {
         $this->newsletter = $newsletter;
     }
@@ -101,11 +110,11 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
     /**
      * Getter for newsletter
      *
-     * @return Tx_Newsletter_Domain_Model_Newsletter newsletter
+     * @return \Ecodev\Newsletter\Domain\Model\Newsletter newsletter
      */
     public function getNewsletter()
     {
-        $newsletterRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         return $newsletterRepository->findByUid($this->newsletter);
     }
 
@@ -132,7 +141,7 @@ class Tx_Newsletter_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEn
 
     public function getOpenedPercentage()
     {
-        $emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+        $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
         $emailCount = $emailRepository->getCount($this->newsletter);
 
         if ($emailCount == 0)

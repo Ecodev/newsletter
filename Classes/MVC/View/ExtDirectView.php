@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\View;
+
+use Ecodev\Newsletter\MVC\View\JsonView;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -27,7 +34,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_View_ExtDirectView extends Tx_Newsletter_MVC_View_JsonView
+class ExtDirectView extends JsonView
 {
 
     /**

@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+use ExtensionManagementUtility;
+use Ecodev\Newsletter\Exception;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -40,7 +49,7 @@
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Newsletter_ViewHelpers_IncludeExtOnReadyFromFileViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -61,7 +70,7 @@ class Tx_Newsletter_ViewHelpers_IncludeExtOnReadyFromFileViewHelper extends Tx_N
         $filePath = $extPath . $pathInsideExt . $name;
 
         if (!file_exists($filePath)) {
-            throw new Tx_Newsletter_Exception('File not found: ' . $filePath, 1264197781);
+            throw new Exception('File not found: ' . $filePath, 1264197781);
         }
 
         $fileContent = file_get_contents($extPath . $pathInsideExt . $name);

@@ -1,5 +1,13 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList\Sql;
+use Ecodev\Newsletter\BounceHandler;
+
+
+
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
  * on the $this->getTableName() table.
@@ -8,7 +16,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_Newsletter_Domain_Model_RecipientList_Sql
+abstract class GentleSql extends Sql
 {
 
     /**
@@ -33,13 +41,13 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList_GentleSql extends Tx_New
 
         $increment = 0;
         switch ($bounceLevel) {
-            case Tx_Newsletter_BounceHandler::NEWSLETTER_UNSUBSCRIBE:
+            case BounceHandler::NEWSLETTER_UNSUBSCRIBE:
                 $increment = 10;
                 break;
-            case Tx_Newsletter_BounceHandler::NEWSLETTER_HARDBOUNCE:
+            case BounceHandler::NEWSLETTER_HARDBOUNCE:
                 $increment = 5;
                 break;
-            case Tx_Newsletter_BounceHandler::NEWSLETTER_SOFTBOUNCE:
+            case BounceHandler::NEWSLETTER_SOFTBOUNCE:
                 $increment = 1;
                 break;
         }

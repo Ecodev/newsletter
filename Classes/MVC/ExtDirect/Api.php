@@ -1,5 +1,13 @@
 <?php
 
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use \TYPO3\CMS\Extbase\Reflection\ReflectionService;
+use PageRepository;
+use ReflectionException;
+use GeneralUtility;
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -30,11 +38,10 @@
  * @subpackage  ExtJS
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  */
-class Tx_Newsletter_MVC_ExtDirect_Api
+class Api
 {
-
     /**
-     * @var Tx_Extbase_Reflection_Service
+     * @var \TYPO3\CMS\Extbase\Reflection\ReflectionService
      */
     protected $reflectionService;
 
@@ -44,7 +51,7 @@ class Tx_Newsletter_MVC_ExtDirect_Api
     protected $frameworkConfiguration;
 
     /**
-     * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -55,23 +62,23 @@ class Tx_Newsletter_MVC_ExtDirect_Api
 
     /**
      *
-     * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
      * @return void
      */
-    public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
-        $this->frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $this->cacheStorageKey = 'Tx_Newsletter_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
+        $this->frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $this->cacheStorageKey = 'Ecodev_Newsletter_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
     }
 
     /**
      * Injects the reflection service
      *
-     * @param Tx_Extbase_Reflection_Service $reflectionService
+     * @param \TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService
      * @return void
      */
-    public function injectReflectionService(Tx_Extbase_Reflection_Service $reflectionService)
+    public function injectReflectionService(\TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService)
     {
         $this->reflectionService = $reflectionService;
     }
@@ -121,9 +128,10 @@ class Tx_Newsletter_MVC_ExtDirect_Api
             # It looks $this->frameworkConfiguration['controllerConfiguration'] is empty as of TYPO3 6.1. Bug or feature?
             $this->frameworkConfiguration['controllerConfiguration'] = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['extbase']['extensions']['Newsletter']['modules']['web_NewsletterTxNewsletterM1']['controllers'];
         }
+
         foreach ($this->frameworkConfiguration['controllerConfiguration'] as $controllerName => $allowedControllerActions) {
             $unstrippedControllerName = $controllerName . 'Controller';
-            $controllerObjectName = 'Tx_' . $this->frameworkConfiguration['extensionName'] . '_Controller_' . $unstrippedControllerName;
+            $controllerObjectName = 'Ecodev\\Newsletter\\Controller\\' . $unstrippedControllerName;
             $controllerActions = array();
             foreach ($allowedControllerActions['actions'] as $actionName) {
                 $unstrippedActionName = $actionName . 'Action';
@@ -141,6 +149,7 @@ class Tx_Newsletter_MVC_ExtDirect_Api
             }
             $api['actions'][$unstrippedControllerName] = $controllerActions;
         }
+
         return $api;
     }
 

@@ -54,7 +54,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.recipient_data',
             'config' => array(
                 'type' => 'user',
-                'userFunc' => 'Tx_Newsletter_Tca_EmailTca->render',
+                'userFunc' => 'Ecodev\\Newsletter\Tca\\EmailTca->render',
                 'size' => 30,
                 'eval' => 'trim',
             ),

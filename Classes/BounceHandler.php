@@ -1,12 +1,22 @@
 <?php
 
+
+namespace Ecodev\Newsletter;
+
+use Ecodev\Newsletter\Tools;
+use Exception;
+use GeneralUtility;
+use DateTime;
+
+
+
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_BounceHandler
+class BounceHandler
 {
 
     const NEWSLETTER_NOT_A_BOUNCE = 1;
@@ -16,7 +26,7 @@ class Tx_Newsletter_BounceHandler
 
     /**
      * Bounce level of the mail source specified
-     * @var integer @see Tx_Newsletter_BounceHandler
+     * @var integer @see \Ecodev\Newsletter\BounceHandler
      */
     private $bounceLevel = self::NEWSLETTER_NOT_A_BOUNCE;
 
@@ -28,19 +38,19 @@ class Tx_Newsletter_BounceHandler
 
     /**
      * ObjecManager
-     * @var Tx_Extbase_Object_ObjectManager
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      */
     private $objectManager;
 
     /**
      * The email concerned by the bounce if any
-     * @var Tx_Newsletter_Domain_Model_Email
+     * @var \Ecodev\Newsletter\Domain\Model\Email
      */
     private $email = null;
 
     /**
      * The recipient list concerned by the bounce if any
-     * @var Tx_Newsletter_Domain_Model_RecipientList
+     * @var \Ecodev\Newsletter\Domain\Model\RecipientList
      */
     private $recipientList = null;
 
@@ -93,7 +103,7 @@ class Tx_Newsletter_BounceHandler
     public static function fetchBouncedEmails()
     {
         // Check that th configured fetchmail is actually available
-        $fetchmail = Tx_Newsletter_Tools::confParam('path_to_fetchmail');
+        $fetchmail = Tools::confParam('path_to_fetchmail');
         $foo = $exitStatus = null;
         exec("$fetchmail --version 2>&1", $foo, $exitStatus);
         if ($exitStatus) {
@@ -103,8 +113,8 @@ class Tx_Newsletter_BounceHandler
         // Find all bounce accounts we need to check
         $content = '';
         $servers = array();
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $bounceAccountRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_BounceAccountRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $bounceAccountRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
             $server = $bounceAccount->getServer();
             $protocol = $bounceAccount->getProtocol();
@@ -123,7 +133,7 @@ class Tx_Newsletter_BounceHandler
         putenv("FETCHMAILHOME=$fetchmailhome");
 
         // Keep messages on server
-        $keep = Tx_Newsletter_Tools::confParam('keep_messages') ? '--keep ' : '';
+        $keep = Tools::confParam('keep_messages') ? '--keep ' : '';
 
         // Execute fetchtmail and ask him to pipe emails to our cli/bounce.php
         $cli_dispatcher = PATH_typo3 . 'cli_dispatch.phpsh'; // This needs to be the absolute path of /typo3/cli_dispatch.phpsh
@@ -141,7 +151,7 @@ class Tx_Newsletter_BounceHandler
      */
     function __construct($mailsource = '')
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
         $this->analyze($mailsource);
     }
 
@@ -195,10 +205,10 @@ class Tx_Newsletter_BounceHandler
 			LIMIT 1");
 
             if (list($recipientListUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
-                $emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+                $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
                 $this->email = $emailRepository->findByUid($emailUid);
 
-                $recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+                $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
                 $this->recipientList = $recipientListRepository->findByUid($recipientListUid);
             }
         }
@@ -213,7 +223,7 @@ class Tx_Newsletter_BounceHandler
 
         // If couldn't find the original email we cannot do anything
         if (!$this->email) {
-            Tx_Newsletter_Tools::log("Bounced email found but cannot find corresponding record in database. Skipped.", 1);
+            Tools::log("Bounced email found but cannot find corresponding record in database. Skipped.", 1);
             return;
         }
 
@@ -223,11 +233,11 @@ class Tx_Newsletter_BounceHandler
             }
 
             $this->email->setBounceTime(new DateTime());
-            $emailRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+            $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
             $emailRepository->updateNow($this->email);
         }
 
-        Tx_Newsletter_Tools::log("Bounced email found with bounce level " . $this->bounceLevel);
+        Tools::log("Bounced email found with bounce level " . $this->bounceLevel);
     }
 
 }

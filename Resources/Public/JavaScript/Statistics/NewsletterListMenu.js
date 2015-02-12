@@ -1,21 +1,21 @@
 "use strict";
 
-Ext.ns("Ext.ux.TYPO3.Newsletter.Statistics");
+Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics");
 
 /**
- * @class Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu
- * @namespace Ext.ux.TYPO3.Newsletter.Statistics
+ * @class Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu
+ * @namespace Ext.ux.Ecodev.Newsletter.Statistics
  * @extends Ext.form.ComboBox
  *
  * Class for newsletter drop down menu
  */
-Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.GridPanel, {
+Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.GridPanel, {
     initComponent: function() {
         var thisNewsletterListMenu = this;
-        var newsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Newsletter');
+        var newsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
 
         var config = {
-            emptyText: Ext.ux.TYPO3.Newsletter.Language.no_statistics,
+            emptyText: Ext.ux.Ecodev.Newsletter.Language.no_statistics,
             id: 'newsletterListMenu',
             store: newsletterStore,
             autoExpandColumn: 'title',
@@ -39,33 +39,33 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
             columns: [
                 {
                     id: 'title',
-                    header: Ext.ux.TYPO3.Newsletter.Language.newsletter,
+                    header: Ext.ux.Ecodev.Newsletter.Language.newsletter,
                     dataIndex: 'title',
                     width: 300,
                     sortable: true
                 },
                 {
-                    header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_planned_time,
+                    header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_planned_time,
                     dataIndex: 'plannedTime',
                     width: 150,
                     sortable: true,
                     renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
                 },
                 {
-                    header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_begin_time,
+                    header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_begin_time,
                     dataIndex: 'beginTime',
                     width: 150,
                     sortable: true,
                     renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
                 },
                 {
-                    header: Ext.ux.TYPO3.Newsletter.Language.recipients,
+                    header: Ext.ux.Ecodev.Newsletter.Language.recipients,
                     dataIndex: 'emailCount',
                     width: 100,
                     sortable: true
                 },
                 {
-                    header: Ext.ux.TYPO3.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
+                    header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
                     dataIndex: 'isTest',
                     width: 70,
                     sortable: true,
@@ -78,7 +78,7 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
         };
 
         Ext.apply(this, config);
-        Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
+        Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu.superclass.initComponent.call(this);
     },
     /**
      * When a newsletter is selected, we update the store representing the selected newsletter.
@@ -90,15 +90,15 @@ Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.Grid
      */
     onNewsletterSelected: function(newsletter) {
 
-        var selectedNewsletterStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_SelectedNewsletter');
+        var selectedNewsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\SelectedNewsletter');
         selectedNewsletterStore.load({params: {data: newsletter.data.__identity}});
 
-        var linkStore = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Link');
+        var linkStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Link');
         linkStore.load({params: {data: newsletter.data.__identity, start: 0, limit: 50}});
 
-        var linkEmail = Ext.StoreMgr.get('Tx_Newsletter_Domain_Model_Email');
+        var linkEmail = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Email');
         linkEmail.load({params: {data: newsletter.data.__identity, start: 0, limit: 50}});
     }
 });
 
-Ext.reg('Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu', Ext.ux.TYPO3.Newsletter.Statistics.NewsletterListMenu);
+Ext.reg('Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu', Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu);

@@ -1,5 +1,12 @@
 <?php
 
+namespace Ecodev\Newsletter\Controller;
+
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
+use FlashMessage;
+use GeneralUtility;
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,23 +36,22 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_RecipientListController extends Tx_Newsletter_MVC_Controller_ExtDirectActionController
+class RecipientListController extends ExtDirectActionController
 {
-
     /**
      * recipientListRepository
      *
-     * @var Tx_Newsletter_Domain_Repository_RecipientListRepository
+     * @var Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository
      */
     protected $recipientListRepository;
 
     /**
      * injectRecipientListRepository
      *
-     * @param Tx_Newsletter_Domain_Repository_RecipientListRepository $recipientListRepository
+     * @param Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository $recipientListRepository
      * @return void
      */
-    public function injectRecipientListRepository(Tx_Newsletter_Domain_Repository_RecipientListRepository $recipientListRepository)
+    public function injectRecipientListRepository(RecipientListRepository $recipientListRepository)
     {
         $this->recipientListRepository = $recipientListRepository;
     }

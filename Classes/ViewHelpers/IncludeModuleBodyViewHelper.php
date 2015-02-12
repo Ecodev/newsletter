@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\ViewHelpers;
+
+use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -40,7 +47,7 @@
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Newsletter_ViewHelpers_IncludeModuleBodyViewHelper extends Tx_Newsletter_ViewHelpers_AbstractViewHelper
+class IncludeModuleBodyViewHelper extends AbstractViewHelper
 {
 
     /**

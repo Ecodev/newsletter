@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
+
+use Ecodev\Newsletter\Domain\Model\RecipientList;
+
+
+
 /**
  * This is the basic class for extracting recipient from other data sources than the database.
  * Here the internal datastructure is an array.
@@ -9,7 +16,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tx_Newsletter_Domain_Model_RecipientList_Array extends Tx_Newsletter_Domain_Model_RecipientList
+abstract class AbstractArray extends RecipientList
 {
 
     function getRecipient()

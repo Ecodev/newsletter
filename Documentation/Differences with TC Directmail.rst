@@ -30,7 +30,7 @@ We tried to keep most things from TC Directmail working as before, but
 we still had to drop/change stuff for simplicity sake.
 
 -  The hook ``getConfiguredMailerHook()`` now has a
-   ``Tx_Newsletter_Domain_Model_Newsletter`` object instead of page
+   ``\Ecodev\Newsletter\Domain\Model\Newsletter`` object instead of page
 -  Recipient do not have their own UID, instead we use email address.
    This affect ``RecipientList::disableReceiver()``,
    ``RecipientList::registerOpen()``, ``RecipientList::registerClick()``

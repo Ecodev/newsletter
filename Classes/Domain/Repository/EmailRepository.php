@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Repository;
+
+use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -24,12 +31,12 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Newsletter_Domain_Model_Email
+ * Repository for \Ecodev\Newsletter\Domain\Model\Email
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository
+class EmailRepository extends AbstractRepository
 {
 
     protected static $emailCountCache = array();
@@ -37,7 +44,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
     /**
      * Returns the email corresponsding to the authCode
      * @param string $authcode
-     * @return Tx_Newsletter_Domain_Model_Email
+     * @return \Ecodev\Newsletter\Domain\Model\Email
      */
     public function findByAuthcode($authcode)
     {
@@ -71,7 +78,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
      * @param integer $uidNewsletter
      * @param integer $start
      * @param integer $limit
-     * @return Tx_Newsletter_Domain_Model_Email[]
+     * @return \Ecodev\Newsletter\Domain\Model\Email[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
     {
@@ -111,7 +118,7 @@ class Tx_Newsletter_Domain_Repository_EmailRepository extends Tx_Newsletter_Doma
 		LIMIT 1");
 
         if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
-            $recipientListRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_RecipientListRepository');
+            $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
             $recipientList = $recipientListRepository->findByUid($recipientListUid);
             if ($recipientList) {
                 $recipientList->registerOpen($emailAddress);

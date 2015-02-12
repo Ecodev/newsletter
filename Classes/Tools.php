@@ -1,5 +1,20 @@
 <?php
 
+
+namespace Ecodev\Newsletter;
+
+use ExtensionManagementUtility;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Mailer;
+use GeneralUtility;
+use Ecodev\Newsletter\Tools as EcodevNewsletterTools;
+use DateTime;
+use tslib_fe;
+use TYPO3;
+use \TYPO3\CMS\Extbase\Core\Bootstrap;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -33,14 +48,14 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsle
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tx_Newsletter_Tools
+abstract class Tools
 {
 
     protected static $configuration = null;
 
     /**
      * UriBuilder
-     * @var Tx_Extbase_MVC_Web_Routing_UriBuilder
+     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     protected static $uriBuilder = null;
 
@@ -78,14 +93,14 @@ abstract class Tx_Newsletter_Tools
      * Create a configured mailer from a newsletter page record.
      * This mailer will have both plain and html content applied as well as files attached.
      *
-     * @param Tx_Newsletter_Domain_Model_Newsletter The newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
      * @param integer $language
-     * @return Tx_Newsletter_Mailer preconfigured mailer for sending
+     * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
      */
-    public static function getConfiguredMailer(Tx_Newsletter_Domain_Model_Newsletter $newsletter, $language = null)
+    public static function getConfiguredMailer(Newsletter $newsletter, $language = null)
     {
         // Configure the mailer
-        $mailer = new Tx_Newsletter_Mailer();
+        $mailer = new Mailer();
         $mailer->setNewsletter($newsletter, $language);
 
         // hook for modifing the mailer before finish preconfiguring
@@ -105,12 +120,12 @@ abstract class Tx_Newsletter_Tools
      */
     static public function createAllSpool()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
         foreach ($newsletters as $newsletter) {
-            Tx_Newsletter_Tools::createSpool($newsletter);
+            EcodevNewsletterTools::createSpool($newsletter);
         }
     }
 
@@ -122,7 +137,7 @@ abstract class Tx_Newsletter_Tools
      * @param   integer      Actual begin time.
      * @return  void
      */
-    static public function createSpool(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
+    static public function createSpool(Newsletter $newsletter)
     {
         global $TYPO3_DB;
 
@@ -130,8 +145,8 @@ abstract class Tx_Newsletter_Tools
         if ($newsletter->getBeginTime())
             return;
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
 
         // Lock the newsletter by setting its begin_time
         $begintime = new DateTime();
@@ -155,7 +170,7 @@ abstract class Tx_Newsletter_Tools
                 $emailSpooledCount++;
             }
         }
-        Tx_Newsletter_Tools::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
+        EcodevNewsletterTools::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
 
         // Schedule repeated newsletter if any
         $newsletter->scheduleNextNewsletter();
@@ -187,7 +202,7 @@ abstract class Tx_Newsletter_Tools
         }
 
         /* Do we any limit to this session? */
-        if ($mails_per_round = Tx_Newsletter_Tools::confParam('mails_per_round')) {
+        if ($mails_per_round = EcodevNewsletterTools::confParam('mails_per_round')) {
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
@@ -213,13 +228,13 @@ abstract class Tx_Newsletter_Tools
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return    void
      */
-    static public function runSpoolOne(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
+    static public function runSpoolOne(Newsletter $newsletter)
     {
         global $TYPO3_DB;
 
 
         /* Do we any limit to this session? */
-        if ($mails_per_round = Tx_Newsletter_Tools::confParam('mails_per_round')) {
+        if ($mails_per_round = EcodevNewsletterTools::confParam('mails_per_round')) {
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
@@ -253,9 +268,9 @@ abstract class Tx_Newsletter_Tools
         $emailSentCount = 0;
         $mailers = array();
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $newsletterRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_NewsletterRepository');
-        $emailRepository = $objectManager->get('Tx_Newsletter_Domain_Repository_EmailRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+        $emailRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
 
         $oldNewsletterUid = null;
         while (list($newsletterUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
@@ -275,7 +290,7 @@ abstract class Tx_Newsletter_Tools
 
             // Was a language with this page defined, if not create one
             if (!is_object($mailers[$L])) {
-                $mailers[$L] = &Tx_Newsletter_Tools::getConfiguredMailer($newsletter, $L);
+                $mailers[$L] = &EcodevNewsletterTools::getConfiguredMailer($newsletter, $L);
             }
 
             // Mark it as started sending
@@ -293,14 +308,14 @@ abstract class Tx_Newsletter_Tools
         }
 
         // Log numbers to syslog
-        Tx_Newsletter_Tools::log("Sent $emailSentCount emails");
+        EcodevNewsletterTools::log("Sent $emailSentCount emails");
     }
 
     /**
      * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
      * @param string $extensionName
      * @param string $pluginName
-     * @return Tx_Extbase_MVC_Web_Routing_UriBuilder
+     * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     protected static function buildUriBuilder($extensionName, $pluginName)
     {
@@ -324,13 +339,13 @@ abstract class Tx_Newsletter_Tools
         }
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof Tx_Extbase_Core_Bootstrap)) {
-            $extbaseBootstrap = $objectManager->get('Tx_Extbase_Core_Bootstrap');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
+            $extbaseBootstrap = $objectManager->get('\TYPO3\CMS\Extbase\Core\Bootstrap');
             $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
         }
 
-        return $objectManager->get('Tx_Extbase_MVC_Web_Routing_UriBuilder');
+        return $objectManager->get('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
     }
 
     /**
@@ -349,8 +364,8 @@ abstract class Tx_Newsletter_Tools
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_Extbase_Object_ObjectManager');
-        $extensionService = $objectManager->get('Tx_Extbase_Service_ExtensionService');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $extensionService = $objectManager->get('\TYPO3\CMS\Extbase\Service\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
         $arguments = array($pluginNamespace => $controllerArguments);

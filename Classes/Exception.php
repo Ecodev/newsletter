@@ -1,5 +1,7 @@
 <?php
 
+namespace Ecodev\Newsletter;
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -25,7 +27,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Newsletter_Exception extends Tx_Extbase_Exception
+class Exception extends \TYPO3\CMS\Extbase\Exception
 {
 
 }

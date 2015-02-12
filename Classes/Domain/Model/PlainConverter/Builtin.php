@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model\PlainConverter;
+
+use ExtensionManagementUtility;
+use html2text;
+use Ecodev\Newsletter\Domain\Model\IPlainConverter;
+
+
+
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/class.html2text.inc');
 
 /**
@@ -8,7 +17,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsle
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_PlainConverter_Builtin extends html2text implements Tx_Newsletter_Domain_Model_IPlainConverter
+class Builtin extends html2text implements IPlainConverter
 {
 
     private $links = array();

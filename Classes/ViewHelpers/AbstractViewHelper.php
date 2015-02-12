@@ -1,5 +1,7 @@
 <?php
 
+namespace Ecodev\Newsletter\ViewHelpers;
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -32,16 +34,15 @@
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-abstract class Tx_Newsletter_ViewHelpers_AbstractViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper
+abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * @var TYPO3\CMS\Core\Page\PageRenderer
      */
     protected $pageRenderer;
 
     /**
-     * @see typo3/sysext/fluid/Classes/Core/ViewHelper/Tx_Fluid_Core_ViewHelper_AbstractViewHelper#initialize()
+     * @see typo3/sysext/fluid/Classes/Core/ViewHelper/\TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper#initialize()
      */
     public function initialize()
     {

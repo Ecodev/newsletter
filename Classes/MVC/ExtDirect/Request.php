@@ -1,5 +1,12 @@
 <?php
 
+
+namespace Ecodev\Newsletter\MVC\ExtDirect;
+
+use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+
+
+
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -26,12 +33,12 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class Tx_Newsletter_MVC_ExtDirect_Request
+class Request
 {
 
     /**
      * @inject
-     * @var Tx_Extbase_Object_ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -59,10 +66,10 @@ class Tx_Newsletter_MVC_ExtDirect_Request
     /**
      * Injects the ObjectManager
      *
-     * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      * @return void
      */
-    public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -78,7 +85,7 @@ class Tx_Newsletter_MVC_ExtDirect_Request
      */
     public function createAndAddTransaction($action, $method, array $data, $tid)
     {
-        $transaction = $this->objectManager->create('Tx_Newsletter_MVC_ExtDirect_Transaction', $this, $action, $method, $data, $tid);
+        $transaction = $this->objectManager->create('Ecodev\Newsletter\MVC\ExtDirect\Transaction', $this, $action, $method, $data, $tid);
         $this->transactions[] = $transaction;
     }
 

@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Controller;
+
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use Ecodev\Newsletter\Domain\Repository\LinkRepository;
+use FlashMessage;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,22 +38,22 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_LinkController extends Tx_Newsletter_MVC_Controller_ExtDirectActionController
+class LinkController extends ExtDirectActionController
 {
 
     /**
      * linkRepository
      *
-     * @var Tx_Newsletter_Domain_Repository_LinkRepository
+     * @var Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository
      */
     protected $linkRepository;
 
     /**
      * injectLinkRepository
-     * @param Tx_Newsletter_Domain_Repository_LinkRepository $linkRepository
+     * @param Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository $linkRepository
      * @return void
      */
-    public function injectLinkRepository(Tx_Newsletter_Domain_Repository_LinkRepository $linkRepository)
+    public function injectLinkRepository(LinkRepository $linkRepository)
     {
         $this->linkRepository = $linkRepository;
     }

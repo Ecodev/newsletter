@@ -1,22 +1,9 @@
 <?php
 
-/**
- * Provides compatiblity with PHP 5.2.9 because 'str_getcsv' was only introduced in PHP 5.3.0
- */
-if (!function_exists('str_getcsv')) {
+namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-    function str_getcsv($input, $delimiter = ',', $enclosure = '"', $notUsed = null)
-    {
-        $temp = fopen("php://memory", "rw");
-        fwrite($temp, $input);
-        fseek($temp, 0);
-        $r = fgetcsv($temp, 0, $delimiter, $enclosure);
-        fclose($temp);
-
-        return $r;
-    }
-
-}
+use Ecodev\Newsletter\Domain\Model\RecipientList\AbstractArray;
+use GeneralUtility;
 
 /**
  * Recipient List using CSV file
@@ -24,9 +11,8 @@ if (!function_exists('str_getcsv')) {
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Model_RecipientList_CsvFile extends Tx_Newsletter_Domain_Model_RecipientList_Array
+class CsvFile extends AbstractArray
 {
-
     /**
      * csvSeparator
      *

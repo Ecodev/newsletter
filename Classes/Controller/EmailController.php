@@ -1,5 +1,20 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Controller;
+
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use FlashMessage;
+use ExtensionManagementUtility;
+use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\BounceHandler;
+use Ecodev\Newsletter\Domain\Model\Email;
+use GeneralUtility;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,23 +44,23 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Controller_ExtDirectActionController
+class EmailController extends ExtDirectActionController
 {
 
     /**
      * emailRepository
      *
-     * @var Tx_Newsletter_Domain_Repository_EmailRepository
+     * @var Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository
      */
     protected $emailRepository;
 
     /**
      * injectEmailRepository
      *
-     * @param Tx_Newsletter_Domain_Repository_EmailRepository $emailRepository
+     * @param Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository $emailRepository
      * @return void
      */
-    public function injectEmailRepository(Tx_Newsletter_Domain_Repository_EmailRepository $emailRepository)
+    public function injectEmailRepository(EmailRepository $emailRepository)
     {
         $this->emailRepository = $emailRepository;
     }
@@ -110,7 +125,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         // If it's a preview, an email which was not sent yet, we will simulate it the best we can
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
-            $newsletter = $this->objectManager->create('Tx_Newsletter_Domain_Model_Newsletter');
+            $newsletter = $this->objectManager->create('\Ecodev\Newsletter\Domain\Model\Newsletter');
             $newsletter->setPid(@$_GET['pid']);
             $newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
 
@@ -122,7 +137,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
                     // Got him
                     if ($record['email'] == $_GET['email']) {
                         // Build a fake email
-                        $email = $this->objectManager->create('Tx_Newsletter_Domain_Model_Email');
+                        $email = $this->objectManager->create('\Ecodev\Newsletter\Domain\Model\Email');
                         $email->setRecipientAddress($record['email']);
                         $email->setRecipientData($record);
                     }
@@ -135,9 +150,10 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
             if ($email) {
                 $newsletter = $email->getNewsletter();
 
-                // Here we need to ensure that we have real newsletter instance because of type hinting on Tx_Newsletter_Tools::getConfiguredMailer()
-                if ($newsletter instanceof Tx_Extbase_Persistence_LazyLoadingProxy)
+                // Here we need to ensure that we have real newsletter instance because of type hinting on \Ecodev\Newsletter\Tools::getConfiguredMailer()
+                if ($newsletter instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
                     $newsletter = $newsletter->_loadRealInstance();
+                }
             }
         }
 
@@ -154,7 +170,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
             if (isset($_GET['injectLinksSpy']))
                 $newsletter->setInjectLinksSpy($_GET['injectLinksSpy']);
 
-            $mailer = Tx_Newsletter_Tools::getConfiguredMailer($newsletter, @$_GET['L']);
+            $mailer = Tools::getConfiguredMailer($newsletter, @$_GET['L']);
             $mailer->prepare($email, $isPreview);
 
             if (@$_GET['plain']) {
@@ -170,7 +186,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
     }
 
     /**
-     * Unsubscribe recipient from RecipientList by registering a bounce of level Tx_Newsletter_BounceHandler::NEWSLETTER_UNSUBSCRIBE
+     * Unsubscribe recipient from RecipientList by registering a bounce of level \Ecodev\Newsletter\BounceHandler::NEWSLETTER_UNSUBSCRIBE
      */
     public function unsubscribeAction()
     {
@@ -191,7 +207,7 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
                 $newsletter = $email->getNewsletter();
                 if ($newsletter) {
                     $recipientList = $newsletter->getRecipientList();
-                    $recipientList->registerBounce($email->getRecipientAddress(), Tx_Newsletter_BounceHandler::NEWSLETTER_UNSUBSCRIBE);
+                    $recipientList->registerBounce($email->getRecipientAddress(), BounceHandler::NEWSLETTER_UNSUBSCRIBE);
                     $success = TRUE;
                     $this->notifyUnsubscribe($newsletter, $recipientList, $email);
                 }
@@ -204,15 +220,15 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
 
     /**
      * Sends an email to the address configured in extension settings when a recipient unsubscribe
-     * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter
-     * @param Tx_Newsletter_Domain_Model_RecipientList $recipientList
-     * @param Tx_Newsletter_Domain_Model_Email $email
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email
      * @return void
      */
-    protected function notifyUnsubscribe($newsletter, $recipientList, Tx_Newsletter_Domain_Model_Email $email)
+    protected function notifyUnsubscribe($newsletter, $recipientList, Email $email)
     {
 
-        $notificationEmail = Tx_Newsletter_Tools::confParam('notification_email');
+        $notificationEmail = Tools::confParam('notification_email');
 
         // Use the page-owner as user
         if ($notificationEmail == 'user') {
@@ -235,8 +251,8 @@ class Tx_Newsletter_Controller_EmailController extends Tx_Newsletter_MVC_Control
         $urlRecipient = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_email][' . $email->getUid() . ']=edit';
         $urlRecipientList = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit';
         $urlNewsletter = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_newsletter][' . $newsletter->getUid() . ']=edit';
-        $subject = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_subject', 'newsletter');
-        $body = Tx_Extbase_Utility_Localization::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
+        $subject = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_subject', 'newsletter');
+        $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
 
         // Actually sends email
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');

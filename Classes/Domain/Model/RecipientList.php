@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Model;
+
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use GeneralUtility;
+use Ecodev\Newsletter\Tools;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -29,7 +38,7 @@
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_DomainObject_AbstractEntity
+abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
@@ -196,11 +205,11 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
     /**
      * Here you can define an action when an address bounces. This can either be database operations such as a deletion.
      * For external data-sources, you might consider collecting the addresses for later removal from the foreign system.
-     * The Tx_Newsletter_Domain_Model_RecipientList_Sql implements a sensible default. "tableName" should also be included
+     * The \Ecodev\Newsletter\Domain\Model\RecipientList\Sql implements a sensible default. "tableName" should also be included
      * for compatibility reasons.
      *
      * @param string $email the email address of the recipient
-     * @param integer $bounceLevel Level of bounce, @see Tx_Newsletter_BounceHandler for possible values
+     * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
      * @return boolean Status of the success of the removal.
      */
     function registerBounce($email, $bounceLevel)
@@ -262,8 +271,8 @@ abstract class Tx_Newsletter_Domain_Model_RecipientList extends Tx_Extbase_Domai
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
             $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
-            $uriXml = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
-            $uriCsv = Tx_Newsletter_Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
+            $uriXml = Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
+            $uriCsv = Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
 
             $out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
 			(<a href="' . $uriXml . "\">export XML</a>, "

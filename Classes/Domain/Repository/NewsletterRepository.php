@@ -1,5 +1,14 @@
 <?php
 
+
+namespace Ecodev\Newsletter\Domain\Repository;
+
+use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
+use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+
+
+
 /* * *************************************************************
  *  Copyright notice
  *
@@ -24,12 +33,12 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Newsletter_Domain_Model_Newsletter
+ * Repository for \Ecodev\Newsletter\Domain\Model\Newsletter
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter_Domain_Repository_AbstractRepository
+class NewsletterRepository extends AbstractRepository
 {
 
     /**
@@ -42,7 +51,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
         $query->setLimit(1);
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
 
         return $query->execute()->getFirst();
     }
@@ -55,14 +64,14 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
         $query = $this->createQuery();
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
 
         return $query->execute();
     }
 
     /**
      * Returns all newsletter which are ready to be sent now and not yet locked (sending already started)
-     * @return Tx_Newsletter_Domain_Model_Newsletter[]
+     * @return \Ecodev\Newsletter\Domain\Model\Newsletter[]
      */
     public function findAllReadyToSend()
     {
@@ -78,7 +87,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
 
     /**
      * Returns all newsletter which are currently being sent
-     * @return Tx_Newsletter_Domain_Model_Newsletter[]
+     * @return \Ecodev\Newsletter\Domain\Model\Newsletter[]
      */
     public function findAllBeingSent()
     {
@@ -91,10 +100,10 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
     /**
      * Returns newsletter statistics to be used for pie and timeline chart
      * We will get the full state for each time when something happened
-     * @param Tx_Newsletter_Domain_Model_Newsletter $newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      * @return array eg: array(array(time, emailNotSentCount, emailSentCount, emailOpenedCount, emailBouncedCount, emailCount, linkOpenedCount, linkCount, [and same fields but Percentage instead of Count] ))
      */
-    public function getStatistics(Tx_Newsletter_Domain_Model_Newsletter $newsletter)
+    public function getStatistics(Newsletter $newsletter)
     {
         $uidNewsletter = $newsletter->getUid();
 
@@ -107,7 +116,7 @@ class Tx_Newsletter_Domain_Repository_NewsletterRepository extends Tx_Newsletter
                 )
         );
 
-        $linkRepository = $this->objectManager->get('Tx_Newsletter_Domain_Repository_LinkRepository');
+        $linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
         $linkCount = $linkRepository->getCount($uidNewsletter);
         $this->fillStateDifferences(
                 $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, array(

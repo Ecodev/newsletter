@@ -6,8 +6,8 @@ if (!defined('TYPO3_MODE')) {
 
 // ========== Register BE Modules
 if (TYPO3_MODE == 'BE') {
-    Tx_Extbase_Utility_Extension::registerModule(
-            $_EXTKEY, 'web', // Make newsletter module a submodule of 'user'
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+            'Ecodev.' . $_EXTKEY, 'web', // Make newsletter module a submodule of 'user'
             'tx_newsletter_m1', // Submodule key
             'before:info', // Position
             array(
