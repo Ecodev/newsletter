@@ -6,7 +6,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
 
 return Symfony\CS\Config\Config::create()
                 ->level(Symfony\CS\FixerInterface::NONE_LEVEL)
-                ->fixers([
+                ->fixers(array(
                     // 'align_double_arrow', // Waste of time
                     // 'align_equals', // Waste of time
                     'braces',
@@ -58,5 +58,5 @@ return Symfony\CS\Config\Config::create()
                     'unused_use',
                     'visibility',
                     'whitespacy_lines',
-                ])
+                ))
                 ->finder($finder);
