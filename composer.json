@@ -1,0 +1,12 @@
+{
+    "name": "ecodev/newsletter",
+    "version": "2.2.3",
+    "type": "typo3-cms-extension",
+    "description": "Send any pages as Newsletter and provide statistics on opened emails and clicked links.",
+    "homepage": "https://github.com/ecodev/newsletter",
+    "license": "GPL-2.0+",
+    "keywords": ["TYPO3 CMS", "newsletter", "email", "statistics"],
+    "require-dev": {
+        "fabpot/php-cs-fixer": "~1.4"
+    }
+}
