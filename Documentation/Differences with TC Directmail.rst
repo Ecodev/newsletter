@@ -1,5 +1,5 @@
-Differences with TC Directmail
-==============================
+Differences with TC Directmail 2.0.2
+====================================
 
 What's better
 -------------
@@ -21,19 +21,4 @@ What's worse
 -  Removed wizard for recipientlist generation
 -  Only one recipient list per newsletter (workaround: send multiple
    newsletter or UNION via raw sql)
--  Removed load-balancing to send email (see #27046)
-
-Breaking changes
-----------------
-
-We tried to keep most things from TC Directmail working as before, but
-we still had to drop/change stuff for simplicity sake.
-
--  The hook ``getConfiguredMailerHook()`` now has a
-   ``\Ecodev\Newsletter\Domain\Model\Newsletter`` object instead of page
--  Recipient do not have their own UID, instead we use email address.
-   This affect ``RecipientList::disableReceiver()``,
-   ``RecipientList::registerOpen()``, ``RecipientList::registerClick()``
-   and their inherited versions.
-
-.. _SwiftMailer: http://swiftmailer.org/
+-  Removed load-balancing to send email (see https://github.com/Ecodev/newsletter/issues/4)

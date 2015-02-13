@@ -17,7 +17,7 @@ Newsletter |badge_travis| |badge_scrutinizer| |badge_gitter|
 
 A TYPO3 extension to send any pages as newsletter to several recipients at once.
 
-Originally based on `TC Directmail`_,
+Originally based on `TC Directmail`_ 2.0.2,
 the mailing engine was almost entirely rewritten but most features were preserved.
 We now use SwiftMailer (from TYPO3 core). And it aims to improve the user
 experience and works out of the box.

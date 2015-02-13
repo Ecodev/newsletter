@@ -49,28 +49,6 @@ planned, or, for testing purpose, you can manually trigger the task
 within Scheduler. Statistics are available as soon as a newsletter is
 queued. So it is possible to check what’s going on.
 
-Migration from TC Directmail
-============================
-
-Migration from TC Directmail is possible via the Extension Manager. In
-the menu “Update” of Newsletter extension a button is available to
-migrate data. This feature is only available if TC Directmail is found
-and Newsletter was never used.
-
-Data migrated:
-
--  RecipientList
--  BounceAccount
--  Newsletter
--  Email sent
--  Bounce level for be_users and fe_users
--  TYPO3 CLI be_user (_cli_newsletter)
-
-Data **not** migrated:
-
--  Links
--  Links clicked
-
 Configuration
 =============
 
