@@ -145,14 +145,11 @@ class NewsletterRepository extends AbstractRepository
         $stateCount = count($stateDifferences);
         if ($stateCount > 5000) {
             $groupingTimestep = 15 * 60; // 15 minutes
-        }
-        elseif ($stateCount > 500) {
+        } elseif ($stateCount > 500) {
             $groupingTimestep = 5 * 60; // 5 minutes
-        }
-        elseif ($stateCount > 50) {
+        } elseif ($stateCount > 50) {
             $groupingTimestep = 1 * 60; // 1 minutes
-        }
-        else {
+        } else {
             $groupingTimestep = 0; // no grouping at all
         }
 
