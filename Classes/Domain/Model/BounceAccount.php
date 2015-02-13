@@ -3,9 +3,7 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -179,5 +177,4 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->password;
     }
-
 }

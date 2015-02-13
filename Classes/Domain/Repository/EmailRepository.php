@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
-use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -82,8 +78,9 @@ class EmailRepository extends AbstractRepository
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
     {
-        if ($uidNewsletter < 1)
+        if ($uidNewsletter < 1) {
             return $this->findAll();
+        }
 
         $query = $this->createQuery();
         $query->matching($query->equals('newsletter', $uidNewsletter));
@@ -125,5 +122,4 @@ class EmailRepository extends AbstractRepository
             }
         }
     }
-
 }

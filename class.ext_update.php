@@ -45,7 +45,7 @@ class ext_update
      * Main function, returning the HTML content of the module
      * @return	string HTML to display
      */
-    function main()
+    public function main()
     {
         $content = '';
         $content .= '<h2>Migration from Newsletter 2.2.3 to 2.3.0</h2>';
@@ -93,14 +93,12 @@ class ext_update
      *
      * @param string $what What should be updated
      */
-    function access($what = 'all')
+    public function access($what = 'all')
     {
-        return TRUE;
+        return true;
     }
-
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/class.ext_update.php']) {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/class.ext_update.php']);
+    include_once $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/newsletter/class.ext_update.php'];
 }
-

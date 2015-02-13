@@ -2,10 +2,9 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use Ecodev\Newsletter\MVC\ExtDirect\Request;
-use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use \TYPO3\CMS\Extbase\Reflection\ReflectionService;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -150,6 +149,7 @@ class Transaction
         $request->setPluginName($frameworkConfiguration['pluginName']);
         $request->setFormat('extdirect');
         $request->setArguments($this->getArguments());
+
         return $request;
     }
 
@@ -228,6 +228,7 @@ class Transaction
     public function getControllerObjectName()
     {
         $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
         return 'Ecodev\\Newsletter\\Controller\\' . $this->action;
     }
 
@@ -284,7 +285,6 @@ class Transaction
      */
     protected function convertObjectToArray($object)
     {
-        return json_decode(json_encode($object), TRUE);
+        return json_decode(json_encode($object), true);
     }
-
 }

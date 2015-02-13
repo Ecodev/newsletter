@@ -3,14 +3,12 @@
 
 namespace Ecodev\Newsletter\MVC\View;
 
-use \TYPO3\CMS\Extbase\Mvc\View\AbstractView;
-use \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use ArrayAccess;
 use DateTime;
-use \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
-use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-
-
+use TYPO3\CMS\Extbase\Mvc\View\AbstractView;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /* *
  * This script belongs to the FLOW3 framework.                            *
@@ -163,6 +161,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
         // the RequestHandlers take care of the ContentType
         //$this->controllerContext->getResponse()->setHeader('Content-Type', 'application/json');
         $propertiesToRender = $this->renderArray();
+
         return json_encode($propertiesToRender);
     }
 
@@ -178,15 +177,16 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
     {
         if (count($this->variablesToRender) === 1) {
             $variableName = current($this->variablesToRender);
-            $valueToRender = isset($this->variables[$variableName]) ? $this->variables[$variableName] : NULL;
+            $valueToRender = isset($this->variables[$variableName]) ? $this->variables[$variableName] : null;
             $configuration = isset($this->configuration[$variableName]) ? $this->configuration[$variableName] : array();
         } else {
             $valueToRender = array();
             foreach ($this->variablesToRender as $variableName) {
-                $valueToRender[$variableName] = isset($this->variables[$variableName]) ? $this->variables[$variableName] : NULL;
+                $valueToRender[$variableName] = isset($this->variables[$variableName]) ? $this->variables[$variableName] : null;
             }
             $configuration = $this->configuration;
         }
+
         return $this->transformValue($valueToRender, $configuration);
     }
 
@@ -207,13 +207,16 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
                 if (isset($configuration['_descendAll']) && is_array($configuration['_descendAll'])) {
                     $array[] = $this->transformValue($element, $configuration['_descendAll']);
                 } else {
-                    if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($key, $configuration['_only']))
+                    if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($key, $configuration['_only'])) {
                         continue;
-                    if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($key, $configuration['_exclude']))
+                    }
+                    if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($key, $configuration['_exclude'])) {
                         continue;
+                    }
                     $array[$key] = $this->transformValue($element, isset($configuration[$key]) ? $configuration[$key] : array());
                 }
             }
+
             return $array;
         } elseif (is_object($value)) {
             return $this->transformObject($value, $configuration);
@@ -245,10 +248,12 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
         $propertyNames = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($object);
         $propertiesToRender = array();
         foreach ($propertyNames as $propertyName) {
-            if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only']))
+            if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only'])) {
                 continue;
-            if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude']))
+            }
+            if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude'])) {
                 continue;
+            }
 
             $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($object, $propertyName);
 
@@ -257,15 +262,14 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
             } elseif (isset($configuration['_descend']) && array_key_exists($propertyName, $configuration['_descend'])) {
                 $propertiesToRender[$propertyName] = $this->transformValue($propertyValue, $configuration['_descend'][$propertyName]);
             } else {
-
             }
         }
-        if (isset($configuration['_exposeObjectIdentifier']) && $configuration['_exposeObjectIdentifier'] === TRUE) {
+        if (isset($configuration['_exposeObjectIdentifier']) && $configuration['_exposeObjectIdentifier'] === true) {
             // we don't use the IdentityMap like its done in FLOW3 because there are some cases objects are not registered there.
             // TODO: rethink this solution - it is really quick and dirty...
             $propertiesToRender['__identity'] = $object->getUid();
         }
+
         return $propertiesToRender;
     }
-
 }

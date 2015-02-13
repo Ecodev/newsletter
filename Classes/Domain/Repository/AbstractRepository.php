@@ -42,7 +42,7 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
     public function createQuery()
     {
         $query = parent::createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(FALSE);
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
         return $query;
     }
@@ -67,5 +67,4 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
     {
         return $this->updateNow($modifiedObject);
     }
-
 }

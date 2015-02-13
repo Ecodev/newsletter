@@ -3,11 +3,9 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use GeneralUtility;
 use Ecodev\Newsletter\Tools;
-
-
+use GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /* * *************************************************************
  *  Copyright notice
@@ -80,5 +78,4 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $this->view->assign('configuration', $configuration);
     }
-
 }

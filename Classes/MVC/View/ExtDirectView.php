@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\MVC\View;
 
-use Ecodev\Newsletter\MVC\View\JsonView;
-
-
-
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -48,7 +44,7 @@ class ExtDirectView extends JsonView
     {
         $result = $this->renderArray();
         $this->controllerContext->getResponse()->setResult($result);
-        $this->controllerContext->getResponse()->setSuccess(TRUE);
+        $this->controllerContext->getResponse()->setSuccess(true);
     }
 
     /**
@@ -72,8 +68,7 @@ class ExtDirectView extends JsonView
         }
         $this->assign('value', array(
             'errors' => $result,
-            'success' => FALSE
+            'success' => false,
         ));
     }
-
 }

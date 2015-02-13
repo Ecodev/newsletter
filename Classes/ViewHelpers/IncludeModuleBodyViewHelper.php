@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -60,5 +56,4 @@ class IncludeModuleBodyViewHelper extends AbstractViewHelper
         $content = $this->renderChildren();
         $this->pageRenderer->addBodyContent($content);
     }
-
 }

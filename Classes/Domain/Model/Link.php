@@ -3,11 +3,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use GeneralUtility;
-use Ecodev\Newsletter\Domain\Model\Newsletter;
-
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -115,6 +112,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getNewsletter()
     {
         $newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+
         return $newsletterRepository->findByUid($this->newsletter);
     }
 
@@ -144,10 +142,10 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
         $emailCount = $emailRepository->getCount($this->newsletter);
 
-        if ($emailCount == 0)
+        if ($emailCount == 0) {
             return 0;
+        }
 
         return round($this->getOpenedCount() * 100 / $emailCount, 2);
     }
-
 }

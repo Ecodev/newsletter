@@ -3,18 +3,16 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
-use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
-use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
-use GeneralUtility;
-use FlashMessage;
 use DateTime;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
 use Exception;
-
-
+use FlashMessage;
+use GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -118,8 +116,8 @@ class NewsletterController extends ExtDirectActionController
         $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
         $this->view->setConfiguration(array(
             'data' => array(
-                '_descendAll' => self::resolveJsonViewConfiguration()
-            )
+                '_descendAll' => self::resolveJsonViewConfiguration(),
+            ),
         ));
 
         $this->addFlashMessage('Loaded Newsletters from Server side.', 'Newsletters loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
@@ -151,7 +149,7 @@ class NewsletterController extends ExtDirectActionController
 
         $this->view->setVariablesToRender(array('total', 'data', 'success'));
         $this->view->setConfiguration(array(
-            'data' => self::resolvePlannedJsonViewConfiguration()
+            'data' => self::resolvePlannedJsonViewConfiguration(),
         ));
 
         $this->view->assign('total', 1);
@@ -171,7 +169,6 @@ class NewsletterController extends ExtDirectActionController
      */
     public function createAction(Newsletter $newNewsletter = null)
     {
-
         $limitTestRecipientCount = 10; // This is a low limit, technically, but it does not make sense to test a newsletter for more people than that anyway
         $recipientList = $newNewsletter->getRecipientList();
         $recipientList->init();
@@ -181,12 +178,12 @@ class NewsletterController extends ExtDirectActionController
         // If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
             $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
-            $this->view->assign('success', FALSE);
+            $this->view->assign('success', false);
         }
         // If we attempt to create a newsletter which contains errors, abort and don't save in DB
         elseif (count($validatedContent['errors'])) {
             $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_newsletter_invalid', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
-            $this->view->assign('success', FALSE);
+            $this->view->assign('success', false);
         } else {
             // If it's a test newsletter, it's planned to be sent right now
             if ($newNewsletter->getIsTest()) {
@@ -196,7 +193,7 @@ class NewsletterController extends ExtDirectActionController
             // Save the new newsletter
             $this->newsletterRepository->add($newNewsletter);
             $this->persistenceManager->persistAll();
-            $this->view->assign('success', TRUE);
+            $this->view->assign('success', true);
 
             // If it is test newsletter, send it immediately
             if ($newNewsletter->getIsTest()) {
@@ -214,10 +211,9 @@ class NewsletterController extends ExtDirectActionController
             }
         }
 
-
         $this->view->setVariablesToRender(array('data', 'success', 'flashMessages'));
         $this->view->setConfiguration(array(
-            'data' => self::resolveJsonViewConfiguration()
+            'data' => self::resolveJsonViewConfiguration(),
         ));
 
         $this->view->assign('data', $newNewsletter);
@@ -238,7 +234,7 @@ class NewsletterController extends ExtDirectActionController
         $conf['_only'][] = 'statistics';
         $conf['_descend'][] = 'statistics';
         $this->view->setConfiguration(array(
-            'data' => $conf
+            'data' => $conf,
         ));
 
         $this->view->assign('total', 1);
@@ -252,10 +248,10 @@ class NewsletterController extends ExtDirectActionController
      *
      * @return array
      */
-    static public function resolveJsonViewConfiguration()
+    public static function resolveJsonViewConfiguration()
     {
         return array(
-            '_exposeObjectIdentifier' => TRUE,
+            '_exposeObjectIdentifier' => true,
             '_only' => array(
                 'pid',
                 'beginTime',
@@ -277,14 +273,14 @@ class NewsletterController extends ExtDirectActionController
                 'endTime' => array(),
                 'plannedTime' => array(),
                 'statistics' => array(),
-            )
+            ),
         );
     }
 
-    static public function resolvePlannedJsonViewConfiguration()
+    public static function resolvePlannedJsonViewConfiguration()
     {
         return array(
-            '_exposeObjectIdentifier' => TRUE,
+            '_exposeObjectIdentifier' => true,
             '_only' => array(
                 'pid',
                 'beginTime',
@@ -311,10 +307,9 @@ class NewsletterController extends ExtDirectActionController
                     '_only' => array(
                         'errors',
                         'warnings',
-                        'infos')
+                        'infos', ),
                 ),
-            )
+            ),
         );
     }
-
 }

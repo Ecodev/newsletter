@@ -29,7 +29,7 @@ class RecipientListTca
 
             $result .= $recipientList->getExtract();
         }
+
         return $result;
     }
-
 }

@@ -3,11 +3,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use DateTime;
-use Ecodev\Newsletter\Domain\Model\Newsletter;
-
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -296,5 +293,4 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->unsubscribed;
     }
-
 }

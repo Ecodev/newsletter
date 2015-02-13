@@ -2,11 +2,11 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use \TYPO3\CMS\Extbase\Reflection\ReflectionService;
+use GeneralUtility;
 use PageRepository;
 use ReflectionException;
-use GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /* * *************************************************************
  *  Copyright notice
@@ -92,10 +92,10 @@ class Api
      * @param boolean $writeToCache Should the created api be stored in the cache.
      * @return array
      */
-    public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = TRUE, $writeToCache = TRUE)
+    public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = true, $writeToCache = true)
     {
         $cacheHash = md5($this->cacheStorageKey . serialize($this->frameworkConfiguration['controllerConfiguration']));
-        $cachedApi = ($readFromCache) ? \TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash) : FALSE;
+        $cachedApi = ($readFromCache) ? \TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash) : false;
         if ($cachedApi) {
             $api = unserialize(\TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash));
         } else {
@@ -104,6 +104,7 @@ class Api
                 \TYPO3\CMS\Frontend\Page\PageRepository::storeHash($cacheHash, serialize($api), $this->cacheStorageKey);
             }
         }
+
         return $api;
     }
 
@@ -139,7 +140,7 @@ class Api
                     $actionParameters = $this->reflectionService->getMethodParameters($controllerObjectName, $unstrippedActionName);
                     $controllerActions[] = array(
                         'len' => count($actionParameters),
-                        'name' => $unstrippedActionName
+                        'name' => $unstrippedActionName,
                     );
                 } catch (ReflectionException $re) {
                     if ($unstrippedActionName !== 'extObjAction') {
@@ -152,5 +153,4 @@ class Api
 
         return $api;
     }
-
 }

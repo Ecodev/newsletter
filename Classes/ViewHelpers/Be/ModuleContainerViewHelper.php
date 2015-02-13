@@ -5,8 +5,6 @@ namespace Ecodev\Newsletter\ViewHelpers\Be;
 
 use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -84,12 +82,11 @@ class ModuleContainerViewHelper extends AbstractViewHelper
      * @see template
      * @see TYPO3\CMS\Core\Page\PageRenderer
      */
-    public function render($pageTitle = '', $enableJumpToUrl = FALSE, $loadPrototype = FALSE, $loadScriptaculous = FALSE, $scriptaculousModule = '', $loadExtJs = TRUE, $loadExtCore = FALSE, $loadExtJsTheme = TRUE, $extJsAdapter = '', $enableExtJsDebug = FALSE, $concatenate = TRUE, $compressJs = TRUE, $compressCss = TRUE, $enableExtJSQuickTips = TRUE, $extCorePath = NULL, $extJsPath = NULL)
+    public function render($pageTitle = '', $enableJumpToUrl = false, $loadPrototype = false, $loadScriptaculous = false, $scriptaculousModule = '', $loadExtJs = true, $loadExtCore = false, $loadExtJsTheme = true, $extJsAdapter = '', $enableExtJsDebug = false, $concatenate = true, $compressJs = true, $compressCss = true, $enableExtJSQuickTips = true, $extCorePath = null, $extJsPath = null)
     {
-
         $doc = $this->getDocInstance();
 
-        if ($enableJumpToUrl === TRUE) {
+        if ($enableJumpToUrl === true) {
             $doc->JScode .= '
 				<script language="javascript" type="text/javascript">
 					script_ended = 0;
@@ -100,28 +97,28 @@ class ModuleContainerViewHelper extends AbstractViewHelper
 				</script>
 			';
         }
-        if ($loadPrototype === TRUE) {
+        if ($loadPrototype === true) {
             $this->pageRenderer->loadPrototype();
         }
-        if ($loadScriptaculous === TRUE) {
+        if ($loadScriptaculous === true) {
             $this->pageRenderer->loadScriptaculous($scriptaculousModule);
         }
-        if ($extCorePath !== NULL) {
+        if ($extCorePath !== null) {
             $this->pageRenderer->setExtCorePath($extCorePath);
         }
-        if ($extJsPath !== NULL) {
+        if ($extJsPath !== null) {
             $this->pageRenderer->setExtJsPath($extJsPath);
         }
-        if ($loadExtJs === TRUE) {
-            $this->pageRenderer->loadExtJS(TRUE, $loadExtJsTheme, $extJsAdapter);
-            if ($enableExtJsDebug === TRUE) {
+        if ($loadExtJs === true) {
+            $this->pageRenderer->loadExtJS(true, $loadExtJsTheme, $extJsAdapter);
+            if ($enableExtJsDebug === true) {
                 $this->pageRenderer->enableExtJsDebug();
             }
         }
-        if ($loadExtCore === TRUE) {
+        if ($loadExtCore === true) {
             $this->pageRenderer->loadExtCore();
         }
-        if ($enableExtJSQuickTips === TRUE) {
+        if ($enableExtJSQuickTips === true) {
             $this->pageRenderer->enableExtJSQuickTips();
         }
 
@@ -129,19 +126,19 @@ class ModuleContainerViewHelper extends AbstractViewHelper
 
         $this->renderChildren();
 
-        if ($compressJs === TRUE) {
+        if ($compressJs === true) {
             $this->pageRenderer->enableCompressJavaScript();
         }
-        if ($compressCss === TRUE) {
+        if ($compressCss === true) {
             $this->pageRenderer->enableCompressCss();
         }
-        if ($concatenate === TRUE) {
+        if ($concatenate === true) {
             $this->pageRenderer->enableConcatenateFiles();
         }
         $output = $doc->startPage($pageTitle);
         $output .= $this->pageRenderer->getBodyContent();
         $output .= $doc->endPage();
+
         return $output;
     }
-
 }

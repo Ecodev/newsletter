@@ -2,7 +2,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\AbstractArray;
 use GeneralUtility;
 
 /**
@@ -97,7 +96,7 @@ class CsvFile extends AbstractArray
         return $this->csvFilename;
     }
 
-    function init()
+    public function init()
     {
         $this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->getCsvFilename());
     }
@@ -130,8 +129,9 @@ class CsvFile extends AbstractArray
         if ($csvdata && $sepchar && count($keys)) {
             $lines = explode("\n", $csvdata);
             foreach ($lines as $line) {
-                if (!trim($line))
+                if (!trim($line)) {
                     continue;
+                }
 
                 $values = str_getcsv($line, $sepchar);
                 if (count($values) != count($keys)) {
@@ -148,11 +148,10 @@ class CsvFile extends AbstractArray
 
     public function getError()
     {
-
-        if (isset($this->error))
+        if (isset($this->error)) {
             return $this->error;
+        }
 
         parent::getError();
     }
-
 }

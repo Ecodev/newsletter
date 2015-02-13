@@ -3,11 +3,9 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Domain\Repository\LinkRepository;
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use FlashMessage;
-
-
 
 /* * *************************************************************
  *  Copyright notice
@@ -73,8 +71,8 @@ class LinkController extends ExtDirectActionController
         $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
         $this->view->setConfiguration(array(
             'data' => array(
-                '_descendAll' => self::resolveJsonViewConfiguration()
-            )
+                '_descendAll' => self::resolveJsonViewConfiguration(),
+            ),
         ));
 
         $this->addFlashMessage('Loaded all Links from Server side.', 'Links loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
@@ -105,12 +103,11 @@ class LinkController extends ExtDirectActionController
      *
      * @return array
      */
-    static public function resolveJsonViewConfiguration()
+    public static function resolveJsonViewConfiguration()
     {
         return array(
-            '_exposeObjectIdentifier' => TRUE,
+            '_exposeObjectIdentifier' => true,
             '_only' => array('url', 'openedCount', 'openedPercentage'),
         );
     }
-
 }

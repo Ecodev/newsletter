@@ -5,8 +5,6 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 use Ecodev\Newsletter\Domain\Model\RecipientList;
 
-
-
 /**
  * This is the basic class for extracting recipient from other data sources than the database.
  * Here the internal datastructure is an array.
@@ -19,7 +17,7 @@ use Ecodev\Newsletter\Domain\Model\RecipientList;
 abstract class AbstractArray extends RecipientList
 {
 
-    function getRecipient()
+    public function getRecipient()
     {
         $r = current($this->data);
         next($this->data);
@@ -35,12 +33,12 @@ abstract class AbstractArray extends RecipientList
         }
     }
 
-    function getCount()
+    public function getCount()
     {
         return count($this->data);
     }
 
-    function getError()
+    public function getError()
     {
         if (!is_array($this->data)) {
             return "Not an array";
@@ -50,5 +48,4 @@ abstract class AbstractArray extends RecipientList
             return "No data fetched";
         }
     }
-
 }

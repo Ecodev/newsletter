@@ -3,16 +3,14 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use TYPO3;
 use CMS;
 use Core;
-use SingletonInterface;
-use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use Ecodev\Newsletter\Exception as EcodevNewsletterException;
 use Exception as Exception;
-
-
+use SingletonInterface;
+use TYPO3;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -90,6 +88,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
         } else {
             $request = $this->buildJsonRequest();
         }
+
         return $request;
     }
 
@@ -106,12 +105,13 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
     {
         $transactionDatas = file_get_contents("php://input");
 
-        if (($transactionDatas = json_decode($transactionDatas)) === NULL) {
+        if (($transactionDatas = json_decode($transactionDatas)) === null) {
             throw new Exception('The request is not a valid Ext Direct request', 1268490738);
         }
 
-        if (!is_array($transactionDatas))
+        if (!is_array($transactionDatas)) {
             $transactionDatas = array($transactionDatas);
+        }
 
         $request = $this->objectManager->create('Ecodev\Newsletter\MVC\ExtDirect\Request');
         foreach ($transactionDatas as $transactionData) {
@@ -119,6 +119,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
                     $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : array(), $transactionData->tid
             );
         }
+
         return $request;
     }
 
@@ -132,15 +133,14 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      */
     protected function buildFormPostRequest()
     {
-        $directRequest->setFormPost(TRUE);
+        $directRequest->setFormPost(true);
         $directRequest->setFileUpload($request->getArgument('extUpload') === 'true');
 
         $packageKey = $request->getArgument('packageKey');
         $subpackageKey = $request->hasArgument('subpackageKey') ? $request->getArgument('subpackageKey') : '';
 
         $directRequest->addTransaction(
-                $request->getArgument('extAction'), $request->getArgument('extMethod'), NULL, $request->getArgument('extTID'), $packageKey, $subpackageKey
+                $request->getArgument('extAction'), $request->getArgument('extMethod'), null, $request->getArgument('extTID'), $packageKey, $subpackageKey
         );
     }
-
 }

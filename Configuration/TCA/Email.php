@@ -21,7 +21,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
-            )
+            ),
         ),
         'begin_time' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.begin_time',
@@ -87,7 +87,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
                     'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ),
             ),
         ),
@@ -101,5 +101,3 @@ $TCA['tx_newsletter_domain_model_email'] = array(
         ),
     ),
 );
-
-

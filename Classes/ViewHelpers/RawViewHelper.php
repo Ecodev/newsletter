@@ -3,9 +3,7 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-
-
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /*
  * This script belongs to the FLOW3 package "Fluid".                      *
@@ -61,19 +59,18 @@ class RawViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      * Disable Fluid interceptors for this ViewHelper
      * @var boolean
      */
-    protected $escapingInterceptorEnabled = FALSE;
+    protected $escapingInterceptorEnabled = false;
 
     /**
      * @param mixed $value The value to output
      * @return string
      */
-    public function render($value = NULL)
+    public function render($value = null)
     {
-        if ($value === NULL) {
+        if ($value === null) {
             return $this->renderChildren();
         } else {
             return $value;
         }
     }
-
 }

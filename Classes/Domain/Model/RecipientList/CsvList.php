@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile;
-
-
-
 /**
  * Recipient List using CSV list (values directly input in TYPO3 Backend)
  *
@@ -44,9 +40,8 @@ class CsvList extends CsvFile
         return $this->csvValues;
     }
 
-    function init()
+    public function init()
     {
         $this->loadCsvFromData($this->getCsvValues());
     }
-
 }

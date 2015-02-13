@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
-use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -52,5 +48,4 @@ class RecipientListRepository extends AbstractRepository
 
         return $recipientList;
     }
-
 }

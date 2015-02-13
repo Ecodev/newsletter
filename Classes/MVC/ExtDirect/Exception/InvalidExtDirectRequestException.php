@@ -5,8 +5,6 @@ namespace Ecodev\Newsletter\MVC\ExtDirect\Exception;
 
 use Ecodev\Newsletter\Exception;
 
-
-
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *
@@ -34,5 +32,4 @@ use Ecodev\Newsletter\Exception;
  */
 class InvalidExtDirectRequestException extends Exception
 {
-
 }

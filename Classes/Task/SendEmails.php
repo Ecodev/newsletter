@@ -3,12 +3,10 @@
 
 namespace Ecodev\Newsletter\Task;
 
-use tx_scheduler_Task;
 use Ecodev\Newsletter\Tools;
 use GeneralUtility;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-
-
+use tx_scheduler_Task;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -49,7 +47,6 @@ class SendEmails extends tx_scheduler_Task
      */
     public function execute()
     {
-
         Tools::createAllSpool();
         Tools::runSpoolOneAll();
 
@@ -86,5 +83,4 @@ class SendEmails extends tx_scheduler_Task
 
         return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount));
     }
-
 }

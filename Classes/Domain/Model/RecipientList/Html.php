@@ -3,10 +3,7 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\AbstractArray;
 use GeneralUtility;
-
-
 
 /**
  * Recipient List using any public URL to fetch and parse for emails addresses
@@ -73,7 +70,7 @@ class Html extends AbstractArray
         return $this->htmlFetchType;
     }
 
-    function init()
+    public function init()
     {
         $this->data = array();
 
@@ -97,5 +94,4 @@ class Html extends AbstractArray
                 }
         }
     }
-
 }

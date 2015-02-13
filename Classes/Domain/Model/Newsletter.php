@@ -2,15 +2,12 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use DateTime;
-use GeneralUtility;
-use Ecodev\Newsletter\Domain\Model\IPlainConverter;
-use Exception;
-use Ecodev\Newsletter\Tools;
-use Ecodev\Newsletter\Domain\Model\BounceAccount;
-use Ecodev\Newsletter\Domain\Model\RecipientList;
 use BackendUtility;
+use DateTime;
+use Ecodev\Newsletter\Tools;
+use Exception;
+use GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -174,8 +171,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function getObjectManager()
     {
-        if (!$this->objectManager)
+        if (!$this->objectManager) {
             $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        }
 
         return $this->objectManager;
     }
@@ -357,7 +355,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setAttachments($attachments)
     {
-        $this->attachments = join(',', $attachments);
+        $this->attachments = implode(',', $attachments);
     }
 
     /**
@@ -564,10 +562,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getUidBounceAccount()
     {
         $bounceAccount = $this->getBounceAccount();
-        if ($bounceAccount)
+        if ($bounceAccount) {
             return $bounceAccount->getUid();
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -622,10 +621,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getUidRecipientList()
     {
         $recipientList = $this->getRecipientList();
-        if ($recipientList)
+        if ($recipientList) {
             return $recipientList->getUid();
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -702,7 +702,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string the title
      */
-    function getTitle()
+    public function getTitle()
     {
         global $TYPO3_DB;
         $rs = $TYPO3_DB->sql_query("SELECT title FROM pages WHERE uid = $this->pid");
@@ -743,7 +743,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
         $newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
 
-
         // Clone this newsletter and give the new plannedTime
         // We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
         global $TYPO3_DB;
@@ -763,10 +762,12 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (!$this->getBeginTime()) {
             $recipientList = $this->getRecipientList();
             $recipientList->init();
+
             return $recipientList->getCount();
         }
 
         $emailRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+
         return $emailRepository->getCount($this->uid);
     }
 
@@ -829,7 +830,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         try {
             $url = $this->getContentUrl($language);
         } catch (Exception $e) {
-
             return array(
                 'content' => '',
                 'errors' => array($e->getMessage()),
@@ -863,7 +863,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
             $errors [] = $LANG->getLL('validation_mail_being_generated');
         }
-
 
         // Find out the absolute domain. If specified in HTML source, use it as is.
         if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match)) {
@@ -899,7 +898,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         // Find linked css and convert into a style-tag
         preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
         foreach ($urls[1] as $i => $url) {
-
             $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
 <style type=\"text/css\">\n<!--\n" . \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url) . "\n-->\n</style>", $content);
         }
@@ -929,7 +927,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             'height' => '((min|max)+-)?height',
             'margin' => 'margin(-(bottom|left|right|top)+)?',
             'padding' => 'padding(-(bottom|left|right|top)+)?',
-            'position' => 'position'
+            'position' => 'position',
         );
         $forbiddenCssPropertiesWarnings = array();
         if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
@@ -968,23 +966,27 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $endTime = $this->getEndTime();
 
         // If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
-        if (!($this->getUid() > 0))
+        if (!($this->getUid() > 0)) {
             return $LANG->getLL('newsletter_status_not_planned');
+        }
 
-        if ($plannedTime && !$beginTime)
+        if ($plannedTime && !$beginTime) {
             return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
+        }
 
-        if ($beginTime && !$endTime)
+        if ($beginTime && !$endTime) {
             return $LANG->getLL('newsletter_status_generating_emails');
+        }
 
         if ($beginTime && $endTime) {
             $emailCount = $this->getEmailCount();
             $emailNotSentCount = $this->getEmailNotSentCount();
 
-            if ($emailNotSentCount)
+            if ($emailNotSentCount) {
                 return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
-            else
+            } else {
                 return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
+            }
         }
 
         return "unexpected status";
@@ -997,5 +999,4 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $stats;
     }
-
 }

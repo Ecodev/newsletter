@@ -3,9 +3,7 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-
-
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /* *
  * This script belongs to the FLOW3 package "Fluid".                      *
@@ -44,8 +42,8 @@ use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class NullViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
-    protected $objectAccessorPostProcessorEnabled = FALSE;
-    protected $escapingInterceptorEnabled = FALSE;
+    protected $objectAccessorPostProcessorEnabled = false;
+    protected $escapingInterceptorEnabled = false;
 
     /**
      * Render without processing
@@ -57,5 +55,4 @@ class NullViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     {
         return $content;
     }
-
 }

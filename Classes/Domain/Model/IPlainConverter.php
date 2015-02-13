@@ -3,9 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *

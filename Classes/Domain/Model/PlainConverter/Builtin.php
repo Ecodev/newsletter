@@ -4,7 +4,7 @@ namespace Ecodev\Newsletter\Domain\Model\PlainConverter;
 
 use Ecodev\Newsletter\Domain\Model\IPlainConverter;
 
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/Html2Text.php');
+require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/Html2Text.php';
 
 /**
  * Convert HTML to plain text using builtin Html2Text tool
@@ -23,5 +23,4 @@ class Builtin implements IPlainConverter
 
         return $converter->getText();
     }
-
 }

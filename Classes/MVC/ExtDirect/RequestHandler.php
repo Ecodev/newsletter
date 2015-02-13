@@ -3,15 +3,11 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface;
-use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use \TYPO3\CMS\Extbase\Mvc\Dispatcher;
-use Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder;
-use \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer;
 use Exception;
-use Ecodev\Newsletter\MVC\ExtDirect\Request;
-
-
+use TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer;
+use TYPO3\CMS\Extbase\Mvc\Dispatcher;
+use TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -65,7 +61,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * Whether to expose exception information in an ExtDirect response
      * @var boolean
      */
-    protected $exposeExceptionInformation = TRUE;
+    protected $exposeExceptionInformation = true;
 
     /**
      * Constructs the Ext Direct Request Handler
@@ -142,7 +138,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
                     'tid' => $transaction->getTid(),
                     'action' => $transaction->getAction(),
                     'method' => $transaction->getMethod(),
-                    'result' => $transactionResponse->getResult()
+                    'result' => $transactionResponse->getResult(),
                 );
             } catch (Exception $exception) {
                 $exceptionMessage = $this->exposeExceptionInformation ? $exception->getMessage() : 'An internal error occured';
@@ -151,10 +147,11 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
                     'type' => 'exception',
                     'tid' => $transaction->getTid(),
                     'message' => $exceptionMessage,
-                    'where' => $exceptionWhere
+                    'where' => $exceptionWhere,
                 );
             }
         }
+
         return $this->sendResponse($results, $extDirectRequest);
     }
 
@@ -200,7 +197,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
             $response->setHeader('Content-Type', 'application/json');
             $response->setContent($jsonResponse);
         }
+
         return $response;
     }
-
 }

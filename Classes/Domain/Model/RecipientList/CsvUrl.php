@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile;
-
-
-
 /**
  * Recipient List using CSV url to retrieve a CSV file
  *
@@ -44,9 +40,8 @@ class CsvUrl extends CsvFile
         return $this->csvUrl;
     }
 
-    function init()
+    public function init()
     {
         $this->loadCsvFromFile($this->getCsvUrl());
     }
-
 }

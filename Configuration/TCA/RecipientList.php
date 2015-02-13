@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_recipientlist'] = array(
     'ctrl' => $TCA['tx_newsletter_domain_model_recipientlist']['ctrl'],
     'interface' => array(
-        'showRecordFieldList' => 'hidden,title'
+        'showRecordFieldList' => 'hidden,title',
     ),
     'feInterface' => $TCA['tx_newsletter_domain_model_recipientlist']['feInterface'],
     'columns' => array(
@@ -16,8 +16,8 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
-                'default' => '0'
-            )
+                'default' => '0',
+            ),
         ),
         'title' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.title',
@@ -25,14 +25,14 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
                 'type' => 'input',
                 'size' => '30',
                 'eval' => 'trim,required',
-            )
+            ),
         ),
         'plain_only' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.plain_only',
             'config' => array(
                 'type' => 'check',
-                'default' => '0'
-            )
+                'default' => '0',
+            ),
         ),
         'lang' => array(
             'label' => 'LLL:EXT:lang/locallang_tca.php:sys_language',
@@ -45,7 +45,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
                 'maxitems' => 1,
                 'items' => array(
                     '0' => array('', -1),
-                    '1' => array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
+                    '1' => array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0),
                 ),
             ),
         ),
@@ -216,7 +216,5 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
-    )
+    ),
 );
-
-

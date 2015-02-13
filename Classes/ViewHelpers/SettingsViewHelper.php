@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -61,5 +57,4 @@ class SettingsViewHelper extends AbstractViewHelper
         $jsCode .= $namespace . '.' . $name . '=' . json_encode($settings);
         $this->pageRenderer->addJsInlineCode('Written by ' . get_class($this) . ' at ' . microtime(), $jsCode);
     }
-
 }

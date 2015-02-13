@@ -3,11 +3,9 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use GeneralUtility;
 use Ecodev\Newsletter\Tools;
-
-
+use GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -167,7 +165,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Array or mysql result containing raw data for recipient list. Kinf of cache in memory.
      * @var array
      */
-    var $data = null;
+    protected $data = null;
 
     /**
      * Initializing method to prepare for reading recipients.
@@ -212,7 +210,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
      * @return boolean Status of the success of the removal.
      */
-    function registerBounce($email, $bounceLevel)
+    public function registerBounce($email, $bounceLevel)
     {
         return false;
     }
@@ -223,9 +221,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * @param string $email the email address of the recipient (who opened the mail)
      * @return	void
      */
-    function registerOpen($email)
+    public function registerOpen($email)
     {
-
     }
 
     /**
@@ -234,9 +231,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * @param string $email the email address of the recipient
      * @return	void
      */
-    function registerClick($email)
+    public function registerClick($email)
     {
-
     }
 
     /**
@@ -281,6 +277,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
         }
 
         $out = '<h4>' . $this->getTitle() . '</h4>' . $out;
+
         return $out;
     }
 
@@ -310,5 +307,4 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
                 }
         }
     }
-
 }

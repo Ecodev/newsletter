@@ -8,7 +8,7 @@
 * https://github.com/t3elmar/Ext
 *********************************************************************/
 
-$EM_CONF[$_EXTKEY] = array (
+$EM_CONF[$_EXTKEY] = array(
   'title' => 'Newsletter',
   'description' => 'Send any pages as Newsletter and provide statistics on opened emails and clicked links.',
   'category' => 'module',
@@ -28,12 +28,10 @@ $EM_CONF[$_EXTKEY] = array (
   'author' => 'Ecodev',
   'author_email' => 'contact@ecodev.ch',
   'author_company' => 'Ecodev',
-  'CGLcompliance' => NULL,
-  'CGLcompliance_note' => NULL,
-  'constraints' =>
-  array (
-    'depends' =>
-    array (
+  'CGLcompliance' => null,
+  'CGLcompliance_note' => null,
+  'constraints' => array(
+    'depends' => array(
       'cms' => '',
       'extbase' => '',
       'fluid' => '',
@@ -42,12 +40,9 @@ $EM_CONF[$_EXTKEY] = array (
       'scheduler' => '1.1.0',
     ),
     'conflicts' => '',
-    'suggests' =>
-    array (
+    'suggests' => array(
     ),
   ),
   'user' => 'acrivelli',
   'comment' => 'Minor fix to ensure that test button is always visible. See https://forge.typo3.org/news/758 for important announcement.',
 );
-
-?>

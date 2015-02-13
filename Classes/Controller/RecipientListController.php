@@ -2,8 +2,8 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use FlashMessage;
 use GeneralUtility;
 
@@ -73,8 +73,8 @@ class RecipientListController extends ExtDirectActionController
         $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
         $this->view->setConfiguration(array(
             'data' => array(
-                '_descendAll' => self::resolveJsonViewConfiguration()
-            )
+                '_descendAll' => self::resolveJsonViewConfiguration(),
+            ),
         ));
 
         $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
@@ -151,14 +151,15 @@ class RecipientListController extends ExtDirectActionController
         $recipientList = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
         if (\TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
             $this->response->setStatus(401);
+
             return 'not authorized !';
         }
 
         $title = $recipientList->getTitle() . '-' . $recipientList->getUid();
 
-        $this->response->setHeader('Content-Type', 'text/' . $format, TRUE);
-        $this->response->setHeader('Content-Description', 'File transfer', TRUE);
-        $this->response->setHeader('Content-Disposition', 'attachment; filename="' . $title . '.' . $format . '"', TRUE);
+        $this->response->setHeader('Content-Type', 'text/' . $format, true);
+        $this->response->setHeader('Content-Description', 'File transfer', true);
+        $this->response->setHeader('Content-Disposition', 'attachment; filename="' . $title . '.' . $format . '"', true);
 
         $recipients = array();
         while ($recipient = $recipientList->getRecipient()) {
@@ -176,18 +177,17 @@ class RecipientListController extends ExtDirectActionController
      *
      * @return array
      */
-    static public function resolveJsonViewConfiguration()
+    public static function resolveJsonViewConfiguration()
     {
         return array(
-            '_exposeObjectIdentifier' => TRUE,
+            '_exposeObjectIdentifier' => true,
             '_only' => array(
                 'title',
                 'plainOnly',
                 'lang',
                 'type',
                 'count',
-            )
+            ),
         );
     }
-
 }

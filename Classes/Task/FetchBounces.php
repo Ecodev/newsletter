@@ -3,10 +3,8 @@
 
 namespace Ecodev\Newsletter\Task;
 
-use tx_scheduler_Task;
 use Ecodev\Newsletter\BounceHandler;
-
-
+use tx_scheduler_Task;
 
 /* * *************************************************************
  *  Copyright notice
@@ -47,10 +45,8 @@ class FetchBounces extends tx_scheduler_Task
      */
     public function execute()
     {
-
         BounceHandler::fetchBouncedEmails();
 
-        return TRUE;
+        return true;
     }
-
 }

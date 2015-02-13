@@ -3,10 +3,7 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 use ExtensionManagementUtility;
-
-
 
 /**
  * Make localization files available in JavaScript
@@ -25,11 +22,11 @@ class LocalizationViewHelper extends AbstractViewHelper
      * @param string $pathInsideExt the path to the file relative to the ext-folder
      * @return void
      */
-    public function render($name = 'locallang.xlf', $extKey = NULL, $pathInsideExt = 'Resources/Private/Language/')
+    public function render($name = 'locallang.xlf', $extKey = null, $pathInsideExt = 'Resources/Private/Language/')
     {
         $names = explode(',', $name);
 
-        if ($extKey == NULL) {
+        if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
@@ -60,10 +57,11 @@ class LocalizationViewHelper extends AbstractViewHelper
 
         // Language inclusion
         $LANG->includeLLFile($filePath);
-        if (!isset($LOCAL_LANG[$LANG->lang]) || empty($LOCAL_LANG[$LANG->lang]))
+        if (!isset($LOCAL_LANG[$LANG->lang]) || empty($LOCAL_LANG[$LANG->lang])) {
             $lang = 'default';
-        else
+        } else {
             $lang = $LANG->lang;
+        }
 
         $result = array();
         foreach ($LOCAL_LANG[$lang] as $key => $value) {
@@ -76,5 +74,4 @@ class LocalizationViewHelper extends AbstractViewHelper
 
         return $result;
     }
-
 }

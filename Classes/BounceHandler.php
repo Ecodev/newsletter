@@ -3,12 +3,9 @@
 
 namespace Ecodev\Newsletter;
 
-use Ecodev\Newsletter\Tools;
+use DateTime;
 use Exception;
 use GeneralUtility;
-use DateTime;
-
-
 
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
@@ -149,7 +146,7 @@ class BounceHandler
      * Constructor for bounce handler
      * @param string $mailsource
      */
-    function __construct($mailsource = '')
+    public function __construct($mailsource = '')
     {
         $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
         $this->analyze($mailsource);
@@ -224,6 +221,7 @@ class BounceHandler
         // If couldn't find the original email we cannot do anything
         if (!$this->email) {
             Tools::log("Bounced email found but cannot find corresponding record in database. Skipped.", 1);
+
             return;
         }
 
@@ -239,5 +237,4 @@ class BounceHandler
 
         Tools::log("Bounced email found with bounce level " . $this->bounceLevel);
     }
-
 }

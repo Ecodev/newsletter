@@ -37,5 +37,4 @@ class EmailTca
 
         return $result;
     }
-
 }

@@ -3,10 +3,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList;
 use Ecodev\Newsletter\BounceHandler;
-
-
+use Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
  * This is the basic SQL related newsletter target. Methods implemented with DB calls using SQL query defined by end-user.
@@ -130,7 +128,7 @@ class Sql extends RecipientList
         return $this->sqlRegisterClick;
     }
 
-    function init()
+    public function init()
     {
         $sql = trim($this->getSqlStatement());
 
@@ -148,7 +146,7 @@ class Sql extends RecipientList
      *
      * @return	array	Recipient with user data.
      */
-    function getRecipient()
+    public function getRecipient()
     {
         $r = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($this->data);
         if (is_array($r)) {
@@ -166,12 +164,12 @@ class Sql extends RecipientList
         }
     }
 
-    function getCount()
+    public function getCount()
     {
         return $GLOBALS['TYPO3_DB']->sql_num_rows($this->data);
     }
 
-    function getError()
+    public function getError()
     {
         return $GLOBALS['TYPO3_DB']->sql_error($this->data);
     }
@@ -184,7 +182,7 @@ class Sql extends RecipientList
      * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
      * @return boolean Status of the success of the removal.
      */
-    function registerBounce($email, $bounceLevel)
+    public function registerBounce($email, $bounceLevel)
     {
         global $TYPO3_DB;
 
@@ -204,6 +202,7 @@ class Sql extends RecipientList
 
         if ($sql) {
             $TYPO3_DB->sql_query($sql);
+
             return $TYPO3_DB->sql_affected_rows();
         } else {
             return false;
@@ -217,7 +216,7 @@ class Sql extends RecipientList
      * @param string $email the email address of the recipient (who opened the mail)
      * @return	void
      */
-    function registerOpen($email)
+    public function registerOpen($email)
     {
         global $TYPO3_DB;
 
@@ -225,6 +224,7 @@ class Sql extends RecipientList
 
         if ($sql) {
             $TYPO3_DB->sql_query($sql);
+
             return $TYPO3_DB->sql_affected_rows();
         } else {
             return false;
@@ -238,7 +238,7 @@ class Sql extends RecipientList
      * @param string $email the email address of the recipient
      * @return	void
      */
-    function registerClick($email)
+    public function registerClick($email)
     {
         global $TYPO3_DB;
 
@@ -246,10 +246,10 @@ class Sql extends RecipientList
 
         if ($sql) {
             $TYPO3_DB->sql_query($sql);
+
             return $TYPO3_DB->sql_affected_rows();
         } else {
             return false;
         }
     }
-
 }

@@ -3,14 +3,12 @@
 
 namespace Ecodev\Newsletter\MVC\Controller;
 
-use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
-use \TYPO3\CMS\Extbase\Validation\PropertyError;
-use Ecodev\Newsletter\MVC\View\JsonView;
 use AbstractMessage;
+use Ecodev\Newsletter\MVC\View\JsonView;
 use GeneralUtility;
-
-
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Validation\PropertyError;
 
 /* * *************************************************************
  *  Copyright notice
@@ -118,7 +116,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @see \TYPO3\CMS\Core\Messaging\FlashMessage
      * @api
      */
-    public function addFlashMessage($messageBody, $messageTitle = '', $severity = \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, $storeInSession = TRUE)
+    public function addFlashMessage($messageBody, $messageTitle = '', $severity = \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, $storeInSession = true)
     {
         if (!is_string($messageBody)) {
             throw new \InvalidArgumentException('The message body must be of type string, "' . gettype($messageBody) . '" given.', 1243258395);
@@ -129,5 +127,4 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         );
         $this->controllerContext->getFlashMessageQueue()->enqueue($flashMessage);
     }
-
 }

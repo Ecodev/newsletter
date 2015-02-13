@@ -3,11 +3,8 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
-use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
-use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-
-
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /* * *************************************************************
  *  Copyright notice
@@ -58,8 +55,9 @@ class NewsletterRepository extends AbstractRepository
 
     public function findAllByPid($pid)
     {
-        if ($pid < 1)
+        if ($pid < 1) {
             return $this->findAll();
+        }
 
         $query = $this->createQuery();
         $query->matching($query->equals('pid', $pid));
@@ -145,14 +143,18 @@ class NewsletterRepository extends AbstractRepository
 
         // Find out what the best grouping step is according to number of states
         $stateCount = count($stateDifferences);
-        if ($stateCount > 5000)
+        if ($stateCount > 5000) {
             $groupingTimestep = 15 * 60; // 15 minutes
-        elseif ($stateCount > 500)
+        }
+        elseif ($stateCount > 500) {
             $groupingTimestep = 5 * 60; // 5 minutes
-        elseif ($stateCount > 50)
+        }
+        elseif ($stateCount > 50) {
             $groupingTimestep = 1 * 60; // 1 minutes
-        else
+        }
+        else {
             $groupingTimestep = 0; // no grouping at all
+        }
 
         $states = array($previousState);
         ksort($stateDifferences);
@@ -172,10 +174,11 @@ class NewsletterRepository extends AbstractRepository
             }
 
             // Compute percentage for link states
-            if ($newState['linkCount'] && $newState['emailCount'])
+            if ($newState['linkCount'] && $newState['emailCount']) {
                 $newState['linkOpenedPercentage'] = $newState['linkOpenedCount'] / ($newState['linkCount'] * $newState['emailCount']) * 100;
-            else
+            } else {
                 $newState['linkOpenedPercentage'] = 0;
+            }
 
             // Insert the state only if grouping allows it
             if ($time >= $minimumTimeToInsert) {
@@ -217,18 +220,20 @@ class NewsletterRepository extends AbstractRepository
         /** @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
         global $TYPO3_DB;
 
-        $rs = $TYPO3_DB->exec_SELECTquery(join(', ', array_keys($stateConfiguration)), $from, $where);
+        $rs = $TYPO3_DB->exec_SELECTquery(implode(', ', array_keys($stateConfiguration)), $from, $where);
         $count = 0;
         while ($email = $TYPO3_DB->sql_fetch_assoc($rs)) {
             foreach ($stateConfiguration as $stateKey => $stateConf) {
                 $time = $email[$stateKey];
                 if ($time) {
-                    if (!isset($stateDifferences[$time]))
+                    if (!isset($stateDifferences[$time])) {
                         $stateDifferences[$time] = $default;
+                    }
 
                     $stateDifferences[$time][$stateConf['increment']] ++;
-                    if (isset($stateConf['decrement']))
+                    if (isset($stateConf['decrement'])) {
                         $stateDifferences[$time][$stateConf['decrement']] --;
+                    }
                 }
             }
             $count++;
@@ -237,5 +242,4 @@ class NewsletterRepository extends AbstractRepository
 
         return $count;
     }
-
 }

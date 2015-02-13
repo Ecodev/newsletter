@@ -3,17 +3,14 @@
 
 namespace Ecodev\Newsletter;
 
-use ExtensionManagementUtility;
-use Ecodev\Newsletter\Domain\Model\Newsletter;
-use Ecodev\Newsletter\Mailer;
-use GeneralUtility;
-use Ecodev\Newsletter\Tools as EcodevNewsletterTools;
 use DateTime;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Tools as EcodevNewsletterTools;
+use ExtensionManagementUtility;
+use GeneralUtility;
 use tslib_fe;
 use TYPO3;
-use \TYPO3\CMS\Extbase\Core\Bootstrap;
-
-
+use TYPO3\CMS\Extbase\Core\Bootstrap;
 
 /* * *************************************************************
  *  Copyright notice
@@ -38,7 +35,7 @@ use \TYPO3\CMS\Extbase\Core\Bootstrap;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/Classes/Mailer.php');
+require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/Classes/Mailer.php';
 
 /**
  * Toolbox for newsletter and dependant extensions.
@@ -118,7 +115,7 @@ abstract class Tools
      * Create the spool for all newsletters who need it
      * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
      */
-    static public function createAllSpool()
+    public static function createAllSpool()
     {
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
@@ -137,13 +134,14 @@ abstract class Tools
      * @param   integer      Actual begin time.
      * @return  void
      */
-    static public function createSpool(Newsletter $newsletter)
+    public static function createSpool(Newsletter $newsletter)
     {
         global $TYPO3_DB;
 
         // If newsletter is locked because spooling now, or already spooled, then skip
-        if ($newsletter->getBeginTime())
+        if ($newsletter->getBeginTime()) {
             return;
+        }
 
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
@@ -197,7 +195,7 @@ abstract class Tools
         $rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
 
         list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
-        if ($num_records <> 0) {
+        if ($num_records != 0) {
             return;
         }
 
@@ -228,10 +226,9 @@ abstract class Tools
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return    void
      */
-    static public function runSpoolOne(Newsletter $newsletter)
+    public static function runSpoolOne(Newsletter $newsletter)
     {
         global $TYPO3_DB;
-
 
         /* Do we any limit to this session? */
         if ($mails_per_round = EcodevNewsletterTools::confParam('mails_per_round')) {
@@ -323,7 +320,7 @@ abstract class Tools
         // If we are in Backend we need to simulate minimal TSFE
         if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof tslib_fe)) {
             if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker;
+                $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker();
                 $GLOBALS['TT']->start();
             }
             $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_fe');
@@ -359,8 +356,9 @@ abstract class Tools
      */
     public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p')
     {
-        if (!self::$uriBuilder)
+        if (!self::$uriBuilder) {
             self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
+        }
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
 
@@ -370,14 +368,12 @@ abstract class Tools
 
         $arguments = array($pluginNamespace => $controllerArguments);
 
-
         self::$uriBuilder
                 ->reset()
-                ->setUseCacheHash(FALSE)
-                ->setCreateAbsoluteUri(TRUE)
+                ->setUseCacheHash(false)
+                ->setCreateAbsoluteUri(true)
                 ->setArguments($arguments);
 
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
-
 }

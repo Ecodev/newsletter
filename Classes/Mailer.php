@@ -3,16 +3,13 @@
 
 namespace Ecodev\Newsletter;
 
+use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-use ExtensionManagementUtility;
 use Exception;
+use ExtensionManagementUtility;
+use GeneralUtility;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
-use Ecodev\Newsletter\Domain\Model\Email;
-use Ecodev\Newsletter\Tools;
-use GeneralUtility;
-
-
 
 /* * *************************************************************
  *  Copyright notice
@@ -37,7 +34,7 @@ use GeneralUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once(PATH_typo3 . 'contrib/swiftmailer/swift_required.php');
+require_once PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
 
 /**
  * This is the holy inner core of newsletter.
@@ -94,7 +91,7 @@ class Mailer
     {
         $plainConverter = $this->newsletter->getPlainConverterInstance();
         $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->domain);
-        
+
         return $plainText;
     }
 
@@ -403,11 +400,13 @@ class Mailer
     {
         $this->resetMarkers();
 
-        if ($this->newsletter->getInjectOpenSpy())
+        if ($this->newsletter->getInjectOpenSpy()) {
             $this->injectOpenSpy($email);
+        }
 
-        if ($this->newsletter->getInjectLinksSpy())
+        if ($this->newsletter->getInjectLinksSpy()) {
             $this->injectLinksSpy($email, $isPreview);
+        }
 
         // We substitute markers last because we don't want to spy each links to view/unsubscribe
         // (created via markers) for each recipient. Only the generic marker is enough.
@@ -440,8 +439,7 @@ class Mailer
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
         $message->setTo($email->getRecipientAddress())
                 ->setFrom(array($this->senderEmail => $this->senderName))
-                ->setSubject($this->title)
-        ;
+                ->setSubject($this->title);
 
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);
@@ -475,5 +473,4 @@ class Mailer
 
         $message->send();
     }
-
 }

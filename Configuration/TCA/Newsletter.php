@@ -21,14 +21,14 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
-            )
+            ),
         ),
         'planned_time' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.planned_time',
             'config' => array(
                 'type' => 'input',
                 'size' => 12,
-                'eval' => 'datetime,required'
+                'eval' => 'datetime,required',
             ),
         ),
         'begin_time' => array(
@@ -83,7 +83,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.is_test',
             'config' => array(
                 'type' => 'check',
-                'default' => 0
+                'default' => 0,
             ),
         ),
         'attachments' => array(
@@ -105,7 +105,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ),
         ),
         'sender_email' => array(
@@ -113,21 +113,21 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ),
         ),
         'inject_open_spy' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.inject_open_spy',
             'config' => array(
                 'type' => 'check',
-                'default' => 0
+                'default' => 0,
             ),
         ),
         'inject_links_spy' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.inject_links_spy',
             'config' => array(
                 'type' => 'check',
-                'default' => 0
+                'default' => 0,
             ),
         ),
         'bounce_account' => array(

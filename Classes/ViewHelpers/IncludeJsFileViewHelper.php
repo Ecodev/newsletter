@@ -3,10 +3,7 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 use ExtensionManagementUtility;
-
-
 
 /* * *************************************************************
  *  Copyright notice
@@ -59,9 +56,9 @@ class IncludeJsFileViewHelper extends AbstractViewHelper
      * @param string $pathInsideExt the path to the file relative to the ext-folder
      * @return string the link
      */
-    public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/')
+    public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/')
     {
-        if ($extKey == NULL) {
+        if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         if (TYPO3_MODE === 'FE') {
@@ -72,5 +69,4 @@ class IncludeJsFileViewHelper extends AbstractViewHelper
         }
         $this->pageRenderer->addJsFile($extRelPath . $pathInsideExt . $name);
     }
-
 }

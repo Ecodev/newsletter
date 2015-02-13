@@ -21,7 +21,7 @@ $TCA['tx_newsletter_domain_model_link'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
-            )
+            ),
         ),
         'url' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.url',
@@ -53,7 +53,7 @@ $TCA['tx_newsletter_domain_model_link'] = array(
                     'collapse' => 0,
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ),
             ),
         ),

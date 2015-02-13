@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql;
-
-
-
 /**
  * Recipient List using Frontend User stored on a given pages
  *
@@ -53,7 +49,7 @@ class FePages extends GentleSql
         return 'fe_users';
     }
 
-    function init()
+    public function init()
     {
         $config = explode(',', $this->getFePages());
         $config[] = -1;
@@ -71,5 +67,4 @@ class FePages extends GentleSql
 				AND fe_users.deleted = 0
 				AND tx_newsletter_bounce < 10");
     }
-
 }

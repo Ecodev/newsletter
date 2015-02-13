@@ -3,9 +3,7 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-
-
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -54,14 +52,14 @@ class Request
      *
      * @var boolean
      */
-    protected $formPost = FALSE;
+    protected $formPost = false;
 
     /**
      * True if this request is containing a file upload
      *
      * @var boolean
      */
-    protected $fileUpload = FALSE;
+    protected $fileUpload = false;
 
     /**
      * Injects the ObjectManager
@@ -138,7 +136,6 @@ class Request
      */
     public function setFileUpload($fileUpload)
     {
-        $this->fileUpload = $fileUpload ? TRUE : FALSE;
+        $this->fileUpload = $fileUpload ? true : false;
     }
-
 }

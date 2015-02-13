@@ -3,9 +3,7 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use \TYPO3\CMS\Extbase\Mvc\Web\Response;
-
-
+use TYPO3\CMS\Extbase\Mvc\Web\Response;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
@@ -48,7 +46,7 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
      *
      * @var boolean
      */
-    protected $success = TRUE;
+    protected $success = true;
 
     /**
      * Setter for the transaction result.
@@ -91,5 +89,4 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
     {
         return $this->success;
     }
-
 }

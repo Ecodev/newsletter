@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
-use Ecodev\Newsletter\Domain\Repository\AbstractRepository;
-
-
-
 /* * *************************************************************
  *  Copyright notice
  *
@@ -53,5 +49,4 @@ class BounceAccountRepository extends AbstractRepository
 
         return $bounceAccount;
     }
-
 }

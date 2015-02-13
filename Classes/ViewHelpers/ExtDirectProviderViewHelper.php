@@ -3,10 +3,7 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 use GeneralUtility;
-
-
 
 /* * *************************************************************
  *  Copyright notice
@@ -75,11 +72,9 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.TYPO3.app', $routeUrl = NULL, $cache = TRUE
-    )
-    {
-
-        if ($routeUrl === NULL) {
+    public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.TYPO3.app', $routeUrl = null, $cache = true
+    ) {
+        if ($routeUrl === null) {
             $routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Ecodev\\Newsletter\\ExtDirectRequest=1';
         }
 
@@ -95,7 +90,6 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
         $jsCode .= ";\n";
         $jsCode .= 'Ext.Direct.addProvider(' . $descriptor . ');' . "\n";
         // add the output to the pageRenderer
-        $this->pageRenderer->addExtOnReadyCode($jsCode, TRUE);
+        $this->pageRenderer->addExtOnReadyCode($jsCode, true);
     }
-
 }

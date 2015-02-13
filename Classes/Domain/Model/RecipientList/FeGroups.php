@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql;
-
-
-
 /**
  * Recipient List using Frontend Groups
  *
@@ -53,12 +49,11 @@ class FeGroups extends GentleSql
         return 'fe_users';
     }
 
-    function init()
+    public function init()
     {
         $groups = explode(',', $this->getFeGroups());
         $groups[] = -1;
         $groups = array_filter($groups);
-
 
         $this->data = $GLOBALS['TYPO3_DB']->sql_query(
                 "SELECT DISTINCT fe_users.uid,name,address,telephone,fax,email,username,fe_users.title,zip,city,country,www,company,fe_groups.title as group_title
@@ -72,5 +67,4 @@ class FeGroups extends GentleSql
 				AND fe_users.deleted = 0
 				AND tx_newsletter_bounce < 10");
     }
-
 }

@@ -3,11 +3,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 use ExtensionManagementUtility;
 use GeneralUtility;
-
-
 
 /* * *************************************************************
  *  Copyright notice
@@ -61,9 +58,9 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
      * @param boolean $recursive
      * @return void the files are added to the pagerenderer instance that renders them in the head of the markup
      */
-    public function render($name = NULL, $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/', $recursive = FALSE)
+    public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/', $recursive = false)
     {
-        if ($extKey == NULL) {
+        if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
@@ -74,7 +71,7 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
         }
         $absFolderPath = $extPath . $pathInsideExt . $name;
         // $files will include all files relative to $pathInsideExt
-        if ($recursive === FALSE) {
+        if ($recursive === false) {
             $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getFilesInDir($absFolderPath);
             foreach ($files as $hash => $filename) {
                 $files[$hash] = $name . $filename;
@@ -89,5 +86,4 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
             $this->pageRenderer->addJsFile($extRelPath . $pathInsideExt . $name);
         }
     }
-
 }

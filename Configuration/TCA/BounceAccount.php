@@ -21,14 +21,14 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
-            )
+            ),
         ),
         'email' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.email',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ),
         ),
         'server' => array(
@@ -36,7 +36,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ),
         ),
         'protocol' => array(
@@ -56,7 +56,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ),
         ),
         'password' => array(
@@ -64,7 +64,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'password'
+                'eval' => 'password',
             ),
         ),
     ),

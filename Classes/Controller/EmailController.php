@@ -3,17 +3,15 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
-use Ecodev\Newsletter\Domain\Repository\EmailRepository;
-use FlashMessage;
-use ExtensionManagementUtility;
-use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\BounceHandler;
 use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use Ecodev\Newsletter\Tools;
+use ExtensionManagementUtility;
+use FlashMessage;
 use GeneralUtility;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-
-
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -80,12 +78,11 @@ class EmailController extends ExtDirectActionController
         $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
         $this->view->setConfiguration(array(
             'data' => array(
-                '_descendAll' => self::resolveJsonViewConfiguration()
-            )
+                '_descendAll' => self::resolveJsonViewConfiguration(),
+            ),
         ));
 
         $this->addFlashMessage('Loaded all Emails from Server side.', 'Emails loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
-        ;
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
         $this->view->assign('data', $emails);
         $this->view->assign('success', true);
@@ -98,7 +95,6 @@ class EmailController extends ExtDirectActionController
      */
     public function openedAction()
     {
-
         $this->emailRepository->registerOpen(@$_REQUEST['c']);
 
         // Send one transparent pixel, so the end-user sees nothing at all
@@ -163,12 +159,17 @@ class EmailController extends ExtDirectActionController
             // Override some configuration
             // so we can customise the preview according to selected settings via JS,
             // and we can also prevent fake statistics when admin 'view' a sent email
-            if (isset($_GET['plainConverter']))
+            if (isset($_GET['plainConverter'])) {
                 $newsletter->setPlainConverter($_GET['plainConverter']);
-            if (isset($_GET['injectOpenSpy']))
+            }
+
+            if (isset($_GET['injectOpenSpy'])) {
                 $newsletter->setInjectOpenSpy($_GET['injectOpenSpy']);
-            if (isset($_GET['injectLinksSpy']))
+            }
+
+            if (isset($_GET['injectLinksSpy'])) {
                 $newsletter->setInjectLinksSpy($_GET['injectLinksSpy']);
+            }
 
             $mailer = Tools::getConfiguredMailer($newsletter, @$_GET['L']);
             $mailer->prepare($email, $isPreview);
@@ -190,7 +191,7 @@ class EmailController extends ExtDirectActionController
      */
     public function unsubscribeAction()
     {
-        $success = FALSE;
+        $success = false;
         $newsletter = null;
         $email = null;
         $recipientAddress = null;
@@ -200,7 +201,7 @@ class EmailController extends ExtDirectActionController
             $email = $this->emailRepository->findByAuthcode($_GET['c']);
             if ($email) {
                 // Mark the email as requested to be unsubscribed
-                $email->setUnsubscribed(TRUE);
+                $email->setUnsubscribed(true);
                 $this->emailRepository->update($email);
                 $recipientAddress = $email->getRecipientAddress();
 
@@ -208,7 +209,7 @@ class EmailController extends ExtDirectActionController
                 if ($newsletter) {
                     $recipientList = $newsletter->getRecipientList();
                     $recipientList->registerBounce($email->getRecipientAddress(), BounceHandler::NEWSLETTER_UNSUBSCRIBE);
-                    $success = TRUE;
+                    $success = true;
                     $this->notifyUnsubscribe($newsletter, $recipientList, $email);
                 }
             }
@@ -227,12 +228,10 @@ class EmailController extends ExtDirectActionController
      */
     protected function notifyUnsubscribe($newsletter, $recipientList, Email $email)
     {
-
         $notificationEmail = Tools::confParam('notification_email');
 
         // Use the page-owner as user
         if ($notificationEmail == 'user') {
-
             $rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email
 			FROM be_users
 			LEFT JOIN pages ON be_users.uid = pages.perms_userid
@@ -269,18 +268,17 @@ class EmailController extends ExtDirectActionController
      *
      * @return array
      */
-    static public function resolveJsonViewConfiguration()
+    public static function resolveJsonViewConfiguration()
     {
         return array(
-            '_exposeObjectIdentifier' => TRUE,
+            '_exposeObjectIdentifier' => true,
             '_only' => array('beginTime', 'endTime', 'authCode', 'bounceTime', 'openTime', 'recipientAddress', 'unsubscribed'),
             '_descend' => array(
                 'beginTime' => array(),
                 'endTime' => array(),
                 'openTime' => array(),
                 'bounceTime' => array(),
-            )
+            ),
         );
     }
-
 }

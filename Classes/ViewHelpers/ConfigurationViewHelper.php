@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
-
-
-
 /**
  * Makes an array of configuration available in JavaScript
  *
@@ -24,11 +20,9 @@ class ConfigurationViewHelper extends AbstractViewHelper
      */
     public function render(array $configuration)
     {
-
         $configuration = json_encode($configuration);
         $javascript = "Ext.ux.Ecodev.Newsletter.Configuration = $configuration;";
 
         $this->pageRenderer->addJsInlineCode("Ext.ux.Ecodev.Newsletter.Configuration", $javascript);
     }
-
 }

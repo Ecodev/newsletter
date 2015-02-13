@@ -3,11 +3,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
-use ExtensionManagementUtility;
 use Ecodev\Newsletter\Exception;
-
-
+use ExtensionManagementUtility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -60,9 +57,9 @@ class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper
      * @param string $pathInsideExt the path to the file relative to the ext-folder
      * @return void
      */
-    public function render($name = 'extOnReady.js', $extKey = NULL, $pathInsideExt = 'Resources/Public/JavaScript/')
+    public function render($name = 'extOnReady.js', $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/')
     {
-        if ($extKey == NULL) {
+        if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
@@ -77,5 +74,4 @@ class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper
 
         $this->pageRenderer->addExtOnReadyCode($fileContent);
     }
-
 }

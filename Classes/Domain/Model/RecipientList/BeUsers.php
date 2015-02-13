@@ -3,10 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql;
-
-
-
 /**
  * Recipient List using Backend Users
  *
@@ -53,7 +49,7 @@ class BeUsers extends GentleSql
         return 'be_users';
     }
 
-    function init()
+    public function init()
     {
         $config = explode(',', $this->getBeUsers());
         $config[] = -1;
@@ -66,5 +62,4 @@ class BeUsers extends GentleSql
 				AND disable = 0
 				AND tx_newsletter_bounce < 10");
     }
-
 }
