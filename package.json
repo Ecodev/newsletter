@@ -1,0 +1,11 @@
+{
+  "name": "Newsletter",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-composer": "^0.1.0",
+    "gulp-jscs": "^1.4.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-shell": "^0.3.0"
+  }
+}

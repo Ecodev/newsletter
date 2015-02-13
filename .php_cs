@@ -2,6 +2,10 @@
 
 $finder = Symfony\CS\Finder\DefaultFinder::create()
         ->exclude('3dparty')
+        ->exclude('Documentation')
+        ->exclude('Resources')
+        ->exclude('vendor')
+        ->exclude('node_modules')
         ->in(__DIR__);
 
 return Symfony\CS\Config\Config::create()

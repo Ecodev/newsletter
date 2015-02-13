@@ -1,0 +1,25 @@
+{
+    "predef": [  // Custom globals.
+        "Ext",
+        "nv",
+        "d3"
+    ],
+    // On-line example https://gist.github.com/connor/1597131
+    "bitwise": true,    // Prohibit bitwise operators (&, |, ^, etc.).
+    "browser": true,    // Standard browser globals e.g. `window`, `document`.
+    "camelcase": false,
+    "curly": true,      // Require {} for every new block or scope.
+    "evil": true,       // Allow eval() for custom template of <gims-select>
+    "forin": false,     // Tolerate `for in` loops without `hasOwnPrototype`.
+    "indent": 4,        // Specify indentation spacing
+    "immed": true,
+    "jquery": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,      // Prohibit use of `arguments.caller` and `arguments.callee`
+    "noempty": true,    // Prohibit use of empty blocks.
+    "nonew": true,      // Prohibit use of constructors for side-effects.
+    "strict": true,    // Require `use strict` pragma  in every file.
+    "undef": true,      // Require all non-global variables be declared before they are used.
+    "unused": true
+}

@@ -6,10 +6,7 @@ php:
   - 5.6
 
 before_script:
-  - travis_retry composer install --dev
+  - npm install -g gulp
+  - npm install
 
-script: ./vendor/bin/php-cs-fixer fix .
-
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover data/logs/tests/coverage-clover.xml
+script: gulp
