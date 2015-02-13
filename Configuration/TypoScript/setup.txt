@@ -10,12 +10,15 @@ module.tx_newsletter {
 }
 
 config.tx_extbase {
+
+    # Vendor should not be necessary because already declared with ExtensionUtility::configurePlugin(), but if not duplicated here, it doesn't work
+    vendorName = Ecodev
+
 	mvc {
 		requestHandlers {
 			Ecodev\Newsletter\MVC\ExtDirect\RequestHandler = Ecodev\Newsletter\MVC\ExtDirect\RequestHandler
 		}
 	}
-
 	persistence.classes {
 
 		# Defines all possibles subclasses of recipientList

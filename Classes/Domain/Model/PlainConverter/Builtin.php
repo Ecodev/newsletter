@@ -1,74 +1,27 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\PlainConverter;
 
-use ExtensionManagementUtility;
-use html2text;
 use Ecodev\Newsletter\Domain\Model\IPlainConverter;
 
-
-
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/class.html2text.inc');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/3dparty/Html2Text.php');
 
 /**
- * Convert HTML to plain text using builtin html2text tool
+ * Convert HTML to plain text using builtin Html2Text tool
  *
  * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Builtin extends html2text implements IPlainConverter
+class Builtin implements IPlainConverter
 {
-
-    private $links = array();
-
-    public function __construct()
-    {
-        /**
-         * Replace Unknown/unhandled entities regexp, with a stricter version: only replace if the unknown entities is made of either only aplha, or only digits
-         * This allows '&' in URL followed by inline CSS such as:
-         *   <a href="http://www.broken.com/">http://www.broken.com/?a=1&b=2</a><div style="border-top:1px solid #00579F;margin-top:10px;"></div>
-         */
-        $key = array_search('/&[^&;]+;/i', $this->search);
-        if ($key) {
-            $this->search[$key] = '/&([[:alpha:]]+|[[:digit:]]+);/i';
-        }
-    }
-
     public function getPlainText($content, $baseUrl)
     {
-        $this->set_base_url($baseUrl);
-        $this->set_html($content);
+        $converter = new \Html2Text\Html2Text($content, array(
+            'do_links' => 'table',
+        ));
+        $converter->setBaseUrl($baseUrl);
 
-        return $this->get_text();
-    }
-
-    function _convert()
-    {
-        $this->links = array();
-        return parent::_convert();
-    }
-
-    /**
-     * Override parent function to make links unique
-     * @see html2text::_build_link_list()
-     */
-    function _build_link_list($link, $display)
-    {
-        // If links already exists, return its existing reference
-        if (array_key_exists($link, $this->links)) {
-            return $display . ' [' . $this->links[$link] . ']';
-        }
-        // Otherwise call the parent and memorize returned reference
-        else {
-            $result = parent::_build_link_list($link, $display);
-
-            preg_match('/\[(\d+)\]$/', $result, $m);
-            $reference = $m[1];
-
-            $this->links[$link] = $reference;
-            return $result;
-        }
+        return $converter->getText();
     }
 
 }
