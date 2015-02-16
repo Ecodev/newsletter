@@ -55,7 +55,14 @@ class LynxTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     private function loadConfiguration()
     {
         $manager = new \TYPO3\CMS\Core\Configuration\ConfigurationManager();
-        $config = $manager->getLocalConfiguration();
+        $path = $manager->getLocalConfigurationFileLocation();
+
+        if (is_readable($path)) {
+            $config = $manager->getLocalConfiguration();
+        } else {
+            $config['EXT']['extConf']['newsletter'] = serialize(array('path_to_lynx' => '/usr/bin/lynx'));
+        }
+
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = $config['EXT']['extConf']['newsletter'];
     }
 

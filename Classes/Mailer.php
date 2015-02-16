@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter;
 
 use Ecodev\Newsletter\Domain\Model\Email;
@@ -34,7 +33,15 @@ use Swift_EmbeddedFile;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
+// For TYPO3 6.X or TYPO3 7.X
+$swift1 = PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
+$swift2 = PATH_typo3 . 'contrib/swiftmailer/lib/swift_required.php';
+
+if (is_readable($swift1)) {
+    require_once $swift1;
+} else {
+    require_once $swift2;
+}
 
 /**
  * This is the holy inner core of newsletter.
@@ -45,7 +52,6 @@ require_once PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
  */
 class Mailer
 {
-
     /**
      * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      */
