@@ -1,10 +1,6 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model;
-
-use GeneralUtility;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice
@@ -37,13 +33,12 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * url
      *
      * @var string $url
      */
-    protected $url;
+    protected $url = '';
 
     /**
      * newsletter
@@ -57,7 +52,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer $openedCount
      */
-    protected $openedCount;
+    protected $openedCount = 0;
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface

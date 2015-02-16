@@ -17,21 +17,21 @@ class CsvFile extends AbstractArray
      *
      * @var string $csvSeparator
      */
-    protected $csvSeparator;
+    protected $csvSeparator = ',';
 
     /**
      * csvFields
      *
      * @var string $csvFields
      */
-    protected $csvFields;
+    protected $csvFields = '';
 
     /**
      * csvFilename
      *
      * @var string $csvFilename
      */
-    protected $csvFilename;
+    protected $csvFilename = '';
 
     /**
      * Setter for csvSeparator
@@ -96,9 +96,18 @@ class CsvFile extends AbstractArray
         return $this->csvFilename;
     }
 
+    /**
+     * Return the path where CSV files are contained
+     * @return string
+     */
+    protected function getPathname()
+    {
+        return PATH_site . 'uploads/tx_newsletter';
+    }
+
     public function init()
     {
-        $this->loadCsvFromFile(PATH_site . 'uploads/tx_newsletter/' . $this->getCsvFilename());
+        $this->loadCsvFromFile($this->getPathname() . '/' . $this->getCsvFilename());
     }
 
     /**

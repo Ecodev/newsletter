@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
@@ -11,13 +10,12 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 class CsvList extends CsvFile
 {
-
     /**
      * csvValues
      *
      * @var string $csvValues
      */
-    protected $csvValues;
+    protected $csvValues = '';
 
     /**
      * Setter for csvValues

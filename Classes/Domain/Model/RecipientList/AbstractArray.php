@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 use Ecodev\Newsletter\Domain\Model\RecipientList;

@@ -17,7 +17,7 @@ class CsvUrl extends CsvFile
      *
      * @var string $csvUrl
      */
-    protected $csvUrl;
+    protected $csvUrl = '';
 
     /**
      * Setter for csvUrl

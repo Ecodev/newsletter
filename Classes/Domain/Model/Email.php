@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
@@ -37,7 +36,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * beginTime
      *
@@ -58,14 +56,14 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $recipientAddress
      * @validate NotEmpty
      */
-    protected $recipientAddress;
+    protected $recipientAddress = '';
 
     /**
      * recipientData
      *
      * @var string $recipientData
      */
-    protected $recipientData;
+    protected $recipientData = 'a:0:{}';
 
     /**
      * openeTime
@@ -94,7 +92,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var boolean $unsubscribed
      * @validate NotEmpty
      */
-    protected $unsubscribed;
+    protected $unsubscribed = false;
 
     /**
      * Setter for beginTime
@@ -187,7 +185,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getAuthCode()
     {
-        return md5($this->uid . $this->getRecipientAddress());
+        return md5($this->getUid() . $this->getRecipientAddress());
     }
 
     /**

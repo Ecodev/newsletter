@@ -21,28 +21,28 @@ class Sql extends RecipientList
      *
      * @var string $sqlStatement
      */
-    protected $sqlStatement;
+    protected $sqlStatement = '';
 
     /**
      * sqlRegisterBounce
      *
      * @var string $sqlRegisterBounce
      */
-    protected $sqlRegisterBounce;
+    protected $sqlRegisterBounce = '';
 
     /**
      * sqlRegisterOpen
      *
      * @var string $sqlRegisterOpen
      */
-    protected $sqlRegisterOpen;
+    protected $sqlRegisterOpen = '';
 
     /**
      * sqlRegisterClick
      *
      * @var string $sqlRegisterClick
      */
-    protected $sqlRegisterClick;
+    protected $sqlRegisterClick = '';
 
     /**
      * Setter for sqlStatement

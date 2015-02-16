@@ -43,35 +43,35 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $email
      * @validate NotEmpty
      */
-    protected $email;
+    protected $email = '';
 
     /**
      * server
      *
      * @var string $server
      */
-    protected $server;
+    protected $server = '';
 
     /**
      * protocol
      *
      * @var string $protocol
      */
-    protected $protocol;
+    protected $protocol = '';
 
     /**
      * username
      *
      * @var string $username
      */
-    protected $username;
+    protected $username = '';
 
     /**
      * password
      *
      * @var string $password
      */
-    protected $password;
+    protected $password = '';
 
     /**
      * Setter for email

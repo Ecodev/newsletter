@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\PlainConverter;
 
 use Ecodev\Newsletter\Domain\Model\IPlainConverter;
@@ -14,13 +13,23 @@ use Ecodev\Newsletter\Tools;
  */
 class Lynx implements IPlainConverter
 {
+    private function injectBaseUrl($content, $baseUrl)
+    {
+        if (strpos($content, '<base ') === false) {
+            $content = str_ireplace('<body', '<base href="' . $baseUrl . '"><body', $content);
+        }
+
+        return $content;
+    }
 
     public function getPlainText($content, $baseUrl)
     {
-        $tmpFile = tempnam(sys_get_temp_dir(), 'html');
-        file_put_contents($tmpFile, $content);
+        $tmpFile = tempnam(sys_get_temp_dir(), 'newsletter_');
+        $contentWithBase = $this->injectBaseUrl($content, $baseUrl);
 
-        $cmd = escapeshellcmd(Tools::confParam('path_to_lynx')) . ' -dump -stdin < ' . escapeshellarg($tmpFile);
+        file_put_contents($tmpFile, $contentWithBase);
+
+        $cmd = escapeshellcmd(Tools::confParam('path_to_lynx')) . ' -force_html -dump ' . escapeshellarg($tmpFile);
         exec($cmd, $output);
         unlink($tmpFile);
         $plainText = implode("\n", $output);

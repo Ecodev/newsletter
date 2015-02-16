@@ -163,6 +163,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->setPlannedTime(new DateTime());
         $this->setInjectOpenSpy(true);
         $this->setInjectLinksSpy(true);
+        $this->setIsTest(false);
     }
 
     /**

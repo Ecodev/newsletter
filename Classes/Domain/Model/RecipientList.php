@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model;
 
 use Ecodev\Newsletter\Tools;
@@ -38,34 +37,33 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * title
      *
      * @var string $title
      */
-    protected $title;
+    protected $title = '';
 
     /**
      * plainOnly
      *
      * @var boolean $plainOnly
      */
-    protected $plainOnly;
+    protected $plainOnly = false;
 
     /**
      * lang
      *
      * @var string $lang
      */
-    protected $lang;
+    protected $lang = '';
 
     /**
      * type
      *
      * @var string $type
      */
-    protected $type;
+    protected $type = '';
 
     /**
      * Setter for title
@@ -288,7 +286,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * normal => field which can be used within newsletter
      * @param string $fieldname
      */
-    private static function getFieldTitle($fieldname)
+    private function getFieldTitle($fieldname)
     {
         switch ($fieldname) {
             case 'email':
