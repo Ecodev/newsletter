@@ -22,3 +22,5 @@ What's worse
 -  Only one recipient list per newsletter (workaround: send multiple
    newsletter or UNION via raw sql)
 -  Removed load-balancing to send email (see https://github.com/Ecodev/newsletter/issues/4)
+
+.. _SwiftMailer: http://swiftmailer.org/
