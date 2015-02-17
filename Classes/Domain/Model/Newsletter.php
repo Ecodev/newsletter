@@ -886,7 +886,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             foreach ($urls[1] as $i => $url) {
                 // If this is already an absolute link, dont replace it
                 if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
-                    $replace_url = str_replace($url, $absoluteDomain . $url, $urls[0][$i]);
+                    $replace_url = str_replace($url, $absoluteDomain . ltrim($url, '/'), $urls[0][$i]);
                     $content = str_replace($urls[0][$i], $replace_url, $content);
                 }
             }
