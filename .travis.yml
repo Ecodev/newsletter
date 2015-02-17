@@ -27,6 +27,10 @@ before_script:
   - composer install
   - mkdir -p uploads typo3temp typo3conf/ext
   - mv newsletter typo3conf/ext/
+  - export typo3DatabaseName="typo3";
+  - export typo3DatabaseHost="localhost";
+  - export typo3DatabaseUsername="root";
+  - export typo3DatabasePassword="";
 
 script:
   - cd typo3conf/ext/newsletter && gulp && cd ../../../
