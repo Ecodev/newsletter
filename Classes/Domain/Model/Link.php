@@ -5,7 +5,7 @@ namespace Ecodev\Newsletter\Domain\Model;
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2014
+ *  (c) 2015
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
