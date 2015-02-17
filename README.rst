@@ -1,10 +1,13 @@
-Newsletter |badge_travis| |badge_scrutinizer| |badge_gitter|
-============================================================
+Newsletter |badge_travis| |badge_scrutinizer| |badge_coverage| |badge_gitter|
+=============================================================================
 
 .. |badge_travis| image:: https://travis-ci.org/Ecodev/gims.svg?branch=master
     :target: https://travis-ci.org/Ecodev/gims
 
 .. |badge_scrutinizer| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
+
+.. |badge_coverage| https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/coverage.png?b=develop
    :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
 
 .. |badge_gitter| image:: https://badges.gitter.im/Join%20Chat.svg
