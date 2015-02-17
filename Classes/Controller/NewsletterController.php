@@ -11,7 +11,6 @@ use Ecodev\Newsletter\Tools;
 use Exception;
 use FlashMessage;
 use GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -310,5 +309,4 @@ class NewsletterController extends ExtDirectActionController
             ),
         );
     }
-
 }

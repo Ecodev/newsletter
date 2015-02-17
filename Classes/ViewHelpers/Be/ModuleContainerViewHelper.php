@@ -36,8 +36,8 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  * = Examples =
  *
  * <code title="Simple">
- * {namespace ext=Ecodev\Newsletter\ViewHelpers}
- * <ext:be.container>your additional viewhelpers inside</ext:be.container>
+ * {namespace newsletter=Ecodev\Newsletter\ViewHelpers}
+ * <newsletter:be.container>your additional viewhelpers inside</ext:be.container>
  * </code>
  *
  * Output:
@@ -45,8 +45,8 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  * Default backend CSS styles and JavaScript will be included
  *
  * <code title="All options">
- * {namespace ext=Ecodev\Newsletter\ViewHelpers}
- * <ext:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
+ * {namespace newsletter=Ecodev\Newsletter\ViewHelpers}
+ * <newsletter:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
  * </code>
  *
  * @category    ViewHelpers

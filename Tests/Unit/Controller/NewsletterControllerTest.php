@@ -94,5 +94,4 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $this->subject->createAction($newsletter);
     }
-
 }

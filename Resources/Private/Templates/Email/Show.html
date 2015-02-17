@@ -1,7 +1,7 @@
 {namespace newsletter=Ecodev\Newsletter\ViewHelpers}
 <f:if condition="{content}">
     <f:then>
-        <newsletter:raw>{content}</newsletter:raw>
+        <f:format.raw>{content}</f:format.raw>
     </f:then>
     <f:else>
         <p><f:translate key="view_newsletter_not_found" /></p>
