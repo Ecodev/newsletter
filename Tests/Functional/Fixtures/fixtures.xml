@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_newsletter_domain_model_newsletter>
+        <uid>10</uid>
+        <pid>2</pid>
+        <sender_name>Sender Name</sender_name>
+        <sender_email>sender@example.com</sender_email>
+    </tx_newsletter_domain_model_newsletter>
+
+    <tx_newsletter_domain_model_newsletter>
+        <uid>20</uid>
+        <pid>2</pid>
+        <sender_name>Sender Name 2</sender_name>
+        <sender_email>sender2@example.com</sender_email>
+        <planned_time>1423729000</planned_time>
+    </tx_newsletter_domain_model_newsletter>
+
+    <tx_newsletter_domain_model_newsletter>
+        <uid>30</uid>
+        <pid>3</pid>
+        <sender_name>Sender Name 3</sender_name>
+        <sender_email>sender3@example.com</sender_email>
+        <planned_time>1423729050</planned_time>
+        <begin_time>1423729051</begin_time>
+    </tx_newsletter_domain_model_newsletter>
+
+    <tx_newsletter_domain_model_email>
+        <newsletter>30</newsletter>
+        <uid>301</uid>
+        <pid>3</pid>
+        <begin_time>1423729052</begin_time>
+        <end_time>1423729053</end_time>
+        <open_time>1423729055</open_time>
+    </tx_newsletter_domain_model_email>
+
+    <tx_newsletter_domain_model_email>
+        <newsletter>30</newsletter>
+        <uid>302</uid>
+        <pid>3</pid>
+        <begin_time>1423729054</begin_time>
+    </tx_newsletter_domain_model_email>
+
+    <tx_newsletter_domain_model_link>
+        <newsletter>30</newsletter>
+        <uid>3001</uid>
+        <pid>3</pid>
+        <url>http://example.com/</url>
+    </tx_newsletter_domain_model_link>
+
+    <tx_newsletter_domain_model_link>
+        <newsletter>30</newsletter>
+        <uid>3002</uid>
+        <pid>3</pid>
+        <url>http://example.com/my-page</url>
+        <opened_count>1</opened_count>
+    </tx_newsletter_domain_model_link>
+
+    <tx_newsletter_domain_model_linkopened>
+        <link>3002</link>
+        <uid>30001</uid>
+        <email>301</email>
+        <open_time>1423729056</open_time>
+    </tx_newsletter_domain_model_linkopened>
+
+</dataset>

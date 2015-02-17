@@ -1,7 +1,7 @@
 tools:
     external_code_coverage:
         timeout: 3000  # Timeout in seconds
-        runs: 6        # Scrutinizer will wait for code coverage submissions for every TEST_GROUP declared in .travis.yml
+        runs: 12       # Scrutinizer will wait for code coverage submissions for every TYPO3_BRANCH declared in .travis.yml
     php_cpd: true
     php_pdepend: true
     php_changetracking: true

@@ -1,11 +1,11 @@
 <phpunit
-    bootstrap="../../../../../typo3/sysext/core/Build/UnitTestsBootstrap.php"
+    bootstrap="../../../../../typo3/sysext/core/Build/FunctionalTestsBootstrap.php"
     colors="true"
+    processIsolation="true"
 >
-
     <testsuites>
-        <testsuite name="EXT:newsletter unit tests">
-            <directory>../Unit/</directory>
+        <testsuite name="EXT:newsletter functional tests">
+            <directory>../Functional/</directory>
         </testsuite>
     </testsuites>
 

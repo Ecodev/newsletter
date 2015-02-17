@@ -30,10 +30,12 @@ before_script:
 
 script:
   - cd typo3conf/ext/newsletter && gulp && cd ../../../
-  - ./bin/phpunit --coverage-clover=unittest-coverage.clover --colors -c typo3conf/ext/newsletter/Tests/Build/UnitTests.xml
+  - ./bin/phpunit --coverage-clover=unit-tests-coverage.clover --colors -c typo3conf/ext/newsletter/Tests/Build/UnitTests.xml
+  - ./bin/phpunit --coverage-clover=functional-tests-coverage.clover --colors -c typo3conf/ext/newsletter/Tests/Build/FunctionalTests.xml
 
 after_script:
   - echo "Uploading code coverage results";
   - cp -R typo3conf/ext/newsletter/.git .
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover unittest-coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover unit-tests-coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover functional-tests-coverage.clover
