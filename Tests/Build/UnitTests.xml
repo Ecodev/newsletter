@@ -5,7 +5,7 @@
 
 	<testsuites>
 		<testsuite name="EXT:newsletter tests">
-			<directory>../Unit/Domain</directory>
+			<directory>../Unit/</directory>
 		</testsuite>
 
 	</testsuites>

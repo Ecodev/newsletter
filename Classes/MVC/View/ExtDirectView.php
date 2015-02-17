@@ -30,7 +30,7 @@ namespace Ecodev\Newsletter\MVC\View;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @scope prototype
  */
-class ExtDirectView extends JsonView
+class ExtDirectView extends \TYPO3\CMS\Extbase\Mvc\View\JsonView
 {
 
     /**

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Controller;
 
 use DateTime;
@@ -45,7 +44,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class NewsletterController extends ExtDirectActionController
 {
-
     /**
      * newsletterRepository
      *
@@ -125,7 +123,7 @@ class NewsletterController extends ExtDirectActionController
         $this->view->assign('total', $newsletters->count());
         $this->view->assign('data', $newsletters);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
+        $this->flushFlashMessages();
     }
 
     /**
@@ -155,7 +153,7 @@ class NewsletterController extends ExtDirectActionController
         $this->view->assign('total', 1);
         $this->view->assign('data', $newsletter);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
+        $this->flushFlashMessages();
     }
 
     /**
@@ -177,12 +175,12 @@ class NewsletterController extends ExtDirectActionController
 
         // If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
-            $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_maximum_recipients', 'newsletter', array($count, $limitTestRecipientCount)), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_maximum_recipients_title', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', array($count, $limitTestRecipientCount)), $this->translate('flashmessage_test_maximum_recipients_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $this->view->assign('success', false);
         }
         // If we attempt to create a newsletter which contains errors, abort and don't save in DB
         elseif (count($validatedContent['errors'])) {
-            $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_newsletter_invalid', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', $this->translate('flashmessage_newsletter_invalid'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $this->view->assign('success', false);
         } else {
             // If it's a test newsletter, it's planned to be sent right now
@@ -202,12 +200,12 @@ class NewsletterController extends ExtDirectActionController
                     Tools::createSpool($newNewsletter);
                     Tools::runSpoolOne($newNewsletter);
 
-                    $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_newsletter_sent', 'newsletter'), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_newsletter_sent_title', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+                    $this->addFlashMessage($this->translate('flashmessage_test_newsletter_sent'), $this->translate('flashmessage_test_newsletter_sent_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
                 } catch (Exception $exception) {
-                    $this->addFlashMessage($exception->getMessage(), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_test_newsletter_error', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+                    $this->addFlashMessage($exception->getMessage(), $this->translate('flashmessage_test_newsletter_error'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
                 }
             } else {
-                $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_newsletter_queued', 'newsletter'), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('flashmessage_newsletter_queued_title', 'newsletter'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+                $this->addFlashMessage($this->translate('flashmessage_newsletter_queued'), $this->translate('flashmessage_newsletter_queued_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
             }
         }
 
@@ -217,7 +215,7 @@ class NewsletterController extends ExtDirectActionController
         ));
 
         $this->view->assign('data', $newNewsletter);
-        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
+        $this->flushFlashMessages();
     }
 
     /**
@@ -307,9 +305,10 @@ class NewsletterController extends ExtDirectActionController
                     '_only' => array(
                         'errors',
                         'warnings',
-                        'infos', ),
+                        'infos',),
                 ),
             ),
         );
     }
+
 }

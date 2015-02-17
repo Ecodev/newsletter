@@ -1,7 +1,8 @@
 <?php
+
 namespace Ecodev\Newsletter\Tests\Unit\Controller;
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2015
@@ -22,7 +23,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * Test case for class Ecodev\Newsletter\Controller\NewsletterController.
@@ -30,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
  */
 class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-
     /**
      * @var \Ecodev\Newsletter\Controller\NewsletterController
      */
@@ -38,7 +38,7 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\NewsletterController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\NewsletterController', array('redirect', 'forward', 'addFlashMessage', 'translate', 'flushFlashMessages'), array(), '', false);
     }
 
     protected function tearDown()
@@ -57,8 +57,10 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $newsletterRepository->expects($this->once())->method('findAll')->will($this->returnValue($allNewsletters));
         $this->inject($this->subject, 'newsletterRepository', $newsletterRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('newsletters', $allNewsletters);
+        $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView', array('assign'));
+        $view->expects($this->at(0))->method('assign')->with('total', count($allNewsletters));
+        $view->expects($this->at(1))->method('assign')->with('data', $allNewsletters);
+        $view->expects($this->at(2))->method('assign')->with('success', true);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -67,37 +69,24 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
-    public function showActionAssignsTheGivenNewsletterToView()
-    {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $this->inject($this->subject, 'view', $view);
-        $view->expects($this->once())->method('assign')->with('newsletter', $newsletter);
-
-        $this->subject->showAction($newsletter);
-    }
-
-    /**
-     * @test
-     */
-    public function newActionAssignsTheGivenNewsletterToView()
-    {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('newNewsletter', $newsletter);
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->newAction($newsletter);
-    }
-
-    /**
-     * @test
-     */
     public function createActionAddsTheGivenNewsletterToNewsletterRepository()
     {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
+        $newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\Model\\Newsletter', array('getValidatedContent'), array(), '', false);
+        $newsletter->expects($this->once())->method('getValidatedContent')->will($this->returnValue(array(
+                    'content' => 'some content',
+                    'errors' => array(),
+                    'warnings' => array(),
+                    'infos' => array(),
+        )));
+        $recipientList = new \Ecodev\Newsletter\Domain\Model\RecipientList\CsvList();
+        $newsletter->setRecipientList($recipientList);
+
+        $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager', array('persistAll'), array(), '', false);
+        $persistenceManager->expects($this->once())->method('persistAll')->will($this->returnValue(null));
+        $this->inject($this->subject, 'persistenceManager', $persistenceManager);
+
+        $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
+        $this->inject($this->subject, 'view', $view);
 
         $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', array('add'), array(), '', false);
         $newsletterRepository->expects($this->once())->method('add')->with($newsletter);
@@ -106,45 +95,4 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->createAction($newsletter);
     }
 
-    /**
-     * @test
-     */
-    public function editActionAssignsTheGivenNewsletterToView()
-    {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $this->inject($this->subject, 'view', $view);
-        $view->expects($this->once())->method('assign')->with('newsletter', $newsletter);
-
-        $this->subject->editAction($newsletter);
-    }
-
-    /**
-     * @test
-     */
-    public function updateActionUpdatesTheGivenNewsletterInNewsletterRepository()
-    {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
-
-        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', array('update'), array(), '', false);
-        $newsletterRepository->expects($this->once())->method('update')->with($newsletter);
-        $this->inject($this->subject, 'newsletterRepository', $newsletterRepository);
-
-        $this->subject->updateAction($newsletter);
-    }
-
-    /**
-     * @test
-     */
-    public function deleteActionRemovesTheGivenNewsletterFromNewsletterRepository()
-    {
-        $newsletter = new \Ecodev\Newsletter\Domain\Model\Newsletter();
-
-        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', array('remove'), array(), '', false);
-        $newsletterRepository->expects($this->once())->method('remove')->with($newsletter);
-        $this->inject($this->subject, 'newsletterRepository', $newsletterRepository);
-
-        $this->subject->deleteAction($newsletter);
-    }
 }

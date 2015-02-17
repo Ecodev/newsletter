@@ -78,7 +78,7 @@ class BounceAccountController extends ExtDirectActionController
         $this->view->assign('total', $bounceAccounts->count());
         $this->view->assign('data', $bounceAccounts);
         $this->view->assign('success', true);
-        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
+        $this->flushFlashMessages();
     }
 
     /**

@@ -1,7 +1,8 @@
 <?php
+
 namespace Ecodev\Newsletter\Tests\Unit\Controller;
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2015
@@ -22,7 +23,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * Test case for class Ecodev\Newsletter\Controller\BounceAccountController.
@@ -30,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
  */
 class BounceAccountControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-
     /**
      * @var \Ecodev\Newsletter\Controller\BounceAccountController
      */
@@ -38,7 +38,7 @@ class BounceAccountControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\BounceAccountController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\BounceAccountController', array('redirect', 'forward', 'addFlashMessage', 'translate', 'flushFlashMessages'), array(), '', false);
     }
 
     protected function tearDown()
@@ -57,24 +57,13 @@ class BounceAccountControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $bounceAccountRepository->expects($this->once())->method('findAll')->will($this->returnValue($allBounceAccounts));
         $this->inject($this->subject, 'bounceAccountRepository', $bounceAccountRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('bounceAccounts', $allBounceAccounts);
+        $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView', array('assign'));
+        $view->expects($this->at(0))->method('assign')->with('total', count($allBounceAccounts));
+        $view->expects($this->at(1))->method('assign')->with('data', $allBounceAccounts);
+        $view->expects($this->at(2))->method('assign')->with('success', true);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
     }
 
-    /**
-     * @test
-     */
-    public function showActionAssignsTheGivenBounceAccountToView()
-    {
-        $bounceAccount = new \Ecodev\Newsletter\Domain\Model\BounceAccount();
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $this->inject($this->subject, 'view', $view);
-        $view->expects($this->once())->method('assign')->with('bounceAccount', $bounceAccount);
-
-        $this->subject->showAction($bounceAccount);
-    }
 }

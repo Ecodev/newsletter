@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\Controller;
 
 use AbstractMessage;
@@ -43,7 +42,6 @@ use TYPO3\CMS\Extbase\Validation\PropertyError;
  */
 class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
      * @inject
@@ -126,5 +124,24 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
                         'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $messageBody, $messageTitle, $severity, $storeInSession
         );
         $this->controllerContext->getFlashMessageQueue()->enqueue($flashMessage);
+    }
+
+    /**
+     * Translate key
+     * @param string $key
+     * @param array $args
+     * @return string
+     */
+    protected function translate($key, array $args = array())
+    {
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, 'newsletter', $args);
+    }
+
+    /**
+     * Flush flashMessages into view
+     */
+    protected function flushFlashMessages()
+    {
+        $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
     }
 }
