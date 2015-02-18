@@ -4,7 +4,6 @@
 namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\BounceHandler;
-use tx_scheduler_Task;
 
 /* * *************************************************************
  *  Copyright notice
@@ -34,7 +33,7 @@ use tx_scheduler_Task;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FetchBounces extends tx_scheduler_Task
+class FetchBounces extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
 
     /**

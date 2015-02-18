@@ -5,7 +5,6 @@ namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\Tools;
 use GeneralUtility;
-use tx_scheduler_Task;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
@@ -36,7 +35,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SendEmails extends tx_scheduler_Task
+class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
 
     /**
