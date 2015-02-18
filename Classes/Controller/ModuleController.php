@@ -33,7 +33,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 /**
  * The view based backend module controller for the Newsletter package.
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController

@@ -26,7 +26,6 @@
 /**
  * Class to migrate DB records
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ext_update

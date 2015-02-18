@@ -38,7 +38,6 @@ use GeneralUtility;
 /**
  * Controller for the Newsletter object
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class NewsletterController extends ExtDirectActionController

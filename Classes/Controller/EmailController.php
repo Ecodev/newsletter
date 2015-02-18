@@ -39,7 +39,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 /**
  * Controller for the Email object
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class EmailController extends ExtDirectActionController

@@ -9,7 +9,6 @@ require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsle
 /**
  * Convert HTML to plain text using builtin Html2Text tool
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Builtin implements IPlainConverter

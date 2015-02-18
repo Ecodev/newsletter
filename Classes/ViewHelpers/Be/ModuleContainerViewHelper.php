@@ -49,9 +49,6 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  * <newsletter:be.moduleContainer pageTitle="foo" enableJumpToUrl="false" enableClickMenu="false" loadPrototype="false" loadScriptaculous="false" scriptaculousModule="someModule,someOtherModule" loadExtJs="true" loadExtJsTheme="false" extJsAdapter="jQuery" concatenate="false" compressJs="false" compressCss="false" enableExtJsDebug="true">your module content</f:be.container>
  * </code>
  *
- * @category    ViewHelpers
- * @package     Newsletter
- * @subpackage  ViewHelpers_Be
  * @author      Bastian Waidelich <bastian@typo3.org>
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html

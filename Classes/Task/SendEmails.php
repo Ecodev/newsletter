@@ -34,7 +34,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 /**
  * Provides Scheduler task to send emails
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class SendEmails extends tx_scheduler_Task

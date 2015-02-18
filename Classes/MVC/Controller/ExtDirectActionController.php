@@ -35,8 +35,6 @@ use TYPO3\CMS\Extbase\Validation\PropertyError;
 /**
  * A Controller used for answering via AJAX speaking JSON
  *
- * @package     Newsletter
- * @subpackage  MVC/Controller
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */

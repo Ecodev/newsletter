@@ -32,7 +32,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\Newsletter
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class NewsletterRepository extends AbstractRepository

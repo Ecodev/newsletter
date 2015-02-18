@@ -8,7 +8,6 @@ use ExtensionManagementUtility;
 /**
  * Make localization files available in JavaScript
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class LocalizationViewHelper extends AbstractViewHelper

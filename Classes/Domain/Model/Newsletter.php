@@ -35,7 +35,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * Newsletter represents a page to be sent to a specific time to several recipients.
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity

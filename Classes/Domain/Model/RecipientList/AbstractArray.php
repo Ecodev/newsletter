@@ -9,8 +9,6 @@ use Ecodev\Newsletter\Domain\Model\RecipientList;
  * Here the internal datastructure is an array.
  * You might extend your class from this if you use external sources.
  *
- * @abstract
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class AbstractArray extends RecipientList

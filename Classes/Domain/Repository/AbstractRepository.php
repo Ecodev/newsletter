@@ -28,7 +28,6 @@ namespace Ecodev\Newsletter\Domain\Repository;
 /**
  * Abstract repository to workaround difficulties (or misunderstanding?) with extbase.
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository

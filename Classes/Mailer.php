@@ -47,7 +47,6 @@ if (is_readable($swift1)) {
  * This is the holy inner core of newsletter.
  * It is normally used in an instance per language to compile MIME 1.0 compatible mails
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Mailer

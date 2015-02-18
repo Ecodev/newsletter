@@ -32,7 +32,6 @@ use tx_scheduler_Task;
 /**
  * Provides Scheduler task to fetch bounced emails
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class FetchBounces extends tx_scheduler_Task

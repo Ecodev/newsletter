@@ -32,9 +32,6 @@ use TYPO3;
 /**
  * Toolbox for newsletter and dependant extensions.
  *
- * @abstract
- * @static
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class Tools

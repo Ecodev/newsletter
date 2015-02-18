@@ -32,7 +32,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * RecipientList
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
@@ -177,7 +176,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * The record MUST contain an "email"-field. Without this one this mailtarget is useless.
      * For compatibility with various subscription systems, the record can contain "tableName"-field.
      *
-     * @abstract
      * @return   array      Assoc array with fields for the receiver
      */
     abstract public function getRecipient();
@@ -185,7 +183,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Get the number of receivers in this newsletter target
      *
-     * @abstract
      * @return   integer      Numbers of receivers.
      */
     abstract public function getCount();
@@ -193,7 +190,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Get error text if the fetching of the newsletter target has somehow failed.
      *
-     * @abstract
      * @return   string      Error text or empty string.
      */
     abstract public function getError();

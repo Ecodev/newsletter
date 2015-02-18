@@ -28,7 +28,6 @@ namespace Ecodev\Newsletter\Domain\Model;
 /**
  * Link
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity

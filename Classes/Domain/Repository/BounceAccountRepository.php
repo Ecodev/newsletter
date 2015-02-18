@@ -29,7 +29,6 @@ namespace Ecodev\Newsletter\Domain\Repository;
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\BounceAccount
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BounceAccountRepository extends AbstractRepository

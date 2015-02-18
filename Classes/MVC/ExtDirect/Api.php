@@ -34,8 +34,6 @@ use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 /**
  * A Service that provides the Ext.Direct Api
  *
- * @package     Newsletter
- * @subpackage  ExtJS
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  */
 class Api

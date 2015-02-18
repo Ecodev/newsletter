@@ -33,7 +33,6 @@ use FlashMessage;
 /**
  * Controller for the BounceAccount object
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BounceAccountController extends ExtDirectActionController

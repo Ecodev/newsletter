@@ -40,9 +40,6 @@ use GeneralUtility;
  * 	<newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  *
- * @category    ViewHelpers
- * @package     TYPO3
- * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */

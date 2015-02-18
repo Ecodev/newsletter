@@ -6,7 +6,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
 /**
  * Makes an array of configuration available in JavaScript
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ConfigurationViewHelper extends AbstractViewHelper

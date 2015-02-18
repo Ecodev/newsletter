@@ -28,9 +28,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
 /**
  * a ViewHelper that holds a pageRenderer Object as instance variable
  *
- * @category    ViewHelpers
- * @package     TYPO3
- * @subpackage  tx_newsletter
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */

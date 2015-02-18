@@ -8,7 +8,6 @@ use GeneralUtility;
 /**
  * Format array of values to CSV format
  *
- * @package Newsletter
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CsvValuesViewHelper extends AbstractViewHelper
