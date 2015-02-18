@@ -1,16 +1,10 @@
 <?php
 
-
 namespace Ecodev\Newsletter;
 
 use DateTime;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-use Ecodev\Newsletter\Tools as EcodevNewsletterTools;
-use ExtensionManagementUtility;
-use GeneralUtility;
-use tslib_fe;
 use TYPO3;
-use TYPO3\CMS\Extbase\Core\Bootstrap;
 
 /* * *************************************************************
  *  Copyright notice
@@ -35,8 +29,6 @@ use TYPO3\CMS\Extbase\Core\Bootstrap;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter') . '/Classes/Mailer.php';
-
 /**
  * Toolbox for newsletter and dependant extensions.
  *
@@ -47,7 +39,6 @@ require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsle
  */
 abstract class Tools
 {
-
     protected static $configuration = null;
 
     /**
@@ -122,7 +113,7 @@ abstract class Tools
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
         foreach ($newsletters as $newsletter) {
-            EcodevNewsletterTools::createSpool($newsletter);
+            self::createSpool($newsletter);
         }
     }
 
@@ -168,7 +159,7 @@ abstract class Tools
                 $emailSpooledCount++;
             }
         }
-        EcodevNewsletterTools::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
+        self::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
 
         // Schedule repeated newsletter if any
         $newsletter->scheduleNextNewsletter();
@@ -200,7 +191,7 @@ abstract class Tools
         }
 
         /* Do we any limit to this session? */
-        if ($mails_per_round = EcodevNewsletterTools::confParam('mails_per_round')) {
+        if ($mails_per_round = self::confParam('mails_per_round')) {
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
@@ -231,7 +222,7 @@ abstract class Tools
         global $TYPO3_DB;
 
         /* Do we any limit to this session? */
-        if ($mails_per_round = EcodevNewsletterTools::confParam('mails_per_round')) {
+        if ($mails_per_round = self::confParam('mails_per_round')) {
             $limit = " LIMIT 0, $mails_per_round ";
         }
 
@@ -287,7 +278,7 @@ abstract class Tools
 
             // Was a language with this page defined, if not create one
             if (!is_object($mailers[$L])) {
-                $mailers[$L] = &EcodevNewsletterTools::getConfiguredMailer($newsletter, $L);
+                $mailers[$L] = &self::getConfiguredMailer($newsletter, $L);
             }
 
             // Mark it as started sending
@@ -305,7 +296,7 @@ abstract class Tools
         }
 
         // Log numbers to syslog
-        EcodevNewsletterTools::log("Sent $emailSentCount emails");
+        self::log("Sent $emailSentCount emails");
     }
 
     /**
@@ -318,14 +309,13 @@ abstract class Tools
     {
 
         // If we are in Backend we need to simulate minimal TSFE
-        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof tslib_fe)) {
+        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
             if (!is_object($GLOBALS['TT'])) {
                 $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker();
                 $GLOBALS['TT']->start();
             }
-            $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_fe');
+            $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController');
             $GLOBALS['TSFE'] = new $TSFEclassName($GLOBALS['TYPO3_CONF_VARS'], 0, '0', 1, '', '', '', '');
-//			$GLOBALS['TSFE']->connectToMySQL();
             $GLOBALS['TSFE']->initFEuser();
             $GLOBALS['TSFE']->fetch_the_id();
             $GLOBALS['TSFE']->getPageAndRootline();
