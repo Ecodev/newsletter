@@ -14,19 +14,15 @@ namespace Ecodev\Newsletter\Tests\Unit\Functional\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
 
 /**
- * Functional test for the Tx_Newsletter_Domain_Repository_NewsletterRepository
+ * Functional test for the \Ecodev\Newsletter\Domain\Repository\NewsletterRepository
  */
 class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
-    protected $objectManager;
-
     /** @var \Ecodev\Newsletter\Domain\Repository\NewsletterRepository */
-    protected $newsletterRepository;
+    private $newsletterRepository;
 
     public function setUp()
     {

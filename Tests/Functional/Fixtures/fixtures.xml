@@ -18,6 +18,7 @@
     <tx_newsletter_domain_model_newsletter>
         <uid>30</uid>
         <pid>3</pid>
+        <recipient_list>1000</recipient_list>
         <sender_name>Sender Name 3</sender_name>
         <sender_email>sender3@example.com</sender_email>
         <planned_time>1423729050</planned_time>
@@ -31,6 +32,7 @@
         <begin_time>1423729052</begin_time>
         <end_time>1423729053</end_time>
         <open_time>1423729055</open_time>
+        <recipient_address>recipient1@example.com</recipient_address>
     </tx_newsletter_domain_model_email>
 
     <tx_newsletter_domain_model_email>
@@ -38,6 +40,7 @@
         <uid>302</uid>
         <pid>3</pid>
         <begin_time>1423729054</begin_time>
+        <recipient_address>recipient2@example.com</recipient_address>
     </tx_newsletter_domain_model_email>
 
     <tx_newsletter_domain_model_link>
@@ -62,4 +65,36 @@
         <open_time>1423729056</open_time>
     </tx_newsletter_domain_model_linkopened>
 
+    <tx_newsletter_domain_model_recipientlist>
+        <uid>1000</uid>
+        <pid>3</pid>
+        <title>test recipient list</title>
+        <sql_statement>
+            SELECT 'recipient1@example.com' AS email
+            UNION ALL
+            SELECT 'recipient2@example.com' AS email
+        </sql_statement>
+        <sql_register_bounce>
+            INSERT INTO sys_log (details)
+            VALUES (CONCAT('bounced ', ###EMAIL###, ', ', ###BOUNCE_TYPE###, ', ', ###BOUNCE_TYPE_SOFT###, ', ', ###BOUNCE_TYPE_HARD###, ', ', ###BOUNCE_TYPE_UNSUBSCRIBE###));
+        </sql_register_bounce>
+        <sql_register_open>
+            INSERT INTO sys_log (details)
+            VALUES (CONCAT('opened ', ###EMAIL###));
+        </sql_register_open>
+        <sql_register_click>
+            INSERT INTO sys_log (details)
+            VALUES (CONCAT('clicked ', ###EMAIL###));
+        </sql_register_click>
+    </tx_newsletter_domain_model_recipientlist>
+
+    <tx_newsletter_domain_model_bounceaccount>
+        <uid>666</uid>
+        <pid>777</pid>
+        <email>bounce@example.com</email>
+        <server>example.com</server>
+        <protocol>pop3</protocol>
+        <username>my-username</username>
+        <password>my-password</password>
+    </tx_newsletter_domain_model_bounceaccount>
 </dataset>

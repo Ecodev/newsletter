@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Repository;
 
 /* * *************************************************************
@@ -34,7 +33,6 @@ namespace Ecodev\Newsletter\Domain\Repository;
  */
 class EmailRepository extends AbstractRepository
 {
-
     protected static $emailCountCache = array();
 
     /**

@@ -59,7 +59,7 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	title varchar(255) DEFAULT '' NOT NULL,
 	plain_only tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	lang varchar(255) DEFAULT '' NOT NULL,
-	type varchar(255) DEFAULT '' NOT NULL,
+	type varchar(255) DEFAULT  'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\Sql' NOT NULL,
 	be_users varchar(255) DEFAULT '' NOT NULL,
 	fe_groups varchar(255) DEFAULT '' NOT NULL,
 	fe_pages varchar(255) DEFAULT '' NOT NULL,
