@@ -42,7 +42,10 @@ class EmailRepository extends AbstractRepository
     public function findByAuthcode($authcode)
     {
         $query = $this->createQuery();
-        $query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE MD5(CONCAT(`uid`, `recipient_address`)) = ? LIMIT 1', array($authcode));
+
+        global $TYPO3_DB;
+        $escaped = $TYPO3_DB->fullQuoteStr($authcode, 'tx_newsletter_domain_model_email');
+        $query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE MD5(CONCAT(`uid`, `recipient_address`)) = ' . $escaped . ' LIMIT 1');
 
         return $query->execute()->getFirst();
     }
@@ -98,9 +101,9 @@ class EmailRepository extends AbstractRepository
         global $TYPO3_DB;
 
         // Minimal sanitization before SQL
-        $authCode = addslashes($authCode);
+        $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
-        $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = '$authCode' LIMIT 1");
+        $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode LIMIT 1");
 
         // Tell the target that he opened the email
         $rs = $TYPO3_DB->sql_query("
@@ -108,7 +111,7 @@ class EmailRepository extends AbstractRepository
 		FROM tx_newsletter_domain_model_email
 		LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
-		WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = '$authCode' AND recipient_list IS NOT NULL
+		WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = $authCode AND recipient_list IS NOT NULL
 		LIMIT 1");
 
         if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {

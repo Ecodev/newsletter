@@ -81,7 +81,7 @@ class LinkRepository extends AbstractRepository
         global $TYPO3_DB;
 
         // Minimal sanitization before SQL
-        $authCode = addslashes($authCode);
+        $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_link');
         $isPlain = $isPlain ? '1' : '0';
         if ($newsletterUid) {
             $limitNewsletter = 'AND tx_newsletter_domain_model_newsletter.uid = ' . (int) $newsletterUid;
@@ -95,7 +95,7 @@ class LinkRepository extends AbstractRepository
 		INNER JOIN tx_newsletter_domain_model_email ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		INNER JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		WHERE
-		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = '$authCode'
+		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = $authCode
         $limitNewsletter");
 
         if (list($linkUid, $emailUid, $recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {

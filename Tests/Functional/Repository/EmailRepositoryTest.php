@@ -76,7 +76,7 @@ class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFu
         $this->emailRepository->registerOpen($this->authCode);
 
         $email = $this->emailRepository->findByUid(302);
-        $this->assertTrue($email->isOpened());
+        $this->assertTrue($email->isOpened(), 'email should be marked as opened');
         $this->assertRecipientListCallbackWasCalled('opened recipient2@example.com');
     }
 }
