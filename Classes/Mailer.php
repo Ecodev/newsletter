@@ -323,7 +323,7 @@ class Mailer
 
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
-                $_procObj = & \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
+                $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
                 $this->html = $_procObj->substituteMarkersHook($this->html, 'html', $markers);
                 $this->title = $_procObj->substituteMarkersHook($this->title, 'title', $markers);
             }

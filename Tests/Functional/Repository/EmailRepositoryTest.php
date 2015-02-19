@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecodev\Newsletter\Tests\Unit\Functional\Repository;
+namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
 /**
  * This file is part of the TYPO3 CMS project.
@@ -79,5 +79,4 @@ class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFu
         $this->assertTrue($email->isOpened());
         $this->assertRecipientListCallbackWasCalled('opened recipient2@example.com');
     }
-
 }

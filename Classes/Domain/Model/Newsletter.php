@@ -66,14 +66,14 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer $repetition
      */
-    protected $repetition;
+    protected $repetition = 0;
 
     /**
      * Tool used to convert to plain text
      *
      * @var string $plainConverter
      */
-    protected $plainConverter;
+    protected $plainConverter = 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin';
 
     /**
      * Whether this newsletter is for test purpose. If it is it will be ignored in statistics
@@ -81,7 +81,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var boolean $isTest
      * @validate NotEmpty
      */
-    protected $isTest;
+    protected $isTest = false;
 
     /**
      * List of files to be attached (comma separated list
@@ -111,14 +111,14 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var boolean $injectOpenSpy
      */
-    protected $injectOpenSpy;
+    protected $injectOpenSpy = true;
 
     /**
      * injectLinksSpy
      *
      * @var boolean $injectLinksSpy
      */
-    protected $injectLinksSpy;
+    protected $injectLinksSpy = true;
 
     /**
      * bounceAccount
@@ -152,17 +152,17 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $objectManager;
 
     /**
+     * @var \Ecodev\Newsletter\Utility\Validator
+     */
+    protected $validator;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         // Set default values for new newsletter
-        $this->setPlainConverter('Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin');
-        $this->setRepetition(0);
         $this->setPlannedTime(new DateTime());
-        $this->setInjectOpenSpy(true);
-        $this->setInjectLinksSpy(true);
-        $this->setIsTest(false);
     }
 
     /**
@@ -806,149 +806,36 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Set the validator
+     * @param \Ecodev\Newsletter\Utility\Validator $validor
+     */
+    public function setValidator(\Ecodev\Newsletter\Utility\Validator $validor)
+    {
+        $this->validator = $validor;
+    }
+
+    /**
+     * Get the validator
+     * @return \Ecodev\Newsletter\Utility\Validator
+     */
+    public function getValidator()
+    {
+        if (!$this->validator) {
+            $this->validator = new \Ecodev\Newsletter\Utility\Validator();
+        }
+
+        return $this->validator;
+    }
+
+    /**
      * Returns the content of this newsletter with validation messages. The content
      * is also "fixed" automatically when possible.
-     * @global type $LANG
      * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
      * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
      */
     public function getValidatedContent($language = null)
     {
-        // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
-        global $LANG;
-        if (is_null($LANG)) {
-            $LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('language'); // create language-object
-            $LLkey = 'default';
-            if ($GLOBALS['TSFE']->config['config']['language']) {
-                $LLkey = $GLOBALS['TSFE']->config['config']['language'];
-            }
-            $LANG->init($LLkey); // initalize language-object with actual language
-        }
-        $LANG->includeLLFile('EXT:newsletter/Resources/Private/Language/locallang.xlf');
-
-        // We need to catch the exception if domain was not found/configured properly
-        try {
-            $url = $this->getContentUrl($language);
-        } catch (Exception $e) {
-            return array(
-                'content' => '',
-                'errors' => array($e->getMessage()),
-                'warnings' => array(),
-                'infos' => array(),
-            );
-        }
-
-        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
-
-        $errors = array();
-        $warnings = array();
-        $infos = array(sprintf($LANG->getLL('validation_content_url'), $url));
-
-        // Content should be more that just a few characters. Apache error propably occured
-        if (strlen($content) < 200) {
-            $errors [] = $LANG->getLL('validation_mail_too_short');
-        }
-
-        // Content should not contain PHP-Warnings
-        if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-            $errors [] = $LANG->getLL('validation_mail_contains_php_warnings');
-        }
-
-        // Content should not contain PHP-Warnings
-        if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-            $errors [] = $LANG->getLL('validation_mail_contains_php_errors');
-        }
-
-        // If the page contains a "Pages is being generared" text... this is bad too
-        if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-            $errors [] = $LANG->getLL('validation_mail_being_generated');
-        }
-
-        // Find out the absolute domain. If specified in HTML source, use it as is.
-        if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match)) {
-            $absoluteDomain = $match[1];
-        }
-        // Otherwise try our best to guess what it is
-        else {
-            $absoluteDomain = 'http://' . $this->getDomain() . '/';
-        }
-
-        // Fix relative URL to absolute URL
-        $urlPatterns = array(
-            'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
-            'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
-            'images' => '/ src="(.*)"/Ui',
-            'background images' => '/ background="(.*)"/Ui',
-        );
-        foreach ($urlPatterns as $type => $urlPattern) {
-            preg_match_all($urlPattern, $content, $urls);
-            foreach ($urls[1] as $i => $url) {
-                // If this is already an absolute link, dont replace it
-                if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
-                    $replace_url = str_replace($url, $absoluteDomain . ltrim($url, '/'), $urls[0][$i]);
-                    $content = str_replace($urls[0][$i], $replace_url, $content);
-                }
-            }
-
-            if (count($urls[1])) {
-                $infos[] = sprintf($LANG->getLL('validation_mail_converted_relative_url'), $type);
-            }
-        }
-
-        // Find linked css and convert into a style-tag
-        preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
-        foreach ($urls[1] as $i => $url) {
-            $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
-<style type=\"text/css\">\n<!--\n" . \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url) . "\n-->\n</style>", $content);
-        }
-        if (count($urls[1])) {
-            $infos[] = $LANG->getLL('validation_mail_contains_linked_styles');
-        }
-
-        // We cant very well have attached javascript in a newsmail ... removing
-        $content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
-        if ($count) {
-            $warnings[] = $LANG->getLL('validation_mail_contains_javascript');
-        }
-
-        // Images in CSS
-        if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
-            $errors[] = $LANG->getLL('validation_mail_contains_css_images');
-        }
-
-        // CSS-classes
-        if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
-            $warnings[] = $LANG->getLL('validation_mail_contains_css_classes');
-        }
-
-        // Positioning & element sizes in CSS
-        $forbiddenCssProperties = array(
-            'width' => '((min|max)+-)?width',
-            'height' => '((min|max)+-)?height',
-            'margin' => 'margin(-(bottom|left|right|top)+)?',
-            'padding' => 'padding(-(bottom|left|right|top)+)?',
-            'position' => 'position',
-        );
-        $forbiddenCssPropertiesWarnings = array();
-        if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
-            foreach ($matches[1] as $stylepart) {
-                foreach ($forbiddenCssProperties as $property => $regex) {
-                    if (preg_match('/[^-]\b' . $regex . '\b[^-]/', $stylepart)) {
-                        $forbiddenCssPropertiesWarnings[$property] = $property;
-                    }
-                }
-            }
-            foreach ($forbiddenCssPropertiesWarnings as $property) {
-                $warnings[] = sprintf($LANG->getLL('validation_mail_contains_css_some_property'), $property);
-            }
-        }
-
-        return array(
-            'content' => $content,
-            'errors' => $errors,
-            'warnings' => $warnings,
-            'infos' => $infos,
-        );
+        return $this->getValidator()->validate($this, $language);
     }
 
     /**

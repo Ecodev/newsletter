@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dataset>
+    <sys_domain>
+        <pid>1</pid>
+        <domainName>example.com</domainName>
+    </sys_domain>
+
+    <sys_template>
+        <pid>1</pid>
+        <root>1</root>
+        <config>
+            page = PAGE
+            page {
+            typeNum = 0
+            }
+        </config>
+    </sys_template>
+
     <tx_newsletter_domain_model_newsletter>
         <uid>10</uid>
         <pid>2</pid>
@@ -10,6 +26,7 @@
     <tx_newsletter_domain_model_newsletter>
         <uid>20</uid>
         <pid>2</pid>
+        <recipient_list>1000</recipient_list>
         <sender_name>Sender Name 2</sender_name>
         <sender_email>sender2@example.com</sender_email>
         <planned_time>1423729000</planned_time>

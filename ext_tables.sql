@@ -20,8 +20,8 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 	sender_email varchar(255) DEFAULT '' NOT NULL,
 	plain_converter varchar(255) DEFAULT 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin' NOT NULL,
 	attachments varchar(255) DEFAULT '' NOT NULL,
-	inject_open_spy tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	inject_links_spy tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	inject_open_spy tinyint(1) unsigned DEFAULT '1' NOT NULL,
+	inject_links_spy tinyint(1) unsigned DEFAULT '1' NOT NULL,
 	bounce_account int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

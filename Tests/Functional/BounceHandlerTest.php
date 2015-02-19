@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecodev\Newsletter\Tests\Unit\Functional;
+namespace Ecodev\Newsletter\Tests\Functional;
 
 /**
  * This file is part of the TYPO3 CMS project.
@@ -17,7 +17,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Functional;
 require_once __DIR__ . '/AbstractFunctionalTestCase.php';
 
 /**
- * Functional test for the \Ecodev\Newsletter\Domain\Repository\BounceAccountRepository
+ * Functional test for the \Ecodev\Newsletter\BounceHandler
  */
 class BounceHandlerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
@@ -54,5 +54,4 @@ STRING;
         $this->assertTrue($email->isBounced());
         $this->assertRecipientListCallbackWasCalled('bounced recipient2@example.com, 2, 2, 3, 4');
     }
-
 }

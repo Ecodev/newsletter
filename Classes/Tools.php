@@ -91,7 +91,7 @@ abstract class Tools
         // hook for modifing the mailer before finish preconfiguring
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
-                $_procObj = & \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
+                $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
                 $mailer = $_procObj->getConfiguredMailerHook($mailer, $newsletter);
             }
         }
@@ -271,11 +271,11 @@ abstract class Tools
             // Define the language of email
             $email = $emailRepository->findByUid($emailUid);
             $recipientData = $email->getRecipientData();
-            $L = $recipientData['L'];
+            $language = $recipientData['L'];
 
             // Was a language with this page defined, if not create one
-            if (!is_object($mailers[$L])) {
-                $mailers[$L] = &self::getConfiguredMailer($newsletter, $L);
+            if (!is_object($mailers[$language])) {
+                $mailers[$language] = self::getConfiguredMailer($newsletter, $language);
             }
 
             // Mark it as started sending
@@ -283,7 +283,7 @@ abstract class Tools
             $emailRepository->updateNow($email);
 
             // Send the email
-            $mailers[$L]->send($email);
+            $mailers[$language]->send($email);
 
             // Mark it as sent already
             $email->setEndTime(new DateTime());

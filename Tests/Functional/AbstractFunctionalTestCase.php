@@ -36,5 +36,4 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
         $count = $db->exec_SELECTcountRows('*', 'sys_log', 'details = ' . $db->fullQuoteStr($details, 'sys_log'));
         $this->assertEquals(1, $count, 'could not find exactly 1 log record containing "' . $details . '"');
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecodev\Newsletter\Tests\Unit\Functional\Repository;
+namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
 /**
  * This file is part of the TYPO3 CMS project.
