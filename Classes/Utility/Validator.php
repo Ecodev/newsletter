@@ -85,7 +85,6 @@ class Validator
         }
 
         $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
-        var_dump(__METHOD__, $content, $this->qqq);
         $errors = array();
         $warnings = array();
         $infos = array(sprintf($this->lang->getLL('validation_content_url'), $url));
