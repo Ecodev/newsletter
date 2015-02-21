@@ -11,9 +11,6 @@ module.tx_newsletter {
 
 config.tx_extbase {
 
-    # Vendor should not be necessary because already declared with ExtensionUtility::configurePlugin(), but if not duplicated here, it doesn't work
-    vendorName = Ecodev
-
 	mvc {
 		requestHandlers {
 			Ecodev\Newsletter\MVC\ExtDirect\RequestHandler = Ecodev\Newsletter\MVC\ExtDirect\RequestHandler
@@ -94,6 +91,7 @@ tx_newsletter_blank_page {
         10 {
             userFunc = \TYPO3\CMS\Extbase\Core\Bootstrap->run
             extensionName = Newsletter
+            vendorName = Ecodev
             pluginName = p
 			switchableControllerActions {
 				Email {
