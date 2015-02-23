@@ -1,8 +1,8 @@
 Newsletter |badge_travis| |badge_scrutinizer| |badge_coverage| |badge_gitter|
 =============================================================================
 
-.. |badge_travis| image:: https://travis-ci.org/Ecodev/gims.svg?branch=master
-    :target: https://travis-ci.org/Ecodev/gims
+.. |badge_travis| image:: https://travis-ci.org/Ecodev/newsletter.svg?branch=master
+    :target: https://travis-ci.org/Ecodev/newsletter
 
 .. |badge_scrutinizer| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/quality-score.png?b=master
    :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
