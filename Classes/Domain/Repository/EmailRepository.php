@@ -103,7 +103,7 @@ class EmailRepository extends AbstractRepository
         // Minimal sanitization before SQL
         $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
-        $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode LIMIT 1");
+        $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode");
 
         // Tell the target that he opened the email
         $rs = $TYPO3_DB->sql_query("
