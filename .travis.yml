@@ -15,6 +15,12 @@ matrix:
       env: TYPO3_BRANCH=TYPO3_7-0
     - php: 5.6
       env: TYPO3_BRANCH=TYPO3_7-0
+    - php: 5.5
+      env: TYPO3_BRANCH=master
+    - php: 5.6
+      env: TYPO3_BRANCH=master
+  allow_failures:
+    - env: TYPO3_BRANCH=master
 
 before_script:
   - sudo apt-get install lynx
