@@ -33,11 +33,9 @@ $EM_CONF[$_EXTKEY] = array(
     'constraints' => array(
         'depends' => array(
             'cms' => '',
-            'extbase' => '',
-            'fluid' => '',
             'php' => '5.3.7-0.0.0',
-            'typo3' => '6.1.0-7.0.99',
-            'scheduler' => '1.1.0',
+            'typo3' => '6.1.0-7.99.99',
+            'scheduler' => '6.1.0',
         ),
         'conflicts' => '',
         'suggests' => array(
