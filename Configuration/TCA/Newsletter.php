@@ -72,8 +72,8 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'select',
                 'items' => array(
-                    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin'),
-                    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx'),
+                    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin'),
+                    array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx'),
                 ),
                 'size' => 1,
                 'maxitems' => 1,

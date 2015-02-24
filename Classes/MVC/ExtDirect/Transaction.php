@@ -143,7 +143,7 @@ class Transaction
     public function buildRequest()
     {
         $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $request = $this->objectManager->create('\TYPO3\CMS\Extbase\Mvc\Web\Request');
+        $request = $this->objectManager->create('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Request');
         $request->setControllerObjectName($this->getControllerObjectName());
         $request->setControllerActionName($this->getControllerActionName());
         $request->setPluginName($frameworkConfiguration['pluginName']);
@@ -161,7 +161,7 @@ class Transaction
      */
     public function buildResponse()
     {
-        return $this->objectManager->create('Ecodev\Newsletter\MVC\ExtDirect\TransactionResponse');
+        return $this->objectManager->create('Ecodev\\Newsletter\\MVC\\ExtDirect\\TransactionResponse');
     }
 
     /**

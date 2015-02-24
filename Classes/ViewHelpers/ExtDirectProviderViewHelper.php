@@ -53,8 +53,8 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
-        $this->apiService = $objectManager->get('Ecodev\Newsletter\MVC\ExtDirect\Api');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->apiService = $objectManager->get('Ecodev\\Newsletter\\MVC\\ExtDirect\\Api');
     }
 
     /**

@@ -105,7 +105,7 @@ abstract class Tools
      */
     public static function createAllSpool()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
@@ -131,7 +131,7 @@ abstract class Tools
             return;
         }
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
 
         // Lock the newsletter by setting its begin_time
@@ -253,7 +253,7 @@ abstract class Tools
         $emailSentCount = 0;
         $mailers = array();
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $emailRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
 
@@ -323,13 +323,13 @@ abstract class Tools
         }
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
-            $extbaseBootstrap = $objectManager->get('\TYPO3\CMS\Extbase\Core\Bootstrap');
+            $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
             $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
         }
 
-        return $objectManager->get('\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder');
+        return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
     }
 
     /**
@@ -349,8 +349,8 @@ abstract class Tools
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
-        $extensionService = $objectManager->get('\TYPO3\CMS\Extbase\Service\ExtensionService');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
         $arguments = array($pluginNamespace => $controllerArguments);

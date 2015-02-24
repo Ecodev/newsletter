@@ -39,7 +39,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $this->assertEquals(2, $count, 'two emails must have been created but not sent yet');
 
         // Prepare a mock to always validate content
-        $mockValidator = $this->getMock('Ecodev\Newsletter\Utility\Validator', array('validate'), array(), '', false);
+        $mockValidator = $this->getMock('Ecodev\\Newsletter\\Utility\\Validator', array('validate'), array(), '', false);
         $mockValidator->method('validate')->will($this->returnValue(
                         array(
                             'content' => 'some very interesting content <a href="http://example.com/fake-content">link</a>',

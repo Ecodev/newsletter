@@ -120,7 +120,7 @@ class EmailController extends ExtDirectActionController
         // If it's a preview, an email which was not sent yet, we will simulate it the best we can
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
-            $newsletter = $this->objectManager->create('\Ecodev\Newsletter\Domain\Model\Newsletter');
+            $newsletter = $this->objectManager->create('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
             $newsletter->setPid(@$_GET['pid']);
             $newsletter->setUidRecipientList(@$_GET['uidRecipientList']);
 
@@ -132,7 +132,7 @@ class EmailController extends ExtDirectActionController
                     // Got him
                     if ($record['email'] == $_GET['email']) {
                         // Build a fake email
-                        $email = $this->objectManager->create('\Ecodev\Newsletter\Domain\Model\Email');
+                        $email = $this->objectManager->create('Ecodev\\Newsletter\\Domain\\Model\\Email');
                         $email->setRecipientAddress($record['email']);
                         $email->setRecipientData($record);
                     }
@@ -253,7 +253,7 @@ class EmailController extends ExtDirectActionController
         $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
 
         // Actually sends email
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($notificationEmail)
                 ->setFrom(array($newsletter->getSenderEmail() => $newsletter->getSenderName()))
                 ->setSubject($subject)

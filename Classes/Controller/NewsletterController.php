@@ -133,7 +133,7 @@ class NewsletterController extends ExtDirectActionController
     {
         $newsletter = $this->newsletterRepository->getLatest($this->pid);
         if (!$newsletter) {
-            $newsletter = $this->objectManager->create('\Ecodev\Newsletter\Domain\Model\Newsletter');
+            $newsletter = $this->objectManager->create('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
             $newsletter->setPid($this->pid);
             $newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
             // Set the first Bounce Account found if any

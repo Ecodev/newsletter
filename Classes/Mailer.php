@@ -441,7 +441,7 @@ class Mailer
      */
     private function raw_send(Email $email)
     {
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
+        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
                 ->setFrom(array($this->senderEmail => $this->senderName))
                 ->setSubject($this->title);

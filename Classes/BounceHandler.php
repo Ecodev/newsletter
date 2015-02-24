@@ -109,7 +109,7 @@ class BounceHandler
         // Find all bounce accounts we need to check
         $content = '';
         $servers = array();
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $bounceAccountRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
             $server = $bounceAccount->getServer();
@@ -147,7 +147,7 @@ class BounceHandler
      */
     public function __construct($mailsource = '')
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $this->analyze($mailsource);
     }
 

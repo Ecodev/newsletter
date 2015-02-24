@@ -22,7 +22,7 @@ class RecipientListTca
         $result = '';
         $uid = intval($PA['row']['uid']);
         if ($uid != 0) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
             $recipientListRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
             $recipientList = $recipientListRepository->findByUidInitialized($uid);
 
