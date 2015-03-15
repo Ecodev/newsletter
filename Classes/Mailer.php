@@ -187,11 +187,13 @@ class Mailer
                     //get filesystem path from url
                     $fsPath = str_replace($this->siteUrl, '', $url);
                     $fsPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($fsPath);
-
+                    
                     // Mark places for embedded files and keep the embed files to be replaced
-                    $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
-                    $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($fsPath);
-                    $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
+                    if(file_exists($fsPath)) {
+                        $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
+                        $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($fsPath);
+                        $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
+                    }
                 }
             }
         }
