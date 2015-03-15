@@ -184,9 +184,9 @@ class Mailer
             foreach ($replace_regs as $replace_reg) {
                 preg_match_all($replace_reg, $src, $urls);
                 foreach ($urls[1] as $i => $url) {
-                	//get filesystem path from url
-                	$fsPath = str_replace($this->siteUrl, '', $url);
-                	$fsPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($fsPath);
+                    //get filesystem path from url
+                    $fsPath = str_replace($this->siteUrl, '', $url);
+                    $fsPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($fsPath);
 
                     // Mark places for embedded files and keep the embed files to be replaced
                     $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
