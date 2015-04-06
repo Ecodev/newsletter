@@ -39,7 +39,7 @@ $swift2 = PATH_typo3 . 'contrib/swiftmailer/lib/swift_required.php';
 
 if (is_readable($swift1)) {
     require_once $swift1;
-} else {
+} elseif (is_readable($swift2)) {
     require_once $swift2;
 }
 
