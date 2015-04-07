@@ -62,6 +62,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
             'string_false' => '',
             'string_true' => 'foo',
         ));
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = serialize(array('attach_images' => true));
     }
 
     public function dataProviderTestMailer()
