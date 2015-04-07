@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Newsletter Title</title>
+    </head>
+    <body>
+        <!-- HTML comment will be ignored in plain text -->
+
+        http://www.example.com this line should never be modified
+        <a href="http://www.example.com">this link should be injected</a>
+
+        ###unknown_field_will_be_kept###
+        ###newsletter_view_url###
+        ###newsletter_unsubscribe_url###
+        ###email###
+        ###my_custom_field###
+
+        http://unknown_field_will_be_kept
+        http://newsletter_view_url
+        http://newsletter_unsubscribe_url
+        http://email
+        http://my_custom_field
+
+        boolean_false=###:IF: boolean_false ###true-ish###:ENDIF:###
+        boolean_true=###:IF: boolean_true ###true-ish###:ENDIF:###
+        integer_false=###:IF: integer_false ###true-ish###:ENDIF:###
+        integer_true=###:IF: integer_true ###true-ish###:ENDIF:###
+        string_false=###:IF: string_false ###true-ish###:ENDIF:###
+        string_true=###:IF: string_true ###true-ish###:ENDIF:###
+
+        boolean_false=###:IF: boolean_false ###true-ish###:ELSE:###false-ish###:ENDIF:###
+        boolean_true=###:IF: boolean_true ###true-ish###:ELSE:###false-ish###:ENDIF:###
+        integer_false=###:IF: integer_false ###true-ish###:ELSE:###false-ish###:ENDIF:###
+        integer_true=###:IF: integer_true ###true-ish###:ELSE:###false-ish###:ENDIF:###
+        string_false=###:IF: string_false ###true-ish###:ELSE:###false-ish###:ENDIF:###
+        string_true=###:IF: string_true ###true-ish###:ELSE:###false-ish###:ENDIF:###
+    </body>
+</html>

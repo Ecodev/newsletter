@@ -277,7 +277,6 @@ class Mailer
     /**
      * Substitute an advanced marker.
      *
-     * @internal
      * @param   string      Source to apply marker substitution to.
      * @param   string      Name of marker.
      * @param   boolean      Display value of marker.
@@ -285,22 +284,43 @@ class Mailer
      */
     private function advancedSubstituteMarker($src, $name, $value)
     {
-        preg_match_all("/###:IF: $name ###([\w\W]*)###:ELSE:###([\w\W]*)###:ENDIF:###/U", $src, $matches);
-        foreach ($matches[0] as $i => $full_mark) {
-            if ($value) {
-                $src = str_ireplace($full_mark, $matches[1][$i], $src);
-            } else {
-                $src = str_ireplace($full_mark, $matches[2][$i], $src);
-            }
-        }
+        $tokenBegin = "###:IF: $name ###";
+        $tokenElse = '###:ELSE:###';
+        $tokenEnd = '###:ENDIF:###';
+        while (($beginning = strpos($src, $tokenBegin)) !== false) {
+            $end = strpos($src, $tokenEnd, $beginning);
 
-        preg_match_all("/###:IF: $name ###([\w\W]*)###:ENDIF:###/U", $src, $matches);
-        foreach ($matches[0] as $i => $full_mark) {
-            if ($value) {
-                $src = str_ireplace($full_mark, $matches[1][$i], $src);
-            } else {
-                $src = str_ireplace($full_mark, '', $src);
+            // If marker is not correctly terminated, cancel everything
+            if ($end === false) {
+                break;
             }
+
+            // Find ELSE token but only before the ENDIF token
+            $else = strpos($src, $tokenElse, $beginning);
+            if ($else > $end) {
+                $else = false;
+            }
+
+            // Find the text which will replace the marker
+            if ($value) {
+                $textBeginning = $beginning + strlen($tokenBegin);
+                if ($else === false) {
+                    $text = substr($src, $textBeginning, $end - $textBeginning);
+                } else {
+                    $text = substr($src, $textBeginning, $else - $textBeginning);
+                }
+            } else {
+                if ($else === false) {
+                    $text = '';
+                } else {
+                    $textBeginning = $else + strlen($tokenElse);
+                    $text = substr($src, $textBeginning, $end - $textBeginning);
+                }
+            }
+
+            // Do the actual replacement in the entire src (possibly replacing the same marker several times)
+            $entireMarker = substr($src, $beginning, $end - $beginning + strlen(($tokenEnd)));
+            $src = str_replace($entireMarker, $text, $src);
         }
 
         return $src;
