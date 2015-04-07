@@ -70,10 +70,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         $data = array();
         foreach (glob(__DIR__ . '/Fixtures/mailer/*', GLOB_ONLYDIR) as $folder) {
-
             foreach (array(false, true) as $injectLinksSpy) {
                 foreach (array(false, true) as $injectOpenSpy) {
-
                     $flags = var_export($injectOpenSpy, true) . '-' . var_export($injectLinksSpy, true);
                     $data[] = array(
                         $injectOpenSpy,

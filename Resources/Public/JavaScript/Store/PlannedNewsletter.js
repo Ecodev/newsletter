@@ -47,8 +47,7 @@
             }
         };
 
-        function convertMessages(newsletter, level)
-        {
+        function convertMessages(newsletter, level) {
             var html = '';
             Ext.each(newsletter.validatedContent[level], function(e) {
                 html = html + '<li>' + e + '</li>';

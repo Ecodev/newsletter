@@ -1,7 +1,7 @@
 (function() {
     "use strict";
     Ext.ns("Ext.ux.Ecodev.Newsletter.Planner");
-// turn on validation errors beside the field globally
+    // turn on validation errors beside the field globally
     Ext.form.Field.prototype.msgTarget = 'side';
     Ext.ux.Ecodev.Newsletter.Planner.Planner = Ext.extend(Ext.form.FormPanel, {
         initComponent: function() {
