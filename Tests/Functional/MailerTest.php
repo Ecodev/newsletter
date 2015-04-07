@@ -54,7 +54,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('s'), array(), '', false);
         $this->mockEmail->setRecipientData(array(
             'email' => 'recipient@example.com',
-            'my_custom_field' => 'my_custom_value',
+            'my_custom_field' => 'my custom value',
             'boolean_false' => false,
             'boolean_true' => true,
             'integer_false' => 0,

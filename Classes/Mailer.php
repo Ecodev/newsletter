@@ -275,13 +275,15 @@ class Mailer
         $search = array(
             "###$name###",
             "http://$name",
-            urlencode("http://$name"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
+            urlencode("###$name###"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
+            urlencode("http://$name"),
         );
 
         $replace = array(
             $value,
             $value,
             urlencode($value), // We need to replace with urlencoded value
+            urlencode($value),
         );
 
         if (in_array($name, $this->htmlMarkers)) {

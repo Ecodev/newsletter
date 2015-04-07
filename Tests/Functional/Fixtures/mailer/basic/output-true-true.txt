@@ -1,12 +1,14 @@
  http://www.example.com this line should never be modified this link
-should be injected [1] ###unknown_field_will_be_kept###
+should be injected [1] this custom link should be injected [2] this
+link should be injected, and marker substituted [3]
+###unknown_field_will_be_kept###
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
-recipient@example.com my_custom_value
+recipient@example.com my custom value
 http://unknown_field_will_be_kept
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
-recipient@example.com my_custom_value boolean_false=
+recipient@example.com my custom value boolean_false=
 boolean_true=true-ish integer_false= integer_true=true-ish
 string_false= string_true=true-ish boolean_false=false-ish
 boolean_true=true-ish integer_false=false-ish integer_true=true-ish
@@ -16,3 +18,5 @@ string_false=false-ish string_true=true-ish
 Links:
 ------
 [1] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fwww.example.com&n=&l=fbe81c5fc853243537a4aabf571a7553
+[2] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fmy+custom+value&n=&l=26478db11a74b3c8675f463fee30cba7
+[3] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fwww.example.com%3Fparam%3Dmy+custom+value&n=&l=cfe201de5943405c840233fec4378a45
