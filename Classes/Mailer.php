@@ -172,31 +172,7 @@ class Mailer
      */
     private function setHtml($src)
     {
-
-        // Convert external files resources to attached files or correct their links
-        $replace_regs = array(
-            '/ src="([^"]+)"/',
-            '/ background="([^"]+)"/',
-        );
-
-        // Attach images if option is set
-        if ($this->extConf['attach_images']) {
-            foreach ($replace_regs as $replace_reg) {
-                preg_match_all($replace_reg, $src, $urls);
-                foreach ($urls[1] as $i => $url) {
-                    //get filesystem path from url
-                    $fsPath = str_replace($this->siteUrl, '', $url);
-                    $fsPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($fsPath);
-                    
-                    // Mark places for embedded files and keep the embed files to be replaced
-                    if(file_exists($fsPath)) {
-                        $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
-                        $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($fsPath);
-                        $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
-                    }
-                }
-            }
-        }
+        $src = $this->findAttachments($src);
 
         // Detect what markers we need to substitute later on
         preg_match_all('/###(\w+)###/', $src, $fields);
@@ -212,6 +188,44 @@ class Mailer
 
         $this->html_tpl = $src;
         $this->html = $src;
+    }
+
+    /**
+     * Find and memorize attachments that will need to be processed by Swift
+     * @param string $src
+     * @return string
+     */
+    private function findAttachments($src)
+    {
+        // Attach images if option is set
+        if (!$this->extConf['attach_images']) {
+            return $src;
+        }
+
+        // Convert external files resources to attached files
+        $attachmentRegexes = array(
+            '/ src="([^"]+)"/',
+            '/ background="([^"]+)"/',
+        );
+
+        foreach ($attachmentRegexes as $regex) {
+            preg_match_all($regex, $src, $urls);
+            foreach ($urls[1] as $i => $url) {
+
+                // Get filesystem path from url
+                $relativePath = str_replace($this->siteUrl, '', $url);
+                $absolutePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($relativePath);
+
+                // Mark places for embedded files and keep the embed files to be replaced
+                if (file_exists($absolutePath)) {
+                    $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
+                    $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($absolutePath);
+                    $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
+                }
+            }
+        }
+
+        return $src;
     }
 
     /**
