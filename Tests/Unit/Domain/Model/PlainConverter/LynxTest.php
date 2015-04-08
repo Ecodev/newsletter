@@ -58,12 +58,15 @@ class LynxTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $path = $manager->getLocalConfigurationFileLocation();
 
         if (is_readable($path)) {
-            $config = $manager->getLocalConfiguration();
-        } else {
-            $config['EXT']['extConf']['newsletter'] = serialize(array('path_to_lynx' => '/usr/bin/lynx'));
+            $allConfig = $manager->getLocalConfiguration();
+            $config = $allConfig['EXT']['extConf']['newsletter'];
         }
 
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = $config['EXT']['extConf']['newsletter'];
+        if (!isset($config)) {
+            $config = serialize(array('path_to_lynx' => '/usr/bin/lynx'));
+        }
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = $config;
     }
 
     private function canRunLynx()

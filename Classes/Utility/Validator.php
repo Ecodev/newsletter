@@ -62,6 +62,16 @@ class Validator
     }
 
     /**
+     * Return the content of the given URL
+     * @param string $url
+     * @return string
+     */
+    protected function getURL($url)
+    {
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
+    }
+
+    /**
      * Returns the content of the newsletter with validation messages. The content
      * is also "fixed" automatically when possible.
      * @param Newsletter $newsletter
@@ -84,7 +94,7 @@ class Validator
             );
         }
 
-        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
+        $content = $this->getURL($url);
         $errors = array();
         $warnings = array();
         $infos = array(sprintf($this->lang->getLL('validation_content_url'), $url));
@@ -127,15 +137,18 @@ class Validator
         );
         foreach ($urlPatterns as $type => $urlPattern) {
             preg_match_all($urlPattern, $content, $urls);
+            $replacementCount = 0;
             foreach ($urls[1] as $i => $url) {
                 // If this is already an absolute link, dont replace it
-                if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $url)) {
-                    $replace_url = str_replace($url, $absoluteDomain . ltrim($url, '/'), $urls[0][$i]);
+                $decodedUrl = html_entity_decode($url);
+                if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $decodedUrl)) {
+                    $replace_url = str_replace($decodedUrl, $absoluteDomain . ltrim($decodedUrl, '/'), $urls[0][$i]);
                     $content = str_replace($urls[0][$i], $replace_url, $content);
+                    $replacementCount++;
                 }
             }
 
-            if (count($urls[1])) {
+            if ($replacementCount) {
                 $infos[] = sprintf($this->lang->getLL('validation_mail_converted_relative_url'), $type);
             }
         }
@@ -144,7 +157,7 @@ class Validator
         preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
         foreach ($urls[1] as $i => $url) {
             $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
-<style type=\"text/css\">\n<!--\n" . \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url) . "\n-->\n</style>", $content);
+<style type=\"text/css\">\n<!--\n" . $this->getURL($url) . "\n-->\n</style>", $content);
         }
         if (count($urls[1])) {
             $infos[] = $this->lang->getLL('validation_mail_contains_linked_styles');
@@ -174,11 +187,12 @@ class Validator
             'padding' => 'padding(-(bottom|left|right|top)+)?',
             'position' => 'position',
         );
+
         $forbiddenCssPropertiesWarnings = array();
         if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
             foreach ($matches[1] as $stylepart) {
                 foreach ($forbiddenCssProperties as $property => $regex) {
-                    if (preg_match('/[^-]\b' . $regex . '\b[^-]/', $stylepart)) {
+                    if (preg_match('/(^|[^\w-])' . $regex . '[^\w-]/', $stylepart)) {
                         $forbiddenCssPropertiesWarnings[$property] = $property;
                     }
                 }

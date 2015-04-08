@@ -1,6 +1,7 @@
  http://www.example.com this line should never be modified this link
 should be injected [1] this custom link should be injected [2] this
-link should be injected, and marker substituted [3]
+link should be injected, and marker substituted [3] mailto link should
+still work HTML entities encoded mailto link should still work [4]
 ###unknown_field_will_be_kept###
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
 http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=d41d8cd98f00b204e9800998ecf8427e
@@ -20,3 +21,4 @@ Links:
 [1] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fwww.example.com&n=&l=fbe81c5fc853243537a4aabf571a7553
 [2] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fmy+custom+value&n=&l=26478db11a74b3c8675f463fee30cba7
 [3] http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link&type=1342671779&url=http%3A%2F%2Fwww.example.com%3Fparam%3Dmy+custom+value&n=&l=cfe201de5943405c840233fec4378a45
+[4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
