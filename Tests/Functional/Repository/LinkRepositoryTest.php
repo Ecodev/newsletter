@@ -24,10 +24,14 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
     /** @var \Ecodev\Newsletter\Domain\Repository\LinkRepository */
     private $linkRepository;
 
+    /** @var \Ecodev\Newsletter\Domain\Repository\EmailRepository */
+    private $emailRepository;
+
     public function setUp()
     {
         parent::setUp();
         $this->linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
+        $this->emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
     }
 
     public function testFindAllByNewsletter()
@@ -76,5 +80,9 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
         $db = $this->getDatabaseConnection();
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_linkopened', 'link = 3001 AND email = 302');
         $this->assertEquals(1, $count, 'must have exactly 1 linkopened record for this link');
+
+        $email = $this->emailRepository->findByUid(302);
+        $this->assertTrue($email->isOpened(), 'email should be marked as open, even if the open spy did not work, because a link was clicked');
+        $this->assertRecipientListCallbackWasCalled('opened recipient2@example.com');
     }
 }

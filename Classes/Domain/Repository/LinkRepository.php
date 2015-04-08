@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Repository;
 
 /* * *************************************************************
@@ -33,7 +32,6 @@ namespace Ecodev\Newsletter\Domain\Repository;
  */
 class LinkRepository extends AbstractRepository
 {
-
     /**
      * Returns all links for a given newsletter
      * @param integer $uidNewsletter
@@ -113,6 +111,11 @@ class LinkRepository extends AbstractRepository
             WHERE
             tx_newsletter_domain_model_link.uid = $linkUid
             ");
+
+            // Also register the email as opened, just in case if it was not already marked open by the open spy (eg: because end-user did not show image)
+            $autCodeEmail = md5($emailUid . $email);
+            $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+            $emailRepository->registerOpen($autCodeEmail);
 
             // Forward which user clicked the link to the recipientList so the recipientList may take appropriate action
             $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');

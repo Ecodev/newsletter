@@ -104,21 +104,24 @@ class EmailRepository extends AbstractRepository
         $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
         $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode");
+        $updateEmailCount = $TYPO3_DB->sql_affected_rows();
 
-        // Tell the target that he opened the email
-        $rs = $TYPO3_DB->sql_query("
-		SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
-		FROM tx_newsletter_domain_model_email
-		LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
-		LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
-		WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = $authCode AND recipient_list IS NOT NULL
-		LIMIT 1");
+        // Tell the target that he opened the email, but only the first time
+        if ($updateEmailCount) {
+            $rs = $TYPO3_DB->sql_query("
+            SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
+            FROM tx_newsletter_domain_model_email
+            LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+            LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
+            WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = $authCode AND recipient_list IS NOT NULL
+            LIMIT 1");
 
-        if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
-            $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
-            $recipientList = $recipientListRepository->findByUid($recipientListUid);
-            if ($recipientList) {
-                $recipientList->registerOpen($emailAddress);
+            if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
+                $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
+                $recipientList = $recipientListRepository->findByUid($recipientListUid);
+                if ($recipientList) {
+                    $recipientList->registerOpen($emailAddress);
+                }
             }
         }
     }
