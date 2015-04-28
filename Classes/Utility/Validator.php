@@ -141,7 +141,7 @@ class Validator
             foreach ($urls[1] as $i => $url) {
                 // If this is already an absolute link, dont replace it
                 $decodedUrl = html_entity_decode($url);
-                if (!preg_match('-^(http://|https://|ftp://|mailto:|#)-i', $decodedUrl)) {
+                if (!preg_match('-^(http://|https://|ftp://|mailto:|tel:|facetime://|skype:|tel-av:|#)-i', $decodedUrl)) {
                     $replace_url = str_replace($decodedUrl, $absoluteDomain . ltrim($decodedUrl, '/'), $urls[0][$i]);
                     $content = str_replace($urls[0][$i], $replace_url, $content);
                     $replacementCount++;
