@@ -802,7 +802,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $language = '&L=' . $language;
         }
 
-        return "http://$domain/index.php?no_cache=1&id=" . $this->getPid() . $language . $append_url;
+        return "http://$domain/index.php?id=" . $this->getPid() . $language . $append_url;
     }
 
     /**
