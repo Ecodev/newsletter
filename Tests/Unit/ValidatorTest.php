@@ -118,6 +118,50 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 ),
             ),
             array(
+                '<a href="tel:+49511123456789">Phone</a>',
+                array(
+                    'content' => '<a href="tel:+49511123456789">Phone</a>',
+                    'errors' => array('validation_mail_too_short'),
+                    'warnings' => array(),
+                    'infos' => array(
+                        'validation_content_url',
+                    ),
+                ),
+            ),
+            array(
+                '<a href="facetime:+49511123456789">Facetime</a>',
+                array(
+                    'content' => '<a href="facetime:+49511123456789">Facetime</a>',
+                    'errors' => array('validation_mail_too_short'),
+                    'warnings' => array(),
+                    'infos' => array(
+                        'validation_content_url',
+                    ),
+                ),
+            ),
+             array(
+                '<a href="skype:username.foo">Skype</a>',
+                array(
+                    'content' => '<a href="skype:username.foo">Skype</a>',
+                    'errors' => array('validation_mail_too_short'),
+                    'warnings' => array(),
+                    'infos' => array(
+                        'validation_content_url',
+                    ),
+                ),
+            ),
+            array(
+                '<a href="tel-av:+49511123456789">Videocall</a>',
+                array(
+                    'content' => '<a href="tel-av:+49511123456789">Videocall</a>',
+                    'errors' => array('validation_mail_too_short'),
+                    'warnings' => array(),
+                    'infos' => array(
+                        'validation_content_url',
+                    ),
+                ),
+            ),
+            array(
                 '<a href="&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">encoded email</a>',
                 array(
                     'content' => '<a href="&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">encoded email</a>',
