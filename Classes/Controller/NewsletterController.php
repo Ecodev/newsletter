@@ -194,7 +194,7 @@ class NewsletterController extends ExtDirectActionController
                 try {
                     // Fill the spool and run the queue
                     Tools::createSpool($newNewsletter);
-                    Tools::runSpoolOne($newNewsletter);
+                    Tools::runSpool($newNewsletter);
 
                     $this->addFlashMessage($this->translate('flashmessage_test_newsletter_sent'), $this->translate('flashmessage_test_newsletter_sent_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
                 } catch (Exception $exception) {

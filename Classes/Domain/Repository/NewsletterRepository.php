@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Repository;
 
 use Ecodev\Newsletter\Domain\Model\Newsletter;
@@ -35,7 +34,6 @@ use Ecodev\Newsletter\Domain\Model\Newsletter;
  */
 class NewsletterRepository extends AbstractRepository
 {
-
     /**
      * Returns the latest newsletter for the given page
      * @param integer $pid
@@ -236,5 +234,47 @@ class NewsletterRepository extends AbstractRepository
         $TYPO3_DB->sql_free_result($rs);
 
         return $count;
+    }
+
+    /**
+     * Find all pairs of newsletter-email UIDs that are should be sent
+     *
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
+     * @param Newsletter $newsletter
+     * @return array [[newsletter => 12, email => 5], ...]
+     */
+    public static function findAllNewsletterAndEmailUidToSend(Newsletter $newsletter = null)
+    {
+        global $TYPO3_DB;
+
+        // Apply limit of emails per round
+        $mails_per_round = (int) \Ecodev\Newsletter\Tools::confParam('mails_per_round');
+        if ($mails_per_round) {
+            $limit = ' LIMIT ' . $mails_per_round;
+        } else {
+            $limit = '';
+        }
+
+        // Apply newsletter restriction if any
+        if ($newsletter) {
+            $newsletterUid = 'AND tx_newsletter_domain_model_newsletter.uid = ' . $newsletter->getUid();
+        } else {
+            $newsletterUid = '';
+        }
+
+        // Find the uid of emails and newsletters that need to be sent
+        $rs = $TYPO3_DB->sql_query('SELECT tx_newsletter_domain_model_newsletter.uid AS newsletter, tx_newsletter_domain_model_email.uid AS email
+						FROM tx_newsletter_domain_model_email
+						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
+						WHERE tx_newsletter_domain_model_email.begin_time = 0
+                        ' . $newsletterUid . '
+						ORDER BY tx_newsletter_domain_model_email.newsletter ' . $limit);
+
+        $result = array();
+        while ($record = $TYPO3_DB->sql_fetch_assoc($rs)) {
+            $result[] = $record;
+        }
+
+        return $result;
     }
 }

@@ -15,7 +15,6 @@ namespace Ecodev\Newsletter\Tests\Functional;
  * The TYPO3 project - inspiring people to share!
  */
 require_once __DIR__ . '/AbstractFunctionalTestCase.php';
-//require_once __DIR__ . '/../../Classes/Domain/Model/Newsletter.php';
 
 /**
  * Functional test for the \Ecodev\Newsletter\Tools
@@ -56,7 +55,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $newsletter = $newsletterRepository->findByUid(20);
         $newsletter->setValidator($mockValidator);
-        \Ecodev\Newsletter\Tools::runSpoolOne($newsletter);
+        \Ecodev\Newsletter\Tools::runSpool($newsletter);
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time != 0 AND end_time != 0 AND recipient_data != ""');
         $this->assertEquals(2, $count, 'should have sent two emails');

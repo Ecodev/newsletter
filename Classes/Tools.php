@@ -4,7 +4,6 @@ namespace Ecodev\Newsletter;
 
 use DateTime;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-use TYPO3;
 
 /* * *************************************************************
  *  Copyright notice
@@ -167,89 +166,33 @@ abstract class Tools
     }
 
     /**
-     * Run the spool on a server.
+     * Run the spool for all Newsletters, with a security to avoid parallel sending
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @return  integer	Number of emails sent.
      */
-    public static function runSpoolOneAll()
+    public static function runAllSpool()
     {
         global $TYPO3_DB;
 
-        /* Try to detect if a spool is already running
-          If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
-          If there are newer records, then stop here, and assume the running mailer will take care of it.
-         */
+        // Try to detect if a spool is already running
+        // If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
+        // If there are newer records, then stop here, and assume the running mailer will take care of it.
         $rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
-
         list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
         if ($num_records != 0) {
             return;
         }
 
-        /* Do we any limit to this session? */
-        if ($mails_per_round = self::confParam('mails_per_round')) {
-            $limit = " LIMIT 0, $mails_per_round ";
-        }
-
-        // Find the uid of emails and newsletters that need to be sent
-        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid
-						FROM tx_newsletter_domain_model_email
-						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
-						WHERE tx_newsletter_domain_model_email.begin_time = 0
-						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
-
-        /* Do it, if there is any records */
-        if ($numRows = $TYPO3_DB->sql_num_rows($rs)) {
-            self::runSpool($rs);
-        }
-
-        return $numRows;
+        self::runSpool();
     }
 
     /**
-     * Run the spool from a browser
-     * This has some limitations. No load balance. Different permissions. And should have a mails_per_round-value
+     * Run the spool for one or all Newsletters
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @return    void
+     * @param Newsletter $limitNewsletter if specified, run spool only for that Newsletter
      */
-    public static function runSpoolOne(Newsletter $newsletter)
+    public static function runSpool(Newsletter $limitNewsletter = null)
     {
-        global $TYPO3_DB;
-
-        /* Do we any limit to this session? */
-        if ($mails_per_round = self::confParam('mails_per_round')) {
-            $limit = " LIMIT 0, $mails_per_round ";
-        }
-
-        // Find the uid of emails and newsletters that need to be sent
-        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_newsletter.uid, tx_newsletter_domain_model_email.uid
-						FROM tx_newsletter_domain_model_email
-						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
-						WHERE tx_newsletter_domain_model_newsletter.uid = " . $newsletter->getUid() . "
-						AND tx_newsletter_domain_model_email.begin_time = 0
-						ORDER BY tx_newsletter_domain_model_email.newsletter " . $limit);
-
-        /* Do it, if there is any records */
-        if ($numRows = $TYPO3_DB->sql_num_rows($rs)) {
-            self::runSpool($rs);
-        }
-
-        return $numRows;
-    }
-
-    /**
-     * Method that accually runs the spool
-     *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param resource SQL-resultset from a select from tx_newsletter_domain_model_email
-     * @return void
-     */
-    private static function runSpool($rs)
-    {
-        global $TYPO3_DB;
-
         $emailSentCount = 0;
         $mailers = array();
 
@@ -257,8 +200,12 @@ abstract class Tools
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $emailRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
 
+        $allUids = $newsletterRepository->findAllNewsletterAndEmailUidToSend($limitNewsletter);
+
         $oldNewsletterUid = null;
-        while (list($newsletterUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
+        foreach ($allUids as $uids) {
+            $newsletterUid = $uids['newsletter'];
+            $emailUid = $uids['email'];
 
             /* For the page, this way we can support multiple pages in one spool session */
             if ($newsletterUid != $oldNewsletterUid) {
@@ -308,7 +255,7 @@ abstract class Tools
         // If we are in Backend we need to simulate minimal TSFE
         if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
             if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new TYPO3\CMS\Core\TimeTracker\TimeTracker();
+                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
                 $GLOBALS['TT']->start();
             }
             $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController');
@@ -363,4 +310,5 @@ abstract class Tools
 
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
+
 }

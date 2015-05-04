@@ -44,7 +44,7 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     public function execute()
     {
         Tools::createAllSpool();
-        Tools::runSpoolOneAll();
+        Tools::runAllSpool();
 
         return true;
     }
