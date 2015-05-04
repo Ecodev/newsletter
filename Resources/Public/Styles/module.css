@@ -65,19 +65,19 @@ ul.infos li {
 }
 
 ul.errors li {
-    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/error.png");
+    list-style-image: url("../Icons/error.png");
 }
 ul.warnings li {
-    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
+    list-style-image: url("../Icons/warning.png");
 }
 ul.infos li {
-    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
+    list-style-image: url("../Icons/information.png");
 }
 
 ul.errors li.none,
 ul.warnings li.none,
 ul.infos li.none {
-    list-style-image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/ok.png");
+    list-style-image: url("../Icons/ok.png");
 }
 
 /*

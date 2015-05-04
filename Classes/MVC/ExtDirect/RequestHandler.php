@@ -45,11 +45,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     protected $dispatcher;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer
-     */
-    protected $flashMessages;
-
-    /**
      * @var Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder
      */
     protected $requestBuilder;
@@ -83,15 +78,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer $objectManager
-     * @return void
-     */
-    public function injectFlashMessages(\TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer $flashMessages)
-    {
-        $this->flashMessages = $flashMessages;
     }
 
     /**
@@ -185,7 +171,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {
-        $response = $this->objectManager->create('TYPO3\\CMS\\Extbase\\Mvc\Web\\Response');
+        $response = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\Web\\Response');
         $jsonResponse = json_encode(count($results) === 1 ? $results[0] : $results);
         if ($extDirectRequest->isFormPost() && $extDirectRequest->isFileUpload()) {
             $response->setHeader('Content-Type', 'text/html');

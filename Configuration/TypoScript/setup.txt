@@ -89,7 +89,7 @@ tx_newsletter_blank_page {
     10 {
         10 = USER_INT
         10 {
-            userFunc = \TYPO3\CMS\Extbase\Core\Bootstrap->run
+            userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
             extensionName = Newsletter
             vendorName = Ecodev
             pluginName = p

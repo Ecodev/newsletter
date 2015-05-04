@@ -60,7 +60,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     public function initializeView()
     {
         if ($this->request->getFormat() === 'extdirect') {
-            $this->view = $this->objectManager->create('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
+            $this->view = $this->objectManager->get('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
             $this->view->setControllerContext($this->controllerContext);
         }
     }

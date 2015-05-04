@@ -310,5 +310,4 @@ abstract class Tools
 
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
-
 }

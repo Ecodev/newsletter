@@ -131,7 +131,7 @@ class NewsletterController extends ExtDirectActionController
     {
         $newsletter = $this->newsletterRepository->getLatest($this->pid);
         if (!$newsletter) {
-            $newsletter = $this->objectManager->create('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
+            $newsletter = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
             $newsletter->setPid($this->pid);
             $newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
             // Set the first Bounce Account found if any
@@ -150,6 +150,16 @@ class NewsletterController extends ExtDirectActionController
         $this->view->assign('data', $newsletter);
         $this->view->assign('success', true);
         $this->flushFlashMessages();
+    }
+
+    /**
+     * Allow 'pid' to be mapped
+     */
+    protected function initializeCreateAction()
+    {
+        $propertyMappingConfiguration = $this->arguments['newNewsletter']->getPropertyMappingConfiguration();
+        $propertyMappingConfiguration->allowAllProperties();
+        $propertyMappingConfiguration->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, true);
     }
 
     /**

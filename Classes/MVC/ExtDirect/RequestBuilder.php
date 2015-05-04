@@ -109,7 +109,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
             $transactionDatas = array($transactionDatas);
         }
 
-        $request = $this->objectManager->create('Ecodev\\Newsletter\\MVC\\ExtDirect\\Request');
+        $request = $this->objectManager->get('Ecodev\\Newsletter\\MVC\\ExtDirect\\Request');
         foreach ($transactionDatas as $transactionData) {
             $request->createAndAddTransaction(
                     $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : array(), $transactionData->tid
