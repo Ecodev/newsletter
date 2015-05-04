@@ -4,7 +4,6 @@
 namespace Ecodev\Newsletter\Domain\Repository;
 
 use Ecodev\Newsletter\Domain\Model\Newsletter;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /* * *************************************************************
  *  Copyright notice

@@ -4,8 +4,6 @@
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Tools;
-use GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /* * *************************************************************
  *  Copyright notice

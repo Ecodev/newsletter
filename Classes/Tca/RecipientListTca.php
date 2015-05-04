@@ -2,8 +2,6 @@
 
 namespace Ecodev\Newsletter\Tca;
 
-use GeneralUtility;
-
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
  *

@@ -3,8 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use GeneralUtility;
-
 /**
  * Format array of values to CSV format
  *

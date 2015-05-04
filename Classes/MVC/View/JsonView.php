@@ -5,10 +5,6 @@ namespace Ecodev\Newsletter\MVC\View;
 
 use ArrayAccess;
 use DateTime;
-use TYPO3\CMS\Extbase\Mvc\View\AbstractView;
-use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
-use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
-use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /* *
  * This script belongs to the FLOW3 framework.                            *

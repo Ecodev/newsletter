@@ -9,8 +9,6 @@ use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
 use Exception;
-use FlashMessage;
-use GeneralUtility;
 
 /* * *************************************************************
  *  Copyright notice

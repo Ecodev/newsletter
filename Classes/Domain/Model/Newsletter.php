@@ -2,12 +2,9 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use BackendUtility;
 use DateTime;
 use Ecodev\Newsletter\Tools;
 use Exception;
-use GeneralUtility;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice

@@ -4,7 +4,6 @@
 namespace Ecodev\Newsletter\ViewHelpers;
 
 use Ecodev\Newsletter\Exception;
-use ExtensionManagementUtility;
 
 /* * *************************************************************
  *  Copyright notice

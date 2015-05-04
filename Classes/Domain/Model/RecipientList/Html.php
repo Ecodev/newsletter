@@ -3,8 +3,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use GeneralUtility;
-
 /**
  * Recipient List using any public URL to fetch and parse for emails addresses
  *

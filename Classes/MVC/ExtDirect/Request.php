@@ -3,8 +3,6 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *
  *                                                                        *

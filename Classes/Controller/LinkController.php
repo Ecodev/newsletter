@@ -5,7 +5,6 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\LinkRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
-use FlashMessage;
 
 /* * *************************************************************
  *  Copyright notice

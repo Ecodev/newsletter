@@ -2,8 +2,6 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /* *

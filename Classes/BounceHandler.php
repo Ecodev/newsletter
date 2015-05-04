@@ -5,7 +5,6 @@ namespace Ecodev\Newsletter;
 
 use DateTime;
 use Exception;
-use GeneralUtility;
 
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.

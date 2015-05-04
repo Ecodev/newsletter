@@ -2,8 +2,6 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use GeneralUtility;
-
 /**
  * Recipient List using CSV file
  *

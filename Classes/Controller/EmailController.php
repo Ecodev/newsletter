@@ -8,10 +8,6 @@ use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
-use ExtensionManagementUtility;
-use FlashMessage;
-use GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice

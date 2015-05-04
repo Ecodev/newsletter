@@ -5,7 +5,6 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
-use FlashMessage;
 
 /* * *************************************************************
  *  Copyright notice

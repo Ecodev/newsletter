@@ -3,9 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use ExtensionManagementUtility;
-use GeneralUtility;
-
 /* * *************************************************************
  *  Copyright notice
  *

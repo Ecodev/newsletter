@@ -4,10 +4,7 @@
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 use Exception;
-use TYPO3\CMS\Extbase\Mvc\Controller\FlashMessageContainer;
 use TYPO3\CMS\Extbase\Mvc\Dispatcher;
-use TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *

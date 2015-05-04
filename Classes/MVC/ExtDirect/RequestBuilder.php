@@ -3,14 +3,10 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use CMS;
-use Core;
 use Ecodev\Newsletter\Exception as EcodevNewsletterException;
 use Exception as Exception;
-use SingletonInterface;
 use TYPO3;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /* *
  * This script belongs to the FLOW3 package "ExtJS".                      *

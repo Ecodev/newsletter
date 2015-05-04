@@ -3,8 +3,6 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
-use ExtensionManagementUtility;
-
 /**
  * Make localization files available in JavaScript
  *

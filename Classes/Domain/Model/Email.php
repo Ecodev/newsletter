@@ -3,7 +3,6 @@
 namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /* * *************************************************************
  *  Copyright notice

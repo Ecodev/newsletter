@@ -2,12 +2,7 @@
 
 namespace Ecodev\Newsletter\MVC\Controller;
 
-use AbstractMessage;
 use Ecodev\Newsletter\MVC\View\JsonView;
-use GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
-use TYPO3\CMS\Extbase\Validation\PropertyError;
 
 /* * *************************************************************
  *  Copyright notice

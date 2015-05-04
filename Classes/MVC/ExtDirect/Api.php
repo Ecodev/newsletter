@@ -2,10 +2,7 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use GeneralUtility;
-use PageRepository;
 use ReflectionException;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /* * *************************************************************

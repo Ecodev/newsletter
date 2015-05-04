@@ -4,8 +4,6 @@
 namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\Tools;
-use GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /* * *************************************************************
  *  Copyright notice

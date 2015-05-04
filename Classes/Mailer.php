@@ -5,8 +5,6 @@ namespace Ecodev\Newsletter;
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
 use Exception;
-use ExtensionManagementUtility;
-use GeneralUtility;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
 

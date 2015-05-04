@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
-use FlashMessage;
-use GeneralUtility;
 
 /* * *************************************************************
  *  Copyright notice
