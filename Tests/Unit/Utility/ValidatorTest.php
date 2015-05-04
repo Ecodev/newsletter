@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecodev\Newsletter\Tests\Unit\Controller;
+namespace Ecodev\Newsletter\Tests\Unit\Utility;
 
 /* * *************************************************************
  *  Copyright notice
@@ -26,7 +26,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
  * ************************************************************* */
 
 /**
- * Test case for class Ecodev\Newsletter\Controller\BounceAccountController.
+ * Test case for class Ecodev\Newsletter\Utility\Validator.
  *
  */
 class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
