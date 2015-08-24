@@ -31,7 +31,7 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 	uid int(11) NOT NULL auto_increment,
@@ -50,7 +50,7 @@ CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_recipientlist (
 	uid int(11) NOT NULL auto_increment,
@@ -82,7 +82,7 @@ CREATE TABLE tx_newsletter_domain_model_recipientlist (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_email (
 	uid int(11) NOT NULL auto_increment,
@@ -108,7 +108,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	KEY newsletter_end_time (newsletter,end_time),
 	KEY newsletter_open_time (newsletter,open_time),
 	KEY newsletter_bounce_time (newsletter,bounce_time),
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_link (
 	uid int(11) NOT NULL auto_increment,
@@ -120,7 +120,7 @@ CREATE TABLE tx_newsletter_domain_model_link (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_linkopened (
 	uid int(11) NOT NULL auto_increment,
@@ -132,4 +132,4 @@ CREATE TABLE tx_newsletter_domain_model_linkopened (
 
 	PRIMARY KEY (uid),
 	KEY email_open_time (email,open_time)
-);
+) ENGINE=InnoDB;
