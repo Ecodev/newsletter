@@ -21,6 +21,11 @@ matrix:
     - env: TYPO3_BRANCH=master
   fast_finish: true
 
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
 before_script:
   - sudo apt-get install lynx
   - npm install -g gulp
