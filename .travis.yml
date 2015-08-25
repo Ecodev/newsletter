@@ -30,7 +30,7 @@ before_script:
   - sudo apt-get install lynx
   - npm install -g gulp
   - npm install
-  - composer install --dev
+  - composer install
   - cd ..
   - git clone --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .

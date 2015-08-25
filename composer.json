@@ -7,5 +7,15 @@
     "keywords": ["TYPO3 CMS", "newsletter", "email", "statistics"],
     "require-dev": {
         "fabpot/php-cs-fixer": "~1.4"
-    }
+    },
+	"autoload": {
+		"psr-4": {
+			"Ecodev\\Newsletter\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Ecodev\\Newsletter\\Tests\\": "Tests/"
+		}
+	}
 }
