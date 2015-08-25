@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\LinkRepository;
@@ -36,7 +35,6 @@ use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
  */
 class LinkController extends ExtDirectActionController
 {
-
     /**
      * linkRepository
      *
@@ -87,12 +85,15 @@ class LinkController extends ExtDirectActionController
      */
     public function clickedAction()
     {
-        $this->linkRepository->registerClick(@$_REQUEST['n'], @$_REQUEST['l'], @$_REQUEST['p']);
+        $url = $this->linkRepository->registerClick(@$_REQUEST['n'], @$_REQUEST['l'], @$_REQUEST['p']);
 
         // Finally redirect to the destination URL
-        $url = @$_REQUEST['url'];
-        header("Location: $url");
-        die();
+        if ($url) {
+            header("Location: $url");
+            die();
+        } else {
+            throw new \TYPO3\CMS\Core\Error\Http\PageNotFoundException('The requested link was not found', 1440490767);
+        }
     }
 
     /**

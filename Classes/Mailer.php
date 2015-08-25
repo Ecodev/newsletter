@@ -386,7 +386,7 @@ class Mailer
         elseif ($isPreview) {
             $linkId = count($this->linksCache);
         }
-        // Finally if we it's not a preview and link was not in cache, check database
+        // Finally if it's not a preview and link was not in cache, check database
         else {
             // Look for the link database, it may already exist
             $res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = "' . $url . '" AND newsletter = ' . $this->newsletter->getUid() . ' LIMIT 1');
@@ -410,7 +410,7 @@ class Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $newUrl = Tools::buildFrontendUri('clicked', array(), 'Link') . '&url=' . urlencode($url) . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+        $newUrl = Tools::buildFrontendUri('clicked', array(), 'Link') . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
 
         return $newUrl;
     }

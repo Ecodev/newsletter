@@ -73,6 +73,7 @@ class LinkRepository extends AbstractRepository
      * @param integer|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param boolean $isPlain
+     * @return string|null absolute URL to be redirected to
      */
     public function registerClick($newsletterUid, $authCode, $isPlain)
     {
@@ -88,7 +89,7 @@ class LinkRepository extends AbstractRepository
         }
 
         // Attempt to find back records in database based on given authCode
-        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
+        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_link.url, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
         FROM tx_newsletter_domain_model_newsletter
 		INNER JOIN tx_newsletter_domain_model_email ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		INNER JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
@@ -96,7 +97,7 @@ class LinkRepository extends AbstractRepository
 		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = $authCode
         $limitNewsletter");
 
-        if (list($linkUid, $emailUid, $recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
+        if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
 
             // Insert a linkopened record to register which user clicked on which link
             $TYPO3_DB->sql_query("
@@ -123,6 +124,8 @@ class LinkRepository extends AbstractRepository
             if ($recipientList) {
                 $recipientList->registerClick($email);
             }
+
+            return $linkUrl;
         }
     }
 }
