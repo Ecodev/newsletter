@@ -9,6 +9,8 @@ env:
   - TYPO3_BRANCH=7.0.2
   - TYPO3_BRANCH=7.1.0
   - TYPO3_BRANCH=7.2.0
+  - TYPO3_BRANCH=7.3.1
+  - TYPO3_BRANCH=7.4.0
   - TYPO3_BRANCH=master
 
 matrix:

@@ -1,5 +1,5 @@
 <phpunit
-    bootstrap="../../../../../typo3/sysext/core/Build/UnitTestsBootstrap.php"
+    bootstrap="UnitTestsBootstrap.php"
     colors="true"
 >
 
