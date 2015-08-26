@@ -174,7 +174,7 @@ class Mailer
 
         // Detect what markers we need to substitute later on
         preg_match_all('/###(\w+)###/', $src, $fields);
-        preg_match_all('|"http://(\w+)"|', $src, $fieldsLinks);
+        preg_match_all('|"https?://(\w+)"|', $src, $fieldsLinks);
         $this->htmlMarkers = array_merge($fields[1], $fieldsLinks[1]);
 
         // Any advanced IF fields we need to sustitute later on
@@ -250,7 +250,7 @@ class Mailer
 
     /**
      * Replace a named marker with a suppied value.
-     * A marker can have the form of a simple string marker ###marker###, or http://marker
+     * A marker can have the form of a simple string marker ###marker###, http://marker, or https://marker
      * Or an advanced conditionnal marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
      *
      * @param   string      Name of the marker to replace
@@ -273,15 +273,19 @@ class Mailer
         $search = array(
             "###$name###",
             "http://$name",
+            "https://$name",
             urlencode("###$name###"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
             urlencode("http://$name"),
+            urlencode("https://$name"),
         );
 
         $replace = array(
             $value,
             $value,
+            preg_replace('-^http://-', 'https://', $value),
             urlencode($value), // We need to replace with urlencoded value
             urlencode($value),
+            urlencode(preg_replace('-^http://-', 'https://', $value)),
         );
 
         if (in_array($name, $this->htmlMarkers)) {

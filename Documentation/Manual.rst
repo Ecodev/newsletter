@@ -118,12 +118,13 @@ Simple substitutions
 
 The extension Newsletter offers markers substitution in newsletter
 content. Any fields available via RecpientList will be substituted in
-content if found. There is two alternative syntax for markers:
+content if found. There is three alternative syntax for markers:
 
 -  :code:`###my_field###`
 -  :code:`http://my_field`
+-  :code:`https://my_field`
 
-The second form is convenient to create hyperlink with TYPO3’s RTE.
+The last two variants are convenient to create hyperlink with TYPO3’s RTE.
 
 By using the SQL RecipientList, we can select several other fields to
 personalize the newsletter with recipient’s name, address, private
