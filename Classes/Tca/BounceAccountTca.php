@@ -59,7 +59,7 @@ class BounceAccountTca
 	
 	/**
 	 * Returns the decrypted field value if set.
-	 " @param array $PA Parameter Array
+	 * @param array $PA Parameter Array
 	 * @return string
 	 */
 	protected function getDecryptedFieldValue($PA)
