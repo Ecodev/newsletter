@@ -110,20 +110,33 @@ class BounceHandler
         $servers = array();
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $bounceAccountRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
+        $subst_tags = array('###SERVER###', '###PROTOCOL###', '###PORT###', '###USERNAME###', '###PASSWORD###' );
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
-            $server = $bounceAccount->getServer();
-            $protocol = $bounceAccount->getProtocol();
-            $username = $bounceAccount->getUsername();
-            $password = $bounceAccount->getPassword();
-
-            $content .= "poll $server proto $protocol username \"$username\" password \"$password\"\n";
-            $servers[] = $server;
+            $subst_values = array();
+            $subst_values[] = $bounceAccount->getServer();
+            $subst_values[] = $bounceAccount->getProtocol();
+            $subst_values[] = $bounceAccount->getPort();
+            $subst_values[] = $bounceAccount->getUsername();
+            $subst_values[] = \Ecodev\Newsletter\Tools::decrypt($bounceAccount->getPassword());
+		   $config = $bounceAccount->getConfig();
+			
+		    if (empty($config)) {
+				// Keep the old config to not break old installations
+				$config= "poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n";
+			} else {
+				$config = \Ecodev\Newsletter\Tools::decrypt($config);
+			}
+			
+              $content .= str_replace($subst_tags, $subst_values , $config)."\n";
+              $subst_values = null; // Dont leave unencrypted values in memory around for too long.
+              $servers[] = $server;
         }
 
         // Write a new fetchmailrc based on bounce accounts found
         $fetchmailhome = PATH_site . 'uploads/tx_newsletter';
         $fetchmailfile = "$fetchmailhome/fetchmailrc";
         file_put_contents($fetchmailfile, $content);
+        $content = null; // Dont leave unencrypted values in memory around for too long.
         chmod($fetchmailfile, 0600);
         putenv("FETCHMAILHOME=$fetchmailhome");
 

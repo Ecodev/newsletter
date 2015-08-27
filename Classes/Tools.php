@@ -33,7 +33,7 @@ use Ecodev\Newsletter\Domain\Model\Newsletter;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tools
+class Tools
 {
     protected static $configuration = null;
 
@@ -309,5 +309,83 @@ abstract class Tools
                 ->setArguments($arguments);
 
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
+    }
+    
+    /**
+	 * Returns an base64_encode encrypted string
+	 * @param string $string
+	 * @return string base64_encode encrypted string
+	 */
+	public static function encrypt($string)
+	{
+		$iv = mcrypt_create_iv(self::getIVSize());
+		return base64_encode($iv.mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv));
+	}
+	
+	/**
+	 * Returns a decrypted string
+	 * @param string $string base64_encode encrypted string
+	 * @return string decrypted string
+	 */
+	public static function decrypt($string)
+	{
+		$string = base64_decode($string);
+		$iv = substr($string, 0, self::getIVSize());
+        $cipher = substr($string, self::getIVSize());
+		return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+	}
+	
+	/**
+	 * Returns the size of the IV
+	 * @return integer
+	 */
+	private static function getIVSize()
+	{
+		static $iv_size;
+		if (!isset($iv_size)) {
+			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256,MCRYPT_MODE_CBC);
+		}
+		return $iv_size;
+	}
+	
+	/**
+	 * Returns the secure encryption key
+	 * @return string
+	 */
+	private static function getSecureKey()
+	{
+		static $secureKey;
+		if (!isset($secureKey)) {
+			$secureKey = hash( 'sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], TRUE );
+		}
+		return $secureKey;
+	}
+	
+	/**
+     * Encrypt old bounce account passwords
+     * @param string $extname 
+     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
+     */
+    public static function encryptOldBounceAccountPasswords( $extname = null )
+    {
+		// Only concerned if it is the newsletter extension that was installed.
+		if( $extname !== 'newsletter' ) {
+            return;
+        }
+		
+        global $TYPO3_DB;
+		
+		// Keep the old config to not break old installations
+		$config= self::encrypt("poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n");
+		
+		// Fetch and update the old records - they will have a default port and an empty config.
+        $rs = $TYPO3_DB->exec_SELECTquery('uid,password','tx_newsletter_domain_model_bounceaccount','port = 0 AND config = \'\'');
+        while(($records[] = $TYPO3_DB->sql_fetch_assoc($rs)) || array_pop($records));
+		$TYPO3_DB->sql_free_result($rs);
+		if ( !empty($records) ) {
+			foreach( $records as $row ) {
+				$TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid='.intval($row['uid']), array( 'password' => self::encrypt($row['password']), 'config' => $config ));
+			}
+		}
     }
 }

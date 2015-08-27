@@ -55,6 +55,13 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $protocol
      */
     protected $protocol = '';
+    
+    /**
+     * port
+     *
+     * @var string $port
+     */
+    protected $port = '';
 
     /**
      * username
@@ -69,6 +76,13 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $password
      */
     protected $password = '';
+    
+    /**
+     * config
+     *
+     * @var string $config
+     */
+    protected $config = '';
 
     /**
      * Setter for email
@@ -132,6 +146,27 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->protocol;
     }
+    
+    /**
+     * Setter for port
+     *
+     * @param string $port port
+     * @return void
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+    }
+
+    /**
+     * Getter for port
+     *
+     * @return string port
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
 
     /**
      * Setter for username
@@ -173,5 +208,26 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    /**
+     * Setter for config
+     *
+     * @param string $config config
+     * @return void
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * Getter for config
+     *
+     * @return string config
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }
