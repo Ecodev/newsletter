@@ -32,7 +32,8 @@ class BounceAccountTca
 
 	/**
 	 * Returns the decrypted password field
-	 " @param array $PA Parameter Array
+	 * @param array $PA Parameter Array
+	 * @param TYPO3\CMS\Backend\Form\FormEngine $fObj 
 	 * @return string
 	 */
 	public function passwordField($PA, $fObj)
@@ -45,7 +46,8 @@ class BounceAccountTca
 	
 	/**
 	 * Returns the decrypted textarea field
-	 " @param array $PA Parameter Array
+	 * @param array $PA Parameter Array
+	 * @param TYPO3\CMS\Backend\Form\FormEngine $fObj 
 	 * @return string
 	 */
 	public function textareaField($PA, $fObj)
