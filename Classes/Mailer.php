@@ -144,7 +144,7 @@ class Mailer
     {
         // Extract title from HTML
         preg_match('|<title[^>]*>(.*)</title>|i', $htmlSrc, $m);
-        
+
         // As this is being extracted from HTML and it is being used as an email subject we need to decode any entities.
         $title = trim(html_entity_decode($m[1]));
 

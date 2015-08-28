@@ -55,7 +55,7 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $protocol
      */
     protected $protocol = '';
-    
+
     /**
      * port
      *
@@ -76,7 +76,7 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $password
      */
     protected $password = '';
-    
+
     /**
      * config
      *
@@ -146,7 +146,7 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->protocol;
     }
-    
+
     /**
      * Setter for port
      *
@@ -209,7 +209,7 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->password;
     }
-    
+
     /**
      * Setter for config
      *

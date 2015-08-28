@@ -118,17 +118,17 @@ class BounceHandler
             $subst_values[] = $bounceAccount->getPort();
             $subst_values[] = $bounceAccount->getUsername();
             $subst_values[] = \Ecodev\Newsletter\Tools::decrypt($bounceAccount->getPassword());
-		   $config = $bounceAccount->getConfig();
-			
-		    if (empty($config)) {
-				// Keep the old config to not break old installations
-				$config= "poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n";
-			} else {
-				$config = \Ecodev\Newsletter\Tools::decrypt($config);
-			}
-			
-              $content .= str_replace($subst_tags, $subst_values , $config)."\n";
-              $subst_values = null; // Dont leave unencrypted values in memory around for too long.
+            $config = $bounceAccount->getConfig();
+
+            if (empty($config)) {
+                // Keep the old config to not break old installations
+                $config = "poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n";
+            } else {
+                $config = \Ecodev\Newsletter\Tools::decrypt($config);
+            }
+
+            $content .= str_replace($subst_tags, $subst_values, $config) . "\n";
+            $subst_values = null; // Dont leave unencrypted values in memory around for too long.
               $servers[] = $server;
         }
 
