@@ -393,7 +393,7 @@ class Mailer
         // Finally if it's not a preview and link was not in cache, check database
         else {
             // Look for the link database, it may already exist
-            $res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = "' . $url . '" AND newsletter = ' . $this->newsletter->getUid() . ' LIMIT 1');
+            $res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = ' . $TYPO3_DB->fullQuoteStr($url, 'tx_newsletter_domain_model_link') . ' AND newsletter = ' . $TYPO3_DB->fullQuoteStr($this->newsletter->getUid(), 'tx_newsletter_domain_model_link') . ' LIMIT 1');
             $row = $TYPO3_DB->sql_fetch_row($res);
             if ($row) {
                 $linkId = $row[0];
