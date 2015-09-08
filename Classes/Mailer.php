@@ -67,6 +67,11 @@ class Mailer
     private $linksCache = array();
 
     /**
+     * @var Utility\MarkerSubstitutor
+     */
+    private $substitutor;
+
+    /**
      * Constructor that set up basic internal datastructures. Do not call directly
      *
      */
@@ -77,6 +82,7 @@ class Mailer
         /* Read some basic settings */
         $this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
         $this->realPath = PATH_site;
+        $this->substitutor = new Utility\MarkerSubstitutor();
     }
 
     /**
@@ -145,18 +151,6 @@ class Mailer
         // Extract title from HTML
         preg_match('|<title[^>]*>(.*)</title>|i', $htmlSrc, $m);
         $title = trim($m[1]);
-
-        /* Detect what markers we need to substitute later on */
-        preg_match_all('/###[\w]+###/', $title, $fields);
-        $this->titleMarkers = str_replace('###', '', $fields[0]);
-
-        /* Any advanced markers we need to sustitute later on */
-        $this->titleAdvancedMarkers = array();
-        preg_match_all('/###:IF: (\w+) ###/U', $title, $fields);
-        foreach ($fields[1] as $field) {
-            $this->titleAdvancedMarkers[] = $field;
-        }
-
         $this->title_tpl = $title;
         $this->title = $title;
     }
@@ -171,19 +165,6 @@ class Mailer
     private function setHtml($src)
     {
         $src = $this->findAttachments($src);
-
-        // Detect what markers we need to substitute later on
-        preg_match_all('/###(\w+)###/', $src, $fields);
-        preg_match_all('|"https?://(\w+)"|', $src, $fieldsLinks);
-        $this->htmlMarkers = array_merge($fields[1], $fieldsLinks[1]);
-
-        // Any advanced IF fields we need to sustitute later on
-        $this->htmlAdvancedMarkers = array();
-        preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
-        foreach ($fields[1] as $field) {
-            $this->htmlAdvancedMarkers[] = $field;
-        }
-
         $this->html_tpl = $src;
         $this->html = $src;
     }
@@ -242,111 +223,10 @@ class Mailer
      *
      * @return   void
      */
-    private function resetMarkers()
+    private function resetContent()
     {
         $this->html = $this->html_tpl;
         $this->title = $this->title_tpl;
-    }
-
-    /**
-     * Replace a named marker with a suppied value.
-     * A marker can have the form of a simple string marker ###marker###, http://marker, or https://marker
-     * Or an advanced conditionnal marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
-     *
-     * @param   string      Name of the marker to replace
-     * @param   string      Value to replace marker with.
-     * @return   void
-     */
-    private function substituteMarker($name, $value)
-    {
-        // For each marker, only substitute if the field is registered as a marker.
-        // This approach has shown to speed up things quite a bit.
-        if (in_array($name, $this->htmlAdvancedMarkers)) {
-            $this->html = self::advancedSubstituteMarker($this->html, $name, $value);
-        }
-
-        if (in_array($name, $this->titleAdvancedMarkers)) {
-            $this->title = self::advancedSubstituteMarker($this->title, $name, $value);
-        }
-
-        // All variants of the marker to search
-        $search = array(
-            "###$name###",
-            "http://$name",
-            "https://$name",
-            urlencode("###$name###"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
-            urlencode("http://$name"),
-            urlencode("https://$name"),
-        );
-
-        $replace = array(
-            $value,
-            $value,
-            preg_replace('-^http://-', 'https://', $value),
-            urlencode($value), // We need to replace with urlencoded value
-            urlencode($value),
-            urlencode(preg_replace('-^http://-', 'https://', $value)),
-        );
-
-        if (in_array($name, $this->htmlMarkers)) {
-            $this->html = str_ireplace($search, $replace, $this->html);
-        }
-
-        if (in_array($name, $this->titleMarkers)) {
-            $this->title = str_ireplace($search, $replace, $this->title);
-        }
-    }
-
-    /**
-     * Substitute an advanced marker.
-     *
-     * @param   string      Source to apply marker substitution to.
-     * @param   string      Name of marker.
-     * @param   boolean      Display value of marker.
-     * @return   string      Source with applied marker.
-     */
-    private function advancedSubstituteMarker($src, $name, $value)
-    {
-        $tokenBegin = "###:IF: $name ###";
-        $tokenElse = '###:ELSE:###';
-        $tokenEnd = '###:ENDIF:###';
-        while (($beginning = strpos($src, $tokenBegin)) !== false) {
-            $end = strpos($src, $tokenEnd, $beginning);
-
-            // If marker is not correctly terminated, cancel everything
-            if ($end === false) {
-                break;
-            }
-
-            // Find ELSE token but only before the ENDIF token
-            $else = strpos($src, $tokenElse, $beginning);
-            if ($else > $end) {
-                $else = false;
-            }
-
-            // Find the text which will replace the marker
-            if ($value) {
-                $textBeginning = $beginning + strlen($tokenBegin);
-                if ($else === false) {
-                    $text = substr($src, $textBeginning, $end - $textBeginning);
-                } else {
-                    $text = substr($src, $textBeginning, $else - $textBeginning);
-                }
-            } else {
-                if ($else === false) {
-                    $text = '';
-                } else {
-                    $textBeginning = $else + strlen($tokenElse);
-                    $text = substr($src, $textBeginning, $end - $textBeginning);
-                }
-            }
-
-            // Do the actual replacement in the entire src (possibly replacing the same marker several times)
-            $entireMarker = substr($src, $beginning, $end - $beginning + strlen(($tokenEnd)));
-            $src = str_replace($entireMarker, $text, $src);
-        }
-
-        return $src;
     }
 
     /**
@@ -357,24 +237,8 @@ class Mailer
      */
     private function substituteMarkers(Email $email)
     {
-        $markers = $email->getRecipientData();
-
-        // Add predefined markers
-        $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = Tools::buildFrontendUri('show', array(), 'Email') . '&c=' . $authCode;
-        $markers['newsletter_unsubscribe_url'] = Tools::buildFrontendUri('unsubscribe', array(), 'Email') . '&c=' . $authCode;
-
-        if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
-            foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
-                $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
-                $this->html = $_procObj->substituteMarkersHook($this->html, 'html', $markers);
-                $this->title = $_procObj->substituteMarkersHook($this->title, 'title', $markers);
-            }
-        }
-
-        foreach ($markers as $name => $value) {
-            $this->substituteMarker($name, $value);
-        }
+        $this->html = $this->substitutor->substituteMarkers($this->html, $email, 'html');
+        $this->title = $this->substitutor->substituteMarkers($this->title, $email, 'title');
     }
 
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
@@ -446,7 +310,7 @@ class Mailer
      */
     public function prepare(Email $email, $isPreview = false)
     {
-        $this->resetMarkers();
+        $this->resetContent();
 
         if ($this->newsletter->getInjectOpenSpy()) {
             $this->injectOpenSpy($email);
@@ -477,7 +341,6 @@ class Mailer
     /**
      * Raw send method. This does not replace markers, or reset the mail afterwards.
      *
-     * @interal
      * @param   array      Record with receivers information as name => value pairs.
      * @param   array      Array with extra headers to apply to mails as name => value pairs.
      * @return   void

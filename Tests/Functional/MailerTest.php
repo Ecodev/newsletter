@@ -121,8 +121,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         if ($injectLinksSpy) {
             $this->assertLinkWasCreated('http://www.example.com');
-            $this->assertLinkWasCreated('http://my custom value');
-            $this->assertLinkWasCreated('http://www.example.com?param=my custom value');
+            $this->assertLinkWasCreated('http://###my_custom_field###');
+            $this->assertLinkWasCreated('http://www.example.com?param=###my_custom_field###');
         }
     }
 

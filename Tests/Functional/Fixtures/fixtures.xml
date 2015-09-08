@@ -64,7 +64,7 @@
         <newsletter>30</newsletter>
         <uid>3001</uid>
         <pid>3</pid>
-        <url>http://example.com/</url>
+        <url>http://newsletter_view_url</url>
     </tx_newsletter_domain_model_link>
 
     <tx_newsletter_domain_model_link>
