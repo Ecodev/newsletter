@@ -114,9 +114,9 @@ class LinkRepository extends AbstractRepository
             ");
 
             // Also register the email as opened, just in case if it was not already marked open by the open spy (eg: because end-user did not show image)
-            $autCodeEmail = md5($emailUid . $email);
+            $authCodeEmail = md5($emailUid . $email);
             $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
-            $emailRepository->registerOpen($autCodeEmail);
+            $emailRepository->registerOpen($authCodeEmail);
 
             // Forward which user clicked the link to the recipientList so the recipientList may take appropriate action
             $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
@@ -125,7 +125,12 @@ class LinkRepository extends AbstractRepository
                 $recipientList->registerClick($email);
             }
 
-            return $linkUrl;
+            // Finally replace markers that may be present in URL (typically for http://newsletter_view_url, but also any other markers)
+            $emailObject = $emailRepository->findByUid($emailUid);
+            $substitutor = new \Ecodev\Newsletter\Utility\MarkerSubstitutor();
+            $finalLinkUrl = $substitutor->substituteMarkersInUrl($linkUrl, $emailObject, 'link');
+
+            return $finalLinkUrl;
         }
     }
 }

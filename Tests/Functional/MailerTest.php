@@ -46,7 +46,9 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         parent::setUp();
 
-        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getDomain', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
+        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getUid', 'getPid', 'getDomain', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
+        $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
+        $this->mockNewsletter->method('getPid')->will($this->returnValue(789));
         $this->mockNewsletter->method('getDomain')->will($this->returnValue('example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
@@ -110,11 +112,28 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $mailer = $this->objectManager->get('Ecodev\\Newsletter\\Mailer');
 
         $mailer->setNewsletter($this->mockNewsletter);
-        $mailer->prepare($this->mockEmail, true);
+        $mailer->prepare($this->mockEmail);
 
         $actualHtml = $mailer->getHtml();
         $actualPlain = $mailer->getPlain();
         $this->assertEquals($expectedHtml, $actualHtml);
         $this->assertEquals($expectedPlain, $actualPlain);
+
+        if ($injectLinksSpy) {
+            $this->assertLinkWasCreated('http://www.example.com');
+            $this->assertLinkWasCreated('http://###my_custom_field###');
+            $this->assertLinkWasCreated('http://www.example.com?param=###my_custom_field###');
+        }
+    }
+
+    /**
+     * Assert that there is exactly 1 record corresponding to the given URL
+     * @param string $url
+     */
+    protected function assertLinkWasCreated($url)
+    {
+        $db = $this->getDatabaseConnection();
+        $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'url = ' . $db->fullQuoteStr($url, 'tx_newsletter_domain_model_link'));
+        $this->assertEquals(1, $count, 'could not find exactly 1 log record containing "' . $url . '"');
     }
 }

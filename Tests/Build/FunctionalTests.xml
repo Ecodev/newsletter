@@ -1,5 +1,5 @@
 <phpunit
-    bootstrap="../../../../../typo3/sysext/core/Build/FunctionalTestsBootstrap.php"
+    bootstrap="FunctionalTestsBootstrap.php"
     colors="true"
     processIsolation="true"
 >

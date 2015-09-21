@@ -32,6 +32,10 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
         parent::setUp();
         $this->linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
         $this->emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+
+        // When testing we need to help the core by filling HTTP_HOST variable to be able to build correct URL
+        $_SERVER['HTTP_HOST'] = 'example.com';
+        $_SERVER['SCRIPT_NAME'] = '/index.php';
     }
 
     public function testFindAllByNewsletter()
@@ -71,7 +75,8 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
     public function testRegisterClick()
     {
         $authCodeForLink = md5($this->authCode . 3001);
-        $this->linkRepository->registerClick(30, $authCodeForLink, false);
+        $url = $this->linkRepository->registerClick(30, $authCodeForLink, false);
+        $this->assertEquals('http://example.com/index.php?id=1&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email&type=1342671779&c=87c4e9b09085befbb7f20faa7482213a', $url, 'the URL returned must have markers substituted');
 
         $link = $this->linkRepository->findByUid(3001);
         $this->assertEquals(1, $link->getOpenedCount(), 'the link opened count must have been incrementated');

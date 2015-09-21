@@ -9,15 +9,6 @@ namespace Ecodev\Newsletter\Tca;
  */
 class BounceAccountTca
 {
-
-    /**
-     * Adds new JavaScript function for evaluation of the TCA fields in backend
-     * @return 	string		JavaScript
-     */
-    public function returnFieldJS()
-    {
-    }
-
     /**
      * Encrypts the field value
      * @param string $value The field value to be evaluated.
