@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-08-22T16:21:05Z" product-name="newsletter">
+        <header/>
+        <body>
+            <trans-unit id="ext-update.manual_updates" xml:space="preserve" approved="yes">
+                <source>Manual Updates</source>
+            <target state="translated">Manuelle Updates</target></trans-unit>
+            <trans-unit id="ext-update.select_manual_tasks" xml:space="preserve" approved="yes">
+                <source>Select the update tasks you wish to manually apply.</source>
+            <target state="translated">Wählen Sie die Update-Aufgaben, die Sie manuell anwenden möchten.</target></trans-unit>
+            <trans-unit id="ext-update.new_install_advice" xml:space="preserve" approved="yes">
+                <source>If this is a new install of the extension, manually updating may not be necessary.</source>
+            <target state="translated">Ist dies eine neue Installation der Erweiterung der manuellen Aktualisierung nicht notwendig sein.</target></trans-unit>
+            <trans-unit id="ext-update.current_version" xml:space="preserve" approved="yes">
+                <source>Current Extension Version: %s</source>
+            <target state="translated">Aktuelle Extension Version: %s</target></trans-unit>
+            <trans-unit id="ext-update.update_tasks" xml:space="preserve" approved="yes">
+                <source>Update Tasks</source>
+            <target state="translated">Update-Aufgaben</target></trans-unit>
+            <trans-unit id="ext-update.task" xml:space="preserve" approved="yes">
+                <source>Task</source>
+            <target state="translated">Aufgabe</target></trans-unit>
+            <trans-unit id="ext-update.since" xml:space="preserve" approved="yes">
+                <source>Since</source>
+            <target state="translated">Seit</target></trans-unit>
+            <trans-unit id="ext-update.update_type" xml:space="preserve" approved="yes">
+                <source>Update-Type</source>
+            <target state="translated">Update-Typ</target></trans-unit>
+            <trans-unit id="ext-update.last_updated" xml:space="preserve" approved="yes">
+                <source>Last-Updated</source>
+            <target state="translated">Letzte-Aktualisierung</target></trans-unit>
+            <trans-unit id="ext-update.ago" xml:space="preserve" approved="yes">
+                <source>%s ago</source>
+            <target state="translated">Vor %s</target></trans-unit>
+            <trans-unit id="ext-update.never" xml:space="preserve" approved="yes">
+                <source>never</source>
+            <target state="translated">niemals</target></trans-unit>
+            <trans-unit id="ext-update.update_selected" xml:space="preserve" approved="yes">
+                <source>Update Selected</source>
+            <target state="translated">Aktualisieren</target></trans-unit>
+            <trans-unit id="ext-update.update_results" xml:space="preserve" approved="yes">
+                <source>Update Results</source>
+            <target state="translated">Update-Ergebnisse</target></trans-unit>
+            <trans-unit id="ext-update.records_modified" xml:space="preserve" approved="yes">
+                <source>Records-Modified</source>
+            <target state="translated">Rekorde-Modified</target></trans-unit>
+            <trans-unit id="ext-update.files_modified" xml:space="preserve" approved="yes">
+                <source>Files-Modified</source>
+            <target state="translated">Files-Modified</target></trans-unit>
+            <trans-unit id="ext-update.problems" xml:space="preserve" approved="yes">
+                <source>Problems</source>
+            <target state="translated">Probleme</target></trans-unit>
+            <trans-unit id="ext-update.none" xml:space="preserve" approved="yes">
+                <source>none</source>
+            <target state="translated">keine</target></trans-unit>
+            <trans-unit id="ext-update.attention" xml:space="preserve" approved="yes">
+                <source>Attention</source>
+            <target state="translated">Achtung</target></trans-unit>
+            <trans-unit id="ext-update.no_tasks_selected" xml:space="preserve" approved="yes">
+                <source>No update tasks selected.</source>
+            <target state="translated">Keine Update-Aufgaben ausgewählt.</target></trans-unit>
+            <trans-unit id="ext-update.all_updates_completed_successfully" xml:space="preserve" approved="yes">
+                <source>All selected update tasks completed successfully.</source>
+            <target state="translated">Alle ausgewählten Update-Aufgaben erfolgreich abgeschlossen.</target></trans-unit>
+            <trans-unit id="ext-update.update_success" xml:space="preserve" approved="yes">
+                <source>Update Success</source>
+            <target state="translated">Update Success</target></trans-unit>
+            <trans-unit id="ext-update.some_update_problems_but_data_integrity_kept" xml:space="preserve" approved="yes">
+                <source>There was some problems with some of the selected update tasks, however your record and file integrity is the same as before you updated.</source>
+            <target state="translated">Es gab einige Probleme mit einigen der ausgewählten Update-Aufgaben jedoch Ihrem Datensatz und Dateiintegrität ist die gleiche wie vor dem Update.</target></trans-unit>
+            <trans-unit id="ext-update.please_review_update_results_below" xml:space="preserve" approved="yes">
+                <source>Please review the Update Results below for further information.</source>
+            <target state="translated">Bitte überprüfen Sie die Update-Ergebnisse unten für weitere Informationen.</target></trans-unit>
+            <trans-unit id="ext-update.update_warning" xml:space="preserve" approved="yes">
+                <source>Update Warning</source>
+            <target state="translated">Update Warnung</target></trans-unit>
+            <trans-unit id="ext-update.some_critical_update_problems" xml:space="preserve" approved="yes">
+                <source>There was some critical problems with some of the selected update tasks, some files or records may have been irreversibly modified. We hope you have a backup.</source>
+            <target state="translated">Es gab einige kritische Probleme mit einigen der ausgewählten Update-Aufgaben, einige Dateien oder Aufzeichnungen können irreversibel verändert haben. Wir hoffen, dass Sie ein Backup haben.</target></trans-unit>
+            <trans-unit id="ext-update.update_error" xml:space="preserve" approved="yes">
+                <source>Update Error</source>
+            <target state="translated">Update-Fehler</target></trans-unit>
+        </body>
+    </file>
+</xliff>
