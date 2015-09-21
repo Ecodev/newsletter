@@ -31,70 +31,20 @@
 class ext_update
 {
     /**
-     * SQL queries to do migration
-     * @var array
-     */
-    private $queries = array(
-        "UPDATE tx_scheduler_task SET serialized_task_object = REPLACE(serialized_task_object, 'O:29:\"Tx_Newsletter_Task_SendEmails\"', 'O:33:\"Ecodev\\\\Newsletter\\\\Task\\\\SendEmails\"');",
-        "UPDATE tx_scheduler_task SET serialized_task_object = REPLACE(serialized_task_object, 'O:31:\"Tx_Newsletter_Task_FetchBounces\"', 'O:35:\"Ecodev\\\\Newsletter\\\\Task\\\\FetchBounces\"');",
-        "UPDATE tx_newsletter_domain_model_recipientlist SET type = REPLACE(type, 'Tx_Newsletter_Domain_Model_RecipientList_', 'Ecodev\\\\Newsletter\\\\Domain\\\\Model\\\\RecipientList\\\\');",
-        "UPDATE tx_newsletter_domain_model_newsletter SET plain_converter = REPLACE(plain_converter, 'Tx_Newsletter_Domain_Model_PlainConverter_', 'Ecodev\\\\Newsletter\\\\Domain\\\\Model\\\\PlainConverter\\\\');",
-    );
-
-    /**
      * Main function, returning the HTML content of the module
      * @return	string HTML to display
      */
     public function main()
     {
-        $content = '';
-        $content .= '<h2>Migration from Newsletter 2.2.3 to 2.3.0</h2>';
-        $content .= '<form name="migrateForm" action="" method ="post">';
-        $content .= '<p>Records in database from Newsletter 2.2.3, or earlier, will be migrated to 2.3.0, or later. This action is idempotent and can be repeated if necessary.</p>';
-        $content .= '<p><input type="submit" name="domigration" value ="Migrate" /></p>';
-        $content .= '</form>';
-
-        // Action! Makes the necessary update
-        $update = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('domigration');
-
-        // The update button was clicked, migrate stuff
-        if (!empty($update)) {
-            $recordCount = $this->doMigration();
-            $content .= '<h3>Results</h3>';
-            $content .= "<p>$recordCount records successfully migrated.</p>";
-        }
-
-        return $content;
-    }
-
-    /**
-     * Apply the migration
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     */
-    private function doMigration()
-    {
-        global $TYPO3_DB;
-
-        $recordCount = 0;
-        foreach ($this->queries as $query) {
-            $res = $TYPO3_DB->sql_query($query);
-            $error = $TYPO3_DB->sql_error();
-            if ($error) {
-                die("<pre>" . $query . "<br>" . $error . "</pre>");
-            }
-            $recordCount += $TYPO3_DB->sql_affected_rows($res);
-        }
-
-        return $recordCount;
+        return \Ecodev\Newsletter\Update::main();
     }
 
     /**
      * This method checks whether it is necessary to display the UPDATE option at all
-     *
-     * @param string $what What should be updated
+     * @return boolean		true if user have access, otherwise false
      */
-    public function access($what = 'all')
+    public function access()
     {
-        return true;
+        return \Ecodev\Newsletter\Update::access();
     }
 }
