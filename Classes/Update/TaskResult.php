@@ -87,12 +87,12 @@ class TaskResult
     /**
      * Task results model constructor
      *
-     * @param boolean $success            
-     * @param string $errorMessage            
-     * @param integer $numRecordsModified            
-     * @param boolean $recordsCommitted            
-     * @param integer $numFilesModified            
-     * @param boolean $filesCommitted            
+     * @param boolean $success
+     * @param string $errorMessage
+     * @param integer $numRecordsModified
+     * @param boolean $recordsCommitted
+     * @param integer $numFilesModified
+     * @param boolean $filesCommitted
      */
     public function __construct($success = false, $errorMessage = '', $numRecordsModified = 0, $recordsCommitted = false, $numFilesModified = 0, $filesCommitted = false)
     {

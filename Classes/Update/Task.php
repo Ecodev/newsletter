@@ -202,7 +202,7 @@ class Task
     /**
      * Sets the current update mode.
      *
-     * @param string $currentUpdateMode            
+     * @param string $currentUpdateMode
      */
     public function setCurrentUpdateMode($currentUpdateMode)
     {
@@ -220,7 +220,7 @@ class Task
     /**
      * Sets the update status of the task.
      *
-     * @param array $updateHistory            
+     * @param array $updateHistory
      */
     public function setStatus($updateHistory)
     {
@@ -241,14 +241,15 @@ class Task
     /**
      * Sets/Gets the execution status of the task.
      *
-     * @param boolean $execute            
+     * @param boolean $execute
      * @return boolean
      */
-    public function canExecute($execute = NULL)
+    public function canExecute($execute = null)
     {
         if (isset($execute) && ! is_null($execute)) {
             $this->executable = (boolean) $execute;
         }
+
         return $this->executable;
     }
 
@@ -284,7 +285,7 @@ class Task
         if ($this->currentUpdateMode == self::AUTO_UPDATE && $this->updated) {
             return $this->executed;
         }
-        
+
         if ($this->method) {
             $result = call_user_func_array($this->method, $this->methodArguments);
             if ($result instanceof \Ecodev\Newsletter\Update\TaskResult) {
@@ -294,6 +295,7 @@ class Task
                 $this->lastUpdate = $result->executionTime;
             }
         }
+
         return $this->executed;
     }
 
@@ -310,7 +312,7 @@ class Task
     /**
      * Returns a callable method
      *
-     * @param string $methodPath            
+     * @param string $methodPath
      * @return string|array|boolean Returns a callable method as string or array or FALSE on failure.
      */
     protected function getCallableMethod($methodPath)
@@ -324,6 +326,7 @@ class Task
         if (is_callable($methodPath)) {
             return $methodPath;
         }
+
         return false;
     }
 }

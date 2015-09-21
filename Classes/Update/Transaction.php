@@ -59,10 +59,12 @@ class Transaction
                 $TYPO3_DB->sql_query("ROLLBACK;");
                 // Because we rolled back nothing was modified so we can safely reset the integrity state.
                 $results->resetDataIntegrity();
+
                 return $results;
             }
             $TYPO3_DB->sql_query("COMMIT;");
         }
+
         return $results;
     }
 
@@ -91,13 +93,14 @@ class Transaction
             }
             $TYPO3_DB->sql_free_result($res);
         }
+
         return $results;
     }
 
     /**
      * Transacts a list of file operations, on encountering an error ALL operations are rolled back to their previous state (if possible).
-     * 
-     * @param array $operands            
+     *
+     * @param array $operands
      * @return \Ecodev\Newsletter\Update\TransactionResult
      */
     public static function transactFileOperands(array $operands)
@@ -106,6 +109,7 @@ class Transaction
         if (! empty($operands)) {
             // @todo transactFileOperands
         }
+
         return $results;
     }
 }

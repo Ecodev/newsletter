@@ -81,7 +81,7 @@ class TransactionResult
     /**
      * Transaction state constructor.
      *
-     * @param number $totalOperands            
+     * @param number $totalOperands
      */
     public function __construct($totalOperands = 0)
     {
@@ -102,7 +102,7 @@ class TransactionResult
     /**
      * Error message setter.
      *
-     * @param string $message            
+     * @param string $message
      */
     public function setErrorMessage($message)
     {
@@ -142,7 +142,7 @@ class TransactionResult
     /**
      * Appends the count of affected data.
      *
-     * @param integer $amount            
+     * @param integer $amount
      */
     public function appendAffectedDataCount($amount)
     {

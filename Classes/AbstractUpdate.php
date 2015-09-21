@@ -1,13 +1,13 @@
 <?php
 namespace Ecodev\Newsletter;
 
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Backend\Utility\IconUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use Ecodev\Newsletter\Update\Task;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * *************************************************************
@@ -33,7 +33,7 @@ use Ecodev\Newsletter\Update\Task;
  * This copyright notice MUST APPEAR in all copies of the script!
  * *************************************************************
  */
-require_once (PATH_typo3 . 'sysext/core/Classes/SingletonInterface.php');
+require_once PATH_typo3 . 'sysext/core/Classes/SingletonInterface.php';
 
 /**
  * Update for newsletter extension
@@ -87,14 +87,14 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
      * @var $updateHistory array
      */
     protected static $updateResults;
-    
+
     // Public Methods
     // ////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Class constructor
      *
-     * @param string $extkey            
+     * @param string $extkey
      */
     public function _construct($extkey = 'newsletter')
     {
@@ -197,7 +197,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
                             $flashMessage = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $successStateMessage, $successStateMessageHeader, $successState);
                             $message .= $flashMessage->render();
                         }
-                        
+
                         // Set the Update Results
                         /* @var $flashMessage \TYPO3\CMS\Core\Messaging\FlashMessage */
                         $flashMessage = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $resultsTable, self::__('ext-update.update_results'), \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
@@ -234,7 +234,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
             $form .= '<legend><h4>&nbsp;' . self::__('ext-update.manual_updates') . '&nbsp;</h4></legend>';
             $form .= '<p>' . self::__('ext-update.select_manual_tasks') . '<br />' . self::__('ext-update.new_install_advice') . '</p>';
             $form .= '<p>' . self::__('ext-update.current_version', array(
-                '<u>v' . self::$version . '</u>'
+                '<u>v' . self::$version . '</u>',
             )) . '</p>';
             $form .= '<h4>' . self::__('ext-update.update_tasks') . '</h4>';
             $form .= '<table class="t3-table">';
@@ -256,7 +256,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
                 // set some pretty dates.
                 $age = $task->getLastUpdate() > - 1 ? (time() - $task->getLastUpdate()) : - 1;
                 $lastUpdate = $task->getLastUpdate() > - 1 ? ($age < (3600 * 3) ? self::__('ext-update.ago', array(
-                    BackendUtility::calcAge($age, $GLOBALS["LANG"]->sL("LLL:EXT:lang/locallang_core.xlf:labels.minutesHoursDaysYears"))
+                    BackendUtility::calcAge($age, $GLOBALS["LANG"]->sL("LLL:EXT:lang/locallang_core.xlf:labels.minutesHoursDaysYears")),
                 )) : strftime('%c', $task->getLastUpdate())) : '<i>' . self::__('ext-update.never') . '</i>';
                 // render row
                 $form .= '<tr role="row" >';
@@ -276,6 +276,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
             // put it all together.
             $html = $message . ' <br />' . $form . $script;
         }
+
         return $html;
     }
 
@@ -299,7 +300,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * This is the public execution method that is triggered by the signal/slot for automatic updates.
      *
-     * @param string $extname            
+     * @param string $extname
      */
     public static function autorun($extname = null)
     {
@@ -317,12 +318,13 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
      * Register update tasks.
      */
     public static function registerUpdateTasks()
-    {}
+    {
+    }
 
     /**
      * Registers an update task to perform.
      *
-     * @param \Ecodev\Newsletter\Update\Task $task            
+     * @param \Ecodev\Newsletter\Update\Task $task
      * @return boolean
      */
     public static function registerUpdateTask($task)
@@ -344,12 +346,13 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
                 self::setUpdateRegister(Task::AUTO_UPDATE, $task);
                 self::setUpdateRegister(Task::MANUAL_UPDATE, $task);
         }
+
         return true;
     }
-    
+
     // Protected Methods
     // ////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Initialize some variables.
      */
@@ -379,7 +382,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
         if (! isset(self::$updateRegister)) {
             self::$updateRegister = array(
                 Task::AUTO_UPDATE => array(),
-                Task::MANUAL_UPDATE => array()
+                Task::MANUAL_UPDATE => array(),
             );
             // Register the update tasks.
             static::registerUpdateTasks();
@@ -396,9 +399,9 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
         $localConfig = array(
             'EXT' => array(
                 'extConf' => array(
-                    self::$EXTKEY => serialize(self::$localConfig)
-                )
-            )
+                    self::$EXTKEY => serialize(self::$localConfig),
+                ),
+            ),
         );
         // Write the changes to file.
         self::$configManager->updateLocalConfiguration($localConfig);
@@ -431,8 +434,8 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Sets the update registry with a value pair.
      *
-     * @param string $updateMode            
-     * @param \Ecodev\Newsletter\Update\Task $task            
+     * @param string $updateMode
+     * @param \Ecodev\Newsletter\Update\Task $task
      */
     protected static function setUpdateRegister($updateMode, $task)
     {
@@ -460,7 +463,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
                     if ($execResult->success) {
                         $successes[] = self::__('"(v%s) %s"', array(
                             $task->getUpdateVersion(),
-                            $task->getDescription()
+                            $task->getDescription(),
                         ));
                         // Add to update history
                         self::$updateHistory[$task->getTaskId()] = $execResult->executionTime;
@@ -474,7 +477,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
                             $task->getDescription(),
                             (($execResult->recordsCommitted && $execResult->numRecordsModified > 0) ? 'Modified ' . $execResult->numRecordsModified . ' Records' : 'OK'),
                             (($execResult->filesCommitted && $execResult->numFilesModified > 0) ? 'Modified ' . $execResult->numFilesModified . ' Files' : 'OK'),
-                            self::__($execResult->errorMessage)
+                            self::__($execResult->errorMessage),
                         ));
                     }
                 }
@@ -483,15 +486,16 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
             if ($successes) {
                 self::log('info', $updateMode, self::__('Completed %s update task/s successfully. [ %s ]', array(
                     count($successes),
-                    implode(', ', $successes)
+                    implode(', ', $successes),
                 )));
             }
             if ($warnings) {
                 self::log('warn', $updateMode, self::__('Encountered %s problem update task/s. [ %s ]', array(
                     count($warnings),
-                    implode(', ', $warnings)
+                    implode(', ', $warnings),
                 )));
             }
+
             return;
         }
         self::log('info', $updateMode, self::__('Nothing to update.'));
@@ -500,9 +504,9 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Log an update event for the extension.
      *
-     * @param string $logMethod            
-     * @param string $updateMode            
-     * @param string $message            
+     * @param string $logMethod
+     * @param string $updateMode
+     * @param string $message
      */
     protected static function log($logMethod, $updateMode, $message)
     {
@@ -516,7 +520,7 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
             $logger->$logMethod(self::__('EXT: %s (v%s) %s-Update: ' . $message, array(
                 self::$EXTKEY,
                 self::$version,
-                ucfirst($updateMode)
+                ucfirst($updateMode),
             )));
         }
     }
@@ -524,22 +528,24 @@ abstract class AbstractUpdate implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Translates extension text or returns the extension key or text.
      *
-     * @param string $translation_key            
-     * @param array $substitutions            
+     * @param string $translation_key
+     * @param array $substitutions
      * @return string
      */
     protected static function __($translation_key, $substitutions = array())
     {
-        if ($translation_key !== NULL) {
+        if ($translation_key !== null) {
             // Check locallang_update.xlf translations first.
             $llPath = 'LLL:EXT:' . self::$EXTKEY . '/Resources/Private/Language/locallang_update.xlf:';
             $text = LocalizationUtility::translate($llPath . $translation_key, self::$EXTKEY, $substitutions);
             // Try elsewhere (locallang.xlf)
-            if ($text == NULL || $text == '') {
+            if ($text == null || $text == '') {
                 $text = LocalizationUtility::translate($translation_key, self::$EXTKEY, $substitutions);
             }
-            return ($text == NULL || $text == '') ? vsprintf($translation_key, $substitutions) : $text;
+
+            return ($text == null || $text == '') ? vsprintf($translation_key, $substitutions) : $text;
         }
+
         return '';
     }
 }
