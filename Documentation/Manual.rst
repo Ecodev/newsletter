@@ -104,11 +104,12 @@ The Fetchmail Configuration field supports 5 marker substitutions:
 -  :code:`###PASSWORD###` The password for the bounce account.
 
 A simple default configuration is automatically supplied when you create a new bounce 
-account, however this simple configuration does not support encrypted TLS/SSL connections.
-Encrypted connections are required for connecting to popular email providers such as 
-Google Gmail. Such configurations are beyond the scope of this manual. For more 
-information on writing fetchmail configurations please consult the 
-`fetchmail (1) <http://www.fetchmail.info/fetchmail-man.html>`_ man pages.
+account in the Typo3 Backend, however this simple configuration does not support 
+encrypted TLS/SSL connections. Encrypted connections are required for connecting to 
+popular email providers such as Google Gmail. Such configurations are beyond the scope 
+of this manual. For more information on writing fetchmail configurations please consult 
+the `fetchmail (1) <http://www.fetchmail.info/fetchmail-man.html>`_ man pages or the 
+internet.
 
 Unsubscription notifications
 ----------------------------
