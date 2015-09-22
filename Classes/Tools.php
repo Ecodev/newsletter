@@ -49,8 +49,8 @@ abstract class Tools
     /**
      * Get a newsletter-conf-template parameter
      *
-     * @param
-     *            string Parameter key
+     * @param string $key
+     *            Parameter key
      * @return mixed Parameter value
      */
     public static function confParam($key)
@@ -95,8 +95,8 @@ abstract class Tools
      * Create a configured mailer from a newsletter page record.
      * This mailer will have both plain and html content applied as well as files attached.
      *
-     * @param
-     *            \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     *            The newsletter
      * @param integer $language
      * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
      */
@@ -119,9 +119,6 @@ abstract class Tools
 
     /**
      * Create the spool for all newsletters who need it
-     *
-     * @param boolean $onlyTest
-     *            if true only test newsletter will be used, otherwise all (included tests)
      */
     public static function createAllSpool()
     {
@@ -138,10 +135,7 @@ abstract class Tools
      * Spool a newsletter page out to the real receivers.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param
-     *            array Newsletter record.
-     * @param
-     *            integer Actual begin time.
+     * @param Newsletter $newsletter
      * @return void
      */
     public static function createSpool(Newsletter $newsletter)
@@ -315,9 +309,10 @@ abstract class Tools
      * @param string $controllerName
      * @param string $extensionName
      * @param string $pluginName
+     * @param array $otherArguments
      * @return string absolute URI
      */
-    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p')
+    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p', array $otherArguments = null)
     {
         if (! self::$uriBuilder) {
             self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
@@ -329,16 +324,19 @@ abstract class Tools
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
-        $arguments = array(
-            $pluginNamespace => $controllerArguments,
-        );
+        if (! isset($otherArguments) || is_null($otherArguments)) {
+            $otherArguments = array();
+        }
 
+        $arguments = $otherArguments;
+        $arguments[$pluginNamespace] = $controllerArguments;
         self::$uriBuilder->reset()
             ->setUseCacheHash(false)
             ->setCreateAbsoluteUri(true)
-            ->setArguments($arguments);
+            ->setArguments($arguments)
+            ->setTargetPageType(1342671779);
 
-        return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
+        return self::$uriBuilder->buildFrontendUri();
     }
 
     /**

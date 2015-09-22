@@ -1,5 +1,4 @@
 <?php
-
 namespace Ecodev\Newsletter;
 
 use Ecodev\Newsletter\Domain\Model\Email;
@@ -8,28 +7,30 @@ use Exception;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
 
-/* * *************************************************************
- *  Copyright notice
+/*
+ * *************************************************************
+ * Copyright notice
  *
- *  (c) 2015
- *  All rights reserved
+ * (c) 2015
+ * All rights reserved
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
  *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ * This copyright notice MUST APPEAR in all copies of the script!
+ * *************************************************************
+ */
 
 // For TYPO3 6.X or TYPO3 7.X
 $swift1 = PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
@@ -49,31 +50,46 @@ if (is_readable($swift1)) {
  */
 class Mailer
 {
+
     /**
+     *
      * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      */
     private $newsletter;
+
     private $html;
+
     private $html_tpl;
+
     private $title;
+
     private $title_tpl;
+
     private $senderName;
+
     private $senderEmail;
+
     private $bounceAddress;
+
     private $siteUrl;
+
     private $homeUrl;
+
     private $attachments = array();
+
     private $attachmentsEmbedded = array();
+
     private $linksCache = array();
 
     /**
+     *
      * @var Utility\MarkerSubstitutor
      */
     private $substitutor;
 
     /**
-     * Constructor that set up basic internal datastructures. Do not call directly
-     *
+     * Constructor that set up basic internal datastructures.
+     * Do not call directly
      */
     public function __construct()
     {
@@ -104,6 +120,13 @@ class Mailer
         return $plainText;
     }
 
+    /**
+     * Sets the newsletter
+     *
+     * @param Newsletter $newsletter
+     * @param string $language
+     * @throws Exception
+     */
     public function setNewsletter(Newsletter $newsletter, $language = null)
     {
         $domain = $newsletter->getDomain();
@@ -144,6 +167,7 @@ class Mailer
 
     /**
      * Extract the title from <title></title> HTML tags
+     *
      * @param string $htmlSrc
      */
     private function setTitle($htmlSrc)
@@ -160,8 +184,9 @@ class Mailer
      * Set the html content of the mail which will be used as template.
      * The content will be edited to include images as attachements if needed.
      *
-     * @param   string      The html content of the mail
-     * @return   void
+     * @param string $src
+     *            The html content of the mail
+     * @return void
      */
     private function setHtml($src)
     {
@@ -172,13 +197,14 @@ class Mailer
 
     /**
      * Find and memorize attachments that will need to be processed by Swift
+     *
      * @param string $src
      * @return string
      */
     private function findAttachments($src)
     {
         // Attach images if option is set
-        if (!$this->extConf['attach_images']) {
+        if (! $this->extConf['attach_images']) {
             return $src;
         }
 
@@ -211,18 +237,19 @@ class Mailer
     /**
      * Insert a "mail-open-spy" in the mail.
      *
-     * @return   void
+     * @return void
      */
     private function injectOpenSpy(Email $email)
     {
-        $this->html = str_ireplace(
-                '</body>', '<div><img src="' . Tools::buildFrontendUri('opened', array(), 'Email') . '&c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>', $this->html);
+        $this->html = str_ireplace('</body>', '<div><img src="' . Tools::buildFrontendUri('opened', array(
+            'c' => $email->getAuthCode(),
+        ), 'Email') . '" width="0" height="0" /></div></body>', $this->html);
     }
 
     /**
      * Reset all modifications to the content.
      *
-     * @return   void
+     * @return void
      */
     private function resetContent()
     {
@@ -233,8 +260,8 @@ class Mailer
     /**
      * Apply multiple markers to mail contents
      *
-     * @param   array      Assoc array with name => value pairs.
-     * @return   void
+     * @param Email $email
+     * @return void
      */
     private function substituteMarkers(Email $email)
     {
@@ -242,6 +269,15 @@ class Mailer
         $this->title = $this->substitutor->substituteMarkers($this->title, $email, 'title');
     }
 
+    /**
+     * Get the link with auth code.
+     *
+     * @param Email $email
+     * @param string $url
+     * @param boolean $isPreview
+     * @param string $isPlainText
+     * @return string The link url
+     */
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
     {
         global $TYPO3_DB;
@@ -250,21 +286,18 @@ class Mailer
         // First check in our local cache
         if (isset($this->linksCache[$url])) {
             $linkId = $this->linksCache[$url];
-        }
-        // Otherwise if we are preparing a preview, just generate incremental ID and do not touch database at all
-        elseif ($isPreview) {
+        } elseif ($isPreview) {
+            // Otherwise if we are preparing a preview, just generate incremental ID and do not touch database at all
             $linkId = count($this->linksCache);
-        }
-        // Finally if it's not a preview and link was not in cache, check database
-        else {
+        } else {
+            // Finally if it's not a preview and link was not in cache, check database
             // Look for the link database, it may already exist
             $res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = ' . $TYPO3_DB->fullQuoteStr($url, 'tx_newsletter_domain_model_link') . ' AND newsletter = ' . $TYPO3_DB->fullQuoteStr($this->newsletter->getUid(), 'tx_newsletter_domain_model_link') . ' LIMIT 1');
             $row = $TYPO3_DB->sql_fetch_row($res);
             if ($row) {
                 $linkId = $row[0];
-            }
-            // Otherwise create it
-            else {
+            } else {
+                // Otherwise create it
                 $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', array(
                     'pid' => $this->newsletter->getPid(),
                     'url' => $url,
@@ -279,7 +312,13 @@ class Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $newUrl = Tools::buildFrontendUri('clicked', array(), 'Link') . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+        $arguments = array();
+        $arguments['n'] = $this->newsletter->getUid();
+        $arguments['l'] = $authCode;
+        if ($isPlainText) {
+            $arguments['p'] = 1;
+        }
+        $newUrl = Tools::buildFrontendUri('clicked', $arguments, 'Link');
 
         return $newUrl;
     }
@@ -287,13 +326,15 @@ class Mailer
     /**
      * Replace all links in the mail to make spy links.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email to prepare the newsletter for
-     * @param boolean $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
-     * @return   void
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email
+     *            The email to prepare the newsletter for
+     * @param boolean $isPreview
+     *            whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
+     * @return void
      */
     private function injectLinksSpy(Email $email, $isPreview)
     {
-        /* Exchange all http:// links  html */
+        /* Exchange all http:// links html */
         preg_match_all('|<a [^>]*href="(https?://[^"]*)"|Ui', $this->html, $urls);
         foreach ($urls[1] as $i => $url) {
             $newUrl = $this->getLinkAuthCode($email, $url, $isPreview);
@@ -306,8 +347,10 @@ class Mailer
 
     /**
      * Prepare the newsletter content for the specified email (substitute markers and insert spies)
+     *
      * @param \Ecodev\Newsletter\Domain\Model\Email $email
-     * @param boolean $isPreview whether we are preparing a preview version of the newsletter
+     * @param boolean $isPreview
+     *            whether we are preparing a preview version of the newsletter
      */
     public function prepare(Email $email, $isPreview = false)
     {
@@ -328,10 +371,12 @@ class Mailer
     }
 
     /**
-     * The regular send method. Use this to send a normal, personalized mail.
+     * The regular send method.
+     * Use this to send a normal, personalized mail.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email object containing recipient email address and extra data for markers
-     * @return   void
+     * @param \Ecodev\Newsletter\Domain\Model\Email $email
+     *            The email object containing recipient email address and extra data for markers
+     * @return void
      */
     public function send(Email $email)
     {
@@ -340,18 +385,20 @@ class Mailer
     }
 
     /**
-     * Raw send method. This does not replace markers, or reset the mail afterwards.
+     * Raw send method.
+     * This does not replace markers, or reset the mail afterwards.
      *
-     * @param   array      Record with receivers information as name => value pairs.
-     * @param   array      Array with extra headers to apply to mails as name => value pairs.
-     * @return   void
+     * @param Email $email
+     * @return void
      */
     private function raw_send(Email $email)
     {
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
-                ->setFrom(array($this->senderEmail => $this->senderName))
-                ->setSubject($this->title);
+            ->setFrom(array(
+            $this->senderEmail => $this->senderName,
+        ))
+            ->setSubject($this->title);
 
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);
