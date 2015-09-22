@@ -41,7 +41,7 @@ abstract class Tools
 
     /**
      * UriBuilder
-     * 
+     *
      * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     protected static $uriBuilder = null;
@@ -66,12 +66,12 @@ abstract class Tools
         if (isset($configTS[$key])) {
             return $configTS[$key];
         }
-        
+
         // Else fallback to the extension config.
         if (! is_array(self::$configuration)) {
             self::$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
         }
-        
+
         return self::$configuration[$key];
     }
 
@@ -79,7 +79,7 @@ abstract class Tools
      * Log a message in database table sys_log
      *
      * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
-     * @param string $message            
+     * @param string $message
      * @param integer $logLevel
      *            0 = message, 1 = error
      */
@@ -97,7 +97,7 @@ abstract class Tools
      *
      * @param
      *            \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
-     * @param integer $language            
+     * @param integer $language
      * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
      */
     public static function getConfiguredMailer(Newsletter $newsletter, $language = null)
@@ -105,7 +105,7 @@ abstract class Tools
         // Configure the mailer
         $mailer = new Mailer();
         $mailer->setNewsletter($newsletter, $language);
-        
+
         // hook for modifing the mailer before finish preconfiguring
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
@@ -113,13 +113,13 @@ abstract class Tools
                 $mailer = $_procObj->getConfiguredMailerHook($mailer, $newsletter);
             }
         }
-        
+
         return $mailer;
     }
 
     /**
      * Create the spool for all newsletters who need it
-     * 
+     *
      * @param boolean $onlyTest
      *            if true only test newsletter will be used, otherwise all (included tests)
      */
@@ -127,7 +127,7 @@ abstract class Tools
     {
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
-        
+
         $newsletters = $newsletterRepository->findAllReadyToSend();
         foreach ($newsletters as $newsletter) {
             self::createSpool($newsletter);
@@ -147,25 +147,25 @@ abstract class Tools
     public static function createSpool(Newsletter $newsletter)
     {
         global $TYPO3_DB;
-        
+
         // If newsletter is locked because spooling now, or already spooled, then skip
         if ($newsletter->getBeginTime()) {
             return;
         }
-        
+
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
-        
+
         // Lock the newsletter by setting its begin_time
         $begintime = new DateTime();
         $newsletter->setBeginTime($begintime);
         $newsletterRepository->updateNow($newsletter);
-        
+
         $emailSpooledCount = 0;
         $recipientList = $newsletter->getRecipientList();
         $recipientList->init();
         while ($receiver = $recipientList->getRecipient()) {
-            
+
             // Register the receiver
             if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($receiver['email'])) {
                 $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
@@ -173,16 +173,16 @@ abstract class Tools
                     'recipient_address' => $receiver['email'],
                     'recipient_data' => serialize($receiver),
                     'pid' => $newsletter->getPid(),
-                    'newsletter' => $newsletter->getUid()
+                    'newsletter' => $newsletter->getUid(),
                 ));
                 $emailSpooledCount ++;
             }
         }
         self::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
-        
+
         // Schedule repeated newsletter if any
         $newsletter->scheduleNextNewsletter();
-        
+
         // Unlock the newsletter by setting its end_time
         $newsletter->setEndTime(new DateTime());
         $newsletterRepository->updateNow($newsletter);
@@ -196,16 +196,16 @@ abstract class Tools
     public static function runAllSpool()
     {
         global $TYPO3_DB;
-        
+
         // Try to detect if a spool is already running
         // If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
         // If there are newer records, then stop here, and assume the running mailer will take care of it.
         $rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
-        list ($num_records) = $TYPO3_DB->sql_fetch_row($rs);
+        list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
         if ($num_records != 0) {
             return;
         }
-        
+
         self::runSpool();
     }
 
@@ -219,64 +219,64 @@ abstract class Tools
     {
         $emailSentCount = 0;
         $mailers = array();
-        
+
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $emailRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
-        
+
         $allUids = $newsletterRepository->findAllNewsletterAndEmailUidToSend($limitNewsletter);
-        
+
         $oldNewsletterUid = null;
         foreach ($allUids as $uids) {
             $newsletterUid = $uids['newsletter'];
             $emailUid = $uids['email'];
-            
+
             /* For the page, this way we can support multiple pages in one spool session */
             if ($newsletterUid != $oldNewsletterUid) {
                 $oldNewsletterUid = $newsletterUid;
                 $mailers = array();
-                
+
                 $newsletter = $newsletterRepository->findByUid($newsletterUid);
             }
-            
+
             // Define the language of email
             $email = $emailRepository->findByUid($emailUid);
             $recipientData = $email->getRecipientData();
             $language = $recipientData['L'];
-            
+
             // Was a language with this page defined, if not create one
             if (! is_object($mailers[$language])) {
                 $mailers[$language] = self::getConfiguredMailer($newsletter, $language);
             }
-            
+
             // Mark it as started sending
             $email->setBeginTime(new DateTime());
             $emailRepository->updateNow($email);
-            
+
             // Send the email
             $mailers[$language]->send($email);
-            
+
             // Mark it as sent already
             $email->setEndTime(new DateTime());
             $emailRepository->updateNow($email);
-            
+
             $emailSentCount ++;
         }
-        
+
         // Log numbers to syslog
         self::log("Sent $emailSentCount emails");
     }
 
     /**
      * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
-     * 
-     * @param string $extensionName            
-     * @param string $pluginName            
+     *
+     * @param string $extensionName
+     * @param string $pluginName
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     protected static function buildUriBuilder($extensionName, $pluginName)
     {
-        
+
         // If we are in Backend we need to simulate minimal TSFE
         if (! isset($GLOBALS['TSFE']) || ! ($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
             if (! is_object($GLOBALS['TT'])) {
@@ -293,28 +293,28 @@ abstract class Tools
             $GLOBALS['TSFE']->forceTemplateParsing = 1;
             $GLOBALS['TSFE']->getConfigArray();
         }
-        
+
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         if (! (isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
             $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
             $extbaseBootstrap->initialize(array(
                 'extensionName' => $extensionName,
-                'pluginName' => $pluginName
+                'pluginName' => $pluginName,
             ));
         }
-        
+
         return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
     }
 
     /**
      * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
-     * 
-     * @param string $actionName            
-     * @param array $controllerArguments            
-     * @param string $controllerName            
-     * @param string $extensionName            
-     * @param string $pluginName            
+     *
+     * @param string $actionName
+     * @param array $controllerArguments
+     * @param string $controllerName
+     * @param string $extensionName
+     * @param string $pluginName
      * @return string absolute URI
      */
     public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p')
@@ -324,39 +324,39 @@ abstract class Tools
         }
         $controllerArguments['action'] = $actionName;
         $controllerArguments['controller'] = $controllerName;
-        
+
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
-        
+
         $arguments = array(
-            $pluginNamespace => $controllerArguments
+            $pluginNamespace => $controllerArguments,
         );
-        
+
         self::$uriBuilder->reset()
             ->setUseCacheHash(false)
             ->setCreateAbsoluteUri(true)
             ->setArguments($arguments);
-        
+
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
 
     /**
      * Returns an base64_encode encrypted string
-     * 
-     * @param string $string            
+     *
+     * @param string $string
      * @return string base64_encode encrypted string
      */
     public static function encrypt($string)
     {
         $iv = mcrypt_create_iv(self::getIVSize());
-        
+
         return base64_encode($iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv));
     }
 
     /**
      * Returns a decrypted string
-     * 
+     *
      * @param string $string
      *            base64_encode encrypted string
      * @return string decrypted string
@@ -366,13 +366,13 @@ abstract class Tools
         $string = base64_decode($string);
         $iv = substr($string, 0, self::getIVSize());
         $cipher = substr($string, self::getIVSize());
-        
+
         return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
     }
 
     /**
      * Returns the size of the IV
-     * 
+     *
      * @return integer
      */
     private static function getIVSize()
@@ -381,13 +381,13 @@ abstract class Tools
         if (! isset($iv_size)) {
             $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
         }
-        
+
         return $iv_size;
     }
 
     /**
      * Returns the secure encryption key
-     * 
+     *
      * @return string
      */
     private static function getSecureKey()
@@ -396,14 +396,14 @@ abstract class Tools
         if (! isset($secureKey)) {
             $secureKey = hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true);
         }
-        
+
         return $secureKey;
     }
 
     /**
      * Encrypt old bounce account passwords
-     * 
-     * @param string $extname            
+     *
+     * @param string $extname
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public static function encryptOldBounceAccountPasswords($extname = null)
@@ -412,12 +412,12 @@ abstract class Tools
         if ($extname !== 'newsletter') {
             return;
         }
-        
+
         global $TYPO3_DB;
-        
+
         // Keep the old config to not break old installations
         $config = self::encrypt("poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n");
-        
+
         // Fetch and update the old records - they will have a default port and an empty config.
         $rs = $TYPO3_DB->exec_SELECTquery('uid,password', 'tx_newsletter_domain_model_bounceaccount', 'port = 0 AND config = \'\'');
         while (($records[] = $TYPO3_DB->sql_fetch_assoc($rs)) || array_pop($records));
@@ -426,7 +426,7 @@ abstract class Tools
             foreach ($records as $row) {
                 $TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . intval($row['uid']), array(
                     'password' => self::encrypt($row['password']),
-                    'config' => $config
+                    'config' => $config,
                 ));
             }
         }
