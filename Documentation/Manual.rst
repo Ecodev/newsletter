@@ -93,6 +93,23 @@ enabled, the extension Newsletter will automatically attach the address
 as return-path, read the rejected emails and disable/delete the failed
 email addresses. The bounced emails will also appear in the statistics.
 
+The bounce account is accessed via `fetchmail <http://www.fetchmail.info/>`_.
+It is possible to add your own fetchmail configurations to the bounce account. 
+The Fetchmail Configuration field supports 5 marker substitutions:
+
+-  :code:`###SERVER###` The domain of the bounce account email server.
+-  :code:`###PROTOCOL###` The connection protocol of the email server (imap|pop3).
+-  :code:`###PORT###` The connection port of the bounce account email server.
+-  :code:`###USERNAME###` The username for the bounce account.
+-  :code:`###PASSWORD###` The password for the bounce account.
+
+A simple default configuration is automatically supplied when you create a new bounce 
+account, however this simple configuration does not support encrypted TLS/SSL connections.
+Encrypted connections are required for connecting to popular email providers such as 
+Google Gmail. Such configurations are beyond the scope of this manual. For more 
+information on writing fetchmail configurations please consult the 
+`fetchmail (1) <http://www.fetchmail.info/fetchmail-man.html>`_ man pages.
+
 Unsubscription notifications
 ----------------------------
 
