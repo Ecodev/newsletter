@@ -1,6 +1,7 @@
 {
     "name": "ecodev/newsletter",
     "type": "typo3-cms-extension",
+    "version": "2.5.2",
     "description": "Send any pages as Newsletter and provide statistics on opened emails and clicked links.",
     "homepage": "https://github.com/ecodev/newsletter",
     "license": "GPL-2.0+",
