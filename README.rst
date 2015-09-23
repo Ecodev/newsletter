@@ -14,11 +14,11 @@ Newsletter |badge_travis| |badge_scrutinizer| |badge_coverage| |badge_gitter|
    :alt: Join the chat at https://gitter.im/Ecodev/newsletter
    :target: https://gitter.im/Ecodev/newsletter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: Documentation/img/Statistics_-_Overview_-_small.png
+.. image:: Documentation/Images/Overview_-_small.png
    :align: right
 
 
-A TYPO3 extension to send any pages as newsletter to several recipients at once.
+A TYPO3 extension to send any pages as a newsletter to several recipients at once.
 
 Originally based on `TC Directmail`_ 2.0.2,
 the mailing engine was almost entirely rewritten but most features were preserved.

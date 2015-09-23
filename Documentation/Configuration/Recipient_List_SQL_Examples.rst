@@ -1,3 +1,13 @@
+.. ==================================================
+.. FOR YOUR INFORMATION
+.. --------------------------------------------------
+.. -*- coding: utf-8 -*- with BOM.
+
+.. include:: ../Includes.txt
+
+
+.. _configuration-SQL_Examples:
+
 SQL examples for Recipient List
 ===============================
 
@@ -18,6 +28,8 @@ makes sense:
 
 The following examples may use fields which does not exist by default in
 database. Be sure to check the query.
+
+.. _configuration-SQL_Examples-extension_addresses:
 
 With extension addresses
 ------------------------
@@ -56,8 +68,10 @@ SQL to register a bounced email:
 
     WHERE email_address = ###EMAIL###
 
+.. _configuration-SQL_Examples-extension_tt_address:
+
 With extension tt_address
---------------------------
+-------------------------
 
 We do not count bounces, but only exclude recipient on first hard bounce
 or unsubscribe.
