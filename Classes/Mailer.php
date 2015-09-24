@@ -414,7 +414,13 @@ class Mailer
     {
         /* Exchange all http:// links html */
         preg_match_all('|<a [^>]*href="(https?://[^"]*)"|Ui', $this->html, $urls);
+        // No-Track Marker
+        $notrackMarker = Tools::confParam('no-track');
         foreach ($urls[1] as $i => $url) {
+            // Check for a no-track marker
+            if (!empty($notrackMarker) && stripos($url, $notrackMarker) != false) {
+                continue;
+            }
             $newUrl = $this->getLinkAuthCode($email, $url, $isPreview);
 
             /* Two step replace to be as precise as possible */

@@ -341,6 +341,19 @@ Constants
    :Default:
       
 
+ - :Constants:
+      config.no-track
+   :Description:
+      A no-track marker. 
+      
+      A unique marker or keyword that can be added to links in your newsletter 
+      to exclude them from being tracked when 'Detect clinked links' is enabled.
+      How you add the marker to your anchor links is up to you.
+   :Type:
+      string
+   :Default:
+      
+
 .. _configuration-realurl:
 
 RealURL
