@@ -63,6 +63,12 @@
             <trans-unit id="tx_newsletter_domain_model_newsletter.sender_email" xml:space="preserve">
                 <source>Sender Email</source>
             </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.replyto_name" xml:space="preserve">
+                <source>Reply-To Name</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.replyto_email" xml:space="preserve">
+                <source>Reply-To Email</source>
+            </trans-unit>
             <trans-unit id="tx_newsletter_domain_model_newsletter.inject_open_spy" xml:space="preserve">
                 <source>Detect opened emails</source>
             </trans-unit>

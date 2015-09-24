@@ -52,33 +52,106 @@ class Mailer
 {
 
     /**
+     * Newsletter model
      *
      * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      */
     private $newsletter;
 
+    /**
+     * Newsletter HTML Body
+     *
+     * @var string
+     */
     private $html;
 
+    /**
+     * Newsletter TEXT Body
+     *
+     * @var string
+     */
     private $html_tpl;
 
+    /**
+     * Newsletter HTML title
+     *
+     * @var string
+     */
     private $title;
 
+    /**
+     * Newsletter TEXT title
+     *
+     * @var string
+     */
     private $title_tpl;
 
+    /**
+     * Sender Name
+     *
+     * @var string
+     */
     private $senderName;
 
+    /**
+     * Sender <Email>
+     *
+     * @var string
+     */
     private $senderEmail;
 
+    /**
+     * Reply-To: Name
+     *
+     * @var string
+     */
+    private $replytoName;
+
+    /**
+     * Reply-To: <Email>
+     *
+     * @var string
+     */
+    private $replytoEmail;
+
+    /**
+     * Return-To: <Email>
+     *
+     * @var string
+     */
     private $bounceAddress;
 
+    /**
+     * Site URL
+     * @var string
+     */
     private $siteUrl;
 
+    /**
+     * Home URL
+     * @var string
+     */
     private $homeUrl;
 
+    /**
+     * Attachments
+     *
+     * @var array
+     */
     private $attachments = array();
 
+    /**
+     * Embedded attachements
+     *
+     * @var array
+     */
     private $attachmentsEmbedded = array();
 
+    /**
+     * Links cache
+     *
+     * @var array
+     */
     private $linksCache = array();
 
     /**
@@ -136,12 +209,17 @@ class Mailer
         $_SERVER['HTTP_HOST'] = $domain;
         $_SERVER['SCRIPT_NAME'] = '/index.php';
 
+        /**
+         * @todo Support HTTPS in siteURL.
+         */
         $this->siteUrl = "http://$domain/";
         $this->linksCache = array();
         $this->newsletter = $newsletter;
         $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
         $this->senderEmail = $newsletter->getSenderEmail();
+        $this->replytoName = $newsletter->getReplytoName();
+        $this->replytoEmail = $newsletter->getReplytoEmail();
         $bounceAccount = $newsletter->getBounceAccount();
         $this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
 
@@ -393,6 +471,7 @@ class Mailer
      */
     private function raw_send(Email $email)
     {
+        /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
             ->setFrom(array(
@@ -400,6 +479,9 @@ class Mailer
         ))
             ->setSubject($this->title);
 
+        if ($this->replytoEmail) {
+            $message->addReplyTo($this->replytoEmail, $this->replytoName);
+        }
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);
         }

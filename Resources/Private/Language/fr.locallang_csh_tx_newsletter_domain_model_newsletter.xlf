@@ -39,6 +39,14 @@
                 <source>The email of the newsletter sender</source>
                 <target>L'adresse email de l'expéditeur de la newsletter</target>
             </trans-unit>
+            <trans-unit id="replyto_name.description" xml:space="preserve">
+                <source>The name of the newsletter Reply-to:</source>
+                <target>Le nom de `Reply-to:` de la newsletter</target>
+            </trans-unit>
+            <trans-unit id="replyto_email.description" xml:space="preserve">
+                <source>The email of the newsletter Reply-to:</source>
+                <target>L'adresse email de `Reply-to:` de la newsletter</target>
+            </trans-unit>
             <trans-unit id="inject_open_spy.description" xml:space="preserve" approved="yes">
                 <source>injectOpenSpy</source>
                 <target>Essaie de détecter l'ouverture de l'email en injectant une image &quot;espion&quot; dans le corps de l'email</target>

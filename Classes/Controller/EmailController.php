@@ -162,18 +162,18 @@ class EmailController extends ExtDirectActionController
                     }
                 }
             }
-        }  // Otherwise look for the original email which was already sent
-else {
-    $email = $this->emailRepository->findByAuthcode($args['c']);
-    if ($email) {
-        $newsletter = $email->getNewsletter();
+        } else {
+            // Otherwise look for the original email which was already sent
+            $email = $this->emailRepository->findByAuthcode($args['c']);
+            if ($email) {
+                $newsletter = $email->getNewsletter();
 
                 // Here we need to ensure that we have real newsletter instance because of type hinting on \Ecodev\Newsletter\Tools::getConfiguredMailer()
                 if ($newsletter instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
                     $newsletter = $newsletter->_loadRealInstance();
                 }
-    }
-}
+            }
+        }
 
         // If we found everything needed, we can render the email
         $content = null;
@@ -196,7 +196,7 @@ else {
             $mailer = Tools::getConfiguredMailer($newsletter, @$args['L']);
             $mailer->prepare($email, $isPreview);
 
-            if (@$_GET['plain']) {
+            if (@$args['plain']) {
                 $content = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><pre>';
                 $content .= $mailer->getPlain();
                 $content .= '</pre></body></html>';
@@ -322,6 +322,7 @@ else {
         ))
             ->setSubject($subject)
             ->setBody($body, 'text/html');
+
         $message->send();
     }
 

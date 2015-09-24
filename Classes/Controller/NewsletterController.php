@@ -1,5 +1,4 @@
 <?php
-
 namespace Ecodev\Newsletter\Controller;
 
 use DateTime;
@@ -10,28 +9,30 @@ use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
 use Exception;
 
-/* * *************************************************************
- *  Copyright notice
+/*
+ * *************************************************************
+ * Copyright notice
  *
- *  (c) 2015
- *  All rights reserved
+ * (c) 2015
+ * All rights reserved
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
  *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ * This copyright notice MUST APPEAR in all copies of the script!
+ * *************************************************************
+ */
 
 /**
  * Controller for the Newsletter object
@@ -40,6 +41,7 @@ use Exception;
  */
 class NewsletterController extends ExtDirectActionController
 {
+
     /**
      * newsletterRepository
      *
@@ -91,8 +93,10 @@ class NewsletterController extends ExtDirectActionController
     protected function initializeAction()
     {
         // Set default value of PID to know where to store/look for newsletter
-        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, array("min_range" => 0));
-        if (!$this->pid) {
+        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, array(
+            "min_range" => 0,
+        ));
+        if (! $this->pid) {
             $this->pid = 0;
         }
         parent::initializeAction();
@@ -107,7 +111,12 @@ class NewsletterController extends ExtDirectActionController
     {
         $newsletters = $this->newsletterRepository->findAllByPid($this->pid);
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
+        $this->view->setVariablesToRender(array(
+            'total',
+            'data',
+            'success',
+            'flashMessages',
+        ));
         $this->view->setConfiguration(array(
             'data' => array(
                 '_descendAll' => self::resolveJsonViewConfiguration(),
@@ -130,18 +139,22 @@ class NewsletterController extends ExtDirectActionController
     public function listPlannedAction()
     {
         $newsletter = $this->newsletterRepository->getLatest($this->pid);
-        if (!$newsletter) {
+        if (! $newsletter) {
             $newsletter = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
             $newsletter->setPid($this->pid);
-            $newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
-            // Set the first Bounce Account found if any
+            $newsletter->setUid(- 1); // We set a fake uid so ExtJS will see it as a real record
+                                      // Set the first Bounce Account found if any
             $newsletter->setBounceAccount($this->bounceAccountRepository->findFirst());
         }
 
         // Default planned time is right now
         $newsletter->setPlannedTime(new DateTime());
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success'));
+        $this->view->setVariablesToRender(array(
+            'total',
+            'data',
+            'success',
+        ));
         $this->view->setConfiguration(array(
             'data' => self::resolvePlannedJsonViewConfiguration(),
         ));
@@ -165,11 +178,12 @@ class NewsletterController extends ExtDirectActionController
     /**
      * Creates a new Newsletter and forwards to the list action.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newNewsletter
+     *            a fresh Newsletter object which has not yet been added to the repository
      * @return void
      * @dontverifyrequesthash
      * @dontvalidate $newNewsletter
-     * @ignorevalidation $newNewsletter
+     * @ignore validation $newNewsletter
      */
     public function createAction(Newsletter $newNewsletter = null)
     {
@@ -181,11 +195,13 @@ class NewsletterController extends ExtDirectActionController
 
         // If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
-            $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', array($count, $limitTestRecipientCount)), $this->translate('flashmessage_test_maximum_recipients_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', array(
+                $count,
+                $limitTestRecipientCount,
+            )), $this->translate('flashmessage_test_maximum_recipients_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $this->view->assign('success', false);
-        }
-        // If we attempt to create a newsletter which contains errors, abort and don't save in DB
-        elseif (count($validatedContent['errors'])) {
+        } elseif (count($validatedContent['errors'])) {
+            // If we attempt to create a newsletter which contains errors, abort and don't save in DB
             $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', $this->translate('flashmessage_newsletter_invalid'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $this->view->assign('success', false);
         } else {
@@ -215,7 +231,11 @@ class NewsletterController extends ExtDirectActionController
             }
         }
 
-        $this->view->setVariablesToRender(array('data', 'success', 'flashMessages'));
+        $this->view->setVariablesToRender(array(
+            'data',
+            'success',
+            'flashMessages',
+        ));
         $this->view->setConfiguration(array(
             'data' => self::resolveJsonViewConfiguration(),
         ));
@@ -226,13 +246,18 @@ class NewsletterController extends ExtDirectActionController
 
     /**
      * Returns the newsletter with included statistics to be used for timeline chart
+     *
      * @param integer $uidNewsletter
      */
     public function statisticsAction($uidNewsletter)
     {
         $newsletter = $this->newsletterRepository->findByUid($uidNewsletter);
 
-        $this->view->setVariablesToRender(array('data', 'success', 'total'));
+        $this->view->setVariablesToRender(array(
+            'data',
+            'success',
+            'total',
+        ));
 
         $conf = self::resolveJsonViewConfiguration();
         $conf['_only'][] = 'statistics';
@@ -269,6 +294,8 @@ class NewsletterController extends ExtDirectActionController
                 'repetition',
                 'senderEmail',
                 'senderName',
+                'replytoEmail',
+                'replytoName',
                 'title',
                 'emailCount',
             ),
@@ -299,6 +326,8 @@ class NewsletterController extends ExtDirectActionController
                 'repetition',
                 'senderEmail',
                 'senderName',
+                'replytoEmail',
+                'replytoName',
                 'title',
                 'validatedContent',
                 'status',
@@ -311,7 +340,8 @@ class NewsletterController extends ExtDirectActionController
                     '_only' => array(
                         'errors',
                         'warnings',
-                        'infos',),
+                        'infos',
+                    ),
                 ),
             ),
         );
