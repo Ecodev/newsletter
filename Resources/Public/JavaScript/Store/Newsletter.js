@@ -32,6 +32,8 @@
                             {name: 'repetition', type: 'int'},
                             {name: 'senderEmail', type: 'string'},
                             {name: 'senderName', type: 'string'},
+                            {name: 'replytoEmail', type: 'string'},
+                            {name: 'replytoName', type: 'string'},
                             {name: 'plainConverter', type: 'string'},
                             {name: 'title', type: 'string'},
                             {name: 'uidBounceAccount', type: 'int'},

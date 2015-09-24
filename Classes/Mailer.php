@@ -59,6 +59,8 @@ class Mailer
     private $title_tpl;
     private $senderName;
     private $senderEmail;
+    private $replytoName;
+    private $replytoEmail;
     private $bounceAddress;
     private $siteUrl;
     private $homeUrl;
@@ -126,6 +128,8 @@ class Mailer
         $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
         $this->senderEmail = $newsletter->getSenderEmail();
+        $this->replytoName = $newsletter->getReplytoName();
+        $this->replytoEmail = $newsletter->getReplytoEmail();
         $bounceAccount = $newsletter->getBounceAccount();
         $this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
 
@@ -157,7 +161,10 @@ class Mailer
     {
         // Extract title from HTML
         preg_match('|<title[^>]*>(.*)</title>|i', $htmlSrc, $m);
-        $title = trim($m[1]);
+
+        // As this is being extracted from HTML and it is being used as an email subject we need to decode any entities.
+        $title = trim(html_entity_decode($m[1]));
+
         $this->title_tpl = $title;
         $this->title = $title;
     }
@@ -371,12 +378,17 @@ class Mailer
      */
     private function raw_send(Email $email)
     {
+        /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
             ->setFrom(array(
             $this->senderEmail => $this->senderName,
         ))
             ->setSubject($this->title);
+
+        if ($this->replytoEmail) {
+            $message->addReplyTo($this->replytoEmail, $this->replytoName);
+        }
 
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);

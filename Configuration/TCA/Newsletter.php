@@ -7,10 +7,10 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_newsletter_domain_model_newsletter'] = array(
     'ctrl' => $TCA['tx_newsletter_domain_model_newsletter']['ctrl'],
     'interface' => array(
-        'showRecordFieldList' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
+        'showRecordFieldList' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,replyto_name,replyto_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
     ),
     'types' => array(
-        '1' => array('showitem' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list'),
+        '1' => array('showitem' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,replyto_name,replyto_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -113,7 +113,23 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
+                'eval' => 'email',
+            ),
+        ),
+        'replyto_name' => array(
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.replyto_name',
+            'config' => array(
+                'type' => 'input',
+                'size' => 30,
                 'eval' => 'trim',
+            ),
+        ),
+        'replyto_email' => array(
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.replyto_email',
+            'config' => array(
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'email',
             ),
         ),
         'inject_open_spy' => array(

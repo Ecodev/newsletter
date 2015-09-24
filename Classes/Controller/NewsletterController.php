@@ -269,6 +269,8 @@ class NewsletterController extends ExtDirectActionController
                 'repetition',
                 'senderEmail',
                 'senderName',
+                'replytoEmail',
+                'replytoName',
                 'title',
                 'emailCount',
             ),
@@ -299,6 +301,8 @@ class NewsletterController extends ExtDirectActionController
                 'repetition',
                 'senderEmail',
                 'senderName',
+                'replytoEmail',
+                'replytoName',
                 'title',
                 'validatedContent',
                 'status',
@@ -311,7 +315,8 @@ class NewsletterController extends ExtDirectActionController
                     '_only' => array(
                         'errors',
                         'warnings',
-                        'infos',),
+                        'infos',
+                    ),
                 ),
             ),
         );

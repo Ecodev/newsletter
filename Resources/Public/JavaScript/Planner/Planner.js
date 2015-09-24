@@ -128,6 +128,16 @@
                                                 items:
                                                         [
                                                             {
+                                                                fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_replyto_name,
+                                                                name: 'replytoName',
+                                                                allowBlank: true
+                                                            },
+                                                            {
+                                                                fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_replyto_email,
+                                                                name: 'replytoEmail',
+                                                                allowBlank: true
+                                                                },
+                                                            {
                                                                 xtype: 'combo',
                                                                 fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_bounce_account,
                                                                 name: 'uidBounceAccount',

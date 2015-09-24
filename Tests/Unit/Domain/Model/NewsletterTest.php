@@ -33,7 +33,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class NewsletterTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
     /**
      * @var \Ecodev\Newsletter\Domain\Model\Newsletter
@@ -42,6 +42,7 @@ class NewsletterTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function setUp()
     {
+        $this->loadConfiguration();
         $this->subject = new \Ecodev\Newsletter\Domain\Model\Newsletter();
     }
 
@@ -368,5 +369,25 @@ class NewsletterTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $recipientList->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setRecipientList($recipientList);
         $this->assertEquals(123, $this->subject->getUidRecipientList());
+    }
+
+    /**
+     * @test
+     */
+    public function getReplytoName()
+    {
+        $this->assertSame('John Connor', $this->subject->getReplytoName(), 'sould return globally configured default value');
+        $this->subject->setReplytoName('My custom name');
+        $this->assertSame('My custom name', $this->subject->getReplytoName(), 'sould return locally set value');
+    }
+
+    /**
+     * @test
+     */
+    public function getReplytoEmail()
+    {
+        $this->assertSame('john.connor@example.com', $this->subject->getReplytoEmail(), 'sould return globally configured default value');
+        $this->subject->setReplytoEmail('custom@example.com');
+        $this->assertSame('custom@example.com', $this->subject->getReplytoEmail(), 'sould return locally set value');
     }
 }

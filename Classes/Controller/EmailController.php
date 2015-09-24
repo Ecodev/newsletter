@@ -193,7 +193,7 @@ class EmailController extends ExtDirectActionController
             $mailer = Tools::getConfiguredMailer($newsletter, @$args['L']);
             $mailer->prepare($email, $isPreview);
 
-            if (@$_GET['plain']) {
+            if (@$args['plain']) {
                 $content = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head><body><pre>';
                 $content .= $mailer->getPlain();
                 $content .= '</pre></body></html>';

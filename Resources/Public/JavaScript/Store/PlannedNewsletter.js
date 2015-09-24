@@ -30,6 +30,8 @@
                             {name: 'repetition', type: 'int'},
                             {name: 'senderEmail', type: 'string'},
                             {name: 'senderName', type: 'string'},
+                            {name: 'replytoEmail', type: 'string'},
+                            {name: 'replytoName', type: 'string'},
                             {name: 'title', type: 'string'},
                             {name: 'status', type: 'string'},
                             {name: 'errors', convert: function(v, newsletter) {

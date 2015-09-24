@@ -87,6 +87,14 @@
                 <source>Sender Email</source>
                 <target>Sender E-Mail</target>
             </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.replyto_name" xml:space="preserve">
+                <source>Reply-To Name</source>
+                <target>Reply-To Name</target>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_newsletter.replyto_email" xml:space="preserve">
+                <source>Reply-To Email</source>
+                <target>Reply-To E-mail</target>
+            </trans-unit>
             <trans-unit id="tx_newsletter_domain_model_newsletter.inject_open_spy" xml:space="preserve" approved="yes">
                 <source>Detect opened emails</source>
                 <target>Erkenne geöffnete E-Mails</target>

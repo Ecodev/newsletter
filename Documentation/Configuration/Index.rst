@@ -197,6 +197,30 @@ Constants
       user
 
  - :Constants:
+      config.replyto_name
+   :Description:
+      Default Reply-To name. 
+      
+      Can be overridden for each newsletter.
+      Can be any string.
+   :Type:
+      string
+   :Default:
+      
+
+ - :Constants:
+      config.replyto_email
+   :Description:
+      Default Reply-To email. 
+      
+      Can be overridden for each newsletter. If blank, will not be set. 
+      Must be a valid email address.
+   :Type:
+      string
+   :Default:
+      
+
+ - :Constants:
       config.notification_email
    :Description:
       Notification email. 

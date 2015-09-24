@@ -35,7 +35,7 @@ use Ecodev\Newsletter\Tools;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class LynxTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class LynxTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
     /**
      * @var \Ecodev\Newsletter\Domain\Model\Builtin
@@ -50,23 +50,6 @@ class LynxTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function tearDown()
     {
         unset($this->subject);
-    }
-
-    private function loadConfiguration()
-    {
-        $manager = new \TYPO3\CMS\Core\Configuration\ConfigurationManager();
-        $path = $manager->getLocalConfigurationFileLocation();
-
-        if (is_readable($path)) {
-            $allConfig = $manager->getLocalConfiguration();
-            $config = $allConfig['EXT']['extConf']['newsletter'];
-        }
-
-        if (!isset($config)) {
-            $config = serialize(array('path_to_lynx' => '/usr/bin/lynx'));
-        }
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = $config;
     }
 
     private function canRunLynx()
