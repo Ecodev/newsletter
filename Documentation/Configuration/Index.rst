@@ -304,6 +304,19 @@ Constants
    :Default:
       100
 
+ - :Constants:
+      config.unsubscribe_redirect
+   :Description:
+      Redirect to an external URL or internal Typo3 page.
+      
+      When set to a valid URL or a numeric Page ID (pid the) user will be 
+      redirected to that location instead of the default rendering of the 
+      unsubscribe template.
+   :Type:
+      string
+   :Default:
+
+
 .. _configuration-realurl:
 
 RealURL
