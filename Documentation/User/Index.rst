@@ -13,11 +13,20 @@ Users Manual
 
 Target group: **Editors**
 
-Sending bulk email requires careful planning, you should check very carefully 
-the content and formatting of your newsletter and the recipients who you intend 
-to send it to. It is very easy to accidentally send unsolicited emails with this 
-extension to numerous people.The developers of this extension take no 
-resposibility for your angry email recipients.
+.. contents::
+
+.. _user-words_of_advice:
+
+Words of advice
+---------------
+
+Sending bulk email comes with a certain level of responsibility and therefore 
+requires careful planning. You should check very thoroughly the content and 
+formatting of your newsletter and the recipients whom you intend to send it to. 
+It is very easy to accidentally/intentionally send unsolicited emails with this 
+extension to numerous people. **Nobody** likes to have their mail box filled with 
+junk, please be respectful. The developers of this extension take no 
+responsibility for your angry email recipients.
 
 .. warning::
 
@@ -25,15 +34,15 @@ Please think very hard what you are doing when using this tool, once emails have
 been sent by the system it is near impossible to recall them.
 
 Having said that, it is very important to make small test sends of your 
-newsletter to your own email address to proof your work before you schedule it 
-for final delivery.
+newsletter to your own email test accounts to proof your work before you 
+schedule it for final delivery.
 
 .. tip::
 
 Give yourself enough forward scheduling time. If you schedule a newsletter it 
-may be possible to stop it before it has been sent. If you spot a problem 
-quickly advise your Adminstrator as soon as possible as they probably have the 
-ability to stop the mails.
+may be possible to stop it before the emails have been sent. If you spot a 
+problem quickly advise your Adminstrator as soon as possible as they probably 
+have the ability to stop the mails.
 
 .. _user-sending_first_newsletter:
 

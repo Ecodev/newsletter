@@ -11,6 +11,8 @@
 Introduction
 ============
 
+.. contents::
+
 
 .. _what-it-does:
 

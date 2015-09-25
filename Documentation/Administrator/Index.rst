@@ -13,6 +13,8 @@ Administrator Manual
 
 Target group: **Administrators**
 
+.. contents::
+
 TBD...
 
 .. _admin-installation:

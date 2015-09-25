@@ -64,7 +64,7 @@ Newsletter
 	User/Index
 	Administrator/Index
 	Configuration/Index
-   Configuration/Recipient_List_SQL_Examples
+   Configuration/Examples
 	Developer/Index
 	KnownProblems/Index
 	ToDoList/Index

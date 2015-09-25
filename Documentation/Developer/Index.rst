@@ -13,6 +13,13 @@ Developer Corner
 
 Target group: **Developers**
 
+.. contents::
+
+.. _developer-getting_involved:
+
+Getting Involved
+----------------
+
 This extension is developed on GitHub, if you wish to contribute to the 
 `project`_ you are most welcome to participate. There are some nice ideas 
 floating around including: better statistics; integration of premailer; and 

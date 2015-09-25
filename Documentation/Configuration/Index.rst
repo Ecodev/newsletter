@@ -13,6 +13,8 @@ Configuration Reference
 
 Target group: **Developers**
 
+.. contents::
+
 The configuration of this extension is not trivial and requires many parts to 
 be prepared so that a user can start sending newsletters. The configuration is
 going to be determined by your hosting environment, your Typo3 setup and the 
@@ -73,7 +75,7 @@ define a list of recipients. It allows the dynamic composition of strings that
 can be used in newsletter content. And it also allows you to take action (SQL
 queries) upon specific events (bounced email, unsubscribe). Thus we
 **strongly recommend the use of SQL Recipient List** and to read the
-[[Recipient_List_SQL_Examples]].
+[[Examples]].
 
 For CSV, when asked for ``CSV Fields``, you should enter the column names,
 eg: ``email,firstname,lastname``. Then file/list/url should only contains
