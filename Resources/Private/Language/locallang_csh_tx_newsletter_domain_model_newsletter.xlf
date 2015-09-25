@@ -30,6 +30,12 @@
             <trans-unit id="sender_email.description" xml:space="preserve">
                 <source>The email of the newsletter sender</source>
             </trans-unit>
+            <trans-unit id="replyto_name.description" xml:space="preserve">
+                <source>The name of the newsletter Reply-to:</source>
+            </trans-unit>
+            <trans-unit id="replyto_email.description" xml:space="preserve">
+                <source>The email of the newsletter Reply-to:</source>
+            </trans-unit>
             <trans-unit id="inject_open_spy.description" xml:space="preserve">
                 <source>injectOpenSpy</source>
             </trans-unit>

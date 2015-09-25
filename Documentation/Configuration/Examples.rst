@@ -1,5 +1,24 @@
-SQL examples for Recipient List
-===============================
+.. ==================================================
+.. FOR YOUR INFORMATION
+.. --------------------------------------------------
+.. -*- coding: utf-8 -*- with BOM.
+
+.. include:: ../Includes.txt
+
+
+.. _configuration-Examples:
+
+Configuration Examples
+======================
+
+Target group: **Developers**
+
+.. contents::
+
+.. _configuration-Examples-Recipient_List:
+
+Recipient List SQL
+------------------
 
 SQL can use special markers in query which will be substituted when it
 makes sense:
@@ -19,8 +38,10 @@ makes sense:
 The following examples may use fields which does not exist by default in
 database. Be sure to check the query.
 
+.. _configuration-Examples-Recipient_List-extension_addresses:
+
 With extension addresses
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 We use a new field
 ``tx_addresses_domain_model_person.tx_newsletter_bounce`` to count
@@ -56,8 +77,10 @@ SQL to register a bounced email:
 
     WHERE email_address = ###EMAIL###
 
+.. _configuration-Examples-Recipient_List-extension_tt_address:
+
 With extension tt_address
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We do not count bounces, but only exclude recipient on first hard bounce
 or unsubscribe.

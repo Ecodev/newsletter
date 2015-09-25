@@ -111,7 +111,9 @@
         <email>bounce@example.com</email>
         <server>example.com</server>
         <protocol>pop3</protocol>
+        <port>110</port>
         <username>my-username</username>
         <password>my-password</password>
+        <config>poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n</config>
     </tx_newsletter_domain_model_bounceaccount>
 </dataset>

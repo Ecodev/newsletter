@@ -39,6 +39,14 @@
                 <source>The email of the newsletter sender</source>
                 <target>E-Mail des Newsletter Absenders</target>
             </trans-unit>
+            <trans-unit id="replyto_name.description" xml:space="preserve">
+                <source>The name of the newsletter Reply-to:</source>
+                <target>Name des Newsletter `Reply-to:`</target>
+            </trans-unit>
+            <trans-unit id="replyto_email.description" xml:space="preserve">
+                <source>The email of the newsletter Reply-to:</source>
+                <target>E-Mail des Newsletter `Reply-to:`</target>
+            </trans-unit>
             <trans-unit id="inject_open_spy.description" xml:space="preserve" approved="yes">
                 <source>injectOpenSpy</source>
                 <target>injectOpenSpy</target>

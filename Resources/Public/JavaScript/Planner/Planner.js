@@ -128,6 +128,16 @@
                                                 items:
                                                         [
                                                             {
+                                                                fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_replyto_name,
+                                                                name: 'replytoName',
+                                                                allowBlank: true
+                                                            },
+                                                            {
+                                                                fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_replyto_email,
+                                                                name: 'replytoEmail',
+                                                                allowBlank: true
+                                                                },
+                                                            {
                                                                 xtype: 'combo',
                                                                 fieldLabel: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_bounce_account,
                                                                 name: 'uidBounceAccount',
@@ -272,7 +282,8 @@
 
                                                                     var form = grid.findParentByType('form').getForm();
                                                                     var values = form.getFieldValues();
-                                                                    var url = String.format('{0}&pid={1}&uidRecipientList={2}&plainConverter={3}&injectOpenSpy={4}&injectLinksSpy={5}&email={6}',
+                                                                    var hasQuery = String(Ext.ux.Ecodev.Newsletter.Configuration.emailShowUrl).indexOf('?') > -1 ? '&' : '?';
+                                                                    var url = String.format('{0}' +  hasQuery + 'pid={1}&uidRecipientList={2}&plainConverter={3}&injectOpenSpy={4}&injectLinksSpy={5}&email={6}',
                                                                             Ext.ux.Ecodev.Newsletter.Configuration.emailShowUrl,
                                                                             encodeURIComponent(values.pid),
                                                                             encodeURIComponent(values.uidRecipientList),

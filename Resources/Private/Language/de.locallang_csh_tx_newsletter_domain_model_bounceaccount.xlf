@@ -23,6 +23,14 @@
                 <source>password</source>
                 <target>Kennwort</target>
             </trans-unit>
+            <trans-unit id="port.description" xml:space="preserve">
+                <source>port</source>
+                <target>Port</target>
+            </trans-unit>
+            <trans-unit id="config.description" xml:space="preserve">
+                <source>config</source>
+                <target>fetchmail Konfigurations</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

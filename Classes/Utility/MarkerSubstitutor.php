@@ -120,8 +120,8 @@ class MarkerSubstitutor
 
         // Add predefined markers
         $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = Tools::buildFrontendUri('show', array(), 'Email') . '&c=' . $authCode;
-        $markers['newsletter_unsubscribe_url'] = Tools::buildFrontendUri('unsubscribe', array(), 'Email') . '&c=' . $authCode;
+        $markers['newsletter_view_url'] = Tools::buildFrontendUri('show', array('c' => $authCode), 'Email');
+        $markers['newsletter_unsubscribe_url'] = Tools::buildFrontendUri('unsubscribe', array('c' => $authCode), 'Email');
 
         return $markers;
     }

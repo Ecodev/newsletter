@@ -7,7 +7,7 @@ sender_email = user
 # cat=basic; type=string; label=Notification email: Specify a valid address email to receive notification when recipients unsubscribe. If "user", the be_user owning the newsletter will be used. If blank, no notification will be sent. Otherwise must be a valid email address.
 notification_email = user
 
-# cat=basic; type=string; label=Domain: Domain or domain + path (without "http") from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
+# cat=basic; type=string; label=Domain: Domain or domain + path (without "http") from which to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path =
 
 # cat=basic; type=string; label=Append parameters: String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template. Or disable cache with &no_cache=1.
@@ -27,3 +27,6 @@ attach_images = 1
 
 # cat=basic; type=integer; label=Number of mailer per round: This can be used to limit the rate on which Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
 mails_per_round = 100
+
+# cat=basic; type=string; label=Redirect page (pid|url) on unsubscribe: If this is value is set, on unsubscribe the user will be redirected to the corresponding page. 
+unsubscribe_redirect =

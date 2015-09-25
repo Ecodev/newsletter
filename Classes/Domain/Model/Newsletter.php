@@ -1,33 +1,35 @@
 <?php
-
 namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
 use Ecodev\Newsletter\Tools;
 use Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/* * *************************************************************
- *  Copyright notice
+/*
+ * *************************************************************
+ * Copyright notice
  *
- *  (c) 2015
- *  All rights reserved
+ * (c) 2015
+ * All rights reserved
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
  *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ * This copyright notice MUST APPEAR in all copies of the script!
+ * *************************************************************
+ */
 
 /**
  * Newsletter represents a page to be sent to a specific time to several recipients.
@@ -36,6 +38,7 @@ use Exception;
  */
 class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
     /**
      * When the newsletter will start sending emails
      *
@@ -73,7 +76,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $plainConverter = 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin';
 
     /**
-     * Whether this newsletter is for test purpose. If it is it will be ignored in statistics
+     * Whether this newsletter is for test purpose.
+     * If it is it will be ignored in statistics
      *
      * @var boolean $isTest
      * @validate NotEmpty
@@ -81,7 +85,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $isTest = false;
 
     /**
-     * List of files to be attached (comma separated list
+     * List of files to be attached (comma separated list)
      *
      * @var string $attachments
      */
@@ -104,6 +108,20 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $senderEmail;
 
     /**
+     * The Reply-To: name of the newsletter
+     *
+     * @var string $replytoName
+     */
+    protected $replytoName;
+
+    /**
+     * The Reply-To: <email> of the newsletter
+     *
+     * @var string $replytoEmail
+     */
+    protected $replytoEmail;
+
+    /**
      * injectOpenSpy
      *
      * @var boolean $injectOpenSpy
@@ -120,12 +138,15 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * bounceAccount
      * @lazy
+     *
      * @var \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount
      */
     protected $bounceAccount;
 
     /**
-     * UID of the bounce account. Only exist for ease of use with ExtJS
+     * UID of the bounce account.
+     * Only exist for ease of use with ExtJS
+     *
      * @var integer $uidBounceAccount
      */
     protected $uidBounceAccount;
@@ -133,22 +154,27 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * recipientList
      * @lazy
+     *
      * @var \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
      */
     protected $recipientList;
 
     /**
-     * UID of the bounce account. Only exist for ease of use with ExtJS
+     * UID of the bounce account.
+     * Only exist for ease of use with ExtJS
+     *
      * @var integer $uidRecipientList
      */
     protected $uidRecipientList;
 
     /**
+     *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
+     *
      * @var \Ecodev\Newsletter\Utility\Validator
      */
     protected $validator;
@@ -164,12 +190,13 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the ObjectManager
+     *
      * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected function getObjectManager()
     {
-        if (!$this->objectManager) {
-            $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        if (! $this->objectManager) {
+            $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         }
 
         return $this->objectManager;
@@ -177,6 +204,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Setter for uid
+     *
      * @param integer $uid
      * @return void
      */
@@ -188,7 +216,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for plannedTime
      *
-     * @param DateTime $plannedTime When the newsletter will start sending emails
+     * @param DateTime $plannedTime
+     *            When the newsletter will start sending emails
      * @return void
      */
     public function setPlannedTime(DateTime $plannedTime)
@@ -209,7 +238,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for beginTime
      *
-     * @param DateTime $beginTime beginTime
+     * @param DateTime $beginTime
+     *            beginTime
      * @return void
      */
     public function setBeginTime(DateTime $beginTime)
@@ -230,7 +260,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for endTime
      *
-     * @param DateTime $endTime endTime
+     * @param DateTime $endTime
+     *            endTime
      * @return void
      */
     public function setEndTime(DateTime $endTime)
@@ -251,7 +282,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for repetition
      *
-     * @param integer $repetition 0-7 values to indicates when this newsletter will repeat
+     * @param integer $repetition
+     *            0-7 values to indicates when this newsletter will repeat
      * @return void
      */
     public function setRepetition($repetition)
@@ -272,7 +304,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for plainConverter
      *
-     * @param string $plainConverter Tool used to convert to plain text
+     * @param string $plainConverter
+     *            Tool used to convert to plain text
      * @return void
      */
     public function setPlainConverter($plainConverter)
@@ -292,6 +325,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns an instance of plain converter
+     *
      * @throws Exception
      * @return \Ecodev\Newsletter\Domain\Model\IPlainConverter
      */
@@ -306,7 +340,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $converter = new PlainConverter\Builtin();
         }
 
-        if (!($converter instanceof IPlainConverter)) {
+        if (! ($converter instanceof IPlainConverter)) {
             throw new Exception("$class does not implement \Ecodev\Newsletter\Domain\Model\IPlainConverter");
         }
 
@@ -316,7 +350,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for isTest
      *
-     * @param boolean $isTest Whether this newsletter is for test purpose. If it is it will be ignored in statistics
+     * @param boolean $isTest
+     *            Whether this newsletter is for test purpose. If it is it will be ignored in statistics
      * @return void
      */
     public function setIsTest($isTest)
@@ -347,7 +382,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for attachments
      *
-     * @param string $attachments List of files to be attached (comma separated list
+     * @param string $attachments
+     *            List of files to be attached (comma separated list
      * @return void
      */
     public function setAttachments($attachments)
@@ -368,7 +404,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for senderName
      *
-     * @param string $senderName The name of the newsletter sender
+     * @param string $senderName
+     *            The name of the newsletter sender
      * @return void
      */
     public function setSenderName($senderName)
@@ -408,9 +445,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             if ($sender) {
                 return $sender;
             }
-        }
-        // Returns the name as defined in configuration
-        elseif ($sender) {
+        } elseif ($sender) {
+            // Returns the name as defined in configuration
             return $sender;
         }
 
@@ -421,7 +457,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for senderEmail
      *
-     * @param string $senderEmail The email of the newsletter sender
+     * @param string $senderEmail
+     *            The email of the newsletter sender
      * @return void
      */
     public function setSenderEmail($senderEmail)
@@ -446,7 +483,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         global $TYPO3_DB;
 
         /* The sender defined on the page? */
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($this->senderEmail)) {
+        if (GeneralUtility::validEmail($this->senderEmail)) {
             return $this->senderEmail;
         }
 
@@ -460,13 +497,13 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 			WHERE p.uid = $this->pid");
 
             list($email) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
-            if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($email)) {
+            if (GeneralUtility::validEmail($email)) {
                 return $email;
             }
         }
 
         /* Maybe it was a hardcoded email address? */
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($email)) {
+        if (GeneralUtility::validEmail($email)) {
             return $email;
         }
 
@@ -479,9 +516,70 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Setter for Reply-To: name
+     *
+     * @param string $replytoName
+     */
+    public function setReplytoName($replytoName)
+    {
+        $this->replytoName = $replytoName;
+    }
+
+    /**
+     * Getter for Reply-To: name
+     *
+     * @return string
+     */
+    public function getReplytoName()
+    {
+        // Return the replytoName defined on the newsletter
+        if ($this->replytoName) {
+            return $this->replytoName;
+        }
+        // Return the replytoName defined in extension configuration
+        $replytoName = Tools::confParam('replyto_name');
+        if ($replytoName) {
+            return $replytoName;
+        }
+        // Return empty
+        return '';
+    }
+
+    /**
+     * Setter for Reply-To: <email>
+     *
+     * @param string $replytoEmail
+     */
+    public function setReplytoEmail($replytoEmail)
+    {
+        $this->replytoEmail = $replytoEmail;
+    }
+
+    /**
+     * Getter for Reply-To: <email>
+     *
+     * @return string
+     */
+    public function getReplytoEmail()
+    {
+        // Return the replytoEmail defined on the newsletter
+        if (GeneralUtility::validEmail($this->replytoEmail)) {
+            return $this->replytoEmail;
+        }
+        // Return the replytoEmail defined in extension configuration
+        $replytoEmail = Tools::confParam('replyto_email');
+        if (GeneralUtility::validEmail($replytoEmail)) {
+            return $replytoEmail;
+        }
+        // Return empty
+        return '';
+    }
+
+    /**
      * Setter for injectOpenSpy
      *
-     * @param boolean $injectOpenSpy injectOpenSpy
+     * @param boolean $injectOpenSpy
+     *            injectOpenSpy
      * @return void
      */
     public function setInjectOpenSpy($injectOpenSpy)
@@ -512,7 +610,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for injectLinksSpy
      *
-     * @param boolean $injectLinksSpy injectLinksSpy
+     * @param boolean $injectLinksSpy
+     *            injectLinksSpy
      * @return void
      */
     public function setInjectLinksSpy($injectLinksSpy)
@@ -543,7 +642,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for bounceAccount
      *
-     * @param \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount bounceAccount
+     * @param \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount
+     *            bounceAccount
      * @return void
      */
     public function setBounceAccount(BounceAccount $bounceAccount = null)
@@ -592,7 +692,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for recipientList
      *
-     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList recipientList
+     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
+     *            recipientList
      * @return void
      */
     public function setRecipientList(RecipientList $recipientList)
@@ -653,7 +754,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $domain = Tools::confParam('fetch_path');
 
         // Else we try to resolve a domain in page root line
-        if (!$domain) {
+        if (! $domain) {
             $pids = array_reverse(\TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid));
             foreach ($pids as $page) {
                 /* Domains */
@@ -673,9 +774,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
 
         // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
-        if (!$domain) {
+        if (! $domain) {
             $rootLine = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid);
-            $parser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\ExtendedTemplateService'); // Defined global here!
+            $parser = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\ExtendedTemplateService'); // Defined global here!
             $parser->tt_track = 0; // Do not log time-performance information
             $parser->init();
             $parser->runThroughTemplates($rootLine); // This generates the constants/config + hierarchy info for the template.
@@ -686,7 +787,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
 
         // If still no domain, can't continue
-        if (!$domain) {
+        if (! $domain) {
             throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
         }
 
@@ -696,6 +797,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the title, NOT localized, of the page sent by this newsletter.
      * This should only used for BE, because newsletter recipients need localized title
+     *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string the title
      */
@@ -714,6 +816,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Schedule the next newsletter if it defined to be repeated
+     *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function scheduleNextNewsletter()
@@ -722,20 +825,28 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         list($year, $month, $day, $hour, $minute) = explode('-', date("Y-n-j-G-i", $plannedTime->format('U')));
 
         switch ($this->getRepetition()) {
-            case 0: return;
-            case 1: $day += 1;
+            case 0:
+                return;
+            case 1:
+                $day += 1;
                 break;
-            case 2: $day += 7;
+            case 2:
+                $day += 7;
                 break;
-            case 3: $day += 14;
+            case 3:
+                $day += 14;
                 break;
-            case 4: $month += 1;
+            case 4:
+                $month += 1;
                 break;
-            case 5: $month += 3;
+            case 5:
+                $month += 3;
                 break;
-            case 6: $month += 6;
+            case 6:
+                $month += 6;
                 break;
-            case 7: $year += 1;
+            case 7:
+                $year += 1;
                 break;
         }
         $newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
@@ -744,8 +855,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         // We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
         global $TYPO3_DB;
         $TYPO3_DB->sql_query("INSERT INTO tx_newsletter_domain_model_newsletter
-        (uid, pid, planned_time, begin_time, end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, tstamp, crdate, deleted, hidden)
-		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . " AS tstamp, " . time() . " AS crdate, deleted, hidden
+        (uid, pid, planned_time, begin_time, end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, tstamp, crdate, deleted, hidden)
+		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . " AS tstamp, " . time() . " AS crdate, deleted, hidden
 		FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
     }
 
@@ -757,7 +868,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getEmailCount()
     {
         // If the newsletter didn't start, we rely on recipientList to tell us how many email there will be
-        if (!$this->getBeginTime()) {
+        if (! $this->getBeginTime()) {
             $recipientList = $this->getRecipientList();
             $recipientList->init();
 
@@ -771,6 +882,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Get the number of not yet sent email
+     *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function getEmailNotSentCount()
@@ -778,7 +890,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         global $TYPO3_DB;
 
         // If the newsletter didn't start, then it means all emails are "not sent"
-        if (!$this->getBeginTime()) {
+        if (! $this->getBeginTime()) {
             return $this->getEmailCount();
         }
 
@@ -789,6 +901,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the URL of the content of this newsletter
+     *
      * @return string
      */
     public function getContentUrl($language = null)
@@ -796,7 +909,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $append_url = Tools::confParam('append_url');
         $domain = $this->getDomain();
 
-        if (!is_null($language)) {
+        if (! is_null($language)) {
             $language = '&L=' . $language;
         }
 
@@ -805,6 +918,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Set the validator
+     *
      * @param \Ecodev\Newsletter\Utility\Validator $validor
      */
     public function setValidator(\Ecodev\Newsletter\Utility\Validator $validor)
@@ -814,11 +928,12 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Get the validator
+     *
      * @return \Ecodev\Newsletter\Utility\Validator
      */
     public function getValidator()
     {
-        if (!$this->validator) {
+        if (! $this->validator) {
             $this->validator = new \Ecodev\Newsletter\Utility\Validator();
         }
 
@@ -826,9 +941,12 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the content of this newsletter with validation messages. The content
+     * Returns the content of this newsletter with validation messages.
+     * The content
      * is also "fixed" automatically when possible.
-     * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
+     *
+     * @param string $language
+     *            language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
      * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
      */
     public function getValidatedContent($language = null)
@@ -838,6 +956,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Return a human readable status for the newsletter
+     *
      * @return string
      */
     public function getStatus()
@@ -851,15 +970,15 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $endTime = $this->getEndTime();
 
         // If we don't have a valid UID, it means we are a "fake model" newsletter not saved yet
-        if (!($this->getUid() > 0)) {
+        if (! ($this->getUid() > 0)) {
             return $LANG->getLL('newsletter_status_not_planned');
         }
 
-        if ($plannedTime && !$beginTime) {
+        if ($plannedTime && ! $beginTime) {
             return sprintf($LANG->getLL('newsletter_status_planned'), $plannedTime->format(DateTime::ISO8601));
         }
 
-        if ($beginTime && !$endTime) {
+        if ($beginTime && ! $endTime) {
             return $LANG->getLL('newsletter_status_generating_emails');
         }
 
@@ -877,6 +996,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return "unexpected status";
     }
 
+    /**
+     * Returns newsletter statistics to be used for pie and timeline chart
+     *
+     * @return array eg: array(array(time, emailNotSentCount, emailSentCount, emailOpenedCount, emailBouncedCount, emailCount, linkOpenedCount, linkCount, [and same fields but Percentage instead of Count] ))
+     */
     public function getStatistics()
     {
         $newsletterRepository = $this->getObjectManager()->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
