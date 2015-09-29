@@ -1,47 +1,44 @@
 <?php
+
 namespace Ecodev\Newsletter;
 
 use DateTime;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
 
-/*
- * *************************************************************
- * Copyright notice
+/* * *************************************************************
+ *  Copyright notice
  *
- * (c) 2015
- * All rights reserved
+ *  (c) 2015
+ *  All rights reserved
  *
- * This script is part of the TYPO3 project. The TYPO3 project is
- * free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * The GNU General Public License can be found at
- * http://www.gnu.org/copyleft/gpl.html.
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
  *
- * This script is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * This copyright notice MUST APPEAR in all copies of the script!
- * *************************************************************
- */
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ * ************************************************************* */
 
 /**
  * Toolbox for newsletter and dependant extensions.
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-abstract class Tools
+class Tools
 {
-
     protected static $configuration = null;
 
     /**
      * UriBuilder
-     *
      * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     protected static $uriBuilder = null;
@@ -49,26 +46,12 @@ abstract class Tools
     /**
      * Get a newsletter-conf-template parameter
      *
-     * @param string $key
-     *            Parameter key
-     * @return mixed Parameter value
+     * @param    string   Parameter key
+     * @return   mixed    Parameter value
      */
     public static function confParam($key)
     {
-        // Look for a config in the module TS first.
-        static $configTS;
-        if (! is_array($configTS)) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $beConfManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
-            $configTS = $beConfManager->getTypoScriptSetup();
-            $configTS = $configTS['module.']['tx_newsletter.']['config.'];
-        }
-        if (isset($configTS[$key])) {
-            return $configTS[$key];
-        }
-
-        // Else fallback to the extension config.
-        if (! is_array(self::$configuration)) {
+        if (!is_array(self::$configuration)) {
             self::$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
         }
 
@@ -80,8 +63,7 @@ abstract class Tools
      *
      * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
      * @param string $message
-     * @param integer $logLevel
-     *            0 = message, 1 = error
+     * @param integer $logLevel 0 = message, 1 = error
      */
     public static function log($message, $logLevel = 0)
     {
@@ -95,8 +77,7 @@ abstract class Tools
      * Create a configured mailer from a newsletter page record.
      * This mailer will have both plain and html content applied as well as files attached.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
-     *            The newsletter
+     * @param \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
      * @param integer $language
      * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
      */
@@ -119,6 +100,7 @@ abstract class Tools
 
     /**
      * Create the spool for all newsletters who need it
+     * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
      */
     public static function createAllSpool()
     {
@@ -135,8 +117,9 @@ abstract class Tools
      * Spool a newsletter page out to the real receivers.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param Newsletter $newsletter
-     * @return void
+     * @param   array        Newsletter record.
+     * @param   integer      Actual begin time.
+     * @return  void
      */
     public static function createSpool(Newsletter $newsletter)
     {
@@ -169,7 +152,7 @@ abstract class Tools
                     'pid' => $newsletter->getPid(),
                     'newsletter' => $newsletter->getUid(),
                 ));
-                $emailSpooledCount ++;
+                $emailSpooledCount++;
             }
         }
         self::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
@@ -206,8 +189,7 @@ abstract class Tools
     /**
      * Run the spool for one or all Newsletters
      *
-     * @param Newsletter $limitNewsletter
-     *            if specified, run spool only for that Newsletter
+     * @param Newsletter $limitNewsletter if specified, run spool only for that Newsletter
      */
     public static function runSpool(Newsletter $limitNewsletter = null)
     {
@@ -239,7 +221,7 @@ abstract class Tools
             $language = $recipientData['L'];
 
             // Was a language with this page defined, if not create one
-            if (! is_object($mailers[$language])) {
+            if (!is_object($mailers[$language])) {
                 $mailers[$language] = self::getConfiguredMailer($newsletter, $language);
             }
 
@@ -254,7 +236,7 @@ abstract class Tools
             $email->setEndTime(new DateTime());
             $emailRepository->updateNow($email);
 
-            $emailSentCount ++;
+            $emailSentCount++;
         }
 
         // Log numbers to syslog
@@ -263,7 +245,6 @@ abstract class Tools
 
     /**
      * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
-     *
      * @param string $extensionName
      * @param string $pluginName
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
@@ -272,8 +253,8 @@ abstract class Tools
     {
 
         // If we are in Backend we need to simulate minimal TSFE
-        if (! isset($GLOBALS['TSFE']) || ! ($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
-            if (! is_object($GLOBALS['TT'])) {
+        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
+            if (!is_object($GLOBALS['TT'])) {
                 $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
                 $GLOBALS['TT']->start();
             }
@@ -290,12 +271,9 @@ abstract class Tools
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        if (! (isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
+        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
             $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
-            $extbaseBootstrap->initialize(array(
-                'extensionName' => $extensionName,
-                'pluginName' => $pluginName,
-            ));
+            $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
         }
 
         return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
@@ -303,18 +281,16 @@ abstract class Tools
 
     /**
      * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
-     *
      * @param string $actionName
      * @param array $controllerArguments
      * @param string $controllerName
      * @param string $extensionName
      * @param string $pluginName
-     * @param array $otherArguments
      * @return string absolute URI
      */
-    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p', array $otherArguments = null)
+    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p')
     {
-        if (! self::$uriBuilder) {
+        if (!self::$uriBuilder) {
             self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
         }
         $controllerArguments['action'] = $actionName;
@@ -324,24 +300,19 @@ abstract class Tools
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
-        if (! isset($otherArguments) || is_null($otherArguments)) {
-            $otherArguments = array();
-        }
+        $arguments = array($pluginNamespace => $controllerArguments);
 
-        $arguments = $otherArguments;
-        $arguments[$pluginNamespace] = $controllerArguments;
-        self::$uriBuilder->reset()
-            ->setUseCacheHash(false)
-            ->setCreateAbsoluteUri(true)
-            ->setArguments($arguments)
-            ->setTargetPageType(1342671779);
+        self::$uriBuilder
+                ->reset()
+                ->setUseCacheHash(false)
+                ->setCreateAbsoluteUri(true)
+                ->setArguments($arguments);
 
-        return self::$uriBuilder->buildFrontendUri();
+        return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
 
     /**
      * Returns an base64_encode encrypted string
-     *
      * @param string $string
      * @return string base64_encode encrypted string
      */
@@ -354,9 +325,7 @@ abstract class Tools
 
     /**
      * Returns a decrypted string
-     *
-     * @param string $string
-     *            base64_encode encrypted string
+     * @param string $string base64_encode encrypted string
      * @return string decrypted string
      */
     public static function decrypt($string)
@@ -370,13 +339,12 @@ abstract class Tools
 
     /**
      * Returns the size of the IV
-     *
      * @return integer
      */
     private static function getIVSize()
     {
         static $iv_size;
-        if (! isset($iv_size)) {
+        if (!isset($iv_size)) {
             $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
         }
 
@@ -385,13 +353,12 @@ abstract class Tools
 
     /**
      * Returns the secure encryption key
-     *
      * @return string
      */
     private static function getSecureKey()
     {
         static $secureKey;
-        if (! isset($secureKey)) {
+        if (!isset($secureKey)) {
             $secureKey = hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true);
         }
 
