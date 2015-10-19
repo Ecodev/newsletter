@@ -10,6 +10,9 @@ notification_email = user
 # cat=basic; type=string; label=Domain: Domain or domain + path (without "http") from wich to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path =
 
+# cat=basic; type=string; label=Protocol: Protocol http:// or https://
+protocol =
+
 # cat=basic; type=string; label=Append parameters: String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template. Or disable cache with &no_cache=1.
 append_url =
 
