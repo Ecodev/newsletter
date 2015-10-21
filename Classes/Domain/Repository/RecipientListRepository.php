@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Repository;
 
 /* * *************************************************************
@@ -33,14 +32,22 @@ namespace Ecodev\Newsletter\Domain\Repository;
  */
 class RecipientListRepository extends AbstractRepository
 {
-
     /**
-     * Returns a RecipientList already initialized
+     * Returns a RecipientList already initialized, even if it is hidden
      * @return \Ecodev\Newsletter\Domain\Model\RecipientList
      */
     public function findByUidInitialized($uidRecipientlist)
     {
-        $recipientList = $this->findByUid($uidRecipientlist);
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setIgnoreEnableFields(true); // because of this line hidden objects can be retrieved
+        $recipientList = $query->matching(
+                        $query->equals('uid', $uidRecipientlist)
+                )
+                ->execute()
+                ->getFirst();
+
         if ($recipientList) {
             $recipientList->init();
         }
