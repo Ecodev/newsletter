@@ -55,7 +55,7 @@ class BeUsers extends GentleSql
         $config = array_filter($config);
 
         $this->data = $GLOBALS['TYPO3_DB']->sql_query(
-                "SELECT uid,email,realName,username,lang,admin FROM be_users
+                "SELECT email, realName, username, lang, admin FROM be_users
 				WHERE uid IN (" . implode(',', $config) . ")
 				AND email <> ''
 				AND disable = 0

@@ -172,7 +172,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Fetch one receiver record from the newsletter target.
      * The record MUST contain an "email"-field. Without this one this mailtarget is useless.
-     * For compatibility with various subscription systems, the record can contain "tableName"-field.
      *
      * @return   array      Assoc array with fields for the receiver
      */
@@ -193,10 +192,9 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     abstract public function getError();
 
     /**
-     * Here you can define an action when an address bounces. This can either be database operations such as a deletion.
+     * Here you can define an action when an address bounces. This can be database operations such as a deletion.
      * For external data-sources, you might consider collecting the addresses for later removal from the foreign system.
-     * The \Ecodev\Newsletter\Domain\Model\RecipientList\Sql implements a sensible default. "tableName" should also be included
-     * for compatibility reasons.
+     * The \Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql implements a sensible default.
      *
      * @param string $email the email address of the recipient
      * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
@@ -285,9 +283,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
         switch ($fieldname) {
             case 'email':
             case 'plain_only':
-            case 'authCode':
-            case 'uid':
-            case 'tableName':
             case 'L':
                 return '<span style="color: green;">' . $fieldname . '</span>';
 

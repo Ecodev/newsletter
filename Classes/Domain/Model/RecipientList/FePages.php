@@ -55,7 +55,7 @@ class FePages extends GentleSql
         $config = array_filter($config);
 
         $this->data = $GLOBALS['TYPO3_DB']->sql_query(
-                "SELECT DISTINCT fe_users.uid,name,address,telephone,fax,email,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
+                "SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
 				FROM pages
 				INNER JOIN fe_users ON pages.uid = fe_users.pid
 				WHERE pages.uid IN (" . implode(',', $config) . ")
