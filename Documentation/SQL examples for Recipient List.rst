@@ -1,5 +1,8 @@
-SQL examples for Recipient List
-===============================
+SQL Recipient List
+==================
+
+Markers
+-------
 
 SQL can use special markers in query which will be substituted when it
 makes sense:
@@ -16,8 +19,20 @@ makes sense:
 ======================================  ================  ============== =============== =============
 
 
+General recommendations
+-----------------------
+
+When using SQL Recipient List you should try to minimize the amount of data
+selected. This is because when the newsletter is sent those data will be
+duplicated (in `tx_newsletter_domain_model_email` records), hence the database
+size will increase. To avoid the growth to get out of hand it is **strongly
+recommended to avoid selecting everything** such as ``SELECT * FROM [...]``.
+
+Examples
+========
+
 The following examples may use fields which does not exist by default in
-database. Be sure to check the query.
+database. Be sure to check the query thoroughly.
 
 With extension addresses
 ------------------------
