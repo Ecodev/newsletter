@@ -6,3 +6,7 @@ tools:
     php_pdepend: true
     php_changetracking: true
     sensiolabs_security_checker: true
+checks:
+    php:
+        code_rating: true
+        duplication: true
