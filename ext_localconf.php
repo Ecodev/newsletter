@@ -37,3 +37,12 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Ecodev\\Newslet
     'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_fetch_bounces_title',
     'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_fetch_bounces_description',
 );
+
+// TCA custom eval
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['\\Ecodev\\Newsletter\\Tca\\BounceAccountTca'] = 'EXT:' . $_EXTKEY . '/Classes/Tca/BounceAccountTca.php';
+
+// Make a call to update
+if (TYPO3_MODE === 'BE') {
+    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+    $dispatcher->connect('TYPO3\\CMS\\Extensionmanager\\Service\\ExtensionManagementService', 'hasInstalledExtensions', 'Ecodev\\Newsletter\\Update', 'autorun');
+}

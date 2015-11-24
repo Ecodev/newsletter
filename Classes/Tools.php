@@ -310,4 +310,58 @@ abstract class Tools
 
         return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
     }
+
+    /**
+     * Returns an base64_encode encrypted string
+     * @param string $string
+     * @return string base64_encode encrypted string
+     */
+    public static function encrypt($string)
+    {
+        $iv = mcrypt_create_iv(self::getIVSize());
+
+        return base64_encode($iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv));
+    }
+
+    /**
+     * Returns a decrypted string
+     * @param string $string base64_encode encrypted string
+     * @return string decrypted string
+     */
+    public static function decrypt($string)
+    {
+        $string = base64_decode($string);
+        $iv = substr($string, 0, self::getIVSize());
+        $cipher = substr($string, self::getIVSize());
+
+        return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+    }
+
+    /**
+     * Returns the size of the IV
+     * @return integer
+     */
+    private static function getIVSize()
+    {
+        static $iv_size;
+        if (!isset($iv_size)) {
+            $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+        }
+
+        return $iv_size;
+    }
+
+    /**
+     * Returns the secure encryption key
+     * @return string
+     */
+    private static function getSecureKey()
+    {
+        static $secureKey;
+        if (!isset($secureKey)) {
+            $secureKey = hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true);
+        }
+
+        return $secureKey;
+    }
 }
