@@ -50,6 +50,7 @@
         <end_time>1423729053</end_time>
         <open_time>1423729055</open_time>
         <recipient_address>recipient1@example.com</recipient_address>
+        <recipient_data>a:1:{s:5:"email";s:22:"recipient1@example.com";}</recipient_data>
     </tx_newsletter_domain_model_email>
 
     <tx_newsletter_domain_model_email>
@@ -58,6 +59,7 @@
         <pid>3</pid>
         <begin_time>1423729054</begin_time>
         <recipient_address>recipient2@example.com</recipient_address>
+        <recipient_data>a:1:{s:5:"email";s:22:"recipient2@example.com";}</recipient_data>
     </tx_newsletter_domain_model_email>
 
     <tx_newsletter_domain_model_link>
@@ -103,6 +105,7 @@
             INSERT INTO sys_log (details)
             VALUES (CONCAT('clicked ', ###EMAIL###));
         </sql_register_click>
+        <csv_values></csv_values>
     </tx_newsletter_domain_model_recipientlist>
 
     <tx_newsletter_domain_model_bounceaccount>
