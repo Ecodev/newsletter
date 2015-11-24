@@ -18,6 +18,12 @@
             <trans-unit id="password.description" xml:space="preserve">
                 <source>password</source>
             </trans-unit>
+            <trans-unit id="port.description" xml:space="preserve">
+                <source>port</source>
+            </trans-unit>
+            <trans-unit id="config.description" xml:space="preserve">
+                <source>config</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
