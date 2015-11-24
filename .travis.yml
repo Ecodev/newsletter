@@ -54,8 +54,4 @@ script:
   - ./bin/phpunit $PHPUNIT_FLAGS_FUNCTIONAL --colors -c typo3conf/ext/newsletter/Tests/Build/FunctionalTests.xml
 
 after_script:
-  - echo "Uploading code coverage results";
-  - cp -R typo3conf/ext/newsletter/.git .
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover unit-tests-coverage.clover
-  - php ocular.phar code-coverage:upload --format=php-clover functional-tests-coverage.clover
+  - if [[ ! -z $PHPUNIT_FLAGS_UNIT ]]; then echo "Uploading code coverage results" && cp -R typo3conf/ext/newsletter/.git . && wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover unit-tests-coverage.clover && php ocular.phar code-coverage:upload --format=php-clover functional-tests-coverage.clover ; fi
