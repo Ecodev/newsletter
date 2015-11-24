@@ -11,6 +11,8 @@ env:
   - TYPO3_BRANCH=7.2.0
   - TYPO3_BRANCH=7.3.1
   - TYPO3_BRANCH=7.4.0
+  - TYPO3_BRANCH=7.5.0
+  - TYPO3_BRANCH=7.6.0
   - TYPO3_BRANCH=master
 
 matrix:
@@ -29,6 +31,8 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.0' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.0' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - sudo apt-get install lynx
   - npm install -g gulp
   - npm install
@@ -46,8 +50,8 @@ before_script:
 
 script:
   - cd typo3conf/ext/newsletter && gulp && cd ../../../
-  - ./bin/phpunit --coverage-clover=unit-tests-coverage.clover --colors -c typo3conf/ext/newsletter/Tests/Build/UnitTests.xml
-  - ./bin/phpunit --coverage-clover=functional-tests-coverage.clover --colors -c typo3conf/ext/newsletter/Tests/Build/FunctionalTests.xml
+  - ./bin/phpunit $PHPUNIT_FLAGS_UNIT --colors -c typo3conf/ext/newsletter/Tests/Build/UnitTests.xml
+  - ./bin/phpunit $PHPUNIT_FLAGS_FUNCTIONAL --colors -c typo3conf/ext/newsletter/Tests/Build/FunctionalTests.xml
 
 after_script:
   - echo "Uploading code coverage results";
