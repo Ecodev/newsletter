@@ -125,7 +125,8 @@ class Validator
         }
         // Otherwise try our best to guess what it is
         else {
-            $absoluteDomain = 'http://' . $newsletter->getDomain() . '/';
+			$protocol = Tools::confParam('protocol');
+            $absoluteDomain = $protocol . $newsletter->getDomain() . '/';
         }
 
         // Fix relative URL to absolute URL

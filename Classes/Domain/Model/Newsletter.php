@@ -799,8 +799,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (!is_null($language)) {
             $language = '&L=' . $language;
         }
-
-        return "http://$domain/index.php?id=" . $this->getPid() . $language . $append_url;
+        $protocol = Tools::confParam('protocol'); //stefano: protocol is now set through "basic.protocol" parameter
+        return "$protocol$domain/index.php?id=" . $this->getPid() . $language . $append_url;
     }
 
     /**
