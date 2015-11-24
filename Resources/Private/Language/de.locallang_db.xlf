@@ -127,6 +127,12 @@
                 <source>Password</source>
                 <target>Kennwort</target>
             </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.port" xml:space="preserve">
+                <source>Port</source>
+            </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_bounceaccount.config" xml:space="preserve">
+                <source>fetchmail Konfigurations</source>
+            </trans-unit>
             <trans-unit id="tx_newsletter_domain_model_recipientlist" xml:space="preserve" approved="yes">
                 <source>Recipient List</source>
                 <target>Empfängerliste</target>

@@ -106,26 +106,22 @@ class BounceHandler
         }
 
         // Find all bounce accounts we need to check
-        $content = '';
+        $fetchmailConfiguration = '';
         $servers = array();
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $bounceAccountRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
-            $server = $bounceAccount->getServer();
-            $protocol = $bounceAccount->getProtocol();
-            $username = $bounceAccount->getUsername();
-            $password = $bounceAccount->getPassword();
-
-            $content .= "poll $server proto $protocol username \"$username\" password \"$password\"\n";
-            $servers[] = $server;
+            $fetchmailConfiguration .= $bounceAccount->getSubstitutedConfig() . "\n";
+            $servers[] = $bounceAccount->getServer();
         }
 
         // Write a new fetchmailrc based on bounce accounts found
-        $fetchmailhome = PATH_site . 'uploads/tx_newsletter';
-        $fetchmailfile = "$fetchmailhome/fetchmailrc";
-        file_put_contents($fetchmailfile, $content);
-        chmod($fetchmailfile, 0600);
-        putenv("FETCHMAILHOME=$fetchmailhome");
+        $fetchmailHome = PATH_site . 'uploads/tx_newsletter';
+        $fetchmailFile = "$fetchmailHome/fetchmailrc";
+        file_put_contents($fetchmailFile, $fetchmailConfiguration);
+        $fetchmailConfiguration = null; // Dont leave unencrypted values in memory around for too long.
+        chmod($fetchmailFile, 0600);
+        putenv("FETCHMAILHOME=$fetchmailHome");
 
         // Keep messages on server
         $keep = Tools::confParam('keep_messages') ? '--keep ' : '';
@@ -137,7 +133,7 @@ class BounceHandler
             exec($cmd);
         }
 
-        unlink($fetchmailfile);
+        unlink($fetchmailFile);
     }
 
     /**

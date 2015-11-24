@@ -104,6 +104,23 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
+    public function getPortReturnsInitialValueForString()
+    {
+        $this->assertSame(0, $this->subject->getPort());
+    }
+
+    /**
+     * @test
+     */
+    public function setPortForIntSetsPort()
+    {
+        $this->subject->setPort(25);
+        $this->assertAttributeEquals(25, 'port', $this->subject);
+    }
+
+    /**
+     * @test
+     */
     public function getUsernameReturnsInitialValueForString()
     {
         $this->assertSame('', $this->subject->getUsername());
@@ -133,5 +150,62 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->setPassword('Conceived at T3CON10');
         $this->assertAttributeEquals('Conceived at T3CON10', 'password', $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function getConfigReturnsInitialValueForString()
+    {
+        $this->assertSame('', $this->subject->getConfig());
+    }
+
+    /**
+     * @test
+     */
+    public function setConfigForStringSetsConfig()
+    {
+        $this->subject->setConfig('Conceived at T3CON10');
+        $this->assertAttributeEquals('Conceived at T3CON10', 'config', $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function getSubstitutedConfigDefault()
+    {
+        $this->subject->setServer('mail.example.com');
+        $this->subject->setProtocol('smtp');
+        $this->subject->setPort(25);
+        $this->subject->setUsername('john');
+        $this->subject->setPassword(\Ecodev\Newsletter\Tools::encrypt('hunter2'));
+        $expected = 'poll mail.example.com proto smtp username "john" password "hunter2"';
+        $this->assertSame($expected, $this->subject->getSubstitutedConfig());
+    }
+
+    /**
+     * @test
+     */
+    public function getSubstitutedConfigCustom()
+    {
+        $this->subject->setServer('pop.example.com');
+        $this->subject->setProtocol('pop');
+        $this->subject->setPort(123);
+        $this->subject->setUsername('connor');
+        $this->subject->setPassword(\Ecodev\Newsletter\Tools::encrypt('skynet'));
+
+        $config = 'server  : ###SERVER###
+protocol: ###PROTOCOL###
+port    : ###PORT###
+username: ###USERNAME###
+password: ###PASSWORD###';
+        $this->subject->setConfig(\Ecodev\Newsletter\Tools::encrypt($config));
+
+        $expected = 'server  : pop.example.com
+protocol: pop
+port    : 123
+username: connor
+password: skynet';
+        $this->assertSame($expected, $this->subject->getSubstitutedConfig());
     }
 }

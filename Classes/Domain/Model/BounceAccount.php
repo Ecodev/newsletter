@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model;
 
 /* * *************************************************************
@@ -33,7 +32,6 @@ namespace Ecodev\Newsletter\Domain\Model;
  */
 class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * email
      *
@@ -57,6 +55,13 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $protocol = '';
 
     /**
+     * port
+     *
+     * @var int $port
+     */
+    protected $port = 0;
+
+    /**
      * username
      *
      * @var string $username
@@ -69,6 +74,13 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string $password
      */
     protected $password = '';
+
+    /**
+     * fetchmail configuration
+     *
+     * @var string $config
+     */
+    protected $config = '';
 
     /**
      * Setter for email
@@ -134,6 +146,27 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Setter for port
+     *
+     * @param int $port port
+     * @return void
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+    }
+
+    /**
+     * Getter for port
+     *
+     * @return int port
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
      * Setter for username
      *
      * @param string $username username
@@ -174,4 +207,50 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->password;
     }
+
+    /**
+     * Setter for config
+     *
+     * @param string $config config
+     * @return void
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * Getter for config
+     *
+     * @return string config
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    public function getSubstitutedConfig()
+    {
+        $markers = array('###SERVER###', '###PROTOCOL###', '###PORT###', '###USERNAME###', '###PASSWORD###');
+        $values = array();
+        $values[] = $this->getServer();
+        $values[] = $this->getProtocol();
+        $values[] = $this->getPort();
+        $values[] = $this->getUsername();
+        $values[] = \Ecodev\Newsletter\Tools::decrypt($this->getPassword());
+
+        $config = $this->getConfig();
+        if (empty($config)) {
+            // Keep the old config to not break old installations
+            $config = 'poll ###SERVER### proto ###PROTOCOL### username "###USERNAME###" password "###PASSWORD###"';
+        } else {
+            $config = \Ecodev\Newsletter\Tools::decrypt($config);
+        }
+
+        $result = str_replace($markers, $values, $config);
+        unset($values); // Dont leave unencrypted values in memory around for too long.
+
+        return $result;
+    }
+
 }
