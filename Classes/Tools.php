@@ -33,7 +33,7 @@ use Ecodev\Newsletter\Domain\Model\Newsletter;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tools
+abstract class Tools
 {
     protected static $configuration = null;
 
@@ -375,33 +375,5 @@ class Tools
         }
 
         return $secureKey;
-    }
-
-    /**
-     * Encrypt old bounce account passwords
-     * @param string $extname
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     */
-    public static function encryptOldBounceAccountPasswords($extname = null)
-    {
-        // Only concerned if it is the newsletter extension that was installed.
-        if ($extname !== 'newsletter') {
-            return;
-        }
-
-        global $TYPO3_DB;
-
-        // Keep the old config to not break old installations
-        $config = self::encrypt("poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n");
-
-        // Fetch and update the old records - they will have a default port and an empty config.
-        $rs = $TYPO3_DB->exec_SELECTquery('uid,password', 'tx_newsletter_domain_model_bounceaccount', 'port = 0 AND config = \'\'');
-        while (($records[] = $TYPO3_DB->sql_fetch_assoc($rs)) || array_pop($records));
-        $TYPO3_DB->sql_free_result($rs);
-        if (!empty($records)) {
-            foreach ($records as $row) {
-                $TYPO3_DB->exec_UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . intval($row['uid']), array( 'password' => self::encrypt($row['password']), 'config' => $config ));
-            }
-        }
     }
 }

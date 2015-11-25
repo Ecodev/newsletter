@@ -41,14 +41,8 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Ecodev\\Newslet
 // TCA custom eval
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['\\Ecodev\\Newsletter\\Tca\\BounceAccountTca'] = 'EXT:' . $_EXTKEY . '/Classes/Tca/BounceAccountTca.php';
 
-// Make a call to update old un-encrypted password fields in bounce accounts when extension is installed
+// Make a call to update
 if (TYPO3_MODE === 'BE') {
-    $class = 'TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher';
-    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($class);
-    $dispatcher->connect(
-        'TYPO3\\CMS\\Extensionmanager\\Service\\ExtensionManagementService',
-        'hasInstalledExtensions',
-        'Ecodev\\Newsletter\\Tools',
-        'encryptOldBounceAccountPasswords'
-    );
+    $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+    $dispatcher->connect('TYPO3\\CMS\\Extensionmanager\\Service\\ExtensionManagementService', 'hasInstalledExtensions', 'Ecodev\\Newsletter\\Update\\Update', 'update');
 }
