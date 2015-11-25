@@ -53,7 +53,7 @@ abstract class Tools
     {
         // Look for a config in the module TS first.
         static $configTS;
-        if (!is_array($configTS)) {
+        if (!is_array($configTS) && isset($GLOBALS['TYPO3_DB'])) {
             $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
             $beConfManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
             $configTS = $beConfManager->getTypoScriptSetup();
