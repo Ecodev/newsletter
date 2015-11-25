@@ -42,8 +42,8 @@ CREATE TABLE tx_newsletter_domain_model_bounceaccount (
 	protocol varchar(255) DEFAULT '' NOT NULL,
 	port smallint(6) unsigned DEFAULT 0 NOT NULL,
 	username varchar(255) DEFAULT '' NOT NULL,
-	password text DEFAULT '' NOT NULL,
-	config text DEFAULT '' NOT NULL,
+	password text NOT NULL,
+	config text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

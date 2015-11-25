@@ -116,5 +116,6 @@
         <protocol>pop3</protocol>
         <username>my-username</username>
         <password>my-password</password>
+        <config>poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n</config>
     </tx_newsletter_domain_model_bounceaccount>
 </dataset>
