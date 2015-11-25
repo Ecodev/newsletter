@@ -252,5 +252,4 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $result;
     }
-
 }

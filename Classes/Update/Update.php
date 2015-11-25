@@ -3,7 +3,6 @@
 namespace Ecodev\Newsletter\Update;
 
 use Ecodev\Newsletter\Tools;
-use Ecodev\Newsletter\Update\Transaction;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /*
