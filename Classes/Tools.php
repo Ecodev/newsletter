@@ -46,11 +46,25 @@ class Tools
     /**
      * Get a newsletter-conf-template parameter
      *
-     * @param    string   Parameter key
-     * @return   mixed    Parameter value
+     * @param string $key Parameter key
+     * @return mixed Parameter value
      */
     public static function confParam($key)
     {
+        // Look for a config in the module TS first.
+        static $configTS;
+        if (!is_array($configTS)) {
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+            $beConfManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
+            $configTS = $beConfManager->getTypoScriptSetup();
+            $configTS = $configTS['module.']['tx_newsletter.']['config.'];
+        }
+
+        if (isset($configTS[$key])) {
+            return $configTS[$key];
+        }
+
+        // Else fallback to the extension config.
         if (!is_array(self::$configuration)) {
             self::$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter']);
         }
@@ -100,7 +114,6 @@ class Tools
 
     /**
      * Create the spool for all newsletters who need it
-     * @param boolean $onlyTest if true only test newsletter will be used, otherwise all (included tests)
      */
     public static function createAllSpool()
     {
@@ -117,9 +130,8 @@ class Tools
      * Spool a newsletter page out to the real receivers.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param   array        Newsletter record.
-     * @param   integer      Actual begin time.
-     * @return  void
+     * @param Newsletter $newsletter
+     * @return void
      */
     public static function createSpool(Newsletter $newsletter)
     {

@@ -85,7 +85,7 @@ Bounce account
 A new record type called “Bounce account”. You should select a bounce
 account for newsletter. The bounce account is used in two ways:
 
--  To provide an email address for the mail to bounce to ("Return-Path:" header)
+-  To provide an email address for the mail to bounce to (``Return-Path:`` header)
 -  To provide login information to the email account for the bounce-system to login to.
 
 Once a newsletter has a BounceAccount and the bounce Scheduler task is
@@ -101,6 +101,27 @@ of SQL for bounced email. However it is possible to receive an email
 whenever a recipient requests for unsubscription. The “Notification
 email” field needs to be specified in extension configuration (in Extension
 Manager).
+
+Overriding with TypoScript
+--------------------------
+
+It is possible to override any configuration seen in Extension Manager via
+TypoScript. This allow you to have a different configuration values for
+different domains.
+
+TypoScript syntax would be similar to:
+
+.. code:: php
+
+    module.tx_newsletter.config {
+        sender_name = John Connor
+        sender_email = me@example.com
+        attach_images = 1
+        keep_messages = 0
+        append_url = &no_cache=1
+        fetch_path =
+        notification_email =
+    }
 
 Writing a newsletter
 ====================
