@@ -1,8 +1,5 @@
-SQL Recipient List
-==================
-
-Markers
--------
+SQL examples for Recipient List
+===============================
 
 SQL can use special markers in query which will be substituted when it
 makes sense:
@@ -29,10 +26,12 @@ size will increase. To avoid the growth to get out of hand it is **strongly
 recommended to avoid selecting everything** such as ``SELECT * FROM [...]``.
 
 Examples
-========
+--------
 
 The following examples may use fields which does not exist by default in
 database. Be sure to check the query thoroughly.
+
+.. _configuration-SQL_Examples-extension_addresses:
 
 With extension addresses
 ------------------------
@@ -71,8 +70,10 @@ SQL to register a bounced email:
 
     WHERE email_address = ###EMAIL###
 
+.. _configuration-SQL_Examples-extension_tt_address:
+
 With extension tt_address
---------------------------
+-------------------------
 
 We do not count bounces, but only exclude recipient on first hard bounce
 or unsubscribe.
