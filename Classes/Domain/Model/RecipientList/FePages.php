@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
@@ -10,11 +9,10 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 class FePages extends GentleSql
 {
-
     /**
      * fePages
      *
-     * @var string $fePages
+     * @var string
      */
     protected $fePages;
 
@@ -22,7 +20,6 @@ class FePages extends GentleSql
      * Setter for fePages
      *
      * @param string $fePages fePages
-     * @return void
      */
     public function setFePages($fePages)
     {
@@ -55,10 +52,10 @@ class FePages extends GentleSql
         $config = array_filter($config);
 
         $this->data = $GLOBALS['TYPO3_DB']->sql_query(
-                "SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
+                'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
 				FROM pages
 				INNER JOIN fe_users ON pages.uid = fe_users.pid
-				WHERE pages.uid IN (" . implode(',', $config) . ")
+				WHERE pages.uid IN (' . implode(',', $config) . ")
 				AND email != ''
 				AND pages.deleted = 0
 				AND pages.hidden = 0

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 /* *
@@ -31,7 +30,6 @@ namespace Ecodev\Newsletter\MVC\ExtDirect;
  */
 class Request
 {
-
     /**
      * @inject
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
@@ -48,14 +46,14 @@ class Request
     /**
      * True if this request is a form post
      *
-     * @var boolean
+     * @var bool
      */
     protected $formPost = false;
 
     /**
      * True if this request is containing a file upload
      *
-     * @var boolean
+     * @var bool
      */
     protected $fileUpload = false;
 
@@ -63,7 +61,6 @@ class Request
      * Injects the ObjectManager
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @return void
      */
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
@@ -77,7 +74,6 @@ class Request
      * @param string $method The "method" – the "action name" in FLOW3 terms
      * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method
      * @param mixed $tid The ExtDirect transaction id
-     * @return void
      */
     public function createAndAddTransaction($action, $method, array $data, $tid)
     {
@@ -98,7 +94,7 @@ class Request
     /**
      * Whether this request represents a form post or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isFormPost()
     {
@@ -108,8 +104,7 @@ class Request
     /**
      * Marks this request as representing a form post or not.
      *
-     * @param boolean $formPost
-     * @return void
+     * @param bool $formPost
      */
     public function setFormPost($formPost)
     {
@@ -119,7 +114,7 @@ class Request
     /**
      * Whether this request represents a file upload or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isFileUpload()
     {
@@ -129,8 +124,7 @@ class Request
     /**
      * Marks this request as representing a file upload or not.
      *
-     * @param boolean $fileUpload
-     * @return void
+     * @param bool $fileUpload
      */
     public function setFileUpload($fileUpload)
     {

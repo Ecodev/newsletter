@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
@@ -36,7 +35,6 @@ use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
  */
 class BounceAccountController extends ExtDirectActionController
 {
-
     /**
      * bounceAccountRepository
      *
@@ -48,7 +46,6 @@ class BounceAccountController extends ExtDirectActionController
      * injectBounceAccounRepository
      *
      * @param Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository $bounceAccountRepository
-     * @return void
      */
     public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
     {

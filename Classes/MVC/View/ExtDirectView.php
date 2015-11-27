@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\View;
 
 /* *
@@ -32,7 +31,6 @@ namespace Ecodev\Newsletter\MVC\View;
  */
 class ExtDirectView extends JsonView
 {
-
     /**
      * Renders the Ext Direct view by delegating to the JsonView
      * for rendering a serializable array.

@@ -144,7 +144,7 @@ class Validator
                 if (!Uri::isAbsolute($decodedUrl)) {
                     $replace_url = str_replace($decodedUrl, $absoluteDomain . ltrim($decodedUrl, '/'), $urls[0][$i]);
                     $content = str_replace($urls[0][$i], $replace_url, $content);
-                    $replacementCount++;
+                    ++$replacementCount;
                 }
             }
 

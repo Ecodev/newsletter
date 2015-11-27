@@ -29,7 +29,6 @@ use Ecodev\Newsletter\Utility\Uri;
 
 /**
  * Test case for class Ecodev\Newsletter\Utility\Uri.
- *
  */
 class UriTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {

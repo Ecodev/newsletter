@@ -38,7 +38,7 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
         $newsletter2 = $this->newsletterRepository->getLatest(2);
         $this->assertNotNull($newsletter2, 'should find newsletter...');
 
-        $this->assertEquals(20, $newsletter2->getUid(), '...with UID 20, not UID 30');
+        $this->assertSame(20, $newsletter2->getUid(), '...with UID 20, not UID 30');
     }
 
     public function testFindAllByPid()
@@ -54,14 +54,14 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
     {
         $newsletters1 = $this->newsletterRepository->findAllReadyToSend();
         $this->assertCount(1, $newsletters1, 'should find only one');
-        $this->assertEquals(20, $newsletters1[0]->getUid());
+        $this->assertSame(20, $newsletters1[0]->getUid());
     }
 
     public function testFindAllBeingSent()
     {
         $newsletters1 = $this->newsletterRepository->findAllBeingSent();
         $this->assertCount(1, $newsletters1, 'should find only one');
-        $this->assertEquals(30, $newsletters1[0]->getUid());
+        $this->assertSame(30, $newsletters1[0]->getUid());
     }
 
     public function testGetStatistics()
@@ -94,8 +94,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailCount' => 2,
                 'linkOpenedCount' => 0,
                 'linkCount' => 2,
-                'emailNotSentPercentage' => 50,
-                'emailSentPercentage' => 50,
+                'emailNotSentPercentage' => 50.0,
+                'emailSentPercentage' => 50.0,
                 'emailOpenedPercentage' => 0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 0,
@@ -109,9 +109,9 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailCount' => 2,
                 'linkOpenedCount' => 0,
                 'linkCount' => 2,
-                'emailNotSentPercentage' => 50,
+                'emailNotSentPercentage' => 50.0,
                 'emailSentPercentage' => 0,
-                'emailOpenedPercentage' => 50,
+                'emailOpenedPercentage' => 50.0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 0,
             ),
@@ -124,14 +124,14 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailCount' => 2,
                 'linkOpenedCount' => 1,
                 'linkCount' => 2,
-                'emailNotSentPercentage' => 50,
+                'emailNotSentPercentage' => 50.0,
                 'emailSentPercentage' => 0,
-                'emailOpenedPercentage' => 50,
+                'emailOpenedPercentage' => 50.0,
                 'emailBouncedPercentage' => 0,
-                'linkOpenedPercentage' => 25,
+                'linkOpenedPercentage' => 25.0,
             ),
         );
 
-        $this->assertEquals($expected, $stats);
+        $this->assertSame($expected, $stats);
     }
 }

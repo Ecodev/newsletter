@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\BounceHandler;
@@ -35,11 +34,10 @@ use Ecodev\Newsletter\BounceHandler;
  */
 class FetchBounces extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
-
     /**
      * Fetch bounce emails from servers, who will then be piped to cli/bounce.php for analysis
      *
-     * @return boolean	Returns true on successful execution, false on error
+     * @return bool	Returns true on successful execution, false on error
      */
     public function execute()
     {

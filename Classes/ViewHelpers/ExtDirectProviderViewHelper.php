@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers;
 
 /* * *************************************************************
@@ -40,7 +39,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  */
 class ExtDirectProviderViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var \Ecodev\Newsletter\MVC\ExtDirect\Api
      */
@@ -63,9 +61,7 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      * @param string $name The name for the javascript variable.
      * @param string $namespace The namespace the variable is placed.
      * @param string $routeUrl You can specify a URL that acts as router.
-     * @param boolean $cache
-     *
-     * @return void
+     * @param bool $cache
      */
     public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.TYPO3.app', $routeUrl = null, $cache = true
     ) {

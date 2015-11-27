@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class CsvFileTest extends AbstractRecipientList
 {
@@ -54,7 +53,7 @@ class CsvFileTest extends AbstractRecipientList
     public function setCsvSeparatorForStringSetsCsvSeparator()
     {
         $this->subject->setCsvSeparator('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'csvSeparator', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'csvSeparator', $this->subject);
     }
 
     /**
@@ -71,7 +70,7 @@ class CsvFileTest extends AbstractRecipientList
     public function setCsvFieldsForStringSetsCsvFields()
     {
         $this->subject->setCsvFields('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'csvFields', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'csvFields', $this->subject);
     }
 
     /**
@@ -88,7 +87,7 @@ class CsvFileTest extends AbstractRecipientList
     public function setCsvFilenameForStringSetsCsvFilename()
     {
         $this->subject->setCsvFilename('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'csvFilename', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'csvFilename', $this->subject);
     }
 
     protected function prepareDataForEnumeration()
@@ -106,7 +105,7 @@ class CsvFileTest extends AbstractRecipientList
         $this->prepareDataForEnumeration();
         $this->subject->setCsvFields('email,name,some_flags');
         $this->subject->init();
-        $this->assertEquals(2, $this->subject->getCount());
+        $this->assertSame(2, $this->subject->getCount());
 
         $recipient1 = array(
             'email' => 'john@example.com',
@@ -122,8 +121,8 @@ class CsvFileTest extends AbstractRecipientList
             'plain_only' => false,
         );
 
-        $this->assertEquals($recipient1, $this->subject->getRecipient());
-        $this->assertEquals($recipient2, $this->subject->getRecipient());
+        $this->assertSame($recipient1, $this->subject->getRecipient());
+        $this->assertSame($recipient2, $this->subject->getRecipient());
         $this->assertFalse($this->subject->getRecipient());
     }
 }

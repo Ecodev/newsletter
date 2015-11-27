@@ -31,13 +31,11 @@ namespace Ecodev\Newsletter\Tests\Functional;
 class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
     /**
-     *
      * @var \Ecodev\Newsletter\Domain\Model\Newsletter
      */
     private $mockNewsletter = null;
 
     /**
-     *
      * @var \Ecodev\Newsletter\Domain\Model\Email
      */
     private $mockEmail = null;
@@ -116,8 +114,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         $actualHtml = $mailer->getHtml();
         $actualPlain = $mailer->getPlain();
-        $this->assertEquals($expectedHtml, $actualHtml);
-        $this->assertEquals($expectedPlain, $actualPlain);
+        $this->assertSame($expectedHtml, $actualHtml);
+        $this->assertSame($expectedPlain, $actualPlain);
 
         if ($injectLinksSpy) {
             $this->assertLinkWasCreated('http://www.example.com');
@@ -134,6 +132,6 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         $db = $this->getDatabaseConnection();
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'url = ' . $db->fullQuoteStr($url, 'tx_newsletter_domain_model_link'));
-        $this->assertEquals(1, $count, 'could not find exactly 1 log record containing "' . $url . '"');
+        $this->assertSame(1, $count, 'could not find exactly 1 log record containing "' . $url . '"');
     }
 }

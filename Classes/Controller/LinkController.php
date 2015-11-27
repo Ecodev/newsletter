@@ -45,7 +45,6 @@ class LinkController extends ExtDirectActionController
     /**
      * injectLinkRepository
      * @param Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository $linkRepository
-     * @return void
      */
     public function injectLinkRepository(LinkRepository $linkRepository)
     {
@@ -55,9 +54,9 @@ class LinkController extends ExtDirectActionController
     /**
      * Displays all Links
      *
-     * @param integer $uidNewsletter
-     * @param integer $start
-     * @param integer $limit
+     * @param int $uidNewsletter
+     * @param int $start
+     * @param int $limit
      * @return string The rendered list view
      */
     public function listAction($uidNewsletter, $start, $limit)

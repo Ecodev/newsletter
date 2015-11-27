@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\PlainConverter;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class BuiltinTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -58,6 +57,6 @@ class BuiltinTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $html = file_get_contents(__DIR__ . '/input.html');
         $expected = file_get_contents(__DIR__ . '/builtin.txt');
         $actual = $this->subject->getPlainText($html, 'http://my-domain.com');
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 }

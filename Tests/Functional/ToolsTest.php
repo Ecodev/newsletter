@@ -27,15 +27,15 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
 
         $db = $this->getDatabaseConnection();
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_newsletter', 'begin_time != 0 AND end_time != 0');
-        $this->assertEquals(0, $count);
+        $this->assertSame(0, $count);
 
         \Ecodev\Newsletter\Tools::createAllSpool();
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_newsletter', 'begin_time != 0 AND end_time != 0');
-        $this->assertEquals(1, $count, 'newsletter should be marked as spooled');
+        $this->assertSame(1, $count, 'newsletter should be marked as spooled');
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time = 0');
-        $this->assertEquals(2, $count, 'two emails must have been created but not sent yet');
+        $this->assertSame(2, $count, 'two emails must have been created but not sent yet');
 
         // Prepare a mock to always validate content
         $mockValidator = $this->getMock('Ecodev\\Newsletter\\Utility\\Validator', array('validate'), array(), '', false);
@@ -58,8 +58,8 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         \Ecodev\Newsletter\Tools::runSpool($newsletter);
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time != 0 AND end_time != 0 AND recipient_data != ""');
-        $this->assertEquals(2, $count, 'should have sent two emails');
+        $this->assertSame(2, $count, 'should have sent two emails');
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'newsletter = 20');
-        $this->assertEquals(1, $count, 'should have on1 new link');
+        $this->assertSame(1, $count, 'should have on1 new link');
     }
 }

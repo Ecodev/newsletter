@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers;
 
 /* * *************************************************************
@@ -42,15 +41,13 @@ namespace Ecodev\Newsletter\ViewHelpers;
  */
 class IncludeJsFolderViewHelper extends AbstractViewHelper
 {
-
     /**
      * Calls addJsFile for each file in the given folder on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
      * @param string $pathInsideExt the path to the file relative to the ext-folder
-     * @param boolean $recursive
-     * @return void the files are added to the pagerenderer instance that renders them in the head of the markup
+     * @param bool $recursive
      */
     public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/', $recursive = false)
     {

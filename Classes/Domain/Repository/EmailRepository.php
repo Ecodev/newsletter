@@ -53,7 +53,7 @@ class EmailRepository extends AbstractRepository
     /**
      * Returns the count of emails for a given newsletter
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param integer $uidNewsletter
+     * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
     {
@@ -71,9 +71,9 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Returns all email for a given newsletter
-     * @param integer $uidNewsletter
-     * @param integer $start
-     * @param integer $limit
+     * @param int $uidNewsletter
+     * @param int $start
+     * @param int $limit
      * @return \Ecodev\Newsletter\Domain\Model\Email[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
@@ -103,7 +103,7 @@ class EmailRepository extends AbstractRepository
         // Minimal sanitization before SQL
         $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
-        $TYPO3_DB->sql_query("UPDATE tx_newsletter_domain_model_email SET open_time = " . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode");
+        $TYPO3_DB->sql_query('UPDATE tx_newsletter_domain_model_email SET open_time = ' . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode");
         $updateEmailCount = $TYPO3_DB->sql_affected_rows();
 
         // Tell the target that he opened the email, but only the first time

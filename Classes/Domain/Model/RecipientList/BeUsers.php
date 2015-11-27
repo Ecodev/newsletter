@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
@@ -10,11 +9,10 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 class BeUsers extends GentleSql
 {
-
     /**
      * beUsers
      *
-     * @var string $beUsers
+     * @var string
      */
     protected $beUsers;
 
@@ -22,7 +20,6 @@ class BeUsers extends GentleSql
      * Setter for beUsers
      *
      * @param string $beUsers beUsers
-     * @return void
      */
     public function setBeUsers($beUsers)
     {
@@ -55,8 +52,8 @@ class BeUsers extends GentleSql
         $config = array_filter($config);
 
         $this->data = $GLOBALS['TYPO3_DB']->sql_query(
-                "SELECT email, realName, username, lang, admin FROM be_users
-				WHERE uid IN (" . implode(',', $config) . ")
+                'SELECT email, realName, username, lang, admin FROM be_users
+				WHERE uid IN (' . implode(',', $config) . ")
 				AND email <> ''
 				AND disable = 0
 				AND tx_newsletter_bounce < 10");

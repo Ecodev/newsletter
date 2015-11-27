@@ -52,8 +52,6 @@ abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
 
     /**
      * Fetches the pageRenderer from the BE Context.
-     *
-     * @return void
      */
     protected function initializeBackend()
     {
@@ -63,8 +61,6 @@ abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
     /**
      * Fetches the pageRenderer from the FE Context.
      * (not tested)
-     *
-     * @return void
      */
     public function initializeFrontend()
     {

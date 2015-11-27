@@ -34,6 +34,6 @@ class RecipientListRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Ab
     {
         $recipientList = $this->recipientListRepository->findByUidInitialized(1000);
         $this->assertNotNull($recipientList);
-        $this->assertEquals(2, $recipientList->getCount(), 'should not have to call init() to get count');
+        $this->assertSame(2, $recipientList->getCount(), 'should not have to call init() to get count');
     }
 }

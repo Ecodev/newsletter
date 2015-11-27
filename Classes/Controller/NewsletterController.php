@@ -58,7 +58,6 @@ class NewsletterController extends ExtDirectActionController
      * injectNewsletterRepository
      *
      * @param Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository $newsletterRepository
-     * @return void
      */
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -69,7 +68,6 @@ class NewsletterController extends ExtDirectActionController
      * injectBounceAccounRepository
      *
      * @param Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository $bounceAccountRepository
-     * @return void
      */
     public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
     {
@@ -85,13 +83,11 @@ class NewsletterController extends ExtDirectActionController
 
     /**
      * Initializes the current action
-     *
-     * @return void
      */
     protected function initializeAction()
     {
         // Set default value of PID to know where to store/look for newsletter
-        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, array("min_range" => 0));
+        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, array('min_range' => 0));
         if (!$this->pid) {
             $this->pid = 0;
         }
@@ -166,7 +162,6 @@ class NewsletterController extends ExtDirectActionController
      * Creates a new Newsletter and forwards to the list action.
      *
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
-     * @return void
      * @dontverifyrequesthash
      * @dontvalidate $newNewsletter
      * @ignorevalidation $newNewsletter
@@ -226,7 +221,7 @@ class NewsletterController extends ExtDirectActionController
 
     /**
      * Returns the newsletter with included statistics to be used for timeline chart
-     * @param integer $uidNewsletter
+     * @param int $uidNewsletter
      */
     public function statisticsAction($uidNewsletter)
     {

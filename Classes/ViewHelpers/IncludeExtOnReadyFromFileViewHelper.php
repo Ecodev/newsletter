@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers;
 
 use Ecodev\Newsletter\Exception;
@@ -44,14 +43,12 @@ use Ecodev\Newsletter\Exception;
  */
 class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper
 {
-
     /**
      * Calls addJsFile on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
      * @param string $pathInsideExt the path to the file relative to the ext-folder
-     * @return void
      */
     public function render($name = 'extOnReady.js', $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/')
     {

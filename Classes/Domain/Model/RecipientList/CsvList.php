@@ -12,7 +12,7 @@ class CsvList extends CsvFile
     /**
      * csvValues
      *
-     * @var string $csvValues
+     * @var string
      */
     protected $csvValues = '';
 
@@ -20,7 +20,6 @@ class CsvList extends CsvFile
      * Setter for csvValues
      *
      * @param string $csvValues csvValues
-     * @return void
      */
     public function setCsvValues($csvValues)
     {

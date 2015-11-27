@@ -1,4 +1,5 @@
 <?php
+
 namespace Ecodev\Newsletter\Update;
 
 /*
@@ -34,7 +35,6 @@ namespace Ecodev\Newsletter\Update;
  */
 class Transaction
 {
-
     /**
      * Executes an array of of INNODB queries wrapped in a transaction.
      * WARNING: Only works with InnoDB tables and DOES NOT CHECK the table type!!!
@@ -48,21 +48,21 @@ class Transaction
     public static function transactInnoDBQueries(array $queries)
     {
         $results = new TransactionResult(count($queries));
-        if (! empty($queries)) {
+        if (!empty($queries)) {
             global $TYPO3_DB;
             // By wrapping the queries in a transaction we can rollback if
             // something goes wrong and not destroy the users data in the process.
             // WARNING: Only works with InnoDB tables and DOES NOT CHECK the table type!!!
-            $TYPO3_DB->sql_query("START TRANSACTION;");
+            $TYPO3_DB->sql_query('START TRANSACTION;');
             $results = self::transactDBQueries($queries);
             if ($results->getErrorMessage()) {
-                $TYPO3_DB->sql_query("ROLLBACK;");
+                $TYPO3_DB->sql_query('ROLLBACK;');
                 // Because we rolled back nothing was modified so we can safely reset the integrity state.
                 $results->resetDataIntegrity();
 
                 return $results;
             }
-            $TYPO3_DB->sql_query("COMMIT;");
+            $TYPO3_DB->sql_query('COMMIT;');
         }
 
         return $results;
@@ -79,7 +79,7 @@ class Transaction
     private static function transactDBQueries(array $queries)
     {
         $results = new TransactionResult(count($queries));
-        if (! empty($queries)) {
+        if (!empty($queries)) {
             global $TYPO3_DB;
             foreach ($queries as $query) {
                 $res = $TYPO3_DB->sql_query($query);

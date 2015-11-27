@@ -33,7 +33,6 @@ use Ecodev\Newsletter\Tools;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class LynxTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
@@ -74,6 +73,6 @@ class LynxTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $html = file_get_contents(__DIR__ . '/input.html');
         $expected = file_get_contents(__DIR__ . '/lynx.txt');
         $actual = $this->subject->getPlainText($html, 'http://my-domain.com');
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 }

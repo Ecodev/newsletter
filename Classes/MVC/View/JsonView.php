@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\View;
 
 use ArrayAccess;
@@ -35,7 +34,6 @@ use DateTime;
  */
 class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
      */
@@ -110,7 +108,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * Injects the PersistenceManager.
      *
      * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
-     * @return void
      */
     public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
     {
@@ -122,7 +119,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * By default only the variable 'value' will be rendered
      *
      * @param array $variablesToRender
-     * @return void
      * @author Bastian Waidelich <bastian@typo3.org>
      * @api
      */
@@ -133,7 +129,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
 
     /**
      * @param array $configuration The rendering configuration for this JSON view
-     * @return void
      * @author Robert Lemke <robert@typo3.org>
      */
     public function setConfiguration(array $configuration)

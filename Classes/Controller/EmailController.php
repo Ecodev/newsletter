@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\BounceHandler;
@@ -40,7 +39,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailController extends ExtDirectActionController
 {
-
     /**
      * emailRepository
      *
@@ -52,7 +50,6 @@ class EmailController extends ExtDirectActionController
      * injectEmailRepository
      *
      * @param Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository $emailRepository
-     * @return void
      */
     public function injectEmailRepository(EmailRepository $emailRepository)
     {
@@ -62,9 +59,9 @@ class EmailController extends ExtDirectActionController
     /**
      * Displays all Emails
      *
-     * @param integer $uidNewsletter
-     * @param integer $start
-     * @param integer $limit
+     * @param int $uidNewsletter
+     * @param int $start
+     * @param int $limit
      * @return string The rendered list view
      */
     public function listAction($uidNewsletter, $start, $limit)
@@ -274,7 +271,6 @@ class EmailController extends ExtDirectActionController
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
      * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
      * @param \Ecodev\Newsletter\Domain\Model\Email $email
-     * @return void
      */
     protected function notifyUnsubscribe($newsletter, $recipientList, Email $email)
     {
@@ -282,10 +278,10 @@ class EmailController extends ExtDirectActionController
 
         // Use the page-owner as user
         if ($notificationEmail == 'user') {
-            $rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT email
+            $rs = $GLOBALS['TYPO3_DB']->sql_query('SELECT email
 			FROM be_users
 			LEFT JOIN pages ON be_users.uid = pages.perms_userid
-			WHERE pages.uid = " . $newsletter->getPid());
+			WHERE pages.uid = ' . $newsletter->getPid());
 
             list($notificationEmail) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
         }

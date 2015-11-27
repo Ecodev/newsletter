@@ -37,28 +37,28 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * title
      *
-     * @var string $title
+     * @var string
      */
     protected $title = '';
 
     /**
      * plainOnly
      *
-     * @var boolean $plainOnly
+     * @var bool
      */
     protected $plainOnly = false;
 
     /**
      * lang
      *
-     * @var string $lang
+     * @var string
      */
     protected $lang = '';
 
     /**
      * type
      *
-     * @var string $type
+     * @var string
      */
     protected $type = '';
 
@@ -66,7 +66,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Setter for title
      *
      * @param string $title title
-     * @return void
      */
     public function setTitle($title)
     {
@@ -86,8 +85,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Setter for plainOnly
      *
-     * @param boolean $plainOnly plainOnly
-     * @return void
+     * @param bool $plainOnly plainOnly
      */
     public function setPlainOnly($plainOnly)
     {
@@ -97,7 +95,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Getter for plainOnly
      *
-     * @return boolean plainOnly
+     * @return bool plainOnly
      */
     public function getPlainOnly()
     {
@@ -107,7 +105,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Returns the state of plainOnly
      *
-     * @return boolean the state of plainOnly
+     * @return bool the state of plainOnly
      */
     public function isPlainOnly()
     {
@@ -118,7 +116,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Setter for lang
      *
      * @param string $lang lang
-     * @return void
      */
     public function setLang($lang)
     {
@@ -139,7 +136,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Setter for type
      *
      * @param string $type type
-     * @return void
      */
     public function setType($type)
     {
@@ -164,8 +160,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
 
     /**
      * Initializing method to prepare for reading recipients.
-     *
-     * @return    void
      */
     abstract public function init();
 
@@ -180,7 +174,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Get the number of receivers in this newsletter target
      *
-     * @return   integer      Numbers of receivers.
+     * @return   int      Numbers of receivers.
      */
     abstract public function getCount();
 
@@ -197,8 +191,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * The \Ecodev\Newsletter\Domain\Model\RecipientList\GentleSql implements a sensible default.
      *
      * @param string $email the email address of the recipient
-     * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
-     * @return boolean Status of the success of the removal.
+     * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
+     * @return bool Status of the success of the removal.
      */
     public function registerBounce($email, $bounceLevel)
     {
@@ -209,7 +203,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Here you can implement some action to take whenever the user has opened the mail via beenthere.php
      *
      * @param string $email the email address of the recipient (who opened the mail)
-     * @return	void
      */
     public function registerOpen($email)
     {
@@ -219,7 +212,6 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Here you can implement some action to take whenever the user has clicked a link via click.php
      *
      * @param string $email the email address of the recipient
-     * @return	void
      */
     public function registerClick($email)
     {
@@ -231,7 +223,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     public function getExtract($limit = 30)
     {
         if ($this->getError()) {
-            $out = "Error: " . $this->getError();
+            $out = 'Error: ' . $this->getError();
         } else {
             $i = 0;
             while ($row = $this->getRecipient()) {
@@ -239,7 +231,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
                 if ($i == 0) {
                     $out .= '<tr>';
                     foreach (array_keys($row) as $key) {
-                        $out .= '<th style="padding-right: 1em;">' . $this->getFieldTitle($key) . "</th>";
+                        $out .= '<th style="padding-right: 1em;">' . $this->getFieldTitle($key) . '</th>';
                     }
                     $out .= '</tr>';
                 }
@@ -261,8 +253,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             $uriCsv = Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
 
             $out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
-			(<a href="' . $uriXml . "\">export XML</a>, "
-                    . '<a href="' . $uriCsv . "\">export CSV</a>"
+			(<a href="' . $uriXml . '">export XML</a>, '
+                    . '<a href="' . $uriCsv . '">export CSV</a>'
                     . ')</p>';
         }
 

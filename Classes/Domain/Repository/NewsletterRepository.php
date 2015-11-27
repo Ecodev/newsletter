@@ -36,7 +36,7 @@ class NewsletterRepository extends AbstractRepository
 {
     /**
      * Returns the latest newsletter for the given page
-     * @param integer $pid
+     * @param int $pid
      */
     public function getLatest($pid)
     {
@@ -210,7 +210,7 @@ class NewsletterRepository extends AbstractRepository
             'linkOpenedCount' => 0,
         );
 
-        /** @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
+        /* @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
         global $TYPO3_DB;
 
         $rs = $TYPO3_DB->exec_SELECTquery(implode(', ', array_keys($stateConfiguration)), $from, $where);
@@ -223,13 +223,13 @@ class NewsletterRepository extends AbstractRepository
                         $stateDifferences[$time] = $default;
                     }
 
-                    $stateDifferences[$time][$stateConf['increment']] ++;
+                    ++$stateDifferences[$time][$stateConf['increment']];
                     if (isset($stateConf['decrement'])) {
-                        $stateDifferences[$time][$stateConf['decrement']] --;
+                        --$stateDifferences[$time][$stateConf['decrement']];
                     }
                 }
             }
-            $count++;
+            ++$count;
         }
         $TYPO3_DB->sql_free_result($rs);
 

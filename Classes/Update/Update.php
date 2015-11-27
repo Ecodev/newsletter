@@ -46,7 +46,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     public static function update($extensionName)
     {
         // Only concerned on running auto-updates if it is the newsletter extension that was installed and IS installed.
-        if ($extensionName != 'newsletter' && ! ExtensionManagementUtility::isLoaded($extensionName)) {
+        if ($extensionName != 'newsletter' && !ExtensionManagementUtility::isLoaded($extensionName)) {
             return;
         }
 

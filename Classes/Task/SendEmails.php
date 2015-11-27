@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\Tools;
@@ -35,11 +34,10 @@ use Ecodev\Newsletter\Tools;
  */
 class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
-
     /**
      * Sends emails for queued newsletter
      *
-     * @return boolean	Returns true on successful execution, false on error
+     * @return bool	Returns true on successful execution, false on error
      */
     public function execute()
     {

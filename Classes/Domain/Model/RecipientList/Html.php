@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
@@ -10,18 +9,17 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 class Html extends AbstractArray
 {
-
     /**
      * htmlUrl
      *
-     * @var string $htmlUrl
+     * @var string
      */
     protected $htmlUrl;
 
     /**
      * htmlFetchType
      *
-     * @var string $htmlFetchType
+     * @var string
      */
     protected $htmlFetchType;
 
@@ -29,7 +27,6 @@ class Html extends AbstractArray
      * Setter for htmlUrl
      *
      * @param string $htmlUrl htmlUrl
-     * @return void
      */
     public function setHtmlUrl($htmlUrl)
     {
@@ -50,7 +47,6 @@ class Html extends AbstractArray
      * Setter for htmlFetchType
      *
      * @param string $htmlFetchType htmlFetchType
-     * @return void
      */
     public function setHtmlFetchType($htmlFetchType)
     {

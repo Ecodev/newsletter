@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 use Ecodev\Newsletter\Exception as EcodevNewsletterException;
@@ -35,7 +34,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
  */
 class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
 {
-
     /**
      * @inject
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
@@ -52,7 +50,6 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      * Injects the ObjectManager
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @return void
      */
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
@@ -63,7 +60,6 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      * Injects the ConfigurationManager
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @return void
      */
     public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager)
     {
@@ -92,14 +88,14 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      * Builds a Json Ext Direct request by reading the transaction data from
      * standard input.
      *
-     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
      * @throws Exception
+     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
      * @author Christopher Hlubek <hlubek@networkteam.com>
      * @author Robert Lemke <robert@typo3.org>
      */
     protected function buildJsonRequest()
     {
-        $transactionDatas = file_get_contents("php://input");
+        $transactionDatas = file_get_contents('php://input');
 
         if (($transactionDatas = json_decode($transactionDatas)) === null) {
             throw new Exception('The request is not a valid Ext Direct request', 1268490738);

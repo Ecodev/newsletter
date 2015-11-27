@@ -35,21 +35,21 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * url
      *
-     * @var string $url
+     * @var string
      */
     protected $url = '';
 
     /**
      * newsletter
      * @lazy
-     * @var integer $newsletter
+     * @var int
      */
     protected $newsletter;
 
     /**
      * opened count
      *
-     * @var integer $openedCount
+     * @var int
      */
     protected $openedCount = 0;
 
@@ -70,7 +70,6 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for url
      *
      * @param string $url url
-     * @return void
      */
     public function setUrl($url)
     {
@@ -91,7 +90,6 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for newsletter
      *
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
-     * @return void
      */
     public function setNewsletter(Newsletter $newsletter)
     {
@@ -113,8 +111,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for openedCount
      *
-     * @param integer $openedCount openedCount
-     * @return void
+     * @param int $openedCount openedCount
      */
     public function setOpenedCount($openedCount)
     {
@@ -124,7 +121,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for openedCount
      *
-     * @return integer openedCount
+     * @return int openedCount
      */
     public function getOpenedCount()
     {

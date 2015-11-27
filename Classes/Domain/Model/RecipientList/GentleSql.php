@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 use Ecodev\Newsletter\BounceHandler;
@@ -13,7 +12,6 @@ use Ecodev\Newsletter\BounceHandler;
  */
 abstract class GentleSql extends Sql
 {
-
     /**
      * Returns the tablename to work with
      * @return string
@@ -27,8 +25,8 @@ abstract class GentleSql extends Sql
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
-     * @param integer $bounceLevel This is the level of the bounce.
-     * @return boolean Success of the bounce-handling.
+     * @param int $bounceLevel This is the level of the bounce.
+     * @return bool Success of the bounce-handling.
      */
     public function registerBounce($email, $bounceLevel)
     {
@@ -48,7 +46,7 @@ abstract class GentleSql extends Sql
         }
 
         if ($increment) {
-            $TYPO3_DB->sql_query("UPDATE " . $this->getTableName() . "
+            $TYPO3_DB->sql_query('UPDATE ' . $this->getTableName() . "
 						SET tx_newsletter_bounce = tx_newsletter_bounce + $increment
 						WHERE email = '$email'");
 
@@ -67,7 +65,7 @@ abstract class GentleSql extends Sql
      */
     public function registerClick($email)
     {
-        $GLOBALS['TYPO3_DB']->sql_query("UPDATE " . $this->getTableName() . "
+        $GLOBALS['TYPO3_DB']->sql_query('UPDATE ' . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
     }
@@ -79,7 +77,7 @@ abstract class GentleSql extends Sql
      */
     public function registerOpen($email)
     {
-        $GLOBALS['TYPO3_DB']->sql_query("UPDATE " . $this->getTableName() . "
+        $GLOBALS['TYPO3_DB']->sql_query('UPDATE ' . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
     }

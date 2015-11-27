@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers\Be;
 
 use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
@@ -55,24 +54,23 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  */
 class ModuleContainerViewHelper extends AbstractViewHelper
 {
-
     /**
      * Renders start page with template.php and pageTitle.
      *
      * @param string  $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
-     * @param boolean $enableJumpToUrl If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
-     * @param boolean $loadPrototype specifies whether to load prototype library. Defaults to FALSE
-     * @param boolean $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
+     * @param bool $enableJumpToUrl If TRUE, includes "jumpTpUrl" javascript function required by ActionMenu. Defaults to TRUE
+     * @param bool $loadPrototype specifies whether to load prototype library. Defaults to FALSE
+     * @param bool $loadScriptaculous specifies whether to load scriptaculous libraries. Defaults to FALSE
      * @param string  $scriptaculousModule additionales modules for scriptaculous
-     * @param boolean $loadExtJs specifies whether to load ExtJS library. Defaults to TRUE
-     * @param boolean $loadExtCore specifies whether to load ExtJS library. Defaults to TRUE
-     * @param boolean $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to TRUE
+     * @param bool $loadExtJs specifies whether to load ExtJS library. Defaults to TRUE
+     * @param bool $loadExtCore specifies whether to load ExtJS library. Defaults to TRUE
+     * @param bool $loadExtJsTheme whether to load ExtJS "grey" theme. Defaults to TRUE
      * @param string  $extJsAdapter load alternative adapter (ext-base is default adapter)
-     * @param boolean $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only.
-     * @param boolean $concatenate specifies if the loaded jsFiles should be concatenated into one file. Defaults to TRUE
-     * @param boolean $compressJs specifies wether to compress the js. Defaults TRUE
-     * @param boolean $compressCss specifies wether to compress the css. Defaults TRUE
-     * @param boolean $enableExtJSQuickTips
+     * @param bool $enableExtJsDebug if TRUE, debug version of ExtJS is loaded. Use this for development only.
+     * @param bool $concatenate specifies if the loaded jsFiles should be concatenated into one file. Defaults to TRUE
+     * @param bool $compressJs specifies wether to compress the js. Defaults TRUE
+     * @param bool $compressCss specifies wether to compress the css. Defaults TRUE
+     * @param bool $enableExtJSQuickTips
      * @param string  $extCorePath specifies a path for the ExtCore default NULL (uses the path set in the TYPO3\CMS\Core\Page\PageRenderer)
      * @param string  $extJsPath specifies a path for the ExtJS default NULL (uses the path set in the TYPO3\CMS\Core\Page\PageRenderer)
      * @return string

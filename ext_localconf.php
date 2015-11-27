@@ -11,9 +11,7 @@ if (!defined('TYPO3_MODE')) {
 // Register keys for CLI
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['newsletter_bounce'] = array('EXT:newsletter/cli/bounce.php', '_CLI_scheduler');
 
-/**
- * Configure FE plugin element "TABLE"
- */
+// Configure FE plugin element
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Ecodev.' . $_EXTKEY, 'p', array(// list of controller
     'Email' => 'show, opened',

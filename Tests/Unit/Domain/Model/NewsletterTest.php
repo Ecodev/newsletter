@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
@@ -58,7 +57,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUid());
         $this->subject->setUid(123);
-        $this->assertEquals(123, $this->subject->getUid());
+        $this->assertSame(123, $this->subject->getUid());
     }
 
     /**
@@ -72,7 +71,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->assertNotNull($plannedTime);
 
         $plannedTime->setTime(0, 0, 0);
-        $this->assertEquals($today, $plannedTime);
+        $this->assertSame($today->format(\DateTime::ISO8601), $plannedTime->format(\DateTime::ISO8601));
     }
 
     /**
@@ -83,7 +82,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setPlannedTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'plannedTime', $this->subject
         );
     }
@@ -93,7 +92,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getBeginTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
+        $this->assertSame(
                 null, $this->subject->getBeginTime()
         );
     }
@@ -106,7 +105,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setBeginTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'beginTime', $this->subject
         );
     }
@@ -116,7 +115,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getEndTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
+        $this->assertSame(
                 null, $this->subject->getEndTime()
         );
     }
@@ -129,7 +128,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setEndTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'endTime', $this->subject
         );
     }
@@ -151,7 +150,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setRepetition(12);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 12, 'repetition', $this->subject
         );
     }
@@ -176,7 +175,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setPlainConverter('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 'Conceived at T3CON10', 'plainConverter', $this->subject
         );
     }
@@ -224,7 +223,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setIsTest(true);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 true, 'isTest', $this->subject
         );
     }
@@ -234,7 +233,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getBounceAccountReturnsInitialValueForBounceAccount()
     {
-        $this->assertEquals(
+        $this->assertSame(
                 null, $this->subject->getBounceAccount()
         );
     }
@@ -247,7 +246,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $bounceAccountFixture = new \Ecodev\Newsletter\Domain\Model\BounceAccount();
         $this->subject->setBounceAccount($bounceAccountFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $bounceAccountFixture, 'bounceAccount', $this->subject
         );
     }
@@ -262,7 +261,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $bounceAccount = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\BounceAccount', array('getUid'), array(), '', false);
         $bounceAccount->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setBounceAccount($bounceAccount);
-        $this->assertEquals(123, $this->subject->getUidBounceAccount());
+        $this->assertSame(123, $this->subject->getUidBounceAccount());
     }
 
     /**
@@ -272,11 +271,11 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setSenderName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 'Conceived at T3CON10', 'senderName', $this->subject
         );
 
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getSenderName());
+        $this->assertSame('Conceived at T3CON10', $this->subject->getSenderName());
     }
 
     /**
@@ -286,11 +285,11 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setSenderEmail('john@example.com');
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 'john@example.com', 'senderEmail', $this->subject
         );
 
-        $this->assertEquals('john@example.com', $this->subject->getSenderEmail());
+        $this->assertSame('john@example.com', $this->subject->getSenderEmail());
     }
 
     /**
@@ -309,7 +308,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setInjectOpenSpy(true);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 true, 'injectOpenSpy', $this->subject
         );
     }
@@ -330,7 +329,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->subject->setInjectLinksSpy(false);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 false, 'injectLinksSpy', $this->subject
         );
     }
@@ -340,7 +339,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getRecipientListReturnsInitialValueForRecipientList()
     {
-        $this->assertEquals(
+        $this->assertSame(
                 null, $this->subject->getRecipientList()
         );
     }
@@ -353,7 +352,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $recipientListFixture = new \Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers();
         $this->subject->setRecipientList($recipientListFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $recipientListFixture, 'recipientList', $this->subject
         );
     }
@@ -368,7 +367,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $recipientList = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers', array('getUid'), array(), '', false);
         $recipientList->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setRecipientList($recipientList);
-        $this->assertEquals(123, $this->subject->getUidRecipientList());
+        $this->assertSame(123, $this->subject->getUidRecipientList());
     }
 
     /**

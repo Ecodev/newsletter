@@ -46,7 +46,6 @@ class RecipientListController extends ExtDirectActionController
      * injectRecipientListRepository
      *
      * @param Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository $recipientListRepository
-     * @return void
      */
     public function injectRecipientListRepository(RecipientListRepository $recipientListRepository)
     {
@@ -84,9 +83,9 @@ class RecipientListController extends ExtDirectActionController
 
     /**
      * Returns the list of recipient for the specified recipientList
-     * @param integer $uidRecipientList
-     * @param integer $start
-     * @param integer $limit
+     * @param int $uidRecipientList
+     * @param int $start
+     * @param int $limit
      */
     public function listRecipientAction($uidRecipientList, $start, $limit)
     {
@@ -131,9 +130,8 @@ class RecipientListController extends ExtDirectActionController
     /**
      * Export a list of recipient and all their data
      *
-     * @param integer $uidRecipientList
+     * @param int $uidRecipientList
      * @param string $authCode
-     * @return void
      */
     public function exportAction($uidRecipientList, $authCode)
     {

@@ -35,7 +35,7 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * email
      *
-     * @var string $email
+     * @var string
      * @validate NotEmpty
      */
     protected $email = '';
@@ -43,42 +43,42 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * server
      *
-     * @var string $server
+     * @var string
      */
     protected $server = '';
 
     /**
      * protocol
      *
-     * @var string $protocol
+     * @var string
      */
     protected $protocol = '';
 
     /**
      * port
      *
-     * @var int $port
+     * @var int
      */
     protected $port = 0;
 
     /**
      * username
      *
-     * @var string $username
+     * @var string
      */
     protected $username = '';
 
     /**
      * password
      *
-     * @var string $password
+     * @var string
      */
     protected $password = '';
 
     /**
      * fetchmail configuration
      *
-     * @var string $config
+     * @var string
      */
     protected $config = '';
 
@@ -86,7 +86,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for email
      *
      * @param string $email email
-     * @return void
      */
     public function setEmail($email)
     {
@@ -107,7 +106,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for server
      *
      * @param string $server server
-     * @return void
      */
     public function setServer($server)
     {
@@ -128,7 +126,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for protocol
      *
      * @param string $protocol protocol
-     * @return void
      */
     public function setProtocol($protocol)
     {
@@ -149,7 +146,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for port
      *
      * @param int $port port
-     * @return void
      */
     public function setPort($port)
     {
@@ -170,7 +166,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for username
      *
      * @param string $username username
-     * @return void
      */
     public function setUsername($username)
     {
@@ -191,7 +186,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for password
      *
      * @param string $password password
-     * @return void
      */
     public function setPassword($password)
     {
@@ -212,7 +206,6 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for config
      *
      * @param string $config config
-     * @return void
      */
     public function setConfig($config)
     {

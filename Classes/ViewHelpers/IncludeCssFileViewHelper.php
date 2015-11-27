@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers;
 
 /* * *************************************************************
@@ -42,7 +41,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  */
 class IncludeCssFileViewHelper extends AbstractViewHelper
 {
-
     /**
      * Calls addCssFile on the Instance of TYPO3\CMS\Core\Page\PageRenderer.
      *

@@ -80,7 +80,7 @@ class Transaction
     /**
      * The transaction ID to associate with this request
      *
-     * @var integer
+     * @var int
      */
     protected $tid;
 
@@ -105,7 +105,6 @@ class Transaction
 
     /**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @return void
      */
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
@@ -114,7 +113,6 @@ class Transaction
 
     /**
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-     * @return void
      */
     public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
@@ -125,7 +123,6 @@ class Transaction
      * Injects the Reflection Service
      *
      * @param \TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService
-     * @return void
      */
     public function injectReflectionService(\TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService)
     {
@@ -209,7 +206,7 @@ class Transaction
     /**
      * Getter for tid
      *
-     * @return integer
+     * @return int
      * @author Robert Lemke <robert@typo3.org>
      */
     public function getTid()

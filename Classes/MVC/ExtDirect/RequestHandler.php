@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 use Exception;
@@ -33,7 +32,6 @@ use TYPO3\CMS\Extbase\Mvc\Dispatcher;
  */
 class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
@@ -51,7 +49,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * Whether to expose exception information in an ExtDirect response
-     * @var boolean
+     * @var bool
      */
     protected $exposeExceptionInformation = true;
 
@@ -73,7 +71,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @return void
      */
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
@@ -82,7 +79,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher
-     * @return void
      */
     public function injectDispatcher(\TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher)
     {
@@ -91,7 +87,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
-     * @return void
      */
     public function injectRequestBuilder(RequestBuilder $requestBuilder)
     {
@@ -101,7 +96,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     /**
      * Handles a raw Ext Direct request and sends the respsonse.
      *
-     * @return void
      * @author Robert Lemke <robert@typo3.org>
      * @author Christopher Hlubek <hlubek@networkteam.com>
      */
@@ -141,7 +135,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     /**
      * Checks if the request handler can handle the current request.
      *
-     * @return boolean TRUE if it can handle the request, otherwise FALSE
+     * @return bool TRUE if it can handle the request, otherwise FALSE
      * @author Robert Lemke <robert@typo3.org>
      */
     public function canHandleRequest()
@@ -153,7 +147,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * Returns the priority - how eager the handler is to actually handle the
      * request.
      *
-     * @return integer The priority of the request handler
+     * @return int The priority of the request handler
      * @author Robert Lemke <robert@typo3.org>
      */
     public function getPriority()
@@ -166,7 +160,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      *
      * @param array $results The collected results from the transaction requests
      * @param Ecodev\Newsletter\MVC\ExtDirect\Request $extDirectRequest
-     * @return void
      * @author Robert Lemke <robert@typo3.org>
      */
     protected function sendResponse(array $results, Request $extDirectRequest)

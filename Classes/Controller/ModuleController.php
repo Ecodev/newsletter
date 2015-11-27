@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Tools;
@@ -35,7 +34,6 @@ use Ecodev\Newsletter\Tools;
  */
 class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * @var int
      */
@@ -43,8 +41,6 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      * Initializes the controller before invoking an action method.
-     *
-     * @return void
      */
     protected function initializeAction()
     {
@@ -54,8 +50,6 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * index action for the module controller
      * This will render the HTML needed for ExtJS application
-     *
-     * @return void
      */
     public function indexAction()
     {

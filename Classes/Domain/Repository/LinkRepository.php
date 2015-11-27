@@ -34,9 +34,9 @@ class LinkRepository extends AbstractRepository
 {
     /**
      * Returns all links for a given newsletter
-     * @param integer $uidNewsletter
-     * @param integer $start
-     * @param integer $limit
+     * @param int $uidNewsletter
+     * @param int $start
+     * @param int $limit
      * @return \Ecodev\Newsletter\Domain\Model\Link[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
@@ -56,7 +56,7 @@ class LinkRepository extends AbstractRepository
     /**
      * Returns the count of links for a given newsletter
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param integer $uidNewsletter
+     * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
     {
@@ -70,9 +70,9 @@ class LinkRepository extends AbstractRepository
      * Register a clicked link in database and forward the event to RecipientList
      * so it can optionnally do something more
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param integer|null $newsletterUid newsletter UID to limit search scope, or NULL
+     * @param int|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
-     * @param boolean $isPlain
+     * @param bool $isPlain
      * @return string|null absolute URL to be redirected to
      */
     public function registerClick($newsletterUid, $authCode, $isPlain)
@@ -102,8 +102,8 @@ class LinkRepository extends AbstractRepository
             // Insert a linkopened record to register which user clicked on which link
             $TYPO3_DB->sql_query("
             INSERT INTO tx_newsletter_domain_model_linkopened (link, email, is_plain, open_time)
-            VALUES ($linkUid, $emailUid, $isPlain, " . time() . ")
-            ");
+            VALUES ($linkUid, $emailUid, $isPlain, " . time() . ')
+            ');
 
             // Increment the total count of clicks for the link itself (so if the linkopened records are deleted, we still know how many times the link was opened)
             $TYPO3_DB->sql_query("

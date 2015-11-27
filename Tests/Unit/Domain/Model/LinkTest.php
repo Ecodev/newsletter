@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -64,7 +63,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setUrlForStringSetsUrl()
     {
         $this->subject->setUrl('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'url', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'url', $this->subject);
     }
 
     /**
@@ -75,7 +74,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $newsletterFixture = new \Ecodev\Newsletter\Domain\Model\Newsletter();
         $this->subject->setNewsletter($newsletterFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $newsletterFixture, 'newsletter', $this->subject
         );
     }
@@ -97,7 +96,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->setOpenedCount(12);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 12, 'openedCount', $this->subject
         );
     }

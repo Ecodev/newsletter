@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class SqlTest extends AbstractRecipientList
 {
@@ -54,7 +53,7 @@ class SqlTest extends AbstractRecipientList
     public function setSqlStatementForStringSetsSqlStatement()
     {
         $this->subject->setSqlStatement('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'sqlStatement', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'sqlStatement', $this->subject);
     }
 
     /**
@@ -71,7 +70,7 @@ class SqlTest extends AbstractRecipientList
     public function setSqlRegisterBounceForStringSetsSqlRegisterBounce()
     {
         $this->subject->setSqlRegisterBounce('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'sqlRegisterBounce', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'sqlRegisterBounce', $this->subject);
     }
 
     /**
@@ -88,6 +87,6 @@ class SqlTest extends AbstractRecipientList
     public function setSqlRegisterClickForStringSetsSqlRegisterClick()
     {
         $this->subject->setSqlRegisterClick('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'sqlRegisterClick', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'sqlRegisterClick', $this->subject);
     }
 }

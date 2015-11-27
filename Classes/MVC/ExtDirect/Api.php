@@ -56,9 +56,7 @@ class Api
     protected $cacheStorageKey;
 
     /**
-     *
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
-     * @return void
      */
     public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
@@ -71,7 +69,6 @@ class Api
      * Injects the reflection service
      *
      * @param \TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService
-     * @return void
      */
     public function injectReflectionService(\TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService)
     {
@@ -83,8 +80,8 @@ class Api
      *
      * @param string $routeUrl
      * @param string $namespace
-     * @param boolean $readFromCache Should the cache be used when reading the data.
-     * @param boolean $writeToCache Should the created api be stored in the cache.
+     * @param bool $readFromCache Should the cache be used when reading the data.
+     * @param bool $writeToCache Should the created api be stored in the cache.
      * @return array
      */
     public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = true, $writeToCache = true)

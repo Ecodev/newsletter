@@ -50,7 +50,7 @@ if (is_readable($swift1)) {
 class Mailer
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
      */
     private $newsletter;
     private $html;
@@ -75,7 +75,6 @@ class Mailer
 
     /**
      * Constructor that set up basic internal datastructures. Do not call directly
-     *
      */
     public function __construct()
     {
@@ -174,7 +173,6 @@ class Mailer
      * The content will be edited to include images as attachements if needed.
      *
      * @param   string      The html content of the mail
-     * @return   void
      */
     private function setHtml($src)
     {
@@ -223,8 +221,6 @@ class Mailer
 
     /**
      * Insert a "mail-open-spy" in the mail.
-     *
-     * @return   void
      */
     private function injectOpenSpy(Email $email)
     {
@@ -237,8 +233,6 @@ class Mailer
 
     /**
      * Reset all modifications to the content.
-     *
-     * @return   void
      */
     private function resetContent()
     {
@@ -250,7 +244,6 @@ class Mailer
      * Apply multiple markers to mail contents
      *
      * @param Email $email
-     * @return void
      */
     private function substituteMarkers(Email $email)
     {
@@ -263,7 +256,7 @@ class Mailer
      *
      * @param Email $email
      * @param string $url
-     * @param boolean $isPreview
+     * @param bool $isPreview
      * @param string $isPlainText
      * @return string The link url
      */
@@ -319,8 +312,7 @@ class Mailer
      * Replace all links in the mail to make spy links.
      *
      * @param \Ecodev\Newsletter\Domain\Model\Email $email The email to prepare the newsletter for
-     * @param boolean $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
-     * @return   void
+     * @param bool $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
      */
     private function injectLinksSpy(Email $email, $isPreview)
     {
@@ -346,7 +338,7 @@ class Mailer
     /**
      * Prepare the newsletter content for the specified email (substitute markers and insert spies)
      * @param \Ecodev\Newsletter\Domain\Model\Email $email
-     * @param boolean $isPreview whether we are preparing a preview version of the newsletter
+     * @param bool $isPreview whether we are preparing a preview version of the newsletter
      */
     public function prepare(Email $email, $isPreview = false)
     {
@@ -370,7 +362,6 @@ class Mailer
      * The regular send method. Use this to send a normal, personalized mail.
      *
      * @param \Ecodev\Newsletter\Domain\Model\Email $email The email object containing recipient email address and extra data for markers
-     * @return   void
      */
     public function send(Email $email)
     {
@@ -382,7 +373,6 @@ class Mailer
      * Raw send method. This does not replace markers, or reset the mail afterwards.
      *
      * @param Email $email
-     * @return void
      */
     private function raw_send(Email $email)
     {

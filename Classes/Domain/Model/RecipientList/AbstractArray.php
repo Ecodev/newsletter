@@ -13,7 +13,6 @@ use Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 abstract class AbstractArray extends RecipientList
 {
-
     public function getRecipient()
     {
         $r = current($this->data);
@@ -38,11 +37,11 @@ abstract class AbstractArray extends RecipientList
     public function getError()
     {
         if (!is_array($this->data)) {
-            return "Not an array";
+            return 'Not an array';
         }
 
         if (count($this->data) == 0) {
-            return "No data fetched";
+            return 'No data fetched';
         }
     }
 }

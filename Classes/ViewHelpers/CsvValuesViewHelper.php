@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\ViewHelpers;
 
 /**
@@ -10,7 +9,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  */
 class CsvValuesViewHelper extends AbstractViewHelper
 {
-
     /**
      * Format array of values to CSV format
      *

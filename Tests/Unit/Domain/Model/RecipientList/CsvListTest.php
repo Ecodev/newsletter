@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class CsvListTest extends CsvFileTest
 {
@@ -62,7 +61,7 @@ class CsvListTest extends CsvFileTest
     public function setCsvValuesForStringSetsCsvValues()
     {
         $this->subject->setCsvValues('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'csvValues', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'csvValues', $this->subject);
     }
 
     protected function prepareDataForEnumeration()

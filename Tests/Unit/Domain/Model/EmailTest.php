@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -55,8 +54,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getBeginTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
-                null, $this->subject->getBeginTime()
+        $this->assertNull(
+                $this->subject->getBeginTime()
         );
     }
 
@@ -68,7 +67,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setBeginTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'beginTime', $this->subject
         );
     }
@@ -78,8 +77,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getEndTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
-                null, $this->subject->getEndTime()
+        $this->assertNull(
+                $this->subject->getEndTime()
         );
     }
 
@@ -91,7 +90,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setEndTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'endTime', $this->subject
         );
     }
@@ -101,8 +100,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getOpenTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
-                null, $this->subject->getOpenTime()
+        $this->assertNull(
+                $this->subject->getOpenTime()
         );
     }
 
@@ -114,7 +113,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setOpenTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'openTime', $this->subject
         );
     }
@@ -124,8 +123,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getBounceTimeReturnsInitialValueForDateTime()
     {
-        $this->assertEquals(
-                null, $this->subject->getBounceTime()
+        $this->assertNull(
+                $this->subject->getBounceTime()
         );
     }
 
@@ -137,7 +136,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $dateTimeFixture = new \DateTime();
         $this->subject->setBounceTime($dateTimeFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $dateTimeFixture, 'bounceTime', $this->subject
         );
     }
@@ -147,8 +146,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getUnsubscribedReturnsInitialValueForBoolean()
     {
-        $this->assertSame(
-                false, $this->subject->getUnsubscribed()
+        $this->assertFalse(
+                $this->subject->getUnsubscribed()
         );
     }
 
@@ -159,7 +158,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->setUnsubscribed(true);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 true, 'unsubscribed', $this->subject
         );
     }
@@ -178,7 +177,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setRecipientAddressForStringSetsRecipientAddress()
     {
         $this->subject->setRecipientAddress('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'recipientAddress', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'recipientAddress', $this->subject);
     }
 
     /**
@@ -195,7 +194,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setRecipientDataForStringSetsRecipientData()
     {
         $this->subject->setRecipientData(array('data1', 'data2'));
-        $this->assertEquals(array('data1', 'data2'), $this->subject->getRecipientData());
+        $this->assertSame(array('data1', 'data2'), $this->subject->getRecipientData());
     }
 
     /**
@@ -203,7 +202,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getNewsletterReturnsInitialValueForNewsletter()
     {
-        $this->assertEquals(
+        $this->assertSame(
                 null, $this->subject->getNewsletter()
         );
     }
@@ -216,7 +215,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $newsletterFixture = new \Ecodev\Newsletter\Domain\Model\Newsletter();
         $this->subject->setNewsletter($newsletterFixture);
 
-        $this->assertAttributeEquals(
+        $this->assertAttributeSame(
                 $newsletterFixture, 'newsletter', $this->subject
         );
     }
@@ -249,6 +248,6 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $email = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('getUid'), array(), '', false);
         $email->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $email->setRecipientAddress('john@example.com');
-        $this->assertEquals('462aa2b1b9885a181e6d916a409d96c8', $email->getAuthCode());
+        $this->assertSame('462aa2b1b9885a181e6d916a409d96c8', $email->getAuthCode());
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Repository;
 
 /* * *************************************************************
@@ -33,7 +32,6 @@ namespace Ecodev\Newsletter\Domain\Repository;
  */
 class BounceAccountRepository extends AbstractRepository
 {
-
     /**
      * Returns the first BounceAccount or null if none at all
      * @return type

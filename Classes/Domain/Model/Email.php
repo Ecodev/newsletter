@@ -37,21 +37,21 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * beginTime
      *
-     * @var DateTime $beginTime
+     * @var DateTime
      */
     protected $beginTime;
 
     /**
      * endTime
      *
-     * @var DateTime $endTime
+     * @var DateTime
      */
     protected $endTime;
 
     /**
      * recipientAddress
      *
-     * @var string $recipientAddress
+     * @var string
      * @validate NotEmpty
      */
     protected $recipientAddress = '';
@@ -59,35 +59,35 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * recipientData
      *
-     * @var string $recipientData
+     * @var string
      */
     protected $recipientData = 'a:0:{}';
 
     /**
      * openeTime
      *
-     * @var DateTime $openTime
+     * @var DateTime
      */
     protected $openTime;
 
     /**
      * bounceTime
      *
-     * @var DateTime $bounceTime
+     * @var DateTime
      */
     protected $bounceTime;
 
     /**
      * newsletter
      * @lazy
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
      */
     protected $newsletter;
 
     /**
      * Whether the recipient of this email requested to unsubscribe.
      *
-     * @var boolean $unsubscribed
+     * @var bool
      * @validate NotEmpty
      */
     protected $unsubscribed = false;
@@ -96,7 +96,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for beginTime
      *
      * @param DateTime $beginTime beginTime
-     * @return void
      */
     public function setBeginTime(DateTime $beginTime)
     {
@@ -117,7 +116,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for endTime
      *
      * @param DateTime $endTime endTime
-     * @return void
      */
     public function setEndTime(DateTime $endTime)
     {
@@ -138,7 +136,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for recipientAddress
      *
      * @param string $recipientAddress recipientAddress
-     * @return void
      */
     public function setRecipientAddress($recipientAddress)
     {
@@ -159,7 +156,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for recipientData
      *
      * @param array $recipientData recipientData
-     * @return void
      */
     public function setRecipientData(array $recipientData)
     {
@@ -190,7 +186,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for openTime
      *
      * @param DateTime $openTime openTime
-     * @return void
      */
     public function setOpenTime(DateTime $openTime)
     {
@@ -210,7 +205,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the state of opened
      *
-     * @return boolean the state of opened
+     * @return bool the state of opened
      */
     public function isOpened()
     {
@@ -221,7 +216,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for bounceTime
      *
      * @param DateTime $bounceTime bounceTime
-     * @return void
      */
     public function setBounceTime(DateTime $bounceTime)
     {
@@ -241,7 +235,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the state of bounced
      *
-     * @return boolean the state of bounced
+     * @return bool the state of bounced
      */
     public function isBounced()
     {
@@ -252,7 +246,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for newsletter
      *
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
-     * @return void
      */
     public function setNewsletter(Newsletter $newsletter)
     {
@@ -272,8 +265,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for unsubscribed
      *
-     * @param boolean $unsubscribed Whether the recipient of this email requested to unsubscribe.
-     * @return void
+     * @param bool $unsubscribed Whether the recipient of this email requested to unsubscribe.
      */
     public function setUnsubscribed($unsubscribed)
     {
@@ -283,7 +275,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for unsubscribed
      *
-     * @return boolean Whether the recipient of this email requested to unsubscribe.
+     * @return bool Whether the recipient of this email requested to unsubscribe.
      */
     public function getUnsubscribed()
     {

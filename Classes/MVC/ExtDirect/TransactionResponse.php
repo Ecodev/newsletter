@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 use TYPO3\CMS\Extbase\Mvc\Web\Response;
@@ -33,7 +32,6 @@ use TYPO3\CMS\Extbase\Mvc\Web\Response;
  */
 class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
 {
-
     /**
      * The Ext Direct result that will be JSON encoded
      *
@@ -44,7 +42,7 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
     /**
      * The Ext Direct success code. Defaults to TRUE.
      *
-     * @var boolean
+     * @var bool
      */
     protected $success = true;
 
@@ -52,7 +50,6 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
      * Setter for the transaction result.
      *
      * @param mixed $result The result of the called action
-     * @return void
      */
     public function setResult($result)
     {
@@ -62,8 +59,7 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
     /**
      * Sette for success.
      *
-     * @param boolean $success The success of the called action
-     * @return void
+     * @param bool $success The success of the called action
      */
     public function setSuccess($success)
     {
@@ -83,7 +79,7 @@ class TransactionResponse extends \TYPO3\CMS\Extbase\Mvc\Web\Response
     /**
      * Returns the state (success/fail) of the transaction.
      *
-     * @return boolean The success
+     * @return bool The success
      */
     public function getSuccess()
     {

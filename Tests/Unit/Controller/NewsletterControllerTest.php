@@ -27,7 +27,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Controller;
 
 /**
  * Test case for class Ecodev\Newsletter\Controller\NewsletterController.
- *
  */
 class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {

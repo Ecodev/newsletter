@@ -77,7 +77,7 @@ abstract class Tools
      *
      * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
      * @param string $message
-     * @param integer $logLevel 0 = message, 1 = error
+     * @param int $logLevel 0 = message, 1 = error
      */
     public static function log($message, $logLevel = 0)
     {
@@ -92,7 +92,7 @@ abstract class Tools
      * This mailer will have both plain and html content applied as well as files attached.
      *
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
-     * @param integer $language
+     * @param int $language
      * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
      */
     public static function getConfiguredMailer(Newsletter $newsletter, $language = null)
@@ -131,7 +131,6 @@ abstract class Tools
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param Newsletter $newsletter
-     * @return void
      */
     public static function createSpool(Newsletter $newsletter)
     {
@@ -164,7 +163,7 @@ abstract class Tools
                     'pid' => $newsletter->getPid(),
                     'newsletter' => $newsletter->getUid(),
                 ));
-                $emailSpooledCount++;
+                ++$emailSpooledCount;
             }
         }
         self::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
@@ -248,7 +247,7 @@ abstract class Tools
             $email->setEndTime(new DateTime());
             $emailRepository->updateNow($email);
 
-            $emailSentCount++;
+            ++$emailSentCount;
         }
 
         // Log numbers to syslog
@@ -356,7 +355,7 @@ abstract class Tools
 
     /**
      * Returns the size of the IV
-     * @return integer
+     * @return int
      */
     private static function getIVSize()
     {

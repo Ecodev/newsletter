@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -64,7 +63,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setEmailForStringSetsEmail()
     {
         $this->subject->setEmail('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'email', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'email', $this->subject);
     }
 
     /**
@@ -81,7 +80,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setServerForStringSetsServer()
     {
         $this->subject->setServer('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'server', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'server', $this->subject);
     }
 
     /**
@@ -98,7 +97,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setProtocolForStringSetsProtocol()
     {
         $this->subject->setProtocol('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'protocol', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'protocol', $this->subject);
     }
 
     /**
@@ -115,7 +114,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setPortForIntSetsPort()
     {
         $this->subject->setPort(25);
-        $this->assertAttributeEquals(25, 'port', $this->subject);
+        $this->assertAttributeSame(25, 'port', $this->subject);
     }
 
     /**
@@ -132,7 +131,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setUsernameForStringSetsUsername()
     {
         $this->subject->setUsername('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'username', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'username', $this->subject);
     }
 
     /**
@@ -149,7 +148,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setPasswordForStringSetsPassword()
     {
         $this->subject->setPassword('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'password', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'password', $this->subject);
     }
 
     /**
@@ -166,7 +165,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setConfigForStringSetsConfig()
     {
         $this->subject->setConfig('Conceived at T3CON10');
-        $this->assertAttributeEquals('Conceived at T3CON10', 'config', $this->subject);
+        $this->assertAttributeSame('Conceived at T3CON10', 'config', $this->subject);
     }
 
     /**

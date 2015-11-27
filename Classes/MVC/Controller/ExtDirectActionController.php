@@ -45,7 +45,6 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * Injects the PersistenceManager.
      *
      * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
-     * @return void
      */
     public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
     {
@@ -54,8 +53,6 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
     /**
      * Initializes the View to be a \Ecodev\Newsletter\ExtDirect\View\ExtDirectView that renders json without Template Files.
-     *
-     * @return void
      */
     public function initializeView()
     {
@@ -100,9 +97,8 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      *
      * @param string $messageBody The message
      * @param string $messageTitle Optional message title
-     * @param integer $severity Optional severity, must be one of \TYPO3\CMS\Core\Messaging\FlashMessage constants
-     * @param boolean $storeInSession Optional, defines whether the message should be stored in the session (default) or not
-     * @return void
+     * @param int $severity Optional severity, must be one of \TYPO3\CMS\Core\Messaging\FlashMessage constants
+     * @param bool $storeInSession Optional, defines whether the message should be stored in the session (default) or not
      * @throws \InvalidArgumentException if the message body is no string
      * @see \TYPO3\CMS\Core\Messaging\FlashMessage
      * @api

@@ -34,6 +34,6 @@ class BounceAccountRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Ab
     {
         $bounceAccount = $this->bounceAccountRepository->findFirst();
         $this->assertNotNull($bounceAccount);
-        $this->assertEquals(666, $bounceAccount->getUid());
+        $this->assertSame(666, $bounceAccount->getUid());
     }
 }

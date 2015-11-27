@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 use Ecodev\Newsletter\BounceHandler;
@@ -14,32 +13,31 @@ use Ecodev\Newsletter\Domain\Model\RecipientList;
  */
 class Sql extends RecipientList
 {
-
     /**
      * sqlStatement
      *
-     * @var string $sqlStatement
+     * @var string
      */
     protected $sqlStatement = '';
 
     /**
      * sqlRegisterBounce
      *
-     * @var string $sqlRegisterBounce
+     * @var string
      */
     protected $sqlRegisterBounce = '';
 
     /**
      * sqlRegisterOpen
      *
-     * @var string $sqlRegisterOpen
+     * @var string
      */
     protected $sqlRegisterOpen = '';
 
     /**
      * sqlRegisterClick
      *
-     * @var string $sqlRegisterClick
+     * @var string
      */
     protected $sqlRegisterClick = '';
 
@@ -47,7 +45,6 @@ class Sql extends RecipientList
      * Setter for sqlStatement
      *
      * @param string $sqlStatement sqlStatement
-     * @return void
      */
     public function setSqlStatement($sqlStatement)
     {
@@ -68,7 +65,6 @@ class Sql extends RecipientList
      * Setter for sqlRegisterBounce
      *
      * @param string $sqlRegisterBounce sqlRegisterBounce
-     * @return void
      */
     public function setSqlRegisterBounce($sqlRegisterBounce)
     {
@@ -89,7 +85,6 @@ class Sql extends RecipientList
      * Setter for sqlRegisterOpen
      *
      * @param string $sqlRegisterOpen sqlRegisterOpen
-     * @return void
      */
     public function setSqlRegisterOpen($sqlRegisterOpen)
     {
@@ -110,7 +105,6 @@ class Sql extends RecipientList
      * Setter for sqlRegisterClick
      *
      * @param string $sqlRegisterClick sqlRegisterClick
-     * @return void
      */
     public function setSqlRegisterClick($sqlRegisterClick)
     {
@@ -178,8 +172,8 @@ class Sql extends RecipientList
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
-     * @param integer $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
-     * @return boolean Status of the success of the removal.
+     * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
+     * @return bool Status of the success of the removal.
      */
     public function registerBounce($email, $bounceLevel)
     {
@@ -213,7 +207,6 @@ class Sql extends RecipientList
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient (who opened the mail)
-     * @return	void
      */
     public function registerOpen($email)
     {
@@ -235,7 +228,6 @@ class Sql extends RecipientList
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
-     * @return	void
      */
     public function registerClick($email)
     {

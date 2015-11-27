@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\MVC\ExtDirect\Exception;
 
 use Ecodev\Newsletter\Exception;

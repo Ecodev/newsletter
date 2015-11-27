@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter\Domain\Model;
 
 /* * *************************************************************
@@ -32,7 +31,6 @@ namespace Ecodev\Newsletter\Domain\Model;
  */
 interface IPlainConverter
 {
-
     /**
      * Returns the plain text version of the content
      * @param string $content HTML content to be converted to plain text

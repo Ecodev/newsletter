@@ -34,13 +34,13 @@ class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFu
     {
         $email = $this->emailRepository->findByAuthcode($this->authCode);
         $this->assertNotNull($email);
-        $this->assertEquals(302, $email->getUid());
+        $this->assertSame(302, $email->getUid());
     }
 
     public function testGetCount()
     {
-        $this->assertEquals(0, $this->emailRepository->getCount(10));
-        $this->assertEquals(2, $this->emailRepository->getCount(30));
+        $this->assertSame(0, $this->emailRepository->getCount(10));
+        $this->assertSame(2, $this->emailRepository->getCount(30));
     }
 
     public function testFindAllByNewsletter()
@@ -49,23 +49,23 @@ class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFu
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 0, 999);
         $this->assertCount(2, $emails);
-        $this->assertEquals(301, $emails[0]->getUid());
-        $this->assertEquals(302, $emails[1]->getUid());
+        $this->assertSame(301, $emails[0]->getUid());
+        $this->assertSame(302, $emails[1]->getUid());
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 1, 999);
         $this->assertCount(1, $emails);
-        $this->assertEquals(302, $emails[0]->getUid());
+        $this->assertSame(302, $emails[0]->getUid());
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 2, 999);
         $this->assertCount(0, $emails);
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 0, 1);
         $this->assertCount(1, $emails);
-        $this->assertEquals(301, $emails[0]->getUid());
+        $this->assertSame(301, $emails[0]->getUid());
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 1, 1);
         $this->assertCount(1, $emails);
-        $this->assertEquals(302, $emails[0]->getUid());
+        $this->assertSame(302, $emails[0]->getUid());
 
         $emails = $this->emailRepository->findAllByNewsletter(30, 2, 1);
         $this->assertCount(0, $emails);

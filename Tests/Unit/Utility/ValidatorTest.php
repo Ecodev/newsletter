@@ -27,7 +27,6 @@ namespace Ecodev\Newsletter\Tests\Unit\Utility;
 
 /**
  * Test case for class Ecodev\Newsletter\Utility\Validator.
- *
  */
 class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
@@ -266,6 +265,6 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->validator->method('getURL')->will($this->returnValue($input));
         $actual = $this->validator->validate($this->newsletter);
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 }

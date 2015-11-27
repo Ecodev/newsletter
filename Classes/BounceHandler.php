@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ecodev\Newsletter;
 
 use DateTime;
@@ -13,7 +12,6 @@ use Exception;
  */
 class BounceHandler
 {
-
     const NEWSLETTER_NOT_A_BOUNCE = 1;
     const NEWSLETTER_SOFTBOUNCE = 2;
     const NEWSLETTER_HARDBOUNCE = 3;
@@ -21,7 +19,7 @@ class BounceHandler
 
     /**
      * Bounce level of the mail source specified
-     * @var integer @see \Ecodev\Newsletter\BounceHandler
+     * @var int @see \Ecodev\Newsletter\BounceHandler
      */
     private $bounceLevel = self::NEWSLETTER_NOT_A_BOUNCE;
 
@@ -214,7 +212,7 @@ class BounceHandler
 
         // If couldn't find the original email we cannot do anything
         if (!$this->email) {
-            Tools::log("Bounced email found but cannot find corresponding record in database. Skipped.", 1);
+            Tools::log('Bounced email found but cannot find corresponding record in database. Skipped.', 1);
 
             return;
         }
@@ -229,6 +227,6 @@ class BounceHandler
             $emailRepository->updateNow($this->email);
         }
 
-        Tools::log("Bounced email found with bounce level " . $this->bounceLevel);
+        Tools::log('Bounced email found with bounce level ' . $this->bounceLevel);
     }
 }

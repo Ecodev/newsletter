@@ -1,4 +1,5 @@
 <?php
+
 namespace Ecodev\Newsletter\Update;
 
 /*
@@ -34,11 +35,10 @@ namespace Ecodev\Newsletter\Update;
  */
 class TransactionResult
 {
-
     /**
      * Whether the transaction was completed or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $completed = false;
 
@@ -53,28 +53,28 @@ class TransactionResult
      * The integrity state of whether or not data was modified.
      * A value TRUE means it was not modified.
      *
-     * @var boolean
+     * @var bool
      */
     protected $dataIntegrity = true;
 
     /**
      * The number of data instances affected by the transaction.
      *
-     * @var integer
+     * @var int
      */
     protected $affectedDataCount = 0;
 
     /**
      * The total number of operands in the transaction.
      *
-     * @var integer
+     * @var int
      */
     protected $totalOperands = 0;
 
     /**
      * The number of operands processed in the transaction.
      *
-     * @var integer
+     * @var int
      */
     protected $processedOperands = 0;
 
@@ -95,7 +95,7 @@ class TransactionResult
      */
     public function stepProcessed()
     {
-        $this->processedOperands ++;
+        ++$this->processedOperands;
         $this->completed = ($this->processedOperands >= $this->totalOperands);
     }
 
@@ -122,7 +122,7 @@ class TransactionResult
     /**
      * The complete state of the transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function complete()
     {
@@ -132,7 +132,7 @@ class TransactionResult
     /**
      * Affected data count getter.
      *
-     * @return integer
+     * @return int
      */
     public function getAffectedDataCount()
     {
@@ -142,7 +142,7 @@ class TransactionResult
     /**
      * Appends the count of affected data.
      *
-     * @param integer $amount
+     * @param int $amount
      */
     public function appendAffectedDataCount($amount)
     {
@@ -163,7 +163,7 @@ class TransactionResult
      * Returns the integrity state of whether or not data was modified.
      * A value TRUE means it was not modified and the data remains integral.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDataIntegrity()
     {

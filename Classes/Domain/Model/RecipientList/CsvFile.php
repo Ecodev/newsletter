@@ -12,21 +12,21 @@ class CsvFile extends AbstractArray
     /**
      * csvSeparator
      *
-     * @var string $csvSeparator
+     * @var string
      */
     protected $csvSeparator = ',';
 
     /**
      * csvFields
      *
-     * @var string $csvFields
+     * @var string
      */
     protected $csvFields = '';
 
     /**
      * csvFilename
      *
-     * @var string $csvFilename
+     * @var string
      */
     protected $csvFilename = '';
 
@@ -34,7 +34,6 @@ class CsvFile extends AbstractArray
      * Setter for csvSeparator
      *
      * @param string $csvSeparator csvSeparator
-     * @return void
      */
     public function setCsvSeparator($csvSeparator)
     {
@@ -55,7 +54,6 @@ class CsvFile extends AbstractArray
      * Setter for csvFields
      *
      * @param string $csvFields csvFields
-     * @return void
      */
     public function setCsvFields($csvFields)
     {
@@ -76,7 +74,6 @@ class CsvFile extends AbstractArray
      * Setter for csvFilename
      *
      * @param string $csvFilename csvFilename
-     * @return void
      */
     public function setCsvFilename($csvFilename)
     {
