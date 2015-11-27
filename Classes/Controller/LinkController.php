@@ -85,11 +85,24 @@ class LinkController extends ExtDirectActionController
      */
     public function clickedAction()
     {
-        $url = $this->linkRepository->registerClick(@$_REQUEST['n'], @$_REQUEST['l'], @$_REQUEST['p']);
+        $args = $this->request->getArguments();
+
+        // For compatibility with old links
+        $oldArgs = array('n', 'l', 'p');
+        foreach ($oldArgs as $arg) {
+            if (!isset($args[$arg])) {
+                if (isset($_REQUEST[$arg])) {
+                    $args[$arg] = $_REQUEST[$arg];
+                }
+            }
+        }
+
+        $url = $this->linkRepository->registerClick(@$args['n'], @$args['l'], @$args['p']);
 
         // Finally redirect to the destination URL
         if ($url) {
-            header("Location: $url");
+            // This gives a proper 303 redirect.
+            $this->redirectToUri($url);
             die();
         } else {
             throw new \TYPO3\CMS\Core\Error\Http\PageNotFoundException('The requested link was not found', 1440490767);

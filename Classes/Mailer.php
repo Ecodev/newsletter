@@ -104,6 +104,13 @@ class Mailer
         return $plainText;
     }
 
+    /**
+     * Sets the newsletter
+     *
+     * @param Newsletter $newsletter
+     * @param string $language
+     * @throws Exception
+     */
     public function setNewsletter(Newsletter $newsletter, $language = null)
     {
         $domain = $newsletter->getDomain();
@@ -214,8 +221,11 @@ class Mailer
      */
     private function injectOpenSpy(Email $email)
     {
-        $this->html = str_ireplace(
-                '</body>', '<div><img src="' . Tools::buildFrontendUri('opened', array(), 'Email') . '&c=' . $email->getAuthCode() . '" width="0" height="0" /></div></body>', $this->html);
+        $url = Tools::buildFrontendUri('opened', array(
+            'c' => $email->getAuthCode(),
+        ), 'Email');
+
+        $this->html = str_ireplace('</body>', '<div><img src="' . $url . '" width="0" height="0" /></div></body>', $this->html);
     }
 
     /**
@@ -232,8 +242,8 @@ class Mailer
     /**
      * Apply multiple markers to mail contents
      *
-     * @param   array      Assoc array with name => value pairs.
-     * @return   void
+     * @param Email $email
+     * @return void
      */
     private function substituteMarkers(Email $email)
     {
@@ -241,6 +251,15 @@ class Mailer
         $this->title = $this->substitutor->substituteMarkers($this->title, $email, 'title');
     }
 
+    /**
+     * Get the link with auth code.
+     *
+     * @param Email $email
+     * @param string $url
+     * @param boolean $isPreview
+     * @param string $isPlainText
+     * @return string The link url
+     */
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
     {
         global $TYPO3_DB;
@@ -278,7 +297,13 @@ class Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $newUrl = Tools::buildFrontendUri('clicked', array(), 'Link') . '&n=' . $this->newsletter->getUid() . '&l=' . $authCode . ($isPlainText ? '&p=1' : '');
+        $arguments = array();
+        $arguments['n'] = $this->newsletter->getUid();
+        $arguments['l'] = $authCode;
+        if ($isPlainText) {
+            $arguments['p'] = 1;
+        }
+        $newUrl = Tools::buildFrontendUri('clicked', $arguments, 'Link');
 
         return $newUrl;
     }
@@ -341,16 +366,17 @@ class Mailer
     /**
      * Raw send method. This does not replace markers, or reset the mail afterwards.
      *
-     * @param   array      Record with receivers information as name => value pairs.
-     * @param   array      Array with extra headers to apply to mails as name => value pairs.
-     * @return   void
+     * @param Email $email
+     * @return void
      */
     private function raw_send(Email $email)
     {
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
-                ->setFrom(array($this->senderEmail => $this->senderName))
-                ->setSubject($this->title);
+            ->setFrom(array(
+            $this->senderEmail => $this->senderName,
+        ))
+            ->setSubject($this->title);
 
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);

@@ -102,6 +102,66 @@ whenever a recipient requests for unsubscription. The “Notification
 email” field needs to be specified in extension configuration (in Extension
 Manager).
 
+RealURL
+-------
+
+It is possible to configure the extension for use with RealURL to shorten the 
+length of URLS inside your newsletters.
+
+Here is a example trimmed from realurlconf.php:
+
+
+.. code:: php
+
+ <?php
+ $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = array(
+   // ...
+   'postVarSets' => array(
+      '_DEFAULT' => array (
+         // RealURL for newsletter extension
+         'redirect' => array(
+            array(
+               'GETvar' => 'type',
+               'valueMap' => array(
+                  'z' => '1342671779',
+               ),
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[action]',
+               'valueMap' => array(
+                  'g' => 'clicked',
+                  's' => 'show',
+                  'u' => 'unsubscribe',
+                  'o' => 'opened',
+               )
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[controller]',
+               'valueMap' => array(
+                  't' => 'Link',
+                  'e' => 'Email',
+               )
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[c]',
+               'cond' => array (
+                  'prevValueInList' => 'Email'
+               ),
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[n]',
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[l]',
+            ),
+            array(
+               'GETvar' => 'tx_newsletter_p[p]',
+            ),
+         ),
+      ),
+   // ...
+ );
+ 
 Overriding with TypoScript
 --------------------------
 

@@ -298,9 +298,10 @@ abstract class Tools
      * @param string $controllerName
      * @param string $extensionName
      * @param string $pluginName
+     * @param array $otherArguments
      * @return string absolute URI
      */
-    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p')
+    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p', array $otherArguments = null)
     {
         if (!self::$uriBuilder) {
             self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
@@ -312,15 +313,19 @@ abstract class Tools
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
 
-        $arguments = array($pluginNamespace => $controllerArguments);
+        if (!isset($otherArguments) || is_null($otherArguments)) {
+            $otherArguments = array();
+        }
 
-        self::$uriBuilder
-                ->reset()
-                ->setUseCacheHash(false)
-                ->setCreateAbsoluteUri(true)
-                ->setArguments($arguments);
+        $arguments = $otherArguments;
+        $arguments[$pluginNamespace] = $controllerArguments;
+        self::$uriBuilder->reset()
+            ->setUseCacheHash(false)
+            ->setCreateAbsoluteUri(true)
+            ->setArguments($arguments)
+            ->setTargetPageType(1342671779);
 
-        return self::$uriBuilder->buildFrontendUri() . '&type=1342671779';
+        return self::$uriBuilder->buildFrontendUri();
     }
 
     /**
