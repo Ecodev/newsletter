@@ -24,5 +24,4 @@ class AbstractUnitTestCase extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = $config;
     }
-
 }

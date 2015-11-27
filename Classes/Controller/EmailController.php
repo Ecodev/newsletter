@@ -331,5 +331,4 @@ class EmailController extends ExtDirectActionController
             ),
         );
     }
-
 }
