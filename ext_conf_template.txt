@@ -27,3 +27,6 @@ attach_images = 1
 
 # cat=basic; type=integer; label=Number of mailer per round: This can be used to limit the rate on which Newsletter will send out mails. You must set this if you wish to use the "Invoke mailer" button. If you specify 0 as value, it will send all mails in one go.
 mails_per_round = 100
+
+# cat=basic; type=string; label=Redirect page (pid|url) on unsubscribe: If this value is set, on unsubscribe the user will be redirected to the corresponding page.
+unsubscribe_redirect =

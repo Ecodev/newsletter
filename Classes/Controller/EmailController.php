@@ -138,7 +138,7 @@ class EmailController extends ExtDirectActionController
         }
 
         $isPreview = empty($args['c']); // If we don't have an authentification code, we are in preview mode
-                                        // If it's a preview, an email which was not sent yet, we will simulate it the best we can
+        // If it's a preview, an email which was not sent yet, we will simulate it the best we can
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
             $newsletter = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
@@ -243,6 +243,28 @@ class EmailController extends ExtDirectActionController
             }
         }
 
+        // Redirect unsubscribe via config.
+        $redirect = Tools::confParam('unsubscribe_redirect');
+
+        // If it is a PID, convert to a URL
+        if (is_numeric($redirect)) {
+            $uriBuilder = $this->controllerContext->getUriBuilder();
+            $uriBuilder->reset();
+            $uriBuilder->setUseCacheHash(false);
+            $uriBuilder->setTargetPageUid((integer) $redirect);
+            // Append the recipient address just in case you want to do something with it at the destination
+            $uriBuilder->setArguments(array(
+                'recipient' => $recipientAddress,
+            ));
+            $uri = $uriBuilder->build();
+        }
+
+        // If it is a valid URL, redirect to it
+        if (GeneralUtility::isValidUrl($redirect)) {
+            $this->redirectToUri($redirect);
+        }
+
+        // Else render the template.
         $this->view->assign('success', $success);
         $this->view->assign('recipientAddress', $recipientAddress);
     }
@@ -309,4 +331,5 @@ class EmailController extends ExtDirectActionController
             ),
         );
     }
+
 }
