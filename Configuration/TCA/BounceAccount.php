@@ -43,12 +43,11 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.protocol',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('POP3', 'pop3'),
                     array('IMAP', 'imap'),
                 ),
-                'size' => 1,
-                'maxitems' => 1,
             ),
         ),
         'port' => array(
@@ -71,21 +70,17 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.password',
             'config' => array(
                 'type' => 'input',
-                'form_type' => 'user',
-                'userFunc' => '\\Ecodev\\Newsletter\\Tca\\BounceAccountTca->passwordField',
                 'size' => 30,
-                'eval' => '\\Ecodev\\Newsletter\\Tca\\BounceAccountTca',
+                'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
             ),
         ),
         'config' => array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.config',
             'config' => array(
                 'type' => 'text',
-               'form_type' => 'user',
-               'userFunc' => '\\Ecodev\\Newsletter\\Tca\\BounceAccountTca->textareaField',
                 'cols' => 40,
                 'rows' => 8,
-                'eval' => '\\Ecodev\\Newsletter\\Tca\\BounceAccountTca',
+                'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
                 'wrap' => 'off',
                 'default' => "poll ###SERVER###\nproto ###PROTOCOL### \nport ###PORT###\nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n",
             ),

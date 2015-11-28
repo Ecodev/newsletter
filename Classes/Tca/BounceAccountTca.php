@@ -10,6 +10,17 @@ namespace Ecodev\Newsletter\Tca;
 class BounceAccountTca
 {
     /**
+     * Decrypt values from DB (on TYPO3 6.2)
+     */
+    public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
+    {
+        $encryptedFields = array('password', 'config');
+        if ($table == 'tx_newsletter_domain_model_bounceaccount' && in_array($field, $encryptedFields)) {
+            $row[$field] = self::getDecryptedFieldValue($field, $row[$field]);
+        }
+    }
+
+    /**
      * Encrypts the field value
      * @param string $value The field value to be evaluated.
      * @param string $isIn The "isIn" value of the field configuration from TCA
@@ -22,48 +33,20 @@ class BounceAccountTca
     }
 
     /**
-     * Returns the decrypted password field
-     * @param array $PA Parameter Array
-     * @param TYPO3\CMS\Backend\Form\FormEngine $fObj
-     * @return string
-     */
-    public function passwordField($PA, $fObj)
-    {
-        $PA['itemFormElValue'] = $this->getDecryptedFieldValue($PA);
-        $formField = $fObj->getSingleField_typeInput($PA['table'], $PA['field'], $PA['row'], $PA);
-        $formField = str_replace('type="text"', 'type="password"', $formField);
-
-        return $formField;
-    }
-
-    /**
-     * Returns the decrypted textarea field
-     * @param array $PA Parameter Array
-     * @param TYPO3\CMS\Backend\Form\FormEngine $fObj
-     * @return string
-     */
-    public function textareaField($PA, $fObj)
-    {
-        $PA['itemFormElValue'] = $this->getDecryptedFieldValue($PA);
-        $formField = $fObj->getSingleField_typeText($PA['table'], $PA['field'], $PA['row'], $PA);
-
-        return $formField;
-    }
-
-    /**
      * Returns the decrypted field value if set.
      * @param array $PA Parameter Array
      * @return string
      */
-    protected function getDecryptedFieldValue($PA)
+    public static function getDecryptedFieldValue($field, $value)
     {
+        $default = @$GLOBALS['TCA']['tx_newsletter_domain_model_bounceaccount']['columns'][$field]['config']['default'];
+
         // Set the value
-        $value = $PA['itemFormElValue'];
         if (empty($value)) {
-            if (isset($PA['fieldConf']['config']['default'])) {
-                $value = $PA['fieldConf']['config']['default'];
+            if ($default) {
+                $value = $default;
             }
-        } elseif ($value != $PA['fieldConf']['config']['default']) {
+        } elseif ($value != $default) {
             $value = \Ecodev\Newsletter\Tools::decrypt($value);
         }
 
