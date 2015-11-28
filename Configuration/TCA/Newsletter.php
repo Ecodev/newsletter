@@ -113,7 +113,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'email',
+                'eval' => 'trim',
             ),
         ),
         'replyto_name' => array(
@@ -129,7 +129,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'email',
+                'eval' => 'trim',
             ),
         ),
         'inject_open_spy' => array(
