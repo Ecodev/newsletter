@@ -18,6 +18,11 @@ class EmailTca
     public function render($PA, $fObj)
     {
         $data = unserialize($PA['row']['recipient_data']);
+
+        if (!$data) {
+            $data = array();
+        }
+
         $keys = array_keys($data);
 
         $result = '<table style="border: 1px grey solid; border-collapse: collapse;">';

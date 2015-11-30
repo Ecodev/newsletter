@@ -4,6 +4,14 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+// From TYPO3 7.4.0 onward we must use EXT prefix
+if (version_compare(TYPO3_version, '7.4.0', '>=')) {
+    $wizardIcon = 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif';
+} else {
+    // But for TYPO3 6.2 family, we still have to use old style
+    $wizardIcon = 'edit2.gif';
+}
+
 $TCA['tx_newsletter_domain_model_newsletter'] = array(
     'ctrl' => $TCA['tx_newsletter_domain_model_newsletter']['ctrl'],
     'interface' => array(
@@ -53,6 +61,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.repetition',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.repetition_none', '0'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.repetition_daily', '1'),
@@ -63,7 +72,6 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.repetition_semiyearly', '6'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.repetition_yearly', '7'),
                 ),
-                'size' => 1,
                 'maxitems' => 1,
             ),
         ),
@@ -71,11 +79,11 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx'),
                 ),
-                'size' => 1,
                 'maxitems' => 1,
             ),
         ),
@@ -150,14 +158,17 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.bounce_account',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_newsletter_domain_model_bounceaccount',
                 'items' => array(array('', 0)),
                 'maxitems' => 1,
                 'wizards' => array(
                     'edit' => array(
                         'type' => 'popup',
-                        'icon' => 'edit2.gif',
-                        'script' => 'wizard_edit.php',
+                        'icon' => $wizardIcon,
+                        'module' => array(
+                            'name' => 'wizard_edit',
+                        ),
                     ),
                 ),
             ),
@@ -166,13 +177,16 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.recipient_list',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_newsletter_domain_model_recipientlist',
                 'maxitems' => 1,
                 'wizards' => array(
                     'edit' => array(
                         'type' => 'popup',
-                        'icon' => 'edit2.gif',
-                        'script' => 'wizard_edit.php',
+                        'icon' => $wizardIcon,
+                        'module' => array(
+                            'name' => 'wizard_edit',
+                        ),
                     ),
                 ),
             ),

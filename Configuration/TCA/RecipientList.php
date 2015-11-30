@@ -38,9 +38,9 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'label' => 'LLL:EXT:lang/locallang_tca.php:sys_language',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.uid',
-                'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'items' => array(
@@ -53,6 +53,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.be_users',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
                 'foreign_table_where' => 'ORDER BY be_users.uid',
                 'size' => 5,
@@ -160,6 +161,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type_be_users', 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type_fe_groups', 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\FeGroups'),
@@ -170,7 +172,6 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type_csv_url', 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\CsvUrl'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type_html', 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\Html'),
                 ),
-                'size' => 1,
                 'maxitems' => 1,
                 'default' => 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers',
             ),
@@ -187,6 +188,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.html_fetch_type',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.html_fetch_type_mailto', 'mailto'),
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.html_fetch_type_regex', 'regex'),
