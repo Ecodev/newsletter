@@ -702,13 +702,13 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Function to fetch the proper domain from which to fetch content for newsletter.
+     * Returns the proper base URL (scheme + domain + path) from which to fetch content for newsletter.
      * This is either a sys_domain record from the page tree or the fetch_path property.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @return string Correct domain.
+     * @return string Base URL, eg: https://www.example.com/path
      */
-    public function getDomain()
+    public function getBaseUrl()
     {
         global $TYPO3_DB;
 
@@ -753,7 +753,21 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
         }
 
+        // Force scheme if found from domain record, or if fetch_path was not configured properly (before Newsletter 2.6.0)
+        if (!preg_match('~^https?://~', $domain)) {
+            $domain = 'http://' . $domain;
+        }
+
         return $domain;
+    }
+
+    /**
+     * Get domain name
+     * @return string domain, eg: www.example.com
+     */
+    public function getDomain()
+    {
+        return parse_url($this->getBaseUrl(), PHP_URL_HOST);
     }
 
     /**
@@ -857,13 +871,13 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getContentUrl($language = null)
     {
         $append_url = Tools::confParam('append_url');
-        $domain = $this->getDomain();
+        $baseUrl = $this->getBaseUrl();
 
         if (!is_null($language)) {
             $language = '&L=' . $language;
         }
 
-        return "http://$domain/index.php?id=" . $this->getPid() . $language . $append_url;
+        return $baseUrl . '/index.php?id=' . $this->getPid() . $language . $append_url;
     }
 
     /**
@@ -952,4 +966,5 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $stats;
     }
+
 }

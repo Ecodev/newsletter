@@ -7,7 +7,7 @@ sender_email = user
 # cat=basic; type=string; label=Notification email: Specify a valid address email to receive notification when recipients unsubscribe. If "user", the be_user owning the newsletter will be used. If blank, no notification will be sent. Otherwise must be a valid email address.
 notification_email = user
 
-# cat=basic; type=string; label=Domain: Domain or domain + path (without "http") from which to fetch content and encode links with. Leave blank to use domain-records from the page tree.
+# cat=basic; type=string; label=Domain: Base URL (scheme + domain + path) from which to fetch content and encode links with. Leave blank to use domain-records from the page tree.
 fetch_path =
 
 # cat=basic; type=string; label=Append parameters: String to append to URL's when fetching content. For example use &type=<num> allows you to implement your newsletter with a special template. Or disable cache with &no_cache=1.

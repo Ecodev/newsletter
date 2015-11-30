@@ -237,7 +237,7 @@ Constants
  - :Constants:
       config.fetch_path
    :Description:
-      Domain or domain + path (without "http") from which to fetch content and 
+      Base URL (scheme + domain + path) from which to fetch content and 
       encode links with. 
       
       Leave blank to use domain-records from the page tree.

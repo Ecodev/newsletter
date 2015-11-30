@@ -47,9 +47,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 }));
 
         $this->validator = $this->getMock('Ecodev\\Newsletter\\Utility\\Validator', array('getURL'), array(), '', false);
-        $this->newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getContentUrl', 'getDomain'), array(), '', false);
+        $this->newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getContentUrl', 'getBaseUrl'), array(), '', false);
         $this->newsletter->method('getContentUrl')->will($this->returnValue('http://example.com/?id=123'));
-        $this->newsletter->method('getDomain')->will($this->returnValue('example.com'));
+        $this->newsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
     }
 
     protected function tearDown()

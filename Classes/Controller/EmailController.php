@@ -292,7 +292,7 @@ class EmailController extends ExtDirectActionController
         }
 
         // Build email texts
-        $baseUrl = 'http://' . $newsletter->getDomain();
+        $baseUrl = $newsletter->getBaseUrl();
         $urlRecipient = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_email][' . $email->getUid() . ']=edit';
         $urlRecipientList = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit';
         $urlNewsletter = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_newsletter][' . $newsletter->getUid() . ']=edit';

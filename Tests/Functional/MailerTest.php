@@ -44,10 +44,10 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         parent::setUp();
 
-        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getUid', 'getPid', 'getDomain', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
+        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
         $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
         $this->mockNewsletter->method('getPid')->will($this->returnValue(789));
-        $this->mockNewsletter->method('getDomain')->will($this->returnValue('example.com'));
+        $this->mockNewsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
 

@@ -125,7 +125,7 @@ class Validator
         }
         // Otherwise try our best to guess what it is
         else {
-            $absoluteDomain = 'http://' . $newsletter->getDomain() . '/';
+            $absoluteDomain = $newsletter->getBaseUrl() . '/';
         }
 
         // Fix relative URL to absolute URL

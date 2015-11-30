@@ -114,14 +114,12 @@ class Mailer
      */
     public function setNewsletter(Newsletter $newsletter, $language = null)
     {
-        $domain = $newsletter->getDomain();
-
         // When sending newsletter via scheduler (so via CLI mode) realurl cannot guess
         // the domain name by himself, so we help him by filling HTTP_HOST variable
-        $_SERVER['HTTP_HOST'] = $domain;
+        $_SERVER['HTTP_HOST'] = $newsletter->getDomain();
         $_SERVER['SCRIPT_NAME'] = '/index.php';
 
-        $this->siteUrl = "http://$domain/";
+        $this->siteUrl = $newsletter->getBaseUrl() . '/';
         $this->linksCache = array();
         $this->newsletter = $newsletter;
         $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
@@ -225,8 +223,8 @@ class Mailer
     private function injectOpenSpy(Email $email)
     {
         $url = Tools::buildFrontendUri('opened', array(
-            'c' => $email->getAuthCode(),
-        ), 'Email');
+                    'c' => $email->getAuthCode(),
+                        ), 'Email');
 
         $this->html = str_ireplace('</body>', '<div><img src="' . $url . '" width="0" height="0" /></div></body>', $this->html);
     }
@@ -379,10 +377,10 @@ class Mailer
         /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
-            ->setFrom(array(
-            $this->senderEmail => $this->senderName,
-        ))
-            ->setSubject($this->title);
+                ->setFrom(array(
+                    $this->senderEmail => $this->senderName,
+                ))
+                ->setSubject($this->title);
 
         if ($this->replytoEmail) {
             $message->addReplyTo($this->replytoEmail, $this->replytoName);
@@ -420,4 +418,5 @@ class Mailer
 
         $message->send();
     }
+
 }
