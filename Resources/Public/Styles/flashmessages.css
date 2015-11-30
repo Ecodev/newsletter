@@ -24,31 +24,31 @@ div.messenge-box h3 {margin-bottom : 10px; background-color: #FFFFFF;}
 div.messenge-box p {margin-left : 20px; padding-bottom : 5px; }
 
 .message-ok {
-    color: #3b7826;
-    background-image: url("../Icons/ok.png");
+    color: #3b7826 !important;
+    background-image: url("../Icons/ok.png") !important;
 }
 
 .message-notice {
-    color: #777;
-    background-image: url('../Icons/notice.png');
+    color: #777 !important;
+    background-image: url("../Icons/notice.png") !important;
 }
 
 .message-information {
-    color: #4c73a1;
-    background-image: url('../Icons/information.png');
+    color: #4c73a1 !important;
+    background-image: url("../Icons/information.png") !important;
 }
 
 .message-ok {
-    color: #3b7826;
-    background-image: url('../Icons/ok.png');
+    color: #3b7826 !important;
+    background-image: url("../Icons/ok.png") !important;
 }
 
 .message-warning {
-    color: #9e7d4a;
-    background-image: url("../Icons/warning.png");
+    color: #9e7d4a !important;
+    background-image: url("../Icons/warning.png") !important;
 }
 
 .message-error {
-    color: #aa0225;
-    background-image: url('../Icons/error.png');
+    color: #aa0225 !important;
+    background-image: url("../Icons/error.png") !important;
 }
