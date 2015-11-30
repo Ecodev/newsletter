@@ -51,18 +51,12 @@ class Api
     protected $configurationManager;
 
     /**
-     * @var string
-     */
-    protected $cacheStorageKey;
-
-    /**
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
      */
     public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
         $this->frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $this->cacheStorageKey = 'Ecodev_Newsletter_ExtDirect_API_' . $this->frameworkConfiguration['pluginName'];
     }
 
     /**
@@ -76,31 +70,6 @@ class Api
     }
 
     /**
-     * Fetches the API from cache_hash or ceates an API
-     *
-     * @param string $routeUrl
-     * @param string $namespace
-     * @param bool $readFromCache Should the cache be used when reading the data.
-     * @param bool $writeToCache Should the created api be stored in the cache.
-     * @return array
-     */
-    public function getApi($routeUrl = '', $namespace = 'Ext.ux.TYPO3.app', $readFromCache = true, $writeToCache = true)
-    {
-        $cacheHash = md5($this->cacheStorageKey . serialize($this->frameworkConfiguration['controllerConfiguration']));
-        $cachedApi = ($readFromCache) ? \TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash) : false;
-        if ($cachedApi) {
-            $api = unserialize(\TYPO3\CMS\Frontend\Page\PageRepository::getHash($cacheHash));
-        } else {
-            $api = $this->createApi($routeUrl, $namespace);
-            if ($writeToCache) {
-                \TYPO3\CMS\Frontend\Page\PageRepository::storeHash($cacheHash, serialize($api), $this->cacheStorageKey);
-            }
-        }
-
-        return $api;
-    }
-
-    /**
      * Creates the remote api based on the module/plugin configuration using the extbase
      * reflection features.
      *
@@ -108,7 +77,7 @@ class Api
      * @param string $namespace
      * @return array
      */
-    protected function createApi($routeUrl, $namespace)
+    public function createApi($routeUrl, $namespace)
     {
         $api = array();
         $api['url'] = $routeUrl;

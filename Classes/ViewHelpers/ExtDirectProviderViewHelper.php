@@ -61,15 +61,14 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      * @param string $name The name for the javascript variable.
      * @param string $namespace The namespace the variable is placed.
      * @param string $routeUrl You can specify a URL that acts as router.
-     * @param bool $cache
      */
-    public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.TYPO3.app', $routeUrl = null, $cache = true
-    ) {
+    public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.Ecodev.Newsletter.Remote', $routeUrl = null)
+    {
         if ($routeUrl === null) {
             $routeUrl = $this->controllerContext->getUriBuilder()->reset()->build() . '&Ecodev\\Newsletter\\ExtDirectRequest=1';
         }
 
-        $api = $this->apiService->getApi($routeUrl, $namespace, $cache);
+        $api = $this->apiService->createApi($routeUrl, $namespace);
 
         // prepare output variable
         $jsCode = '';
