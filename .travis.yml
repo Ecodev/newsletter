@@ -1,4 +1,5 @@
 language: php
+sudo: false
 
 php:
   - 5.5
@@ -33,7 +34,6 @@ cache:
 before_script:
   - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.0' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
   - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.0' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
-  - sudo apt-get install lynx
   - npm install -g gulp
   - npm install
   - composer install
