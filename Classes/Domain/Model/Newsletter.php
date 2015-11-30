@@ -966,5 +966,4 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $stats;
     }
-
 }

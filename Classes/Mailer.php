@@ -418,5 +418,4 @@ class Mailer
 
         $message->send();
     }
-
 }
