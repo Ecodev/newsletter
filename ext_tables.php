@@ -4,6 +4,14 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+// From TYPO3 7.4.0 onward we must use EXT prefix
+if (version_compare(TYPO3_version, '7.4.0', '>=')) {
+    $iconfilePrefix = 'EXT:' . $_EXTKEY . '/';
+} else {
+    // But for TYPO3 6.2 family, we still have to use old style
+    $iconfilePrefix = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY);
+}
+
 // ========== Register BE Modules
 if (TYPO3_MODE == 'BE') {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
@@ -38,7 +46,7 @@ $TCA['tx_newsletter_domain_model_newsletter'] = array(
             'disabled' => 'hidden',
         ),
         'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Newsletter.php',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
+        'iconfile' => $iconfilePrefix . 'Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
     ),
 );
 
@@ -55,7 +63,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = array(
             'disabled' => 'hidden',
         ),
         'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/BounceAccount.php',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_bounceaccount.gif',
+        'iconfile' => $iconfilePrefix . 'Resources/Public/Icons/tx_newsletter_domain_model_bounceaccount.gif',
     ),
 );
 
@@ -73,7 +81,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
             'disabled' => 'hidden',
         ),
         'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/RecipientList.php',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif',
+        'iconfile' => $iconfilePrefix . 'Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif',
         'type' => 'type', // this tells extbase to respect the "type" column for Single Table Inheritance
     ),
 );
@@ -91,7 +99,7 @@ $TCA['tx_newsletter_domain_model_email'] = array(
             'disabled' => 'hidden',
         ),
         'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Email.php',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_email.gif',
+        'iconfile' => $iconfilePrefix . 'Resources/Public/Icons/tx_newsletter_domain_model_email.gif',
     ),
 );
 
@@ -102,6 +110,6 @@ $TCA['tx_newsletter_domain_model_link'] = array(
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link',
         'label' => 'url',
         'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Link.php',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_newsletter_domain_model_link.gif',
+        'iconfile' => $iconfilePrefix . 'Resources/Public/Icons/tx_newsletter_domain_model_link.gif',
     ),
 );
