@@ -73,18 +73,14 @@ abstract class Tools
     }
 
     /**
-     * Log a message in database table sys_log
+     * Returns a logger for given class
      *
-     * @global \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $BE_USER
-     * @param string $message
-     * @param int $logLevel 0 = message, 1 = error
+     * @param string $class
+     * @return \TYPO3\CMS\Core\Log\Logger
      */
-    public static function log($message, $logLevel = 0)
+    public static function getLogger($class)
     {
-        global $BE_USER;
-        if ($BE_USER instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication) {
-            $BE_USER->simplelog($message, 'newsletter', $logLevel);
-        }
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger($class);
     }
 
     /**
@@ -166,7 +162,7 @@ abstract class Tools
                 ++$emailSpooledCount;
             }
         }
-        self::log("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
+        self::getLogger(__CLASS__)->info("Queued $emailSpooledCount emails to be sent for newsletter " . $newsletter->getUid());
 
         // Schedule repeated newsletter if any
         $newsletter->scheduleNextNewsletter();
@@ -250,8 +246,8 @@ abstract class Tools
             ++$emailSentCount;
         }
 
-        // Log numbers to syslog
-        self::log("Sent $emailSentCount emails");
+        // Log numbers
+        self::getLogger(__CLASS__)->info("Sent $emailSentCount emails");
     }
 
     /**

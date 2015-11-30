@@ -212,7 +212,7 @@ class BounceHandler
 
         // If couldn't find the original email we cannot do anything
         if (!$this->email) {
-            Tools::log('Bounced email found but cannot find corresponding record in database. Skipped.', 1);
+            Tools::getLogger(__CLASS__)->warning('Bounced email found but cannot find corresponding record in database. Skipped.');
 
             return;
         }
@@ -227,6 +227,6 @@ class BounceHandler
             $emailRepository->updateNow($this->email);
         }
 
-        Tools::log('Bounced email found with bounce level ' . $this->bounceLevel);
+        Tools::getLogger(__CLASS__)->info('Bounced email found with bounce level ' . $this->bounceLevel);
     }
 }

@@ -105,7 +105,7 @@ class Api
                     );
                 } catch (ReflectionException $re) {
                     if ($unstrippedActionName !== 'extObjAction') {
-                        \TYPO3\CMS\Core\Utility\GeneralUtility::sysLog('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.', 'Newsletter', 1);
+                        \Ecodev\Newsletter\Tools::getLogger(__CLASS__)->critical('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.');
                     }
                 }
             }
