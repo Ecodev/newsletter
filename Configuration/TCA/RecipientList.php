@@ -173,7 +173,7 @@ $TCA['tx_newsletter_domain_model_recipientlist'] = array(
                     array('LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist.type_html', 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\Html'),
                 ),
                 'maxitems' => 1,
-                'default' => 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers',
+                'default' => 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\Sql',
             ),
         ),
         'html_url' => array(
