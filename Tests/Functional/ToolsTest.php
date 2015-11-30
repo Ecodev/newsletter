@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Functional;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -29,7 +31,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_newsletter', 'begin_time != 0 AND end_time != 0');
         $this->assertSame(0, $count);
 
-        \Ecodev\Newsletter\Tools::createAllSpool();
+        Tools::createAllSpool();
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_newsletter', 'begin_time != 0 AND end_time != 0');
         $this->assertSame(1, $count, 'newsletter should be marked as spooled');
@@ -55,7 +57,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
         $newsletter = $newsletterRepository->findByUid(20);
         $newsletter->setValidator($mockValidator);
-        \Ecodev\Newsletter\Tools::runSpool($newsletter);
+        Tools::runSpool($newsletter);
 
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time != 0 AND end_time != 0 AND recipient_data != ""');
         $this->assertSame(2, $count, 'should have sent two emails');
