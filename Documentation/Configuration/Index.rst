@@ -74,6 +74,9 @@ For CSV, when asked for ``CSV Fields``, you should enter the column names,
 eg: ``email,firstname,lastname``. Then file/list/url should only contains
 the values without any column headers, eg: ``me@example.com,John,Connor``.
 
+You can define a ``storagePid`` in the Constants if you want different Recipient Lists for different Users.
+Otherwise every User can use every Recipient List.
+
 .. _configuration-bounce_accounts
 
 Bounce Accounts
@@ -107,6 +110,9 @@ support encrypted TLS/SSL connections. Encrypted connections are required for
 connecting to popular email providers such as Google Gmail. Such configurations 
 are beyond the scope of this manual. For more information on writing fetchmail 
 configurations please consult the `fetchmail (1)`_  man pages or the internet.
+
+You can define a ``storagePid`` in the Constants if you want different Bounce Accounts for different Users.
+Otherwise every User can use every Bounce Accounts.
 
 .. _fetchmail: http://www.fetchmail.info/
 .. _fetchmail (1): http://www.fetchmail.info/fetchmail-man.html

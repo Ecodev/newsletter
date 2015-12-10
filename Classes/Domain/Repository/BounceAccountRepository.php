@@ -32,6 +32,21 @@ namespace Ecodev\Newsletter\Domain\Repository;
  */
 class BounceAccountRepository extends AbstractRepository
 {
+    public function createQuery()
+    {
+        $query = parent::createQuery();
+
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+        $storagePid = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'newsletter', 'storagePid');
+
+        if ($storagePid['storagePid']) {
+            $query->getQuerySettings()->setRespectStoragePage(true);
+        }
+
+        return $query;
+    }
+
     /**
      * Returns the first BounceAccount or null if none at all
      * @return type
