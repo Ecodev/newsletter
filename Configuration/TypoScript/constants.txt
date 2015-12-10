@@ -1,10 +1,14 @@
 module.tx_newsletter {
 	view {
-			# cat=plugin.tx_newsletter/file; type=string; label=Path to template root (BE)
+			# cat=module.tx_newsletter/file; type=string; label=Path to template root (BE)
 		templateRootPath = EXT:newsletter/Resources/Private/Templates/
-			# cat=plugin.tx_newsletter/file; type=string; label=Path to template partials (BE)
+			# cat=module.tx_newsletter/file; type=string; label=Path to template partials (BE)
 		partialRootPath = EXT:newsletter/Resources/Private/Partials/
-			# cat=plugin.tx_newsletter/file; type=string; label=Path to template layouts (BE)
+			# cat=module.tx_newsletter/file; type=string; label=Path to template layouts (BE)
 		layoutRootPath = EXT:newsletter/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=module.tx_newsletter//a; type=string; label=Default storage PID
+		storagePid =
 	}
 }
