@@ -311,7 +311,7 @@ Constants
       1
 
  - :Constants:
-      config.attach_images
+      config.mails_per_round
    :Description:
       Number of mails to send per iteration.
       
