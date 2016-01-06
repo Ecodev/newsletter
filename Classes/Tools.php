@@ -330,7 +330,7 @@ abstract class Tools
      */
     public static function encrypt($string)
     {
-        $iv = mcrypt_create_iv(self::getIVSize());
+        $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
 
         return base64_encode($iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv));
     }
