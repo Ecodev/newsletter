@@ -67,7 +67,7 @@ class Html extends AbstractArray
     {
         $this->data = array();
 
-        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($this->getHtmlUrl());
+        $content = \Ecodev\Newsletter\Tools::getUrl($this->getHtmlUrl());
 
         switch ($this->getHtmlFetchType()) {
             case 'mailto':

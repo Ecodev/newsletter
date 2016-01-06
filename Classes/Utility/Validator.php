@@ -68,7 +68,7 @@ class Validator
      */
     protected function getURL($url)
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
+        return \Ecodev\Newsletter\Tools::getUrl($url);
     }
 
     /**

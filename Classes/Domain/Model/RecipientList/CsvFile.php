@@ -112,7 +112,7 @@ class CsvFile extends AbstractArray
     {
         $csvdata = null;
         if ($filename) {
-            $csvdata = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($filename);
+            $csvdata = \Ecodev\Newsletter\Tools::getURL($filename);
         }
 
         $this->loadCsvFromData($csvdata);

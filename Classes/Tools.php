@@ -376,4 +376,31 @@ abstract class Tools
 
         return $secureKey;
     }
+
+    /**
+     * Return the full user agent string to be used in HTTP headers
+     * @return string
+     */
+    public static function getUserAgent()
+    {
+        $version = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getExtensionVersion('newsletter');
+        $userAgent = TYPO3_user_agent . ' Newsletter/' . $version . ' (https://github.com/Ecodev/newsletter)';
+
+        return $userAgent;
+    }
+
+    /**
+     * Fetch and returns the content at specified URL
+     * @param string $url
+     * @return string
+     */
+    public static function getUrl($url)
+    {
+        // Specify User-Agent header if we fetch an URL, but not if it's a file on disk
+        if (Utility\Uri::isAbsolute($url)) {
+            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, array(self::getUserAgent()));
+        } else {
+            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
+        }
+    }
 }

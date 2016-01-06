@@ -17,4 +17,11 @@ class ToolsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $decrypted = Tools::decrypt($encrypted);
         $this->assertSame('my value', $decrypted, 'must be original value');
     }
+
+    public function testUserAgent()
+    {
+        define('TYPO3_user_agent', 'User-Agent: TYPO3/1.2.3');
+        $userAgent = Tools::getUserAgent();
+        $this->assertSame(1, preg_match('~^User-Agent: TYPO3/1\.2\.3 Newsletter/\d+\.\d+\.\d+ \(https://github.com/Ecodev/newsletter\)$~', $userAgent));
+    }
 }
