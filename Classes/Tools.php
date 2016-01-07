@@ -383,7 +383,12 @@ abstract class Tools
      */
     public static function getUserAgent()
     {
-        $version = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getExtensionVersion('newsletter');
+        // Fetch version manually to keep compatibility with TYPO3 6.2 to TYPO3 7.4
+        $_EXTKEY = 'newsletter';
+        $EM_CONF = array();
+        require \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY, '/ext_emconf.php');
+        $version = $EM_CONF[$_EXTKEY]['version'];
+
         $userAgent = TYPO3_user_agent . ' Newsletter/' . $version . ' (https://github.com/Ecodev/newsletter)';
 
         return $userAgent;
