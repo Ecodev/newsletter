@@ -97,7 +97,7 @@ class Validator
         $content = $this->getURL($url);
         $errors = array();
         $warnings = array();
-        $infos = array(sprintf($this->lang->getLL('validation_content_url'), $url));
+        $infos = array(sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>'));
 
         // Content should be more that just a few characters. Apache error propably occured
         if (strlen($content) < 200) {
