@@ -64,7 +64,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $configuration = array(
             'pageId' => $this->pageId,
             'pageType' => $pageType,
-            'emailShowUrl' => UriBuilder::buildFrontendUri('show', array(), 'Email'),
+            'emailShowUrl' => UriBuilder::buildFrontendUri($this->pageId, 'Email', 'show'),
         );
 
         $this->view->assign('configuration', $configuration);

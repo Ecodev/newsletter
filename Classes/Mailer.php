@@ -223,9 +223,7 @@ class Mailer
      */
     private function injectOpenSpy(Email $email)
     {
-        $url = UriBuilder::buildFrontendUri('opened', array(
-                    'c' => $email->getAuthCode(),
-                        ), 'Email');
+        $url = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'opened', array('c' => $email->getAuthCode()));
 
         $this->html = str_ireplace('</body>', '<div><img src="' . $url . '" width="0" height="0" /></div></body>', $this->html);
     }
@@ -302,7 +300,7 @@ class Mailer
         if ($isPlainText) {
             $arguments['p'] = 1;
         }
-        $newUrl = UriBuilder::buildFrontendUri('clicked', $arguments, 'Link');
+        $newUrl = UriBuilder::buildFrontendUri($email->getPid(), 'Link', 'clicked', $arguments);
 
         return $newUrl;
     }

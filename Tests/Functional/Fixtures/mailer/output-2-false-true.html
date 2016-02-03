@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Newsletter Title</title>
+    </head>
+    <body>
+        <!-- HTML comment will be ignored in plain text -->
+
+        http://www.example.com this line should never be modified
+        <a href="http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bn%5D=12345&tx_newsletter_p%5Bl%5D=83d3cea3f4e089b7f7131719049a6efa&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link">this link should be injected</a>
+        <a href="http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bn%5D=12345&tx_newsletter_p%5Bl%5D=37ba48a2031ad61f5b9b32759c650179&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link">this custom link should be injected</a>
+        <a href="http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bn%5D=12345&tx_newsletter_p%5Bl%5D=1d6061672598d4a25c12d1e12c622bc2&tx_newsletter_p%5Baction%5D=clicked&tx_newsletter_p%5Bcontroller%5D=Link">this link should be injected, and marker substituted</a>
+        <a href="mailto:john@example.com">mailto link should still work</a>
+        <a href="&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">HTML entities encoded mailto link should still work</a>
+
+        ###unknown_field_will_be_kept###
+        http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email
+        http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email
+        recipient@example.com
+        my custom value
+
+        http://unknown_field_will_be_kept
+        http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email
+        http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email
+        recipient@example.com
+        my custom value
+
+        https://unknown_field_will_be_kept
+        https://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email
+        https://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=d41d8cd98f00b204e9800998ecf8427e&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email
+        recipient@example.com
+        my custom value
+
+        boolean_false=
+        boolean_true=true-ish
+        integer_false=
+        integer_true=true-ish
+        string_false=
+        string_true=true-ish
+
+        boolean_false=false-ish
+        boolean_true=true-ish
+        integer_false=false-ish
+        integer_true=true-ish
+        string_false=false-ish
+        string_true=true-ish
+
+        <img src="###_#_SWIFT_EMBEDDED_MARKER_0_#_###" alt="image"/>
+    </body>
+</html>

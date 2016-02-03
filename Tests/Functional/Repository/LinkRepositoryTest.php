@@ -76,7 +76,7 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
     {
         $authCodeForLink = md5($this->authCode . 3001);
         $url = $this->linkRepository->registerClick(30, $authCodeForLink, false);
-        $this->assertSame('http://example.com/index.php?id=1&type=1342671779&tx_newsletter_p%5Bc%5D=87c4e9b09085befbb7f20faa7482213a&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email', $url, 'the URL returned must have markers substituted');
+        $this->assertSame('http://example.com/index.php?id=3&type=1342671779&tx_newsletter_p%5Bc%5D=87c4e9b09085befbb7f20faa7482213a&tx_newsletter_p%5Baction%5D=show&tx_newsletter_p%5Bcontroller%5D=Email', $url, 'the URL returned must have markers substituted');
 
         $link = $this->linkRepository->findByUid(3001);
         $this->assertSame(1, $link->getOpenedCount(), 'the link opened count must have been incrementated');

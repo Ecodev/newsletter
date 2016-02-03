@@ -46,12 +46,11 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
         $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
-        $this->mockNewsletter->method('getPid')->will($this->returnValue(789));
         $this->mockNewsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
 
-        $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('s'), array(), '', false);
+        $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('getPid'), array(), '', false);
         $this->mockEmail->setRecipientData(array(
             'email' => 'recipient@example.com',
             'my_custom_field' => 'my custom value',
@@ -66,23 +65,32 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = serialize(array('attach_images' => true));
     }
 
+    private function getData($pid, $injectOpenSpy, $injectLinksSpy)
+    {
+        $folder = __DIR__ . '/Fixtures/mailer';
+        $flags = implode('-', array($pid, var_export($injectOpenSpy, true), var_export($injectLinksSpy, true)));
+
+        return array(
+            $pid,
+            $injectOpenSpy,
+            $injectLinksSpy,
+            $folder . '/input.html',
+            $folder . "/output-$flags.html",
+            $folder . "/output-$flags.txt",
+        );
+    }
+
     public function dataProviderTestMailer()
     {
         $data = array();
-        foreach (glob(__DIR__ . '/Fixtures/mailer/*', GLOB_ONLYDIR) as $folder) {
-            foreach (array(false, true) as $injectLinksSpy) {
-                foreach (array(false, true) as $injectOpenSpy) {
-                    $flags = var_export($injectOpenSpy, true) . '-' . var_export($injectLinksSpy, true);
-                    $data[] = array(
-                        $injectOpenSpy,
-                        $injectLinksSpy,
-                        $folder . '/input.html',
-                        $folder . "/output-$flags.html",
-                        $folder . "/output-$flags.txt",
-                    );
-                }
+        foreach (array(false, true) as $injectLinksSpy) {
+            foreach (array(false, true) as $injectOpenSpy) {
+                $data[] = $this->getData(2, $injectOpenSpy, $injectLinksSpy);
             }
         }
+
+        // One more test with a different PID that should output different domains
+        $data[] = $this->getData(6, true, true);
 
         return $data;
     }
@@ -90,7 +98,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     /**
      * @dataProvider dataProviderTestMailer
      */
-    public function testMailer($injectOpenSpy, $injectLinksSpy, $inputFile, $expectedHtmlFile, $expectedPlainFile)
+    public function testMailer($pid, $injectOpenSpy, $injectLinksSpy, $inputFile, $expectedHtmlFile, $expectedPlainFile)
     {
         $input = file_get_contents($inputFile);
         $expectedHtml = file_get_contents($expectedHtmlFile);
@@ -106,6 +114,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         ));
         $this->mockNewsletter->method('getInjectOpenSpy')->will($this->returnValue($injectOpenSpy));
         $this->mockNewsletter->method('getInjectLinksSpy')->will($this->returnValue($injectLinksSpy));
+        $this->mockNewsletter->method('getPid')->will($this->returnValue($pid));
+        $this->mockEmail->method('getPid')->will($this->returnValue($pid));
 
         $mailer = $this->objectManager->get('Ecodev\\Newsletter\\Mailer');
 

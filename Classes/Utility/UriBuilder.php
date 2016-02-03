@@ -32,29 +32,40 @@ namespace Ecodev\Newsletter\Utility;
  */
 abstract class UriBuilder
 {
+    const EXTENSION_NAME = 'newsletter';
+    const PLUGIN_NAME = 'p';
+
     /**
-     * UriBuilder
-     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
+     * UriBuilders indexed by PID
+     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder[]
      */
-    private static $uriBuilder = null;
+    private static $uriBuilder = array();
+
+    private static function getUriBuilder($currentPid)
+    {
+        if (!isset(self::$uriBuilder[$currentPid])) {
+            $builder = self::createUriBuilder($currentPid);
+            self::$uriBuilder[$currentPid] = $builder;
+        }
+
+        return self::$uriBuilder[$currentPid];
+    }
 
     /**
      * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
-     * @param string $extensionName
-     * @param string $pluginName
+     * @param int $currentPid
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
-    private static function buildUriBuilder($extensionName, $pluginName)
+    private static function createUriBuilder($currentPid)
     {
-
         // If we are in Backend we need to simulate minimal TSFE
         if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
             if (!is_object($GLOBALS['TT'])) {
                 $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
                 $GLOBALS['TT']->start();
             }
-            $pid = 0;
-            $TSFE = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $pid, '0', 1);
+
+            $TSFE = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $currentPid, '0', 1);
 
             $GLOBALS['TSFE'] = $TSFE;
             $GLOBALS['TSFE']->initFEuser();
@@ -70,7 +81,7 @@ abstract class UriBuilder
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
             $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
-            $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
+            $extbaseBootstrap->initialize(array('extensionName' => self::EXTENSION_NAME, 'pluginName' => self::PLUGIN_NAME));
         }
 
         return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
@@ -78,38 +89,33 @@ abstract class UriBuilder
 
     /**
      * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
-     * @param string $actionName
-     * @param array $controllerArguments
+     * @param int $currentPid
      * @param string $controllerName
-     * @param string $extensionName
-     * @param string $pluginName
-     * @param array $otherArguments
+     * @param string $actionName
+     * @param array $arguments
      * @return string absolute URI
      */
-    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p', array $otherArguments = null)
+    public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = array())
     {
-        if (!self::$uriBuilder) {
-            self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
-        }
-        $controllerArguments['action'] = $actionName;
-        $controllerArguments['controller'] = $controllerName;
-
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
-        $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
+        $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
 
-        if (!isset($otherArguments) || is_null($otherArguments)) {
-            $otherArguments = array();
-        }
+        // Prepare arguments
+        $arguments['action'] = $actionName;
+        $arguments['controller'] = $controllerName;
+        $namespacedArguments = array($pluginNamespace => $arguments);
 
-        $arguments = $otherArguments;
-        $arguments[$pluginNamespace] = $controllerArguments;
-        self::$uriBuilder->reset()
-            ->setUseCacheHash(false)
-            ->setCreateAbsoluteUri(true)
-            ->setArguments($arguments)
-            ->setTargetPageType(1342671779);
+        // Configure Uri
+        $uriBuilder = self::getUriBuilder($currentPid);
+        $uriBuilder->reset()
+                ->setUseCacheHash(false)
+                ->setCreateAbsoluteUri(true)
+                ->setArguments($namespacedArguments)
+                ->setTargetPageType(1342671779);
 
-        return self::$uriBuilder->buildFrontendUri();
+        $uri = $uriBuilder->buildFrontendUri();
+
+        return $uri;
     }
 }
