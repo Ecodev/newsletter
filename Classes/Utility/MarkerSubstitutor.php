@@ -3,7 +3,6 @@
 namespace Ecodev\Newsletter\Utility;
 
 use Ecodev\Newsletter\Domain\Model\Email;
-use Ecodev\Newsletter\Tools;
 
 /* * *************************************************************
  *  Copyright notice
@@ -120,8 +119,8 @@ class MarkerSubstitutor
 
         // Add predefined markers
         $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = Tools::buildFrontendUri('show', array('c' => $authCode), 'Email');
-        $markers['newsletter_unsubscribe_url'] = Tools::buildFrontendUri('unsubscribe', array('c' => $authCode), 'Email');
+        $markers['newsletter_view_url'] = UriBuilder::buildFrontendUri('show', array('c' => $authCode), 'Email');
+        $markers['newsletter_unsubscribe_url'] = UriBuilder::buildFrontendUri('unsubscribe', array('c' => $authCode), 'Email');
 
         return $markers;
     }

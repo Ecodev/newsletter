@@ -38,12 +38,6 @@ abstract class Tools
     protected static $configuration = null;
 
     /**
-     * UriBuilder
-     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
-     */
-    protected static $uriBuilder = null;
-
-    /**
      * Get a newsletter-conf-template parameter
      *
      * @param string $key Parameter key
@@ -248,79 +242,6 @@ abstract class Tools
 
         // Log numbers
         self::getLogger(__CLASS__)->info("Sent $emailSentCount emails");
-    }
-
-    /**
-     * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
-     * @param string $extensionName
-     * @param string $pluginName
-     * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
-     */
-    protected static function buildUriBuilder($extensionName, $pluginName)
-    {
-
-        // If we are in Backend we need to simulate minimal TSFE
-        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
-            if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
-                $GLOBALS['TT']->start();
-            }
-            $TSFEclassName = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController');
-            $GLOBALS['TSFE'] = new $TSFEclassName($GLOBALS['TYPO3_CONF_VARS'], 0, '0', 1, '', '', '', '');
-            $GLOBALS['TSFE']->initFEuser();
-            $GLOBALS['TSFE']->fetch_the_id();
-            $GLOBALS['TSFE']->getPageAndRootline();
-            $GLOBALS['TSFE']->initTemplate();
-            $GLOBALS['TSFE']->tmpl->getFileName_backPath = PATH_site;
-            $GLOBALS['TSFE']->forceTemplateParsing = 1;
-            $GLOBALS['TSFE']->getConfigArray();
-        }
-
-        // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
-            $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
-            $extbaseBootstrap->initialize(array('extensionName' => $extensionName, 'pluginName' => $pluginName));
-        }
-
-        return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
-    }
-
-    /**
-     * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
-     * @param string $actionName
-     * @param array $controllerArguments
-     * @param string $controllerName
-     * @param string $extensionName
-     * @param string $pluginName
-     * @param array $otherArguments
-     * @return string absolute URI
-     */
-    public static function buildFrontendUri($actionName, array $controllerArguments, $controllerName, $extensionName = 'newsletter', $pluginName = 'p', array $otherArguments = null)
-    {
-        if (!self::$uriBuilder) {
-            self::$uriBuilder = self::buildUriBuilder($extensionName, $pluginName);
-        }
-        $controllerArguments['action'] = $actionName;
-        $controllerArguments['controller'] = $controllerName;
-
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
-        $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
-
-        if (!isset($otherArguments) || is_null($otherArguments)) {
-            $otherArguments = array();
-        }
-
-        $arguments = $otherArguments;
-        $arguments[$pluginNamespace] = $controllerArguments;
-        self::$uriBuilder->reset()
-            ->setUseCacheHash(false)
-            ->setCreateAbsoluteUri(true)
-            ->setArguments($arguments)
-            ->setTargetPageType(1342671779);
-
-        return self::$uriBuilder->buildFrontendUri();
     }
 
     /**

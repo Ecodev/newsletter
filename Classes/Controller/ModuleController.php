@@ -2,7 +2,7 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Utility\UriBuilder;
 
 /* * *************************************************************
  *  Copyright notice
@@ -64,7 +64,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $configuration = array(
             'pageId' => $this->pageId,
             'pageType' => $pageType,
-            'emailShowUrl' => Tools::buildFrontendUri('show', array(), 'Email'),
+            'emailShowUrl' => UriBuilder::buildFrontendUri('show', array(), 'Email'),
         );
 
         $this->view->assign('configuration', $configuration);

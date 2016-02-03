@@ -2,7 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
-use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Utility\UriBuilder;
 
 /* * *************************************************************
  *  Copyright notice
@@ -249,8 +249,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
             $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
-            $uriXml = Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
-            $uriCsv = Tools::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
+            $uriXml = UriBuilder::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'), 'RecipientList');
+            $uriCsv = UriBuilder::buildFrontendUri('export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'), 'RecipientList');
 
             $out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
 			(<a href="' . $uriXml . '">export XML</a>, '

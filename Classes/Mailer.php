@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter;
 
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Utility\UriBuilder;
 use Exception;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
@@ -222,7 +223,7 @@ class Mailer
      */
     private function injectOpenSpy(Email $email)
     {
-        $url = Tools::buildFrontendUri('opened', array(
+        $url = UriBuilder::buildFrontendUri('opened', array(
                     'c' => $email->getAuthCode(),
                         ), 'Email');
 
@@ -301,7 +302,7 @@ class Mailer
         if ($isPlainText) {
             $arguments['p'] = 1;
         }
-        $newUrl = Tools::buildFrontendUri('clicked', $arguments, 'Link');
+        $newUrl = UriBuilder::buildFrontendUri('clicked', $arguments, 'Link');
 
         return $newUrl;
     }
