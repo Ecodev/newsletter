@@ -15,7 +15,6 @@ env:
   - TYPO3_BRANCH=7.4.0
   - TYPO3_BRANCH=7.5.0
   - TYPO3_BRANCH=7.6.9
-  - TYPO3_BRANCH=8.1.2
   - TYPO3_BRANCH=master
 
 matrix:
@@ -24,6 +23,8 @@ matrix:
       env: TYPO3_BRANCH=TYPO3_6-2
     - php: 5.4
       env: TYPO3_BRANCH=TYPO3_6-2
+    - php: 7.0
+      env: TYPO3_BRANCH=8.1.2
   allow_failures:
     - env: TYPO3_BRANCH=master
   fast_finish: true
