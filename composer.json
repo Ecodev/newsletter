@@ -9,7 +9,7 @@
         "ext-mcrypt": "*"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "~1.4"
+        "friendsofphp/php-cs-fixer": "^1.11"
     },
 	"autoload": {
 		"psr-4": {
