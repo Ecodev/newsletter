@@ -7,7 +7,6 @@ php:
   - 7.0
 
 env:
-  - TYPO3_BRANCH=TYPO3_6-2
   - TYPO3_BRANCH=7.0.2
   - TYPO3_BRANCH=7.1.0
   - TYPO3_BRANCH=7.2.0
@@ -15,16 +14,23 @@ env:
   - TYPO3_BRANCH=7.4.0
   - TYPO3_BRANCH=7.5.0
   - TYPO3_BRANCH=7.6.9
-  - TYPO3_BRANCH=master
 
 matrix:
   include:
     - php: 5.3
-      env: TYPO3_BRANCH=TYPO3_6-2
+      env: TYPO3_BRANCH=6.2.25
     - php: 5.4
-      env: TYPO3_BRANCH=TYPO3_6-2
+      env: TYPO3_BRANCH=6.2.25
+    - php: 5.5
+      env: TYPO3_BRANCH=6.2.25
+    - php: 5.6
+      env: TYPO3_BRANCH=6.2.25
+    - php: 7.0
+      env: TYPO3_BRANCH=8.0.0
     - php: 7.0
       env: TYPO3_BRANCH=8.1.2
+    - php: 7.0
+      env: TYPO3_BRANCH=master
   allow_failures:
     - env: TYPO3_BRANCH=master
   fast_finish: true
@@ -35,7 +41,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - composer self-update --stable
+  - composer self-update 1.0.3
   - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
   - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - npm install -g gulp
