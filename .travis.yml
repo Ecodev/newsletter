@@ -4,6 +4,7 @@ sudo: false
 php:
   - 5.5
   - 5.6
+  - 7.0
 
 env:
   - TYPO3_BRANCH=TYPO3_6-2
@@ -13,7 +14,8 @@ env:
   - TYPO3_BRANCH=7.3.1
   - TYPO3_BRANCH=7.4.0
   - TYPO3_BRANCH=7.5.0
-  - TYPO3_BRANCH=7.6.2
+  - TYPO3_BRANCH=7.6.9
+  - TYPO3_BRANCH=8.1.2
   - TYPO3_BRANCH=master
 
 matrix:
@@ -32,8 +34,8 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.2' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
-  - if [[ $TRAVIS_PHP_VERSION = '5.6' && $TYPO3_BRANCH = '7.6.2' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - npm install -g gulp
   - npm install
   - composer install
