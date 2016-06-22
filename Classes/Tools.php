@@ -48,8 +48,8 @@ abstract class Tools
         // Look for a config in the module TS first.
         static $configTS;
         if (!is_array($configTS) && isset($GLOBALS['TYPO3_DB'])) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $beConfManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+            $beConfManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager::class);
             $configTS = $beConfManager->getTypoScriptSetup();
             $configTS = $configTS['module.']['tx_newsletter.']['config.'];
         }
@@ -74,7 +74,7 @@ abstract class Tools
      */
     public static function getLogger($class)
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger($class);
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger($class);
     }
 
     /**
@@ -107,8 +107,8 @@ abstract class Tools
      */
     public static function createAllSpool()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
         foreach ($newsletters as $newsletter) {
@@ -131,8 +131,8 @@ abstract class Tools
             return;
         }
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
 
         // Lock the newsletter by setting its begin_time
         $begintime = new DateTime();
@@ -197,9 +197,9 @@ abstract class Tools
         $emailSentCount = 0;
         $mailers = [];
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
-        $emailRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $emailRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
 
         $allUids = $newsletterRepository->findAllNewsletterAndEmailUidToSend($limitNewsletter);
 

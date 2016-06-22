@@ -40,7 +40,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $this->assertSame(2, $count, 'two emails must have been created but not sent yet');
 
         // Prepare a mock to always validate content
-        $mockValidator = $this->getMock('Ecodev\\Newsletter\\Utility\\Validator', ['validate'], [], '', false);
+        $mockValidator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['validate'], [], '', false);
         $mockValidator->method('validate')->will($this->returnValue(
                         [
                             'content' => 'some very interesting content <a href="http://example.com/fake-content">link</a>',
@@ -54,7 +54,7 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         global $TYPO3_CONF_VARS;
         $TYPO3_CONF_VARS['MAIL']['transport'] = 'Swift_NullTransport';
 
-        $newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+        $newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
         $newsletter = $newsletterRepository->findByUid(20);
         $newsletter->setValidator($mockValidator);
         Tools::runSpool($newsletter);

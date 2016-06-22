@@ -49,7 +49,7 @@ class Validator
         // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
         global $LANG;
         if (is_null($LANG)) {
-            $LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Lang\\LanguageService'); // create language-object
+            $LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Lang\LanguageService::class); // create language-object
             $LLkey = 'default';
             if ($GLOBALS['TSFE']->config['config']['language']) {
                 $LLkey = $GLOBALS['TSFE']->config['config']['language'];

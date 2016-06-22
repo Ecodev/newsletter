@@ -140,7 +140,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      */
     public function canHandleRequest()
     {
-        return isset($_GET['Ecodev\\Newsletter\\ExtDirectRequest']);
+        return isset($_GET[\Ecodev\Newsletter\ExtDirectRequest::class]);
     }
 
     /**
@@ -164,7 +164,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {
-        $response = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\Web\\Response');
+        $response = $this->objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Response::class);
         $jsonResponse = json_encode(count($results) === 1 ? $results[0] : $results);
         if ($extDirectRequest->isFormPost() && $extDirectRequest->isFileUpload()) {
             $response->setHeader('Content-Type', 'text/html');

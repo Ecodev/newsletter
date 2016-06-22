@@ -43,21 +43,21 @@ class NewsletterController extends ExtDirectActionController
     /**
      * newsletterRepository
      *
-     * @var Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository
+     * @var Ecodev\Newsletter\Domain\Repository\NewsletterRepository
      */
     protected $newsletterRepository;
 
     /**
      * bounceAccountRepository
      *
-     * @var Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository
+     * @var Ecodev\Newsletter\Domain\Repository\BounceAccountRepository
      */
     protected $bounceAccountRepository;
 
     /**
      * injectNewsletterRepository
      *
-     * @param Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository $newsletterRepository
+     * @param Ecodev\Newsletter\Domain\Repository\NewsletterRepository $newsletterRepository
      */
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -67,7 +67,7 @@ class NewsletterController extends ExtDirectActionController
     /**
      * injectBounceAccounRepository
      *
-     * @param Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository $bounceAccountRepository
+     * @param Ecodev\Newsletter\Domain\Repository\BounceAccountRepository $bounceAccountRepository
      */
     public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
     {
@@ -127,7 +127,7 @@ class NewsletterController extends ExtDirectActionController
     {
         $newsletter = $this->newsletterRepository->getLatest($this->pid);
         if (!$newsletter) {
-            $newsletter = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
+            $newsletter = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Newsletter::class);
             $newsletter->setPid($this->pid);
             $newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
             // Set the first Bounce Account found if any
@@ -155,7 +155,7 @@ class NewsletterController extends ExtDirectActionController
     {
         $propertyMappingConfiguration = $this->arguments['newNewsletter']->getPropertyMappingConfiguration();
         $propertyMappingConfiguration->allowAllProperties();
-        $propertyMappingConfiguration->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, true);
+        $propertyMappingConfiguration->setTypeConverterOption(\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::class, \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, true);
     }
 
     /**

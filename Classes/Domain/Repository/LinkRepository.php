@@ -115,11 +115,11 @@ class LinkRepository extends AbstractRepository
 
             // Also register the email as opened, just in case if it was not already marked open by the open spy (eg: because end-user did not show image)
             $authCodeEmail = md5($emailUid . $email);
-            $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+            $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
             $emailRepository->registerOpen($authCodeEmail);
 
             // Forward which user clicked the link to the recipientList so the recipientList may take appropriate action
-            $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
+            $recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
             $recipientList = $recipientListRepository->findByUid($recipientListUid);
             if ($recipientList) {
                 $recipientList->registerClick($email);

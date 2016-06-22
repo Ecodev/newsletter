@@ -27,7 +27,7 @@ class RecipientListRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Ab
     public function setUp()
     {
         parent::setUp();
-        $this->recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
+        $this->recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
     }
 
     public function testFindByUidInitialized()

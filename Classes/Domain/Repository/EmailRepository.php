@@ -117,7 +117,7 @@ class EmailRepository extends AbstractRepository
             LIMIT 1");
 
             if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
-                $recipientListRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository');
+                $recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
                 $recipientList = $recipientListRepository->findByUid($recipientListUid);
                 if ($recipientList) {
                     $recipientList->registerOpen($emailAddress);

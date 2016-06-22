@@ -42,14 +42,14 @@ class EmailController extends ExtDirectActionController
     /**
      * emailRepository
      *
-     * @var Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository
+     * @var Ecodev\Newsletter\Domain\Repository\EmailRepository
      */
     protected $emailRepository;
 
     /**
      * injectEmailRepository
      *
-     * @param Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository $emailRepository
+     * @param Ecodev\Newsletter\Domain\Repository\EmailRepository $emailRepository
      */
     public function injectEmailRepository(EmailRepository $emailRepository)
     {
@@ -138,7 +138,7 @@ class EmailController extends ExtDirectActionController
         // If it's a preview, an email which was not sent yet, we will simulate it the best we can
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
-            $newsletter = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
+            $newsletter = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Newsletter::class);
             $newsletter->setPid(@$args['pid']);
             $newsletter->setUidRecipientList(@$args['uidRecipientList']);
 
@@ -150,7 +150,7 @@ class EmailController extends ExtDirectActionController
                     // Got him
                     if ($record['email'] == $args['email']) {
                         // Build a fake email
-                        $email = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Model\\Email');
+                        $email = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Email::class);
                         $email->setRecipientAddress($record['email']);
                         $email->setRecipientData($record);
                     }
@@ -300,7 +300,7 @@ class EmailController extends ExtDirectActionController
         $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', [$email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter]);
 
         // Actually sends email
-        $message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $message = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
         $message->setTo($notificationEmail)
                 ->setFrom([$newsletter->getSenderEmail() => $newsletter->getSenderName()])
                 ->setSubject($subject)

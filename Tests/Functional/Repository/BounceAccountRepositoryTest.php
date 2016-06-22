@@ -27,7 +27,7 @@ class BounceAccountRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Ab
     public function setUp()
     {
         parent::setUp();
-        $this->bounceAccountRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
+        $this->bounceAccountRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\BounceAccountRepository::class);
     }
 
     public function testFindFirst()

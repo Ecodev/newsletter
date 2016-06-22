@@ -162,7 +162,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $converter = $this->subject->getPlainConverter();
         $this->assertSame(
-                'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin', $converter
+                \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class, $converter
         );
 
         $this->assertTrue(class_exists($converter));
@@ -186,9 +186,9 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getPlainConverterInstance()
     {
         $classes = [
-            'NonExistingClassFooBar' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin',
-            'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin',
-            'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx',
+            'NonExistingClassFooBar' => \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class,
+            \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class => \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class,
+            \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx::class => \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx::class,
         ];
 
         foreach ($classes as $class => $expected) {
@@ -258,7 +258,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidBounceAccount());
 
-        $bounceAccount = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\BounceAccount', ['getUid'], [], '', false);
+        $bounceAccount = $this->getMock(\Ecodev\Newsletter\Domain\Model\BounceAccount::class, ['getUid'], [], '', false);
         $bounceAccount->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setBounceAccount($bounceAccount);
         $this->assertSame(123, $this->subject->getUidBounceAccount());
@@ -364,7 +364,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidRecipientList());
 
-        $recipientList = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers', ['getUid'], [], '', false);
+        $recipientList = $this->getMock(\Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers::class, ['getUid'], [], '', false);
         $recipientList->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setRecipientList($recipientList);
         $this->assertSame(123, $this->subject->getUidRecipientList());

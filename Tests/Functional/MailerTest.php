@@ -44,13 +44,13 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         parent::setUp();
 
-        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', ['getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'], [], '', false);
+        $this->mockNewsletter = $this->getMock(\Ecodev\Newsletter\Domain\Model\Newsletter::class, ['getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'], [], '', false);
         $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
         $this->mockNewsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
 
-        $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', ['getPid'], [], '', false);
+        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid'], [], '', false);
         $this->mockEmail->setRecipientData([
             'email' => 'recipient@example.com',
             'my_custom_field' => 'my custom value',
@@ -117,7 +117,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $this->mockNewsletter->method('getPid')->will($this->returnValue($pid));
         $this->mockEmail->method('getPid')->will($this->returnValue($pid));
 
-        $mailer = $this->objectManager->get('Ecodev\\Newsletter\\Mailer');
+        $mailer = $this->objectManager->get(\Ecodev\Newsletter\Mailer::class);
 
         $mailer->setNewsletter($this->mockNewsletter);
         $mailer->prepare($this->mockEmail);

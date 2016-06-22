@@ -38,14 +38,14 @@ class BounceAccountController extends ExtDirectActionController
     /**
      * bounceAccountRepository
      *
-     * @var Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository
+     * @var Ecodev\Newsletter\Domain\Repository\BounceAccountRepository
      */
     protected $bounceAccountRepository;
 
     /**
      * injectBounceAccounRepository
      *
-     * @param Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository $bounceAccountRepository
+     * @param Ecodev\Newsletter\Domain\Repository\BounceAccountRepository $bounceAccountRepository
      */
     public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
     {

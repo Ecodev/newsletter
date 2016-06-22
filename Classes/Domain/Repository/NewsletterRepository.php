@@ -110,7 +110,7 @@ class NewsletterRepository extends AbstractRepository
                 ]
         );
 
-        $linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
+        $linkRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\LinkRepository::class);
         $linkCount = $linkRepository->getCount($uidNewsletter);
         $this->fillStateDifferences(
                 $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, [

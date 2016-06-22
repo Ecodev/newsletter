@@ -40,14 +40,14 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         global $LANG;
 
         // Initialize a fake LANG that return the localisation key instead of real value
-        $LANG = $this->getMock('TYPO3\\CMS\\Lang\\LanguageService', ['includeLLFile', 'getLL'], [], '', false);
+        $LANG = $this->getMock(\TYPO3\CMS\Lang\LanguageService::class, ['includeLLFile', 'getLL'], [], '', false);
         $LANG->method('includeLLFile')->will($this->returnValue(null));
         $LANG->method('getLL')->will($this->returnCallback(function ($langKey) {
                     return $langKey;
                 }));
 
-        $this->validator = $this->getMock('Ecodev\\Newsletter\\Utility\\Validator', ['getURL'], [], '', false);
-        $this->newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', ['getContentUrl', 'getBaseUrl'], [], '', false);
+        $this->validator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['getURL'], [], '', false);
+        $this->newsletter = $this->getMock(\Ecodev\Newsletter\Domain\Model\Newsletter::class, ['getContentUrl', 'getBaseUrl'], [], '', false);
         $this->newsletter->method('getContentUrl')->will($this->returnValue('http://example.com/?id=123'));
         $this->newsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
     }

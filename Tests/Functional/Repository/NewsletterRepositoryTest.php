@@ -27,7 +27,7 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
     public function setUp()
     {
         parent::setUp();
-        $this->newsletterRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
+        $this->newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
     }
 
     public function testGetLatest()

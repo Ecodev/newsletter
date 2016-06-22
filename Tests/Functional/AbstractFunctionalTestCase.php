@@ -18,7 +18,7 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
     public function setUp()
     {
         parent::setUp();
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 
         $this->importDataSet(__DIR__ . '/Fixtures/fixtures.xml');
         $this->authCode = md5(302 . 'recipient2@example.com');

@@ -92,7 +92,7 @@ class CsvFileTest extends AbstractRecipientList
 
     protected function prepareDataForEnumeration()
     {
-        $this->subject = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\CsvFile', ['getPathname'], [], '', false);
+        $this->subject = $this->getMock(\Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile::class, ['getPathname'], [], '', false);
         $this->subject->expects($this->once())->method('getPathname')->will($this->returnValue(__DIR__));
         $this->subject->setCsvFilename('data.csv');
     }

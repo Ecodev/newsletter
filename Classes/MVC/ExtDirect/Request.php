@@ -77,7 +77,7 @@ class Request
      */
     public function createAndAddTransaction($action, $method, array $data, $tid)
     {
-        $transaction = $this->objectManager->get('Ecodev\\Newsletter\\MVC\\ExtDirect\\Transaction', $this, $action, $method, $data, $tid);
+        $transaction = $this->objectManager->get(\Ecodev\Newsletter\MVC\ExtDirect\Transaction::class, $this, $action, $method, $data, $tid);
         $this->transactions[] = $transaction;
     }
 

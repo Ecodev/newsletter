@@ -57,7 +57,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     public function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
     {
         if ($this->request->getFormat() === 'extdirect') {
-            $this->view = $this->objectManager->get('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
+            $this->view = $this->objectManager->get(\Ecodev\Newsletter\MVC\View\ExtDirectView::class);
             $this->view->setControllerContext($this->controllerContext);
         }
     }
@@ -110,7 +110,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         }
         /* @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
         $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $messageBody, $messageTitle, $severity, $storeInSession
+                        \TYPO3\CMS\Core\Messaging\FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
         );
         $this->controllerContext->getFlashMessageQueue()->enqueue($flashMessage);
     }

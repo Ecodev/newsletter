@@ -30,8 +30,8 @@ class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFun
     public function setUp()
     {
         parent::setUp();
-        $this->linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
-        $this->emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+        $this->linkRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\LinkRepository::class);
+        $this->emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
 
         // When testing we need to help the core by filling HTTP_HOST variable to be able to build correct URL
         $_SERVER['HTTP_HOST'] = 'example.com';

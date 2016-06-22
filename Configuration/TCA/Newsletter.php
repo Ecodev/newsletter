@@ -81,8 +81,8 @@ $TCA['tx_newsletter_domain_model_newsletter'] = [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_builtin', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin'],
-                    ['LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_lynx', 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx'],
+                    ['LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_builtin', \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class],
+                    ['LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter.plain_converter_lynx', \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx::class],
                 ],
                 'maxitems' => 1,
             ],

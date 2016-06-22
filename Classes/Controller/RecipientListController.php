@@ -38,14 +38,14 @@ class RecipientListController extends ExtDirectActionController
     /**
      * recipientListRepository
      *
-     * @var Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository
+     * @var Ecodev\Newsletter\Domain\Repository\RecipientListRepository
      */
     protected $recipientListRepository;
 
     /**
      * injectRecipientListRepository
      *
-     * @param Ecodev\\Newsletter\\Domain\\Repository\\RecipientListRepository $recipientListRepository
+     * @param Ecodev\Newsletter\Domain\Repository\RecipientListRepository $recipientListRepository
      */
     public function injectRecipientListRepository(RecipientListRepository $recipientListRepository)
     {

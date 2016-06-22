@@ -27,7 +27,7 @@ class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFu
     public function setUp()
     {
         parent::setUp();
-        $this->emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+        $this->emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
     }
 
     public function testFindByAuthcode()

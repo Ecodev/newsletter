@@ -49,7 +49,7 @@ STRING;
         $bounceHandler = new \Ecodev\Newsletter\BounceHandler($content);
         $bounceHandler->dispatch();
 
-        $emailRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\EmailRepository');
+        $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
         $email = $emailRepository->findByUid(302);
         $this->assertTrue($email->isBounced());
         $this->assertRecipientListCallbackWasCalled('bounced recipient2@example.com, 2, 2, 3, 4');

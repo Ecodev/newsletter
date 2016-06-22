@@ -71,7 +71,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
+                'eval' => \Ecodev\Newsletter\Tca\BounceAccountTca::class,
             ],
         ],
         'config' => [
@@ -80,7 +80,7 @@ $TCA['tx_newsletter_domain_model_bounceaccount'] = [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 8,
-                'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
+                'eval' => \Ecodev\Newsletter\Tca\BounceAccountTca::class,
                 'wrap' => 'off',
                 'default' => "poll ###SERVER###\nproto ###PROTOCOL### \nport ###PORT###\nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n",
             ],

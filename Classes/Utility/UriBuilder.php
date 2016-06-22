@@ -65,7 +65,7 @@ abstract class UriBuilder
                 $GLOBALS['TT']->start();
             }
 
-            $TSFE = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $currentPid, '0', 1);
+            $TSFE = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], $currentPid, '0', 1);
 
             $GLOBALS['TSFE'] = $TSFE;
             $GLOBALS['TSFE']->initFEuser();
@@ -78,13 +78,13 @@ abstract class UriBuilder
         }
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
-            $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
+            $extbaseBootstrap = $objectManager->get(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
             $extbaseBootstrap->initialize(['extensionName' => self::EXTENSION_NAME, 'pluginName' => self::PLUGIN_NAME]);
         }
 
-        return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
+        return $objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder::class);
     }
 
     /**
@@ -97,8 +97,8 @@ abstract class UriBuilder
      */
     public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $extensionService = $objectManager->get(\TYPO3\CMS\Extbase\Service\ExtensionService::class);
         $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
 
         // Prepare arguments
