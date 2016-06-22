@@ -20,16 +20,16 @@
         var directFlashMessages = new Ext.util.Observable();
         directFlashMessages.addEvents('new');
 
-        var initialize = function() {
-            Ext.Direct.on('event', fetchRemoteMessages);
-        };
-
         var fetchRemoteMessages = function(event) {
             if (event.result && event.result.flashMessages) {
                 var flashMessages = event.result.flashMessages;
                 delete event.result.flashMessages;
                 directFlashMessages.fireEvent('new', flashMessages);
             }
+        };
+
+        var initialize = function() {
+            Ext.Direct.on('event', fetchRemoteMessages);
         };
 
         return Ext.apply(directFlashMessages, {

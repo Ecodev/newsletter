@@ -2,10 +2,11 @@
   "name": "Newsletter",
   "private": true,
   "dependencies": {
-    "gulp": "^3.8.11",
-    "gulp-composer": "^0.1.0",
-    "gulp-jscs": "^1.4.0",
-    "gulp-jshint": "^1.10.0",
-    "gulp-shell": "^0.4.0"
+    "gulp": "^3.9.1",
+    "gulp-composer": "^0.4.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-shell": "^0.5.2",
+    "jshint": "^2.9.2"
   }
 }

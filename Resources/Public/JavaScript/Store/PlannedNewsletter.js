@@ -11,6 +11,20 @@
 
         var plannedNewsletterStore = null;
 
+        function convertMessages(newsletter, level) {
+            var html = '';
+            Ext.each(newsletter.validatedContent[level], function(e) {
+                html = html + '<li>' + e + '</li>';
+            });
+
+            if (html === '') {
+                html = '<li class="none">' + Ext.ux.Ecodev.Newsletter.Language.none + '</li>';
+            }
+
+            html = '<ul class="' + level + '">' + html + '</ul>';
+            return html;
+        }
+
         var initialize = function() {
             if (plannedNewsletterStore === null) {
                 plannedNewsletterStore = new Ext.data.DirectStore({
@@ -48,20 +62,6 @@
                 });
             }
         };
-
-        function convertMessages(newsletter, level) {
-            var html = '';
-            Ext.each(newsletter.validatedContent[level], function(e) {
-                html = html + '<li>' + e + '</li>';
-            });
-
-            if (html === '') {
-                html = '<li class="none">' + Ext.ux.Ecodev.Newsletter.Language.none + '</li>';
-            }
-
-            html = '<ul class="' + level + '">' + html + '</ul>';
-            return html;
-        }
 
         /**
          * Public API of this singleton.

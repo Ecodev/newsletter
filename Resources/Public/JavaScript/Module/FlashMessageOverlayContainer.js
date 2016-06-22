@@ -44,68 +44,6 @@
             logLevel: 0
         };
 
-        /**
-         * Create needed stuff in DOM and register at the FlashMessageDispatcher
-         * to receive incoming Messages.
-         */
-        var initialize = function(incomingConfig) {
-            if (incomingConfig) {
-                config = Ext.applyIf(incomingConfig, config);
-            }
-
-            msgCt = Ext.DomHelper.insertFirst(document.body, {id: 'flashmessages-div'}, true);
-            msgCt.setStyle('position', 'absolute');
-            msgCt.setStyle('z-index', 9999);
-            msgCt.setWidth(config.width);
-            msgCt.setOpacity(config.opacity);
-            Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher.on('new', handleMessages);
-        };
-
-        /**
-         * React on incoming Messages.
-         */
-        var handleMessages = function(flashMessages) {
-            Ext.each(flashMessages, function(message) {
-                addMessage(message);
-            });
-        };
-
-        /***
-         * Adds a message to queue.
-         *
-         * @param {String} message
-         */
-        var addMessage = function(message) {
-            delete message.sessionMessage;
-            var type = message.severity;
-            var msg = message.message;
-            var title = message.title || '&nbsp;';
-            showMessageBox(type, title, msg);
-            message.tstamp = new Date();
-            messageStore.addSorted(new messageStore.recordType(message));
-        };
-
-        /**
-         * creates a msgbox for a incoming message and shows it for while
-         * based on the text length.
-         */
-        var showMessageBox = function(type, title, msg) {
-            if (type < config.logLevel) {
-                return;
-            }
-
-            var delay = config.minDelay;
-            delay = msg.length / 13.3;
-            if (delay < config.minDelay) {
-                delay = config.minDelay;
-            } else if (delay > config.maxDelay) {
-                delay = config.maxDelay;
-            }
-            msgCt.alignTo(document, 't-tr?');
-            var html = buildMessageBox(type, title, String.format.apply(String, Array.prototype.slice.call(arguments, 2)));
-            Ext.DomHelper.append(msgCt, {html: html}, true).slideIn('t').pause(delay).ghost('t', {remove: true});
-        };
-
         /***
          * buildMessageBox
          */
@@ -141,6 +79,68 @@
                 '</div>',
                 '</div>'
             ].join('');
+        };
+
+        /**
+         * creates a msgbox for a incoming message and shows it for while
+         * based on the text length.
+         */
+        var showMessageBox = function(type, title, msg) {
+            if (type < config.logLevel) {
+                return;
+            }
+
+            var delay = config.minDelay;
+            delay = msg.length / 13.3;
+            if (delay < config.minDelay) {
+                delay = config.minDelay;
+            } else if (delay > config.maxDelay) {
+                delay = config.maxDelay;
+            }
+            msgCt.alignTo(document, 't-tr?');
+            var html = buildMessageBox(type, title, String.format.apply(String, Array.prototype.slice.call(arguments, 2)));
+            Ext.DomHelper.append(msgCt, {html: html}, true).slideIn('t').pause(delay).ghost('t', {remove: true});
+        };
+
+        /***
+         * Adds a message to queue.
+         *
+         * @param {String} message
+         */
+        var addMessage = function(message) {
+            delete message.sessionMessage;
+            var type = message.severity;
+            var msg = message.message;
+            var title = message.title || '&nbsp;';
+            showMessageBox(type, title, msg);
+            message.tstamp = new Date();
+            messageStore.addSorted(new messageStore.recordType(message));
+        };
+
+        /**
+         * React on incoming Messages.
+         */
+        var handleMessages = function(flashMessages) {
+            Ext.each(flashMessages, function(message) {
+                addMessage(message);
+            });
+        };
+
+        /**
+         * Create needed stuff in DOM and register at the FlashMessageDispatcher
+         * to receive incoming Messages.
+         */
+        var initialize = function(incomingConfig) {
+            if (incomingConfig) {
+                config = Ext.applyIf(incomingConfig, config);
+            }
+
+            msgCt = Ext.DomHelper.insertFirst(document.body, {id: 'flashmessages-div'}, true);
+            msgCt.setStyle('position', 'absolute');
+            msgCt.setStyle('z-index', 9999);
+            msgCt.setWidth(config.width);
+            msgCt.setOpacity(config.opacity);
+            Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher.on('new', handleMessages);
         };
 
         var getMessageGrid = function() {

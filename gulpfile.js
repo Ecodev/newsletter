@@ -34,7 +34,7 @@ gulp.task('lint-php', ['composer'], shell.task([
 
 gulp.task('composer', function() {
     var composer = require('gulp-composer');
-    return composer('install --dev', {});
+    return composer('install', {});
 });
 
 gulp.task('watch', function() {
