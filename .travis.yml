@@ -4,35 +4,38 @@ sudo: false
 php:
   - 5.5
   - 5.6
-  - 7.0
 
 env:
-  - TYPO3_BRANCH=7.0.2
-  - TYPO3_BRANCH=7.1.0
-  - TYPO3_BRANCH=7.2.0
-  - TYPO3_BRANCH=7.3.1
-  - TYPO3_BRANCH=7.4.0
-  - TYPO3_BRANCH=7.5.0
-  - TYPO3_BRANCH=7.6.9
+  - TYPO3_VERSION=7.0.2
+  - TYPO3_VERSION=7.1.0
+  - TYPO3_VERSION=7.2.0
+  - TYPO3_VERSION=7.3.1
+  - TYPO3_VERSION=7.4.0
+  - TYPO3_VERSION=7.5.0
+  - TYPO3_VERSION=7.6.9
 
 matrix:
   include:
-    - php: 5.3
-      env: TYPO3_BRANCH=6.2.25
-    - php: 5.4
-      env: TYPO3_BRANCH=6.2.25
     - php: 5.5
-      env: TYPO3_BRANCH=6.2.25
+      env: TYPO3_VERSION=6.2.25
     - php: 5.6
-      env: TYPO3_BRANCH=6.2.25
+      env: TYPO3_VERSION=6.2.25
     - php: 7.0
-      env: TYPO3_BRANCH=8.0.0
+      env: TYPO3_VERSION=7.3.1
     - php: 7.0
-      env: TYPO3_BRANCH=8.1.2
+      env: TYPO3_VERSION=7.4.0
     - php: 7.0
-      env: TYPO3_BRANCH=master
+      env: TYPO3_VERSION=7.5.0
+    - php: 7.0
+      env: TYPO3_VERSION=7.6.9
+    - php: 7.0
+      env: TYPO3_VERSION=8.0.0
+    - php: 7.0
+      env: TYPO3_VERSION=8.1.2
+    - php: 7.0
+      env: TYPO3_VERSION=master
   allow_failures:
-    - env: TYPO3_BRANCH=master
+    - env: TYPO3_VERSION=master
   fast_finish: true
 
 cache:
@@ -42,13 +45,13 @@ cache:
 
 before_script:
   - composer self-update 1.0.3
-  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
-  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_BRANCH = '7.6.9' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_VERSION = '7.6.9' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.0' && $TYPO3_VERSION = '7.6.9' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - npm install -g gulp
   - npm install
   - composer install
   - cd ..
-  - git clone --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
+  - git clone --branch $TYPO3_VERSION --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
   - composer install
   - mkdir -p uploads typo3temp typo3conf/ext
