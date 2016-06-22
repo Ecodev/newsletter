@@ -253,7 +253,7 @@ class EmailController extends ExtDirectActionController
             $uriBuilder->setArguments(array(
                 'recipient' => $recipientAddress,
             ));
-            $uri = $uriBuilder->build();
+            $redirect = $uriBuilder->build();
         }
 
         // If it is a valid URL, redirect to it
