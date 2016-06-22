@@ -54,7 +54,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     /**
      * Initializes the View to be a \Ecodev\Newsletter\ExtDirect\View\ExtDirectView that renders json without Template Files.
      */
-    public function initializeView()
+    public function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
     {
         if ($this->request->getFormat() === 'extdirect') {
             $this->view = $this->objectManager->get('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
