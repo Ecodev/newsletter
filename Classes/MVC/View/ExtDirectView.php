@@ -54,7 +54,7 @@ class ExtDirectView extends JsonView
      */
     public function assignErrors(array $errors)
     {
-        $result = array();
+        $result = [];
         foreach ($errors as $argumentName => $argumentError) {
             foreach ($argumentError->getErrors() as $propertyName => $propertyError) {
                 $message = '';
@@ -64,9 +64,9 @@ class ExtDirectView extends JsonView
                 $result[$propertyName] = $message;
             }
         }
-        $this->assign('value', array(
+        $this->assign('value', [
             'errors' => $result,
             'success' => false,
-        ));
+        ]);
     }
 }

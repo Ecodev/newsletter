@@ -248,11 +248,11 @@ class Transaction
      */
     public function getArguments()
     {
-        if ($this->data === array()) {
-            return array();
+        if ($this->data === []) {
+            return [];
         }
 
-        $arguments = array();
+        $arguments = [];
 
         if (!$this->request->isFormPost()) {
             $parameters = $this->reflectionService->getMethodParameters($this->getControllerObjectName(), $this->getControllerActionName() . 'Action');

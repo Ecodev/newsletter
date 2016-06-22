@@ -20,7 +20,7 @@ class EmailTca
         $data = unserialize($PA['row']['recipient_data']);
 
         if (!$data) {
-            $data = array();
+            $data = [];
         }
 
         $keys = array_keys($data);

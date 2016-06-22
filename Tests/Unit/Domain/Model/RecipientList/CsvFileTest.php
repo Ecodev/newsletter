@@ -92,7 +92,7 @@ class CsvFileTest extends AbstractRecipientList
 
     protected function prepareDataForEnumeration()
     {
-        $this->subject = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\CsvFile', array('getPathname'), array(), '', false);
+        $this->subject = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\CsvFile', ['getPathname'], [], '', false);
         $this->subject->expects($this->once())->method('getPathname')->will($this->returnValue(__DIR__));
         $this->subject->setCsvFilename('data.csv');
     }
@@ -107,19 +107,19 @@ class CsvFileTest extends AbstractRecipientList
         $this->subject->init();
         $this->assertSame(2, $this->subject->getCount());
 
-        $recipient1 = array(
+        $recipient1 = [
             'email' => 'john@example.com',
             'name' => 'John',
             'some_flags' => '1',
             'plain_only' => false,
-        );
+        ];
 
-        $recipient2 = array(
+        $recipient2 = [
             'email' => 'bob@example.com',
             'name' => 'Roger',
             'some_flags' => '0',
             'plain_only' => false,
-        );
+        ];
 
         $this->assertSame($recipient1, $this->subject->getRecipient());
         $this->assertSame($recipient2, $this->subject->getRecipient());

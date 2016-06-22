@@ -68,7 +68,7 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
                 $files[$hash] = $name . $filename;
             }
         } else {
-            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getAllFilesAndFoldersInPath(array(), $absFolderPath, '', 0, 99, '\\.svn');
+            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getAllFilesAndFoldersInPath([], $absFolderPath, '', 0, 99, '\\.svn');
             foreach ($files as $hash => $absPath) {
                 $files[$hash] = str_replace($extPath . $pathInsideExt, '', $absPath);
             }

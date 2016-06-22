@@ -25,7 +25,7 @@ class LocalizationViewHelper extends AbstractViewHelper
         }
         $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
 
-        $localizations = array();
+        $localizations = [];
         foreach ($names as $name) {
             $filePath = $extPath . $pathInsideExt . $name;
             $localizations = array_merge($localizations, $this->getLocalizations($filePath));
@@ -57,7 +57,7 @@ class LocalizationViewHelper extends AbstractViewHelper
             $lang = $LANG->lang;
         }
 
-        $result = array();
+        $result = [];
         foreach ($LOCAL_LANG[$lang] as $key => $value) {
             $target = $value[0]['target'];
 

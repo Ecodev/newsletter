@@ -65,9 +65,9 @@ class Mailer
     private $bounceAddress;
     private $siteUrl;
     private $homeUrl;
-    private $attachments = array();
-    private $attachmentsEmbedded = array();
-    private $linksCache = array();
+    private $attachments = [];
+    private $attachmentsEmbedded = [];
+    private $linksCache = [];
 
     /**
      * @var Utility\MarkerSubstitutor
@@ -121,7 +121,7 @@ class Mailer
         $_SERVER['SCRIPT_NAME'] = '/index.php';
 
         $this->siteUrl = $newsletter->getBaseUrl() . '/';
-        $this->linksCache = array();
+        $this->linksCache = [];
         $this->newsletter = $newsletter;
         $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
@@ -193,10 +193,10 @@ class Mailer
         }
 
         // Convert external files resources to attached files
-        $attachmentRegexes = array(
+        $attachmentRegexes = [
             '/ src="([^"]+)"/',
             '/ background="([^"]+)"/',
-        );
+        ];
 
         foreach ($attachmentRegexes as $regex) {
             preg_match_all($regex, $src, $urls);
@@ -223,7 +223,7 @@ class Mailer
      */
     private function injectOpenSpy(Email $email)
     {
-        $url = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'opened', array('c' => $email->getAuthCode()));
+        $url = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'opened', ['c' => $email->getAuthCode()]);
 
         $this->html = str_ireplace('</body>', '<div><img src="' . $url . '" width="0" height="0" /></div></body>', $this->html);
     }
@@ -280,11 +280,11 @@ class Mailer
             }
             // Otherwise create it
             else {
-                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', array(
+                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', [
                     'pid' => $this->newsletter->getPid(),
                     'url' => $url,
                     'newsletter' => $this->newsletter->getUid(),
-                ));
+                ]);
 
                 $linkId = $TYPO3_DB->sql_insert_id();
             }
@@ -294,7 +294,7 @@ class Mailer
         $this->linksCache[$url] = $linkId;
 
         $authCode = md5($email->getAuthCode() . $linkId);
-        $arguments = array();
+        $arguments = [];
         $arguments['n'] = $this->newsletter->getUid();
         $arguments['l'] = $authCode;
         if ($isPlainText) {
@@ -376,9 +376,9 @@ class Mailer
         /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($email->getRecipientAddress())
-                ->setFrom(array(
+                ->setFrom([
                     $this->senderEmail => $this->senderName,
-                ))
+                ])
                 ->setSubject($this->title);
 
         if ($this->replytoEmail) {

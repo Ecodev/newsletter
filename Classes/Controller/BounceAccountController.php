@@ -61,12 +61,12 @@ class BounceAccountController extends ExtDirectActionController
     {
         $bounceAccounts = $this->bounceAccountRepository->findAll();
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
-        $this->view->setConfiguration(array(
-            'data' => array(
+        $this->view->setVariablesToRender(['total', 'data', 'success', 'flashMessages']);
+        $this->view->setConfiguration([
+            'data' => [
                 '_descendAll' => self::resolveJsonViewConfiguration(),
-            ),
-        ));
+            ],
+        ]);
 
         $this->addFlashMessage('Loaded BounceAccounts from Server side.', 'BounceAccounts loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
@@ -84,14 +84,14 @@ class BounceAccountController extends ExtDirectActionController
      */
     public static function resolveJsonViewConfiguration()
     {
-        return array(
+        return [
             '_exposeObjectIdentifier' => true,
-            '_only' => array(
+            '_only' => [
                 'email',
                 'server',
                 'protocol',
                 'username',
-            ),
-        );
+            ],
+        ];
     }
 }

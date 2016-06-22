@@ -103,29 +103,29 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     {
         $extDirectRequest = $this->requestBuilder->build();
 
-        $results = array();
+        $results = [];
         foreach ($extDirectRequest->getTransactions() as $transaction) {
             $transactionRequest = $transaction->buildRequest();
             $transactionResponse = $transaction->buildResponse();
 
             try {
                 $this->dispatcher->dispatch($transactionRequest, $transactionResponse);
-                $results[] = array(
+                $results[] = [
                     'type' => 'rpc',
                     'tid' => $transaction->getTid(),
                     'action' => $transaction->getAction(),
                     'method' => $transaction->getMethod(),
                     'result' => $transactionResponse->getResult(),
-                );
+                ];
             } catch (Exception $exception) {
                 $exceptionMessage = $this->exposeExceptionInformation ? $exception->getMessage() : 'An internal error occured';
                 $exceptionWhere = $this->exposeExceptionInformation ? $exception->getTraceAsString() : '';
-                $results[] = array(
+                $results[] = [
                     'type' => 'exception',
                     'tid' => $transaction->getTid(),
                     'message' => $exceptionMessage,
                     'where' => $exceptionWhere,
-                );
+                ];
             }
         }
 

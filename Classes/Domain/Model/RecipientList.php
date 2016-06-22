@@ -249,8 +249,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
             $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
-            $uriXml = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml'));
-            $uriCsv = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', array('uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv'));
+            $uriXml = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml']);
+            $uriCsv = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv']);
 
             $out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients
 			(<a href="' . $uriXml . '">export XML</a>, '

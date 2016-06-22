@@ -79,11 +79,11 @@ class Api
      */
     public function createApi($routeUrl, $namespace)
     {
-        $api = array();
+        $api = [];
         $api['url'] = $routeUrl;
         $api['type'] = 'remoting';
         $api['namespace'] = $namespace;
-        $api['actions'] = array();
+        $api['actions'] = [];
 
         if (empty($this->frameworkConfiguration['controllerConfiguration'])) {
             # @todo improve me! Hack for fetching API of newsletter the hard way!
@@ -94,15 +94,15 @@ class Api
         foreach ($this->frameworkConfiguration['controllerConfiguration'] as $controllerName => $allowedControllerActions) {
             $unstrippedControllerName = $controllerName . 'Controller';
             $controllerObjectName = 'Ecodev\\Newsletter\\Controller\\' . $unstrippedControllerName;
-            $controllerActions = array();
+            $controllerActions = [];
             foreach ($allowedControllerActions['actions'] as $actionName) {
                 $unstrippedActionName = $actionName . 'Action';
                 try {
                     $actionParameters = $this->reflectionService->getMethodParameters($controllerObjectName, $unstrippedActionName);
-                    $controllerActions[] = array(
+                    $controllerActions[] = [
                         'len' => count($actionParameters),
                         'name' => $unstrippedActionName,
-                    );
+                    ];
                 } catch (ReflectionException $re) {
                     if ($unstrippedActionName !== 'extObjAction') {
                         \Ecodev\Newsletter\Tools::getLogger(__CLASS__)->critical('You have a not existing action (' . $controllerObjectName . '::' . $unstrippedActionName . ') in your module/plugin configuration. This action will not be available for Ext.Direct remote execution.');

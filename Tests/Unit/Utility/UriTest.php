@@ -34,9 +34,9 @@ class UriTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     public function dataProviderTestUri()
     {
-        $result = array();
+        $result = [];
         foreach (Uri::getSchemes() as $scheme) {
-            $result[] = array($scheme);
+            $result[] = [$scheme];
         }
 
         return $result;

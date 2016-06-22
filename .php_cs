@@ -10,7 +10,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
 
 return Symfony\CS\Config\Config::create()
                 ->level(Symfony\CS\FixerInterface::NONE_LEVEL)
-                ->fixers(array(
+                ->fixers([
                     // 'align_double_arrow', // Waste of time
                     // 'align_equals', // Waste of time
                     'array_element_no_space_before_comma',
@@ -40,7 +40,7 @@ return Symfony\CS\Config\Config::create()
                     'list_commas',
                     // 'logical_not_operators_with_spaces', // No we prefer to keep "!" without spaces
                     // 'logical_not_operators_with_successor_space', // idem
-                    'long_array_syntax',
+                    // 'long_array_syntax', // We opted in for the short syntax
                     'lowercase_constants',
                     'lowercase_keywords',
                     'method_argument_space',
@@ -84,7 +84,8 @@ return Symfony\CS\Config\Config::create()
                     'remove_lines_between_uses',
                     'return',
                     'self_accessor',
-                    // 'short_array_syntax', // We still support PHP 5.3
+                    'short_array_syntax',
+                    'short_bool_cast',
                     'short_echo_tag',
                     'short_tag',
                     'single_array_no_trailing_comma',
@@ -106,5 +107,5 @@ return Symfony\CS\Config\Config::create()
                     'unused_use',
                     'visibility',
                     'whitespacy_lines',
-                ))
+                ])
                 ->finder($finder);

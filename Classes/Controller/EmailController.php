@@ -68,12 +68,12 @@ class EmailController extends ExtDirectActionController
     {
         $emails = $this->emailRepository->findAllByNewsletter($uidNewsletter, $start, $limit);
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
-        $this->view->setConfiguration(array(
-            'data' => array(
+        $this->view->setVariablesToRender(['total', 'data', 'success', 'flashMessages']);
+        $this->view->setConfiguration([
+            'data' => [
                 '_descendAll' => self::resolveJsonViewConfiguration(),
-            ),
-        ));
+            ],
+        ]);
 
         $this->addFlashMessage('Loaded all Emails from Server side.', 'Emails loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
@@ -114,7 +114,7 @@ class EmailController extends ExtDirectActionController
         $args = $this->request->getArguments();
 
         // For compatibility with old links
-        $otherArgs = array(
+        $otherArgs = [
             'type',
             'uidRecipientList',
             'c',
@@ -125,7 +125,7 @@ class EmailController extends ExtDirectActionController
             'email',
             'plain',
             'L',
-        );
+        ];
         foreach ($otherArgs as $arg) {
             if (!isset($args[$arg])) {
                 if (isset($_GET[$arg])) {
@@ -250,9 +250,9 @@ class EmailController extends ExtDirectActionController
             $uriBuilder->setUseCacheHash(false);
             $uriBuilder->setTargetPageUid((integer) $redirect);
             // Append the recipient address just in case you want to do something with it at the destination
-            $uriBuilder->setArguments(array(
+            $uriBuilder->setArguments([
                 'recipient' => $recipientAddress,
-            ));
+            ]);
             $redirect = $uriBuilder->build();
         }
 
@@ -297,12 +297,12 @@ class EmailController extends ExtDirectActionController
         $urlRecipientList = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit';
         $urlNewsletter = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_newsletter][' . $newsletter->getUid() . ']=edit';
         $subject = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_subject', 'newsletter');
-        $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', array($email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter));
+        $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', [$email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter]);
 
         // Actually sends email
         $message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $message->setTo($notificationEmail)
-                ->setFrom(array($newsletter->getSenderEmail() => $newsletter->getSenderName()))
+                ->setFrom([$newsletter->getSenderEmail() => $newsletter->getSenderName()])
                 ->setSubject($subject)
                 ->setBody($body, 'text/html');
         $message->send();
@@ -316,15 +316,15 @@ class EmailController extends ExtDirectActionController
      */
     public static function resolveJsonViewConfiguration()
     {
-        return array(
+        return [
             '_exposeObjectIdentifier' => true,
-            '_only' => array('beginTime', 'endTime', 'authCode', 'bounceTime', 'openTime', 'recipientAddress', 'unsubscribed'),
-            '_descend' => array(
-                'beginTime' => array(),
-                'endTime' => array(),
-                'openTime' => array(),
-                'bounceTime' => array(),
-            ),
-        );
+            '_only' => ['beginTime', 'endTime', 'authCode', 'bounceTime', 'openTime', 'recipientAddress', 'unsubscribed'],
+            '_descend' => [
+                'beginTime' => [],
+                'endTime' => [],
+                'openTime' => [],
+                'bounceTime' => [],
+            ],
+        ];
     }
 }

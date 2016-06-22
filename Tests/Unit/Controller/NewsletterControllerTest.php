@@ -37,7 +37,7 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\NewsletterController', array('redirect', 'forward', 'addFlashMessage', 'translate', 'flushFlashMessages'), array(), '', false);
+        $this->subject = $this->getMock('Ecodev\\Newsletter\\Controller\\NewsletterController', ['redirect', 'forward', 'addFlashMessage', 'translate', 'flushFlashMessages'], [], '', false);
     }
 
     protected function tearDown()
@@ -50,13 +50,13 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function listActionFetchesAllNewslettersFromRepositoryAndAssignsThemToView()
     {
-        $allNewsletters = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allNewsletters = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', array('findAll'), array(), '', false);
+        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', ['findAll'], [], '', false);
         $newsletterRepository->expects($this->once())->method('findAll')->will($this->returnValue($allNewsletters));
         $this->inject($this->subject, 'newsletterRepository', $newsletterRepository);
 
-        $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView', array('assign'));
+        $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView', ['assign']);
         $view->expects($this->at(0))->method('assign')->with('total', count($allNewsletters));
         $view->expects($this->at(1))->method('assign')->with('data', $allNewsletters);
         $view->expects($this->at(2))->method('assign')->with('success', true);
@@ -70,24 +70,24 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function createActionAddsTheGivenNewsletterToNewsletterRepository()
     {
-        $newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\Model\\Newsletter', array('getValidatedContent'), array(), '', false);
-        $newsletter->expects($this->once())->method('getValidatedContent')->will($this->returnValue(array(
+        $newsletter = $this->getMock('Ecodev\\Newsletter\\Domain\Model\\Newsletter', ['getValidatedContent'], [], '', false);
+        $newsletter->expects($this->once())->method('getValidatedContent')->will($this->returnValue([
                     'content' => 'some content',
-                    'errors' => array(),
-                    'warnings' => array(),
-                    'infos' => array(),
-        )));
+                    'errors' => [],
+                    'warnings' => [],
+                    'infos' => [],
+        ]));
         $recipientList = new \Ecodev\Newsletter\Domain\Model\RecipientList\CsvList();
         $newsletter->setRecipientList($recipientList);
 
-        $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager', array('persistAll'), array(), '', false);
+        $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager', ['persistAll'], [], '', false);
         $persistenceManager->expects($this->once())->method('persistAll')->will($this->returnValue(null));
         $this->inject($this->subject, 'persistenceManager', $persistenceManager);
 
         $view = $this->getMock('Ecodev\\Newsletter\\MVC\\View\\ExtDirectView');
         $this->inject($this->subject, 'view', $view);
 
-        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', array('add'), array(), '', false);
+        $newsletterRepository = $this->getMock('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository', ['add'], [], '', false);
         $newsletterRepository->expects($this->once())->method('add')->with($newsletter);
         $this->inject($this->subject, 'newsletterRepository', $newsletterRepository);
 

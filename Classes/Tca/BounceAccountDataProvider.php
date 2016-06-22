@@ -17,7 +17,7 @@ class BounceAccountDataProvider implements \TYPO3\CMS\Backend\Form\FormDataProvi
     public function addData(array $result)
     {
         if ($result['tableName'] == 'tx_newsletter_domain_model_bounceaccount') {
-            $encryptedFields = array('password', 'config');
+            $encryptedFields = ['password', 'config'];
             foreach ($encryptedFields as $field) {
                 $result['databaseRow'][$field] = BounceAccountTca::getDecryptedFieldValue($field, $result['databaseRow'][$field]);
             }

@@ -179,19 +179,19 @@ class Sql extends RecipientList
     {
         global $TYPO3_DB;
 
-        $sql = str_replace(array(
+        $sql = str_replace([
             '###EMAIL###',
             '###BOUNCE_TYPE###',
             '###BOUNCE_TYPE_SOFT###',
             '###BOUNCE_TYPE_HARD###',
             '###BOUNCE_TYPE_UNSUBSCRIBE###',
-                ), array(
+                ], [
             $TYPO3_DB->fullQuoteStr($email, 'tx_newsletter_domain_model_recipientlist'), // Here we assume the SQL table to recipientList, but it could be something different.
             $bounceLevel,
             BounceHandler::NEWSLETTER_SOFTBOUNCE,
             BounceHandler::NEWSLETTER_HARDBOUNCE,
             BounceHandler::NEWSLETTER_UNSUBSCRIBE,
-                ), $this->getSqlRegisterBounce());
+                ], $this->getSqlRegisterBounce());
 
         if ($sql) {
             $TYPO3_DB->sql_query($sql);

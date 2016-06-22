@@ -4,86 +4,86 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_newsletter_domain_model_bounceaccount'] = array(
+$TCA['tx_newsletter_domain_model_bounceaccount'] = [
     'ctrl' => $TCA['tx_newsletter_domain_model_bounceaccount']['ctrl'],
-    'interface' => array(
+    'interface' => [
         'showRecordFieldList' => 'email,server,protocol,port,username,password',
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'email,protocol,server,port,username,password,config'),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
-        'hidden' => array(
+    ],
+    'types' => [
+        '1' => ['showitem' => 'email,protocol,server,port,username,password,config'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'email' => array(
+            ],
+        ],
+        'email' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.email',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required',
-            ),
-        ),
-        'server' => array(
+            ],
+        ],
+        'server' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.server',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-            ),
-        ),
-        'protocol' => array(
+            ],
+        ],
+        'protocol' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.protocol',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('POP3', 'pop3'),
-                    array('IMAP', 'imap'),
-                ),
-            ),
-        ),
-        'port' => array(
+                'items' => [
+                    ['POP3', 'pop3'],
+                    ['IMAP', 'imap'],
+                ],
+            ],
+        ],
+        'port' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.port',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 5,
                 'eval' => 'int',
-            ),
-        ),
-        'username' => array(
+            ],
+        ],
+        'username' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.username',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-            ),
-        ),
-        'password' => array(
+            ],
+        ],
+        'password' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.password',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
-            ),
-        ),
-        'config' => array(
+            ],
+        ],
+        'config' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount.config',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 8,
                 'eval' => 'Ecodev\\Newsletter\\Tca\\BounceAccountTca',
                 'wrap' => 'off',
                 'default' => "poll ###SERVER###\nproto ###PROTOCOL### \nport ###PORT###\nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n",
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

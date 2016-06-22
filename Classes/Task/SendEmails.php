@@ -75,6 +75,6 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         $emailsPerRound = Tools::confParam('mails_per_round');
 
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', array($emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount));
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', [$emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount]);
     }
 }

@@ -6,7 +6,7 @@ require_once getcwd() . '/typo3/sysext/core/Build/UnitTestsBootstrap.php';
 spl_autoload_register(function ($class) {
     $prefix = 'Ecodev\\Newsletter\\Tests\\';
     if (strpos($class, $prefix) === 0) {
-        $file = str_replace(array($prefix, '\\'), array('', '/'), $class) . '.php';
+        $file = str_replace([$prefix, '\\'], ['', '/'], $class) . '.php';
 
         require_once __DIR__ . '/../' . $file;
     }

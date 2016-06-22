@@ -44,14 +44,14 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     {
         parent::setUp();
 
-        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', array('getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'), array(), '', false);
+        $this->mockNewsletter = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Newsletter', ['getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'], [], '', false);
         $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
         $this->mockNewsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
 
-        $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('getPid'), array(), '', false);
-        $this->mockEmail->setRecipientData(array(
+        $this->mockEmail = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', ['getPid'], [], '', false);
+        $this->mockEmail->setRecipientData([
             'email' => 'recipient@example.com',
             'my_custom_field' => 'my custom value',
             'boolean_false' => false,
@@ -60,31 +60,31 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
             'integer_true' => 1,
             'string_false' => '',
             'string_true' => 'foo',
-        ));
+        ]);
 
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = serialize(array('attach_images' => true));
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['newsletter'] = serialize(['attach_images' => true]);
     }
 
     private function getData($pid, $injectOpenSpy, $injectLinksSpy)
     {
         $folder = __DIR__ . '/Fixtures/mailer';
-        $flags = implode('-', array($pid, var_export($injectOpenSpy, true), var_export($injectLinksSpy, true)));
+        $flags = implode('-', [$pid, var_export($injectOpenSpy, true), var_export($injectLinksSpy, true)]);
 
-        return array(
+        return [
             $pid,
             $injectOpenSpy,
             $injectLinksSpy,
             $folder . '/input.html',
             $folder . "/output-$flags.html",
             $folder . "/output-$flags.txt",
-        );
+        ];
     }
 
     public function dataProviderTestMailer()
     {
-        $data = array();
-        foreach (array(false, true) as $injectLinksSpy) {
-            foreach (array(false, true) as $injectOpenSpy) {
+        $data = [];
+        foreach ([false, true] as $injectLinksSpy) {
+            foreach ([false, true] as $injectOpenSpy) {
                 $data[] = $this->getData(2, $injectOpenSpy, $injectLinksSpy);
             }
         }
@@ -105,12 +105,12 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $expectedPlain = file_get_contents($expectedPlainFile);
 
         $this->mockNewsletter->method('getValidatedContent')->will($this->returnValue(
-                        array(
+                        [
                             'content' => $input,
-                            'errors' => array(),
-                            'warnings' => array(),
-                            'infos' => array(),
-                        )
+                            'errors' => [],
+                            'warnings' => [],
+                            'infos' => [],
+                        ]
         ));
         $this->mockNewsletter->method('getInjectOpenSpy')->will($this->returnValue($injectOpenSpy));
         $this->mockNewsletter->method('getInjectLinksSpy')->will($this->returnValue($injectLinksSpy));

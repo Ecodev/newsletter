@@ -63,12 +63,12 @@ class LinkController extends ExtDirectActionController
     {
         $links = $this->linkRepository->findAllByNewsletter($uidNewsletter, $start, $limit);
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
-        $this->view->setConfiguration(array(
-            'data' => array(
+        $this->view->setVariablesToRender(['total', 'data', 'success', 'flashMessages']);
+        $this->view->setConfiguration([
+            'data' => [
                 '_descendAll' => self::resolveJsonViewConfiguration(),
-            ),
-        ));
+            ],
+        ]);
 
         $this->addFlashMessage('Loaded all Links from Server side.', 'Links loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
@@ -87,7 +87,7 @@ class LinkController extends ExtDirectActionController
         $args = $this->request->getArguments();
 
         // For compatibility with old links
-        $oldArgs = array('n', 'l', 'p');
+        $oldArgs = ['n', 'l', 'p'];
         foreach ($oldArgs as $arg) {
             if (!isset($args[$arg])) {
                 if (isset($_REQUEST[$arg])) {
@@ -116,9 +116,9 @@ class LinkController extends ExtDirectActionController
      */
     public static function resolveJsonViewConfiguration()
     {
-        return array(
+        return [
             '_exposeObjectIdentifier' => true,
-            '_only' => array('url', 'openedCount', 'openedPercentage'),
-        );
+            '_only' => ['url', 'openedCount', 'openedPercentage'],
+        ];
     }
 }

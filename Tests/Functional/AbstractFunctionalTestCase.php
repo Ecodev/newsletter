@@ -6,8 +6,8 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
 {
     /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
     protected $objectManager;
-    protected $testExtensionsToLoad = array('typo3conf/ext/newsletter');
-    protected $coreExtensionsToLoad = array('extbase', 'fluid');
+    protected $testExtensionsToLoad = ['typo3conf/ext/newsletter'];
+    protected $coreExtensionsToLoad = ['extbase', 'fluid'];
 
     /**
      * Auth code for recipient 2

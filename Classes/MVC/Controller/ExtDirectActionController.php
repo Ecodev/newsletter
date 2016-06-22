@@ -83,7 +83,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             }
         }
         if ($this->view instanceof JsonView) {
-            $this->view->setVariablesToRender(array('flashMessages', 'error', 'success'));
+            $this->view->setVariablesToRender(['flashMessages', 'error', 'success']);
             $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
             $this->view->assign('error', $message);
             $this->view->assign('success', false);
@@ -121,7 +121,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param array $args
      * @return string
      */
-    protected function translate($key, array $args = array())
+    protected function translate($key, array $args = [])
     {
         return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, 'newsletter', $args);
     }

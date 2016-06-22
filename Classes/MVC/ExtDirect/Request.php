@@ -41,7 +41,7 @@ class Request
      *
      * @var array
      */
-    protected $transactions = array();
+    protected $transactions = [];
 
     /**
      * True if this request is a form post

@@ -50,7 +50,7 @@ class BounceHandler
     /**
      * Matches for soft bounces
      */
-    protected $soft = array(
+    protected $soft = [
         '/mailbox is full/i',
         '/quota exceeded/i',
         '/Subject:\s*Delivery unsuccessful: Mailbox has exceeded the limit/i',
@@ -58,12 +58,12 @@ class BounceHandler
         '/Mailbox disk quota exceeded/i',
         '/recipient was unavailable to take delivery of the message/i',
         '/Subject:\s*Undelivered Mail Returned to Sender/i',
-    );
+    ];
 
     /**
      *  Matches for hard bounces
      */
-    protected $hard = array(
+    protected $hard = [
         /* Anywhere in the mail */
         '/User unknown/',
         '/sorry to have to inform you that your message could not be delivered to one or more recipients./i',
@@ -88,7 +88,7 @@ class BounceHandler
         '/Subject:\s*Failed (mail|delivery|notice)/i',
         /* Both */
         '/Subject:\s*Delivery Status Notification[\s\S]+Failed/ix',
-    );
+    ];
 
     /**
      * Fetch all email from Bounce Accounts and pipe each of them to cli/bounce.php
@@ -105,7 +105,7 @@ class BounceHandler
 
         // Find all bounce accounts we need to check
         $fetchmailConfiguration = '';
-        $servers = array();
+        $servers = [];
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $bounceAccountRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\BounceAccountRepository');
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {

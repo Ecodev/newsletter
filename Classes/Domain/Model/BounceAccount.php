@@ -224,8 +224,8 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     public function getSubstitutedConfig()
     {
-        $markers = array('###SERVER###', '###PROTOCOL###', '###PORT###', '###USERNAME###', '###PASSWORD###');
-        $values = array();
+        $markers = ['###SERVER###', '###PROTOCOL###', '###PORT###', '###USERNAME###', '###PASSWORD###'];
+        $values = [];
         $values[] = $this->getServer();
         $values[] = $this->getProtocol();
         $values[] = $this->getPort();

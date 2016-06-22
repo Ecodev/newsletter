@@ -185,7 +185,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getRecipientDataReturnsInitialValueForArray()
     {
-        $this->assertSame(array(), $this->subject->getRecipientData());
+        $this->assertSame([], $this->subject->getRecipientData());
     }
 
     /**
@@ -193,8 +193,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setRecipientDataForStringSetsRecipientData()
     {
-        $this->subject->setRecipientData(array('data1', 'data2'));
-        $this->assertSame(array('data1', 'data2'), $this->subject->getRecipientData());
+        $this->subject->setRecipientData(['data1', 'data2']);
+        $this->assertSame(['data1', 'data2'], $this->subject->getRecipientData());
     }
 
     /**
@@ -245,7 +245,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getAuthCode()
     {
-        $email = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', array('getUid'), array(), '', false);
+        $email = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\Email', ['getUid'], [], '', false);
         $email->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $email->setRecipientAddress('john@example.com');
         $this->assertSame('462aa2b1b9885a181e6d916a409d96c8', $email->getAuthCode());

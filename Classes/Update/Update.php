@@ -68,12 +68,12 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
      */
     private static function getQueriesToMigrateClassPathsInRecords()
     {
-        return array(
+        return [
             "UPDATE tx_scheduler_task SET serialized_task_object = REPLACE(serialized_task_object, 'O:29:\"Tx_Newsletter_Task_SendEmails\"', 'O:33:\"Ecodev\\\\Newsletter\\\\Task\\\\SendEmails\"');",
             "UPDATE tx_scheduler_task SET serialized_task_object = REPLACE(serialized_task_object, 'O:31:\"Tx_Newsletter_Task_FetchBounces\"', 'O:35:\"Ecodev\\\\Newsletter\\\\Task\\\\FetchBounces\"');",
             "UPDATE tx_newsletter_domain_model_recipientlist SET type = REPLACE(type, 'Tx_Newsletter_Domain_Model_RecipientList_', 'Ecodev\\\\Newsletter\\\\Domain\\\\Model\\\\RecipientList\\\\');",
             "UPDATE tx_newsletter_domain_model_newsletter SET plain_converter = REPLACE(plain_converter, 'Tx_Newsletter_Domain_Model_PlainConverter_', 'Ecodev\\\\Newsletter\\\\Domain\\\\Model\\\\PlainConverter\\\\');",
-        );
+        ];
     }
 
     /**
@@ -95,13 +95,13 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
         $TYPO3_DB->sql_free_result($rs);
 
         // Set Queries
-        $queries = array();
+        $queries = [];
         if (!empty($records)) {
             foreach ($records as $row) {
-                $queries[] = $TYPO3_DB->UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . intval($row['uid']), array(
+                $queries[] = $TYPO3_DB->UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . intval($row['uid']), [
                     'password' => Tools::encrypt($row['password']),
                     'config' => $config,
-                ));
+                ]);
             }
         }
 

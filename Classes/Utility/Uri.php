@@ -39,7 +39,7 @@ class Uri
      */
     public static function getSchemes()
     {
-        return array(
+        return [
             'aaa',
             'aaas',
             'about',
@@ -233,7 +233,7 @@ class Uri
             'z39.50',
             'z39.50r',
             'z39.50s',
-        );
+        ];
     }
 
     /**
@@ -242,7 +242,7 @@ class Uri
      */
     private static function getPattern()
     {
-        $escapedSchemes = array();
+        $escapedSchemes = [];
         foreach (self::getSchemes() as $scheme) {
             $escapedSchemes[] = preg_quote($scheme);
         }

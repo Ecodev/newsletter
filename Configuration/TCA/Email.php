@@ -4,100 +4,100 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_newsletter_domain_model_email'] = array(
+$TCA['tx_newsletter_domain_model_email'] = [
     'ctrl' => $TCA['tx_newsletter_domain_model_email']['ctrl'],
-    'interface' => array(
+    'interface' => [
         'showRecordFieldList' => 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,unsubscribed,newsletter',
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,unsubscribed,newsletter'),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
-        'hidden' => array(
+    ],
+    'types' => [
+        '1' => ['showitem' => 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,unsubscribed,newsletter'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'begin_time' => array(
+            ],
+        ],
+        'begin_time' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.begin_time',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 12,
                 'readOnly' => true,
                 'eval' => 'datetime',
-            ),
-        ),
-        'end_time' => array(
+            ],
+        ],
+        'end_time' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.end_time',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 12,
                 'readOnly' => true,
                 'eval' => 'datetime',
-            ),
-        ),
-        'recipient_address' => array(
+            ],
+        ],
+        'recipient_address' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.recipient_address',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'readOnly' => true,
                 'eval' => 'trim,required',
-            ),
-        ),
-        'recipient_data' => array(
+            ],
+        ],
+        'recipient_data' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.recipient_data',
-            'config' => array(
+            'config' => [
                 'type' => 'user',
                 'userFunc' => 'Ecodev\\Newsletter\Tca\\EmailTca->render',
                 'size' => 30,
                 'eval' => 'trim',
-            ),
-        ),
-        'open_time' => array(
+            ],
+        ],
+        'open_time' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.open_time',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
                 'default' => 0,
                 'readOnly' => true,
-            ),
-        ),
-        'bounce_time' => array(
+            ],
+        ],
+        'bounce_time' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.bounce_time',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
                 'default' => 0,
                 'readOnly' => true,
-            ),
-        ),
-        'newsletter' => array(
+            ],
+        ],
+        'newsletter' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.newsletter',
-            'config' => array(
+            'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_newsletter_domain_model_newsletter',
                 'minitems' => 0,
                 'maxitems' => 1,
-                'appearance' => array(
+                'appearance' => [
                     'collapse' => 0,
                     'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'showAllLocalizationLink' => 1,
-                ),
-            ),
-        ),
-        'unsubscribed' => array(
+                ],
+            ],
+        ],
+        'unsubscribed' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.unsubscribed',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
                 'default' => 0,
                 'readOnly' => true,
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

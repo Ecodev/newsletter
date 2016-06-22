@@ -65,7 +65,7 @@ class Html extends AbstractArray
 
     public function init()
     {
-        $this->data = array();
+        $this->data = [];
 
         $content = \Ecodev\Newsletter\Tools::getUrl($this->getHtmlUrl());
 
@@ -74,7 +74,7 @@ class Html extends AbstractArray
                 preg_match_all('|<a[^>]+href="mailto:([^"]+)"[^>]*>(.*)</a>|Ui', $content, $fetched_data);
 
                 foreach ($fetched_data[1] as $i => $email) {
-                    $this->data[] = array('email' => $email, 'name' => $fetched_data[2][$i]);
+                    $this->data[] = ['email' => $email, 'name' => $fetched_data[2][$i]];
                 }
                 break;
 

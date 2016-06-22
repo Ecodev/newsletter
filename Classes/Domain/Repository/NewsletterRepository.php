@@ -44,7 +44,7 @@ class NewsletterRepository extends AbstractRepository
         $query->setLimit(1);
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(['uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute()->getFirst();
     }
@@ -58,7 +58,7 @@ class NewsletterRepository extends AbstractRepository
         $query = $this->createQuery();
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(['uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute();
     }
@@ -101,27 +101,27 @@ class NewsletterRepository extends AbstractRepository
     {
         $uidNewsletter = $newsletter->getUid();
 
-        $stateDifferences = array();
+        $stateDifferences = [];
         $emailCount = $this->fillStateDifferences(
-                $stateDifferences, 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter, array(
-            'end_time' => array('increment' => 'emailSentCount', 'decrement' => 'emailNotSentCount'),
-            'open_time' => array('increment' => 'emailOpenedCount', 'decrement' => 'emailSentCount'),
-            'bounce_time' => array('increment' => 'emailBouncedCount', 'decrement' => 'emailSentCount'),
-                )
+                $stateDifferences, 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter, [
+            'end_time' => ['increment' => 'emailSentCount', 'decrement' => 'emailNotSentCount'],
+            'open_time' => ['increment' => 'emailOpenedCount', 'decrement' => 'emailSentCount'],
+            'bounce_time' => ['increment' => 'emailBouncedCount', 'decrement' => 'emailSentCount'],
+                ]
         );
 
         $linkRepository = $this->objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\LinkRepository');
         $linkCount = $linkRepository->getCount($uidNewsletter);
         $this->fillStateDifferences(
-                $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, array(
-            'open_time' => array('increment' => 'linkOpenedCount'),
-                )
+                $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, [
+            'open_time' => ['increment' => 'linkOpenedCount'],
+                ]
         );
 
         // Find out the very first event (when the newsletter was planned)
         $plannedTime = $newsletter ? $newsletter->getPlannedTime() : null;
         $emailCount = $newsletter ? $newsletter->getEmailCount() : $emailCount; // We re-calculate email count so get correct number if newsletter is not sent yet
-        $previousState = array(
+        $previousState = [
             'time' => $plannedTime ? (int) $plannedTime->format('U') : null,
             'emailNotSentCount' => $emailCount,
             'emailSentCount' => 0,
@@ -135,7 +135,7 @@ class NewsletterRepository extends AbstractRepository
             'emailOpenedPercentage' => 0,
             'emailBouncedPercentage' => 0,
             'linkOpenedPercentage' => 0,
-        );
+        ];
 
         // Find out what the best grouping step is according to number of states
         $stateCount = count($stateDifferences);
@@ -149,7 +149,7 @@ class NewsletterRepository extends AbstractRepository
             $groupingTimestep = 0; // no grouping at all
         }
 
-        $states = array($previousState);
+        $states = [$previousState];
         ksort($stateDifferences);
         $minimumTimeToInsert = 0; // First state must always be not grouped, so we don't increment here
         foreach ($stateDifferences as $time => $diff) {
@@ -162,7 +162,7 @@ class NewsletterRepository extends AbstractRepository
             }
 
             // Compute percentage for email states
-            foreach (array('emailNotSent', 'emailSent', 'emailOpened', 'emailBounced') as $key) {
+            foreach (['emailNotSent', 'emailSent', 'emailOpened', 'emailBounced'] as $key) {
                 $newState[$key . 'Percentage'] = $newState[$key . 'Count'] / $newState['emailCount'] * 100;
             }
 
@@ -201,14 +201,14 @@ class NewsletterRepository extends AbstractRepository
      */
     protected function fillStateDifferences(array &$stateDifferences, $from, $where, array $stateConfiguration)
     {
-        $default = array(
+        $default = [
             'emailNotSentCount' => 0,
             'emailSentCount' => 0,
             'emailOpenedCount' => 0,
             'emailBouncedCount' => 0,
             'emailBouncedCount' => 0,
             'linkOpenedCount' => 0,
-        );
+        ];
 
         /* @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
         global $TYPO3_DB;
@@ -270,7 +270,7 @@ class NewsletterRepository extends AbstractRepository
                         ' . $newsletterUid . '
 						ORDER BY tx_newsletter_domain_model_email.newsletter ' . $limit);
 
-        $result = array();
+        $result = [];
         while ($record = $TYPO3_DB->sql_fetch_assoc($rs)) {
             $result[] = $record;
         }

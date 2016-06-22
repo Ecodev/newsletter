@@ -124,7 +124,7 @@ class CsvFile extends AbstractArray
      */
     protected function loadCsvFromData($csvdata)
     {
-        $this->data = array();
+        $this->data = [];
 
         $sepchar = $this->getCsvSeparator() ? $this->getCsvSeparator() : ',';
         $keys = array_unique(array_map('trim', explode($sepchar, $this->getCsvFields())));

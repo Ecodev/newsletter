@@ -69,8 +69,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
         $newsletter = $this->newsletterRepository->findByUid(30);
         $stats = $this->newsletterRepository->getStatistics($newsletter);
 
-        $expected = array(
-            array(
+        $expected = [
+            [
                 'time' => 1423729050,
                 'emailNotSentCount' => 2,
                 'emailSentCount' => 0,
@@ -84,8 +84,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailOpenedPercentage' => 0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 0,
-            ),
-            array(
+            ],
+            [
                 'time' => 1423729053,
                 'emailNotSentCount' => 1,
                 'emailSentCount' => 1,
@@ -99,8 +99,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailOpenedPercentage' => 0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 0,
-            ),
-            array(
+            ],
+            [
                 'time' => 1423729055,
                 'emailNotSentCount' => 1,
                 'emailSentCount' => 0,
@@ -114,8 +114,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailOpenedPercentage' => 50.0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 0,
-            ),
-            array(
+            ],
+            [
                 'time' => 1423729056,
                 'emailNotSentCount' => 1,
                 'emailSentCount' => 0,
@@ -129,8 +129,8 @@ class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\Abstr
                 'emailOpenedPercentage' => 50.0,
                 'emailBouncedPercentage' => 0,
                 'linkOpenedPercentage' => 25.0,
-            ),
-        );
+            ],
+        ];
 
         $this->assertSame($expected, $stats);
     }

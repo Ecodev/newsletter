@@ -4,58 +4,58 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_newsletter_domain_model_link'] = array(
+$TCA['tx_newsletter_domain_model_link'] = [
     'ctrl' => $TCA['tx_newsletter_domain_model_link']['ctrl'],
-    'interface' => array(
+    'interface' => [
         'showRecordFieldList' => 'url,opened_count,newsletter',
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'url,opened_count,newsletter'),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
-        'hidden' => array(
+    ],
+    'types' => [
+        '1' => ['showitem' => 'url,opened_count,newsletter'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'url' => array(
+            ],
+        ],
+        'url' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.url',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim',
                 'readOnly' => true,
-            ),
-        ),
-        'opened_count' => array(
+            ],
+        ],
+        'opened_count' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.opened_count',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int',
                 'readOnly' => true,
-            ),
-        ),
-        'newsletter' => array(
+            ],
+        ],
+        'newsletter' => [
             'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link.newsletter',
-            'config' => array(
+            'config' => [
                 'readOnly' => true,
                 'type' => 'inline',
                 'foreign_table' => 'tx_newsletter_domain_model_newsletter',
                 'minitems' => 0,
                 'maxitems' => 1,
-                'appearance' => array(
+                'appearance' => [
                     'collapse' => 0,
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'showAllLocalizationLink' => 1,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

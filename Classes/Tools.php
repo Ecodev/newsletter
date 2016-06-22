@@ -146,13 +146,13 @@ abstract class Tools
 
             // Register the receiver
             if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($receiver['email'])) {
-                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', array(
+                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', [
                     'pid' => $newsletter->getPid(),
                     'recipient_address' => $receiver['email'],
                     'recipient_data' => serialize($receiver),
                     'pid' => $newsletter->getPid(),
                     'newsletter' => $newsletter->getUid(),
-                ));
+                ]);
                 ++$emailSpooledCount;
             }
         }
@@ -195,7 +195,7 @@ abstract class Tools
     public static function runSpool(Newsletter $limitNewsletter = null)
     {
         $emailSentCount = 0;
-        $mailers = array();
+        $mailers = [];
 
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $newsletterRepository = $objectManager->get('Ecodev\\Newsletter\\Domain\\Repository\\NewsletterRepository');
@@ -211,7 +211,7 @@ abstract class Tools
             /* For the page, this way we can support multiple pages in one spool session */
             if ($newsletterUid != $oldNewsletterUid) {
                 $oldNewsletterUid = $newsletterUid;
-                $mailers = array();
+                $mailers = [];
 
                 $newsletter = $newsletterRepository->findByUid($newsletterUid);
             }
@@ -306,7 +306,7 @@ abstract class Tools
     {
         // Fetch version manually to keep compatibility with TYPO3 6.2 to TYPO3 7.4
         $_EXTKEY = 'newsletter';
-        $EM_CONF = array();
+        $EM_CONF = [];
         require \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY, '/ext_emconf.php');
         $version = $EM_CONF[$_EXTKEY]['version'];
 
@@ -324,7 +324,7 @@ abstract class Tools
     {
         // Specify User-Agent header if we fetch an URL, but not if it's a file on disk
         if (Utility\Uri::isAbsolute($url)) {
-            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, array(self::getUserAgent()));
+            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, [self::getUserAgent()]);
         } else {
             return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
         }

@@ -185,11 +185,11 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getPlainConverterInstance()
     {
-        $classes = array(
+        $classes = [
             'NonExistingClassFooBar' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin',
             'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Builtin',
             'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx' => 'Ecodev\\Newsletter\\Domain\\Model\\PlainConverter\\Lynx',
-        );
+        ];
 
         foreach ($classes as $class => $expected) {
             $this->subject->setPlainConverter($class);
@@ -258,7 +258,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidBounceAccount());
 
-        $bounceAccount = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\BounceAccount', array('getUid'), array(), '', false);
+        $bounceAccount = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\BounceAccount', ['getUid'], [], '', false);
         $bounceAccount->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setBounceAccount($bounceAccount);
         $this->assertSame(123, $this->subject->getUidBounceAccount());
@@ -364,7 +364,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidRecipientList());
 
-        $recipientList = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers', array('getUid'), array(), '', false);
+        $recipientList = $this->getMock('Ecodev\\Newsletter\\Domain\\Model\\RecipientList\\BeUsers', ['getUid'], [], '', false);
         $recipientList->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setRecipientList($recipientList);
         $this->assertSame(123, $this->subject->getUidRecipientList());

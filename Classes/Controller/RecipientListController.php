@@ -66,12 +66,12 @@ class RecipientListController extends ExtDirectActionController
             $recipientList->init();
         }
 
-        $this->view->setVariablesToRender(array('total', 'data', 'success', 'flashMessages'));
-        $this->view->setConfiguration(array(
-            'data' => array(
+        $this->view->setVariablesToRender(['total', 'data', 'success', 'flashMessages']);
+        $this->view->setConfiguration([
+            'data' => [
                 '_descendAll' => self::resolveJsonViewConfiguration(),
-            ),
-        ));
+            ],
+        ]);
 
         $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
 
@@ -93,7 +93,7 @@ class RecipientListController extends ExtDirectActionController
 
         // Gather recipient according to defined limits
         $i = 0;
-        $recipients = array();
+        $recipients = [];
         while ($recipient = $recipientLists->getRecipient()) {
             if ($i++ >= $start) {
                 $recipients[] = $recipient;
@@ -103,17 +103,17 @@ class RecipientListController extends ExtDirectActionController
             }
         }
 
-        $metaData = array(
+        $metaData = [
             'totalProperty' => 'total',
             'successProperty' => 'success',
             'idProperty' => 'uid',
             'root' => 'data',
-            'fields' => array(),
-        );
+            'fields' => [],
+        ];
 
         if (count($recipients)) {
             foreach (array_keys(reset($recipients)) as $field) {
-                $metaData['fields'][] = array('name' => $field, 'type' => 'string');
+                $metaData['fields'][] = ['name' => $field, 'type' => 'string'];
             }
         }
 
@@ -124,7 +124,7 @@ class RecipientListController extends ExtDirectActionController
         $this->view->assign('data', $recipients);
         $this->view->assign('success', true);
         $this->view->assign('flashMessages', $this->controllerContext->getFlashMessageQueue()->getAllMessagesAndFlush());
-        $this->view->setVariablesToRender(array('metaData', 'total', 'data', 'success', 'flashMessages'));
+        $this->view->setVariablesToRender(['metaData', 'total', 'data', 'success', 'flashMessages']);
     }
 
     /**
@@ -136,7 +136,7 @@ class RecipientListController extends ExtDirectActionController
     public function exportAction($uidRecipientList, $authCode)
     {
         // Assert we are using supported formats
-        $availableFormats = array('csv', 'xml');
+        $availableFormats = ['csv', 'xml'];
         $format = $this->request->getFormat();
         if (!in_array($format, $availableFormats)) {
             $format = reset($availableFormats);
@@ -156,7 +156,7 @@ class RecipientListController extends ExtDirectActionController
         $this->response->setHeader('Content-Description', 'File transfer', true);
         $this->response->setHeader('Content-Disposition', 'attachment; filename="' . $title . '.' . $format . '"', true);
 
-        $recipients = array();
+        $recipients = [];
         while ($recipient = $recipientList->getRecipient()) {
             $recipients[] = $recipient;
         }
@@ -174,15 +174,15 @@ class RecipientListController extends ExtDirectActionController
      */
     public static function resolveJsonViewConfiguration()
     {
-        return array(
+        return [
             '_exposeObjectIdentifier' => true,
-            '_only' => array(
+            '_only' => [
                 'title',
                 'plainOnly',
                 'lang',
                 'type',
                 'count',
-            ),
-        );
+            ],
+        ];
     }
 }

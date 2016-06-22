@@ -39,7 +39,7 @@ abstract class UriBuilder
      * UriBuilders indexed by PID
      * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder[]
      */
-    private static $uriBuilder = array();
+    private static $uriBuilder = [];
 
     private static function getUriBuilder($currentPid)
     {
@@ -81,7 +81,7 @@ abstract class UriBuilder
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
             $extbaseBootstrap = $objectManager->get('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
-            $extbaseBootstrap->initialize(array('extensionName' => self::EXTENSION_NAME, 'pluginName' => self::PLUGIN_NAME));
+            $extbaseBootstrap->initialize(['extensionName' => self::EXTENSION_NAME, 'pluginName' => self::PLUGIN_NAME]);
         }
 
         return $objectManager->get('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
@@ -95,7 +95,7 @@ abstract class UriBuilder
      * @param array $arguments
      * @return string absolute URI
      */
-    public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = array())
+    public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
     {
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         $extensionService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ExtensionService');
@@ -104,7 +104,7 @@ abstract class UriBuilder
         // Prepare arguments
         $arguments['action'] = $actionName;
         $arguments['controller'] = $controllerName;
-        $namespacedArguments = array($pluginNamespace => $arguments);
+        $namespacedArguments = [$pluginNamespace => $arguments];
 
         // Configure Uri
         $uriBuilder = self::getUriBuilder($currentPid);

@@ -14,7 +14,7 @@ class BounceAccountTca
      */
     public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
     {
-        $encryptedFields = array('password', 'config');
+        $encryptedFields = ['password', 'config'];
         if ($table == 'tx_newsletter_domain_model_bounceaccount' && in_array($field, $encryptedFields)) {
             $row[$field] = self::getDecryptedFieldValue($field, $row[$field]);
         }

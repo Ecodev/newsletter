@@ -86,18 +86,18 @@ class Validator
         try {
             $url = $newsletter->getContentUrl($language);
         } catch (Exception $e) {
-            return array(
+            return [
                 'content' => '',
-                'errors' => array($e->getMessage()),
-                'warnings' => array(),
-                'infos' => array(),
-            );
+                'errors' => [$e->getMessage()],
+                'warnings' => [],
+                'infos' => [],
+            ];
         }
 
         $content = $this->getURL($url);
-        $errors = array();
-        $warnings = array();
-        $infos = array(sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>'));
+        $errors = [];
+        $warnings = [];
+        $infos = [sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>')];
 
         // Content should be more that just a few characters. Apache error propably occured
         if (strlen($content) < 200) {
@@ -129,12 +129,12 @@ class Validator
         }
 
         // Fix relative URL to absolute URL
-        $urlPatterns = array(
+        $urlPatterns = [
             'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
             'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
             'images' => '/ src="(.*)"/Ui',
             'background images' => '/ background="(.*)"/Ui',
-        );
+        ];
         foreach ($urlPatterns as $type => $urlPattern) {
             preg_match_all($urlPattern, $content, $urls);
             $replacementCount = 0;
@@ -180,15 +180,15 @@ class Validator
         }
 
         // Positioning & element sizes in CSS
-        $forbiddenCssProperties = array(
+        $forbiddenCssProperties = [
             'width' => '((min|max)+-)?width',
             'height' => '((min|max)+-)?height',
             'margin' => 'margin(-(bottom|left|right|top)+)?',
             'padding' => 'padding(-(bottom|left|right|top)+)?',
             'position' => 'position',
-        );
+        ];
 
-        $forbiddenCssPropertiesWarnings = array();
+        $forbiddenCssPropertiesWarnings = [];
         if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
             foreach ($matches[1] as $stylepart) {
                 foreach ($forbiddenCssProperties as $property => $regex) {
@@ -202,11 +202,11 @@ class Validator
             }
         }
 
-        return array(
+        return [
             'content' => $content,
             'errors' => $errors,
             'warnings' => $warnings,
             'infos' => $infos,
-        );
+        ];
     }
 }

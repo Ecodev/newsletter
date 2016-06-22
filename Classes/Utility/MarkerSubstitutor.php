@@ -101,7 +101,7 @@ class MarkerSubstitutor
         $this->simpleMarkersFound = array_merge($fields[1], $fieldsLinks[1]);
 
         // Any advanced IF fields we need to sustitute later on
-        $this->advancedMarkersFound = array();
+        $this->advancedMarkersFound = [];
         preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
         foreach ($fields[1] as $field) {
             $this->advancedMarkersFound[] = $field;
@@ -119,8 +119,8 @@ class MarkerSubstitutor
 
         // Add predefined markers
         $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'show', array('c' => $authCode));
-        $markers['newsletter_unsubscribe_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'unsubscribe', array('c' => $authCode));
+        $markers['newsletter_view_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'show', ['c' => $authCode]);
+        $markers['newsletter_unsubscribe_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'unsubscribe', ['c' => $authCode]);
 
         return $markers;
     }
@@ -135,23 +135,23 @@ class MarkerSubstitutor
      */
     private function substituteSimpleMarker($src, $name, $value)
     {     // All variants of the marker to search
-        $search = array(
+        $search = [
             "###$name###",
             "http://$name",
             "https://$name",
             urlencode("###$name###"), // If the marker is in a link and the "links spy" option is activated it will be urlencoded
             urlencode("http://$name"),
             urlencode("https://$name"),
-        );
+        ];
 
-        $replace = array(
+        $replace = [
             $value,
             $value,
             preg_replace('-^http://-', 'https://', $value),
             urlencode($value), // We need to replace with urlencoded value
             urlencode($value),
             urlencode(preg_replace('-^http://-', 'https://', $value)),
-        );
+        ];
 
         return str_ireplace($search, $replace, $src);
     }
