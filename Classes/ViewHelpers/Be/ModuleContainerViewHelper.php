@@ -55,6 +55,11 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
 class ModuleContainerViewHelper extends AbstractViewHelper
 {
     /**
+     * Don't escape anything because we will render the entire page
+     */
+    protected $escapeOutput = false;
+
+    /**
      * Renders start page with template.php and pageTitle.
      *
      * @param string  $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
