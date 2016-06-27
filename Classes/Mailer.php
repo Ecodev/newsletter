@@ -67,6 +67,7 @@ class Mailer
     private $homeUrl;
     private $attachments = [];
     private $attachmentsEmbedded = [];
+    private $attachmentsMapping = [];
     private $linksCache = [];
 
     /**
@@ -202,20 +203,38 @@ class Mailer
             preg_match_all($regex, $src, $urls);
             foreach ($urls[1] as $i => $url) {
 
-                // Get filesystem path from url
-                $relativePath = str_replace($this->siteUrl, '', $url);
-                $absolutePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($relativePath);
-
-                // Mark places for embedded files and keep the embed files to be replaced
-                if (file_exists($absolutePath)) {
-                    $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
-                    $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($absolutePath);
+                // Mark places for embedded files
+                $swiftEmbeddedMarker = $this->getSwiftEmbeddedMarker($url);
+                if ($swiftEmbeddedMarker) {
                     $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
                 }
             }
         }
 
         return $src;
+    }
+
+    /**
+     * Returns a swift marker if the image can be embedded
+     * @param string $imageUrl
+     * @return string|null
+     */
+    private function getSwiftEmbeddedMarker($imageUrl)
+    {
+        // Get filesystem path from url
+        $relativePath = str_replace($this->siteUrl, '', $imageUrl);
+        $absolutePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($relativePath);
+
+        // If the same image was already embeded, reuse its marker, otherwise create a marker and keep the embed files to be replaced
+        if (isset($this->attachmentsMapping[$absolutePath])) {
+            return $this->attachmentsMapping[$absolutePath];
+        } elseif (file_exists($absolutePath)) {
+            $swiftEmbeddedMarker = '###_#_SWIFT_EMBEDDED_MARKER_' . count($this->attachmentsEmbedded) . '_#_###';
+            $this->attachmentsEmbedded[$swiftEmbeddedMarker] = Swift_EmbeddedFile::fromPath($absolutePath);
+            $this->attachmentsMapping[$absolutePath] = $swiftEmbeddedMarker;
+
+            return $swiftEmbeddedMarker;
+        }
     }
 
     /**
