@@ -55,9 +55,9 @@ class Mailer
      */
     private $newsletter;
     private $html;
-    private $html_tpl;
+    private $htmlTemplate;
     private $title;
-    private $title_tpl;
+    private $titleTemplate;
     private $senderName;
     private $senderEmail;
     private $replytoName;
@@ -164,7 +164,7 @@ class Mailer
         // As this is being extracted from HTML and it is being used as an email subject we need to decode any entities.
         $title = trim(html_entity_decode($m[1]));
 
-        $this->title_tpl = $title;
+        $this->titleTemplate = $title;
         $this->title = $title;
     }
 
@@ -177,7 +177,7 @@ class Mailer
     private function setHtml($src)
     {
         $src = $this->findAttachments($src);
-        $this->html_tpl = $src;
+        $this->htmlTemplate = $src;
         $this->html = $src;
     }
 
@@ -252,8 +252,8 @@ class Mailer
      */
     private function resetContent()
     {
-        $this->html = $this->html_tpl;
-        $this->title = $this->title_tpl;
+        $this->html = $this->htmlTemplate;
+        $this->title = $this->titleTemplate;
     }
 
     /**
