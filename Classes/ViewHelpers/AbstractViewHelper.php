@@ -51,7 +51,6 @@ abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Abstra
         // For TYPO3 7.4 and newer we can use a direct method, for older version 6.2-7.3
         if (is_callable([$this, 'getPageRenderer'])) {
             return $this->getPageRenderer();
-
         } else {
             return $this->getDocInstance()->getPageRenderer();
         }
