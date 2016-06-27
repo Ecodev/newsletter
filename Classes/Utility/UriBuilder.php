@@ -116,6 +116,12 @@ abstract class UriBuilder
 
         $uri = $uriBuilder->buildFrontendUri();
 
+        // For some reason the core set the backPath to something while building URI,
+        // but it will somehow break the RecipientList editing in backend, so we unset it here
+        // This was at least since TYPO3 7.6, maybe earlier, but not on TYPO3 8.0 anymore
+        $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+        $pageRenderer->backPath = null;
+
         return $uri;
     }
 }
