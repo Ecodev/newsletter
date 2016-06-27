@@ -31,7 +31,7 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
 {
     /**
      * @var TYPO3\CMS\Core\Page\PageRenderer
@@ -43,47 +43,17 @@ abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
      */
     public function initialize()
     {
-        if (TYPO3_MODE === 'BE') {
-            $this->initializeBackend();
+        $this->pageRenderer = $this->getPageRendererCompatibility();
+    }
+
+    private function getPageRendererCompatibility()
+    {
+        // For TYPO3 7.4 and newer we can use a direct method, for older version 6.2-7.3
+        if (is_callable([$this, 'getPageRenderer'])) {
+            return $this->getPageRenderer();
+
         } else {
-            $this->initializeFrontend();
+            return $this->getDocInstance()->getPageRenderer();
         }
-    }
-
-    /**
-     * Fetches the pageRenderer from the BE Context.
-     */
-    protected function initializeBackend()
-    {
-        $this->pageRenderer = $this->getDocInstance()->getPageRenderer();
-    }
-
-    /**
-     * Fetches the pageRenderer from the FE Context.
-     * (not tested)
-     */
-    public function initializeFrontend()
-    {
-        $GLOBALS['TSFE']->backPath = TYPO3_mainDir;
-        $this->pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-    }
-
-    /**
-     * Gets instance of template if exists or create a new one.
-     * Saves instance in viewHelperVariableContainer
-     *
-     * @return template $doc
-     */
-    protected function getDocInstance()
-    {
-        if (!isset($GLOBALS['SOBE'])) {
-            $GLOBALS['SOBE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Controller\NewRecordController::class);
-        }
-        if (!isset($GLOBALS['SOBE']->doc)) {
-            $GLOBALS['SOBE']->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Template\DocumentTemplate::class);
-            $GLOBALS['SOBE']->doc->backPath = $GLOBALS['BACK_PATH'];
-        }
-
-        return $GLOBALS['SOBE']->doc;
     }
 }
