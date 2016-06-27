@@ -161,9 +161,16 @@ class RecipientListController extends ExtDirectActionController
             $recipients[] = $recipient;
         }
 
+        // If we have at least one recipient we can extract the field
+        if ($recipients) {
+            $fields = array_keys(reset($recipients));
+        } else {
+            $fields = [];
+        }
+
         $this->view->assign('recipients', $recipients);
         $this->view->assign('title', $title);
-        $this->view->assign('fields', array_keys(reset($recipients)));
+        $this->view->assign('fields', $fields);
     }
 
     /**
