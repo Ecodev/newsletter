@@ -1,11 +1,19 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
-
-$TCA['tx_newsletter_domain_model_recipientlist'] = [
-    'ctrl' => $TCA['tx_newsletter_domain_model_recipientlist']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_recipientlist',
+        'label' => 'title',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'type' => 'type',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_recipientlist.gif',
+        'type' => 'type', // this tells extbase to respect the "type" column for Single Table Inheritance
+    ],
     'interface' => [
         'showRecordFieldList' => 'hidden,title',
     ],

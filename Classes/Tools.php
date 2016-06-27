@@ -329,4 +329,19 @@ abstract class Tools
             return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
         }
     }
+
+    /**
+     * Returns the iconfile prefix
+     * @return string
+     */
+    public static function getIconfilePrefix()
+    {
+        // From TYPO3 7.4.0 onward we must use EXT prefix
+        if (version_compare(TYPO3_version, '7.4.0', '>=')) {
+            return 'EXT:newsletter/';
+        } else {
+            // But for TYPO3 6.2 family, we still have to use old style
+            return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('newsletter');
+        }
+    }
 }

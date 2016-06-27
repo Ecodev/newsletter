@@ -1,11 +1,17 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
-
-$TCA['tx_newsletter_domain_model_bounceaccount'] = [
-    'ctrl' => $TCA['tx_newsletter_domain_model_bounceaccount']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_bounceaccount',
+        'label' => 'email',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_bounceaccount.gif',
+    ],
     'interface' => [
         'showRecordFieldList' => 'email,server,protocol,port,username,password',
     ],

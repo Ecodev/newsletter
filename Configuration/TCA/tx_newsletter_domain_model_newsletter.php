@@ -1,9 +1,5 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
-
 // From TYPO3 7.4.0 onward we must use EXT prefix
 if (version_compare(TYPO3_version, '7.4.0', '>=')) {
     $wizardIcon = 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif';
@@ -12,8 +8,18 @@ if (version_compare(TYPO3_version, '7.4.0', '>=')) {
     $wizardIcon = 'edit2.gif';
 }
 
-$TCA['tx_newsletter_domain_model_newsletter'] = [
-    'ctrl' => $TCA['tx_newsletter_domain_model_newsletter']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter',
+        'label' => 'planned_time',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
+    ],
     'interface' => [
         'showRecordFieldList' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,replyto_name,replyto_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
     ],

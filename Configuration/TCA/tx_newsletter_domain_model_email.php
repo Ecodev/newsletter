@@ -1,11 +1,17 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
-
-$TCA['tx_newsletter_domain_model_email'] = [
-    'ctrl' => $TCA['tx_newsletter_domain_model_email']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email',
+        'label' => 'recipient_address',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_email.gif',
+    ],
     'interface' => [
         'showRecordFieldList' => 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,unsubscribed,newsletter',
     ],
