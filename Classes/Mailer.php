@@ -382,7 +382,7 @@ class Mailer
     public function send(Email $email)
     {
         $this->prepare($email);
-        $this->raw_send($email);
+        $this->rawSend($email);
     }
 
     /**
@@ -390,7 +390,7 @@ class Mailer
      *
      * @param Email $email
      */
-    private function raw_send(Email $email)
+    private function rawSend(Email $email)
     {
         /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
