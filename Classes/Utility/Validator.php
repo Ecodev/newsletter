@@ -40,6 +40,31 @@ class Validator
     private $lang;
 
     /**
+     * @var Newsletter
+     */
+    private $newsletter;
+
+    /**
+     * @var string content to be validated
+     */
+    private $content;
+
+    /**
+     * @var array
+     */
+    private $errors = [];
+
+    /**
+     * @var array
+     */
+    private $warnings = [];
+
+    /**
+     * @var array
+     */
+    private $infos = [];
+
+    /**
      * Initialize and return language service
      * @global \TYPO3\CMS\Lang\LanguageService $LANG
      * @return \TYPO3\CMS\Lang\LanguageService
@@ -76,109 +101,177 @@ class Validator
      * is also "fixed" automatically when possible.
      * @param Newsletter $newsletter
      * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
-     * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
+     * @return array
      */
     public function validate(Newsletter $newsletter, $language = null)
     {
         $this->initializeLang();
 
+        // Reset stuff
+        $this->newsletter = $newsletter;
+        $this->content = '';
+        $this->errors = [];
+        $this->warnings = [];
+        $this->infos = [];
+
         // We need to catch the exception if domain was not found/configured properly
         try {
-            $url = $newsletter->getContentUrl($language);
+            $url = $this->newsletter->getContentUrl($language);
         } catch (Exception $e) {
-            return [
-                'content' => '',
-                'errors' => [$e->getMessage()],
-                'warnings' => [],
-                'infos' => [],
-            ];
+            $this->errors[] = $e->getMessage();
+
+            return $this->getResult();
         }
 
-        $content = $this->getURL($url);
-        $errors = [];
-        $warnings = [];
-        $infos = [sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>')];
+        $this->content = $this->getURL($url);
+        $this->infos[] = sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>');
 
-        // Content should be more that just a few characters. Apache error propably occured
-        if (strlen($content) < 200) {
-            $errors [] = $this->lang->getLL('validation_mail_too_short');
+        $this->errorTooShort();
+        $this->errorPhpWarnings();
+        $this->errorPhpErrors();
+        $this->errorPageBeingGenerated();
+        $this->infoRelativeToAbsolute();
+        $this->infoLinkedCss();
+        $this->warningJavascript();
+        $this->errorImageInCSS();
+        $this->warningCssClasses();
+        $this->warningCssProperties();
+
+        return $this->getResult();
+    }
+
+    /**
+     * Content should be more that just a few characters. Apache error propably occured
+     */
+    private function errorTooShort()
+    {
+        if (strlen($this->content) < 200) {
+            $this->errors[] = $this->lang->getLL('validation_mail_too_short');
         }
+    }
 
-        // Content should not contain PHP-Warnings
-        if (substr($content, 0, 22) == "<br />\n<b>Warning</b>:") {
-            $errors [] = $this->lang->getLL('validation_mail_contains_php_warnings');
+    /**
+     * Content should not contain PHP-Warnings
+     */
+    private function errorPhpWarnings()
+    {
+        if (substr($this->content, 0, 22) == "<br />\n<b>Warning</b>:") {
+            $this->errors[] = $this->lang->getLL('validation_mail_contains_php_warnings');
         }
+    }
 
-        // Content should not contain PHP-Warnings
-        if (substr($content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
-            $errors [] = $this->lang->getLL('validation_mail_contains_php_errors');
+    /**
+     * Content should not contain PHP-Warnings
+     */
+    private function errorPhpErrors()
+    {
+        if (substr($this->content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
+            $this->errors[] = $this->lang->getLL('validation_mail_contains_php_errors');
         }
+    }
 
-        // If the page contains a "Pages is being generared" text... this is bad too
-        if (strpos($content, 'Page is being generated.') && strpos($content, 'If this message does not disappear within')) {
-            $errors [] = $this->lang->getLL('validation_mail_being_generated');
+    /**
+     * If the page contains a "Pages is being generared" text, this is bad
+     */
+    private function errorPageBeingGenerated()
+    {
+        if (strpos($this->content, 'Page is being generated.') && strpos($this->content, 'If this message does not disappear within')) {
+            $this->errors[] = $this->lang->getLL('validation_mail_being_generated');
         }
+    }
 
+    /**
+     * Fix relative URL to absolute URL
+     */
+    private function infoRelativeToAbsolute()
+    {
         // Find out the absolute domain. If specified in HTML source, use it as is.
-        if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $content, $match)) {
+        if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $this->content, $match)) {
             $absoluteDomain = $match[1];
         }
         // Otherwise try our best to guess what it is
         else {
-            $absoluteDomain = $newsletter->getBaseUrl() . '/';
+            $absoluteDomain = $this->newsletter->getBaseUrl() . '/';
         }
 
-        // Fix relative URL to absolute URL
         $urlPatterns = [
             'hyperlinks' => '/<a [^>]*href="(.*)"/Ui',
             'stylesheets' => '/<link [^>]*href="(.*)"/Ui',
             'images' => '/ src="(.*)"/Ui',
             'background images' => '/ background="(.*)"/Ui',
         ];
+
         foreach ($urlPatterns as $type => $urlPattern) {
-            preg_match_all($urlPattern, $content, $urls);
+            preg_match_all($urlPattern, $this->content, $urls);
             $replacementCount = 0;
             foreach ($urls[1] as $i => $url) {
                 // If this is already an absolute link, dont replace it
                 $decodedUrl = html_entity_decode($url);
                 if (!Uri::isAbsolute($decodedUrl)) {
                     $replace_url = str_replace($decodedUrl, $absoluteDomain . ltrim($decodedUrl, '/'), $urls[0][$i]);
-                    $content = str_replace($urls[0][$i], $replace_url, $content);
+                    $this->content = str_replace($urls[0][$i], $replace_url, $this->content);
                     ++$replacementCount;
                 }
             }
 
             if ($replacementCount) {
-                $infos[] = sprintf($this->lang->getLL('validation_mail_converted_relative_url'), $type);
+                $this->infos[] = sprintf($this->lang->getLL('validation_mail_converted_relative_url'), $type);
             }
         }
+    }
 
-        // Find linked css and convert into a style-tag
-        preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $content, $urls);
+    /**
+     * Find linked css and convert into a <style> tag
+     */
+    private function infoLinkedCss()
+    {
+        preg_match_all('|<link rel="stylesheet" type="text/css" href="([^"]+)"[^>]+>|Ui', $this->content, $urls);
         foreach ($urls[1] as $i => $url) {
-            $content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
-<style type=\"text/css\">\n<!--\n" . $this->getURL($url) . "\n-->\n</style>", $content);
+            $this->content = str_replace($urls[0][$i], "<!-- fetched URL: $url -->
+<style type=\"text/css\">\n<!--\n" . $this->getURL($url) . "\n-->\n</style>", $this->content);
         }
+
         if (count($urls[1])) {
-            $infos[] = $this->lang->getLL('validation_mail_contains_linked_styles');
+            $this->infos[] = $this->lang->getLL('validation_mail_contains_linked_styles');
         }
+    }
 
-        // We cant very well have attached javascript in a newsmail ... removing
-        $content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $content, -1, $count);
+    /**
+     * We cant very well have attached javascript in a newsmail ... removing
+     */
+    private function warningJavascript()
+    {
+        $this->content = preg_replace('|<script[^>]*type="text/javascript"[^>]*>[^<]*</script>|i', '', $this->content, -1, $count);
         if ($count) {
-            $warnings[] = $this->lang->getLL('validation_mail_contains_javascript');
+            $this->warnings[] = $this->lang->getLL('validation_mail_contains_javascript');
         }
+    }
 
-        // Images in CSS
-        if (preg_match('|background-image: url\([^\)]+\)|', $content) || preg_match('|list-style-image: url\([^\)]+\)|', $content)) {
-            $errors[] = $this->lang->getLL('validation_mail_contains_css_images');
+    /**
+     * Find images used via CSS
+     */
+    private function errorImageInCSS()
+    {
+        if (preg_match('|background-image: url\([^\)]+\)|', $this->content) || preg_match('|list-style-image: url\([^\)]+\)|', $this->content)) {
+            $this->errors[] = $this->lang->getLL('validation_mail_contains_css_images');
         }
+    }
 
-        // CSS-classes
-        if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $content)) {
-            $warnings[] = $this->lang->getLL('validation_mail_contains_css_classes');
+    /**
+     * Find CSS classes
+     */
+    private function warningCssClasses()
+    {
+        if (preg_match('|<[a-z]+ [^>]*class="[^"]+"[^>]*>|', $this->content)) {
+            $this->warnings[] = $this->lang->getLL('validation_mail_contains_css_classes');
         }
+    }
 
+    /**
+     * Find forbidden CSS properties
+     */
+    private function warningCssProperties()
+    {
         // Positioning & element sizes in CSS
         $forbiddenCssProperties = [
             'width' => '((min|max)+-)?width',
@@ -189,7 +282,7 @@ class Validator
         ];
 
         $forbiddenCssPropertiesWarnings = [];
-        if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $content, $matches)) {
+        if (preg_match_all('|<[a-z]+[^>]+style="([^"]*)"|', $this->content, $matches)) {
             foreach ($matches[1] as $stylepart) {
                 foreach ($forbiddenCssProperties as $property => $regex) {
                     if (preg_match('/(^|[^\w-])' . $regex . '[^\w-]/', $stylepart)) {
@@ -198,15 +291,22 @@ class Validator
                 }
             }
             foreach ($forbiddenCssPropertiesWarnings as $property) {
-                $warnings[] = sprintf($this->lang->getLL('validation_mail_contains_css_some_property'), $property);
+                $this->warnings[] = sprintf($this->lang->getLL('validation_mail_contains_css_some_property'), $property);
             }
         }
+    }
 
+    /**
+     * Return the structured result
+     * @return array ['content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos]
+     */
+    private function getResult()
+    {
         return [
-            'content' => $content,
-            'errors' => $errors,
-            'warnings' => $warnings,
-            'infos' => $infos,
+            'content' => $this->content,
+            'errors' => $this->errors,
+            'warnings' => $this->warnings,
+            'infos' => $this->infos,
         ];
     }
 }
