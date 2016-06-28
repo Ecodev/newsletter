@@ -372,6 +372,8 @@ class Mailer
         // (created via markers) for each recipient. Only the generic marker is enough.
         // Otherwise we would mess up opened link statistics
         $this->substituteMarkers($email);
+
+        return $this->createMessage($email);
     }
 
     /**
@@ -381,16 +383,16 @@ class Mailer
      */
     public function send(Email $email)
     {
-        $this->prepare($email);
-        $this->rawSend($email);
+        $message = $this->prepare($email);
+        $message->send();
     }
 
     /**
-     * Raw send method. This does not replace markers, or reset the mail afterwards.
+     * Creates the Message object from our current state and returns it
      *
      * @param Email $email
      */
-    private function rawSend(Email $email)
+    private function createMessage(Email $email)
     {
         /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
@@ -434,6 +436,6 @@ class Mailer
             $message->addPart($plain, 'text/plain');
         }
 
-        $message->send();
+        return $message;
     }
 }

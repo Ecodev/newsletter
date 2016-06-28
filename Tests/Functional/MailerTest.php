@@ -50,7 +50,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
 
-        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid'], [], '', false);
+        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid', 'getRecipientAddress'], [], '', false);
+        $this->mockEmail->method('getRecipientAddress')->will($this->returnValue('recipient@example.com'));
         $this->mockEmail->setRecipientData([
             'email' => 'recipient@example.com',
             'my_custom_field' => 'my custom value',
@@ -75,8 +76,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
             $injectOpenSpy,
             $injectLinksSpy,
             $folder . '/input.html',
-            $folder . "/output-$flags.html",
-            $folder . "/output-$flags.txt",
+            $folder . "/output-$flags.eml",
         ];
     }
 
@@ -98,11 +98,10 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
     /**
      * @dataProvider dataProviderTestMailer
      */
-    public function testMailer($pid, $injectOpenSpy, $injectLinksSpy, $inputFile, $expectedHtmlFile, $expectedPlainFile)
+    public function testMailer($pid, $injectOpenSpy, $injectLinksSpy, $inputFile, $expectedEmailFile)
     {
         $input = file_get_contents($inputFile);
-        $expectedHtml = file_get_contents($expectedHtmlFile);
-        $expectedPlain = file_get_contents($expectedPlainFile);
+        $expectedEmail = file_get_contents($expectedEmailFile);
 
         $this->mockNewsletter->method('getValidatedContent')->will($this->returnValue(
                         [
@@ -120,12 +119,10 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $mailer = $this->objectManager->get(\Ecodev\Newsletter\Mailer::class);
 
         $mailer->setNewsletter($this->mockNewsletter);
-        $mailer->prepare($this->mockEmail);
+        $message = $mailer->prepare($this->mockEmail);
+        $actualEmail = $message->toString();
 
-        $actualHtml = $mailer->getHtml();
-        $actualPlain = $mailer->getPlain();
-        $this->assertSame($expectedHtml, $actualHtml);
-        $this->assertSame($expectedPlain, $actualPlain);
+        $this->assertSame($this->unrandomizeEmail($expectedEmail), $this->unrandomizeEmail($actualEmail));
 
         if ($injectLinksSpy) {
             $this->assertLinkWasCreated('http://www.example.com');
@@ -138,10 +135,38 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
      * Assert that there is exactly 1 record corresponding to the given URL
      * @param string $url
      */
-    protected function assertLinkWasCreated($url)
+    private function assertLinkWasCreated($url)
     {
         $db = $this->getDatabaseConnection();
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'url = ' . $db->fullQuoteStr($url, 'tx_newsletter_domain_model_link'));
         $this->assertSame(1, $count, 'could not find exactly 1 log record containing "' . $url . '"');
+    }
+
+    /**
+     * Replace random parts of email with non-random string
+     * @param string $email
+     * @return string
+     */
+    private function unrandomizeEmail($email)
+    {
+        $notRandoms = [];
+        $unRandomize = function ($matched) use (&$notRandoms) {
+            $random = $matched[0];
+            if (!isset($notRandoms[$random])) {
+                $notRandoms[$random] = 'NOT_RANDOM_' . count($notRandoms);
+            }
+
+            return $notRandoms[$random];
+        };
+
+        $randomPatterns = [
+            'Date: .*',
+            '_=_swift_v[\da-f_]+_=_',
+            '[\da-f\n\r=]+@swift.generated',
+        ];
+
+        $unRandomizedEmail = preg_replace_callback('/' . implode('|', $randomPatterns) . '/', $unRandomize, $email);
+
+        return $unRandomizedEmail;
     }
 }

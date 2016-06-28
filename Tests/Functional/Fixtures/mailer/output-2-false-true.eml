@@ -1,0 +1,209 @@
+Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
+Date: Tue, 28 Jun 2016 17:02:10 +0900
+Subject: Newsletter Title
+From: John Connor <noreply@example.com>
+To: recipient@example.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_"
+
+
+--_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+ http://www.example.com this line should never be modified this link
+shou=
+ld be injected [1] this custom link should be injected [2] this
+link shou=
+ld be injected, and marker substituted [3] mailto link should
+still work =
+HTML entities encoded mailto link should still work [4]
+###unknown_field_=
+will_be_kept###
+http://example.com/index.php?id=3D2&type=3D1342671779&tx_=
+newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Bac=
+tion%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+http://example.com=
+/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e43=
+52719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_=
+p%5Bcontroller%5D=3DEmail
+recipient@example.com my custom value
+http://=
+unknown_field_will_be_kept
+http://example.com/index.php?id=3D2&type=3D134=
+2671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsle=
+tter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+http://=
+example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D162=
+1db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_=
+newsletter_p%5Bcontroller%5D=3DEmail
+recipient@example.com my custom valu=
+e
+https://unknown_field_will_be_kept
+https://example.com/index.php?id=
+=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba6=
+17990&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3D=
+Email
+https://example.com/index.php?id=3D2&type=3D1342671779&tx_newslette=
+r_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=
+=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail
+recipient@example.=
+com my custom value boolean_false=3D
+boolean_true=3Dtrue-ish integer_fals=
+e=3D integer_true=3Dtrue-ish
+string_false=3D string_true=3Dtrue-ish boole=
+an_false=3Dfalse-ish
+boolean_true=3Dtrue-ish integer_false=3Dfalse-ish in=
+teger_true=3Dtrue-ish
+string_false=3Dfalse-ish string_true=3Dtrue-ish=20
+=
+
+Links:
+------
+[1] http://example.com/index.php?id=3D2&type=3D1342671=
+779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3Db2ca893c8e2ddb5=
+cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5Bc=
+ontroller%5D=3DLink
+[2] http://example.com/index.php?id=3D2&type=3D134267=
+1779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3D5e0f4eea9bfa81=
+31f3d92fe3e8f07972&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5B=
+controller%5D=3DLink
+[3] http://example.com/index.php?id=3D2&type=3D13426=
+71779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3Dc779ff50a74c8=
+20d70b8d5c5e6739d00&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5=
+Bcontroller%5D=3DLink
+[4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6=
+A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&=
+#x63;&#x6F;&#x6D;
+
+
+--_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_
+Content-Type: multipart/related;
+ boundary="_=_swift_v4_1467100930_6ab14ce4289ba01605321def6d9472cc_=_"
+
+
+--_=_swift_v4_1467100930_6ab14ce4289ba01605321def6d9472cc_=_
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Newsletter Title</ti=
+tle>
+    </head>
+    <body>
+        <!-- HTML comment will be ignored=
+ in plain text -->
+
+        http://www.example.com this line should nev=
+er be modified
+        <a href=3D"http://example.com/index.php?id=3D2&typ=
+e=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3Db2ca=
+893c8e2ddb5cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsl=
+etter_p%5Bcontroller%5D=3DLink">this link should be injected</a>
+        =
+<a href=3D"http://example.com/index.php?id=3D2&type=3D1342671779&tx_newslet=
+ter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3D5e0f4eea9bfa8131f3d92fe3e8f07=
+972&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5Bcontroller%5D=
+=3DLink">this custom link should be injected</a>
+        <a href=3D"http:=
+//example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D1=
+2345&tx_newsletter_p%5Bl%5D=3Dc779ff50a74c820d70b8d5c5e6739d00&tx_newslette=
+r_p%5Baction%5D=3Dclicked&tx_newsletter_p%5Bcontroller%5D=3DLink">this link=
+ should be injected, and marker substituted</a>
+        <a href=3D"mailto=
+:john@example.com">mailto link should still work</a>
+        <a href=3D"&=
+#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x6=
+5;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">HTML entiti=
+es encoded mailto link should still work</a>
+
+        ###unknown_field_=
+will_be_kept###
+        http://example.com/index.php?id=3D2&type=3D134267=
+1779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newslette=
+r_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+        ht=
+tp://example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=
+=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscri=
+be&tx_newsletter_p%5Bcontroller%5D=3DEmail
+        recipient@example.com=
+
+        my custom value
+
+        http://unknown_field_will_be_kept=
+
+        http://example.com/index.php?id=3D2&type=3D1342671779&tx_newslet=
+ter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=
+=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+        http://example.co=
+m/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4=
+352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_newsletter=
+_p%5Bcontroller%5D=3DEmail
+        recipient@example.com
+        my cus=
+tom value
+
+        https://unknown_field_will_be_kept
+        https:/=
+/example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D16=
+21db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsle=
+tter_p%5Bcontroller%5D=3DEmail
+        https://example.com/index.php?id=
+=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba6=
+17990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontrolle=
+r%5D=3DEmail
+        recipient@example.com
+        my custom value
+=
+
+        boolean_false=3D
+        boolean_true=3Dtrue-ish
+        int=
+eger_false=3D
+        integer_true=3Dtrue-ish
+        string_false=3D=
+
+        string_true=3Dtrue-ish
+
+        boolean_false=3Dfalse-ish
+=
+        boolean_true=3Dtrue-ish
+        integer_false=3Dfalse-ish
+     =
+   integer_true=3Dtrue-ish
+        string_false=3Dfalse-ish
+        str=
+ing_true=3Dtrue-ish
+
+        <img src=3D"cid:53ddf332c561cd15b9afcdd794=
+e50281@swift.generated" alt=3D"image"/>
+    </body>
+</html>
+
+
+--_=_swift_v4_1467100930_6ab14ce4289ba01605321def6d9472cc_=_
+Content-Type: image/png; name=tx_newsletter.png
+Content-Transfer-Encoding: base64
+Content-ID: <53ddf332c561cd15b9afcdd794e50281@swift.generated>
+Content-Disposition: inline; filename=tx_newsletter.png
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIkSURBVDjLjZPLaxpRGMWzsHQTpLvusgiF
+7rvuqn9L/4Muu/UxvlAUFa0SUWsU32+jg0iLi1KIohhREWnxTdU4aG2E5vS7AxHSWJvFwJ3H79xz
+zv3mCMDRoSudTksTiUQ+Fotx4XBY8vf7x8CFaDS6CoVCQiAQ4Hw+n+RRAqlUShqPxxm8Ho/HWK1W
+IPjG4/FwLpfr6UGBOzgSiayHwyFoDYoAQRBwdnb22+FwJG0225O9AslkUkof83cwA8/Pz0FxsFgs
+RCcECxaLhTOZTJK9MJW1HgwGIPvMNsgRLjsD6NMNxL5+g9lsvjUajSW9Xv9sB1NZUgJ4KkuEyQG8
+Xi9IFLPZDOaLJt5++IJ3nkt87w9BsKDVal/vhckBqCwx+3Q6RalUwo/ZHO8DFQQ+NZHgP0Oj0Ww5
+jnsjCtBufDAY3E4mE5AI3G63mJ3BJI5isYher4dGq4uPcZ7BNwS/2pVIcN7v99/2+310Oh3k83kR
+Zg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST4
+5MEgUVmjcrksfjSfz9FsNkURtmulUhFdMFihUJzsHWWarOdOp3NbKBTEo2OtL5dL1Ot18DwPyvtL
+Lpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6
+Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==
+
+--_=_swift_v4_1467100930_6ab14ce4289ba01605321def6d9472cc_=_--
+
+
+--_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_--
