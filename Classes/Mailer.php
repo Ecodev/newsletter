@@ -130,7 +130,7 @@ class Mailer
         $this->replytoName = $newsletter->getReplytoName();
         $this->replytoEmail = $newsletter->getReplytoEmail();
         $bounceAccount = $newsletter->getBounceAccount();
-        $this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : '';
+        $this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : null;
 
         // Build html
         $validatedContent = $newsletter->getValidatedContent($language);
@@ -406,9 +406,14 @@ class Mailer
             $message->addReplyTo($this->replytoEmail, $this->replytoName);
         }
 
+        $unsubscribeUrls = ['<' . $email->getUnsubscribeUrl() . '>'];
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);
+            array_unshift($unsubscribeUrls, '<mailto:' . $this->bounceAddress . '?subject=unsubscribe>');
         }
+
+        // Add header for easy unsubscribe, either by email, or standard URL
+        $message->getHeaders()->addTextHeader('List-Unsubscribe', implode(', ', $unsubscribeUrls));
 
         foreach ($this->attachments as $attachment) {
             $message->attach($attachment);

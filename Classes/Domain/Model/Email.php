@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
+use Ecodev\Newsletter\Utility\UriBuilder;
 
 /* * *************************************************************
  *  Copyright notice
@@ -280,5 +281,23 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getUnsubscribed()
     {
         return $this->unsubscribed;
+    }
+
+    /**
+     * Return the URL to view the newsletter
+     * @return string
+     */
+    public function getViewUrl()
+    {
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'show', ['c' => $this->getAuthCode()]);
+    }
+
+    /**
+     * Return the URL to unsubscribe from the newsletter
+     * @return string
+     */
+    public function getUnsubscribeUrl()
+    {
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', ['c' => $this->getAuthCode()]);
     }
 }

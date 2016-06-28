@@ -1,3 +1,4 @@
+Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
 Date: Tue, 28 Jun 2016 17:02:10 +0900
 Subject: Newsletter Title
@@ -6,6 +7,8 @@ To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_"
+List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe>,
+ <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email>
 
 
 --_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_

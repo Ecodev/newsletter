@@ -118,9 +118,8 @@ class MarkerSubstitutor
         $markers = $email->getRecipientData();
 
         // Add predefined markers
-        $authCode = $email->getAuthCode();
-        $markers['newsletter_view_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'show', ['c' => $authCode]);
-        $markers['newsletter_unsubscribe_url'] = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'unsubscribe', ['c' => $authCode]);
+        $markers['newsletter_view_url'] = $email->getViewUrl();
+        $markers['newsletter_unsubscribe_url'] = $email->getUnsubscribeUrl();
 
         return $markers;
     }
