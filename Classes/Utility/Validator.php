@@ -136,6 +136,7 @@ class Validator
         $this->errorImageInCSS();
         $this->warningCssClasses();
         $this->warningCssProperties();
+        $this->infoImageAlt();
 
         return $this->getResult();
     }
@@ -294,6 +295,33 @@ class Validator
                 $this->warnings[] = sprintf($this->lang->getLL('validation_mail_contains_css_some_property'), $property);
             }
         }
+    }
+
+    /**
+     * Inject alt attribute for image that don't have it yet
+     */
+    private function infoImageAlt()
+    {
+        if (!$this->content) {
+            return;
+        }
+
+        $document = new \DOMDocument();
+        @$document->loadHTML($this->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imgs = $document->getElementsByTagName('img');
+        $count = 0;
+        foreach ($imgs as $img) {
+            if (!$img->hasAttribute('alt')) {
+                $img->setAttribute('alt', '');
+                ++$count;
+            }
+        }
+
+        if ($count) {
+            $this->infos[] = sprintf($this->lang->getLL('validation_mail_injected_alt_attribute'), $count);
+        }
+
+        $this->content = trim($document->saveHTML());
     }
 
     /**

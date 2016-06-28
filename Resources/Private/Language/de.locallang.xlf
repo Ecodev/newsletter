@@ -55,6 +55,10 @@
                 <source>Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</source>
                 <target>Das Layout wurde mit der &quot;%1$s&quot; CSS Eigenschaft erstellt. Dies führt in einigen E-Mail Clients zu Fehlern. Verwenden Sie stattdessen das old-style HTML Layout.</target>
             </trans-unit>
+            <trans-unit id="validation_mail_injected_alt_attribute" xml:space="preserve" approved="yes">
+                <source>%1$s images had missing `alt` attributes. Empty values were injected.</source>
+                <target>%1$s Bilder fehlten `alt` Attribute. Leere Werte wurden injiziert.</target>
+            </trans-unit>
             <trans-unit id="none" xml:space="preserve" approved="yes">
                 <source>none</source>
                 <target>keine</target>

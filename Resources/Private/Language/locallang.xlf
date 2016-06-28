@@ -42,6 +42,9 @@
             <trans-unit id="validation_mail_contains_css_some_property" xml:space="preserve">
                 <source>Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</source>
             </trans-unit>
+            <trans-unit id="validation_mail_injected_alt_attribute" xml:space="preserve">
+                <source>%1$s images had missing `alt` attributes. Empty values were injected.</source>
+            </trans-unit>
             <trans-unit id="none" xml:space="preserve">
                 <source>none</source>
             </trans-unit>

@@ -119,7 +119,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             [
                 '<a href="&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">encoded email</a>',
                 [
-                    'content' => '<a href="&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;">encoded email</a>',
+                    'content' => '<a href="mailto:john@example.com">encoded email</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
                     'infos' => [
@@ -128,9 +128,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 ],
             ],
             [
-                '<img src="relative.jpg"/>',
+                '<img src="relative.jpg" alt="relative">',
                 [
-                    'content' => '<img src="http://example.com/relative.jpg"/>',
+                    'content' => '<img src="http://example.com/relative.jpg" alt="relative">',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
                     'infos' => [
@@ -140,9 +140,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 ],
             ],
             [
-                '<img src="http://other-domain.com/absolute.jpg"/>',
+                '<img src="http://other-domain.com/absolute.jpg" alt="absolute">',
                 [
-                    'content' => '<img src="http://other-domain.com/absolute.jpg"/>',
+                    'content' => '<img src="http://other-domain.com/absolute.jpg" alt="absolute">',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
                     'infos' => [
@@ -184,13 +184,25 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 ],
             ],
             [
-                '<p class="bigger"><p>',
+                '<p class="bigger"></p>',
                 [
-                    'content' => '<p class="bigger"><p>',
+                    'content' => '<p class="bigger"></p>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => ['validation_mail_contains_css_classes'],
                     'infos' => [
                         'validation_content_url',
+                    ],
+                ],
+            ],
+            [
+                '<p><img src="http://example.com/no-alt.png"><img src="http://example.com/empty-alt.png" alt=""><img src="http://example.com/alt.png" alt="some text"><svg>unkown tag</svg></p>',
+                [
+                    'content' => '<p><img src="http://example.com/no-alt.png" alt=""><img src="http://example.com/empty-alt.png" alt=""><img src="http://example.com/alt.png" alt="some text"><svg>unkown tag</svg></p>',
+                    'errors' => ['validation_mail_too_short'],
+                    'warnings' => [],
+                    'infos' => [
+                        'validation_content_url',
+                        'validation_mail_injected_alt_attribute',
                     ],
                 ],
             ],
@@ -216,9 +228,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
                 // First property
                 $result[] = [
-                    '<p style="' . $property . ': 10px"><p>',
+                    '<p style="' . $property . ': 10px"></p>',
                     [
-                        'content' => '<p style="' . $property . ': 10px"><p>',
+                        'content' => '<p style="' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
                         'infos' => [
@@ -229,9 +241,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
                 // In the middle
                 $result[] = [
-                    '<p style="color: red;' . $property . ': 10px"><p>',
+                    '<p style="color: red;' . $property . ': 10px"></p>',
                     [
-                        'content' => '<p style="color: red;' . $property . ': 10px"><p>',
+                        'content' => '<p style="color: red;' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
                         'infos' => [
@@ -242,9 +254,9 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
                 // In the middle, but with a space
                 $result[] = [
-                    '<p style="color: red; ' . $property . ': 10px"><p>',
+                    '<p style="color: red; ' . $property . ': 10px"></p>',
                     [
-                        'content' => '<p style="color: red; ' . $property . ': 10px"><p>',
+                        'content' => '<p style="color: red; ' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
                         'infos' => [

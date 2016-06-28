@@ -55,6 +55,10 @@
                 <source>Layout is done by the &quot;%1$s&quot; CSS property. This breaks your layout in numerous MUAs. Use old-style HTML layout instead.</source>
                 <target>La proprieté CSS &quot;%1$s&quot; est utilisée. Cela casse la mise en page dans la plupart des MUA. L'utilisation de mise en page en HTML &quot;à l'ancienne&quot; est recommandée.</target>
             </trans-unit>
+            <trans-unit id="validation_mail_injected_alt_attribute" xml:space="preserve" approved="yes">
+                <source>%1$s images had missing `alt` attributes. Empty values were injected.</source>
+                <target>%1$s images n'avaient pas d'attribut `alt`. Des valeurs vides ont été injectées.</target>
+            </trans-unit>
             <trans-unit id="none" xml:space="preserve" approved="yes">
                 <source>none</source>
                 <target>aucun</target>

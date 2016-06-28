@@ -6,7 +6,8 @@
     "license": "GPL-2.0+",
     "keywords": ["TYPO3 CMS", "newsletter", "email", "statistics"],
     "require": {
-        "ext-mcrypt": "*"
+        "ext-mcrypt": "*",
+        "ext-dom": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^1.11"
