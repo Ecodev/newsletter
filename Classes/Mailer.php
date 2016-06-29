@@ -414,6 +414,7 @@ class Mailer
 
         // Add header for easy unsubscribe, either by email, or standard URL
         $message->getHeaders()->addTextHeader('List-Unsubscribe', implode(', ', $unsubscribeUrls));
+        $message->getHeaders()->addTextHeader('Precedence', 'bulk');
 
         foreach ($this->attachments as $attachment) {
             $message->attach($attachment);
