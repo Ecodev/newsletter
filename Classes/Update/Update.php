@@ -50,7 +50,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
             return;
         }
 
-        $queries = array_merge(self::getQueriesToMigrateClassPathsInRecords(), self::getQueriesToEncryptOldBounceAccountPasswords());
+        $queries = array_merge(self::getQueriesToMigrateClassPathsInRecords(), self::getQueriesToEncryptOldBounceAccountPasswords(), self::getQueriesToGenerateAuthCode());
 
         /* @var $transactedResults \Ecodev\Newsletter\Update\TransactionResult */
         $transactedResults = Transaction::transactInnoDBQueries($queries);
@@ -59,6 +59,18 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
         if (!$transactedResults->complete()) {
             throw new \Exception($transactedResults->getErrorMessage(), 1448435734);
         }
+    }
+
+    /**
+     * Return queries to generate the authCode of emails once and for all
+     *
+     * @return string[]
+     */
+    private static function getQueriesToGenerateAuthCode()
+    {
+        return [
+            "UPDATE tx_newsletter_domain_model_email SET auth_code = MD5(CONCAT(uid, recipient_address)) WHERE NOT auth_code;",
+        ];
     }
 
     /**

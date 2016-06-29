@@ -246,7 +246,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getAuthCode()
     {
         $email = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getUid'], [], '', false);
-        $email->expects($this->once())->method('getUid')->will($this->returnValue(123));
+        $email->expects($this->any())->method('getUid')->will($this->returnValue(123));
         $email->setRecipientAddress('john@example.com');
         $this->assertSame('462aa2b1b9885a181e6d916a409d96c8', $email->getAuthCode());
     }

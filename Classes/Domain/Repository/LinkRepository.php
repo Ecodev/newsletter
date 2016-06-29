@@ -89,15 +89,15 @@ class LinkRepository extends AbstractRepository
         }
 
         // Attempt to find back records in database based on given authCode
-        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_link.url, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
+        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_link.url, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address, tx_newsletter_domain_model_email.auth_code
         FROM tx_newsletter_domain_model_newsletter
 		INNER JOIN tx_newsletter_domain_model_email ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		INNER JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		WHERE
-		MD5(CONCAT(MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)), tx_newsletter_domain_model_link.uid)) = $authCode
+		MD5(CONCAT(tx_newsletter_domain_model_email.auth_code, tx_newsletter_domain_model_link.uid)) = $authCode
         $limitNewsletter");
 
-        if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email) = $TYPO3_DB->sql_fetch_row($rs)) {
+        if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email, $authCodeEmail) = $TYPO3_DB->sql_fetch_row($rs)) {
 
             // Insert a linkopened record to register which user clicked on which link
             $TYPO3_DB->sql_query("
@@ -114,7 +114,6 @@ class LinkRepository extends AbstractRepository
             ");
 
             // Also register the email as opened, just in case if it was not already marked open by the open spy (eg: because end-user did not show image)
-            $authCodeEmail = md5($emailUid . $email);
             $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
             $emailRepository->registerOpen($authCodeEmail);
 

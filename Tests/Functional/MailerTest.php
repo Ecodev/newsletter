@@ -53,8 +53,9 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
         $this->mockNewsletter->method('getBounceAccount')->will($this->returnValue($bounceAccount));
 
-        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid', 'getRecipientAddress'], [], '', false);
+        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid', 'getRecipientAddress', 'getAuthCode'], [], '', false);
         $this->mockEmail->method('getRecipientAddress')->will($this->returnValue('recipient@example.com'));
+        $this->mockEmail->method('getAuthCode')->will($this->returnValue('1621db76eb1e4352719c95f3ba617990'));
         $this->mockEmail->setRecipientData([
             'email' => 'recipient@example.com',
             'my_custom_field' => 'my custom value',

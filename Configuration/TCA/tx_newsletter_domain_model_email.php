@@ -105,5 +105,14 @@ return [
                 'readOnly' => true,
             ],
         ],
+        'auth_code' => [
+            'label' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email.auth_code',
+            'config' => [
+                'type' => 'input',
+                'size' => 32,
+                'readOnly' => true,
+                'eval' => 'trim,required',
+            ],
+        ],
     ],
 ];

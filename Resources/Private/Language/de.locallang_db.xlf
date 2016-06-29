@@ -293,6 +293,10 @@
                 <source>Unsubscribed</source>
                 <target>Abgemeldet</target>
             </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.auth_code" xml:space="preserve" approved="yes">
+                <source>AuthCode</source>
+                <target>AuthCode</target>
+            </trans-unit>
             <trans-unit id="tx_newsletter_domain_model_link" xml:space="preserve" approved="yes">
                 <source>Link</source>
                 <target>Link</target>

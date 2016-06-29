@@ -219,6 +219,9 @@
             <trans-unit id="tx_newsletter_domain_model_email.unsubscribed" xml:space="preserve">
                 <source>Unsubscribed</source>
             </trans-unit>
+            <trans-unit id="tx_newsletter_domain_model_email.auth_code" xml:space="preserve">
+                <source>AuthCode</source>
+            </trans-unit>
             <trans-unit id="tx_newsletter_domain_model_link" xml:space="preserve">
                 <source>Link</source>
             </trans-unit>

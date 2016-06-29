@@ -100,6 +100,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	recipient_data text NOT NULL,
 	newsletter int(11) unsigned DEFAULT '0',
 	unsubscribed tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	auth_code varchar(32) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -112,6 +113,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	KEY newsletter_end_time (newsletter,end_time),
 	KEY newsletter_open_time (newsletter,open_time),
 	KEY newsletter_bounce_time (newsletter,bounce_time),
+	UNIQUE (auth_code),
 ) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_link (

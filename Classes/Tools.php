@@ -144,15 +144,15 @@ abstract class Tools
         $recipientList->init();
         while ($receiver = $recipientList->getRecipient()) {
 
-            // Register the receiver
+            // Register the recipient
             if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($receiver['email'])) {
                 $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', [
                     'pid' => $newsletter->getPid(),
                     'recipient_address' => $receiver['email'],
                     'recipient_data' => serialize($receiver),
-                    'pid' => $newsletter->getPid(),
                     'newsletter' => $newsletter->getUid(),
-                ]);
+                    'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
+                ], ['auth_code']);
                 ++$emailSpooledCount;
             }
         }
@@ -218,6 +218,7 @@ abstract class Tools
 
             // Define the language of email
             $email = $emailRepository->findByUid($emailUid);
+//            var_dump([$email->getUid(),$email->getRecipientAddress(),  $email->getAuthCode()]);die();
             $recipientData = $email->getRecipientData();
             $language = $recipientData['L'];
 

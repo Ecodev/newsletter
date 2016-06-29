@@ -45,7 +45,7 @@ class EmailRepository extends AbstractRepository
 
         global $TYPO3_DB;
         $escaped = $TYPO3_DB->fullQuoteStr($authcode, 'tx_newsletter_domain_model_email');
-        $query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE MD5(CONCAT(`uid`, `recipient_address`)) = ' . $escaped . ' LIMIT 1');
+        $query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE auth_code = ' . $escaped . ' LIMIT 1');
 
         return $query->execute()->getFirst();
     }
@@ -103,7 +103,7 @@ class EmailRepository extends AbstractRepository
         // Minimal sanitization before SQL
         $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
-        $TYPO3_DB->sql_query('UPDATE tx_newsletter_domain_model_email SET open_time = ' . time() . " WHERE open_time = 0 AND MD5(CONCAT(uid, recipient_address)) = $authCode");
+        $TYPO3_DB->sql_query('UPDATE tx_newsletter_domain_model_email SET open_time = ' . time() . " WHERE open_time = 0 AND auth_code = $authCode");
         $updateEmailCount = $TYPO3_DB->sql_affected_rows();
 
         // Tell the target that he opened the email, but only the first time
@@ -113,7 +113,7 @@ class EmailRepository extends AbstractRepository
             FROM tx_newsletter_domain_model_email
             LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
             LEFT JOIN tx_newsletter_domain_model_recipientlist ON (tx_newsletter_domain_model_newsletter.recipient_list = tx_newsletter_domain_model_recipientlist.uid)
-            WHERE MD5(CONCAT(tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_email.recipient_address)) = $authCode AND recipient_list IS NOT NULL
+            WHERE tx_newsletter_domain_model_email.auth_code = $authCode AND recipient_list IS NOT NULL
             LIMIT 1");
 
             if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {

@@ -35,6 +35,7 @@ use Ecodev\Newsletter\Utility\UriBuilder;
  */
 class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
     /**
      * beginTime
      *
@@ -94,6 +95,16 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $unsubscribed = false;
 
     /**
+     * authCode
+     *
+     * The MD5 hash used to identify an email in user content
+     * (So we don't need to expose ID in newsletter content)
+     *
+     * @var string
+     */
+    protected $authCode = '';
+
+    /**
      * Setter for beginTime
      *
      * @param DateTime $beginTime beginTime
@@ -141,6 +152,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRecipientAddress($recipientAddress)
     {
         $this->recipientAddress = $recipientAddress;
+        $this->computeAuthCode();
     }
 
     /**
@@ -174,13 +186,27 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Compute authCode
+     *
+     * @return string authCode
+     */
+    private function computeAuthCode()
+    {
+        if ($this->getUid()) {
+            $this->authCode = md5($this->getUid() . $this->getRecipientAddress());
+        }
+    }
+
+    /**
      * Getter for authCode
+     *
+     * This is set on DB insertion and can never be changed
      *
      * @return string authCode
      */
     public function getAuthCode()
     {
-        return md5($this->getUid() . $this->getRecipientAddress());
+        return $this->authCode;
     }
 
     /**
@@ -300,4 +326,5 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', ['c' => $this->getAuthCode()]);
     }
+
 }
