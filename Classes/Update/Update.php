@@ -69,7 +69,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     private static function getQueriesToGenerateAuthCode()
     {
         return [
-            "UPDATE tx_newsletter_domain_model_email SET auth_code = MD5(CONCAT(uid, recipient_address)) WHERE NOT auth_code;",
+            'UPDATE tx_newsletter_domain_model_email SET auth_code = MD5(CONCAT(uid, recipient_address)) WHERE NOT auth_code;',
         ];
     }
 

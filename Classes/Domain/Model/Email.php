@@ -35,7 +35,6 @@ use Ecodev\Newsletter\Utility\UriBuilder;
  */
 class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * beginTime
      *
@@ -326,5 +325,4 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', ['c' => $this->getAuthCode()]);
     }
-
 }
