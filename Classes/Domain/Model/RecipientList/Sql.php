@@ -2,8 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\BounceHandler;
 use Ecodev\Newsletter\Domain\Model\RecipientList;
+use Ecodev\Newsletter\Utility\EmailParser;
 
 /**
  * This is the basic SQL related newsletter target. Methods implemented with DB calls using SQL query defined by end-user.
@@ -188,9 +188,9 @@ class Sql extends RecipientList
                 ], [
             $TYPO3_DB->fullQuoteStr($email, 'tx_newsletter_domain_model_recipientlist'), // Here we assume the SQL table to recipientList, but it could be something different.
             $bounceLevel,
-            BounceHandler::NEWSLETTER_SOFTBOUNCE,
-            BounceHandler::NEWSLETTER_HARDBOUNCE,
-            BounceHandler::NEWSLETTER_UNSUBSCRIBE,
+            EmailParser::NEWSLETTER_SOFTBOUNCE,
+            EmailParser::NEWSLETTER_HARDBOUNCE,
+            EmailParser::NEWSLETTER_UNSUBSCRIBE,
                 ], $this->getSqlRegisterBounce());
 
         if ($sql) {

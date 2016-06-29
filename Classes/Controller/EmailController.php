@@ -2,11 +2,11 @@
 
 namespace Ecodev\Newsletter\Controller;
 
-use Ecodev\Newsletter\BounceHandler;
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Utility\EmailParser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /* * *************************************************************
@@ -203,7 +203,7 @@ class EmailController extends ExtDirectActionController
     }
 
     /**
-     * Unsubscribe recipient from RecipientList by registering a bounce of level \Ecodev\Newsletter\BounceHandler::NEWSLETTER_UNSUBSCRIBE
+     * Unsubscribe recipient from RecipientList by registering a bounce of level \Ecodev\Newsletter\Utility\EmailParser::NEWSLETTER_UNSUBSCRIBE
      */
     public function unsubscribeAction()
     {
@@ -233,7 +233,7 @@ class EmailController extends ExtDirectActionController
                 $newsletter = $email->getNewsletter();
                 if ($newsletter) {
                     $recipientList = $newsletter->getRecipientList();
-                    $recipientList->registerBounce($email->getRecipientAddress(), BounceHandler::NEWSLETTER_UNSUBSCRIBE);
+                    $recipientList->registerBounce($email->getRecipientAddress(), EmailParser::NEWSLETTER_UNSUBSCRIBE);
                     $success = true;
                     $this->notifyUnsubscribe($newsletter, $recipientList, $email);
                 }

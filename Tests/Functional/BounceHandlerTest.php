@@ -23,28 +23,8 @@ class BounceHandlerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunc
 {
     public function testDispatch()
     {
-        $content = <<<STRING
-Delivered-To: bounce@example.com
-Received: by 10.10.10.10 with SMTP id a59csp784285qge;
-        Thu, 8 Jan 2015 00:07:47 -0800 (PST)
-From: MAILER-DAEMON@example.com (Mail Delivery System)
-Subject: Undelivered Mail Returned to Sender
-To: recipient2@example.com
-Message-ID: <$this->authCode@example.com>
-
-This is the mail system at host mail.example.com.
-
-I'm sorry to have to inform you that your message could not
-be delivered to one or more recipients. It's attached below.
-
-For further assistance, please send mail to postmaster.
-
-If you do so, please include this problem report. You can
-delete your own text from the attached returned message.
-
-                   The mail system
-
-STRING;
+        $filename = dirname(__DIR__) . '/Unit/Fixtures/bounce/2-87c4e9b09085befbb7f20faa7482213a-Undelivered Mail Returned to Sender.eml';
+        $content = file_get_contents($filename);
 
         $bounceHandler = new \Ecodev\Newsletter\BounceHandler($content);
         $bounceHandler->dispatch();

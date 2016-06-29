@@ -2,7 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
-use Ecodev\Newsletter\BounceHandler;
+use Ecodev\Newsletter\Utility\EmailParser;
 
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
@@ -34,13 +34,13 @@ abstract class GentleSql extends Sql
 
         $increment = 0;
         switch ($bounceLevel) {
-            case BounceHandler::NEWSLETTER_UNSUBSCRIBE:
+            case EmailParser::NEWSLETTER_UNSUBSCRIBE:
                 $increment = 10;
                 break;
-            case BounceHandler::NEWSLETTER_HARDBOUNCE:
+            case EmailParser::NEWSLETTER_HARDBOUNCE:
                 $increment = 5;
                 break;
-            case BounceHandler::NEWSLETTER_SOFTBOUNCE:
+            case EmailParser::NEWSLETTER_SOFTBOUNCE:
                 $increment = 1;
                 break;
         }
