@@ -409,7 +409,7 @@ class Mailer
         $unsubscribeUrls = ['<' . $email->getUnsubscribeUrl() . '>'];
         if ($this->bounceAddress) {
             $message->setReturnPath($this->bounceAddress);
-            array_unshift($unsubscribeUrls, '<mailto:' . $this->bounceAddress . '?subject=unsubscribe>');
+            array_unshift($unsubscribeUrls, '<mailto:' . $this->bounceAddress . '?subject=unsubscribe-' . $email->getAuthCode() . '>');
         }
 
         // Add header for easy unsubscribe, either by email, or standard URL

@@ -7,7 +7,7 @@ To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="_=_swift_v4_1467100944_06ef3ce9567384507238783ab8255bdb_=_"
-List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe>,
+List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
  <http://example.com/index.php?id=1&type=1342671779&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email>
 
 
