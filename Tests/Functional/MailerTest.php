@@ -171,15 +171,22 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         $unRandomizedEmail = preg_replace_callback('/' . implode('|', $randomPatterns) . '/', $unRandomize, $email);
 
-        // Sort headers starting with Content-* because order varies between PHP 5.4-5.6 VS PHP 7
+        // Sort some headers because order varies between PHP 5.4-5.6 VS PHP 7
         $sort = function ($matches) {
-            $lines = explode("\r\n", trim($matches[0]));
+
+            // Join multi-lines headers in single line and split each headers
+            $lines = explode("\r\n", trim(str_replace("\r\n ", ' ', $matches[0])));
             sort($lines);
 
             return implode("\r\n", $lines) . "\r\n";
         };
 
-        $sortedEmail = preg_replace_callback('/(Content-.*\r\n){2,}/', $sort, $unRandomizedEmail);
+        $headerPatterns = [
+            'Content-.*\r\n',
+            'Precedence: bulk\r\n',
+            'List-Unsubscribe: .*\r\n.*\r\n',
+        ];
+        $sortedEmail = preg_replace_callback('/((' . implode(')|(', $headerPatterns) . ')){2,}/', $sort, $unRandomizedEmail);
 
         return $sortedEmail;
     }
