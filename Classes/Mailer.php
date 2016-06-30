@@ -5,7 +5,6 @@ namespace Ecodev\Newsletter;
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
 use Ecodev\Newsletter\Utility\UriBuilder;
-use Exception;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
 
@@ -112,7 +111,7 @@ class Mailer
      *
      * @param Newsletter $newsletter
      * @param string $language
-     * @throws Exception
+     * @throws \Exception
      */
     public function setNewsletter(Newsletter $newsletter, $language = null)
     {
@@ -135,7 +134,7 @@ class Mailer
         // Build html
         $validatedContent = $newsletter->getValidatedContent($language);
         if (count($validatedContent['errors'])) {
-            throw new Exception('The newsletter HTML content does not validate. The sending is aborted. See errors: ' . serialize($validatedContent['errors']));
+            throw new \Exception('The newsletter HTML content does not validate. The sending is aborted. See errors: ' . serialize($validatedContent['errors']));
         }
         $this->setHtml($validatedContent['content']);
 

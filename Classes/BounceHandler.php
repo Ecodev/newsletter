@@ -4,7 +4,6 @@ namespace Ecodev\Newsletter;
 
 use DateTime;
 use Ecodev\Newsletter\Utility\EmailParser;
-use Exception;
 
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
@@ -47,7 +46,7 @@ class BounceHandler
         $foo = $exitStatus = null;
         exec("$fetchmail --version 2>&1", $foo, $exitStatus);
         if ($exitStatus) {
-            throw new Exception("fetchmail is not available with path configured via Extension Manager '$fetchmail'. Install fetchmail or update configuration and try again.");
+            throw new \Exception("fetchmail is not available with path configured via Extension Manager '$fetchmail'. Install fetchmail or update configuration and try again.");
         }
 
         // Find all bounce accounts we need to check

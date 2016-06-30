@@ -8,7 +8,6 @@ use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
 use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
-use Exception;
 
 /* * *************************************************************
  *  Copyright notice
@@ -202,7 +201,7 @@ class NewsletterController extends ExtDirectActionController
                     Tools::runSpool($newNewsletter);
 
                     $this->addFlashMessage($this->translate('flashmessage_test_newsletter_sent'), $this->translate('flashmessage_test_newsletter_sent_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
-                } catch (Exception $exception) {
+                } catch (\Exception $exception) {
                     $this->addFlashMessage($exception->getMessage(), $this->translate('flashmessage_test_newsletter_error'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
                 }
             } else {

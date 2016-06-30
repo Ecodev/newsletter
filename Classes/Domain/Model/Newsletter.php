@@ -4,7 +4,6 @@ namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
 use Ecodev\Newsletter\Tools;
-use Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /* * *************************************************************
@@ -301,7 +300,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns an instance of plain converter
-     * @throws Exception
+     * @throws \Exception
      * @return \Ecodev\Newsletter\Domain\Model\IPlainConverter
      */
     public function getPlainConverterInstance()
@@ -316,7 +315,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
 
         if (!($converter instanceof IPlainConverter)) {
-            throw new Exception("$class does not implement \Ecodev\Newsletter\Domain\Model\IPlainConverter");
+            throw new \Exception("$class does not implement \Ecodev\Newsletter\Domain\Model\IPlainConverter");
         }
 
         return $converter;
@@ -750,7 +749,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         // If still no domain, can't continue
         if (!$domain) {
-            throw new Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
+            throw new \Exception("Could not find the domain name. Use Newsletter configuration page to set 'fetch_path'");
         }
 
         // Force scheme if found from domain record, or if fetch_path was not configured properly (before Newsletter 2.6.0)

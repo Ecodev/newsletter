@@ -115,15 +115,16 @@ class Validator
         $this->infos = [];
 
         // We need to catch the exception if domain was not found/configured properly
+        // or if we can't fetch the content (eg: because of improper SSL certificates)
         try {
             $url = $this->newsletter->getContentUrl($language);
-        } catch (Exception $e) {
+            $this->content = $this->getURL($url);
+        } catch (\Exception $e) {
             $this->errors[] = $e->getMessage();
 
             return $this->getResult();
         }
 
-        $this->content = $this->getURL($url);
         $this->infos[] = sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>');
 
         $this->errorTooShort();

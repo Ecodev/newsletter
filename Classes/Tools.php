@@ -152,7 +152,7 @@ abstract class Tools
                     'recipient_data' => serialize($receiver),
                     'newsletter' => $newsletter->getUid(),
                     'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
-                ], ['auth_code']);
+                        ], ['auth_code']);
                 ++$emailSpooledCount;
             }
         }
@@ -218,7 +218,6 @@ abstract class Tools
 
             // Define the language of email
             $email = $emailRepository->findByUid($emailUid);
-//            var_dump([$email->getUid(),$email->getRecipientAddress(),  $email->getAuthCode()]);die();
             $recipientData = $email->getRecipientData();
             $language = $recipientData['L'];
 
@@ -325,10 +324,20 @@ abstract class Tools
     {
         // Specify User-Agent header if we fetch an URL, but not if it's a file on disk
         if (Utility\Uri::isAbsolute($url)) {
-            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, [self::getUserAgent()]);
+            $headers = [self::getUserAgent()];
         } else {
-            return \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url);
+            $headers = [self::getUserAgent()];
         }
+
+        $report = [];
+        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, $headers, $report);
+
+        // Throw Exception if content could not be fetched so that it is properly caught in Validador
+        if ($content === false) {
+            throw new \Exception('Could not fetch "' . $url . '"' . PHP_EOL . 'Error: ' . $report['error'] . PHP_EOL . 'Message: ' . $report['message']);
+        }
+
+        return $content;
     }
 
     /**
