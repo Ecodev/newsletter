@@ -326,7 +326,7 @@ abstract class Tools
         if (Utility\Uri::isAbsolute($url)) {
             $headers = [self::getUserAgent()];
         } else {
-            $headers = [self::getUserAgent()];
+            $headers = null;
         }
 
         $report = [];
