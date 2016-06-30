@@ -123,7 +123,8 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $mailer = $this->objectManager->get(\Ecodev\Newsletter\Mailer::class);
 
         $mailer->setNewsletter($this->mockNewsletter);
-        $message = $mailer->prepare($this->mockEmail);
+        $mailer->prepare($this->mockEmail);
+        $message = $mailer->createMessage($this->mockEmail);
         $actualEmail = $message->toString();
 
         $this->assertSame($this->unrandomizeEmail($expectedEmail), $this->unrandomizeEmail($actualEmail));
