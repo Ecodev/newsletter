@@ -48,5 +48,5 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRe
 // Make a call to update
 if (TYPO3_MODE === 'BE') {
     $dispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
-    $dispatcher->connect(\TYPO3\CMS\Extensionmanager\Service\ExtensionManagementService::class, 'hasInstalledExtensions', \Ecodev\Newsletter\Update\Update::class, 'update');
+    $dispatcher->connect(\TYPO3\CMS\Extensionmanager\Utility\InstallUtility::class, 'afterExtensionInstall', \Ecodev\Newsletter\Update\Update::class, 'afterExtensionInstall');
 }
