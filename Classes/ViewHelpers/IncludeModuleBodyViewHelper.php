@@ -36,7 +36,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * 	<newsletter:includeModuleBody><!-- HTML Content --></newsletter:includeModuleBody>
  * </newsletter:be.moduleContainer>
  *
- * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class IncludeModuleBodyViewHelper extends AbstractViewHelper

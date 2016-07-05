@@ -31,7 +31,6 @@ namespace Ecodev\Newsletter\Update;
  * A model for transaction states of operands
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author marvin-martian https://github.com/marvin-martian
  */
 class TransactionResult
 {

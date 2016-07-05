@@ -34,7 +34,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * 	<newsletter:includeDirectApi />
  * </newsletter:be.moduleContainer>
  *
- * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class ExtDirectProviderViewHelper extends AbstractViewHelper

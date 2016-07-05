@@ -28,7 +28,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
 /**
  * a ViewHelper that holds a pageRenderer Object as instance variable
  *
- * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 abstract class AbstractViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper

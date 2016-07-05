@@ -59,7 +59,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager A reference to the object factory
      * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher The request dispatcher
      * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function __construct(
     \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager, \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher, RequestBuilder $requestBuilder)
@@ -95,9 +94,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * Handles a raw Ext Direct request and sends the respsonse.
-     *
-     * @author Robert Lemke <robert@typo3.org>
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function handleRequest()
     {
@@ -136,7 +132,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * Checks if the request handler can handle the current request.
      *
      * @return bool TRUE if it can handle the request, otherwise FALSE
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function canHandleRequest()
     {
@@ -148,7 +143,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * request.
      *
      * @return int The priority of the request handler
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getPriority()
     {
@@ -160,7 +154,6 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      *
      * @param array $results The collected results from the transaction requests
      * @param Ecodev\Newsletter\MVC\ExtDirect\Request $extDirectRequest
-     * @author Robert Lemke <robert@typo3.org>
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {

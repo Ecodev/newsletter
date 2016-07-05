@@ -36,7 +36,6 @@ class ExtDirectView extends JsonView
      * for rendering a serializable array.
      *
      * @return string An empty string
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function render()
     {
@@ -50,7 +49,6 @@ class ExtDirectView extends JsonView
      * understands.
      *
      * @param array $errors Errors e.g. from mapping results
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function assignErrors(array $errors)
     {

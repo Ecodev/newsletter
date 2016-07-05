@@ -48,8 +48,6 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  * <newsletter:be.moduleContainer pageTitle="foo">your module content</f:be.container>
  * </code>
  *
- * @author      Bastian Waidelich <bastian@typo3.org>
- * @author      Dennis Ahrens <dennis.ahrens@googlemail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class ModuleContainerViewHelper extends AbstractViewHelper

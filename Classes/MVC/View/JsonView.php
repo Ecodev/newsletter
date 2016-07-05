@@ -119,7 +119,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * By default only the variable 'value' will be rendered
      *
      * @param array $variablesToRender
-     * @author Bastian Waidelich <bastian@typo3.org>
      * @api
      */
     public function setVariablesToRender(array $variablesToRender)
@@ -129,7 +128,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
 
     /**
      * @param array $configuration The rendering configuration for this JSON view
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function setConfiguration(array $configuration)
     {
@@ -142,8 +140,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * the result.
      *
      * @return string The JSON encoded variables
-     * @author Sebastian Kurfürst <sebastian@typo3.org>
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      * @api
      */
     public function render()
@@ -161,7 +157,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * array.
      *
      * @return array An array containing the values, ready to be JSON encoded
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      * @api
      */
     protected function renderArray()
@@ -188,7 +183,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * @param mixed $value The value to transform
      * @param mixed $configuration Configuration for transforming the value or NULL
      * @return array The transformed value
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     protected function transformValue($value, $configuration)
     {
@@ -223,8 +217,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * @param object $object Object to traverse
      * @param mixed $configuration Configuration for transforming the given object or NULL
      * @return array Object structure as an aray
-     * @author Christopher Hlubek <hlubek@networkteam.com>
-     * @author Dennis Ahrens <dennis.ahrens@fh-hannover.de>
      */
     protected function transformObject($object, $configuration)
     {

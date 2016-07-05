@@ -36,7 +36,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * 	<newsletter:includeCssFile name="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  *
- * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class IncludeCssFileViewHelper extends AbstractViewHelper

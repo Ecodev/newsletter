@@ -30,7 +30,6 @@ use Ecodev\Newsletter\MVC\View\JsonView;
 /**
  * A Controller used for answering via AJAX speaking JSON
  *
- * @author      Dennis Ahrens <dennis.ahrens@fh-hannover.de>
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
@@ -66,7 +65,6 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * Override parent method to render error message for ExtJS (in JSON).
      * Also append detail about what property failed to error message.
      *
-     * @author Adrien Crivelli
      * @return string
      */
     protected function errorAction()

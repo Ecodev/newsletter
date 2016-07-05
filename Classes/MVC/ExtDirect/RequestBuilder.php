@@ -89,8 +89,6 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      *
      * @throws \Exception
      * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
-     * @author Christopher Hlubek <hlubek@networkteam.com>
-     * @author Robert Lemke <robert@typo3.org>
      */
     protected function buildJsonRequest()
     {
@@ -118,8 +116,6 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      * Builds a Form Post Ext Direct Request
      *
      * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
-     * @author Christopher Hlubek <hlubek@networkteam.com>
-     * @author Robert Lemke <robert@typo3.org>
      * @todo Well... make it work, eh?
      */
     protected function buildFormPostRequest()

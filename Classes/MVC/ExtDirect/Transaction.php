@@ -92,7 +92,6 @@ class Transaction
      * @param string $method The "method" – the "action name" in FLOW3 terms
      * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method
      * @param mixed $tid The ExtDirect transaction id
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function __construct(Request $request, $action, $method, array $data, $tid)
     {
@@ -133,7 +132,6 @@ class Transaction
      * Build a web request for dispatching this Ext Direct transaction
      *
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Request A web request for this transaction
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function buildRequest()
     {
@@ -152,7 +150,6 @@ class Transaction
      * Build a response for dispatching this Ext Direct transaction
      *
      * @return TransactionResponse A response for dispatching this transaction
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function buildResponse()
     {
@@ -163,7 +160,6 @@ class Transaction
      * Getter for action
      *
      * @return string
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getAction()
     {
@@ -174,7 +170,6 @@ class Transaction
      * Getter for method
      *
      * @return string
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getMethod()
     {
@@ -185,7 +180,6 @@ class Transaction
      * Getter for data
      *
      * @return array
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getData()
     {
@@ -196,7 +190,6 @@ class Transaction
      * Getter for type
      *
      * @return string The transaction type, currently always "rpc"
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getType()
     {
@@ -207,7 +200,6 @@ class Transaction
      * Getter for tid
      *
      * @return int
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getTid()
     {
@@ -218,7 +210,6 @@ class Transaction
      * Getter for the controller object name
      *
      * @return string
-     * @author Robert Lemke <robert@typo3.org>
      */
     public function getControllerObjectName()
     {
@@ -231,7 +222,6 @@ class Transaction
      * Getter for the controller object name
      *
      * @return string
-     * @author Dennis Ahrens <dennis.ahrens@fh-hannover.de>
      */
     public function getControllerActionName()
     {
@@ -243,8 +233,6 @@ class Transaction
      * to map them by reflecting on the action parameters.
      *
      * @return array The mapped arguments
-     * @author Robert Lemke <robert@typo3.org>
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     public function getArguments()
     {
@@ -276,7 +264,6 @@ class Transaction
      *
      * @param stdClass $object The object to convert
      * @return array The object converted to an array
-     * @author Christopher Hlubek <hlubek@networkteam.com>
      */
     protected function convertObjectToArray($object)
     {
