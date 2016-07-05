@@ -68,11 +68,6 @@
                                         deferEmptyText : false,
                                         tpl: new Ext.XTemplate(
                                                 '<tpl for=".">',
-                                                '<div><tpl if="status == \'\' ">Child empty</tpl>',
-                                                '<div><tpl if="status ">Child just proper</tpl>',
-                                                '<div><tpl if="status != \'\'">NOT Child</tpl>',
-                                                '<div><tpl if="status == null">null</tpl>',
-                                                '<div><tpl if="status == undefined">null</tpl>',
                                                 '<h2>' + Ext.ux.Ecodev.Newsletter.Language.recent_activity + '</h2><p>{status}</p>',
                                                 '<h2>' + Ext.ux.Ecodev.Newsletter.Language.newsletter_validity + '</h3>',
                                                 '<h3>' + Ext.ux.Ecodev.Newsletter.Language.errors + '</h3>{errors}',
