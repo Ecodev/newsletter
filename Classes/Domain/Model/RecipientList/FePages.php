@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
  * Recipient List using Frontend User stored on a given pages
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class FePages extends GentleSql
 {

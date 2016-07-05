@@ -7,8 +7,6 @@ use Ecodev\Newsletter\Tools;
 
 /**
  * Convert HTML to plain text using external lynx program
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Lynx implements IPlainConverter
 {

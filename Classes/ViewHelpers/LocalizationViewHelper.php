@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
 
 /**
  * Make localization files available in JavaScript
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class LocalizationViewHelper extends AbstractViewHelper
 {

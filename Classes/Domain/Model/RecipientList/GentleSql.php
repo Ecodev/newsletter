@@ -7,8 +7,6 @@ use Ecodev\Newsletter\Utility\EmailParser;
 /**
  * This is a more gentle version on the generic sql-driven target. It is dependant on integer field tx_newsletter_bounce
  * on the $this->getTableName() table.
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class GentleSql extends Sql
 {

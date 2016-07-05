@@ -26,7 +26,7 @@ Newsletter
         newsletter, email, scheduling, bulk email
 
     :Copyright:
-        2010-2015
+        2010-2016
 
     :Author:
         Ecodev
@@ -39,7 +39,7 @@ Newsletter
         available from http://www.opencontent.org/openpub/
 
     :Support:
-        If you need help with this extension, commercial support may be obtained 
+        If you need help with this extension, commercial support may be obtained
         by contacting `www.ecodev.ch <http://www.ecodev.ch>`_.
 
     :Rendered:

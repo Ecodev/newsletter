@@ -8,8 +8,6 @@ use Ecodev\Newsletter\Domain\Model\RecipientList;
  * This is the basic class for extracting recipient from other data sources than the database.
  * Here the internal datastructure is an array.
  * You might extend your class from this if you use external sources.
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 abstract class AbstractArray extends RecipientList
 {

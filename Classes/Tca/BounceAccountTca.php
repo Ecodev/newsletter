@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\Tca;
 
 /**
  * Handle bounced account encryption
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class BounceAccountTca
 {

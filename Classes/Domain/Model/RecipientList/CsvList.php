@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
  * Recipient List using CSV list (values directly input in TYPO3 Backend)
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CsvList extends CsvFile
 {

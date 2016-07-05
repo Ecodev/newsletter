@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
 /**
  * Recipient List using any public URL to fetch and parse for emails addresses
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Html extends AbstractArray
 {

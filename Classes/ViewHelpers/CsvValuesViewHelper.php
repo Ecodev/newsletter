@@ -4,8 +4,6 @@ namespace Ecodev\Newsletter\ViewHelpers;
 
 /**
  * Format array of values to CSV format
- *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CsvValuesViewHelper extends AbstractViewHelper
 {
