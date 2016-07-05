@@ -149,7 +149,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         $unRandomizedEmail = preg_replace_callback('/' . implode('|', $randomPatterns) . '/', $unRandomize, $email);
 
-        // Sort some headers because order varies between PHP 5.4-5.6 VS PHP 7
+        // Sort some headers because order varies between PHP 5.6 VS PHP 7
         $sort = function ($matches) {
 
             // Join multi-lines headers in single line and split each headers

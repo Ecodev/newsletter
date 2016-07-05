@@ -6,6 +6,7 @@
     "license": "GPL-2.0+",
     "keywords": ["TYPO3 CMS", "newsletter", "email", "statistics"],
     "require": {
+        "php" : ">=5.6.0",
         "ext-mcrypt": "*",
         "ext-dom": "*"
     },
