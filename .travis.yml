@@ -38,6 +38,8 @@ matrix:
     - php: 7.0
       env: TYPO3_VERSION=8.1.2
     - php: 7.0
+      env: TYPO3_VERSION=8.2.0
+    - php: 7.0
       env: TYPO3_VERSION=master
   allow_failures:
     - env: TYPO3_VERSION=master
