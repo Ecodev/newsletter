@@ -283,7 +283,7 @@ class Validator
         }
 
         $document = new \DOMDocument();
-        @$document->loadHTML($this->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        @$document->loadHTML('<?xml encoding="utf-8" ?>' . $this->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imgs = $document->getElementsByTagName('img');
         $count = 0;
         foreach ($imgs as $img) {
