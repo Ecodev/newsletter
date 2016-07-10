@@ -60,19 +60,21 @@ string_false=3D string_true=3Dtrue-ish boole=
 an_false=3Dfalse-ish
 boolean_true=3Dtrue-ish integer_false=3Dfalse-ish in=
 teger_true=3Dtrue-ish
-string_false=3Dfalse-ish string_true=3Dtrue-ish=20
-=
+string_false=3Dfalse-ish string_true=3Dtrue-ish UTF=
+-8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
+=E2=9C=93 =E2=82=AC =E2=98=
+=BA =E2=98=B9=20
 =20
 
 Links:
 ------
 [1] http://www.example.com
-[2] http://mycustomva=
-lue
+[2] =
+http://mycustomvalue
 [3] http://www.example.com?param=3Dmycustomvalue
-[4] /&#x6D;&#x61;&=
-#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x6=
-1;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
+[=
+4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40=
+;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
 --_=_swift_v4_1467100924_d359bbc14872d6139a0c7cfb07f684b7_=_
@@ -167,13 +169,16 @@ lse=3Dfalse-ish
 false-ish
         string_true=3Dtrue-ish
 
-        <img src=3D"cid:91b=
-6a27b7fc12237597c43495f68013c@swift.generated" alt=3D"image"/>
-    <div><=
-img src=3D"http://example.com/index.php?id=3D2&type=3D1342671779&tx_newslet=
-ter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=
-=3Dopened&tx_newsletter_p%5Bcontroller%5D=3DEmail" width=3D"0" height=3D"0"=
- /></div></body>
+        UTF-8: k=C3=B6nnen =
+=ED=95=9C=EA=B5=AD=EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
+
+  =
+      <img src=3D"cid:91b6a27b7fc12237597c43495f68013c@swift.generated" alt=
+=3D"image"/>
+    <div><img src=3D"http://example.com/index.php?id=3D2&typ=
+e=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx=
+_newsletter_p%5Baction%5D=3Dopened&tx_newsletter_p%5Bcontroller%5D=3DEmail"=
+ width=3D"0" height=3D"0" /></div></body>
 </html>
 
 

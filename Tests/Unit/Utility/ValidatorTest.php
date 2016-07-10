@@ -183,6 +183,17 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     ],
                 ],
             ],
+            [
+                '<p>Üü können</p>',
+                [
+                    'content' => '<p>&Uuml;&uuml; k&ouml;nnen</p>',
+                    'errors' => ['validation_mail_too_short'],
+                    'warnings' => [],
+                    'infos' => [
+                        'validation_content_url',
+                    ],
+                ],
+            ],
         ];
 
         $forbiddenCssProperties = [

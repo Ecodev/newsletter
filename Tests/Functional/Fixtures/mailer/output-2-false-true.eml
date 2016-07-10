@@ -60,26 +60,28 @@ string_false=3D string_true=3Dtrue-ish boole=
 an_false=3Dfalse-ish
 boolean_true=3Dtrue-ish integer_false=3Dfalse-ish in=
 teger_true=3Dtrue-ish
-string_false=3Dfalse-ish string_true=3Dtrue-ish=20
-=
+string_false=3Dfalse-ish string_true=3Dtrue-ish UTF=
+-8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
+=E2=9C=93 =E2=82=AC =E2=98=
+=BA =E2=98=B9=20
 
 Links:
 ------
-[1] http://example.com/index.php?id=3D2&type=3D1342671=
-779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3Db2ca893c8e2ddb5=
-cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5Bc=
-ontroller%5D=3DLink
-[2] http://example.com/index.php?id=3D2&type=3D134267=
-1779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3D5e0f4eea9bfa81=
-31f3d92fe3e8f07972&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5B=
-controller%5D=3DLink
-[3] http://example.com/index.php?id=3D2&type=3D13426=
-71779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5D=3Dc779ff50a74c8=
-20d70b8d5c5e6739d00&tx_newsletter_p%5Baction%5D=3Dclicked&tx_newsletter_p%5=
-Bcontroller%5D=3DLink
-[4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6=
-A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&=
-#x63;&#x6F;&#x6D;
+[1] http://example.com/index.php?id=
+=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%5=
+D=3Db2ca893c8e2ddb5cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=3Dclicked&=
+tx_newsletter_p%5Bcontroller%5D=3DLink
+[2] http://example.com/index.php?i=
+d=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl%=
+5D=3D5e0f4eea9bfa8131f3d92fe3e8f07972&tx_newsletter_p%5Baction%5D=3Dclicked=
+&tx_newsletter_p%5Bcontroller%5D=3DLink
+[3] http://example.com/index.php?=
+id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl=
+%5D=3Dc779ff50a74c820d70b8d5c5e6739d00&tx_newsletter_p%5Baction%5D=3Dclicke=
+d&tx_newsletter_p%5Bcontroller%5D=3DLink
+[4] /&#x6D;&#x61;&#x69;&#x6C;&#x=
+74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;=
+&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
 --_=_swift_v4_1467100930_0ef960b53620b4307d8ade6916e02f04_=_
@@ -182,9 +184,13 @@ eger_false=3D
         str=
 ing_true=3Dtrue-ish
 
-        <img src=3D"cid:53ddf332c561cd15b9afcdd794=
-e50281@swift.generated" alt=3D"image"/>
-    </body>
+        UTF-8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=
+=EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
+
+        <img src=3D"=
+cid:53ddf332c561cd15b9afcdd794e50281@swift.generated" alt=3D"image"/>
+   =
+ </body>
 </html>
 
 

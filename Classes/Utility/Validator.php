@@ -283,7 +283,8 @@ class Validator
         }
 
         $document = new \DOMDocument();
-        @$document->loadHTML($this->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $prefix = '<?xml encoding="UTF-8">';
+        @$document->loadHTML($prefix . $this->content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imgs = $document->getElementsByTagName('img');
         $count = 0;
         foreach ($imgs as $img) {
@@ -297,7 +298,8 @@ class Validator
             $this->infos[] = sprintf($this->lang->getLL('validation_mail_injected_alt_attribute'), $count);
         }
 
-        $this->content = trim($document->saveHTML());
+        $newContent = trim(preg_replace('/^' . preg_quote($prefix) . '/', '', $document->saveHTML()));
+        $this->content = $newContent;
     }
 
     /**
