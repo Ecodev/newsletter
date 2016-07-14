@@ -3,7 +3,12 @@
 namespace Ecodev\Newsletter;
 
 use DateTime;
+use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Toolbox for newsletter and dependant extensions.
@@ -23,8 +28,7 @@ abstract class Tools
         // Look for a config in the module TS first.
         static $configTS;
         if (!is_array($configTS) && isset($GLOBALS['TYPO3_DB'])) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-            $beConfManager = $objectManager->get(\TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager::class);
+            $beConfManager = self::getObjectManager()->get(\TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager::class);
             $configTS = $beConfManager->getTypoScriptSetup();
             $configTS = $configTS['module.']['tx_newsletter.']['config.'];
         }
@@ -49,7 +53,7 @@ abstract class Tools
      */
     public static function getLogger($class)
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger($class);
+        return GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger($class);
     }
 
     /**
@@ -66,10 +70,10 @@ abstract class Tools
         $mailer = new Mailer();
         $mailer->setNewsletter($newsletter, $language);
 
-        // hook for modifing the mailer before finish preconfiguring
+        // hook for modifying the mailer before finish preconfiguring
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['getConfiguredMailerHook'] as $_classRef) {
-                $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
+                $_procObj = GeneralUtility::getUserObj($_classRef);
                 $mailer = $_procObj->getConfiguredMailerHook($mailer, $newsletter);
             }
         }
@@ -82,8 +86,7 @@ abstract class Tools
      */
     public static function createAllSpool()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $newsletterRepository = self::getNewsletterRepository();
 
         $newsletters = $newsletterRepository->findAllReadyToSend();
         foreach ($newsletters as $newsletter) {
@@ -99,19 +102,16 @@ abstract class Tools
      */
     public static function createSpool(Newsletter $newsletter)
     {
-        global $TYPO3_DB;
-
         // If newsletter is locked because spooling now, or already spooled, then skip
         if ($newsletter->getBeginTime()) {
             return;
         }
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $newsletterRepository = self::getNewsletterRepository();
 
         // Lock the newsletter by setting its begin_time
-        $begintime = new DateTime();
-        $newsletter->setBeginTime($begintime);
+        $beginTime = new DateTime();
+        $newsletter->setBeginTime($beginTime);
         $newsletterRepository->updateNow($newsletter);
 
         $emailSpooledCount = 0;
@@ -120,14 +120,18 @@ abstract class Tools
         while ($receiver = $recipientList->getRecipient()) {
 
             // Register the recipient
-            if (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($receiver['email'])) {
-                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_email', [
-                    'pid' => $newsletter->getPid(),
-                    'recipient_address' => $receiver['email'],
-                    'recipient_data' => serialize($receiver),
-                    'newsletter' => $newsletter->getUid(),
-                    'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
-                        ], ['auth_code']);
+            if (GeneralUtility::validEmail($receiver['email'])) {
+                self::getDatabaseConnection()->exec_INSERTquery(
+                    'tx_newsletter_domain_model_email',
+                    [
+                        'pid' => $newsletter->getPid(),
+                        'recipient_address' => $receiver['email'],
+                        'recipient_data' => serialize($receiver),
+                        'newsletter' => $newsletter->getUid(),
+                        'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
+                    ],
+                    ['auth_code']
+                );
                 ++$emailSpooledCount;
             }
         }
@@ -148,13 +152,13 @@ abstract class Tools
      */
     public static function runAllSpool()
     {
-        global $TYPO3_DB;
+        $databaseConnection = self::getDatabaseConnection();
 
         // Try to detect if a spool is already running
         // If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
         // If there are newer records, then stop here, and assume the running mailer will take care of it.
-        $rs = $TYPO3_DB->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
-        list($num_records) = $TYPO3_DB->sql_fetch_row($rs);
+        $rs = $databaseConnection->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
+        list($num_records) = $databaseConnection->sql_fetch_row($rs);
         if ($num_records != 0) {
             return;
         }
@@ -172,9 +176,8 @@ abstract class Tools
         $emailSentCount = 0;
         $mailers = [];
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
-        $emailRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $newsletterRepository = self::getNewsletterRepository();
+        $emailRepository = self::getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
 
         $allUids = $newsletterRepository->findAllNewsletterAndEmailUidToSend($limitNewsletter);
 
@@ -192,6 +195,7 @@ abstract class Tools
             }
 
             // Define the language of email
+            /** @var Email $email */
             $email = $emailRepository->findByUid($emailUid);
             $recipientData = $email->getRecipientData();
             $language = $recipientData['L'];
@@ -221,6 +225,7 @@ abstract class Tools
 
     /**
      * Returns an base64_encode encrypted string
+     *
      * @param string $string
      * @return string base64_encode encrypted string
      */
@@ -228,11 +233,14 @@ abstract class Tools
     {
         $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
 
-        return base64_encode($iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv));
+        return base64_encode(
+            $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
+        );
     }
 
     /**
      * Returns a decrypted string
+     *
      * @param string $string base64_encode encrypted string
      * @return string decrypted string
      */
@@ -247,6 +255,7 @@ abstract class Tools
 
     /**
      * Returns the size of the IV
+     *
      * @return int
      */
     private static function getIVSize()
@@ -261,6 +270,7 @@ abstract class Tools
 
     /**
      * Returns the secure encryption key
+     *
      * @return string
      */
     private static function getSecureKey()
@@ -275,6 +285,7 @@ abstract class Tools
 
     /**
      * Return the full user agent string to be used in HTTP headers
+     *
      * @return string
      */
     public static function getUserAgent()
@@ -292,6 +303,7 @@ abstract class Tools
 
     /**
      * Fetch and returns the content at specified URL
+     *
      * @param string $url
      * @return string
      */
@@ -305,11 +317,13 @@ abstract class Tools
         }
 
         $report = [];
-        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($url, 0, $headers, $report);
+        $content = GeneralUtility::getUrl($url, 0, $headers, $report);
 
-        // Throw Exception if content could not be fetched so that it is properly caught in Validador
+        // Throw Exception if content could not be fetched so that it is properly caught in Validator
         if ($content === false) {
-            throw new \Exception('Could not fetch "' . $url . '"' . PHP_EOL . 'Error: ' . $report['error'] . PHP_EOL . 'Message: ' . $report['message']);
+            throw new \Exception(
+                'Could not fetch "' . $url . '"' . PHP_EOL . 'Error: ' . $report['error'] . PHP_EOL . 'Message: ' . $report['message']
+            );
         }
 
         return $content;
@@ -317,6 +331,7 @@ abstract class Tools
 
     /**
      * Returns the iconfile prefix
+     *
      * @return string
      */
     public static function getIconfilePrefix()
@@ -328,5 +343,35 @@ abstract class Tools
             // But for TYPO3 6.2 family, we still have to use old style
             return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('newsletter');
         }
+    }
+
+    /**
+     * Returns the ObjectManager
+     *
+     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     */
+    private static function getObjectManager()
+    {
+        return GeneralUtility::makeInstance(ObjectManager::class);
+    }
+
+    /**
+     * Returns the Newsletter Repository
+     *
+     * @return NewsletterRepository
+     */
+    private static function getNewsletterRepository()
+    {
+        return self::getObjectManager()->get(NewsletterRepository::class);
+    }
+
+    /**
+     * Returns the the connection to database
+     *
+     * @return DatabaseConnection
+     */
+    private static function getDatabaseConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
     }
 }
