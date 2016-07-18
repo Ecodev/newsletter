@@ -33,7 +33,7 @@ class MarkerSubstitutor
      * Apply multiple markers to mail contents
      * @param string $src
      * @param Email $email
-     * @param string $name optionnal name to be forwarded to hook
+     * @param string $name optional name to be forwarded to hook
      * @return string url with marker replaced
      */
     public function substituteMarkers($src, Email $email, $name = '')
