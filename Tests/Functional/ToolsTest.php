@@ -27,21 +27,27 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time = 0');
         $this->assertSame(2, $count, 'two emails must have been created but not sent yet');
 
+        $lastInsertedEmail = $db->exec_SELECTgetSingleRow('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time = 0');
+        $this->assertNotSame(md5('0' . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code'], 'the UID used in authCode must never be 0');
+        $this->assertSame(md5($lastInsertedEmail['uid'] . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code'], 'the UID used in authCode should be the real value');
+
         // Prepare a mock to always validate content
+        /** @var \Ecodev\Newsletter\Utility\Validator|\PHPUnit_Framework_MockObject_MockObject $mockValidator */
         $mockValidator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['validate'], [], '', false);
         $mockValidator->method('validate')->will($this->returnValue(
-                        [
-                            'content' => 'some very interesting content <a href="http://example.com/fake-content">link</a>',
-                            'errors' => [],
-                            'warnings' => [],
-                            'infos' => [],
-                        ]
+            [
+                'content' => 'some very interesting content <a href="http://example.com/fake-content">link</a>',
+                'errors' => [],
+                'warnings' => [],
+                'infos' => [],
+            ]
         ));
 
         // Force email to NOT be sent
         global $TYPO3_CONF_VARS;
         $TYPO3_CONF_VARS['MAIL']['transport'] = 'Swift_NullTransport';
 
+        /** @var \Ecodev\Newsletter\Domain\Repository\NewsletterRepository $newsletterRepository */
         $newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
         $newsletter = $newsletterRepository->findByUid(20);
         $newsletter->setValidator($mockValidator);

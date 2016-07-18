@@ -117,21 +117,29 @@ abstract class Tools
         $emailSpooledCount = 0;
         $recipientList = $newsletter->getRecipientList();
         $recipientList->init();
+        $databaseConnection = self::getDatabaseConnection();
         while ($receiver = $recipientList->getRecipient()) {
-
             // Register the recipient
             if (GeneralUtility::validEmail($receiver['email'])) {
-                self::getDatabaseConnection()->exec_INSERTquery(
+                $databaseConnection->exec_INSERTquery(
                     'tx_newsletter_domain_model_email',
                     [
                         'pid' => $newsletter->getPid(),
                         'recipient_address' => $receiver['email'],
                         'recipient_data' => serialize($receiver),
                         'newsletter' => $newsletter->getUid(),
+                    ]
+                );
+
+                $databaseConnection->exec_UPDATEquery(
+                    'tx_newsletter_domain_model_email',
+                    'uid = ' . intval($databaseConnection->sql_insert_id()),
+                    [
                         'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
                     ],
                     ['auth_code']
                 );
+
                 ++$emailSpooledCount;
             }
         }
