@@ -13,7 +13,7 @@ class MarkerSubstitutor
     private $advancedMarkersFound;
 
     /**
-     * Substitude multiple markers to an URL
+     * Substitute multiple markers to an URL
      * @param string $url
      * @param Email $email
      * @return string url with marker replaced
@@ -33,7 +33,7 @@ class MarkerSubstitutor
      * Apply multiple markers to mail contents
      * @param string $src
      * @param Email $email
-     * @param string $name optionnal name to be forwarded to hook
+     * @param string $name optional name to be forwarded to hook
      * @return string url with marker replaced
      */
     public function substituteMarkers($src, Email $email, $name = '')
@@ -75,7 +75,7 @@ class MarkerSubstitutor
         preg_match_all('|"https?://(\w+)"|', $src, $fieldsLinks);
         $this->simpleMarkersFound = array_merge($fields[1], $fieldsLinks[1]);
 
-        // Any advanced IF fields we need to sustitute later on
+        // Any advanced IF fields we need to substitute later on
         $this->advancedMarkersFound = [];
         preg_match_all('/###:IF: (\w+) ###/U', $src, $fields);
         foreach ($fields[1] as $field) {
@@ -132,7 +132,7 @@ class MarkerSubstitutor
 
     /**
      * Substitute an advanced marker
-     * An advanced conditionnal marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
+     * An advanced conditional marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
      * @param string $src Source to apply marker substitution to
      * @param string $name Name of the marker to replace
      * @param string $value Value to replace marker with
