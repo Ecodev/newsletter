@@ -81,8 +81,8 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
 
         $lastInsertedEmail = $db->exec_SELECTgetSingleRow('*', 'tx_newsletter_domain_model_email', 'newsletter = 20 AND begin_time = 0');
 
-        $this->assertNotEquals(md5('0' . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code']);
-        $this->assertEquals(md5($lastInsertedEmail['uid'] . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code']);
+        $this->assertNotSame(md5('0' . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code']);
+        $this->assertSame(md5($lastInsertedEmail['uid'] . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code']);
     }
 
     /**
