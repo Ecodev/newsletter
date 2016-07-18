@@ -213,7 +213,6 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         // Generate additionnal test cases for CSS properties
         foreach ($forbiddenCssProperties as $isForbidden => $properties) {
             foreach ($properties as $property) {
-
                 // First property
                 $result[] = [
                     '<p style="' . $property . ': 10px"></p>',

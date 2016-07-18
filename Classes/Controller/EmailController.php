@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
@@ -17,14 +18,14 @@ class EmailController extends ExtDirectActionController
     /**
      * emailRepository
      *
-     * @var Ecodev\Newsletter\Domain\Repository\EmailRepository
+     * @var \Ecodev\Newsletter\Domain\Repository\EmailRepository
      */
     protected $emailRepository;
 
     /**
      * injectEmailRepository
      *
-     * @param Ecodev\Newsletter\Domain\Repository\EmailRepository $emailRepository
+     * @param \Ecodev\Newsletter\Domain\Repository\EmailRepository $emailRepository
      */
     public function injectEmailRepository(EmailRepository $emailRepository)
     {
@@ -113,6 +114,7 @@ class EmailController extends ExtDirectActionController
         // If it's a preview, an email which was not sent yet, we will simulate it the best we can
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
+            /** @var Newsletter $newsletter */
             $newsletter = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Newsletter::class);
             $newsletter->setPid(@$args['pid']);
             $newsletter->setUidRecipientList(@$args['uidRecipientList']);
