@@ -73,7 +73,6 @@ class LinkRepository extends AbstractRepository
         $limitNewsletter");
 
         if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email, $authCodeEmail) = $TYPO3_DB->sql_fetch_row($rs)) {
-
             // Insert a linkopened record to register which user clicked on which link
             $TYPO3_DB->sql_query("
             INSERT INTO tx_newsletter_domain_model_linkopened (link, email, is_plain, open_time)

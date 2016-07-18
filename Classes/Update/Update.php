@@ -52,7 +52,6 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     {
         $output = '';
         foreach ($this->getQueries() as $title => $queries) {
-
             /* @var $transactedResult \Ecodev\Newsletter\Update\TransactionResult */
             $transactedResult = Transaction::transactInnoDBQueries($queries);
 
