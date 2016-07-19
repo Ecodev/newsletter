@@ -44,7 +44,7 @@ class MarkerSubstitutor
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
                 $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
-                $result = $_procObj->substituteMarkersHook($result, $name, $markers);
+                $result = $_procObj->substituteMarkersHook($result, $name, $markers, $email);
             }
         }
 
