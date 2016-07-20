@@ -8,7 +8,7 @@ use Ecodev\Newsletter\Utility\UriBuilder;
 /**
  * Email
  */
-class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements EmailInterface
 {
     /**
      * beginTime
@@ -130,7 +130,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Getter for recipientAddress
+     * Get the recipient address (eg: john@example.com)
      *
      * @return string recipientAddress
      */
@@ -150,9 +150,12 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Getter for recipientData
+     * Get recipient data.
      *
-     * @return array recipientData
+     * This return an array of all custom data for this recipient. That
+     * typically includes all fields selected in a SQL RecipientList.
+     *
+     * @return string[] recipientData
      */
     public function getRecipientData()
     {
