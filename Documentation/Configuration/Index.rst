@@ -133,14 +133,16 @@ Manager) or via template TypoScript.
 TypoScript Reference
 --------------------
 
-Constants
+Ext Config / Setup
 ^^^^^^^^^
+
+The config constants be set as global constants in extension config (via Extension Manager) and can be overwritten by Typoscript setup. In Typoscript setup the configurations should be **prexied with module.tx_newsletter.**
 
 .. t3-field-list-table::
  :header-rows: 1
 
- - :Constants:
-      Constants (should be prefixed with module.tx_newsletter.)
+ - :Setup:
+      Config
    :Description:
       Description
    :Type:
@@ -148,7 +150,7 @@ Constants
    :Default:
       Default
 
- - :Constants:
+ - :Setup:
       view.templateRootPath
    :Description:
       Path to template root (BE)
@@ -157,7 +159,7 @@ Constants
    :Default:
       EXT:newsletter/Resources/Private/Templates/
 
- - :Constants:
+ - :Setup:
       view.partialRootPath
    :Description:
       Path to template partials (BE)
@@ -166,7 +168,7 @@ Constants
    :Default:
       EXT:newsletter/Resources/Private/Partials/
 
- - :Constants:
+ - :Setup:
       view.layoutRootPath
    :Description:
       Path to template layouts (BE)
@@ -175,7 +177,7 @@ Constants
    :Default:
       EXT:newsletter/Resources/Private/Layouts/
 
- - :Constants:
+ - :Setup:
       config.sender_name
    :Description:
       Default sender name.
@@ -189,7 +191,7 @@ Constants
    :Default:
       user
 
- - :Constants:
+ - :Setup:
       config.sender_email
    :Description:
       Default sender email.
@@ -202,7 +204,7 @@ Constants
    :Default:
       user
 
- - :Constants:
+ - :Setup:
       config.replyto_name
    :Description:
       Default Reply-To name.
@@ -214,7 +216,7 @@ Constants
    :Default:
 
 
- - :Constants:
+ - :Setup:
       config.replyto_email
    :Description:
       Default Reply-To email.
@@ -226,7 +228,7 @@ Constants
    :Default:
 
 
- - :Constants:
+ - :Setup:
       config.notification_email
    :Description:
       Notification email.
@@ -240,7 +242,7 @@ Constants
    :Default:
       user
 
- - :Constants:
+ - :Setup:
       config.fetch_path
    :Description:
       Base URL (scheme + domain + path) from which to fetch content and
@@ -252,7 +254,7 @@ Constants
    :Default:
 
 
- - :Constants:
+ - :Setup:
       config.append_url
    :Description:
       String to append to URL's when fetching content.
@@ -264,7 +266,7 @@ Constants
    :Default:
 
 
- - :Constants:
+ - :Setup:
       config.path_to_lynx
    :Description:
       Path to `Lynx <http://lynx.isc.org/>`_ text web browser.
@@ -277,7 +279,7 @@ Constants
       /usr/bin/lynx
 
 
- - :Constants:
+ - :Setup:
       config.path_to_fetchmail
    :Description:
       Path to `fetchmail <http://www.fetchmail.info/>`_ program.
@@ -289,7 +291,7 @@ Constants
    :Default:
       /usr/bin/fetchmail
 
- - :Constants:
+ - :Setup:
       config.keep_messages
    :Description:
       Keep bounced emails on server.
@@ -302,7 +304,7 @@ Constants
    :Default:
       0
 
- - :Constants:
+ - :Setup:
       config.attach_images
    :Description:
       Attach inline images to newsletters.
@@ -316,7 +318,7 @@ Constants
    :Default:
       1
 
- - :Constants:
+ - :Setup:
       config.mails_per_round
    :Description:
       Number of mails to send per iteration.
@@ -329,7 +331,7 @@ Constants
    :Default:
       100
 
- - :Constants:
+ - :Setup:
       config.unsubscribe_redirect
    :Description:
       Redirect to an external URL or internal Typo3 page.
@@ -342,7 +344,7 @@ Constants
    :Default:
 
 
- - :Constants:
+ - :Setup:
       config.no-track
    :Description:
       A no-track marker.
