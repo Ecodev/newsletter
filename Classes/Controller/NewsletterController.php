@@ -146,7 +146,7 @@ class NewsletterController extends ExtDirectActionController
         $recipientList = $newNewsletter->getRecipientList();
         $recipientList->init();
         $count = $recipientList->getCount();
-        $validatedContent = $newNewsletter->getValidatedContent($language);
+        $validatedContent = $newNewsletter->getValidatedContent();
 
         // If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
