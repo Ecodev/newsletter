@@ -112,7 +112,7 @@ abstract class Tools
         // Lock the newsletter by setting its begin_time
         $beginTime = new DateTime();
         $newsletter->setBeginTime($beginTime);
-        $newsletterRepository->updateNow($newsletter);
+        $newsletterRepository->update($newsletter);
 
         $emailSpooledCount = 0;
         $recipientList = $newsletter->getRecipientList();
@@ -150,7 +150,7 @@ abstract class Tools
 
         // Unlock the newsletter by setting its end_time
         $newsletter->setEndTime(new DateTime());
-        $newsletterRepository->updateNow($newsletter);
+        $newsletterRepository->update($newsletter);
     }
 
     /**
@@ -215,14 +215,14 @@ abstract class Tools
 
             // Mark it as started sending
             $email->setBeginTime(new DateTime());
-            $emailRepository->updateNow($email);
+            $emailRepository->update($email);
 
             // Send the email
             $mailers[$language]->send($email);
 
             // Mark it as sent already
             $email->setEndTime(new DateTime());
-            $emailRepository->updateNow($email);
+            $emailRepository->update($email);
 
             ++$emailSentCount;
         }

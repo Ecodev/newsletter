@@ -144,7 +144,7 @@ class BounceHandler
 
             $this->email->setBounceTime(new DateTime());
             $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
-            $emailRepository->updateNow($this->email);
+            $emailRepository->update($this->email);
         }
 
         Tools::getLogger(__CLASS__)->info('Bounced email found with bounce level ' . $bounceLevel);
