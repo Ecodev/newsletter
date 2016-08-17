@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Recipient List using Backend Users
  */
@@ -49,7 +51,7 @@ class BeUsers extends GentleSql
         $config[] = -1;
         $config = array_filter($config);
 
-        $this->data = $GLOBALS['TYPO3_DB']->sql_query(
+        $this->data = Tools::getDatabaseConnection()->sql_query(
                 'SELECT email, realName, username, lang, admin FROM be_users
 				WHERE uid IN (' . implode(',', $config) . ")
 				AND email <> ''

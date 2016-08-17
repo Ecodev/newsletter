@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\Link
  */
@@ -30,13 +32,12 @@ class LinkRepository extends AbstractRepository
 
     /**
      * Returns the count of links for a given newsletter
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
     {
-        global $TYPO3_DB;
-        $count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'newsletter = ' . $uidNewsletter);
+        $db = Tools::getDatabaseConnection();
+        $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_link', 'newsletter = ' . $uidNewsletter);
 
         return (int) $count;
     }
@@ -44,7 +45,6 @@ class LinkRepository extends AbstractRepository
     /**
      * Register a clicked link in database and forward the event to RecipientList
      * so it can optionnally do something more
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param int|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param bool $isPlain
@@ -52,10 +52,10 @@ class LinkRepository extends AbstractRepository
      */
     public function registerClick($newsletterUid, $authCode, $isPlain)
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // Minimal sanitization before SQL
-        $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_link');
+        $authCode = $db->fullQuoteStr($authCode, 'tx_newsletter_domain_model_link');
         $isPlain = $isPlain ? '1' : '0';
         if ($newsletterUid) {
             $limitNewsletter = 'AND tx_newsletter_domain_model_newsletter.uid = ' . (int) $newsletterUid;
@@ -64,7 +64,7 @@ class LinkRepository extends AbstractRepository
         }
 
         // Attempt to find back records in database based on given authCode
-        $rs = $TYPO3_DB->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_link.url, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address, tx_newsletter_domain_model_email.auth_code
+        $rs = $db->sql_query("SELECT tx_newsletter_domain_model_link.uid, tx_newsletter_domain_model_link.url, tx_newsletter_domain_model_email.uid, tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address, tx_newsletter_domain_model_email.auth_code
         FROM tx_newsletter_domain_model_newsletter
 		INNER JOIN tx_newsletter_domain_model_email ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 		INNER JOIN tx_newsletter_domain_model_link ON (tx_newsletter_domain_model_link.newsletter = tx_newsletter_domain_model_newsletter.uid)
@@ -72,16 +72,16 @@ class LinkRepository extends AbstractRepository
 		MD5(CONCAT(tx_newsletter_domain_model_email.auth_code, tx_newsletter_domain_model_link.uid)) = $authCode
         $limitNewsletter");
 
-        if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email, $authCodeEmail) = $TYPO3_DB->sql_fetch_row($rs)) {
+        if (list($linkUid, $linkUrl, $emailUid, $recipientListUid, $email, $authCodeEmail) = $db->sql_fetch_row($rs)) {
 
             // Insert a linkopened record to register which user clicked on which link
-            $TYPO3_DB->sql_query("
+            $db->sql_query("
             INSERT INTO tx_newsletter_domain_model_linkopened (link, email, is_plain, open_time)
             VALUES ($linkUid, $emailUid, $isPlain, " . time() . ')
             ');
 
             // Increment the total count of clicks for the link itself (so if the linkopened records are deleted, we still know how many times the link was opened)
-            $TYPO3_DB->sql_query("
+            $db->sql_query("
             UPDATE tx_newsletter_domain_model_link
             SET tx_newsletter_domain_model_link.opened_count = tx_newsletter_domain_model_link.opened_count + 1
             WHERE

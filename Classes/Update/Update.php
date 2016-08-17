@@ -22,7 +22,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function __construct()
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
+        $this->databaseConnection = Tools::getDatabaseConnection();
     }
 
     /**

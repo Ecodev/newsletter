@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\Domain\Repository;
 
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Tools;
 
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\Newsletter
@@ -170,7 +171,6 @@ class NewsletterRepository extends AbstractRepository
     /**
      * Fills the $stateDifferences array with incremental difference that the state introduce.
      * It supports merging with existing diff in the array and several states on the same time.
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param array $stateDifferences
      * @param string $from
      * @param string $where
@@ -188,12 +188,12 @@ class NewsletterRepository extends AbstractRepository
             'linkOpenedCount' => 0,
         ];
 
-        /* @var $TYPO3_DB \TYPO3\CMS\Core\Database\DatabaseConnection */
-        global $TYPO3_DB;
+        /* @var $db \TYPO3\CMS\Core\Database\DatabaseConnection */
+        $db = Tools::getDatabaseConnection();
 
-        $rs = $TYPO3_DB->exec_SELECTquery(implode(', ', array_keys($stateConfiguration)), $from, $where);
+        $rs = $db->exec_SELECTquery(implode(', ', array_keys($stateConfiguration)), $from, $where);
         $count = 0;
-        while ($email = $TYPO3_DB->sql_fetch_assoc($rs)) {
+        while ($email = $db->sql_fetch_assoc($rs)) {
             foreach ($stateConfiguration as $stateKey => $stateConf) {
                 $time = $email[$stateKey];
                 if ($time) {
@@ -209,7 +209,7 @@ class NewsletterRepository extends AbstractRepository
             }
             ++$count;
         }
-        $TYPO3_DB->sql_free_result($rs);
+        $db->sql_free_result($rs);
 
         return $count;
     }
@@ -217,13 +217,12 @@ class NewsletterRepository extends AbstractRepository
     /**
      * Find all pairs of newsletter-email UIDs that are should be sent
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param Newsletter $newsletter
      * @return array [[newsletter => 12, email => 5], ...]
      */
     public static function findAllNewsletterAndEmailUidToSend(Newsletter $newsletter = null)
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // Apply limit of emails per round
         $mails_per_round = (int) \Ecodev\Newsletter\Tools::confParam('mails_per_round');
@@ -241,7 +240,7 @@ class NewsletterRepository extends AbstractRepository
         }
 
         // Find the uid of emails and newsletters that need to be sent
-        $rs = $TYPO3_DB->sql_query('SELECT tx_newsletter_domain_model_newsletter.uid AS newsletter, tx_newsletter_domain_model_email.uid AS email
+        $rs = $db->sql_query('SELECT tx_newsletter_domain_model_newsletter.uid AS newsletter, tx_newsletter_domain_model_email.uid AS email
 						FROM tx_newsletter_domain_model_email
 						INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
 						WHERE tx_newsletter_domain_model_email.begin_time = 0
@@ -249,7 +248,7 @@ class NewsletterRepository extends AbstractRepository
 						ORDER BY tx_newsletter_domain_model_email.newsletter ' . $limit);
 
         $result = [];
-        while ($record = $TYPO3_DB->sql_fetch_assoc($rs)) {
+        while ($record = $db->sql_fetch_assoc($rs)) {
             $result[] = $record;
         }
 

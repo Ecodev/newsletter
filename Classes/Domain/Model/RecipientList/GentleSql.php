@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\EmailParser;
 
 /**
@@ -21,14 +22,13 @@ abstract class GentleSql extends Sql
      * Hard bounces count more that soft ones. After 2 hards or 10 softs the user will be disabled.
      * You should be able to reset then in the backend
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $email the email address of the recipient
      * @param int $bounceLevel This is the level of the bounce.
      * @return bool Success of the bounce-handling.
      */
     public function registerBounce($email, $bounceLevel)
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         $increment = 0;
         switch ($bounceLevel) {
@@ -44,11 +44,11 @@ abstract class GentleSql extends Sql
         }
 
         if ($increment) {
-            $TYPO3_DB->sql_query('UPDATE ' . $this->getTableName() . "
+            $db->sql_query('UPDATE ' . $this->getTableName() . "
 						SET tx_newsletter_bounce = tx_newsletter_bounce + $increment
 						WHERE email = '$email'");
 
-            return $TYPO3_DB->sql_affected_rows();
+            return $db->sql_affected_rows();
         }
 
         return false;
@@ -63,7 +63,7 @@ abstract class GentleSql extends Sql
      */
     public function registerClick($email)
     {
-        $GLOBALS['TYPO3_DB']->sql_query('UPDATE ' . $this->getTableName() . "
+        Tools::getDatabaseConnection()->sql_query('UPDATE ' . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
     }
@@ -75,7 +75,7 @@ abstract class GentleSql extends Sql
      */
     public function registerOpen($email)
     {
-        $GLOBALS['TYPO3_DB']->sql_query('UPDATE ' . $this->getTableName() . "
+        Tools::getDatabaseConnection()->sql_query('UPDATE ' . $this->getTableName() . "
 							SET tx_newsletter_bounce = 0
 							WHERE email = '$email'");
     }

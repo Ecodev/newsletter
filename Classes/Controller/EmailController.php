@@ -253,12 +253,12 @@ class EmailController extends ExtDirectActionController
 
         // Use the page-owner as user
         if ($notificationEmail == 'user') {
-            $rs = $GLOBALS['TYPO3_DB']->sql_query('SELECT email
+            $rs = Tools::getDatabaseConnection()->sql_query('SELECT email
 			FROM be_users
 			LEFT JOIN pages ON be_users.uid = pages.perms_userid
 			WHERE pages.uid = ' . $newsletter->getPid());
 
-            list($notificationEmail) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
+            list($notificationEmail) = Tools::getDatabaseConnection()->sql_fetch_row($rs);
         }
 
         // If cannot find valid email, don't send any notification

@@ -363,12 +363,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * or the sender name defined in $TYPO3_CONF_VARS['EXTCONF']['newsletter']['senderName']
      * or The sites name as defined in $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string The name of the newsletter sender
      */
     public function getSenderName()
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // Return the senderName defined on the newsletter
         if ($this->senderName) {
@@ -379,12 +378,12 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $sender = Tools::confParam('sender_name');
         if ($sender == 'user') {
             // Use the page-owner as user
-            $rs = $GLOBALS['TYPO3_DB']->sql_query("SELECT realName
+            $rs = $db->sql_query("SELECT realName
 							  FROM be_users
 							  LEFT JOIN pages ON be_users.uid = pages.perms_userid
 							  WHERE pages.uid = $this->pid");
 
-            list($sender) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
+            list($sender) = $db->sql_fetch_row($rs);
             if ($sender) {
                 return $sender;
             }
@@ -417,12 +416,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * or the guessed email address of the user running the this process.
      * or the no-reply@$_SERVER['HTTP_HOST'].
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string The email of the newsletter sender
      */
     public function getSenderEmail()
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         /* The sender defined on the page? */
         if (GeneralUtility::validEmail($this->senderEmail)) {
@@ -433,12 +431,12 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $email = Tools::confParam('sender_email');
         if ($email == 'user') {
             /* Use the page-owner as user */
-            $rs = $TYPO3_DB->sql_query("SELECT email
+            $rs = $db->sql_query("SELECT email
 			FROM be_users bu
 			LEFT JOIN pages p ON bu.uid = p.perms_userid
 			WHERE p.uid = $this->pid");
 
-            list($email) = $GLOBALS['TYPO3_DB']->sql_fetch_row($rs);
+            list($email) = Tools::getDatabaseConnection()->sql_fetch_row($rs);
             if (GeneralUtility::validEmail($email)) {
                 return $email;
             }
@@ -679,12 +677,11 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the proper base URL (scheme + domain + path) from which to fetch content for newsletter.
      * This is either a sys_domain record from the page tree or the fetch_path property.
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string Base URL, eg: https://www.example.com/path
      */
     public function getBaseUrl()
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // Is anything hardcoded from TYPO3_CONF_VARS ?
         $domain = Tools::confParam('fetch_path');
@@ -694,7 +691,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $pids = array_reverse(\TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid));
             foreach ($pids as $page) {
                 /* Domains */
-                $rs = $TYPO3_DB->sql_query("SELECT domainName FROM sys_domain
+                $rs = $db->sql_query("SELECT domainName FROM sys_domain
 								INNER JOIN pages ON sys_domain.pid = pages.uid
 								WHERE NOT sys_domain.hidden
 								AND NOT pages.hidden
@@ -703,8 +700,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 								ORDER BY sys_domain.sorting
 								LIMIT 0,1");
 
-                if ($TYPO3_DB->sql_num_rows($rs)) {
-                    list($domain) = $TYPO3_DB->sql_fetch_row($rs);
+                if ($db->sql_num_rows($rs)) {
+                    list($domain) = $db->sql_fetch_row($rs);
                 }
             }
         }
@@ -747,17 +744,16 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the title, NOT localized, of the page sent by this newsletter.
      * This should only used for BE, because newsletter recipients need localized title
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @return string the title
      */
     public function getTitle()
     {
-        global $TYPO3_DB;
-        $rs = $TYPO3_DB->sql_query("SELECT title FROM pages WHERE uid = $this->pid");
+        $db = Tools::getDatabaseConnection();
+        $rs = $db->sql_query("SELECT title FROM pages WHERE uid = $this->pid");
 
         $title = '';
-        if ($TYPO3_DB->sql_num_rows($rs)) {
-            list($title) = $TYPO3_DB->sql_fetch_row($rs);
+        if ($db->sql_num_rows($rs)) {
+            list($title) = $db->sql_fetch_row($rs);
         }
 
         return $title;
@@ -765,7 +761,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Schedule the next newsletter if it defined to be repeated
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function scheduleNextNewsletter()
     {
@@ -793,8 +788,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         // Clone this newsletter and give the new plannedTime
         // We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
-        global $TYPO3_DB;
-        $TYPO3_DB->sql_query("INSERT INTO tx_newsletter_domain_model_newsletter
+        $db = Tools::getDatabaseConnection();
+        $db->sql_query("INSERT INTO tx_newsletter_domain_model_newsletter
         (uid, pid, planned_time, begin_time, end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, tstamp, crdate, deleted, hidden)
 		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . ' AS tstamp, ' . time() . ' AS crdate, deleted, hidden
 		FROM tx_newsletter_domain_model_newsletter WHERE uid = ' . $this->getUid());
@@ -822,18 +817,17 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Get the number of not yet sent email
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public function getEmailNotSentCount()
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // If the newsletter didn't start, then it means all emails are "not sent"
         if (!$this->getBeginTime()) {
             return $this->getEmailCount();
         }
 
-        $numberOfNotSent = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
+        $numberOfNotSent = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'end_time = 0 AND newsletter = ' . $this->getUid());
 
         return (int) $numberOfNotSent;
     }

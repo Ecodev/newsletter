@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Controller;
 
+use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\UriBuilder;
 
 /**
@@ -29,7 +30,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function indexAction()
     {
         $pageType = '';
-        $record = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('doktype', 'pages', 'uid =' . $this->pageId);
+        $record = Tools::getDatabaseConnection()->exec_SELECTgetSingleRow('doktype', 'pages', 'uid =' . $this->pageId);
         if (!empty($record['doktype']) && $record['doktype'] == 254) {
             $pageType = 'folder';
         } elseif (!empty($record['doktype'])) {

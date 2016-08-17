@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\Email
  */
@@ -18,8 +20,8 @@ class EmailRepository extends AbstractRepository
     {
         $query = $this->createQuery();
 
-        global $TYPO3_DB;
-        $escaped = $TYPO3_DB->fullQuoteStr($authcode, 'tx_newsletter_domain_model_email');
+        $db = Tools::getDatabaseConnection();
+        $escaped = $db->fullQuoteStr($authcode, 'tx_newsletter_domain_model_email');
         $query->statement('SELECT * FROM `tx_newsletter_domain_model_email` WHERE auth_code = ' . $escaped . ' LIMIT 1');
 
         return $query->execute()->getFirst();
@@ -27,7 +29,6 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Returns the count of emails for a given newsletter
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
@@ -37,8 +38,8 @@ class EmailRepository extends AbstractRepository
             return self::$emailCountCache[$uidNewsletter];
         }
 
-        global $TYPO3_DB;
-        $count = $TYPO3_DB->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
+        $db = Tools::getDatabaseConnection();
+        $count = $db->exec_SELECTcountRows('*', 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter);
         self::$emailCountCache[$uidNewsletter] = $count;
 
         return (int) $count;
@@ -68,22 +69,21 @@ class EmailRepository extends AbstractRepository
     /**
      * Register an open email in database and forward the event to RecipientList
      * so it can optionnally do something more
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param string $authCode
      */
     public function registerOpen($authCode)
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
 
         // Minimal sanitization before SQL
-        $authCode = $TYPO3_DB->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
+        $authCode = $db->fullQuoteStr($authCode, 'tx_newsletter_domain_model_email');
 
-        $TYPO3_DB->sql_query('UPDATE tx_newsletter_domain_model_email SET open_time = ' . time() . " WHERE open_time = 0 AND auth_code = $authCode");
-        $updateEmailCount = $TYPO3_DB->sql_affected_rows();
+        $db->sql_query('UPDATE tx_newsletter_domain_model_email SET open_time = ' . time() . " WHERE open_time = 0 AND auth_code = $authCode");
+        $updateEmailCount = $db->sql_affected_rows();
 
         // Tell the target that he opened the email, but only the first time
         if ($updateEmailCount) {
-            $rs = $TYPO3_DB->sql_query("
+            $rs = $db->sql_query("
             SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.recipient_address
             FROM tx_newsletter_domain_model_email
             LEFT JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
@@ -91,7 +91,7 @@ class EmailRepository extends AbstractRepository
             WHERE tx_newsletter_domain_model_email.auth_code = $authCode AND recipient_list IS NOT NULL
             LIMIT 1");
 
-            if (list($recipientListUid, $emailAddress) = $TYPO3_DB->sql_fetch_row($rs)) {
+            if (list($recipientListUid, $emailAddress) = $db->sql_fetch_row($rs)) {
                 $recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
                 $recipientList = $recipientListRepository->findByUid($recipientListUid);
                 if ($recipientList) {

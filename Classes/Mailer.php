@@ -243,7 +243,7 @@ class Mailer
      */
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
         $url = html_entity_decode($url);
 
         // First check in our local cache
@@ -257,20 +257,20 @@ class Mailer
         // Finally if it's not a preview and link was not in cache, check database
         else {
             // Look for the link database, it may already exist
-            $res = $TYPO3_DB->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = ' . $TYPO3_DB->fullQuoteStr($url, 'tx_newsletter_domain_model_link') . ' AND newsletter = ' . $TYPO3_DB->fullQuoteStr($this->newsletter->getUid(), 'tx_newsletter_domain_model_link') . ' LIMIT 1');
-            $row = $TYPO3_DB->sql_fetch_row($res);
+            $res = $db->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = ' . $db->fullQuoteStr($url, 'tx_newsletter_domain_model_link') . ' AND newsletter = ' . $db->fullQuoteStr($this->newsletter->getUid(), 'tx_newsletter_domain_model_link') . ' LIMIT 1');
+            $row = $db->sql_fetch_row($res);
             if ($row) {
                 $linkId = $row[0];
             }
             // Otherwise create it
             else {
-                $TYPO3_DB->exec_INSERTquery('tx_newsletter_domain_model_link', [
+                $db->exec_INSERTquery('tx_newsletter_domain_model_link', [
                     'pid' => $this->newsletter->getPid(),
                     'url' => $url,
                     'newsletter' => $this->newsletter->getUid(),
                 ]);
 
-                $linkId = $TYPO3_DB->sql_insert_id();
+                $linkId = $db->sql_insert_id();
             }
         }
 

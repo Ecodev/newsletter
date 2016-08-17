@@ -97,7 +97,6 @@ abstract class Tools
     /**
      * Spool a newsletter page out to the real receivers.
      *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      * @param Newsletter $newsletter
      */
     public static function createSpool(Newsletter $newsletter)
@@ -117,11 +116,11 @@ abstract class Tools
         $emailSpooledCount = 0;
         $recipientList = $newsletter->getRecipientList();
         $recipientList->init();
-        $databaseConnection = self::getDatabaseConnection();
+        $db = self::getDatabaseConnection();
         while ($receiver = $recipientList->getRecipient()) {
             // Register the recipient
             if (GeneralUtility::validEmail($receiver['email'])) {
-                $databaseConnection->exec_INSERTquery(
+                $db->exec_INSERTquery(
                     'tx_newsletter_domain_model_email',
                     [
                         'pid' => $newsletter->getPid(),
@@ -131,9 +130,9 @@ abstract class Tools
                     ]
                 );
 
-                $databaseConnection->exec_UPDATEquery(
+                $db->exec_UPDATEquery(
                     'tx_newsletter_domain_model_email',
-                    'uid = ' . intval($databaseConnection->sql_insert_id()),
+                    'uid = ' . intval($db->sql_insert_id()),
                     [
                         'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
                     ],
@@ -155,18 +154,16 @@ abstract class Tools
 
     /**
      * Run the spool for all Newsletters, with a security to avoid parallel sending
-     *
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     public static function runAllSpool()
     {
-        $databaseConnection = self::getDatabaseConnection();
+        $db = self::getDatabaseConnection();
 
         // Try to detect if a spool is already running
         // If there is no records for the last 15 seconds, previous spool session is assumed to have ended.
         // If there are newer records, then stop here, and assume the running mailer will take care of it.
-        $rs = $databaseConnection->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
-        list($num_records) = $databaseConnection->sql_fetch_row($rs);
+        $rs = $db->sql_query('SELECT COUNT(uid) FROM tx_newsletter_domain_model_email WHERE end_time > ' . (time() - 15));
+        list($num_records) = $db->sql_fetch_row($rs);
         if ($num_records != 0) {
             return;
         }
@@ -378,7 +375,7 @@ abstract class Tools
      *
      * @return DatabaseConnection
      */
-    private static function getDatabaseConnection()
+    public static function getDatabaseConnection()
     {
         return $GLOBALS['TYPO3_DB'];
     }

@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Recipient List using Frontend Groups
  */
@@ -49,7 +51,7 @@ class FeGroups extends GentleSql
         $groups[] = -1;
         $groups = array_filter($groups);
 
-        $this->data = $GLOBALS['TYPO3_DB']->sql_query(
+        $this->data = Tools::getDatabaseConnection()->sql_query(
                 'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,fe_groups.title as group_title
 				FROM fe_groups, fe_users
 				WHERE fe_groups.uid IN (' . implode(',', $groups) . ")

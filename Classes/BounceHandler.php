@@ -92,11 +92,10 @@ class BounceHandler
 
     /**
      * Attempt to find the email in database which were bounced
-     * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
      */
     protected function findEmail()
     {
-        global $TYPO3_DB;
+        $db = Tools::getDatabaseConnection();
         $this->email = null;
         $this->recipientList = null;
 
@@ -104,7 +103,7 @@ class BounceHandler
         if ($authCode) {
 
             // Find the recipientList and email UIDs according to authcode
-            $rs = $TYPO3_DB->sql_query("
+            $rs = $db->sql_query("
 			SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.uid
 			FROM tx_newsletter_domain_model_email
 			INNER JOIN tx_newsletter_domain_model_newsletter ON (tx_newsletter_domain_model_email.newsletter = tx_newsletter_domain_model_newsletter.uid)
@@ -112,7 +111,7 @@ class BounceHandler
 			WHERE tx_newsletter_domain_model_email.auth_code = '$authCode' AND recipient_list IS NOT NULL
 			LIMIT 1");
 
-            if (list($recipientListUid, $emailUid) = $TYPO3_DB->sql_fetch_row($rs)) {
+            if (list($recipientListUid, $emailUid) = $db->sql_fetch_row($rs)) {
                 $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
                 $this->email = $emailRepository->findByUid($emailUid);
 

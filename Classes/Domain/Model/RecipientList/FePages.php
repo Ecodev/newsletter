@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Recipient List using Frontend User stored on a given pages
  */
@@ -49,7 +51,7 @@ class FePages extends GentleSql
         $config[] = -1;
         $config = array_filter($config);
 
-        $this->data = $GLOBALS['TYPO3_DB']->sql_query(
+        $this->data = Tools::getDatabaseConnection()->sql_query(
                 'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
 				FROM pages
 				INNER JOIN fe_users ON pages.uid = fe_users.pid
