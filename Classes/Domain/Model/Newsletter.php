@@ -768,20 +768,28 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         list($year, $month, $day, $hour, $minute) = explode('-', date('Y-n-j-G-i', $plannedTime->format('U')));
 
         switch ($this->getRepetition()) {
-            case 0: return;
-            case 1: $day += 1;
+            case 0:
+                return;
+            case 1:
+                $day += 1;
                 break;
-            case 2: $day += 7;
+            case 2:
+                $day += 7;
                 break;
-            case 3: $day += 14;
+            case 3:
+                $day += 14;
                 break;
-            case 4: $month += 1;
+            case 4:
+                $month += 1;
                 break;
-            case 5: $month += 3;
+            case 5:
+                $month += 3;
                 break;
-            case 6: $month += 6;
+            case 6:
+                $month += 6;
                 break;
-            case 7: $year += 1;
+            case 7:
+                $year += 1;
                 break;
         }
         $newPlannedTime = mktime($hour, $minute, 0, $month, $day, $year);
