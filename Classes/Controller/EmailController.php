@@ -185,8 +185,6 @@ class EmailController extends ExtDirectActionController
     public function unsubscribeAction()
     {
         $success = false;
-        $newsletter = null;
-        $email = null;
         $recipientAddress = null;
 
         $args = $this->request->getArguments();

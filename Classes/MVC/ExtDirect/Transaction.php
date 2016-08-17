@@ -192,8 +192,6 @@ class Transaction
      */
     public function getControllerObjectName()
     {
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-
         return 'Ecodev\\Newsletter\\Controller\\' . $this->action;
     }
 
@@ -231,8 +229,6 @@ class Transaction
                     $arguments[$name] = $this->convertObjectToArray($this->data[$parameterIndex]);
                 }
             }
-        } else {
-            // TODO Reuse setArgumentsFromRawRequestData from Web/RequestBuilder
         }
 
         return $arguments;

@@ -102,7 +102,7 @@ class LinkRepository extends AbstractRepository
             // Finally replace markers that may be present in URL (typically for http://newsletter_view_url, but also any other markers)
             $emailObject = $emailRepository->findByUid($emailUid);
             $substitutor = new \Ecodev\Newsletter\Utility\MarkerSubstitutor();
-            $finalLinkUrl = $substitutor->substituteMarkersInUrl($linkUrl, $emailObject, 'link');
+            $finalLinkUrl = $substitutor->substituteMarkersInUrl($linkUrl, $emailObject);
 
             return $finalLinkUrl;
         }

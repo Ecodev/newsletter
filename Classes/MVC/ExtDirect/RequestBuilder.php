@@ -53,7 +53,6 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
         $postArguments = $_POST;
         if (isset($postArguments['extAction'])) {
             throw new EcodevNewsletterException('Form Post Request building is not yet implemented.', 1281379502);
-            $request = $this->buildFormPostRequest($postArguments);
         } else {
             $request = $this->buildJsonRequest();
         }
@@ -88,24 +87,5 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
         }
 
         return $request;
-    }
-
-    /**
-     * Builds a Form Post Ext Direct Request
-     *
-     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
-     * @todo Well... make it work, eh?
-     */
-    protected function buildFormPostRequest()
-    {
-        $directRequest->setFormPost(true);
-        $directRequest->setFileUpload($request->getArgument('extUpload') === 'true');
-
-        $packageKey = $request->getArgument('packageKey');
-        $subpackageKey = $request->hasArgument('subpackageKey') ? $request->getArgument('subpackageKey') : '';
-
-        $directRequest->addTransaction(
-                $request->getArgument('extAction'), $request->getArgument('extMethod'), null, $request->getArgument('extTID'), $packageKey, $subpackageKey
-        );
     }
 }

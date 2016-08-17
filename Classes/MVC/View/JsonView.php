@@ -123,9 +123,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      */
     public function render()
     {
-        // extjs file upload forms can handle application/json
-        // the RequestHandlers take care of the ContentType
-        //$this->controllerContext->getResponse()->setHeader('Content-Type', 'application/json');
         $propertiesToRender = $this->renderArray();
 
         return json_encode($propertiesToRender);
@@ -223,7 +220,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
                 $propertiesToRender[$propertyName] = $propertyValue;
             } elseif (isset($configuration['_descend']) && array_key_exists($propertyName, $configuration['_descend'])) {
                 $propertiesToRender[$propertyName] = $this->transformValue($propertyValue, $configuration['_descend'][$propertyName]);
-            } else {
             }
         }
         if (isset($configuration['_exposeObjectIdentifier']) && $configuration['_exposeObjectIdentifier'] === true) {
