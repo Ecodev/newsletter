@@ -840,6 +840,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the URL of the content of this newsletter
+     * @param int $language
      * @return string
      */
     public function getContentUrl($language = null)

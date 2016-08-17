@@ -13,7 +13,7 @@ class Transaction
      * I am assuming you know what queries you are throwing into this method.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param array $queries
+     * @param string[] $queries
      *            An array of SQL queries.
      * @return \Ecodev\Newsletter\Update\TransactionResult
      */
@@ -44,7 +44,7 @@ class Transaction
      * Executes an array of database queries.
      *
      * @global \TYPO3\CMS\Core\Database\DatabaseConnection $TYPO3_DB
-     * @param array $queries
+     * @param string[] $queries
      *            An array of SQL queries.
      * @return \Ecodev\Newsletter\Update\TransactionResult
      */

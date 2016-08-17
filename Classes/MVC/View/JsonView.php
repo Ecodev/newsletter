@@ -21,7 +21,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
     /**
      * Only variables whose name is contained in this array will be rendered
      *
-     * @var array
+     * @var string[]
      */
     protected $variablesToRender = ['value'];
 
@@ -97,7 +97,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * Specifies which variables this JsonView should render
      * By default only the variable 'value' will be rendered
      *
-     * @param array $variablesToRender
+     * @param string[] $variablesToRender
      * @api
      */
     public function setVariablesToRender(array $variablesToRender)

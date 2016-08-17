@@ -23,9 +23,9 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
 
     /**
      * Update the object immediately in DB. This is used for time-sensitive operation such as locks.
-     * @param object $modifiedObject
+     * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $modifiedObject
      */
-    public function updateNow($modifiedObject)
+    public function updateNow(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $modifiedObject)
     {
         parent::update($modifiedObject);
         $this->persistenceManager->persistAll();
@@ -35,7 +35,7 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      * Override parent method to update the object and persist changes immediately. By commiting immediately
      * stay compatible with raw sql query via $TYPO3_DB.
      * TODO this method should be destroyed once "old code" is completely replaced with extbase concepts
-     * @param object $modifiedObject
+     * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $modifiedObject
      */
     public function update($modifiedObject)
     {

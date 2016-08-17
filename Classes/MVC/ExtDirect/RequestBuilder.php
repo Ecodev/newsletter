@@ -36,7 +36,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
     /**
      * Injects the ConfigurationManager
      *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
      */
     public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager)
     {

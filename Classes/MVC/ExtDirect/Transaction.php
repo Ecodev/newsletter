@@ -66,7 +66,7 @@ class Transaction
     /**
      * Constructs the Transaction
      *
-     * @param Ecodev\Newsletter\MVC\ExtDirect\Request $request The direct request this transaction belongs to
+     * @param Request $request The direct request this transaction belongs to
      * @param string $action The "action" – the "controller object name" in FLOW3 terms
      * @param string $method The "method" – the "action name" in FLOW3 terms
      * @param array $data Numeric array of arguments which are eventually passed to the FLOW3 action method

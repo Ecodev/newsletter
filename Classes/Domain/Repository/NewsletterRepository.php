@@ -24,6 +24,9 @@ class NewsletterRepository extends AbstractRepository
         return $query->execute()->getFirst();
     }
 
+    /**
+     * @param int $pid
+     */
     public function findAllByPid($pid)
     {
         if ($pid < 1) {

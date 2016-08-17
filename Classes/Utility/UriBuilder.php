@@ -16,6 +16,10 @@ abstract class UriBuilder
      */
     private static $uriBuilder = [];
 
+    /**
+     * @param int $currentPid
+     * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
+     */
     private static function getUriBuilder($currentPid)
     {
         if (!isset(self::$uriBuilder[$currentPid])) {
