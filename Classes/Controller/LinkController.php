@@ -77,7 +77,6 @@ class LinkController extends ExtDirectActionController
         if ($url) {
             // This gives a proper 303 redirect.
             $this->redirectToUri($url);
-            die();
         } else {
             throw new \TYPO3\CMS\Core\Error\Http\PageNotFoundException('The requested link was not found', 1440490767);
         }
