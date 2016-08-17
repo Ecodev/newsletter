@@ -3,12 +3,12 @@
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\PlainConverter;
 
 /**
- * Test case for class \Ecodev\Newsletter\Domain\Model\Builtin.
+ * Test case for class \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin.
  */
 class BuiltinTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Builtin
+     * @var \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin
      */
     protected $subject = null;
 

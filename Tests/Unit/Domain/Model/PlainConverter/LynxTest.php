@@ -5,12 +5,12 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\PlainConverter;
 use Ecodev\Newsletter\Tools;
 
 /**
- * Test case for class \Ecodev\Newsletter\Domain\Model\Builtin.
+ * Test case for class \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx.
  */
 class LynxTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Builtin
+     * @var \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx
      */
     protected $subject = null;
 

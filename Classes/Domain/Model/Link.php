@@ -17,7 +17,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * newsletter
      * @lazy
-     * @var int
+     * @var Newsletter
      */
     protected $newsletter;
 

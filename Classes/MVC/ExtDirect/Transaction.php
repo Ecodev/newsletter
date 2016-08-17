@@ -31,7 +31,7 @@ class Transaction
     /**
      * The direct request this transaction belongs to
      *
-     * @var Ecodev\Newsletter\MVC\ExtDirect\Request
+     * @var Request
      */
     protected $request;
 
