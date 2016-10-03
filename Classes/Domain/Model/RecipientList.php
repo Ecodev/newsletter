@@ -249,18 +249,14 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      */
     private function getFieldTitle($fieldname)
     {
-        switch ($fieldname) {
-            case 'email':
-            case 'plain_only':
-            case 'L':
-                return '<span style="color: green;">' . $fieldname . '</span>';
+        $knownFields = ['email', 'plain_only', 'L', 'sender_email', 'sender_name', 'replyto_email', 'replyto_name'];
 
-            default:
-                if (preg_match('/_[0-9]+$/', $fieldname)) {
-                    return '<span style="color: red;">' . $fieldname . '</span>';
-                } else {
-                    return $fieldname;
-                }
+        if (in_array($fieldname, $knownFields)) {
+            return '<span style="color: green;">' . $fieldname . '</span>';
+        } elseif (preg_match('/_[0-9]+$/', $fieldname)) {
+            return '<span style="color: red;">' . $fieldname . '</span>';
+        } else {
+            return $fieldname;
         }
     }
 }

@@ -74,8 +74,29 @@ For CSV, when asked for ``CSV Fields``, you should enter the column names,
 eg: ``email,firstname,lastname``. Then file/list/url should only contains
 the values without any column headers, eg: ``me@example.com,John,Connor``.
 
-You can define a ``storagePid`` in the Constants if you want different Recipient Lists for different Users.
-Otherwise every User can use every Recipient List.
+You can define a ``storagePid`` in the Constants if you want different Recipient
+Lists for different Users. Otherwise every User can use every Recipient List.
+
+.. _configuration-recipient_lists-special_fields
+
+Special fields
+^^^^^^^^^^^^^^
+
+Recipient List can include as many fields as needed to compose the newsletter,
+but there are a few reserved fields that have a special meaning:
+
+===================== =========== ====== =============================== ===========================
+ Field                 Mandatory   Type   Description                     Default
+===================== =========== ====== =============================== ===========================
+:code:`email`              ✓      string Recipient email
+:code:`plain_only`                bool   Whether to send only plain text  The Recipient List value
+:code:`L`                         int    Language code of content         The Recipient List value
+:code:`sender_email`              string Sender email                     The Newsletter value
+:code:`sender_name`               string Sender name                      The Newsletter value
+:code:`replyto_email`             string Reply-To email                   The Newsletter value
+:code:`replyto_name`              string Reply-To name                    The Newsletter value
+===================== =========== ====== =============================== ===========================
+
 
 .. _configuration-bounce_accounts
 
@@ -415,8 +436,3 @@ Here is a example trimmed from ``realurlconf.php``:
         ),
         // ...
     );
-
-
-
-.. _configuration-faq:
-

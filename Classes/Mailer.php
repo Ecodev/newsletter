@@ -375,16 +375,23 @@ class Mailer
      */
     public function createMessage(Email $email)
     {
+        // Possibly override sender info from recipientData
+        $recipientData = $email->getRecipientData();
+        $senderEmail = isset($recipientData['sender_email']) && GeneralUtility::validEmail($recipientData['sender_email']) ? $recipientData['sender_email'] : $this->senderEmail;
+        $senderName = isset($recipientData['sender_name']) && $recipientData['sender_name'] ? $recipientData['sender_name'] : $this->senderName;
+        $replytoEmail = isset($recipientData['replyto_email']) && GeneralUtility::validEmail($recipientData['replyto_email']) ? $recipientData['replyto_email'] : $this->replytoEmail;
+        $replytoName = isset($recipientData['replyto_name']) && $recipientData['replyto_name'] ? $recipientData['replyto_name'] : $this->replytoName;
+
         /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
         $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
         $message->setTo($email->getRecipientAddress())
                 ->setFrom([
-                    $this->senderEmail => $this->senderName,
+                    $senderEmail => $senderName,
                 ])
                 ->setSubject($this->title);
 
-        if ($this->replytoEmail) {
-            $message->addReplyTo($this->replytoEmail, $this->replytoName);
+        if ($replytoEmail) {
+            $message->addReplyTo($replytoEmail, $replytoName);
         }
 
         $unsubscribeUrls = ['<' . $email->getUnsubscribeUrl() . '>'];
@@ -408,7 +415,6 @@ class Mailer
         // Build plaintext
         $plain = $this->getPlain();
 
-        $recipientData = $email->getRecipientData();
         if ($recipientData['plain_only']) {
             $message->setBody($plain, 'text/plain');
         } else {
