@@ -58,7 +58,7 @@ abstract class Tools
 
     /**
      * Create a configured mailer from a newsletter page record.
-     * This mailer will have both plain and html content applied as well as files attached.
+     * This mailer will have both plain and HTML content applied as well as files attached.
      *
      * @param \Ecodev\Newsletter\Domain\Model\Newsletter The newsletter
      * @param int $language

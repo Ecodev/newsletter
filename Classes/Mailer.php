@@ -137,8 +137,7 @@ class Mailer
      * Set the html content of the mail which will be used as template.
      * The content will be edited to include images as attachements if needed.
      *
-     * @param   string      The html content of the mail
-     * @param mixed $src
+     * @param string $src The HTML content of the mail
      */
     private function setHtml($src)
     {

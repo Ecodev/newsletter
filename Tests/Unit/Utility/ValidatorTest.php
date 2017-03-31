@@ -259,8 +259,8 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestValidator
-     * @param mixed $input
-     * @param mixed $expected
+     * @param string $input
+     * @param array $expected
      */
     public function testValidator($input, $expected)
     {

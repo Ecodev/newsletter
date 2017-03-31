@@ -21,7 +21,7 @@ class UriTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestUri
-     * @param mixed $scheme
+     * @param string $scheme
      */
     public function testKnownSchemes($scheme)
     {

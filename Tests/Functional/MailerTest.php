@@ -78,11 +78,11 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
     /**
      * @dataProvider dataProviderTestMailer
-     * @param mixed $pid
-     * @param mixed $injectOpenSpy
-     * @param mixed $injectLinksSpy
-     * @param mixed $inputFile
-     * @param mixed $expectedEmailFile
+     * @param int $pid
+     * @param bool $injectOpenSpy
+     * @param bool $injectLinksSpy
+     * @param string $inputFile
+     * @param string $expectedEmailFile
      */
     public function testMailer($pid, $injectOpenSpy, $injectLinksSpy, $inputFile, $expectedEmailFile)
     {

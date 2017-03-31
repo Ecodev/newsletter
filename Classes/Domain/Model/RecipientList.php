@@ -194,7 +194,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
 
     /**
      * Return HTML code showing an extract of recipients (first X recipients)
-     * @param mixed $limit
+     * @param int $limit
      */
     public function getExtract($limit = 30)
     {

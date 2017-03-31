@@ -24,7 +24,7 @@ class RecipientListRepository extends AbstractRepository
 
     /**
      * Returns a RecipientList already initialized, even if it is hidden
-     * @param mixed $uidRecipientlist
+     * @param int $uidRecipientlist
      * @return \Ecodev\Newsletter\Domain\Model\RecipientList
      */
     public function findByUidInitialized($uidRecipientlist)

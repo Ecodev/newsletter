@@ -28,10 +28,10 @@ class EmailParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestParser
-     * @param mixed $expectedBounce
-     * @param mixed $expectedAuthCode
-     * @param mixed $message
-     * @param mixed $filename
+     * @param int $expectedBounce
+     * @param string $expectedAuthCode
+     * @param string $message
+     * @param string $filename
      */
     public function testParser($expectedBounce, $expectedAuthCode, $message, $filename)
     {
