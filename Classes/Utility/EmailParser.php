@@ -68,6 +68,9 @@ class EmailParser
     ];
     private $unsubscribePattern = '/Subject:\s*unsubscribe-([\da-f]{32})/i';
 
+    /**
+     * @param string $emailSource
+     */
     public function parse($emailSource)
     {
         $this->emailSource = $emailSource;
@@ -88,7 +91,6 @@ class EmailParser
 
     /**
      * Analyze the given mail source to guess the bounce level
-     * @param string $mailsource
      */
     private function parseBounceLevel()
     {

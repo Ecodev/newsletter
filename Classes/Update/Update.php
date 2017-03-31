@@ -89,7 +89,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Return queries to generate the authCode of emails once and for all
      *
-     * @return array
+     * @return string[]
      */
     public function getQueries()
     {
