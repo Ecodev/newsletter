@@ -9,6 +9,7 @@ abstract class UriBuilder
 {
     const EXTENSION_NAME = 'newsletter';
     const PLUGIN_NAME = 'p';
+    const PAGE_TYPE = 1342671779;
 
     /**
      * UriBuilders indexed by PID
@@ -31,7 +32,7 @@ abstract class UriBuilder
     }
 
     /**
-     * Build an uriBuilder that can be used from any context (backend, frontend, TCA) to generate frontend URI
+     * Build an uriBuilder that can be used from any context (backend, frontend) to generate frontend URI
      * @param int $currentPid
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
@@ -56,7 +57,7 @@ abstract class UriBuilder
             $GLOBALS['TSFE']->getConfigArray();
         }
 
-        // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from TCA)
+        // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from scheduler CLI)
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
         if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
             $extbaseBootstrap = $objectManager->get(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
@@ -67,14 +68,13 @@ abstract class UriBuilder
     }
 
     /**
-     * Returns a frontend URI independently of current context, with or without extbase, and with or without TSFE
-     * @param int $currentPid
+     * Return an array of namespaced arguments
      * @param string $controllerName
      * @param string $actionName
      * @param array $arguments
-     * @return string absolute URI
+     * @return array
      */
-    public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
+    private static function getNamespacedArguments($controllerName, $actionName, array $arguments)
     {
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
         $extensionService = $objectManager->get(\TYPO3\CMS\Extbase\Service\ExtensionService::class);
@@ -85,21 +85,46 @@ abstract class UriBuilder
         $arguments['controller'] = $controllerName;
         $namespacedArguments = [$pluginNamespace => $arguments];
 
+        return $namespacedArguments;
+    }
+
+    /**
+     * Returns an ugly frontend URI from TCA context
+     * @param string $controllerName
+     * @param string $actionName
+     * @param array $arguments
+     * @return string absolute URI
+     */
+    public static function buildFrontendUriFromTca($controllerName, $actionName, array $arguments = [])
+    {
+        $namespacedArguments = self::getNamespacedArguments($controllerName, $actionName, $arguments);
+        $namespacedArguments['type'] = self::PAGE_TYPE;
+        $uri = '/?' . http_build_query($namespacedArguments);
+
+        return $uri;
+    }
+
+    /**
+     * Returns a frontend URI independently of current context (backend or frontend)
+     * @param int $currentPid
+     * @param string $controllerName
+     * @param string $actionName
+     * @param array $arguments
+     * @return string absolute URI
+     */
+    public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
+    {
+        $namespacedArguments = self::getNamespacedArguments($controllerName, $actionName, $arguments);
+
         // Configure Uri
         $uriBuilder = self::getUriBuilder($currentPid);
         $uriBuilder->reset()
-                ->setUseCacheHash(false)
-                ->setCreateAbsoluteUri(true)
-                ->setArguments($namespacedArguments)
-                ->setTargetPageType(1342671779);
+            ->setUseCacheHash(false)
+            ->setCreateAbsoluteUri(true)
+            ->setArguments($namespacedArguments)
+            ->setTargetPageType(self::PAGE_TYPE);
 
         $uri = $uriBuilder->buildFrontendUri();
-
-        // For some reason the core set the backPath to something while building URI,
-        // but it will somehow break the RecipientList editing in backend, so we unset it here
-        // This was at least since TYPO3 7.6, maybe earlier, but not on TYPO3 8.0 anymore
-        $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-        $pageRenderer->backPath = null;
 
         return $uri;
     }

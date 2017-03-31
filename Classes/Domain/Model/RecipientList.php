@@ -223,14 +223,10 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             }
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
-            // From TYPO3 7.6.0 and higher we are able to generate URI without entirely breaking the backend
-            $export = '';
-            if (version_compare(TYPO3_version, '7.6.0', '>=')) {
-                $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
-                $uriXml = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml']);
-                $uriCsv = UriBuilder::buildFrontendUri($this->getPid(), 'RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv']);
-                $export = ' (<a href="' . $uriXml . '">export XML</a>, <a href="' . $uriCsv . '">export CSV</a>)';
-            }
+            $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
+            $uriXml = UriBuilder::buildFrontendUriFromTcA('RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml']);
+            $uriCsv = UriBuilder::buildFrontendUriFromTcA('RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv']);
+            $export = ' (<a href="' . $uriXml . '">export XML</a>, <a href="' . $uriCsv . '">export CSV</a>)';
 
             $out .= '<p><strong>' . $i . '/' . $this->getCount() . '</strong> recipients' . $export . '</p>';
         }
