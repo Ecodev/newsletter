@@ -142,21 +142,21 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Fetch one receiver record from the newsletter target.
      * The record MUST contain an "email"-field. Without this one this mailtarget is useless.
      *
-     * @return   array      Assoc array with fields for the receiver
+     * @return array|false Associative array with fields for the receiver
      */
     abstract public function getRecipient();
 
     /**
      * Get the number of receivers in this newsletter target
      *
-     * @return   int      numbers of receivers
+     * @return int numbers of receivers
      */
     abstract public function getCount();
 
     /**
      * Get error text if the fetching of the newsletter target has somehow failed.
      *
-     * @return   string      error text or empty string
+     * @return string error text or empty string
      */
     abstract public function getError();
 

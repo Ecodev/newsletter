@@ -27,7 +27,7 @@ class ext_update
     }
 
     /**
-     * Return wether update is required
+     * Return whether update is required
      * @return bool
      */
     public function access()
