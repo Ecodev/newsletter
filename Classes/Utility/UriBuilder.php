@@ -31,6 +31,7 @@ abstract class UriBuilder
      * @var array
      */
     private static $uriCache = [];
+
     /**
      * @var string plugin namespace for arguments
      */

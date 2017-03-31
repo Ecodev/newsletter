@@ -33,12 +33,17 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
+before_install:
+  - nvm install 8
+  - nvm use 8
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
+
 before_script:
   - composer self-update 1.0.3
   - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.23' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
   - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.23' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
-  - npm install -g gulp
-  - npm install
+  - yarn install
   - composer install
   - cd ..
   - git clone --branch $TYPO3_VERSION --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
@@ -52,7 +57,7 @@ before_script:
   - export typo3DatabasePassword="";
 
 script:
-  - cd typo3conf/ext/newsletter && gulp && cd ../../../
+  - cd typo3conf/ext/newsletter && ./node_modules/.bin/gulp && cd ../../../
   - ./bin/phpunit $PHPUNIT_FLAGS_UNIT --colors -c typo3conf/ext/newsletter/Tests/Build/UnitTests.xml
   - ./bin/phpunit $PHPUNIT_FLAGS_FUNCTIONAL --colors -c typo3conf/ext/newsletter/Tests/Build/FunctionalTests.xml
 

@@ -3,10 +3,10 @@
   "private": true,
   "dependencies": {
     "gulp": "^3.9.1",
-    "gulp-composer": "^0.4.0",
-    "gulp-jscs": "^3.0.2",
-    "gulp-jshint": "^2.0.1",
-    "gulp-shell": "^0.5.2",
-    "jshint": "^2.9.2"
+    "gulp-composer": "^0.4.5",
+    "gulp-jscs": "^4.1.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-shell": "^0.6.5",
+    "jshint": "^2.9.5"
   }
 }
