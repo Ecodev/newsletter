@@ -52,8 +52,7 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'items' => [
-                    '0' => ['', -1],
-                    '1' => ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0],
+                    ['LLL:EXT:lang/locallang_general.php:LGL.default_value', 0],
                 ],
             ],
         ],

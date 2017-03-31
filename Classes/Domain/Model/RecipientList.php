@@ -26,9 +26,9 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * lang
      *
-     * @var string
+     * @var int
      */
-    protected $lang = '';
+    protected $lang = 0;
 
     /**
      * type
@@ -90,7 +90,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Setter for lang
      *
-     * @param string $lang lang
+     * @param int $lang lang
      */
     public function setLang($lang)
     {
@@ -100,7 +100,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Getter for lang
      *
-     * @return string lang
+     * @return int lang
      */
     public function getLang()
     {

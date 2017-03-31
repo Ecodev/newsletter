@@ -64,7 +64,7 @@ abstract class AbstractRecipientList extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getLangReturnsInitialValueForString()
     {
-        $this->assertSame('', $this->subject->getLang());
+        $this->assertSame(0, $this->subject->getLang());
     }
 
     /**
@@ -72,8 +72,8 @@ abstract class AbstractRecipientList extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setLangForStringSetsLang()
     {
-        $this->subject->setLang('Conceived at T3CON10');
-        $this->assertAttributeSame('Conceived at T3CON10', 'lang', $this->subject);
+        $this->subject->setLang(123);
+        $this->assertAttributeSame(123, 'lang', $this->subject);
     }
 
     /**
