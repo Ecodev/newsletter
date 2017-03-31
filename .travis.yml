@@ -15,7 +15,6 @@ php:
 
 env:
   - TYPO3_VERSION=7.6.16
-  - TYPO3_VERSION=8.6.1
   - TYPO3_VERSION=master
 
 matrix:
