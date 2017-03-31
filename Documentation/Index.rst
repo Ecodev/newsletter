@@ -40,7 +40,7 @@ Newsletter
 
     :Support:
         If you need help with this extension, commercial support may be obtained
-        by contacting `www.ecodev.ch <http://www.ecodev.ch>`_.
+        by contacting `ecodev.ch <https://ecodev.ch/>`_.
 
     :Rendered:
         |today|

@@ -22,6 +22,4 @@ Links
 
 :Contact:
     If you need help with this extension, commercial support may be obtained
-    by contacting `www.ecodev.ch`_. 
-
-.. _www.ecodev.ch: https://www.ecodev.ch
+    by contacting `ecodev.ch <https://ecodev.ch/>`_.
