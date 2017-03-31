@@ -1,18 +1,18 @@
 Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
-Date: Tue, 28 Jun 2016 17:02:04 +0900
+Date: Fri, 31 Mar 2017 14:27:53 +0000
 Subject: Newsletter Title
 From: John Connor <noreply@example.com>
 To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="_=_swift_v4_1467100924_d359bbc14872d6139a0c7cfb07f684b7_=_"
+ boundary="_=_swift_v4_1490970473_b1551141122184e25f08df22a2cd328b_=_"
 Precedence: bulk
 List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
  <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email>
 
 
---_=_swift_v4_1467100924_d359bbc14872d6139a0c7cfb07f684b7_=_
+--_=_swift_v4_1490970473_b1551141122184e25f08df22a2cd328b_=_
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -63,26 +63,27 @@ teger_true=3Dtrue-ish
 string_false=3Dfalse-ish string_true=3Dtrue-ish UTF=
 -8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
 =E2=9C=93 =E2=82=AC =E2=98=
-=BA =E2=98=B9=20
+=BA =E2=98=B9 [image]=20
 =20
 
 Links:
 ------
-[1] http://www.example.com
-[2] =
-http://mycustomvalue
-[3] http://www.example.com?param=3Dmycustomvalue
-[=
-4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40=
-;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
+[1] http://www.example.co=
+m
+[2] http://mycustomvalue
+[3] http://www.example.com?param=3Dmycustomv=
+alue
+[4] /&#x6D;&#x61;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x=
+6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;=
 
 
---_=_swift_v4_1467100924_d359bbc14872d6139a0c7cfb07f684b7_=_
+
+--_=_swift_v4_1490970473_b1551141122184e25f08df22a2cd328b_=_
 Content-Type: multipart/related;
- boundary="_=_swift_v4_1467100924_007d60d37e0a5f4a28654505bbefc571_=_"
+ boundary="_=_swift_v4_1490970473_1c12c9974480ff0d325761b4efeae081_=_"
 
 
---_=_swift_v4_1467100924_007d60d37e0a5f4a28654505bbefc571_=_
+--_=_swift_v4_1490970473_1c12c9974480ff0d325761b4efeae081_=_
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -173,7 +174,7 @@ false-ish
 =ED=95=9C=EA=B5=AD=EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
 
   =
-      <img src=3D"cid:91b6a27b7fc12237597c43495f68013c@swift.generated" alt=
+      <img src=3D"cid:902dca5a1f2250ad95e28602d8cef017@swift.generated" alt=
 =3D"image"/>
     <div><img src=3D"http://example.com/index.php?id=3D2&typ=
 e=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx=
@@ -182,10 +183,10 @@ _newsletter_p%5Baction%5D=3Dopened&tx_newsletter_p%5Bcontroller%5D=3DEmail"=
 </html>
 
 
---_=_swift_v4_1467100924_007d60d37e0a5f4a28654505bbefc571_=_
+--_=_swift_v4_1490970473_1c12c9974480ff0d325761b4efeae081_=_
 Content-Type: image/png; name=tx_newsletter.png
 Content-Transfer-Encoding: base64
-Content-ID: <91b6a27b7fc12237597c43495f68013c@swift.generated>
+Content-ID: <902dca5a1f2250ad95e28602d8cef017@swift.generated>
 Content-Disposition: inline; filename=tx_newsletter.png
 
 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
@@ -201,7 +202,7 @@ Zg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST4
 Lpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6
 Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==
 
---_=_swift_v4_1467100924_007d60d37e0a5f4a28654505bbefc571_=_--
+--_=_swift_v4_1490970473_1c12c9974480ff0d325761b4efeae081_=_--
 
 
---_=_swift_v4_1467100924_d359bbc14872d6139a0c7cfb07f684b7_=_--
+--_=_swift_v4_1490970473_b1551141122184e25f08df22a2cd328b_=_--

@@ -7,18 +7,19 @@ SECOND TITLE
 Muffin cake tootsie roll chocolate cake cookie. Gummi bears sugar plum
 powder icing jujubes tart danish caramels. Cotton candy jujubes
 pudding chocolate ice cream sesame snaps. Souffle cookie marzipan
-chocolate cake croissant lemon drops. 
+chocolate cake croissant lemon drops.
 
 Icing souffle sugar plum ice cream marzipan. Jelly tart powder
 fruitcake oat cake halvah chocolate cake halvah icing. Gummies candy
-canes liquorice. Dragee pastry sesame snaps cake cake gingerbread. 
+canes liquorice. Dragee pastry sesame snaps cake cake gingerbread.
 
  	* item 1
  	* item 2
  	* item 3
 
- first link [1] second link [2] third identical link [1] relative link
-[3] 
+first link [1] second link [2] third identical link [1] relative link
+[3]
+ 
 
 Links:
 ------

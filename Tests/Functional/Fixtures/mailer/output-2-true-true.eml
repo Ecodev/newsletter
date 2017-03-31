@@ -1,18 +1,18 @@
 Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
-Date: Tue, 28 Jun 2016 17:02:17 +0900
+Date: Fri, 31 Mar 2017 14:28:07 +0000
 Subject: Newsletter Title
 From: John Connor <noreply@example.com>
 To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="_=_swift_v4_1467100937_428f57eb678c54a8df6f3fe0229b856c_=_"
+ boundary="_=_swift_v4_1490970487_52b25f79732ea21ddc5194bd33fff094_=_"
 Precedence: bulk
 List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
  <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email>
 
 
---_=_swift_v4_1467100937_428f57eb678c54a8df6f3fe0229b856c_=_
+--_=_swift_v4_1490970487_52b25f79732ea21ddc5194bd33fff094_=_
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -63,34 +63,34 @@ teger_true=3Dtrue-ish
 string_false=3Dfalse-ish string_true=3Dtrue-ish UTF=
 -8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
 =E2=9C=93 =E2=82=AC =E2=98=
-=BA =E2=98=B9=20
+=BA =E2=98=B9 [image]=20
 =20
 
 Links:
 ------
-[1] http://example.com/index.php?=
-id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5Bl=
-%5D=3Db2ca893c8e2ddb5cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=3Dclicke=
-d&tx_newsletter_p%5Bcontroller%5D=3DLink
-[2] http://example.com/index.php=
-?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5B=
-l%5D=3D5e0f4eea9bfa8131f3d92fe3e8f07972&tx_newsletter_p%5Baction%5D=3Dclick=
-ed&tx_newsletter_p%5Bcontroller%5D=3DLink
-[3] http://example.com/index.ph=
-p?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter_p%5=
-Bl%5D=3Dc779ff50a74c820d70b8d5c5e6739d00&tx_newsletter_p%5Baction%5D=3Dclic=
-ked&tx_newsletter_p%5Bcontroller%5D=3DLink
-[4] /&#x6D;&#x61;&#x69;&#x6C;&=
-#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;&#x7=
-0;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
+[1] http://example.com/in=
+dex.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newslett=
+er_p%5Bl%5D=3Db2ca893c8e2ddb5cf431dfcf66f3cc48&tx_newsletter_p%5Baction%5D=
+=3Dclicked&tx_newsletter_p%5Bcontroller%5D=3DLink
+[2] http://example.com/=
+index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsle=
+tter_p%5Bl%5D=3D5e0f4eea9bfa8131f3d92fe3e8f07972&tx_newsletter_p%5Baction%5=
+D=3Dclicked&tx_newsletter_p%5Bcontroller%5D=3DLink
+[3] http://example.com=
+/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsl=
+etter_p%5Bl%5D=3Dc779ff50a74c820d70b8d5c5e6739d00&tx_newsletter_p%5Baction%=
+5D=3Dclicked&tx_newsletter_p%5Bcontroller%5D=3DLink
+[4] /&#x6D;&#x61;&#x6=
+9;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&=
+#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
---_=_swift_v4_1467100937_428f57eb678c54a8df6f3fe0229b856c_=_
+--_=_swift_v4_1490970487_52b25f79732ea21ddc5194bd33fff094_=_
 Content-Type: multipart/related;
- boundary="_=_swift_v4_1467100937_5f7f7d2d0c86fb46b8a16793a454fcb6_=_"
+ boundary="_=_swift_v4_1490970487_03edfcfc5bc2f0bf8f16d3cc071cec52_=_"
 
 
---_=_swift_v4_1467100937_5f7f7d2d0c86fb46b8a16793a454fcb6_=_
+--_=_swift_v4_1490970487_03edfcfc5bc2f0bf8f16d3cc071cec52_=_
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -189,7 +189,7 @@ ing_true=3Dtrue-ish
 =EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
 
         <img src=3D"=
-cid:b9edd076128ec87858d063d12f3a1fe6@swift.generated" alt=3D"image"/>
+cid:a55f795fb641d1a16651335188f4b6a2@swift.generated" alt=3D"image"/>
    =
  <div><img src=3D"http://example.com/index.php?id=3D2&type=3D1342671779&tx_=
 newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Bac=
@@ -198,10 +198,10 @@ t=3D"0" /></div></body>
 </html>
 
 
---_=_swift_v4_1467100937_5f7f7d2d0c86fb46b8a16793a454fcb6_=_
+--_=_swift_v4_1490970487_03edfcfc5bc2f0bf8f16d3cc071cec52_=_
 Content-Type: image/png; name=tx_newsletter.png
 Content-Transfer-Encoding: base64
-Content-ID: <b9edd076128ec87858d063d12f3a1fe6@swift.generated>
+Content-ID: <a55f795fb641d1a16651335188f4b6a2@swift.generated>
 Content-Disposition: inline; filename=tx_newsletter.png
 
 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
@@ -217,7 +217,7 @@ Zg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST4
 Lpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6
 Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==
 
---_=_swift_v4_1467100937_5f7f7d2d0c86fb46b8a16793a454fcb6_=_--
+--_=_swift_v4_1490970487_03edfcfc5bc2f0bf8f16d3cc071cec52_=_--
 
 
---_=_swift_v4_1467100937_428f57eb678c54a8df6f3fe0229b856c_=_--
+--_=_swift_v4_1490970487_52b25f79732ea21ddc5194bd33fff094_=_--

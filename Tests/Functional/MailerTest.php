@@ -90,12 +90,12 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $expectedEmail = file_get_contents($expectedEmailFile);
 
         $this->mockNewsletter->method('getValidatedContent')->will($this->returnValue(
-                        [
-                            'content' => $input,
-                            'errors' => [],
-                            'warnings' => [],
-                            'infos' => [],
-                        ]
+                [
+                    'content' => $input,
+                    'errors' => [],
+                    'warnings' => [],
+                    'infos' => [],
+                ]
         ));
         $this->mockNewsletter->method('getInjectOpenSpy')->will($this->returnValue($injectOpenSpy));
         $this->mockNewsletter->method('getInjectLinksSpy')->will($this->returnValue($injectLinksSpy));
@@ -108,6 +108,9 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $mailer->prepare($this->mockEmail);
         $message = $mailer->createMessage($this->mockEmail);
         $actualEmail = $message->toString();
+
+        $logFile = '/tmp/' . basename($expectedEmailFile);
+        file_put_contents($logFile, $actualEmail);
 
         $this->assertSame($this->unrandomizeEmail($expectedEmail), $this->unrandomizeEmail($actualEmail));
 
