@@ -15,7 +15,7 @@ class Transaction
      * I am assuming you know what queries you are throwing into this method.
      *
      * @param string[] $queries
-     *            An array of SQL queries.
+     *            An array of SQL queries
      * @return \Ecodev\Newsletter\Update\TransactionResult
      */
     public static function transactInnoDBQueries(array $queries)
@@ -45,7 +45,7 @@ class Transaction
      * Executes an array of database queries.
      *
      * @param string[] $queries
-     *            An array of SQL queries.
+     *            An array of SQL queries
      * @return \Ecodev\Newsletter\Update\TransactionResult
      */
     private static function transactDBQueries(array $queries)

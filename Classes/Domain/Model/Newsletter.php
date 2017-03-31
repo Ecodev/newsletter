@@ -599,8 +599,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $bounceAccount = $this->getBounceAccount();
         if ($bounceAccount) {
             return $bounceAccount->getUid();
-        } else {
-            return null;
         }
     }
 
@@ -656,8 +654,6 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $recipientList = $this->getRecipientList();
         if ($recipientList) {
             return $recipientList->getUid();
-        } else {
-            return null;
         }
     }
 
@@ -923,9 +919,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
             if ($emailNotSentCount) {
                 return sprintf($LANG->getLL('newsletter_status_sending'), $emailCount - $emailNotSentCount, $emailCount);
-            } else {
-                return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
             }
+
+            return sprintf($LANG->getLL('newsletter_status_was_sent'), $endTime->format(DateTime::ISO8601));
         }
 
         return 'unexpected status';

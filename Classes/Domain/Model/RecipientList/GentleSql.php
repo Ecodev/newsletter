@@ -23,8 +23,8 @@ abstract class GentleSql extends Sql
      * You should be able to reset then in the backend
      *
      * @param string $email the email address of the recipient
-     * @param int $bounceLevel This is the level of the bounce.
-     * @return bool Success of the bounce-handling.
+     * @param int $bounceLevel this is the level of the bounce
+     * @return bool success of the bounce-handling
      */
     public function registerBounce($email, $bounceLevel)
     {

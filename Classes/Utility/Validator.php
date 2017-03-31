@@ -122,7 +122,7 @@ class Validator
      */
     private function errorTooShort()
     {
-        if (strlen($this->content) < 200) {
+        if (mb_strlen($this->content) < 200) {
             $this->errors[] = $this->lang->getLL('validation_mail_too_short');
         }
     }
@@ -132,7 +132,7 @@ class Validator
      */
     private function errorPhpWarnings()
     {
-        if (substr($this->content, 0, 22) == "<br />\n<b>Warning</b>:") {
+        if (mb_substr($this->content, 0, 22) == "<br />\n<b>Warning</b>:") {
             $this->errors[] = $this->lang->getLL('validation_mail_contains_php_warnings');
         }
     }
@@ -142,7 +142,7 @@ class Validator
      */
     private function errorPhpErrors()
     {
-        if (substr($this->content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
+        if (mb_substr($this->content, 0, 26) == "<br />\n<b>Fatal error</b>:") {
             $this->errors[] = $this->lang->getLL('validation_mail_contains_php_errors');
         }
     }
@@ -152,7 +152,7 @@ class Validator
      */
     private function errorPageBeingGenerated()
     {
-        if (strpos($this->content, 'Page is being generated.') && strpos($this->content, 'If this message does not disappear within')) {
+        if (mb_strpos($this->content, 'Page is being generated.') && mb_strpos($this->content, 'If this message does not disappear within')) {
             $this->errors[] = $this->lang->getLL('validation_mail_being_generated');
         }
     }

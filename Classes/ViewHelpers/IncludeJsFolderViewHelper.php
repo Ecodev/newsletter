@@ -30,7 +30,7 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
         }
         $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
         if (TYPO3_MODE === 'FE') {
-            $extRelPath = substr($extPath, strlen(PATH_site));
+            $extRelPath = mb_substr($extPath, mb_strlen(PATH_site));
         } else {
             $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         }

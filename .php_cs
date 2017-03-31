@@ -1,111 +1,142 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-        ->exclude('3dparty')
-        ->exclude('Documentation')
-        ->exclude('Resources')
-        ->exclude('vendor')
-        ->exclude('node_modules')
-        ->in(__DIR__);
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('3dparty')
+    ->exclude('Documentation')
+    ->exclude('Resources')
+    ->exclude('vendor')
+    ->exclude('node_modules')
+    ->in(__DIR__);
 
-return Symfony\CS\Config\Config::create()
-                ->level(Symfony\CS\FixerInterface::NONE_LEVEL)
-                ->fixers([
-                    // 'align_double_arrow', // Waste of time
-                    // 'align_equals', // Waste of time
-                    'array_element_no_space_before_comma',
-                    'array_element_white_space_after_comma',
-                    'blankline_after_open_tag',
-                    'braces',
-                    // 'concat_without_spaces', // This make it less readable
-                    'concat_with_spaces',
-                    'double_arrow_multiline_whitespaces',
-                    'duplicate_semicolon',
-                    // 'echo_to_print', // We prefer echo
-                    'elseif',
-                    // 'empty_return', // even if technically useless, we prefer to be explicit with our intent to return null
-                    'encoding',
-                    'eof_ending',
-                    'ereg_to_preg',
-                    'extra_empty_lines',
-                    'function_call_space',
-                    'function_declaration',
-                    'function_typehint_space',
-                    // 'header_comment', // We don't use common header in all our files
-                    'include',
-                    'indentation',
-                    'join_function',
-                    'line_after_namespace',
-                    'linefeed',
-                    'list_commas',
-                    // 'logical_not_operators_with_spaces', // No we prefer to keep "!" without spaces
-                    // 'logical_not_operators_with_successor_space', // idem
-                    // 'long_array_syntax', // We opted in for the short syntax
-                    'lowercase_constants',
-                    'lowercase_keywords',
-                    'method_argument_space',
-                    'multiline_array_trailing_comma',
-                    'multiline_spaces_before_semicolon',
-                    'multiple_use',
-                    'namespace_no_leading_whitespace',
-                    'newline_after_open_tag',
-                    'new_with_braces',
-                    'no_blank_lines_after_class_opening',
-                    // 'no_blank_lines_before_namespace', // we want 1 blank line before namespace
-                    'no_empty_lines_after_phpdocs',
-                    'object_operator',
-                    'operators_spaces',
-                    'ordered_use',
-                    'parenthesis',
-                    'php4_constructor',
-                    'php_closing_tag',
-                    'phpdoc_indent',
-                    'phpdoc_inline_tag',
-                    'phpdoc_no_access',
-                    'phpdoc_no_empty_return',
-                    'phpdoc_no_package',
-                    'phpdoc_order',
-                    // 'phpdoc_params', // Waste of time
-                    'phpdoc_scalar',
-                    // 'phpdoc_separation', // Nope, annotations are easy to read enough, no need to split them with blank lines
-                    // 'phpdoc_short_description', // We usually don't generate documentation so punctuation is not important
-                    'phpdoc_to_comment',
-                    'phpdoc_trim',
-                    'phpdoc_types',
-                    'phpdoc_type_to_var',
-                    // 'phpdoc_var_to_type', // This is not supported by phpDoc2 anymore
-                    'phpdoc_var_without_name',
-                    'php_unit_construct',
-                    'php_unit_strict',
-                    'pre_increment',
-                    'print_to_echo',
-                    'psr0',
-                    'remove_leading_slash_use',
-                    'remove_lines_between_uses',
-                    'return',
-                    'self_accessor',
-                    'short_array_syntax',
-                    'short_bool_cast',
-                    'short_echo_tag',
-                    'short_tag',
-                    'single_array_no_trailing_comma',
-                    'single_blank_line_before_namespace',
-                    'single_line_after_imports',
-                    'single_quote',
-                    'spaces_before_semicolon',
-                    'spaces_cast',
-                    'standardize_not_equal',
-                    // 'strict', // No, too dangerous to change that
-                    // 'strict_param', // No, too dangerous to change that
-                    // 'ternary_spaces', // That would be nice, but NetBeans does not cooperate :-(
-                    'trailing_spaces',
-                    'trim_array_spaces',
-                    'unalign_double_arrow',
-                    'unalign_equals',
-                    'unary_operators_spaces',
-                    'unneeded_control_parentheses',
-                    'unused_use',
-                    'visibility',
-                    'whitespacy_lines',
-                ])
-                ->finder($finder);
+return PhpCsFixer\Config::create()
+        ->setRiskyAllowed(true)
+        ->setFinder($finder)
+        ->setRules([
+            'array_syntax' => ['syntax' => 'short'],
+            'binary_operator_spaces' => true,
+            'blank_line_after_namespace' => true,
+            'blank_line_after_opening_tag' => true,
+            'blank_line_before_return' => true,
+            'braces' => true,
+            'cast_spaces' => true,
+            'class_definition' => true,
+            'class_keyword_remove' => false, // ::class keyword gives us beter support in IDE
+            'combine_consecutive_unsets' => true,
+            'concat_space' => ['spacing' => 'one'],
+            'declare_equal_normalize' => true,
+            'declare_strict_types' => false, // Too early to adopt strict types
+            'dir_constant' => true,
+            'elseif' => true,
+            'encoding' => true,
+            'ereg_to_preg' => true,
+            'full_opening_tag' => true,
+            'function_declaration' => true,
+            'function_typehint_space' => true,
+            'general_phpdoc_annotation_remove' => false, // No use for that
+            'hash_to_slash_comment' => true,
+            'header_comment' => false, // We don't use common header in all our files
+            'heredoc_to_nowdoc' => false, // Not sure about this one
+            'include' => true,
+            'indentation_type' => true,
+            'line_ending' => true,
+            'linebreak_after_opening_tag' => true,
+            'lowercase_cast' => true,
+            'lowercase_constants' => true,
+            'lowercase_keywords' => true,
+            'mb_str_functions' => false, // Cannot use that or it would break mcrypt_decrypt()
+            'method_argument_space' => true,
+            'method_separation' => true,
+            'modernize_types_casting' => true,
+            'native_function_casing' => true,
+            'new_with_braces' => true,
+            'no_alias_functions' => true,
+            'no_blank_lines_after_class_opening' => true,
+            'no_blank_lines_after_phpdoc' => true,
+            'no_blank_lines_before_namespace' => false, // we want 1 blank line before namespace
+            'no_closing_tag' => true,
+            'no_empty_comment' => true,
+            'no_empty_phpdoc' => true,
+            'no_empty_statement' => true,
+            'no_extra_consecutive_blank_lines' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'useTrait', 'curly_brace_block', 'parenthesis_brace_block', 'square_brace_block'],
+            'no_leading_import_slash' => true,
+            'no_leading_namespace_whitespace' => true,
+            'no_mixed_echo_print' => true,
+            'no_multiline_whitespace_around_double_arrow' => true,
+            'no_multiline_whitespace_before_semicolons' => true,
+            'no_php4_constructor' => true,
+            'no_short_bool_cast' => true,
+            'no_short_echo_tag' => true,
+            'no_singleline_whitespace_before_semicolons' => true,
+            'no_spaces_after_function_name' => true,
+            'no_spaces_around_offset' => true,
+            'no_spaces_inside_parenthesis' => true,
+            'no_trailing_comma_in_list_call' => true,
+            'no_trailing_comma_in_singleline_array' => true,
+            'no_trailing_whitespace' => true,
+            'no_trailing_whitespace_in_comment' => true,
+            'no_unneeded_control_parentheses' => true,
+            'no_unreachable_default_argument_value' => true,
+            'no_unused_imports' => true,
+            'no_useless_else' => true,
+            'no_useless_return' => true,
+            'no_whitespace_before_comma_in_array' => true,
+            'no_whitespace_in_blank_line' => true,
+            'normalize_index_brace' => true,
+            'not_operator_with_space' => false, // No we prefer to keep '!' without spaces
+            'not_operator_with_successor_space' => false, // idem
+            'object_operator_without_whitespace' => true,
+            'ordered_class_elements' => false, // We prefer to keep some freedom
+            'ordered_imports' => true,
+            'php_unit_construct' => true,
+            'php_unit_dedicate_assert' => true,
+            'php_unit_fqcn_annotation' => true,
+            'php_unit_strict' => true,
+            'phpdoc_add_missing_param_annotation' => true,
+            'phpdoc_align' => false, // Waste of time
+            'phpdoc_annotation_without_dot' => true,
+            'phpdoc_indent' => true,
+            'phpdoc_inline_tag' => true,
+            'phpdoc_no_access' => true,
+            'phpdoc_no_alias_tag' => true,
+            'phpdoc_no_empty_return' => true,
+            'phpdoc_no_package' => true,
+            'phpdoc_order' => true,
+            'phpdoc_scalar' => true,
+            'phpdoc_separation' => false, // Nope, annotations are easy to read enough, no need to split them with blank lines
+            'phpdoc_single_line_var_spacing' => true,
+            'phpdoc_summary' => false, // We usually don't generate documentation so punctuation is not important
+            'phpdoc_to_comment' => true,
+            'phpdoc_trim' => true,
+            'phpdoc_types' => true,
+            'phpdoc_var_without_name' => true,
+            'pow_to_exponentiation' => true,
+            'pre_increment' => true,
+            'protected_to_private' => true,
+            'psr0' => true,
+            'psr4' => true,
+            'random_api_migration' => true,
+            'return_type_declaration' => true,
+            'self_accessor' => true,
+            'semicolon_after_instruction' => true,
+            'short_scalar_cast' => true,
+            'silenced_deprecation_error' => true,
+            'simplified_null_return' => true,
+            'single_blank_line_at_eof' => true,
+            'single_blank_line_before_namespace' => true,
+            'single_class_element_per_statement' => true,
+            'single_import_per_statement' => true,
+            'single_line_after_imports' => true,
+            'single_quote' => true,
+            'space_after_semicolon' => true,
+            'standardize_not_equals' => true,
+            'strict_comparison' => false, // We sometimes need to compare DateTime objects with non-strict operator
+            'strict_param' => true,
+            'switch_case_semicolon_to_colon' => true,
+            'switch_case_space' => true,
+            'ternary_operator_spaces' => true,
+            'trailing_comma_in_multiline_array' => true,
+            'trim_array_spaces' => true,
+            'unary_operator_spaces' => true,
+            'visibility_required' => true,
+            'whitespace_after_comma_in_array' => true,
+    ]);

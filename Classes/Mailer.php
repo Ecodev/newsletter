@@ -138,6 +138,7 @@ class Mailer
      * The content will be edited to include images as attachements if needed.
      *
      * @param   string      The html content of the mail
+     * @param mixed $src
      */
     private function setHtml($src)
     {
@@ -167,7 +168,6 @@ class Mailer
         foreach ($attachmentRegexes as $regex) {
             preg_match_all($regex, $src, $urls);
             foreach ($urls[1] as $i => $url) {
-
                 // Mark places for embedded files
                 $swiftEmbeddedMarker = $this->getSwiftEmbeddedMarker($url);
                 if ($swiftEmbeddedMarker) {
@@ -302,9 +302,8 @@ class Mailer
         // No-Track Marker
         $notrackMarker = Tools::confParam('no-track');
         foreach ($urls[1] as $i => $url) {
-
             // Check for a no-track marker
-            if (!empty($notrackMarker) && stripos($url, $notrackMarker) != false) {
+            if (!empty($notrackMarker) && mb_stripos($url, $notrackMarker) != false) {
                 continue;
             }
 

@@ -78,6 +78,11 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
     /**
      * @dataProvider dataProviderTestMailer
+     * @param mixed $pid
+     * @param mixed $injectOpenSpy
+     * @param mixed $injectLinksSpy
+     * @param mixed $inputFile
+     * @param mixed $expectedEmailFile
      */
     public function testMailer($pid, $injectOpenSpy, $injectLinksSpy, $inputFile, $expectedEmailFile)
     {
@@ -151,7 +156,6 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
         // Sort some headers because order varies between PHP 5.6 VS PHP 7
         $sort = function ($matches) {
-
             // Join multi-lines headers in single line and split each headers
             $lines = explode("\r\n", trim(str_replace("\r\n ", ' ', $matches[0])));
             sort($lines);

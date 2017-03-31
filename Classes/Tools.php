@@ -132,7 +132,7 @@ abstract class Tools
 
                 $db->exec_UPDATEquery(
                     'tx_newsletter_domain_model_email',
-                    'uid = ' . intval($db->sql_insert_id()),
+                    'uid = ' . (int) $db->sql_insert_id(),
                     [
                         'auth_code' => 'MD5(CONCAT(uid, recipient_address))',
                     ],
@@ -251,7 +251,7 @@ abstract class Tools
      */
     public static function decrypt($string)
     {
-        $string = base64_decode($string);
+        $string = base64_decode($string, true);
         $iv = substr($string, 0, self::getIVSize());
         $cipher = substr($string, self::getIVSize());
 
@@ -344,10 +344,9 @@ abstract class Tools
         // From TYPO3 7.4.0 onward we must use EXT prefix
         if (version_compare(TYPO3_version, '7.4.0', '>=')) {
             return 'EXT:newsletter/';
-        } else {
+        }
             // But for TYPO3 6.2 family, we still have to use old style
             return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('newsletter');
-        }
     }
 
     /**

@@ -101,7 +101,6 @@ class BounceHandler
 
         $authCode = $this->emailParser->getAuthCode();
         if ($authCode) {
-
             // Find the recipientList and email UIDs according to authcode
             $rs = $db->sql_query("
 			SELECT tx_newsletter_domain_model_newsletter.recipient_list, tx_newsletter_domain_model_email.uid

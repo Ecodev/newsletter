@@ -172,7 +172,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 
     /**
      * @test
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function getPlainConverterInstanceThrowsException()
     {

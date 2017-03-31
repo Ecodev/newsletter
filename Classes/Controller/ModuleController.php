@@ -20,7 +20,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected function initializeAction()
     {
-        $this->pageId = intval(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id'));
+        $this->pageId = (int) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
     }
 
     /**

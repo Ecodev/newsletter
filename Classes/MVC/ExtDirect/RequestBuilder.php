@@ -53,9 +53,8 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
         $postArguments = $_POST;
         if (isset($postArguments['extAction'])) {
             throw new EcodevNewsletterException('Form Post Request building is not yet implemented.', 1281379502);
-        } else {
-            $request = $this->buildJsonRequest();
         }
+        $request = $this->buildJsonRequest();
 
         return $request;
     }

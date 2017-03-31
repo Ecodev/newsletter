@@ -12,7 +12,7 @@ class Lynx implements IPlainConverter
 {
     private function injectBaseUrl($content, $baseUrl)
     {
-        if (strpos($content, '<base ') === false) {
+        if (mb_strpos($content, '<base ') === false) {
             $content = str_ireplace('<body', '<base href="' . $baseUrl . '"><body', $content);
         }
 

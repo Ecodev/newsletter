@@ -31,7 +31,7 @@ class IncludeCssFileViewHelper extends AbstractViewHelper
 
         if (TYPO3_MODE === 'FE') {
             $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
-            $extRelPath = substr($extPath, strlen(PATH_site));
+            $extRelPath = mb_substr($extPath, mb_strlen(PATH_site));
         } else {
             $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
         }

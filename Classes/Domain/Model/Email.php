@@ -269,7 +269,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     /**
      * Setter for unsubscribed
      *
-     * @param bool $unsubscribed Whether the recipient of this email requested to unsubscribe.
+     * @param bool $unsubscribed whether the recipient of this email requested to unsubscribe
      */
     public function setUnsubscribed($unsubscribed)
     {
@@ -279,7 +279,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     /**
      * Getter for unsubscribed
      *
-     * @return bool Whether the recipient of this email requested to unsubscribe.
+     * @return bool whether the recipient of this email requested to unsubscribe
      */
     public function getUnsubscribed()
     {

@@ -75,7 +75,6 @@ class Html extends AbstractArray
                     $this->data[] = ['email' => $email, 'name' => $fetched_data[2][$i]];
                 }
                 break;
-
             case 'regex':
             default:
                 preg_match_all("|[\.a-z0-9!#$%&'*+-/=?^_`{\|}]+@[a-z0-9_-][\.a-z0-9_-]*\.[a-z]{2,}|i", $content, $fetched_data);

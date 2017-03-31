@@ -136,7 +136,7 @@ class Sql extends RecipientList
      * Fetch a recipient from the sql-record set. This also computes some commonly used values,
      * such as plain_only and language.
      *
-     * @return	array	Recipient with user data.
+     * @return	array	recipient with user data
      */
     public function getRecipient()
     {
@@ -151,9 +151,9 @@ class Sql extends RecipientList
             }
 
             return $r;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getCount()
@@ -171,7 +171,7 @@ class Sql extends RecipientList
      *
      * @param string $email the email address of the recipient
      * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
-     * @return bool Status of the success of the removal.
+     * @return bool status of the success of the removal
      */
     public function registerBounce($email, $bounceLevel)
     {
@@ -195,9 +195,9 @@ class Sql extends RecipientList
             $db->sql_query($sql);
 
             return $db->sql_affected_rows();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -215,9 +215,9 @@ class Sql extends RecipientList
             $db->sql_query($sql);
 
             return $db->sql_affected_rows();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -235,8 +235,8 @@ class Sql extends RecipientList
             $db->sql_query($sql);
 
             return $db->sql_affected_rows();
-        } else {
-            return false;
         }
+
+        return false;
     }
 }

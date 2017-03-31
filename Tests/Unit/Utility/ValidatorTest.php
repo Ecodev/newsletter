@@ -20,8 +20,8 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $LANG = $this->getMock(\TYPO3\CMS\Lang\LanguageService::class, ['includeLLFile', 'getLL'], [], '', false);
         $LANG->method('includeLLFile')->will($this->returnValue(null));
         $LANG->method('getLL')->will($this->returnCallback(function ($langKey) {
-                    return $langKey;
-                }));
+            return $langKey;
+        }));
 
         $this->validator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['getURL'], [], '', false);
         $this->newsletter = $this->getMock(\Ecodev\Newsletter\Domain\Model\Newsletter::class, ['getContentUrl', 'getBaseUrl'], [], '', false);
@@ -213,7 +213,6 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         // Generate additionnal test cases for CSS properties
         foreach ($forbiddenCssProperties as $isForbidden => $properties) {
             foreach ($properties as $property) {
-
                 // First property
                 $result[] = [
                     '<p style="' . $property . ': 10px"></p>',
@@ -260,6 +259,8 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestValidator
+     * @param mixed $input
+     * @param mixed $expected
      */
     public function testValidator($input, $expected)
     {

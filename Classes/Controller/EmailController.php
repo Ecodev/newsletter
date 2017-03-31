@@ -223,7 +223,7 @@ class EmailController extends ExtDirectActionController
             $uriBuilder = $this->controllerContext->getUriBuilder();
             $uriBuilder->reset();
             $uriBuilder->setUseCacheHash(false);
-            $uriBuilder->setTargetPageUid((integer) $redirect);
+            $uriBuilder->setTargetPageUid((int) $redirect);
             // Append the recipient address just in case you want to do something with it at the destination
             $uriBuilder->setArguments([
                 'recipient' => $recipientAddress,

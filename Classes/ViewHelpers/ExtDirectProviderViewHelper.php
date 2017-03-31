@@ -32,9 +32,9 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      * Also calls Ext.Direct.addProvider() on itself (at js side).
      * The remote API is directly useable.
      *
-     * @param string $name The name for the javascript variable.
-     * @param string $namespace The namespace the variable is placed.
-     * @param string $routeUrl You can specify a URL that acts as router.
+     * @param string $name the name for the javascript variable
+     * @param string $namespace the namespace the variable is placed
+     * @param string $routeUrl you can specify a URL that acts as router
      */
     public function render($name = 'remoteDescriptor', $namespace = 'Ext.ux.Ecodev.Newsletter.Remote', $routeUrl = null)
     {

@@ -149,14 +149,14 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Get the number of receivers in this newsletter target
      *
-     * @return   int      Numbers of receivers.
+     * @return   int      numbers of receivers
      */
     abstract public function getCount();
 
     /**
      * Get error text if the fetching of the newsletter target has somehow failed.
      *
-     * @return   string      Error text or empty string.
+     * @return   string      error text or empty string
      */
     abstract public function getError();
 
@@ -167,7 +167,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      *
      * @param string $email the email address of the recipient
      * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
-     * @return bool Status of the success of the removal.
+     * @return bool status of the success of the removal
      */
     public function registerBounce($email, $bounceLevel)
     {
@@ -194,6 +194,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
 
     /**
      * Return HTML code showing an extract of recipients (first X recipients)
+     * @param mixed $limit
      */
     public function getExtract($limit = 30)
     {
@@ -247,12 +248,12 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     {
         $knownFields = ['email', 'plain_only', 'L', 'sender_email', 'sender_name', 'replyto_email', 'replyto_name'];
 
-        if (in_array($fieldname, $knownFields)) {
+        if (in_array($fieldname, $knownFields, true)) {
             return '<span style="color: green;">' . $fieldname . '</span>';
         } elseif (preg_match('/_[0-9]+$/', $fieldname)) {
             return '<span style="color: red;">' . $fieldname . '</span>';
-        } else {
-            return $fieldname;
         }
+
+        return $fieldname;
     }
 }

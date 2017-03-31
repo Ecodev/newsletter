@@ -113,7 +113,7 @@ class RecipientListController extends ExtDirectActionController
         // Assert we are using supported formats
         $availableFormats = ['csv', 'xml'];
         $format = $this->request->getFormat();
-        if (!in_array($format, $availableFormats)) {
+        if (!in_array($format, $availableFormats, true)) {
             $format = reset($availableFormats);
             $this->request->setFormat($format);
         }

@@ -17,7 +17,7 @@ class EmailParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             $parts = explode('-', basename($filename));
             $result[] = [
                 (int) $parts[0],
-                $parts[1]? : null,
+                $parts[1] ?: null,
                 $parts[2],
                 $filename,
             ];
@@ -28,6 +28,10 @@ class EmailParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestParser
+     * @param mixed $expectedBounce
+     * @param mixed $expectedAuthCode
+     * @param mixed $message
+     * @param mixed $filename
      */
     public function testParser($expectedBounce, $expectedAuthCode, $message, $filename)
     {

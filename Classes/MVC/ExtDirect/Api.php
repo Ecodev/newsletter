@@ -61,8 +61,8 @@ class Api
         $api['actions'] = [];
 
         if (empty($this->frameworkConfiguration['controllerConfiguration'])) {
-            # @todo improve me! Hack for fetching API of newsletter the hard way!
-            # It looks $this->frameworkConfiguration['controllerConfiguration'] is empty as of TYPO3 6.1. Bug or feature?
+            // @todo improve me! Hack for fetching API of newsletter the hard way!
+            // It looks $this->frameworkConfiguration['controllerConfiguration'] is empty as of TYPO3 6.1. Bug or feature?
             $this->frameworkConfiguration['controllerConfiguration'] = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['extbase']['extensions']['Newsletter']['modules']['web_NewsletterTxNewsletterM1']['controllers'];
         }
 

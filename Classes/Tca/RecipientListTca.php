@@ -16,7 +16,7 @@ class RecipientListTca
     public function render($PA, $fObj)
     {
         $result = '';
-        $uid = intval($PA['row']['uid']);
+        $uid = (int) $PA['row']['uid'];
         if ($uid != 0) {
             $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
             $recipientListRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);

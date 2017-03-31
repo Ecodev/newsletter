@@ -52,7 +52,6 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     {
         $output = '';
         foreach ($this->getQueries() as $title => $queries) {
-
             /* @var $transactedResult \Ecodev\Newsletter\Update\TransactionResult */
             $transactedResult = Transaction::transactInnoDBQueries($queries);
 
@@ -82,9 +81,9 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
         // From TYPO3 8.0 and higher, we can use getMessageAsMarkup(), but everything older should use render() method
         if (is_callable([$flashMessage, 'getMessageAsMarkup'])) {
             return $flashMessage->getMessageAsMarkup();
-        } else {
-            return $flashMessage->render();
         }
+
+        return $flashMessage->render();
     }
 
     /**
@@ -166,7 +165,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
         $config = Tools::encrypt("poll ###SERVER###\nproto ###PROTOCOL### \nusername \"###USERNAME###\"\npassword \"###PASSWORD###\"\n");
         $queries = [];
         foreach ($records as $record) {
-            $queries[] = $this->databaseConnection->UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . intval($record['uid']), [
+            $queries[] = $this->databaseConnection->UPDATEquery('tx_newsletter_domain_model_bounceaccount', 'uid=' . (int) $record['uid'], [
                 'password' => Tools::encrypt($record['password']),
                 'config' => $config,
             ]);

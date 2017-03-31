@@ -22,9 +22,9 @@ abstract class AbstractArray extends RecipientList
             }
 
             return $r;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getCount()
