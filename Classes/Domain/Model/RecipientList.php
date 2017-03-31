@@ -128,7 +128,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     }
 
     /**
-     * Array or mysql result containing raw data for recipient list. Kinf of cache in memory.
+     * Array or mysql result containing raw data for recipient list. Kind of cache in memory.
      * @var array
      */
     protected $data = null;
