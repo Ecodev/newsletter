@@ -302,7 +302,7 @@ class Mailer
         $notrackMarker = Tools::confParam('no-track');
         foreach ($urls[1] as $i => $url) {
             // Check for a no-track marker
-            if (!empty($notrackMarker) && mb_stripos($url, $notrackMarker) != false) {
+            if (!empty($notrackMarker) && mb_stripos($url, $notrackMarker) !== false) {
                 continue;
             }
 
