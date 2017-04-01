@@ -19,6 +19,14 @@
                 <source>Content too short. The content must be at least 200 chars long to be considered valid.</source>
                 <target>Contenu trop court. Le contenu doit être d'au moins 200 caractères pour être considéré valide.</target>
             </trans-unit>
+            <trans-unit id="validation_mail_contains_oops" xml:space="preserve" approved="yes">
+                <source>Content contains error message from TYPO3.</source>
+                <target>Le contenu contient des erreurs de TYPO3.</target>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_xdebug" xml:space="preserve" approved="yes">
+                <source>Content contains Xdebug notices or errors.</source>
+                <target>Le contenu contient des erreur de Xdebug.</target>
+            </trans-unit>
             <trans-unit id="validation_mail_contains_php_warnings" xml:space="preserve" approved="yes">
                 <source>Content contains PHP Warnings. This must not reach the receivers.</source>
                 <target>Le contenu contient des warnings PHP. Cela ne doit pas être envoyé aux destinataires.</target>
