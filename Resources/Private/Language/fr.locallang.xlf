@@ -319,6 +319,10 @@
                 <source>It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</source>
                 <target>C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées et %4$s newsletters en cours d'envoi.</target>
             </trans-unit>
+            <trans-unit id="task_fetch_bounce_additional_information" xml:space="preserve" approved="yes">
+                <source>From %1$s bounce baccounts</source>
+                <target>De %1$s comptes de rebonds</target>
+            </trans-unit>
             <trans-unit id="task_fetch_bounces_title" xml:space="preserve" approved="yes">
                 <source>Fetch bounced emails</source>
                 <target>Chercher les emails qui ont rebondits</target>
