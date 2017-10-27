@@ -45,7 +45,7 @@ class ModuleContainerViewHelper extends AbstractViewHelper
         $doc = $this->getDocInstance();
         $this->pageRenderer->backPath = '';
         $this->pageRenderer->loadExtJS();
-        $this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
+        $this->pageRenderer->addCssFile('sysext/core/Resources/Public/ExtJs/xtheme-t3skin.css');
 
         $this->renderChildren();
 
