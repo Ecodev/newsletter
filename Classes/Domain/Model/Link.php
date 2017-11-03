@@ -2,6 +2,11 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 /**
  * Link
  */
@@ -40,7 +45,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
     }
 
     /**
@@ -80,7 +85,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getNewsletter()
     {
-        $newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $newsletterRepository = $this->objectManager->get(NewsletterRepository::class);
 
         return $newsletterRepository->findByUid($this->newsletter);
     }
@@ -107,7 +112,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     public function getOpenedPercentage()
     {
-        $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $emailRepository = $this->objectManager->get(EmailRepository::class);
         $emailCount = $emailRepository->getCount($this->newsletter);
 
         if ($emailCount == 0) {

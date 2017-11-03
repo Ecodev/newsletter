@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\UriBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * The view based backend module controller for the Newsletter package.
@@ -20,7 +21,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected function initializeAction()
     {
-        $this->pageId = (int) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
+        $this->pageId = (int) GeneralUtility::_GP('id');
     }
 
     /**

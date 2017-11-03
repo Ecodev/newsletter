@@ -2,19 +2,22 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
 
+use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\Email.
  */
 class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Email
+     * @var Email
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\Email();
+        $this->subject = new Email();
     }
 
     protected function tearDown()
@@ -185,7 +188,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setNewsletterForNewsletterSetsNewsletter()
     {
-        $newsletterFixture = new \Ecodev\Newsletter\Domain\Model\Newsletter();
+        $newsletterFixture = new Newsletter();
         $this->subject->setNewsletter($newsletterFixture);
 
         $this->assertAttributeSame(
@@ -218,7 +221,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getAuthCode()
     {
-        $email = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getUid'], [], '', false);
+        $email = $this->getMock(Email::class, ['getUid'], [], '', false);
         $email->expects($this->any())->method('getUid')->will($this->returnValue(123));
         $email->setRecipientAddress('john@example.com');
         $this->assertSame('462aa2b1b9885a181e6d916a409d96c8', $email->getAuthCode());

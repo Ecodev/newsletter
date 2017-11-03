@@ -2,6 +2,13 @@
 
 namespace Ecodev\Newsletter\Utility;
 
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Core\Bootstrap;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+
 /**
  * Front end URI builder
  */
@@ -39,13 +46,13 @@ abstract class UriBuilder
     private static function createUriBuilder($currentPid)
     {
         // If we are in Backend we need to simulate minimal TSFE
-        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)) {
+        if (!isset($GLOBALS['TSFE']) || !($GLOBALS['TSFE'] instanceof TypoScriptFrontendController)) {
             if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
+                $GLOBALS['TT'] = new TimeTracker();
                 $GLOBALS['TT']->start();
             }
 
-            $TSFE = @\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], $currentPid, '0', 1);
+            $TSFE = @GeneralUtility::makeInstance(TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], $currentPid, '0', 1);
 
             $GLOBALS['TSFE'] = $TSFE;
             $GLOBALS['TSFE']->initFEuser();
@@ -58,9 +65,9 @@ abstract class UriBuilder
         }
 
         // If extbase is not boostrapped yet, we must do it before building uriBuilder (when used from scheduler CLI)
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof \TYPO3\CMS\Extbase\Core\Bootstrap)) {
-            $extbaseBootstrap = $objectManager->get(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        if (!(isset($GLOBALS['dispatcher']) && $GLOBALS['dispatcher'] instanceof Bootstrap)) {
+            $extbaseBootstrap = $objectManager->get(Bootstrap::class);
             $extbaseBootstrap->initialize(['extensionName' => self::EXTENSION_NAME, 'pluginName' => self::PLUGIN_NAME]);
         }
 
@@ -76,8 +83,8 @@ abstract class UriBuilder
      */
     private static function getNamespacedArguments($controllerName, $actionName, array $arguments)
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $extensionService = $objectManager->get(\TYPO3\CMS\Extbase\Service\ExtensionService::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $extensionService = $objectManager->get(ExtensionService::class);
         $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
 
         // Prepare arguments

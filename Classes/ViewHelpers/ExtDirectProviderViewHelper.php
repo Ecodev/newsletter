@@ -2,6 +2,10 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use Ecodev\Newsletter\MVC\ExtDirect\Api;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 /**
  * View helper which allows
  *
@@ -14,7 +18,7 @@ namespace Ecodev\Newsletter\ViewHelpers;
 class ExtDirectProviderViewHelper extends AbstractViewHelper
 {
     /**
-     * @var \Ecodev\Newsletter\MVC\ExtDirect\Api
+     * @var Api
      */
     protected $apiService;
 
@@ -23,8 +27,8 @@ class ExtDirectProviderViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $this->apiService = $objectManager->get(\Ecodev\Newsletter\MVC\ExtDirect\Api::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->apiService = $objectManager->get(Api::class);
     }
 
     /**

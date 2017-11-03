@@ -4,6 +4,8 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\LinkRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /**
  * Controller for the Link object
@@ -45,7 +47,7 @@ class LinkController extends ExtDirectActionController
             ],
         ]);
 
-        $this->addFlashMessage('Loaded all Links from Server side.', 'Links loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded all Links from Server side.', 'Links loaded successfully', FlashMessage::NOTICE);
 
         $this->view->assign('total', $this->linkRepository->getCount($uidNewsletter));
         $this->view->assign('data', $links);
@@ -78,7 +80,7 @@ class LinkController extends ExtDirectActionController
             // This gives a proper 303 redirect.
             $this->redirectToUri($url);
         } else {
-            throw new \TYPO3\CMS\Core\Error\Http\PageNotFoundException('The requested link was not found', 1440490767);
+            throw new PageNotFoundException('The requested link was not found', 1440490767);
         }
     }
 

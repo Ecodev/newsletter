@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
+use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
+
 require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
 
 /**
@@ -9,13 +11,13 @@ require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
  */
 class RecipientListRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
-    /** @var \Ecodev\Newsletter\Domain\Repository\RecipientListRepository */
+    /** @var RecipientListRepository */
     private $recipientListRepository;
 
     public function setUp()
     {
         parent::setUp();
-        $this->recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
+        $this->recipientListRepository = $this->objectManager->get(RecipientListRepository::class);
     }
 
     public function testFindByUidInitialized()

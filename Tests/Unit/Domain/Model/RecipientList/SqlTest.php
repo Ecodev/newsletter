@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Domain\Model\RecipientList\Sql;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\Sql.
  */
@@ -9,7 +11,7 @@ class SqlTest extends AbstractRecipientList
 {
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\RecipientList\Sql();
+        $this->subject = new Sql();
     }
 
     /**

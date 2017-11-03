@@ -7,6 +7,9 @@ use Ecodev\Newsletter\Domain\Model\Newsletter;
 use Ecodev\Newsletter\Utility\UriBuilder;
 use Swift_Attachment;
 use Swift_EmbeddedFile;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This is the holy inner core of newsletter.
@@ -89,7 +92,7 @@ class Mailer
         $this->siteUrl = $newsletter->getBaseUrl() . '/';
         $this->linksCache = [];
         $this->newsletter = $newsletter;
-        $this->homeUrl = $this->siteUrl . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('newsletter');
+        $this->homeUrl = $this->siteUrl . ExtensionManagementUtility::siteRelPath('newsletter');
         $this->senderName = $newsletter->getSenderName();
         $this->senderEmail = $newsletter->getSenderEmail();
         $this->replytoName = $newsletter->getReplytoName();
@@ -187,7 +190,7 @@ class Mailer
     {
         // Get filesystem path from url
         $relativePath = str_replace($this->siteUrl, '', $imageUrl);
-        $absolutePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($relativePath);
+        $absolutePath = GeneralUtility::getFileAbsFileName($relativePath);
 
         // If the same image was already embeded, reuse its marker, otherwise create a marker and keep the embed files to be replaced
         if (isset($this->attachmentsMapping[$absolutePath])) {
@@ -369,7 +372,7 @@ class Mailer
      * Creates the Message object from our current state and returns it
      *
      * @param Email $email
-     * @return \TYPO3\CMS\Core\Mail\MailMessage
+     * @return MailMessage
      */
     public function createMessage(Email $email)
     {
@@ -380,8 +383,8 @@ class Mailer
         $replytoEmail = isset($recipientData['replyto_email']) && GeneralUtility::validEmail($recipientData['replyto_email']) ? $recipientData['replyto_email'] : $this->replytoEmail;
         $replytoName = isset($recipientData['replyto_name']) && $recipientData['replyto_name'] ? $recipientData['replyto_name'] : $this->replytoName;
 
-        /* @var $message \TYPO3\CMS\Core\Mail\MailMessage  */
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
+        /* @var $message MailMessage  */
+        $message = GeneralUtility::makeInstance(MailMessage::class);
         $message->setTo($email->getRecipientAddress())
                 ->setFrom([
                     $senderEmail => $senderName,

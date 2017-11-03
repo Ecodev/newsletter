@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Recipient List using any public URL to fetch and parse for emails addresses
  */
@@ -65,7 +67,7 @@ class Html extends AbstractArray
     {
         $this->data = [];
 
-        $content = \Ecodev\Newsletter\Tools::getUrl($this->getHtmlUrl());
+        $content = Tools::getUrl($this->getHtmlUrl());
 
         switch ($this->getHtmlFetchType()) {
             case 'mailto':

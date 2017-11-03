@@ -2,11 +2,13 @@
 
 namespace Ecodev\Newsletter\Tests\Unit;
 
+use TYPO3\CMS\Core\Configuration\ConfigurationManager;
+
 class AbstractUnitTestCase extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     protected function loadConfiguration()
     {
-        $manager = new \TYPO3\CMS\Core\Configuration\ConfigurationManager();
+        $manager = new ConfigurationManager();
         $path = $manager->getLocalConfigurationFileLocation();
 
         if (is_readable($path)) {

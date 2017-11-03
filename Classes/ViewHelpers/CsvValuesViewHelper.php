@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Format array of values to CSV format
  */
@@ -15,6 +17,6 @@ class CsvValuesViewHelper extends AbstractViewHelper
      */
     public function render(array $values)
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::csvValues($values);
+        return GeneralUtility::csvValues($values);
     }
 }

@@ -4,6 +4,9 @@ namespace Ecodev\Newsletter\MVC\View;
 
 use ArrayAccess;
 use DateTime;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * A JSON view
@@ -78,7 +81,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
     protected $configuration = [];
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
+     * @var PersistenceManagerInterface
      * @inject
      */
     protected $persistenceManager;
@@ -86,9 +89,9 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
     /**
      * Injects the PersistenceManager.
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
+     * @param PersistenceManagerInterface $persistenceManager
      */
-    public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
     }
@@ -201,10 +204,10 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
             return $object->format('c');
         }
         // load LayzyLoadingProxy instances
-        if ($object instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+        if ($object instanceof LazyLoadingProxy) {
             $object = $object->_loadRealInstance();
         }
-        $propertyNames = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettablePropertyNames($object);
+        $propertyNames = ObjectAccess::getGettablePropertyNames($object);
         $propertiesToRender = [];
         foreach ($propertyNames as $propertyName) {
             if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only'], true)) {
@@ -214,7 +217,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
                 continue;
             }
 
-            $propertyValue = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($object, $propertyName);
+            $propertyValue = ObjectAccess::getProperty($object, $propertyName);
 
             if (!is_array($propertyValue) && !is_object($propertyValue)) {
                 $propertiesToRender[$propertyName] = $propertyValue;

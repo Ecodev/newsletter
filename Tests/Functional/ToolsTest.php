@@ -2,7 +2,9 @@
 
 namespace Ecodev\Newsletter\Tests\Functional;
 
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Utility\Validator;
 
 require_once __DIR__ . '/AbstractFunctionalTestCase.php';
 
@@ -32,8 +34,8 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         $this->assertSame(md5($lastInsertedEmail['uid'] . $lastInsertedEmail['recipient_address']), $lastInsertedEmail['auth_code'], 'the UID used in authCode should be the real value');
 
         // Prepare a mock to always validate content
-        /** @var \Ecodev\Newsletter\Utility\Validator|\PHPUnit_Framework_MockObject_MockObject $mockValidator */
-        $mockValidator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['validate'], [], '', false);
+        /** @var Validator|\PHPUnit_Framework_MockObject_MockObject $mockValidator */
+        $mockValidator = $this->getMock(Validator::class, ['validate'], [], '', false);
         $mockValidator->method('validate')->will($this->returnValue(
             [
                 'content' => 'some very interesting content <a href="http://example.com/fake-content">link</a>',
@@ -47,8 +49,8 @@ class ToolsTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTe
         global $TYPO3_CONF_VARS;
         $TYPO3_CONF_VARS['MAIL']['transport'] = 'Swift_NullTransport';
 
-        /** @var \Ecodev\Newsletter\Domain\Repository\NewsletterRepository $newsletterRepository */
-        $newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        /** @var NewsletterRepository $newsletterRepository */
+        $newsletterRepository = $this->objectManager->get(NewsletterRepository::class);
         $newsletter = $newsletterRepository->findByUid(20);
         $newsletter->setValidator($mockValidator);
         Tools::runSpool($newsletter);

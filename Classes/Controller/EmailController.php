@@ -8,7 +8,12 @@ use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\EmailParser;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller for the Email object
@@ -51,7 +56,7 @@ class EmailController extends ExtDirectActionController
             ],
         ]);
 
-        $this->addFlashMessage('Loaded all Emails from Server side.', 'Emails loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded all Emails from Server side.', 'Emails loaded successfully', FlashMessage::NOTICE);
         $this->view->assign('total', $this->emailRepository->getCount($uidNewsletter));
         $this->view->assign('data', $emails);
         $this->view->assign('success', true);
@@ -69,7 +74,7 @@ class EmailController extends ExtDirectActionController
 
         // Send one transparent pixel, so the end-user sees nothing at all
         header('Content-type: image/gif');
-        readfile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('newsletter', '/Resources/Private/clear.gif'));
+        readfile(ExtensionManagementUtility::extPath('newsletter', '/Resources/Private/clear.gif'));
         die();
     }
 
@@ -115,7 +120,7 @@ class EmailController extends ExtDirectActionController
         if ($isPreview) {
             // Create a fake newsletter and configure it with given parameters
             /** @var Newsletter $newsletter */
-            $newsletter = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Newsletter::class);
+            $newsletter = $this->objectManager->get(Newsletter::class);
             $newsletter->setPid(@$args['pid']);
             $newsletter->setUidRecipientList(@$args['uidRecipientList']);
 
@@ -127,7 +132,7 @@ class EmailController extends ExtDirectActionController
                     // Got him
                     if ($record['email'] == $args['email']) {
                         // Build a fake email
-                        $email = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Email::class);
+                        $email = $this->objectManager->get(Email::class);
                         $email->setRecipientAddress($record['email']);
                         $email->setRecipientData($record);
                     }
@@ -140,7 +145,7 @@ class EmailController extends ExtDirectActionController
                 $newsletter = $email->getNewsletter();
 
                 // Here we need to ensure that we have real newsletter instance because of type hinting on \Ecodev\Newsletter\Tools::getConfiguredMailer()
-                if ($newsletter instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+                if ($newsletter instanceof LazyLoadingProxy) {
                     $newsletter = $newsletter->_loadRealInstance();
                 }
             }
@@ -243,9 +248,10 @@ class EmailController extends ExtDirectActionController
 
     /**
      * Sends an email to the address configured in extension settings when a recipient unsubscribe
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     *
+     * @param Newsletter $newsletter
      * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email
+     * @param Email $email
      */
     protected function notifyUnsubscribe($newsletter, $recipientList, Email $email)
     {
@@ -271,11 +277,11 @@ class EmailController extends ExtDirectActionController
         $urlRecipient = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_email][' . $email->getUid() . ']=edit';
         $urlRecipientList = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_recipientlist][' . $recipientList->getUid() . ']=edit';
         $urlNewsletter = $baseUrl . '/typo3/alt_doc.php?&edit[tx_newsletter_domain_model_newsletter][' . $newsletter->getUid() . ']=edit';
-        $subject = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_subject', 'newsletter');
-        $body = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', [$email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter]);
+        $subject = LocalizationUtility::translate('unsubscribe_notification_subject', 'newsletter');
+        $body = LocalizationUtility::translate('unsubscribe_notification_body', 'newsletter', [$email->getRecipientAddress(), $urlRecipient, $recipientList->getTitle(), $urlRecipientList, $newsletter->getTitle(), $urlNewsletter]);
 
         // Actually sends email
-        $message = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
+        $message = GeneralUtility::makeInstance(MailMessage::class);
         $message->setTo($notificationEmail)
                 ->setFrom([$newsletter->getSenderEmail() => $newsletter->getSenderName()])
                 ->setSubject($subject)

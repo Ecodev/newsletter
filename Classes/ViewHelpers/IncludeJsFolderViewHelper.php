@@ -2,6 +2,9 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * View helper which allows you to include a JS File.
  * Note: This feature is experimental!
@@ -28,21 +31,21 @@ class IncludeJsFolderViewHelper extends AbstractViewHelper
         if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
+        $extPath = ExtensionManagementUtility::extPath($extKey);
         if (TYPO3_MODE === 'FE') {
             $extRelPath = mb_substr($extPath, mb_strlen(PATH_site));
         } else {
-            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
+            $extRelPath = ExtensionManagementUtility::extRelPath($extKey);
         }
         $absFolderPath = $extPath . $pathInsideExt . $name;
         // $files will include all files relative to $pathInsideExt
         if ($recursive === false) {
-            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getFilesInDir($absFolderPath);
+            $files = GeneralUtility::getFilesInDir($absFolderPath);
             foreach ($files as $hash => $filename) {
                 $files[$hash] = $name . $filename;
             }
         } else {
-            $files = \TYPO3\CMS\Core\Utility\GeneralUtility::getAllFilesAndFoldersInPath([], $absFolderPath, '', 0, 99, '\\.svn');
+            $files = GeneralUtility::getAllFilesAndFoldersInPath([], $absFolderPath, '', 0, 99, '\\.svn');
             foreach ($files as $hash => $absPath) {
                 $files[$hash] = str_replace($extPath . $pathInsideExt, '', $absPath);
             }

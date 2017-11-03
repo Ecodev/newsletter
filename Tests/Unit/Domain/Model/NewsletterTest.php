@@ -2,20 +2,26 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
 
+use Ecodev\Newsletter\Domain\Model\BounceAccount;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin;
+use Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx;
+use Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\Newsletter.
  */
 class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
+     * @var Newsletter
      */
     protected $subject = null;
 
     protected function setUp()
     {
         $this->loadConfiguration();
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\Newsletter();
+        $this->subject = new Newsletter();
     }
 
     protected function tearDown()
@@ -135,7 +141,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $converter = $this->subject->getPlainConverter();
         $this->assertSame(
-                \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class, $converter
+                Builtin::class, $converter
         );
 
         $this->assertTrue(class_exists($converter));
@@ -159,9 +165,9 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getPlainConverterInstance()
     {
         $classes = [
-            'NonExistingClassFooBar' => \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class,
-            \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class => \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class,
-            \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx::class => \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx::class,
+            'NonExistingClassFooBar' => Builtin::class,
+            Builtin::class => Builtin::class,
+            Lynx::class => Lynx::class,
         ];
 
         foreach ($classes as $class => $expected) {
@@ -216,7 +222,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function setBounceAccountForBounceAccountSetsBounceAccount()
     {
-        $bounceAccountFixture = new \Ecodev\Newsletter\Domain\Model\BounceAccount();
+        $bounceAccountFixture = new BounceAccount();
         $this->subject->setBounceAccount($bounceAccountFixture);
 
         $this->assertAttributeSame(
@@ -231,7 +237,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidBounceAccount());
 
-        $bounceAccount = $this->getMock(\Ecodev\Newsletter\Domain\Model\BounceAccount::class, ['getUid'], [], '', false);
+        $bounceAccount = $this->getMock(BounceAccount::class, ['getUid'], [], '', false);
         $bounceAccount->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setBounceAccount($bounceAccount);
         $this->assertSame(123, $this->subject->getUidBounceAccount());
@@ -322,7 +328,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function setRecipientListForRecipientListSetsRecipientList()
     {
-        $recipientListFixture = new \Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers();
+        $recipientListFixture = new BeUsers();
         $this->subject->setRecipientList($recipientListFixture);
 
         $this->assertAttributeSame(
@@ -337,7 +343,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $this->assertNull($this->subject->getUidRecipientList());
 
-        $recipientList = $this->getMock(\Ecodev\Newsletter\Domain\Model\RecipientList\BeUsers::class, ['getUid'], [], '', false);
+        $recipientList = $this->getMock(BeUsers::class, ['getUid'], [], '', false);
         $recipientList->expects($this->once())->method('getUid')->will($this->returnValue(123));
         $this->subject->setRecipientList($recipientList);
         $this->assertSame(123, $this->subject->getUidRecipientList());

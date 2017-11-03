@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl.
  */
@@ -9,7 +11,7 @@ class CsvUrlTest extends CsvFileTest
 {
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\RecipientList\CsvUrl();
+        $this->subject = new CsvUrl();
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+
 /**
  * An Ext Direct request
  *
@@ -11,7 +13,7 @@ class Request
 {
     /**
      * @inject
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -39,9 +41,9 @@ class Request
     /**
      * Injects the ObjectManager
      *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -56,7 +58,7 @@ class Request
      */
     public function createAndAddTransaction($action, $method, array $data, $tid)
     {
-        $transaction = $this->objectManager->get(\Ecodev\Newsletter\MVC\ExtDirect\Transaction::class, $this, $action, $method, $data, $tid);
+        $transaction = $this->objectManager->get(Transaction::class, $this, $action, $method, $data, $tid);
         $this->transactions[] = $transaction;
     }
 

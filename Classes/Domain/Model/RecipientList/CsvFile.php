@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Recipient List using CSV file
  */
@@ -110,7 +112,7 @@ class CsvFile extends AbstractArray
     {
         $csvdata = null;
         if ($filename) {
-            $csvdata = \Ecodev\Newsletter\Tools::getURL($filename);
+            $csvdata = Tools::getURL($filename);
         }
 
         $this->loadCsvFromData($csvdata);

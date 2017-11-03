@@ -5,9 +5,13 @@ namespace Ecodev\Newsletter;
 use DateTime;
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
@@ -28,7 +32,7 @@ abstract class Tools
         // Look for a config in the module TS first.
         static $configTS;
         if (!is_array($configTS) && isset($GLOBALS['TYPO3_DB'])) {
-            $beConfManager = self::getObjectManager()->get(\TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager::class);
+            $beConfManager = self::getObjectManager()->get(BackendConfigurationManager::class);
             $configTS = $beConfManager->getTypoScriptSetup();
             $configTS = $configTS['module.']['tx_newsletter.']['config.'];
         }
@@ -53,7 +57,7 @@ abstract class Tools
      */
     public static function getLogger($class)
     {
-        return GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger($class);
+        return GeneralUtility::makeInstance(LogManager::class)->getLogger($class);
     }
 
     /**
@@ -182,7 +186,7 @@ abstract class Tools
         $mailers = [];
 
         $newsletterRepository = self::getNewsletterRepository();
-        $emailRepository = self::getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $emailRepository = self::getObjectManager()->get(EmailRepository::class);
 
         $allUids = $newsletterRepository->findAllNewsletterAndEmailUidToSend($limitNewsletter);
 
@@ -340,7 +344,7 @@ abstract class Tools
             return 'EXT:newsletter/';
         }
             // But for TYPO3 6.2 family, we still have to use old style
-            return \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('newsletter');
+            return ExtensionManagementUtility::extRelPath('newsletter');
     }
 
     /**

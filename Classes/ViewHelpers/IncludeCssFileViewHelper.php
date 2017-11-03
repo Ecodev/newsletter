@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
  * View helper which allows you to include a CSS File.
  * Note: This feature is experimental!
@@ -10,7 +12,7 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeCssFile name="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ *    <newsletter:includeCssFile name="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  */
 class IncludeCssFileViewHelper extends AbstractViewHelper
@@ -21,6 +23,7 @@ class IncludeCssFileViewHelper extends AbstractViewHelper
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
      * @param string $pathInsideExt the path to the file relative to the ext-folder
+     *
      * @return string the link
      */
     public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/Styles/')
@@ -30,10 +33,10 @@ class IncludeCssFileViewHelper extends AbstractViewHelper
         }
 
         if (TYPO3_MODE === 'FE') {
-            $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
+            $extPath = ExtensionManagementUtility::extPath($extKey);
             $extRelPath = mb_substr($extPath, mb_strlen(PATH_site));
         } else {
-            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
+            $extRelPath = ExtensionManagementUtility::extRelPath($extKey);
         }
 
         $this->pageRenderer->addCssFile($extRelPath . $pathInsideExt . $name);

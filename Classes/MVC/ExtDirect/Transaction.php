@@ -2,6 +2,9 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Web\Request;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
 /**
@@ -13,18 +16,18 @@ class Transaction
 {
     /**
      * @inject
-     * @var \TYPO3\CMS\Extbase\Reflection\ReflectionService
+     * @var ReflectionService
      */
     protected $reflectionService;
 
     /**
      * @inject
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -82,17 +85,17 @@ class Transaction
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @param ConfigurationManagerInterface $configurationManager
      */
-    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -100,9 +103,9 @@ class Transaction
     /**
      * Injects the Reflection Service
      *
-     * @param \TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService
+     * @param ReflectionService $reflectionService
      */
-    public function injectReflectionService(\TYPO3\CMS\Extbase\Reflection\ReflectionService $reflectionService)
+    public function injectReflectionService(ReflectionService $reflectionService)
     {
         $this->reflectionService = $reflectionService;
     }
@@ -110,12 +113,12 @@ class Transaction
     /**
      * Build a web request for dispatching this Ext Direct transaction
      *
-     * @return \TYPO3\CMS\Extbase\Mvc\Web\Request A web request for this transaction
+     * @return Request A web request for this transaction
      */
     public function buildRequest()
     {
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $request = $this->objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Request::class);
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $request = $this->objectManager->get(Request::class);
         $request->setControllerObjectName($this->getControllerObjectName());
         $request->setControllerActionName($this->getControllerActionName());
         $request->setPluginName($frameworkConfiguration['pluginName']);
@@ -132,7 +135,7 @@ class Transaction
      */
     public function buildResponse()
     {
-        return $this->objectManager->get(\Ecodev\Newsletter\MVC\ExtDirect\TransactionResponse::class);
+        return $this->objectManager->get(TransactionResponse::class);
     }
 
     /**

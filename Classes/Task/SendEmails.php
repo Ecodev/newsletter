@@ -2,7 +2,11 @@
 
 namespace Ecodev\Newsletter\Task;
 
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use Ecodev\Newsletter\Tools;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Provides Scheduler task to send emails
@@ -32,8 +36,8 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function getAdditionalInformation()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $newsletterRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $newsletterRepository = $objectManager->get(NewsletterRepository::class);
 
         $newslettersToSend = $newsletterRepository->findAllReadyToSend();
         $newslettersBeingSent = $newsletterRepository->findAllBeingSent();
@@ -50,6 +54,6 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         $emailsPerRound = Tools::confParam('mails_per_round');
 
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', [$emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount]);
+        return LocalizationUtility::translate('task_send_emails_additional_information', 'newsletter', [$emailsPerRound, $emailNotSentCount, $newslettersToSendCount, $newslettersBeingSentCount]);
     }
 }

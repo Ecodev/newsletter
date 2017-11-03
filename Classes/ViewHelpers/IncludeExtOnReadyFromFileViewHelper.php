@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\ViewHelpers;
 
 use Ecodev\Newsletter\Exception;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * View helper which allows you to include inline JS code into a module Container.
@@ -29,7 +30,7 @@ class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper
         if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
+        $extPath = ExtensionManagementUtility::extPath($extKey);
 
         $filePath = $extPath . $pathInsideExt . $name;
 

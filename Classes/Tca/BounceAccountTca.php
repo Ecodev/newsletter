@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tca;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * Handle bounced account encryption
  */
@@ -33,7 +35,7 @@ class BounceAccountTca
      */
     public function evaluateFieldValue($value, $isIn, &$set)
     {
-        return \Ecodev\Newsletter\Tools::encrypt($value);
+        return Tools::encrypt($value);
     }
 
     /**
@@ -52,7 +54,7 @@ class BounceAccountTca
                 $value = $default;
             }
         } elseif ($value != $default) {
-            $value = \Ecodev\Newsletter\Tools::decrypt($value);
+            $value = Tools::decrypt($value);
         }
 
         return $value;

@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
  * Make localization files available in JavaScript
  */
@@ -21,7 +23,7 @@ class LocalizationViewHelper extends AbstractViewHelper
         if ($extKey == null) {
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
-        $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
+        $extPath = ExtensionManagementUtility::extPath($extKey);
 
         $localizations = [];
         foreach ($names as $name) {

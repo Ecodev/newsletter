@@ -2,7 +2,15 @@
 
 namespace Ecodev\Newsletter\MVC\Controller;
 
+use Ecodev\Newsletter\MVC\View\ExtDirectView;
 use Ecodev\Newsletter\MVC\View\JsonView;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Validation\PropertyError;
 
 /**
  * A Controller used for answering via AJAX speaking JSON
@@ -10,7 +18,7 @@ use Ecodev\Newsletter\MVC\View\JsonView;
 class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
+     * @var PersistenceManagerInterface
      * @inject
      */
     protected $persistenceManager;
@@ -18,9 +26,9 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     /**
      * Injects the PersistenceManager.
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager
+     * @param PersistenceManagerInterface $persistenceManager
      */
-    public function injectPersistenceManager(\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface $persistenceManager)
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
     }
@@ -28,10 +36,10 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     /**
      * Initializes the View to be a \Ecodev\Newsletter\ExtDirect\View\ExtDirectView that renders json without Template Files.
      */
-    public function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
+    public function initializeView(ViewInterface $view)
     {
         if ($this->request->getFormat() === 'extdirect') {
-            $this->view = $this->objectManager->get(\Ecodev\Newsletter\MVC\View\ExtDirectView::class);
+            $this->view = $this->objectManager->get(ExtDirectView::class);
             $this->view->setControllerContext($this->controllerContext);
         }
     }
@@ -49,7 +57,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         // Append detail of properties if available
         // Message layout is not optimal, but at least we avoid code duplication
         foreach ($this->argumentsMappingResults->getErrors() as $error) {
-            if ($error instanceof \TYPO3\CMS\Extbase\Validation\PropertyError) {
+            if ($error instanceof PropertyError) {
                 foreach ($error->getErrors() as $subError) {
                     $message .= 'Error:   ' . $subError->getMessage() . PHP_EOL;
                 }
@@ -76,14 +84,14 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @see \TYPO3\CMS\Core\Messaging\FlashMessage
      * @api
      */
-    public function addFlashMessage($messageBody, $messageTitle = '', $severity = \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, $storeInSession = true)
+    public function addFlashMessage($messageBody, $messageTitle = '', $severity = AbstractMessage::OK, $storeInSession = true)
     {
         if (!is_string($messageBody)) {
             throw new \InvalidArgumentException('The message body must be of type string, "' . gettype($messageBody) . '" given.', 1243258395);
         }
-        /* @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
-        $flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        \TYPO3\CMS\Core\Messaging\FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
+        /* @var FlashMessage $flashMessage */
+        $flashMessage = GeneralUtility::makeInstance(
+                        FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
         );
         $this->controllerContext->getFlashMessageQueue()->enqueue($flashMessage);
     }
@@ -96,7 +104,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     protected function translate($key, array $args = [])
     {
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, 'newsletter', $args);
+        return LocalizationUtility::translate($key, 'newsletter', $args);
     }
 
     /**

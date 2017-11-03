@@ -2,6 +2,9 @@
 
 namespace Ecodev\Newsletter\Tests\Functional;
 
+use Ecodev\Newsletter\BounceHandler;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+
 require_once __DIR__ . '/AbstractFunctionalTestCase.php';
 
 /**
@@ -14,10 +17,10 @@ class BounceHandlerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunc
         $filename = dirname(__DIR__) . '/Unit/Fixtures/bounce/2-87c4e9b09085befbb7f20faa7482213a-Undelivered Mail Returned to Sender.eml';
         $content = file_get_contents($filename);
 
-        $bounceHandler = new \Ecodev\Newsletter\BounceHandler($content);
+        $bounceHandler = new BounceHandler($content);
         $bounceHandler->dispatch();
 
-        $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $emailRepository = $this->objectManager->get(EmailRepository::class);
         $email = $emailRepository->findByUid(302);
         $this->assertTrue($email->isBounced());
         $this->assertRecipientListCallbackWasCalled('bounced recipient2@example.com, 2, 2, 3, 4');

@@ -2,6 +2,9 @@
 
 namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use Ecodev\Newsletter\Domain\Repository\LinkRepository;
+
 require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
 
 /**
@@ -9,17 +12,17 @@ require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
  */
 class LinkRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
-    /** @var \Ecodev\Newsletter\Domain\Repository\LinkRepository */
+    /** @var LinkRepository */
     private $linkRepository;
 
-    /** @var \Ecodev\Newsletter\Domain\Repository\EmailRepository */
+    /** @var EmailRepository */
     private $emailRepository;
 
     public function setUp()
     {
         parent::setUp();
-        $this->linkRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\LinkRepository::class);
-        $this->emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $this->linkRepository = $this->objectManager->get(LinkRepository::class);
+        $this->emailRepository = $this->objectManager->get(EmailRepository::class);
 
         // When testing we need to help the core by filling HTTP_HOST variable to be able to build correct URL
         $_SERVER['HTTP_HOST'] = 'example.com';

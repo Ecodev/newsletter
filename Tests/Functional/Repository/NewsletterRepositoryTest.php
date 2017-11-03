@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
+
 require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
 
 /**
@@ -9,13 +11,13 @@ require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
  */
 class NewsletterRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
-    /** @var \Ecodev\Newsletter\Domain\Repository\NewsletterRepository */
+    /** @var NewsletterRepository */
     private $newsletterRepository;
 
     public function setUp()
     {
         parent::setUp();
-        $this->newsletterRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $this->newsletterRepository = $this->objectManager->get(NewsletterRepository::class);
     }
 
     public function testGetLatest()

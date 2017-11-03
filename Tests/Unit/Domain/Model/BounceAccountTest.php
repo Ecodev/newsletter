@@ -2,19 +2,22 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
 
+use Ecodev\Newsletter\Domain\Model\BounceAccount;
+use Ecodev\Newsletter\Tools;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\BounceAccount.
  */
 class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\BounceAccount
+     * @var BounceAccount
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\BounceAccount();
+        $this->subject = new BounceAccount();
     }
 
     protected function tearDown()
@@ -150,7 +153,7 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setProtocol('smtp');
         $this->subject->setPort(25);
         $this->subject->setUsername('john');
-        $this->subject->setPassword(\Ecodev\Newsletter\Tools::encrypt('hunter2'));
+        $this->subject->setPassword(Tools::encrypt('hunter2'));
         $expected = 'poll mail.example.com proto smtp username "john" password "hunter2"';
         $this->assertSame($expected, $this->subject->getSubstitutedConfig());
     }
@@ -164,14 +167,14 @@ class BounceAccountTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setProtocol('pop');
         $this->subject->setPort(123);
         $this->subject->setUsername('connor');
-        $this->subject->setPassword(\Ecodev\Newsletter\Tools::encrypt('skynet'));
+        $this->subject->setPassword(Tools::encrypt('skynet'));
 
         $config = 'server  : ###SERVER###
 protocol: ###PROTOCOL###
 port    : ###PORT###
 username: ###USERNAME###
 password: ###PASSWORD###';
-        $this->subject->setConfig(\Ecodev\Newsletter\Tools::encrypt($config));
+        $this->subject->setConfig(Tools::encrypt($config));
 
         $expected = 'server  : pop.example.com
 protocol: pop

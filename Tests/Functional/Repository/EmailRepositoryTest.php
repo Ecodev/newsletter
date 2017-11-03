@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Functional\Repository;
 
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+
 require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
 
 /**
@@ -9,13 +11,13 @@ require_once __DIR__ . '/../AbstractFunctionalTestCase.php';
  */
 class EmailRepositoryTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
-    /** @var \Ecodev\Newsletter\Domain\Repository\EmailRepository */
+    /** @var EmailRepository */
     private $emailRepository;
 
     public function setUp()
     {
         parent::setUp();
-        $this->emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $this->emailRepository = $this->objectManager->get(EmailRepository::class);
     }
 
     public function testFindByAuthcode()

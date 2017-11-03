@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter\Domain\Repository;
 
 use Ecodev\Newsletter\Domain\Model\Newsletter;
 use Ecodev\Newsletter\Tools;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * Repository for \Ecodev\Newsletter\Domain\Model\Newsletter
@@ -20,7 +21,7 @@ class NewsletterRepository extends AbstractRepository
         $query->setLimit(1);
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(['uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute()->getFirst();
     }
@@ -37,7 +38,7 @@ class NewsletterRepository extends AbstractRepository
         $query = $this->createQuery();
         $query->matching($query->equals('pid', $pid));
 
-        $query->setOrderings(['uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute();
     }
@@ -89,7 +90,7 @@ class NewsletterRepository extends AbstractRepository
                 ]
         );
 
-        $linkRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\LinkRepository::class);
+        $linkRepository = $this->objectManager->get(LinkRepository::class);
         $linkCount = $linkRepository->getCount($uidNewsletter);
         $this->fillStateDifferences(
                 $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, [
@@ -225,7 +226,7 @@ class NewsletterRepository extends AbstractRepository
         $db = Tools::getDatabaseConnection();
 
         // Apply limit of emails per round
-        $mails_per_round = (int) \Ecodev\Newsletter\Tools::confParam('mails_per_round');
+        $mails_per_round = (int) Tools::confParam('mails_per_round');
         if ($mails_per_round) {
             $limit = ' LIMIT ' . $mails_per_round;
         } else {

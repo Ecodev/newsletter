@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Domain\Model;
 
+use Ecodev\Newsletter\Tools;
+
 /**
  * BounceAccount
  */
@@ -205,14 +207,14 @@ class BounceAccount extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $values[] = $this->getProtocol();
         $values[] = $this->getPort();
         $values[] = $this->getUsername();
-        $values[] = \Ecodev\Newsletter\Tools::decrypt($this->getPassword());
+        $values[] = Tools::decrypt($this->getPassword());
 
         $config = $this->getConfig();
         if (empty($config)) {
             // Keep the old config to not break old installations
             $config = 'poll ###SERVER### proto ###PROTOCOL### username "###USERNAME###" password "###PASSWORD###"';
         } else {
-            $config = \Ecodev\Newsletter\Tools::decrypt($config);
+            $config = Tools::decrypt($config);
         }
 
         $result = str_replace($markers, $values, $config);

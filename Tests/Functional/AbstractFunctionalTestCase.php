@@ -2,6 +2,9 @@
 
 namespace Ecodev\Newsletter\Tests\Functional;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
 {
     /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
@@ -18,7 +21,7 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
     public function setUp()
     {
         parent::setUp();
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->importDataSet(__DIR__ . '/Fixtures/fixtures.xml');
         $this->authCode = md5(302 . 'recipient2@example.com');

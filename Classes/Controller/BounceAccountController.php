@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /**
  * Controller for the BounceAccount object
@@ -43,7 +44,7 @@ class BounceAccountController extends ExtDirectActionController
             ],
         ]);
 
-        $this->addFlashMessage('Loaded BounceAccounts from Server side.', 'BounceAccounts loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded BounceAccounts from Server side.', 'BounceAccounts loaded successfully', FlashMessage::NOTICE);
 
         $this->view->assign('total', $bounceAccounts->count());
         $this->view->assign('data', $bounceAccounts);

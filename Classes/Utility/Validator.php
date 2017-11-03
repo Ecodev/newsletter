@@ -3,6 +3,9 @@
 namespace Ecodev\Newsletter\Utility;
 
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Tools;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Toolbox for newsletter and dependant extensions.
@@ -10,7 +13,7 @@ use Ecodev\Newsletter\Domain\Model\Newsletter;
 class Validator
 {
     /**
-     * @var \TYPO3\CMS\Lang\LanguageService
+     * @var LanguageService
      */
     private $lang;
 
@@ -41,15 +44,15 @@ class Validator
 
     /**
      * Initialize and return language service
-     * @global \TYPO3\CMS\Lang\LanguageService $LANG
-     * @return \TYPO3\CMS\Lang\LanguageService
+     * @global LanguageService $LANG
+     * @return LanguageService
      */
     private function initializeLang()
     {
         // Here we need to include the locallization file for ExtDirect calls, otherwise we get empty strings
         global $LANG;
         if (is_null($LANG)) {
-            $LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Lang\LanguageService::class); // create language-object
+            $LANG = GeneralUtility::makeInstance(LanguageService::class); // create language-object
             $LLkey = 'default';
             if ($GLOBALS['TSFE']->config['config']['language']) {
                 $LLkey = $GLOBALS['TSFE']->config['config']['language'];
@@ -68,7 +71,7 @@ class Validator
      */
     protected function getURL($url)
     {
-        return \Ecodev\Newsletter\Tools::getUrl($url);
+        return Tools::getUrl($url);
     }
 
     /**

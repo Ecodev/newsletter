@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\Domain\Model;
 
 use Ecodev\Newsletter\Utility\UriBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * RecipientList
@@ -224,7 +225,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             }
             $out = '<table style="border: 1px grey solid; border-collapse: collapse;">' . $out . '</table>';
 
-            $authCode = \TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($this->_getCleanProperties());
+            $authCode = GeneralUtility::stdAuthCode($this->_getCleanProperties());
             $uriXml = UriBuilder::buildFrontendUriFromTcA('RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'xml']);
             $uriCsv = UriBuilder::buildFrontendUriFromTcA('RecipientList', 'export', ['uidRecipientList' => $this->getUid(), 'authCode' => $authCode, 'format' => 'csv']);
             $export = ' (<a href="' . $uriXml . '">export XML</a>, <a href="' . $uriCsv . '">export CSV</a>)';

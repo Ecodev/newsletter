@@ -3,7 +3,12 @@
 namespace Ecodev\Newsletter;
 
 use DateTime;
+use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
 use Ecodev\Newsletter\Utility\EmailParser;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Handle bounced emails. Fetch them, analyse them and take approriate actions.
@@ -18,7 +23,7 @@ class BounceHandler
 
     /**
      * ObjecManager
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     private $objectManager;
 
@@ -50,8 +55,8 @@ class BounceHandler
         // Find all bounce accounts we need to check
         $fetchmailConfiguration = '';
         $servers = [];
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $bounceAccountRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\BounceAccountRepository::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $bounceAccountRepository = $objectManager->get(BounceAccountRepository::class);
         foreach ($bounceAccountRepository->findAll() as $bounceAccount) {
             $fetchmailConfiguration .= $bounceAccount->getSubstitutedConfig() . "\n";
             $servers[] = $bounceAccount->getServer();
@@ -97,7 +102,7 @@ fetchmail output was:
      */
     public function __construct($mailsource = '')
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         $this->emailParser = new EmailParser();
         $this->emailParser->parse($mailsource);
@@ -124,10 +129,10 @@ fetchmail output was:
 			LIMIT 1");
 
             if (list($recipientListUid, $emailUid) = $db->sql_fetch_row($rs)) {
-                $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+                $emailRepository = $this->objectManager->get(EmailRepository::class);
                 $this->email = $emailRepository->findByUid($emailUid);
 
-                $recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
+                $recipientListRepository = $this->objectManager->get(RecipientListRepository::class);
                 $this->recipientList = $recipientListRepository->findByUid($recipientListUid);
             }
         }
@@ -154,7 +159,7 @@ fetchmail output was:
             }
 
             $this->email->setBounceTime(new DateTime());
-            $emailRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+            $emailRepository = $this->objectManager->get(EmailRepository::class);
             $emailRepository->update($this->email);
         }
 

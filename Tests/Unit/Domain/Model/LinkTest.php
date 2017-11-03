@@ -2,19 +2,22 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model;
 
+use Ecodev\Newsletter\Domain\Model\Link;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\Link.
  */
 class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Link
+     * @var Link
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\Link();
+        $this->subject = new Link();
     }
 
     protected function tearDown()
@@ -44,7 +47,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setNewsletterForNewsletterSetsNewsletter()
     {
-        $newsletterFixture = new \Ecodev\Newsletter\Domain\Model\Newsletter();
+        $newsletterFixture = new Newsletter();
         $this->subject->setNewsletter($newsletterFixture);
 
         $this->assertAttributeSame(

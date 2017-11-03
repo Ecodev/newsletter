@@ -5,6 +5,7 @@ namespace Ecodev\Newsletter\MVC\ExtDirect;
 use Ecodev\Newsletter\Exception as EcodevNewsletterException;
 use TYPO3;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * The Ext Direct request builder
@@ -13,22 +14,22 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * @inject
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
      * @inject
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @var ConfigurationManager
      */
     protected $configurationManager;
 
     /**
      * Injects the ObjectManager
      *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -36,9 +37,9 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
     /**
      * Injects the ConfigurationManager
      *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+     * @param ConfigurationManager $configurationManager
      */
-    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager)
+    public function injectConfigurationManager(ConfigurationManager $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -78,7 +79,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
             $transactionDatas = [$transactionDatas];
         }
 
-        $request = $this->objectManager->get(\Ecodev\Newsletter\MVC\ExtDirect\Request::class);
+        $request = $this->objectManager->get(Request::class);
         foreach ($transactionDatas as $transactionData) {
             $request->createAndAddTransaction(
                     $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : [], $transactionData->tid

@@ -2,35 +2,40 @@
 
 namespace Ecodev\Newsletter\Tests\Functional;
 
+use Ecodev\Newsletter\Domain\Model\BounceAccount;
+use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Mailer;
+
 /**
  * Test case for class Ecodev\Newsletter\Mailer.
  */
 class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
+     * @var Newsletter
      */
     private $mockNewsletter = null;
 
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Email
+     * @var Email
      */
     private $mockEmail = null;
 
     public function setUp()
     {
         parent::setUp();
-        $bounceAccount = new \Ecodev\Newsletter\Domain\Model\BounceAccount();
+        $bounceAccount = new BounceAccount();
         $bounceAccount->setEmail('bounce@example.com');
 
-        $this->mockNewsletter = $this->getMock(\Ecodev\Newsletter\Domain\Model\Newsletter::class, ['getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getBounceAccount', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'], [], '', false);
+        $this->mockNewsletter = $this->getMock(Newsletter::class, ['getUid', 'getPid', 'getBaseUrl', 'getSenderName', 'getSenderEmail', 'getBounceAccount', 'getValidatedContent', 'getInjectOpenSpy', 'getInjectLinksSpy'], [], '', false);
         $this->mockNewsletter->method('getUid')->will($this->returnValue(12345));
         $this->mockNewsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
         $this->mockNewsletter->method('getSenderName')->will($this->returnValue('John Connor'));
         $this->mockNewsletter->method('getSenderEmail')->will($this->returnValue('noreply@example.com'));
         $this->mockNewsletter->method('getBounceAccount')->will($this->returnValue($bounceAccount));
 
-        $this->mockEmail = $this->getMock(\Ecodev\Newsletter\Domain\Model\Email::class, ['getPid', 'getRecipientAddress', 'getAuthCode'], [], '', false);
+        $this->mockEmail = $this->getMock(Email::class, ['getPid', 'getRecipientAddress', 'getAuthCode'], [], '', false);
         $this->mockEmail->method('getRecipientAddress')->will($this->returnValue('recipient@example.com'));
         $this->mockEmail->method('getAuthCode')->will($this->returnValue('1621db76eb1e4352719c95f3ba617990'));
         $this->mockEmail->setRecipientData([
@@ -102,7 +107,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $this->mockNewsletter->method('getPid')->will($this->returnValue($pid));
         $this->mockEmail->method('getPid')->will($this->returnValue($pid));
 
-        $mailer = $this->objectManager->get(\Ecodev\Newsletter\Mailer::class);
+        $mailer = $this->objectManager->get(Mailer::class);
 
         $mailer->setNewsletter($this->mockNewsletter);
         $mailer->prepare($this->mockEmail);

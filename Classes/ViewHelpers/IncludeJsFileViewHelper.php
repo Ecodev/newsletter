@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
  * View helper which allows you to include a JS File.
  * Note: This feature is experimental!
@@ -29,10 +31,10 @@ class IncludeJsFileViewHelper extends AbstractViewHelper
             $extKey = $this->controllerContext->getRequest()->getControllerExtensionKey();
         }
         if (TYPO3_MODE === 'FE') {
-            $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extKey);
+            $extPath = ExtensionManagementUtility::extPath($extKey);
             $extRelPath = mb_substr($extPath, mb_strlen(PATH_site));
         } else {
-            $extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($extKey);
+            $extRelPath = ExtensionManagementUtility::extRelPath($extKey);
         }
         $this->pageRenderer->addJsFile($extRelPath . $pathInsideExt . $name);
     }

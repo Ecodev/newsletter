@@ -4,6 +4,8 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Controller for the RecipientList object
@@ -48,7 +50,7 @@ class RecipientListController extends ExtDirectActionController
             ],
         ]);
 
-        $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded RecipientLists from Server side.', 'RecipientLists loaded successfully', FlashMessage::NOTICE);
 
         $this->view->assign('total', $recipientLists->count());
         $this->view->assign('data', $recipientLists);
@@ -92,7 +94,7 @@ class RecipientListController extends ExtDirectActionController
             }
         }
 
-        $this->addFlashMessage('Loaded Recipients from Server side.', 'Recipients loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded Recipients from Server side.', 'Recipients loaded successfully', FlashMessage::NOTICE);
 
         $this->view->assign('metaData', $metaData);
         $this->view->assign('total', $recipientLists->getCount());
@@ -119,7 +121,7 @@ class RecipientListController extends ExtDirectActionController
         }
 
         $recipientList = $this->recipientListRepository->findByUidInitialized($uidRecipientList);
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
+        if (GeneralUtility::stdAuthCode($recipientList->_getCleanProperties()) != $authCode) {
             $this->response->setStatus(401);
 
             return 'not authorized !';

@@ -3,8 +3,17 @@
 namespace Ecodev\Newsletter\Domain\Model;
 
 use DateTime;
+use Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin;
+use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
+use Ecodev\Newsletter\Domain\Repository\EmailRepository;
+use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
+use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
 use Ecodev\Newsletter\Tools;
+use Ecodev\Newsletter\Utility\Validator;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\TypoScript\ExtendedTemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Newsletter represents a page to be sent to a specific time to several recipients.
@@ -45,7 +54,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $plainConverter = \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin::class;
+    protected $plainConverter = Builtin::class;
 
     /**
      * Whether this newsletter is for test purpose. If it is it will be ignored in statistics
@@ -138,7 +147,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $objectManager;
 
     /**
-     * @var \Ecodev\Newsletter\Utility\Validator
+     * @var Validator
      */
     protected $validator;
 
@@ -158,7 +167,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function getObjectManager()
     {
         if (!$this->objectManager) {
-            $this->objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+            $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         }
 
         return $this->objectManager;
@@ -609,7 +618,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setUidBounceAccount($uidBounceAccount = null)
     {
-        $bounceAccountRepository = $this->getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\BounceAccountRepository::class);
+        $bounceAccountRepository = $this->getObjectManager()->get(BounceAccountRepository::class);
         $bounceAccount = $bounceAccountRepository->findByUid($uidBounceAccount);
         $this->setBounceAccount($bounceAccount);
     }
@@ -664,7 +673,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setUidRecipientList($uidRecipientList)
     {
-        $recipientListRepository = $this->getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
+        $recipientListRepository = $this->getObjectManager()->get(RecipientListRepository::class);
         $recipientList = $recipientListRepository->findByUid($uidRecipientList);
         $this->setRecipientList($recipientList);
     }
@@ -684,7 +693,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         // Else we try to resolve a domain in page root line
         if (!$domain) {
-            $pids = array_reverse(\TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid));
+            $pids = array_reverse(BackendUtility::BEgetRootLine($this->pid));
             foreach ($pids as $page) {
                 /* Domains */
                 $rs = $db->sql_query("SELECT domainName FROM sys_domain
@@ -704,8 +713,8 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         // Else we try to find it in sys_template (available at least since TYPO3 4.6 Introduction Package)
         if (!$domain) {
-            $rootLine = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($this->pid);
-            $parser = GeneralUtility::makeInstance(\TYPO3\CMS\Core\TypoScript\ExtendedTemplateService::class); // Defined global here!
+            $rootLine = BackendUtility::BEgetRootLine($this->pid);
+            $parser = GeneralUtility::makeInstance(ExtendedTemplateService::class); // Defined global here!
             $parser->tt_track = 0; // Do not log time-performance information
             $parser->init();
             $parser->runThroughTemplates($rootLine); // This generates the constants/config + hierarchy info for the template.
@@ -814,7 +823,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             return $recipientList->getCount();
         }
 
-        $emailRepository = $this->getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\EmailRepository::class);
+        $emailRepository = $this->getObjectManager()->get(EmailRepository::class);
 
         return $emailRepository->getCount($this->uid);
     }
@@ -855,21 +864,21 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Set the validator
-     * @param \Ecodev\Newsletter\Utility\Validator $validor
+     * @param Validator $validor
      */
-    public function setValidator(\Ecodev\Newsletter\Utility\Validator $validor)
+    public function setValidator(Validator $validor)
     {
         $this->validator = $validor;
     }
 
     /**
      * Get the validator
-     * @return \Ecodev\Newsletter\Utility\Validator
+     * @return Validator
      */
     public function getValidator()
     {
         if (!$this->validator) {
-            $this->validator = new \Ecodev\Newsletter\Utility\Validator();
+            $this->validator = new Validator();
         }
 
         return $this->validator;
@@ -934,7 +943,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getStatistics()
     {
-        $newsletterRepository = $this->getObjectManager()->get(\Ecodev\Newsletter\Domain\Repository\NewsletterRepository::class);
+        $newsletterRepository = $this->getObjectManager()->get(NewsletterRepository::class);
         $stats = $newsletterRepository->getStatistics($this);
 
         return $stats;

@@ -8,6 +8,9 @@ use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
 use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 
 /**
  * Controller for the Newsletter object
@@ -61,7 +64,7 @@ class NewsletterController extends ExtDirectActionController
     protected function initializeAction()
     {
         // Set default value of PID to know where to store/look for newsletter
-        $this->pid = filter_var(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, ['min_range' => 0]);
+        $this->pid = filter_var(GeneralUtility::_GET('id'), FILTER_VALIDATE_INT, ['min_range' => 0]);
         if (!$this->pid) {
             $this->pid = 0;
         }
@@ -84,7 +87,7 @@ class NewsletterController extends ExtDirectActionController
             ],
         ]);
 
-        $this->addFlashMessage('Loaded Newsletters from Server side.', 'Newsletters loaded successfully', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+        $this->addFlashMessage('Loaded Newsletters from Server side.', 'Newsletters loaded successfully', FlashMessage::NOTICE);
 
         $this->view->assign('total', $newsletters->count());
         $this->view->assign('data', $newsletters);
@@ -101,7 +104,7 @@ class NewsletterController extends ExtDirectActionController
     {
         $newsletter = $this->newsletterRepository->getLatest($this->pid);
         if (!$newsletter) {
-            $newsletter = $this->objectManager->get(\Ecodev\Newsletter\Domain\Model\Newsletter::class);
+            $newsletter = $this->objectManager->get(Newsletter::class);
             $newsletter->setPid($this->pid);
             $newsletter->setUid(-1); // We set a fake uid so ExtJS will see it as a real record
             // Set the first Bounce Account found if any
@@ -129,13 +132,14 @@ class NewsletterController extends ExtDirectActionController
     {
         $propertyMappingConfiguration = $this->arguments['newNewsletter']->getPropertyMappingConfiguration();
         $propertyMappingConfiguration->allowAllProperties();
-        $propertyMappingConfiguration->setTypeConverterOption(\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::class, \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, true);
+        $propertyMappingConfiguration->setTypeConverterOption(PersistentObjectConverter::class, PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, true);
     }
 
     /**
      * Creates a new Newsletter and forwards to the list action.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
+     * @param Newsletter $newNewsletter a fresh Newsletter object which has not yet been added to the repository
+     *
      * @dontverifyrequesthash
      * @dontvalidate $newNewsletter
      * @ignorevalidation $newNewsletter
@@ -150,12 +154,12 @@ class NewsletterController extends ExtDirectActionController
 
         // If we attempt to create a newsletter as a test but it has too many recipient, reject it (we cannot safely send several emails wihtout slowing down respoonse and/or timeout issues)
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
-            $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', [$count, $limitTestRecipientCount]), $this->translate('flashmessage_test_maximum_recipients_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', [$count, $limitTestRecipientCount]), $this->translate('flashmessage_test_maximum_recipients_title'), FlashMessage::ERROR);
             $this->view->assign('success', false);
         }
         // If we attempt to create a newsletter which contains errors, abort and don't save in DB
         elseif (count($validatedContent['errors'])) {
-            $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', $this->translate('flashmessage_newsletter_invalid'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', $this->translate('flashmessage_newsletter_invalid'), FlashMessage::ERROR);
             $this->view->assign('success', false);
         } else {
             // If it's a test newsletter, it's planned to be sent right now
@@ -175,12 +179,12 @@ class NewsletterController extends ExtDirectActionController
                     Tools::createSpool($newNewsletter);
                     Tools::runSpool($newNewsletter);
 
-                    $this->addFlashMessage($this->translate('flashmessage_test_newsletter_sent'), $this->translate('flashmessage_test_newsletter_sent_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+                    $this->addFlashMessage($this->translate('flashmessage_test_newsletter_sent'), $this->translate('flashmessage_test_newsletter_sent_title'), FlashMessage::OK);
                 } catch (\Exception $exception) {
-                    $this->addFlashMessage($exception->getMessage(), $this->translate('flashmessage_test_newsletter_error'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+                    $this->addFlashMessage($exception->getMessage(), $this->translate('flashmessage_test_newsletter_error'), FlashMessage::ERROR);
                 }
             } else {
-                $this->addFlashMessage($this->translate('flashmessage_newsletter_queued'), $this->translate('flashmessage_newsletter_queued_title'), \TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+                $this->addFlashMessage($this->translate('flashmessage_newsletter_queued'), $this->translate('flashmessage_newsletter_queued_title'), FlashMessage::OK);
             }
         }
 

@@ -2,6 +2,8 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
 
+use Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile.
  */
@@ -9,7 +11,7 @@ class CsvFileTest extends AbstractRecipientList
 {
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile();
+        $this->subject = new CsvFile();
     }
 
     /**
@@ -65,7 +67,7 @@ class CsvFileTest extends AbstractRecipientList
 
     protected function prepareDataForEnumeration()
     {
-        $this->subject = $this->getMock(\Ecodev\Newsletter\Domain\Model\RecipientList\CsvFile::class, ['getPathname'], [], '', false);
+        $this->subject = $this->getMock(CsvFile::class, ['getPathname'], [], '', false);
         $this->subject->expects($this->once())->method('getPathname')->will($this->returnValue(__DIR__));
         $this->subject->setCsvFilename('data.csv');
     }

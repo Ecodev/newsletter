@@ -2,6 +2,10 @@
 
 namespace Ecodev\Newsletter\Tca;
 
+use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 /**
  * Render extract of recipient list
  */
@@ -18,8 +22,8 @@ class RecipientListTca
         $result = '';
         $uid = (int) $PA['row']['uid'];
         if ($uid != 0) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-            $recipientListRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            $recipientListRepository = $objectManager->get(RecipientListRepository::class);
             $recipientList = $recipientListRepository->findByUidInitialized($uid);
 
             $result .= $recipientList->getExtract();

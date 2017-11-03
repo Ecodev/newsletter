@@ -2,13 +2,17 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Utility;
 
+use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Utility\Validator;
+use TYPO3\CMS\Lang\LanguageService;
+
 /**
  * Test case for class Ecodev\Newsletter\Utility\Validator.
  */
 class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Utility\Validator
+     * @var Validator
      */
     private $validator = null;
 
@@ -17,14 +21,14 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         global $LANG;
 
         // Initialize a fake LANG that return the localisation key instead of real value
-        $LANG = $this->getMock(\TYPO3\CMS\Lang\LanguageService::class, ['includeLLFile', 'getLL'], [], '', false);
+        $LANG = $this->getMock(LanguageService::class, ['includeLLFile', 'getLL'], [], '', false);
         $LANG->method('includeLLFile')->will($this->returnValue(null));
         $LANG->method('getLL')->will($this->returnCallback(function ($langKey) {
             return $langKey;
         }));
 
-        $this->validator = $this->getMock(\Ecodev\Newsletter\Utility\Validator::class, ['getURL'], [], '', false);
-        $this->newsletter = $this->getMock(\Ecodev\Newsletter\Domain\Model\Newsletter::class, ['getContentUrl', 'getBaseUrl'], [], '', false);
+        $this->validator = $this->getMock(Validator::class, ['getURL'], [], '', false);
+        $this->newsletter = $this->getMock(Newsletter::class, ['getContentUrl', 'getBaseUrl'], [], '', false);
         $this->newsletter->method('getContentUrl')->will($this->returnValue('http://example.com/?id=123'));
         $this->newsletter->method('getBaseUrl')->will($this->returnValue('http://example.com'));
     }

@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\PlainConverter;
 
+use Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx;
 use Ecodev\Newsletter\Tools;
 
 /**
@@ -10,13 +11,13 @@ use Ecodev\Newsletter\Tools;
 class LynxTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx
+     * @var Lynx
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\PlainConverter\Lynx();
+        $this->subject = new Lynx();
     }
 
     protected function tearDown()

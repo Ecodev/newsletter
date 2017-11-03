@@ -3,6 +3,7 @@
 namespace Ecodev\Newsletter\Utility;
 
 use Ecodev\Newsletter\Domain\Model\Email;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Used to substitute markers in any kind of text
@@ -43,7 +44,7 @@ class MarkerSubstitutor
 
         if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'])) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['newsletter']['substituteMarkersHook'] as $_classRef) {
-                $_procObj = \TYPO3\CMS\Core\Utility\GeneralUtility::getUserObj($_classRef);
+                $_procObj = GeneralUtility::getUserObj($_classRef);
                 $result = $_procObj->substituteMarkersHook($result, $name, $markers, $email);
             }
         }

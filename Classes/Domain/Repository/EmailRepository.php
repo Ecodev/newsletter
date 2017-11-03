@@ -92,7 +92,7 @@ class EmailRepository extends AbstractRepository
             LIMIT 1");
 
             if (list($recipientListUid, $emailAddress) = $db->sql_fetch_row($rs)) {
-                $recipientListRepository = $this->objectManager->get(\Ecodev\Newsletter\Domain\Repository\RecipientListRepository::class);
+                $recipientListRepository = $this->objectManager->get(RecipientListRepository::class);
                 $recipientList = $recipientListRepository->findByUid($recipientListUid);
                 if ($recipientList) {
                     $recipientList->registerOpen($emailAddress);

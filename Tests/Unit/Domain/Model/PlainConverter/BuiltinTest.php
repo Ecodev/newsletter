@@ -2,19 +2,21 @@
 
 namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\PlainConverter;
 
+use Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin;
+
 /**
  * Test case for class \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin.
  */
 class BuiltinTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin
+     * @var Builtin
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Ecodev\Newsletter\Domain\Model\PlainConverter\Builtin();
+        $this->subject = new Builtin();
     }
 
     protected function tearDown()

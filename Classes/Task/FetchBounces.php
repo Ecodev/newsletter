@@ -3,6 +3,10 @@
 namespace Ecodev\Newsletter\Task;
 
 use Ecodev\Newsletter\BounceHandler;
+use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Provides Scheduler task to fetch bounced emails
@@ -31,10 +35,10 @@ class FetchBounces extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function getAdditionalInformation()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $bounceAccountRepository = $objectManager->get(\Ecodev\Newsletter\Domain\Repository\BounceAccountRepository::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $bounceAccountRepository = $objectManager->get(BounceAccountRepository::class);
         $bounceAccountCount = count($bounceAccountRepository->findAll());
 
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('task_fetch_bounce_additional_information', 'newsletter', [$bounceAccountCount]);
+        return LocalizationUtility::translate('task_fetch_bounce_additional_information', 'newsletter', [$bounceAccountCount]);
     }
 }

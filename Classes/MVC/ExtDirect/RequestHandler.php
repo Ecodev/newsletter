@@ -2,8 +2,11 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
+use Ecodev\Newsletter\ExtDirectRequest;
 use Exception;
 use TYPO3\CMS\Extbase\Mvc\Dispatcher;
+use TYPO3\CMS\Extbase\Mvc\Web\Response;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * The Ext Direct request handler
@@ -11,12 +14,12 @@ use TYPO3\CMS\Extbase\Mvc\Dispatcher;
 class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Mvc\Dispatcher
+     * @var Dispatcher
      */
     protected $dispatcher;
 
@@ -34,12 +37,12 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     /**
      * Constructs the Ext Direct Request Handler
      *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager A reference to the object factory
-     * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher The request dispatcher
+     * @param ObjectManagerInterface $objectManager A reference to the object factory
+     * @param Dispatcher $dispatcher The request dispatcher
      * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
      */
     public function __construct(
-    \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager, \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher, RequestBuilder $requestBuilder)
+        ObjectManagerInterface $objectManager, Dispatcher $dispatcher, RequestBuilder $requestBuilder)
     {
         $this->objectManager = $objectManager;
         $this->dispatcher = $dispatcher;
@@ -47,17 +50,17 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher
+     * @param Dispatcher $dispatcher
      */
-    public function injectDispatcher(\TYPO3\CMS\Extbase\Mvc\Dispatcher $dispatcher)
+    public function injectDispatcher(Dispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
@@ -113,7 +116,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      */
     public function canHandleRequest()
     {
-        return isset($_GET[\Ecodev\Newsletter\ExtDirectRequest::class]);
+        return isset($_GET[ExtDirectRequest::class]);
     }
 
     /**
@@ -135,7 +138,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {
-        $response = $this->objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Response::class);
+        $response = $this->objectManager->get(Response::class);
         $jsonResponse = json_encode(count($results) === 1 ? $results[0] : $results);
         if ($extDirectRequest->isFormPost() && $extDirectRequest->isFileUpload()) {
             $response->setHeader('Content-Type', 'text/html');
