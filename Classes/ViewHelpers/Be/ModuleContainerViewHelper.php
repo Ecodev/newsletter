@@ -45,7 +45,14 @@ class ModuleContainerViewHelper extends AbstractViewHelper
         $doc = $this->getDocInstance();
         $this->pageRenderer->backPath = '';
         $this->pageRenderer->loadExtJS();
-        $this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
+
+        // From TYPO3 8.6.0 onward t3skin is located in core (see: https://forge.typo3.org/issues/79259).
+        if (version_compare(TYPO3_version, '8.6.0', '>=')) {
+            $this->pageRenderer->addCssFile('sysext/core/Resources/Public/ExtJs/xtheme-t3skin.css');
+        } else {
+            // Anything before 8.6.0 must still use the old t3skin EXT path.
+            $this->pageRenderer->addCssFile('sysext/t3skin/extjs/xtheme-t3skin.css');
+        }
 
         $this->renderChildren();
 
