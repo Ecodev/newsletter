@@ -19,6 +19,14 @@
                 <source>Content too short. The content must be at least 200 chars long to be considered valid.</source>
                 <target>Inhalt ist zu kurz. Der Inhalt muss mindestens 200 Zeichen beinhalten.</target>
             </trans-unit>
+            <trans-unit id="validation_mail_contains_oops" xml:space="preserve" approved="yes">
+                <source>Content contains error message from TYPO3.</source>
+                <target>Der Inhalt enthält Fehlermeldung von TYPO3.</target>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_xdebug" xml:space="preserve" approved="yes">
+                <source>Content contains Xdebug notices or errors.</source>
+                <target>Der Inhalt enthält Xdebug Warnungen oder Fehler.</target>
+            </trans-unit>
             <trans-unit id="validation_mail_contains_php_warnings" xml:space="preserve" approved="yes">
                 <source>Content contains PHP Warnings. This must not reach the receivers.</source>
                 <target>Der Inhalt enthält PHP Warnungen.</target>
@@ -45,7 +53,7 @@
             </trans-unit>
             <trans-unit id="validation_mail_contains_css_images" xml:space="preserve" approved="yes">
                 <source>You have used images linked to by CSS in your mail. This will break your layout with most MUAs</source>
-                <target>Sie verwenden Bildern im CSS. Die meisten E-Mail Clients unterstützen dies nicht!</target>
+                <target>Sie verwenden Bilder im CSS. Die meisten E-Mail Clients unterstützen dies nicht!</target>
             </trans-unit>
             <trans-unit id="validation_mail_contains_css_classes" xml:space="preserve" approved="yes">
                 <source>The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</source>
@@ -310,6 +318,10 @@
             <trans-unit id="task_send_emails_additional_information" xml:space="preserve" approved="yes">
                 <source>It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</source>
                 <target>Eingerichtet sind %1$s E-Mails je Versand-Zyklus. Momentan sind ca. %2$s E-Mails die für %3$s geplante Newsletter und %4$s gesendet werden Newsletter zu versenden.</target>
+            </trans-unit>
+            <trans-unit id="task_fetch_bounce_additional_information" xml:space="preserve" approved="yes">
+                <source>From %1$s bounce baccounts</source>
+                <target>Von %1$s bounce baccounts</target>
             </trans-unit>
             <trans-unit id="task_fetch_bounces_title" xml:space="preserve" approved="yes">
                 <source>Fetch bounced emails</source>

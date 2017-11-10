@@ -19,6 +19,14 @@
                 <source>Content too short. The content must be at least 200 chars long to be considered valid.</source>
                 <target>Contenu trop court. Le contenu doit être d'au moins 200 caractères pour être considéré valide.</target>
             </trans-unit>
+            <trans-unit id="validation_mail_contains_oops" xml:space="preserve" approved="yes">
+                <source>Content contains error message from TYPO3.</source>
+                <target>Le contenu contient des erreurs de TYPO3.</target>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_xdebug" xml:space="preserve" approved="yes">
+                <source>Content contains Xdebug notices or errors.</source>
+                <target>Le contenu contient des erreur de Xdebug.</target>
+            </trans-unit>
             <trans-unit id="validation_mail_contains_php_warnings" xml:space="preserve" approved="yes">
                 <source>Content contains PHP Warnings. This must not reach the receivers.</source>
                 <target>Le contenu contient des warnings PHP. Cela ne doit pas être envoyé aux destinataires.</target>
@@ -310,6 +318,10 @@
             <trans-unit id="task_send_emails_additional_information" xml:space="preserve" approved="yes">
                 <source>It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</source>
                 <target>C'est configuré pour envoyer %1$s emails par éxecution. Il y a actuellement un total approximatif de %2$s emails qui doivent être envoyés pour %3$s newsletters plannifiées et %4$s newsletters en cours d'envoi.</target>
+            </trans-unit>
+            <trans-unit id="task_fetch_bounce_additional_information" xml:space="preserve" approved="yes">
+                <source>From %1$s bounce baccounts</source>
+                <target>De %1$s comptes de rebonds</target>
             </trans-unit>
             <trans-unit id="task_fetch_bounces_title" xml:space="preserve" approved="yes">
                 <source>Fetch bounced emails</source>

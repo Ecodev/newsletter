@@ -44,7 +44,7 @@ class LinkRepository extends AbstractRepository
 
     /**
      * Register a clicked link in database and forward the event to RecipientList
-     * so it can optionnally do something more
+     * so it can optionally do something more
      * @param int|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param bool $isPlain

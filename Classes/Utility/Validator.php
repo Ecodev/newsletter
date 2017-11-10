@@ -103,6 +103,8 @@ class Validator
         $this->infos[] = sprintf($this->lang->getLL('validation_content_url'), '<a target="_blank" href="' . $url . '">' . $url . '</a>');
 
         $this->errorTooShort();
+        $this->errorOops();
+        $this->errorXdebug();
         $this->errorPhpWarnings();
         $this->errorPhpErrors();
         $this->errorPageBeingGenerated();
@@ -118,12 +120,32 @@ class Validator
     }
 
     /**
-     * Content should be more that just a few characters. Apache error propably occured
+     * Content should be more that just a few characters. Apache error probably occurred
      */
     private function errorTooShort()
     {
         if (mb_strlen($this->content) < 200) {
             $this->errors[] = $this->lang->getLL('validation_mail_too_short');
+        }
+    }
+
+    /**
+     * Content never contains error from TYPO3
+     */
+    private function errorOops()
+    {
+        if (mb_strpos($this->content, 'Oops, an error occurred') !== false) {
+            $this->errors[] = $this->lang->getLL('validation_mail_contains_oops');
+        }
+    }
+
+    /**
+     * Content should never contains Xdebug dump
+     */
+    private function errorXdebug()
+    {
+        if (mb_strpos($this->content, 'xdebug-') !== false) {
+            $this->errors[] = $this->lang->getLL('validation_mail_contains_xdebug');
         }
     }
 
@@ -148,7 +170,7 @@ class Validator
     }
 
     /**
-     * If the page contains a "Pages is being generared" text, this is bad
+     * If the page contains a "Page is being generated" text, this is bad
      */
     private function errorPageBeingGenerated()
     {

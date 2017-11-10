@@ -20,8 +20,8 @@ class ToolsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     public function testUserAgent()
     {
-        define('TYPO3_user_agent', 'User-Agent: TYPO3/1.2.3');
+        define('TYPO3_user_agent', 'User-Agent: TYPO3');
         $userAgent = Tools::getUserAgent();
-        $this->assertSame(1, preg_match('~^User-Agent: TYPO3/1\.2\.3 Newsletter/\d+\.\d+\.\d+ \(https://github.com/Ecodev/newsletter\)$~', $userAgent));
+        $this->assertSame(1, preg_match('~^User-Agent: TYPO3 Newsletter \(https://github.com/Ecodev/newsletter\)$~', $userAgent));
     }
 }

@@ -15,6 +15,12 @@
             <trans-unit id="validation_mail_too_short" xml:space="preserve">
                 <source>Content too short. The content must be at least 200 chars long to be considered valid.</source>
             </trans-unit>
+            <trans-unit id="validation_mail_contains_oops" xml:space="preserve">
+                <source>Content contains error message from TYPO3.</source>
+            </trans-unit>
+            <trans-unit id="validation_mail_contains_xdebug" xml:space="preserve">
+                <source>Content contains Xdebug notices or errors.</source>
+            </trans-unit>
             <trans-unit id="validation_mail_contains_php_warnings" xml:space="preserve">
                 <source>Content contains PHP Warnings. This must not reach the receivers.</source>
             </trans-unit>
@@ -233,6 +239,9 @@
             </trans-unit>
             <trans-unit id="task_send_emails_additional_information" xml:space="preserve">
                 <source>It is configured to send %1$s emails per execution. There is currently an approximative total of %2$s emails that needs to be sent for %3$s planned newsletters and %4$s newsletters being sent</source>
+            </trans-unit>
+            <trans-unit id="task_fetch_bounce_additional_information" xml:space="preserve">
+                <source>From %1$s bounce baccounts</source>
             </trans-unit>
             <trans-unit id="task_fetch_bounces_title" xml:space="preserve">
                 <source>Fetch bounced emails</source>

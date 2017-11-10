@@ -68,7 +68,7 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Register an open email in database and forward the event to RecipientList
-     * so it can optionnally do something more
+     * so it can optionally do something more
      * @param string $authCode
      */
     public function registerOpen($authCode)

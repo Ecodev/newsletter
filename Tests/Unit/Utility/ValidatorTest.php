@@ -43,10 +43,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="http://example.com/relative-url">link</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                        'validation_mail_converted_relative_url',
-                    ],
+                    'infos' => ['validation_content_url', 'validation_mail_converted_relative_url'],
                 ],
             ],
             [
@@ -55,9 +52,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="http://other-domain.com/absolute-url">link</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -66,9 +61,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="https://other-domain.com/absolute-url">link</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -77,9 +70,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="ftp://other-domain.com/absolute-url">link</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -88,9 +79,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="mailto:john@example.com">email</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -99,9 +88,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<a href="mailto:john@example.com">encoded email</a>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -110,10 +97,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<img src="http://example.com/relative.jpg" alt="relative">',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                        'validation_mail_converted_relative_url',
-                    ],
+                    'infos' => ['validation_content_url', 'validation_mail_converted_relative_url'],
                 ],
             ],
             [
@@ -122,9 +106,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<img src="http://other-domain.com/absolute.jpg" alt="absolute">',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -133,9 +115,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => ['validation_mail_contains_javascript'],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -144,9 +124,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<span style="background-image: url(\'image.jpg\');"></span>',
                     'errors' => ['validation_mail_too_short', 'validation_mail_contains_css_images'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -155,9 +133,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<ul style="list-style-image: url(\'image.jpg\');"></ul>',
                     'errors' => ['validation_mail_too_short', 'validation_mail_contains_css_images'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -166,9 +142,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<p class="bigger"></p>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => ['validation_mail_contains_css_classes'],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
             [
@@ -177,10 +151,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<p><img src="http://example.com/no-alt.png" alt=""><img src="http://example.com/empty-alt.png" alt=""><img src="http://example.com/alt.png" alt="some text"><svg>unkown tag</svg></p>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                        'validation_mail_injected_alt_attribute',
-                    ],
+                    'infos' => ['validation_content_url', 'validation_mail_injected_alt_attribute'],
                 ],
             ],
             [
@@ -189,9 +160,43 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                     'content' => '<p>&Uuml;&uuml; k&ouml;nnen</p>',
                     'errors' => ['validation_mail_too_short'],
                     'warnings' => [],
-                    'infos' => [
-                        'validation_content_url',
-                    ],
+                    'infos' => ['validation_content_url'],
+                ],
+            ],
+            [
+                "<pre class='xdebug-var-dump' dir='ltr'>...</pre>",
+                [
+                    'content' => '<pre class="xdebug-var-dump" dir="ltr">...</pre>',
+                    'errors' => ['validation_mail_too_short', 'validation_mail_contains_xdebug'],
+                    'warnings' => [],
+                    'infos' => ['validation_content_url'],
+                ],
+            ],
+            [
+                "<table class='xdebug-error xe-notice' dir='ltr' border='1' cellspacing='0' cellpadding='1'></table>",
+                [
+                    'content' => '<table class="xdebug-error xe-notice" dir="ltr" border="1" cellspacing="0" cellpadding="1"></table>',
+                    'errors' => ['validation_mail_too_short', 'validation_mail_contains_xdebug'],
+                    'warnings' => [],
+                    'infos' => ['validation_content_url'],
+                ],
+            ],
+            [
+                'Oops, an error occurred! Code: 2017040104171620b29317',
+                [
+                    'content' => '<p>Oops, an error occurred! Code: 2017040104171620b29317</p>',
+                    'errors' => ['validation_mail_too_short', 'validation_mail_contains_oops'],
+                    'warnings' => [],
+                    'infos' => ['validation_content_url'],
+                ],
+            ],
+            [
+                '<title>Oops, an error occurred!</title>',
+                [
+                    'content' => '<title>Oops, an error occurred!</title>',
+                    'errors' => ['validation_mail_too_short', 'validation_mail_contains_oops'],
+                    'warnings' => [],
+                    'infos' => ['validation_content_url'],
                 ],
             ],
         ];
@@ -220,9 +225,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                         'content' => '<p style="' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
-                        'infos' => [
-                            'validation_content_url',
-                        ],
+                        'infos' => ['validation_content_url'],
                     ],
                 ];
 
@@ -233,9 +236,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                         'content' => '<p style="color: red;' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
-                        'infos' => [
-                            'validation_content_url',
-                        ],
+                        'infos' => ['validation_content_url'],
                     ],
                 ];
 
@@ -246,9 +247,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                         'content' => '<p style="color: red; ' . $property . ': 10px"></p>',
                         'errors' => ['validation_mail_too_short'],
                         'warnings' => $isForbidden ? ['validation_mail_contains_css_some_property'] : [],
-                        'infos' => [
-                            'validation_content_url',
-                        ],
+                        'infos' => ['validation_content_url'],
                     ],
                 ];
             }
