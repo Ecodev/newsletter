@@ -53,7 +53,7 @@
             </trans-unit>
             <trans-unit id="validation_mail_contains_css_images" xml:space="preserve" approved="yes">
                 <source>You have used images linked to by CSS in your mail. This will break your layout with most MUAs</source>
-                <target>Sie verwenden Bildern im CSS. Die meisten E-Mail Clients unterstützen dies nicht!</target>
+                <target>Sie verwenden Bilder im CSS. Die meisten E-Mail Clients unterstützen dies nicht!</target>
             </trans-unit>
             <trans-unit id="validation_mail_contains_css_classes" xml:space="preserve" approved="yes">
                 <source>The styling in you mail is made by using CSS classes. This works fine on &quot;real&quot; MUAs like Outlook or Thunderbird, but it will break in many popular webmails like Hotmail. Make sure all your important styles are defined inline.</source>
