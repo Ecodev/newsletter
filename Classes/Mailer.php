@@ -240,7 +240,7 @@ class Mailer
      * @param Email $email
      * @param string $url
      * @param bool $isPreview
-     * @param string $isPlainText
+     * @param bool $isPlainText
      * @return string The link url
      */
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
