@@ -1,7 +1,7 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
-    Ext.ns("Ext.ux.Ecodev.Newsletter.Module");
+    Ext.ns('Ext.ux.Ecodev.Newsletter.Module');
 
     /**
      * @class Ext.ux.Ecodev.Newsletter.Module.Application
@@ -21,7 +21,7 @@
          *
          * This method is called automatically.
          */
-        bootstrap: function() {
+        bootstrap: function () {
             Ext.QuickTips.init();
 
             // init Flashmessage
@@ -30,7 +30,7 @@
                 minDelay: 5,
                 maxDelay: 15,
                 logLevel: -1,
-                opacity: 1
+                opacity: 1,
             });
 
             if (this.checkIfPage()) {
@@ -50,7 +50,7 @@
          *
          * @return {Boolean}
          */
-        checkIfPage: function() {
+        checkIfPage: function () {
             return Ext.ux.Ecodev.Newsletter.Configuration.pageType == 'page';
         },
         /**
@@ -58,44 +58,44 @@
          *
          * @return {Boolean}
          */
-        checkIfPageIsFolder: function() {
+        checkIfPageIsFolder: function () {
             return Ext.ux.Ecodev.Newsletter.Configuration.pageType == 'folder';
         },
         /**
          * Init menus and content area
          */
-        initGui: function() {
+        initGui: function () {
 
             return new Ext.Viewport({
                 layout: 'fit',
                 renderTo: Ext.getBody(),
                 items: [{
-                        id: 'main-tabs',
-                        xtype: 'tabpanel',
-                        activeTab: 0,
-                        border: false,
-                        headerCssClass: 't3-newsletter-docheader',
-                        bodyCssClass: 't3-newsletter-docbody',
-                        padding: '0 20px 10px 24px',
-                        items: [{
-                                xtype: 'Ext.ux.Ecodev.Newsletter.Planner.Planner',
-                                iconCls: 't3-newsletter-button-planner',
-                                api: {
-                                    load: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.listPlannedAction,
-                                    submit: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.createAction
-                                }
+                    id: 'main-tabs',
+                    xtype: 'tabpanel',
+                    activeTab: 0,
+                    border: false,
+                    headerCssClass: 't3-newsletter-docheader',
+                    bodyCssClass: 't3-newsletter-docbody',
+                    padding: '0 20px 10px 24px',
+                    items: [{
+                        xtype: 'Ext.ux.Ecodev.Newsletter.Planner.Planner',
+                        iconCls: 't3-newsletter-button-planner',
+                        api: {
+                            load: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.listPlannedAction,
+                            submit: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.createAction,
+                        },
 
-                            }, {
-                                xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.Statistics',
-                                iconCls: 't3-newsletter-button-statistics'
-                            }]
-                    }]
+                    }, {
+                        xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.Statistics',
+                        iconCls: 't3-newsletter-button-statistics',
+                    }],
+                }],
             });
         },
         /**
          * Init ExtDirect stores
          */
-        initStore: function() {
+        initStore: function () {
             Ext.ux.Ecodev.Newsletter.Store.Newsletter.initialize();
             Ext.ux.Ecodev.Newsletter.Store.SelectedNewsletter.initialize();
             Ext.ux.Ecodev.Newsletter.Store.PlannedNewsletter.initialize();
@@ -108,7 +108,7 @@
         /**
          * Init folder GUI
          */
-        initFolderGui: function() {
+        initFolderGui: function () {
 
             return new Ext.Viewport({
                 layout: 'fit',
@@ -127,16 +127,16 @@
                             '<h2>' + Ext.ux.Ecodev.Newsletter.Language.message_title_page_selected + '</h2>',
                             '<p>' + Ext.ux.Ecodev.Newsletter.Language.message_page_selected + '</p>',
                             '</div>',
-                            '</div>'
-                        ]
-                    }
-                ]
+                            '</div>',
+                        ],
+                    },
+                ],
             });
         },
         /**
          * Init help Gui
          */
-        initHelpGui: function() {
+        initHelpGui: function () {
 
             return new Ext.Viewport({
                 layout: 'fit',
@@ -155,11 +155,11 @@
                             '<h2>' + Ext.ux.Ecodev.Newsletter.Language.message_title_no_pid_selected + '</h2>',
                             '<p>' + Ext.ux.Ecodev.Newsletter.Language.message_no_pid_selected + '</p>',
                             '</div>',
-                            '</div>'
-                        ]
-                    }
-                ]
+                            '</div>',
+                        ],
+                    },
+                ],
             });
-        }
+        },
     });
 }());

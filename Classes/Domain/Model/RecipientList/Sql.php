@@ -136,7 +136,7 @@ class Sql extends RecipientList
      * Fetch a recipient from the sql-record set. This also computes some commonly used values,
      * such as plain_only and language.
      *
-     * @return	array	recipient with user data
+     * @return array recipient with user data
      */
     public function getRecipient()
     {
@@ -171,6 +171,7 @@ class Sql extends RecipientList
      *
      * @param string $email the email address of the recipient
      * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
+     *
      * @return bool status of the success of the removal
      */
     public function registerBounce($email, $bounceLevel)
@@ -183,13 +184,13 @@ class Sql extends RecipientList
             '###BOUNCE_TYPE_SOFT###',
             '###BOUNCE_TYPE_HARD###',
             '###BOUNCE_TYPE_UNSUBSCRIBE###',
-                ], [
+        ], [
             $db->fullQuoteStr($email, 'tx_newsletter_domain_model_recipientlist'), // Here we assume the SQL table to recipientList, but it could be something different.
             $bounceLevel,
             EmailParser::NEWSLETTER_SOFTBOUNCE,
             EmailParser::NEWSLETTER_HARDBOUNCE,
             EmailParser::NEWSLETTER_UNSUBSCRIBE,
-                ], $this->getSqlRegisterBounce());
+        ], $this->getSqlRegisterBounce());
 
         if ($sql) {
             $db->sql_query($sql);

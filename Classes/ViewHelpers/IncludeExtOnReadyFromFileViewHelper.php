@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeExtOnReadyCode file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ *    <newsletter:includeExtOnReadyCode file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  */
 class IncludeExtOnReadyFromFileViewHelper extends AbstractViewHelper

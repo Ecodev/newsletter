@@ -10,7 +10,7 @@ namespace Ecodev\Newsletter\ViewHelpers;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeModuleBody><!-- HTML Content --></newsletter:includeModuleBody>
+ *    <newsletter:includeModuleBody><!-- HTML Content --></newsletter:includeModuleBody>
  * </newsletter:be.moduleContainer>
  */
 class IncludeModuleBodyViewHelper extends AbstractViewHelper

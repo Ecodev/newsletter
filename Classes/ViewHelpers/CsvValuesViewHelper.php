@@ -13,6 +13,7 @@ class CsvValuesViewHelper extends AbstractViewHelper
      * Format array of values to CSV format
      *
      * @param array $values array of values to output in CSV format
+     *
      * @return string
      */
     public function render(array $values)

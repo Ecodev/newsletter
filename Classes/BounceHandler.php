@@ -19,24 +19,28 @@ class BounceHandler
 {
     /**
      * The email parser
+     *
      * @var Utility\EmailParser
      */
     private $emailParser;
 
     /**
      * ObjecManager
+     *
      * @var ObjectManager
      */
     private $objectManager;
 
     /**
      * The email concerned by the bounce if any
+     *
      * @var Email
      */
     private $email = null;
 
     /**
      * The recipient list concerned by the bounce if any
+     *
      * @var RecipientList
      */
     private $recipientList = null;
@@ -100,6 +104,7 @@ fetchmail output was:
 
     /**
      * Constructor for bounce handler
+     *
      * @param string $mailsource
      */
     public function __construct($mailsource = '')

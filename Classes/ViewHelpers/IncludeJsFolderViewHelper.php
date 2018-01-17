@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ *    <newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  */
 class IncludeJsFolderViewHelper extends AbstractViewHelper

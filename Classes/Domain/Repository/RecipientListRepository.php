@@ -30,7 +30,9 @@ class RecipientListRepository extends AbstractRepository
 
     /**
      * Returns a RecipientList already initialized, even if it is hidden
+     *
      * @param int $uidRecipientlist
+     *
      * @return RecipientList
      */
     public function findByUidInitialized($uidRecipientlist)
@@ -40,10 +42,10 @@ class RecipientListRepository extends AbstractRepository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setIgnoreEnableFields(true); // because of this line hidden objects can be retrieved
         $recipientList = $query->matching(
-                        $query->equals('uid', $uidRecipientlist)
-                )
-                ->execute()
-                ->getFirst();
+            $query->equals('uid', $uidRecipientlist)
+        )
+            ->execute()
+            ->getFirst();
 
         if ($recipientList) {
             $recipientList->init();

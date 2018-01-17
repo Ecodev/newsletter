@@ -12,6 +12,7 @@ class BounceAccountDataProvider implements \TYPO3\CMS\Backend\Form\FormDataProvi
      * Decrypt values from DB (on TYPO3 7.6)
      *
      * @param array $result Initialized result array
+     *
      * @return array Result filled with decrypted values
      */
     public function addData(array $result)

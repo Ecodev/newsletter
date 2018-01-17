@@ -20,12 +20,14 @@ abstract class UriBuilder
 
     /**
      * UriBuilders indexed by PID
+     *
      * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder[]
      */
     private static $uriBuilder = [];
 
     /**
      * @param int $currentPid
+     *
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     private static function getUriBuilder($currentPid)
@@ -40,7 +42,9 @@ abstract class UriBuilder
 
     /**
      * Build an uriBuilder that can be used from any context (backend, frontend) to generate frontend URI
+     *
      * @param int $currentPid
+     *
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      */
     private static function createUriBuilder($currentPid)
@@ -76,9 +80,11 @@ abstract class UriBuilder
 
     /**
      * Return an array of namespaced arguments
+     *
      * @param string $controllerName
      * @param string $actionName
      * @param array $arguments
+     *
      * @return array
      */
     private static function getNamespacedArguments($controllerName, $actionName, array $arguments)
@@ -97,9 +103,11 @@ abstract class UriBuilder
 
     /**
      * Returns an ugly frontend URI from TCA context
+     *
      * @param string $controllerName
      * @param string $actionName
      * @param array $arguments
+     *
      * @return string absolute URI
      */
     public static function buildFrontendUriFromTca($controllerName, $actionName, array $arguments = [])
@@ -113,10 +121,12 @@ abstract class UriBuilder
 
     /**
      * Returns a frontend URI independently of current context (backend or frontend)
+     *
      * @param int $currentPid
      * @param string $controllerName
      * @param string $actionName
      * @param array $arguments
+     *
      * @return string absolute URI
      */
     public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])

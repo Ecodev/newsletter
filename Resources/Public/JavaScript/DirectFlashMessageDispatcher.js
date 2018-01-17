@@ -1,5 +1,5 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     Ext.ns('Ext.ux.Ecodev.Newsletter');
     /**
@@ -13,14 +13,14 @@
      * });
      *
      */
-    Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher = (function() {
+    Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher = (function () {
         /**
          * @class Ext.util.Observable
          */
         var directFlashMessages = new Ext.util.Observable();
         directFlashMessages.addEvents('new');
 
-        var fetchRemoteMessages = function(event) {
+        var fetchRemoteMessages = function (event) {
             if (event.result && event.result.flashMessages) {
                 var flashMessages = event.result.flashMessages;
                 delete event.result.flashMessages;
@@ -28,18 +28,18 @@
             }
         };
 
-        var initialize = function() {
+        var initialize = function () {
             Ext.Direct.on('event', fetchRemoteMessages);
         };
 
         return Ext.apply(directFlashMessages, {
             initialize: initialize,
-            addMessage: function(message) {
+            addMessage: function (message) {
                 this.fireEvent('new', [message]);
             },
-            addMessages: function(messages) {
+            addMessages: function (messages) {
                 this.fireEvent('new', messages);
-            }
+            },
         });
     }());
 }());

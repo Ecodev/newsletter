@@ -16,7 +16,7 @@ class FetchBounces extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     /**
      * Fetch bounce emails from servers, who will then be piped to cli/bounce.php for analysis
      *
-     * @return bool	Returns true on successful execution, false on error
+     * @return bool Returns true on successful execution, false on error
      */
     public function execute()
     {
@@ -31,7 +31,7 @@ class FetchBounces extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return	string	Information to display
+     * @return string Information to display
      */
     public function getAdditionalInformation()
     {

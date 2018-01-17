@@ -1,5 +1,5 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     Ext.ns('Ext.ux.Ecodev.Newsletter.Store');
 
@@ -7,11 +7,11 @@
      * A Store for the email model using ExtDirect to communicate with the
      * server side extbase framework.
      */
-    Ext.ux.Ecodev.Newsletter.Store.Email = (function() {
+    Ext.ux.Ecodev.Newsletter.Store.Email = (function () {
 
         var emailStore = null;
 
-        var initialize = function() {
+        var initialize = function () {
             if (emailStore === null) {
                 emailStore = new Ext.data.DirectStore({
                     storeId: 'Ecodev\\Newsletter\\Domain\\Model\\Email',
@@ -29,22 +29,22 @@
                             {name: 'bounceTime', type: 'date'},
                             {name: 'authCode', type: 'string'},
                             {name: 'recipientAddress', type: 'string'},
-                            {name: 'unsubscribed', type: 'boolean'}
-                        ]
+                            {name: 'unsubscribed', type: 'boolean'},
+                        ],
                     }),
                     writer: new Ext.data.JsonWriter({
                         encode: false,
-                        writeAllFields: false
+                        writeAllFields: false,
                     }),
                     api: {
                         read: Ext.ux.Ecodev.Newsletter.Remote.EmailController.listAction,
                         update: Ext.ux.Ecodev.Newsletter.Remote.EmailController.updateAction,
                         destroy: Ext.ux.Ecodev.Newsletter.Remote.EmailController.destroyAction,
-                        create: Ext.ux.Ecodev.Newsletter.Remote.EmailController.createAction
+                        create: Ext.ux.Ecodev.Newsletter.Remote.EmailController.createAction,
                     },
                     paramOrder: {
-                        read: ['data', 'start', 'limit']
-                    }
+                        read: ['data', 'start', 'limit'],
+                    },
                 });
             }
         };
@@ -53,7 +53,7 @@
          * Public API of this singleton.
          */
         return {
-            initialize: initialize
+            initialize: initialize,
         };
     }());
 }());

@@ -62,7 +62,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setPlannedTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'plannedTime', $this->subject
+            $dateTimeFixture, 'plannedTime', $this->subject
         );
     }
 
@@ -72,7 +72,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getBeginTimeReturnsInitialValueForDateTime()
     {
         $this->assertSame(
-                null, $this->subject->getBeginTime()
+            null, $this->subject->getBeginTime()
         );
     }
 
@@ -85,7 +85,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setBeginTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'beginTime', $this->subject
+            $dateTimeFixture, 'beginTime', $this->subject
         );
     }
 
@@ -95,7 +95,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getEndTimeReturnsInitialValueForDateTime()
     {
         $this->assertSame(
-                null, $this->subject->getEndTime()
+            null, $this->subject->getEndTime()
         );
     }
 
@@ -108,7 +108,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setEndTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'endTime', $this->subject
+            $dateTimeFixture, 'endTime', $this->subject
         );
     }
 
@@ -118,7 +118,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getRepetitionReturnsInitialValueForInteger()
     {
         $this->assertSame(
-                0, $this->subject->getRepetition()
+            0, $this->subject->getRepetition()
         );
     }
 
@@ -130,7 +130,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setRepetition(12);
 
         $this->assertAttributeSame(
-                12, 'repetition', $this->subject
+            12, 'repetition', $this->subject
         );
     }
 
@@ -141,7 +141,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     {
         $converter = $this->subject->getPlainConverter();
         $this->assertSame(
-                Builtin::class, $converter
+            Builtin::class, $converter
         );
 
         $this->assertTrue(class_exists($converter));
@@ -155,7 +155,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setPlainConverter('Conceived at T3CON10');
 
         $this->assertAttributeSame(
-                'Conceived at T3CON10', 'plainConverter', $this->subject
+            'Conceived at T3CON10', 'plainConverter', $this->subject
         );
     }
 
@@ -203,7 +203,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setIsTest(true);
 
         $this->assertAttributeSame(
-                true, 'isTest', $this->subject
+            true, 'isTest', $this->subject
         );
     }
 
@@ -213,7 +213,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getBounceAccountReturnsInitialValueForBounceAccount()
     {
         $this->assertSame(
-                null, $this->subject->getBounceAccount()
+            null, $this->subject->getBounceAccount()
         );
     }
 
@@ -226,7 +226,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setBounceAccount($bounceAccountFixture);
 
         $this->assertAttributeSame(
-                $bounceAccountFixture, 'bounceAccount', $this->subject
+            $bounceAccountFixture, 'bounceAccount', $this->subject
         );
     }
 
@@ -251,7 +251,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setSenderName('Conceived at T3CON10');
 
         $this->assertAttributeSame(
-                'Conceived at T3CON10', 'senderName', $this->subject
+            'Conceived at T3CON10', 'senderName', $this->subject
         );
 
         $this->assertSame('Conceived at T3CON10', $this->subject->getSenderName());
@@ -265,7 +265,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setSenderEmail('john@example.com');
 
         $this->assertAttributeSame(
-                'john@example.com', 'senderEmail', $this->subject
+            'john@example.com', 'senderEmail', $this->subject
         );
 
         $this->assertSame('john@example.com', $this->subject->getSenderEmail());
@@ -288,7 +288,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setInjectOpenSpy(true);
 
         $this->assertAttributeSame(
-                true, 'injectOpenSpy', $this->subject
+            true, 'injectOpenSpy', $this->subject
         );
     }
 
@@ -309,7 +309,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setInjectLinksSpy(false);
 
         $this->assertAttributeSame(
-                false, 'injectLinksSpy', $this->subject
+            false, 'injectLinksSpy', $this->subject
         );
     }
 
@@ -319,7 +319,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
     public function getRecipientListReturnsInitialValueForRecipientList()
     {
         $this->assertSame(
-                null, $this->subject->getRecipientList()
+            null, $this->subject->getRecipientList()
         );
     }
 
@@ -332,7 +332,7 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
         $this->subject->setRecipientList($recipientListFixture);
 
         $this->assertAttributeSame(
-                $recipientListFixture, 'recipientList', $this->subject
+            $recipientListFixture, 'recipientList', $this->subject
         );
     }
 

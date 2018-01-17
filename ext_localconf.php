@@ -13,15 +13,15 @@ $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['newsletter_bounce'] = ['EXT
 
 // Configure FE plugin element
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Ecodev.' . $_EXTKEY, 'p', [// list of controller
+    'Ecodev.' . $_EXTKEY, 'p', [// list of controller
     'Email' => 'show, opened',
     'Link' => 'clicked',
     'RecipientList' => 'unsubscribe, export',
-        ], [// non-cacheable controller
-    'Email' => 'show, opened, unsubscribe',
-    'Link' => 'clicked',
-    'RecipientList' => 'export',
-        ]
+], [// non-cacheable controller
+        'Email' => 'show, opened, unsubscribe',
+        'Link' => 'clicked',
+        'RecipientList' => 'export',
+    ]
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\Ecodev\Newsletter\Task\SendEmails::class] = [

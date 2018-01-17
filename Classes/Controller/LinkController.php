@@ -21,6 +21,7 @@ class LinkController extends ExtDirectActionController
 
     /**
      * injectLinkRepository
+     *
      * @param LinkRepository $linkRepository
      */
     public function injectLinkRepository(LinkRepository $linkRepository)
@@ -34,6 +35,7 @@ class LinkController extends ExtDirectActionController
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
+     *
      * @return string The rendered list view
      */
     public function listAction($uidNewsletter, $start, $limit)

@@ -13,9 +13,11 @@ class LinkRepository extends AbstractRepository
 {
     /**
      * Returns all links for a given newsletter
+     *
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
+     *
      * @return Link[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
@@ -34,6 +36,7 @@ class LinkRepository extends AbstractRepository
 
     /**
      * Returns the count of links for a given newsletter
+     *
      * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
@@ -47,9 +50,11 @@ class LinkRepository extends AbstractRepository
     /**
      * Register a clicked link in database and forward the event to RecipientList
      * so it can optionally do something more
+     *
      * @param int|null $newsletterUid newsletter UID to limit search scope, or NULL
      * @param string $authCode identifier to find back the link
      * @param bool $isPlain
+     *
      * @return string|null absolute URL to be redirected to
      */
     public function registerClick($newsletterUid, $authCode, $isPlain)

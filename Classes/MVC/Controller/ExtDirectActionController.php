@@ -80,6 +80,7 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param string $messageTitle Optional message title
      * @param int $severity Optional severity, must be one of \TYPO3\CMS\Core\Messaging\FlashMessage constants
      * @param bool $storeInSession Optional, defines whether the message should be stored in the session (default) or not
+     *
      * @throws \InvalidArgumentException if the message body is no string
      * @see \TYPO3\CMS\Core\Messaging\FlashMessage
      * @api
@@ -91,15 +92,17 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         }
         /* @var FlashMessage $flashMessage */
         $flashMessage = GeneralUtility::makeInstance(
-                        FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
+            FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
         );
         $this->controllerContext->getFlashMessageQueue()->enqueue($flashMessage);
     }
 
     /**
      * Translate key
+     *
      * @param string $key
      * @param array $args
+     *
      * @return string
      */
     protected function translate($key, array $args = [])

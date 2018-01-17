@@ -57,10 +57,10 @@ class NewsletterControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $newsletter = $this->getMock(Newsletter::class, ['getValidatedContent'], [], '', false);
         $newsletter->expects($this->once())->method('getValidatedContent')->will($this->returnValue([
-                    'content' => 'some content',
-                    'errors' => [],
-                    'warnings' => [],
-                    'infos' => [],
+            'content' => 'some content',
+            'errors' => [],
+            'warnings' => [],
+            'infos' => [],
         ]));
         $recipientList = new CsvList();
         $newsletter->setRecipientList($recipientList);

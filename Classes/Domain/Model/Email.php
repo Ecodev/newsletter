@@ -55,6 +55,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
 
     /**
      * newsletter
+     *
      * @lazy
      * @var Newsletter
      */
@@ -288,6 +289,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
 
     /**
      * Return the URL to view the newsletter
+     *
      * @return string
      */
     public function getViewUrl()
@@ -297,6 +299,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
 
     /**
      * Return the URL to unsubscribe from the newsletter
+     *
      * @return string
      */
     public function getUnsubscribeUrl()

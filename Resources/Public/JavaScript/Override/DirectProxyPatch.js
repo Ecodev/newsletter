@@ -2,9 +2,9 @@
  * Patch the DirectProxy to accept paramOrders for store delete, update and create requests.
  */
 Ext.override(Ext.data.DirectProxy, {
-    doRequest: function(action, rs, params, reader, callback, scope, options) {
+    doRequest: function (action, rs, params, reader, callback, scope, options) {
         var args = [],
-                directFn = this.api[action] || this.directFn;
+            directFn = this.api[action] || this.directFn;
 
         if (Ext.isObject(this.paramOrder)) {
             paramOrder = this.paramOrder[action];
@@ -64,12 +64,12 @@ Ext.override(Ext.data.DirectProxy, {
             request: {
                 callback: callback,
                 scope: scope,
-                arg: options
+                arg: options,
             },
-            reader: reader
+            reader: reader,
         };
 
         args.push(this.createCallback(action, rs, trans), this);
         directFn.apply(window, args);
-    }
+    },
 });

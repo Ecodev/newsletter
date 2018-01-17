@@ -1,26 +1,32 @@
 {
-    "name": "ecodev/newsletter",
-    "type": "typo3-cms-extension",
-    "description": "TYPO3 extension to send any pages as Newsletter and provide statistics on opened emails and clicked links.",
-    "homepage": "https://github.com/ecodev/newsletter",
-    "license": "GPL-2.0+",
-    "keywords": ["TYPO3 CMS", "TYPO3", "newsletter", "email", "statistics"],
-    "require": {
-        "php" : ">=5.6.0",
-        "ext-mcrypt": "*",
-        "ext-dom": "*"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.1"
-    },
-	"autoload": {
-		"psr-4": {
-			"Ecodev\\Newsletter\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Ecodev\\Newsletter\\Tests\\": "Tests/"
-		}
-	}
+  "name": "ecodev/newsletter",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 extension to send any pages as Newsletter and provide statistics on opened emails and clicked links.",
+  "homepage": "https://github.com/ecodev/newsletter",
+  "license": "GPL-2.0+",
+  "keywords": [
+    "TYPO3 CMS",
+    "TYPO3",
+    "newsletter",
+    "email",
+    "statistics"
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "ext-mcrypt": "*",
+    "ext-dom": "*"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ecodev\\Newsletter\\": "Classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Ecodev\\Newsletter\\Tests\\": "Tests/"
+    }
+  }
 }

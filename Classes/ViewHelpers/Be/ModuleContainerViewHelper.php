@@ -36,6 +36,7 @@ class ModuleContainerViewHelper extends AbstractViewHelper
      * Renders start page with template.php and pageTitle.
      *
      * @param string $pageTitle title tag of the module. Not required by default, as BE modules are shown in a frame
+     *
      * @return string
      * @see template
      * @see TYPO3\CMS\Core\Page\PageRenderer

@@ -52,6 +52,7 @@ class Api
      *
      * @param string $routeUrl
      * @param string $namespace
+     *
      * @return array
      */
     public function createApi($routeUrl, $namespace)

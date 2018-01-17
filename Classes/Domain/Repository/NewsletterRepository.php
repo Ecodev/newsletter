@@ -13,6 +13,7 @@ class NewsletterRepository extends AbstractRepository
 {
     /**
      * Returns the latest newsletter for the given page
+     *
      * @param int $pid
      */
     public function getLatest($pid)
@@ -52,9 +53,9 @@ class NewsletterRepository extends AbstractRepository
     {
         $query = $this->createQuery();
         $query->matching(
-                $query->logicalAnd(
-                        $query->lessThanOrEqual('plannedTime', time()), $query->logicalNot($query->equals('plannedTime', 0)), $query->equals('beginTime', 0)
-                )
+            $query->logicalAnd(
+                $query->lessThanOrEqual('plannedTime', time()), $query->logicalNot($query->equals('plannedTime', 0)), $query->equals('beginTime', 0)
+            )
         );
 
         return $query->execute();
@@ -76,7 +77,9 @@ class NewsletterRepository extends AbstractRepository
     /**
      * Returns newsletter statistics to be used for pie and timeline chart
      * We will get the full state for each time when something happened
+     *
      * @param Newsletter $newsletter
+     *
      * @return array eg: array(array(time, emailNotSentCount, emailSentCount, emailOpenedCount, emailBouncedCount, emailCount, linkOpenedCount, linkCount, [and same fields but Percentage instead of Count] ))
      */
     public function getStatistics(Newsletter $newsletter)
@@ -85,19 +88,19 @@ class NewsletterRepository extends AbstractRepository
 
         $stateDifferences = [];
         $emailCount = $this->fillStateDifferences(
-                $stateDifferences, 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter, [
-            'end_time' => ['increment' => 'emailSentCount', 'decrement' => 'emailNotSentCount'],
-            'open_time' => ['increment' => 'emailOpenedCount', 'decrement' => 'emailSentCount'],
-            'bounce_time' => ['increment' => 'emailBouncedCount', 'decrement' => 'emailSentCount'],
-                ]
+            $stateDifferences, 'tx_newsletter_domain_model_email', 'newsletter = ' . $uidNewsletter, [
+                'end_time' => ['increment' => 'emailSentCount', 'decrement' => 'emailNotSentCount'],
+                'open_time' => ['increment' => 'emailOpenedCount', 'decrement' => 'emailSentCount'],
+                'bounce_time' => ['increment' => 'emailBouncedCount', 'decrement' => 'emailSentCount'],
+            ]
         );
 
         $linkRepository = $this->objectManager->get(LinkRepository::class);
         $linkCount = $linkRepository->getCount($uidNewsletter);
         $this->fillStateDifferences(
-                $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, [
-            'open_time' => ['increment' => 'linkOpenedCount'],
-                ]
+            $stateDifferences, 'tx_newsletter_domain_model_link LEFT JOIN tx_newsletter_domain_model_linkopened ON (tx_newsletter_domain_model_linkopened.link = tx_newsletter_domain_model_link.uid)', 'tx_newsletter_domain_model_link.newsletter = ' . $uidNewsletter, [
+                'open_time' => ['increment' => 'linkOpenedCount'],
+            ]
         );
 
         // Find out the very first event (when the newsletter was planned)
@@ -174,10 +177,12 @@ class NewsletterRepository extends AbstractRepository
     /**
      * Fills the $stateDifferences array with incremental difference that the state introduce.
      * It supports merging with existing diff in the array and several states on the same time.
+     *
      * @param array $stateDifferences
      * @param string $from
      * @param string $where
      * @param array $stateConfiguration
+     *
      * @return int count of records (not count of states)
      */
     protected function fillStateDifferences(array &$stateDifferences, $from, $where, array $stateConfiguration)
@@ -221,6 +226,7 @@ class NewsletterRepository extends AbstractRepository
      * Find all pairs of newsletter-email UIDs that are should be sent
      *
      * @param Newsletter $newsletter
+     *
      * @return array [[newsletter => 12, email => 5], ...]
      */
     public static function findAllNewsletterAndEmailUidToSend(Newsletter $newsletter = null)

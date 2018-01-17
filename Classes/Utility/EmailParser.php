@@ -14,12 +14,14 @@ class EmailParser
 
     /**
      * Bounce level of the mail source specified
+     *
      * @var int @see \Ecodev\Newsletter\BounceHandler
      */
     private $bounceLevel;
 
     /**
      * The email source
+     *
      * @var string
      */
     private $emailSource;

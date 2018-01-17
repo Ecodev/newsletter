@@ -1,7 +1,7 @@
 <?php
 
 return [
-     'ctrl' => [
+    'ctrl' => [
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link',
         'label' => 'url',
         'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_link.gif',

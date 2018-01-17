@@ -30,6 +30,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
 
     /**
      * Whether to expose exception information in an ExtDirect response
+     *
      * @var bool
      */
     protected $exposeExceptionInformation = true;

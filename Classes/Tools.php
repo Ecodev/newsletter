@@ -25,6 +25,7 @@ abstract class Tools
      * Get a newsletter-conf-template parameter
      *
      * @param string $key Parameter key
+     *
      * @return mixed Parameter value
      */
     public static function confParam($key)
@@ -53,6 +54,7 @@ abstract class Tools
      * Returns a logger for given class
      *
      * @param string $class
+     *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
     public static function getLogger($class)
@@ -66,6 +68,7 @@ abstract class Tools
      *
      * @param Newsletter $newsletter The newsletter
      * @param int $language
+     *
      * @return Mailer preconfigured mailer for sending
      */
     public static function getConfiguredMailer(Newsletter $newsletter, $language = null)
@@ -236,6 +239,7 @@ abstract class Tools
      * Returns an base64_encode encrypted string
      *
      * @param string $string
+     *
      * @return string base64_encode encrypted string
      */
     public static function encrypt($string)
@@ -251,6 +255,7 @@ abstract class Tools
      * Returns a decrypted string
      *
      * @param string $string base64_encode encrypted string
+     *
      * @return string decrypted string
      */
     public static function decrypt($string)
@@ -308,6 +313,7 @@ abstract class Tools
      * Fetch and returns the content at specified URL
      *
      * @param string $url
+     *
      * @return string
      */
     public static function getUrl($url)
@@ -343,8 +349,9 @@ abstract class Tools
         if (version_compare(TYPO3_version, '7.4.0', '>=')) {
             return 'EXT:newsletter/';
         }
-            // But for TYPO3 6.2 family, we still have to use old style
-            return ExtensionManagementUtility::extRelPath('newsletter');
+
+        // But for TYPO3 6.2 family, we still have to use old style
+        return ExtensionManagementUtility::extRelPath('newsletter');
     }
 
     /**

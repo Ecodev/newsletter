@@ -51,7 +51,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setNewsletter($newsletterFixture);
 
         $this->assertAttributeSame(
-                $newsletterFixture, 'newsletter', $this->subject
+            $newsletterFixture, 'newsletter', $this->subject
         );
     }
 
@@ -61,7 +61,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getOpenedCountReturnsInitialValueForInteger()
     {
         $this->assertSame(
-                0, $this->subject->getOpenedCount()
+            0, $this->subject->getOpenedCount()
         );
     }
 
@@ -73,7 +73,7 @@ class LinkTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setOpenedCount(12);
 
         $this->assertAttributeSame(
-                12, 'openedCount', $this->subject
+            12, 'openedCount', $this->subject
         );
     }
 }

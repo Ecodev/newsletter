@@ -60,6 +60,7 @@ class RecipientListController extends ExtDirectActionController
 
     /**
      * Returns the list of recipient for the specified recipientList
+     *
      * @param int $uidRecipientList
      * @param int $start
      * @param int $limit

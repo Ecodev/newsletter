@@ -44,6 +44,7 @@ class EmailController extends ExtDirectActionController
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
+     *
      * @return string The rendered list view
      */
     public function listAction($uidNewsletter, $start, $limit)
@@ -284,9 +285,9 @@ class EmailController extends ExtDirectActionController
         // Actually sends email
         $message = GeneralUtility::makeInstance(MailMessage::class);
         $message->setTo($notificationEmail)
-                ->setFrom([$newsletter->getSenderEmail() => $newsletter->getSenderName()])
-                ->setSubject($subject)
-                ->setBody($body, 'text/html');
+            ->setFrom([$newsletter->getSenderEmail() => $newsletter->getSenderName()])
+            ->setSubject($subject)
+            ->setBody($body, 'text/html');
         $message->send();
     }
 

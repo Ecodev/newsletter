@@ -38,6 +38,7 @@ class BeUsers extends GentleSql
 
     /**
      * Returns the tablename to work with
+     *
      * @return string
      */
     protected function getTableName()
@@ -52,7 +53,7 @@ class BeUsers extends GentleSql
         $config = array_filter($config);
 
         $this->data = Tools::getDatabaseConnection()->sql_query(
-                'SELECT email, realName, username, lang, admin FROM be_users
+            'SELECT email, realName, username, lang, admin FROM be_users
 				WHERE uid IN (' . implode(',', $config) . ")
 				AND email <> ''
 				AND disable = 0

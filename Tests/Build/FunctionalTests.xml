@@ -1,7 +1,7 @@
 <phpunit
-    bootstrap="FunctionalTestsBootstrap.php"
-    colors="true"
-    processIsolation="true"
+        bootstrap="FunctionalTestsBootstrap.php"
+        colors="true"
+        processIsolation="true"
 >
     <testsuites>
         <testsuite name="EXT:newsletter functional tests">

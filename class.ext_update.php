@@ -19,6 +19,7 @@ class ext_update
 
     /**
      * Do update and return result as HTML
+     *
      * @return string HTML content
      */
     public function main()
@@ -28,6 +29,7 @@ class ext_update
 
     /**
      * Return whether update is required
+     *
      * @return bool
      */
     public function access()

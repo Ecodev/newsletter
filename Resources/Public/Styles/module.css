@@ -18,6 +18,7 @@ Newsletter style
     font-size: 120%;
     line-height: normal;
 }
+
 .t3-newsletter-statistic-group {
     margin-top: 2em;
     margin-bottom: 1em;
@@ -32,8 +33,7 @@ Newsletter style
 .t3-newsletter-statistic .sent,
 .t3-newsletter-statistic .opened,
 .t3-newsletter-statistic .bounced,
-.t3-newsletter-statistic .link-opened
-{
+.t3-newsletter-statistic .link-opened {
     font-weight: bold;
     font-size: 150%;
 }
@@ -67,9 +67,11 @@ ul.infos li {
 ul.errors li {
     list-style-image: url("../Icons/error.png");
 }
+
 ul.warnings li {
     list-style-image: url("../Icons/warning.png");
 }
+
 ul.infos li {
     list-style-image: url("../Icons/information.png");
 }
@@ -92,14 +94,12 @@ ul.infos li.none {
     background-color: #DEDEDE;
 }
 
-#newsletterListMenu .x-grid3-row
-{
+#newsletterListMenu .x-grid3-row {
     cursor: pointer;
 }
 
 #pieChartContainer,
-#timelineChartContainer
-{
+#timelineChartContainer {
     height: 100%;
 }
 
@@ -107,6 +107,7 @@ ul.infos li.none {
     position: absolute;
     width: 100%;
 }
+
 .typo3-docheader-buttons {
     position: absolute;
     width: 100%;
@@ -117,16 +118,19 @@ ul.infos li.none {
 .t3-newsletter-docbody {
     background: transparent;
 }
+
 /* Correct space between tabs to match TYPO3-look (should be solved in global ExtJS-theme!) */
 ul.x-tab-strip li {
     margin-right: 1px;
 }
+
 /* Set border around panels and newsletterListMenu */
 #newsletterListMenu .x-panel-body,
 .t3-newsletter-docbody .x-tab-panel-body {
     border: 1px solid #adadad;
     border-top-width: 0;
 }
+
 /* Remove padding around tab-text to make it look like TYPO3 */
 /* Set fixed height for 6.1 */
 .x-tab-strip span.x-tab-strip-text,
@@ -134,22 +138,27 @@ ul.x-tab-strip li {
     padding: 0;
     height: 18px;
 }
+
 /* Set different margins for tabpanels */
 .t3-newsletter-docheader ul.x-tab-strip-top {
     margin: 17px 24px;
 }
+
 .t3-newsletter-docbody ul.x-tab-strip-top {
     margin-bottom: 0;
     margin-top: 0;
 }
+
 /* Correct background-color in border-layout */
 .x-border-layout-ct {
     background-color: transparent;
 }
+
 /* Correct background-color for pagination in RecipientList */
 .x-toolbar {
     background: none;
 }
+
 /* Correct background-color of tabpanels */
 .x-tab-panel-header {
     background: none;
@@ -161,9 +170,9 @@ ul.x-tab-strip li {
     font-size: 10px;
     position: relative;
     text-indent: -9999em;
-    border-top: 1.1em solid rgba(78,78,78, 0.2);
-    border-right: 1.1em solid rgba(78,78,78, 0.2);
-    border-bottom: 1.1em solid rgba(78,78,78, 0.2);
+    border-top: 1.1em solid rgba(78, 78, 78, 0.2);
+    border-right: 1.1em solid rgba(78, 78, 78, 0.2);
+    border-bottom: 1.1em solid rgba(78, 78, 78, 0.2);
     border-left: 1.1em solid #4e4e4e;
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
@@ -171,12 +180,14 @@ ul.x-tab-strip li {
     -webkit-animation: load8 1.1s infinite linear;
     animation: load8 1.1s infinite linear;
 }
+
 .loader,
 .loader:after {
     border-radius: 50%;
     width: 10em;
     height: 10em;
 }
+
 @-webkit-keyframes load8 {
     0% {
         -webkit-transform: rotate(0deg);
@@ -187,6 +198,7 @@ ul.x-tab-strip li {
         transform: rotate(360deg);
     }
 }
+
 @keyframes load8 {
     0% {
         -webkit-transform: rotate(0deg);

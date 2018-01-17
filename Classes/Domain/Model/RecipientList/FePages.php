@@ -38,6 +38,7 @@ class FePages extends GentleSql
 
     /**
      * Returns the tablename to work with
+     *
      * @return string
      */
     protected function getTableName()
@@ -52,7 +53,7 @@ class FePages extends GentleSql
         $config = array_filter($config);
 
         $this->data = Tools::getDatabaseConnection()->sql_query(
-                'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title as pages_title
+            'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,pages.title AS pages_title
 				FROM pages
 				INNER JOIN fe_users ON pages.uid = fe_users.pid
 				WHERE pages.uid IN (' . implode(',', $config) . ")

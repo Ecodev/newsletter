@@ -14,7 +14,9 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Returns the email corresponsding to the authCode
+     *
      * @param string $authcode
+     *
      * @return Email
      */
     public function findByAuthcode($authcode)
@@ -30,6 +32,7 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Returns the count of emails for a given newsletter
+     *
      * @param int $uidNewsletter
      */
     public function getCount($uidNewsletter)
@@ -48,9 +51,11 @@ class EmailRepository extends AbstractRepository
 
     /**
      * Returns all email for a given newsletter
+     *
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
+     *
      * @return Email[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
@@ -70,6 +75,7 @@ class EmailRepository extends AbstractRepository
     /**
      * Register an open email in database and forward the event to RecipientList
      * so it can optionally do something more
+     *
      * @param string $authCode
      */
     public function registerOpen($authCode)

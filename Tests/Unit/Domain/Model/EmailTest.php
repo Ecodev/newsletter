@@ -31,7 +31,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getBeginTimeReturnsInitialValueForDateTime()
     {
         $this->assertNull(
-                $this->subject->getBeginTime()
+            $this->subject->getBeginTime()
         );
     }
 
@@ -44,7 +44,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setBeginTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'beginTime', $this->subject
+            $dateTimeFixture, 'beginTime', $this->subject
         );
     }
 
@@ -54,7 +54,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getEndTimeReturnsInitialValueForDateTime()
     {
         $this->assertNull(
-                $this->subject->getEndTime()
+            $this->subject->getEndTime()
         );
     }
 
@@ -67,7 +67,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setEndTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'endTime', $this->subject
+            $dateTimeFixture, 'endTime', $this->subject
         );
     }
 
@@ -77,7 +77,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getOpenTimeReturnsInitialValueForDateTime()
     {
         $this->assertNull(
-                $this->subject->getOpenTime()
+            $this->subject->getOpenTime()
         );
     }
 
@@ -90,7 +90,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setOpenTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'openTime', $this->subject
+            $dateTimeFixture, 'openTime', $this->subject
         );
     }
 
@@ -100,7 +100,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getBounceTimeReturnsInitialValueForDateTime()
     {
         $this->assertNull(
-                $this->subject->getBounceTime()
+            $this->subject->getBounceTime()
         );
     }
 
@@ -113,7 +113,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setBounceTime($dateTimeFixture);
 
         $this->assertAttributeSame(
-                $dateTimeFixture, 'bounceTime', $this->subject
+            $dateTimeFixture, 'bounceTime', $this->subject
         );
     }
 
@@ -123,7 +123,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getUnsubscribedReturnsInitialValueForBoolean()
     {
         $this->assertFalse(
-                $this->subject->getUnsubscribed()
+            $this->subject->getUnsubscribed()
         );
     }
 
@@ -135,7 +135,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setUnsubscribed(true);
 
         $this->assertAttributeSame(
-                true, 'unsubscribed', $this->subject
+            true, 'unsubscribed', $this->subject
         );
     }
 
@@ -179,7 +179,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getNewsletterReturnsInitialValueForNewsletter()
     {
         $this->assertSame(
-                null, $this->subject->getNewsletter()
+            null, $this->subject->getNewsletter()
         );
     }
 
@@ -192,7 +192,7 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setNewsletter($newsletterFixture);
 
         $this->assertAttributeSame(
-                $newsletterFixture, 'newsletter', $this->subject
+            $newsletterFixture, 'newsletter', $this->subject
         );
     }
 

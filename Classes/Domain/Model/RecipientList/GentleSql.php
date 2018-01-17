@@ -13,6 +13,7 @@ abstract class GentleSql extends Sql
 {
     /**
      * Returns the tablename to work with
+     *
      * @return string
      */
     abstract protected function getTableName();
@@ -24,6 +25,7 @@ abstract class GentleSql extends Sql
      *
      * @param string $email the email address of the recipient
      * @param int $bounceLevel this is the level of the bounce
+     *
      * @return bool success of the bounce-handling
      */
     public function registerBounce($email, $bounceLevel)

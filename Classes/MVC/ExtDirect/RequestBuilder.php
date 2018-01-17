@@ -81,7 +81,7 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
         $request = $this->objectManager->get(Request::class);
         foreach ($transactionDatas as $transactionData) {
             $request->createAndAddTransaction(
-                    $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : [], $transactionData->tid
+                $transactionData->action, $transactionData->method, is_array($transactionData->data) ? $transactionData->data : [], $transactionData->tid
             );
         }
 

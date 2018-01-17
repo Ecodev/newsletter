@@ -262,6 +262,7 @@ class ValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestValidator
+     *
      * @param string $input
      * @param array $expected
      */

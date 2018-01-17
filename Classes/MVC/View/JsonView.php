@@ -37,25 +37,25 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * Example 1:
      *
      * array(
-     * 		'variable1' => array(
-     * 			'_only' => array('property1', 'property2', ...)
-     * 		),
-     * 		'variable2' => array(
-     * 	 		'_exclude' => array('property3', 'property4, ...)
-     * 		),
-     * 		'variable3' => array(
-     * 			'_exclude' => array('secretTitle'),
-     * 			'_descend' => array(
-     * 				'customer' => array(
-     * 					'_only' => array('firstName', 'lastName')
-     * 				)
-     * 			)
-     * 		),
-     * 		'somearrayvalue' => array(
-     * 			'_descendAll' => array(
-     * 				'_only' => array('property1')
-     * 			)
-     * 		)
+     *        'variable1' => array(
+     *            '_only' => array('property1', 'property2', ...)
+     *        ),
+     *        'variable2' => array(
+     *            '_exclude' => array('property3', 'property4, ...)
+     *        ),
+     *        'variable3' => array(
+     *            '_exclude' => array('secretTitle'),
+     *            '_descend' => array(
+     *                'customer' => array(
+     *                    '_only' => array('firstName', 'lastName')
+     *                )
+     *            )
+     *        ),
+     *        'somearrayvalue' => array(
+     *            '_descendAll' => array(
+     *                '_only' => array('property1')
+     *            )
+     *        )
      * )
      *
      * Of variable1 only property1 and property2 will be included.
@@ -101,6 +101,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      * By default only the variable 'value' will be rendered
      *
      * @param string[] $variablesToRender
+     *
      * @api
      */
     public function setVariablesToRender(array $variablesToRender)
@@ -161,6 +162,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      *
      * @param mixed $value The value to transform
      * @param mixed $configuration Configuration for transforming the value or NULL
+     *
      * @return array The transformed value
      */
     protected function transformValue($value, $configuration)
@@ -195,6 +197,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
      *
      * @param object $object Object to traverse
      * @param mixed $configuration Configuration for transforming the given object or NULL
+     *
      * @return array Object structure as an aray
      */
     protected function transformObject($object, $configuration)

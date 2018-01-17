@@ -1,5 +1,5 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     Ext.ns('Ext.ux.Ecodev.Newsletter.Store');
 
@@ -7,11 +7,11 @@
      * A Store for the recipientList model using ExtDirect to communicate with the
      * server side extbase framework.
      */
-    Ext.ux.Ecodev.Newsletter.Store.RecipientList = (function() {
+    Ext.ux.Ecodev.Newsletter.Store.RecipientList = (function () {
 
         var recipientListStore = null;
 
-        var initialize = function() {
+        var initialize = function () {
             if (recipientListStore === null) {
                 recipientListStore = new Ext.data.DirectStore({
                     storeId: 'Ecodev\\Newsletter\\Domain\\Model\\RecipientList',
@@ -27,28 +27,30 @@
                             {name: 'lang', type: 'string'},
                             {name: 'type', type: 'string'},
                             {name: 'count', type: 'integer'},
-                            {name: 'fullName', convert: function(v, recipientList) {
+                            {
+                                name: 'fullName', convert: function (v, recipientList) {
                                     return String.format('{0} ({1})', recipientList.title, recipientList.count);
-                                }}
-                        ]
+                                },
+                            },
+                        ],
                     }),
                     writer: new Ext.data.JsonWriter({
                         encode: false,
-                        writeAllFields: false
+                        writeAllFields: false,
                     }),
                     api: {
                         read: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.listAction,
                         update: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.updateAction,
                         destroy: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.destroyAction,
-                        create: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.createAction
+                        create: Ext.ux.Ecodev.Newsletter.Remote.RecipientListController.createAction,
                     },
                     paramOrder: {
                         read: [],
                         update: ['data'],
                         create: ['data'],
-                        destroy: ['data']
+                        destroy: ['data'],
                     },
-                    autoLoad: true
+                    autoLoad: true,
 
                 });
             }
@@ -57,7 +59,7 @@
          * Public API of this singleton.
          */
         return {
-            initialize: initialize
+            initialize: initialize,
         };
     }());
 }());

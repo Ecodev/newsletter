@@ -1,7 +1,7 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
-    Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics");
+    Ext.ns('Ext.ux.Ecodev.Newsletter.Statistics');
 
     /**
      * @class Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel
@@ -11,7 +11,7 @@
      * Class for statistic tab panel
      */
     Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel = Ext.extend(Ext.TabPanel, {
-        initComponent: function() {
+        initComponent: function () {
 
             var config = {
                 activeTab: 0,
@@ -20,23 +20,23 @@
                     {
                         title: Ext.ux.Ecodev.Newsletter.Language.overview_tab,
                         xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.OverviewTab',
-                        itemId: 'overviewTab'
+                        itemId: 'overviewTab',
                     },
                     {
                         title: Ext.ux.Ecodev.Newsletter.Language.emails_tab,
                         xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.EmailTab',
-                        itemId: 'emailTab'
+                        itemId: 'emailTab',
                     },
                     {
                         title: Ext.ux.Ecodev.Newsletter.Language.links_tab,
                         xtype: 'Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.LinkTab',
-                        itemId: 'linkTab'
-                    }
-                ]
+                        itemId: 'linkTab',
+                    },
+                ],
             };
             Ext.apply(this, config);
             Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.superclass.initComponent.call(this);
-        }
+        },
 
     });
 

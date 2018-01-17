@@ -80,6 +80,7 @@ class Mailer
      *
      * @param Newsletter $newsletter
      * @param string $language
+     *
      * @throws \Exception
      */
     public function setNewsletter(Newsletter $newsletter, $language = null)
@@ -122,6 +123,7 @@ class Mailer
 
     /**
      * Extract the title from <title></title> HTML tags
+     *
      * @param string $htmlSrc
      */
     private function setTitle($htmlSrc)
@@ -151,7 +153,9 @@ class Mailer
 
     /**
      * Find and memorize attachments that will need to be processed by Swift
+     *
      * @param string $src
+     *
      * @return string
      */
     private function findAttachments($src)
@@ -183,7 +187,9 @@ class Mailer
 
     /**
      * Returns a swift marker if the image can be embedded
+     *
      * @param string $imageUrl
+     *
      * @return string|null
      */
     private function getSwiftEmbeddedMarker($imageUrl)
@@ -241,6 +247,7 @@ class Mailer
      * @param string $url
      * @param bool $isPreview
      * @param bool $isPlainText
+     *
      * @return string The link url
      */
     private function getLinkAuthCode(Email $email, $url, $isPreview, $isPlainText = false)
@@ -251,20 +258,17 @@ class Mailer
         // First check in our local cache
         if (isset($this->linksCache[$url])) {
             $linkId = $this->linksCache[$url];
-        }
-        // Otherwise if we are preparing a preview, just generate incremental ID and do not touch database at all
+        } // Otherwise if we are preparing a preview, just generate incremental ID and do not touch database at all
         elseif ($isPreview) {
             $linkId = count($this->linksCache);
-        }
-        // Finally if it's not a preview and link was not in cache, check database
+        } // Finally if it's not a preview and link was not in cache, check database
         else {
             // Look for the link database, it may already exist
             $res = $db->sql_query('SELECT uid FROM tx_newsletter_domain_model_link WHERE url = ' . $db->fullQuoteStr($url, 'tx_newsletter_domain_model_link') . ' AND newsletter = ' . $db->fullQuoteStr($this->newsletter->getUid(), 'tx_newsletter_domain_model_link') . ' LIMIT 1');
             $row = $db->sql_fetch_row($res);
             if ($row) {
                 $linkId = $row[0];
-            }
-            // Otherwise create it
+            } // Otherwise create it
             else {
                 $db->exec_INSERTquery('tx_newsletter_domain_model_link', [
                     'pid' => $this->newsletter->getPid(),
@@ -319,6 +323,7 @@ class Mailer
 
     /**
      * Prepare the newsletter content for the specified email (substitute markers and insert spies)
+     *
      * @param Email $email
      * @param bool $isPreview whether we are preparing a preview version of the newsletter
      */
@@ -372,6 +377,7 @@ class Mailer
      * Creates the Message object from our current state and returns it
      *
      * @param Email $email
+     *
      * @return MailMessage
      */
     public function createMessage(Email $email)
@@ -383,13 +389,13 @@ class Mailer
         $replytoEmail = isset($recipientData['replyto_email']) && GeneralUtility::validEmail($recipientData['replyto_email']) ? $recipientData['replyto_email'] : $this->replytoEmail;
         $replytoName = isset($recipientData['replyto_name']) && $recipientData['replyto_name'] ? $recipientData['replyto_name'] : $this->replytoName;
 
-        /* @var $message MailMessage  */
+        /* @var $message MailMessage */
         $message = GeneralUtility::makeInstance(MailMessage::class);
         $message->setTo($email->getRecipientAddress())
-                ->setFrom([
-                    $senderEmail => $senderName,
-                ])
-                ->setSubject($this->title);
+            ->setFrom([
+                $senderEmail => $senderName,
+            ])
+            ->setSubject($this->title);
 
         if ($replytoEmail) {
             $message->addReplyTo($replytoEmail, $replytoName);

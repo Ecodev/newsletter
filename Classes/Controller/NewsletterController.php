@@ -156,8 +156,7 @@ class NewsletterController extends ExtDirectActionController
         if ($newNewsletter->getIsTest() && $count > $limitTestRecipientCount) {
             $this->addFlashMessage($this->translate('flashmessage_test_maximum_recipients', [$count, $limitTestRecipientCount]), $this->translate('flashmessage_test_maximum_recipients_title'), FlashMessage::ERROR);
             $this->view->assign('success', false);
-        }
-        // If we attempt to create a newsletter which contains errors, abort and don't save in DB
+        } // If we attempt to create a newsletter which contains errors, abort and don't save in DB
         elseif (count($validatedContent['errors'])) {
             $this->addFlashMessage('The newsletter HTML content does not validate. See tab "Newsletter > Status" for details.', $this->translate('flashmessage_newsletter_invalid'), FlashMessage::ERROR);
             $this->view->assign('success', false);
@@ -199,6 +198,7 @@ class NewsletterController extends ExtDirectActionController
 
     /**
      * Returns the newsletter with included statistics to be used for timeline chart
+     *
      * @param int $uidNewsletter
      */
     public function statisticsAction($uidNewsletter)

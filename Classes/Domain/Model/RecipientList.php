@@ -130,6 +130,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
 
     /**
      * Array or mysql result containing raw data for recipient list. Kind of cache in memory.
+     *
      * @var array
      */
     protected $data = null;
@@ -168,6 +169,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      *
      * @param string $email the email address of the recipient
      * @param int $bounceLevel Level of bounce, @see \Ecodev\Newsletter\BounceHandler for possible values
+     *
      * @return bool status of the success of the removal
      */
     public function registerBounce($email, $bounceLevel)
@@ -195,6 +197,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
 
     /**
      * Return HTML code showing an extract of recipients (first X recipients)
+     *
      * @param int $limit
      */
     public function getExtract($limit = 30)
@@ -243,6 +246,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Green => special field recognized
      * Red => field which cannot be used within newsletter with 'markers' features
      * normal => field which can be used within newsletter
+     *
      * @param string $fieldname
      */
     private function getFieldTitle($fieldname)

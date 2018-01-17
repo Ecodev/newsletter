@@ -92,6 +92,7 @@ class CsvFile extends AbstractArray
 
     /**
      * Return the path where CSV files are contained
+     *
      * @return string
      */
     protected function getPathname()
@@ -106,6 +107,7 @@ class CsvFile extends AbstractArray
 
     /**
      * Load data from a CSV file.
+     *
      * @param string $filename path to the CSV file may be on disk or remote URL
      */
     protected function loadCsvFromFile($filename)
@@ -120,6 +122,7 @@ class CsvFile extends AbstractArray
 
     /**
      * Load data from a CSV data.
+     *
      * @param string $csvdata CSV data
      */
     protected function loadCsvFromData($csvdata)

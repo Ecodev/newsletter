@@ -117,6 +117,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * bounceAccount
+     *
      * @lazy
      * @var BounceAccount
      */
@@ -124,12 +125,14 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * UID of the bounce account. Only exist for ease of use with ExtJS
+     *
      * @var int
      */
     protected $uidBounceAccount;
 
     /**
      * recipientList
+     *
      * @lazy
      * @var RecipientList
      */
@@ -137,6 +140,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * UID of the bounce account. Only exist for ease of use with ExtJS
+     *
      * @var int
      */
     protected $uidRecipientList;
@@ -162,6 +166,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the ObjectManager
+     *
      * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected function getObjectManager()
@@ -175,6 +180,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Setter for uid
+     *
      * @param int $uid
      */
     public function setUid($uid)
@@ -284,6 +290,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns an instance of plain converter
+     *
      * @throws \Exception
      * @return IPlainConverter
      */
@@ -396,8 +403,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             if ($sender) {
                 return $sender;
             }
-        }
-        // Returns the name as defined in configuration
+        } // Returns the name as defined in configuration
         elseif ($sender) {
             return $sender;
         }
@@ -739,6 +745,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Get domain name
+     *
      * @return string domain, eg: www.example.com
      */
     public function getDomain()
@@ -749,6 +756,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the title, NOT localized, of the page sent by this newsletter.
      * This should only used for BE, because newsletter recipients need localized title
+     *
      * @return string the title
      */
     public function getTitle()
@@ -847,7 +855,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the URL of the content of this newsletter
+     *
      * @param int $language
+     *
      * @return string
      */
     public function getContentUrl($language = null)
@@ -864,6 +874,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Set the validator
+     *
      * @param Validator $validor
      */
     public function setValidator(Validator $validor)
@@ -873,6 +884,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Get the validator
+     *
      * @return Validator
      */
     public function getValidator()
@@ -887,7 +899,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the content of this newsletter with validation messages. The content
      * is also "fixed" automatically when possible.
+     *
      * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
+     *
      * @return array ('content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos);
      */
     public function getValidatedContent($language = null)
@@ -897,6 +911,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Return a human readable status for the newsletter
+     *
      * @return string
      */
     public function getStatus()

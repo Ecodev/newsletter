@@ -73,7 +73,9 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
 
     /**
      * Render a FlashMessage across all TYPO3 version supported
+     *
      * @param FlashMessage $flashMessage
+     *
      * @return string HTML
      */
     private function renderFlashMessage(FlashMessage $flashMessage)

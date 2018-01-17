@@ -1,7 +1,7 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
-    Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel");
+    Ext.ns('Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel');
 
     /**
      * @class Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.EmailTab
@@ -11,7 +11,7 @@
      * Class for statistic container
      */
     Ext.ux.Ecodev.Newsletter.Statistics.StatisticsPanel.EmailTab = Ext.extend(Ext.grid.GridPanel, {
-        initComponent: function() {
+        initComponent: function () {
 
             var config = {
                 loadMask: true,
@@ -25,12 +25,12 @@
                     displayInfo: true,
                     listeners: {
                         // Before we change page, we inject the currently selected newsletter as params for Ajax request
-                        beforechange: function(pagingToolbar, params) {
+                        beforechange: function (pagingToolbar, params) {
                             var selectedNewsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\SelectedNewsletter');
                             var newsletter = selectedNewsletterStore.getAt(0);
                             params.data = newsletter.data.__identity;
-                        }
-                    }
+                        },
+                    },
                 }),
                 // column model
                 columns: [
@@ -38,7 +38,7 @@
                         dataIndex: '__identity',
                         header: Ext.ux.Ecodev.Newsletter.Language.link_id,
                         sortable: true,
-                        width: 40
+                        width: 40,
                     },
                     {
                         id: 'recipientAddress',
@@ -46,7 +46,7 @@
                         header: Ext.ux.Ecodev.Newsletter.Language.recipients,
                         width: 300,
                         sortable: true,
-                        renderer: this._renderEmail
+                        renderer: this._renderEmail,
                     },
                     {
                         dataIndex: 'endTime',
@@ -54,7 +54,7 @@
                         xtype: 'datecolumn',
                         format: 'Y-m-d H:i:s',
                         width: 150,
-                        sortable: true
+                        sortable: true,
                     },
                     {
                         dataIndex: 'openTime',
@@ -62,7 +62,7 @@
                         xtype: 'datecolumn',
                         format: 'Y-m-d H:i:s',
                         width: 150,
-                        sortable: true
+                        sortable: true,
                     },
                     {
                         dataIndex: 'bounceTime',
@@ -70,25 +70,25 @@
                         xtype: 'datecolumn',
                         format: 'Y-m-d H:i:s',
                         width: 150,
-                        sortable: true
+                        sortable: true,
                     },
                     {
                         dataIndex: 'unsubscribed',
                         header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_email_unsubscribed,
                         width: 100,
                         sortable: true,
-                        renderer: function(value) {
+                        renderer: function (value) {
                             return value ? '✔' : '';
-                        }
+                        },
                     },
                     {
                         dataIndex: 'authCode',
                         header: Ext.ux.Ecodev.Newsletter.Language.view,
                         width: 70,
                         sortable: true,
-                        renderer: this._renderPreview
-                    }
-                ]
+                        renderer: this._renderPreview,
+                    },
+                ],
             };
 
             Ext.apply(this, config);
@@ -102,13 +102,13 @@
          * @param {string} value
          * @return string
          */
-        _renderEmail: function(value) {
+        _renderEmail: function (value) {
             return String.format('<a href="mailto:{0}">{0}</a>', value);
         },
-        _renderPreview: function(value) {
+        _renderPreview: function (value) {
 
             return String.format('<a href="{0}&injectOpenSpy=0&injectLinksSpy=0&c={1}">{2}</a>', Ext.ux.Ecodev.Newsletter.Configuration.emailShowUrl, value, Ext.ux.Ecodev.Newsletter.Language.view);
-        }
+        },
 
     });
 

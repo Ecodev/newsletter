@@ -15,8 +15,10 @@ class MarkerSubstitutor
 
     /**
      * Substitute multiple markers to an URL
+     *
      * @param string $url
      * @param Email $email
+     *
      * @return string url with marker replaced
      */
     public function substituteMarkersInUrl($url, Email $email)
@@ -32,9 +34,11 @@ class MarkerSubstitutor
 
     /**
      * Apply multiple markers to mail contents
+     *
      * @param string $src
      * @param Email $email
      * @param string $name optional name to be forwarded to hook
+     *
      * @return string url with marker replaced
      */
     public function substituteMarkers($src, Email $email, $name = '')
@@ -67,6 +71,7 @@ class MarkerSubstitutor
 
     /**
      * Find any markers that exists in the source
+     *
      * @param string $src
      */
     private function findExistingMarkers($src)
@@ -86,7 +91,9 @@ class MarkerSubstitutor
 
     /**
      * Return all markers and their values as associative array
+     *
      * @param Email $email
+     *
      * @return string[]
      */
     private function getMarkers(Email $email)
@@ -103,9 +110,11 @@ class MarkerSubstitutor
     /**
      * Replace a named marker with a supplied value
      * A simple marker can have the form of: ###marker###, http://marker, or https://marker
+     *
      * @param string $src Source to apply marker substitution to
      * @param string $name Name of the marker to replace
      * @param string $value Value to replace marker with
+     *
      * @return string Source with applied marker
      */
     private function substituteSimpleMarker($src, $name, $value)
@@ -134,9 +143,11 @@ class MarkerSubstitutor
     /**
      * Substitute an advanced marker
      * An advanced conditional marker ###:IF: marker ### ..content.. (###:ELSE:###)? ..content.. ###:ENDIF:###
+     *
      * @param string $src Source to apply marker substitution to
      * @param string $name Name of the marker to replace
      * @param string $value Value to replace marker with
+     *
      * @return string Source with applied marker
      */
     private function substituteAdvancedMarker($src, $name, $value)

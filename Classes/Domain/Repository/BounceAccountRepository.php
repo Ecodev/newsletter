@@ -29,6 +29,7 @@ class BounceAccountRepository extends AbstractRepository
 
     /**
      * Returns the first BounceAccount or null if none at all
+     *
      * @return type
      */
     public function findFirst()
@@ -36,8 +37,8 @@ class BounceAccountRepository extends AbstractRepository
         $query = $this->createQuery();
 
         $bounceAccount = $query->setLimit(1)
-                ->execute()
-                ->getFirst();
+            ->execute()
+            ->getFirst();
 
         return $bounceAccount;
     }

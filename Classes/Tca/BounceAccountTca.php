@@ -11,6 +11,7 @@ class BounceAccountTca
 {
     /**
      * Decrypt values from DB (on TYPO3 6.2)
+     *
      * @param mixed $table
      * @param mixed $field
      * @param mixed $altName
@@ -28,9 +29,11 @@ class BounceAccountTca
 
     /**
      * Encrypts the field value
+     *
      * @param string $value the field value to be evaluated
      * @param string $isIn The "isIn" value of the field configuration from TCA
      * @param bool $set defining if the value is written to the database or not
+     *
      * @return string
      */
     public function evaluateFieldValue($value, $isIn, &$set)
@@ -40,8 +43,10 @@ class BounceAccountTca
 
     /**
      * Returns the decrypted field value if set.
+     *
      * @param mixed $field
      * @param mixed $value
+     *
      * @return string
      */
     public static function getDecryptedFieldValue($field, $value)

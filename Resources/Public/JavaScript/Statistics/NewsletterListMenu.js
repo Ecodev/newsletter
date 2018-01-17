@@ -1,7 +1,7 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
-    Ext.ns("Ext.ux.Ecodev.Newsletter.Statistics");
+    Ext.ns('Ext.ux.Ecodev.Newsletter.Statistics');
 
     /**
      * @class Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu
@@ -11,7 +11,7 @@
      * Class for newsletter drop down menu
      */
     Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu = Ext.extend(Ext.grid.GridPanel, {
-        initComponent: function() {
+        initComponent: function () {
             var thisNewsletterListMenu = this;
             var newsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Newsletter');
 
@@ -26,16 +26,16 @@
                 selModel: new Ext.grid.RowSelectionModel({
                     singleSelect: true,
                     listeners: {
-                        rowselect: function(selectionModel, rowIndex, newsletter) {
+                        rowselect: function (selectionModel, rowIndex, newsletter) {
                             thisNewsletterListMenu.onNewsletterSelected(newsletter);
-                        }
-                    }
+                        },
+                    },
                 }),
                 listeners: {
                     // Select the first item after the everything is loaded
-                    viewready: function(grid) {
+                    viewready: function (grid) {
                         grid.getSelectionModel().selectFirstRow();
-                    }
+                    },
                 },
                 columns: [
                     {
@@ -43,38 +43,38 @@
                         header: Ext.ux.Ecodev.Newsletter.Language.newsletter,
                         dataIndex: 'title',
                         width: 300,
-                        sortable: true
+                        sortable: true,
                     },
                     {
                         header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_planned_time,
                         dataIndex: 'plannedTime',
                         width: 150,
                         sortable: true,
-                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
                     },
                     {
                         header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_begin_time,
                         dataIndex: 'beginTime',
                         width: 150,
                         sortable: true,
-                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                        renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
                     },
                     {
                         header: Ext.ux.Ecodev.Newsletter.Language.recipients,
                         dataIndex: 'emailCount',
                         width: 100,
-                        sortable: true
+                        sortable: true,
                     },
                     {
                         header: Ext.ux.Ecodev.Newsletter.Language.tx_newsletter_domain_model_newsletter_is_test,
                         dataIndex: 'isTest',
                         width: 70,
                         sortable: true,
-                        renderer: function(value) {
+                        renderer: function (value) {
                             return value ? '✔' : '';
-                        }
-                    }
-                ]
+                        },
+                    },
+                ],
 
             };
 
@@ -89,7 +89,7 @@
          * TODO: it should be the depending stores listening to the newsletterList, but I couldn't
          * find an easy way to access the newsletterList from the stores
          */
-        onNewsletterSelected: function(newsletter) {
+        onNewsletterSelected: function (newsletter) {
 
             var selectedNewsletterStore = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\SelectedNewsletter');
             selectedNewsletterStore.load({params: {data: newsletter.data.__identity}});
@@ -99,7 +99,7 @@
 
             var linkEmail = Ext.StoreMgr.get('Ecodev\\Newsletter\\Domain\\Model\\Email');
             linkEmail.load({params: {data: newsletter.data.__identity, start: 0, limit: 50}});
-        }
+        },
     });
 
     Ext.reg('Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu', Ext.ux.Ecodev.Newsletter.Statistics.NewsletterListMenu);

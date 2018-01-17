@@ -41,6 +41,7 @@ class LocalizationViewHelper extends AbstractViewHelper
      * Returns localization variables within an array
      *
      * @param string $filePath
+     *
      * @throws Exception
      * @return array
      */

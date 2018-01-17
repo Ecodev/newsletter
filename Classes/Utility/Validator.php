@@ -44,6 +44,7 @@ class Validator
 
     /**
      * Initialize and return language service
+     *
      * @global LanguageService $LANG
      * @return LanguageService
      */
@@ -66,7 +67,9 @@ class Validator
 
     /**
      * Return the content of the given URL
+     *
      * @param string $url
+     *
      * @return string
      */
     protected function getURL($url)
@@ -77,8 +80,10 @@ class Validator
     /**
      * Returns the content of the newsletter with validation messages. The content
      * is also "fixed" automatically when possible.
+     *
      * @param Newsletter $newsletter
      * @param string $language language of the content of the newsletter (the 'L' parameter in TYPO3 URL)
+     *
      * @return array
      */
     public function validate(Newsletter $newsletter, $language = null)
@@ -190,8 +195,7 @@ class Validator
         // Find out the absolute domain. If specified in HTML source, use it as is.
         if (preg_match('|<base[^>]*href="([^"]*)"[^>]*/>|i', $this->content, $match)) {
             $absoluteDomain = $match[1];
-        }
-        // Otherwise try our best to guess what it is
+        } // Otherwise try our best to guess what it is
         else {
             $absoluteDomain = $this->newsletter->getBaseUrl() . '/';
         }
@@ -329,6 +333,7 @@ class Validator
 
     /**
      * Return the structured result
+     *
      * @return array ['content' => $content, 'errors' => $errors, 'warnings' => $warnings, 'infos' => $infos]
      */
     private function getResult()

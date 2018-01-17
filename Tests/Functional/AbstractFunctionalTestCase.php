@@ -14,6 +14,7 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
 
     /**
      * Auth code for recipient 2
+     *
      * @var string
      */
     protected $authCode;
@@ -30,6 +31,7 @@ abstract class AbstractFunctionalTestCase extends \TYPO3\CMS\Core\Tests\Function
     /**
      * Assert that there is exactly 1 record in sys_log table containing
      * the exact text given in $details
+     *
      * @param string $details
      */
     protected function assertRecipientListCallbackWasCalled($details)

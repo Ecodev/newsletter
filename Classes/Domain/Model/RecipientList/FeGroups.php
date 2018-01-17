@@ -38,6 +38,7 @@ class FeGroups extends GentleSql
 
     /**
      * Returns the tablename to work with
+     *
      * @return string
      */
     protected function getTableName()
@@ -52,7 +53,7 @@ class FeGroups extends GentleSql
         $groups = array_filter($groups);
 
         $this->data = Tools::getDatabaseConnection()->sql_query(
-                'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,fe_groups.title as group_title
+            'SELECT DISTINCT email,name,address,telephone,fax,username,fe_users.title,zip,city,country,www,company,fe_groups.title AS group_title
 				FROM fe_groups, fe_users
 				WHERE fe_groups.uid IN (' . implode(',', $groups) . ")
 				AND FIND_IN_SET(fe_groups.uid, fe_users.usergroup)

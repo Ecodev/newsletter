@@ -1,5 +1,5 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     Ext.ns('Ext.ux.Ecodev.Newsletter');
     /**
@@ -8,7 +8,7 @@
      * @class Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer
      * @singleton
      */
-    Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer = (function() {
+    Ext.ux.Ecodev.Newsletter.FlashMessageOverlayContainer = (function () {
         /**
          * Container in the DOM to show Messages.
          */
@@ -22,13 +22,13 @@
                     {name: 'message', type: 'string'},
                     {name: 'tstamp', type: 'date', dateFormat: 'timestamp'},
                     {name: 'severity'},
-                    {name: 'title', type: 'string'}
-                ]
+                    {name: 'title', type: 'string'},
+                ],
             }),
             sortInfo: {
                 field: 'tstamp',
                 direction: 'DESC' // or 'DESC' (case sensitive for local sorting)
-            }
+            },
         });
         var TYPE_OK = 0;
         var TYPE_WARN = 1;
@@ -41,13 +41,13 @@
             maxDelay: 9,
             width: 400,
             opacity: 0.9,
-            logLevel: 0
+            logLevel: 0,
         };
 
         /***
          * buildMessageBox
          */
-        var buildMessageBox = function(type, title, msg) {
+        var buildMessageBox = function (type, title, msg) {
             var typeIcon = null;
             switch (type) {
                 case TYPE_OK:
@@ -63,7 +63,7 @@
                     typeIcon = 'message-notice';
                     break;
                 case TYPE_NOTICE:
-                    /* falls through */
+                /* falls through */
                 default:
                     typeIcon = 'message-information';
                     break;
@@ -77,7 +77,7 @@
                 msg,
                 '</p>',
                 '</div>',
-                '</div>'
+                '</div>',
             ].join('');
         };
 
@@ -85,7 +85,7 @@
          * creates a msgbox for a incoming message and shows it for while
          * based on the text length.
          */
-        var showMessageBox = function(type, title, msg) {
+        var showMessageBox = function (type, title, msg) {
             if (type < config.logLevel) {
                 return;
             }
@@ -107,7 +107,7 @@
          *
          * @param {String} message
          */
-        var addMessage = function(message) {
+        var addMessage = function (message) {
             delete message.sessionMessage;
             var type = message.severity;
             var msg = message.message;
@@ -120,8 +120,8 @@
         /**
          * React on incoming Messages.
          */
-        var handleMessages = function(flashMessages) {
-            Ext.each(flashMessages, function(message) {
+        var handleMessages = function (flashMessages) {
+            Ext.each(flashMessages, function (message) {
                 addMessage(message);
             });
         };
@@ -130,7 +130,7 @@
          * Create needed stuff in DOM and register at the FlashMessageDispatcher
          * to receive incoming Messages.
          */
-        var initialize = function(incomingConfig) {
+        var initialize = function (incomingConfig) {
             if (incomingConfig) {
                 config = Ext.applyIf(incomingConfig, config);
             }
@@ -143,7 +143,7 @@
             Ext.ux.Ecodev.Newsletter.DirectFlashMessageDispatcher.on('new', handleMessages);
         };
 
-        var getMessageGrid = function() {
+        var getMessageGrid = function () {
             var grid = new Ext.grid.GridPanel({
                 store: messageStore,
                 title: 'Nachrichten-Chronik',
@@ -152,15 +152,15 @@
                     columns: [
                         {header: 'Nachricht', sortable: true, dataIndex: 'message'},
                         {header: 'Typ', sortable: true, dataIndex: 'type'},
-                        {header: 'Zeitpunkt', xtype: 'datecolumn', format: 'H:i:s', sortable: true, dataIndex: 'tstamp'}
+                        {header: 'Zeitpunkt', xtype: 'datecolumn', format: 'H:i:s', sortable: true, dataIndex: 'tstamp'},
                     ],
                     defaults: {
-                        sortable: true
-                    }
+                        sortable: true,
+                    },
                 }),
                 viewConfig: {
-                    forceFit: true
-                }
+                    forceFit: true,
+                },
             });
             return grid;
         };
@@ -171,7 +171,7 @@
         return Ext.apply(new Ext.util.Observable(), {
             initialize: initialize,
             addMessage: addMessage,
-            getMessageGrid: getMessageGrid
+            getMessageGrid: getMessageGrid,
         });
     }());
 }());

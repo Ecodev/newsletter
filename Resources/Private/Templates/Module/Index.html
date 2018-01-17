@@ -6,26 +6,26 @@ Specifiy which js librarys should be loaded
 <newsletter:Be.moduleContainer pageTitle="Newsletter">
 
     <!-- load needed CSS Files -->
-    <newsletter:includeCssFile name="module.css" />
-    <newsletter:includeCssFile name="flashmessages.css" />
-    <newsletter:includeCssFile name="nv.d3.css" />
+    <newsletter:includeCssFile name="module.css"/>
+    <newsletter:includeCssFile name="flashmessages.css"/>
+    <newsletter:includeCssFile name="nv.d3.css"/>
 
     <!-- load needed JS Files -->
-    <newsletter:includeJsFile name="DirectFlashMessageDispatcher.js" />
+    <newsletter:includeJsFile name="DirectFlashMessageDispatcher.js"/>
 
     <!-- load all our JS Files -->
-    <newsletter:includeJsFile name="NVD3/d3.v3.js" />
-    <newsletter:includeJsFile name="NVD3/nv.d3.js" />
-    <newsletter:includeJsFolder name="Module/" recursive="true" />
-    <newsletter:includeJsFolder name="Store/" recursive="true" />
-    <newsletter:includeJsFolder name="Override/" recursive="true" />
-    <newsletter:includeJsFolder name="Planner/" recursive="true" />
-    <newsletter:includeJsFolder name="Statistics/" recursive="true" />
+    <newsletter:includeJsFile name="NVD3/d3.v3.js"/>
+    <newsletter:includeJsFile name="NVD3/nv.d3.js"/>
+    <newsletter:includeJsFolder name="Module/" recursive="true"/>
+    <newsletter:includeJsFolder name="Store/" recursive="true"/>
+    <newsletter:includeJsFolder name="Override/" recursive="true"/>
+    <newsletter:includeJsFolder name="Planner/" recursive="true"/>
+    <newsletter:includeJsFolder name="Statistics/" recursive="true"/>
 
-    <newsletter:ExtDirectProvider name="descriptor" />
+    <newsletter:ExtDirectProvider name="descriptor"/>
 
     <!-- create inline JS based on the Domain Model Definitions -->
-    <newsletter:includeExtOnReadyFromFile name="ExtOnReady.js" />
+    <newsletter:includeExtOnReadyFromFile name="ExtOnReady.js"/>
     <newsletter:localization name="locallang.xlf,locallang_db.xlf"/>
     <newsletter:configuration configuration="{configuration}"/>
 
@@ -33,7 +33,7 @@ Specifiy which js librarys should be loaded
     <newsletter:includeModuleBody>
         <!-- Fields required for history management -->
         <form id="history-form" class="x-hidden">
-            <input type="hidden" id="x-history-field" />
+            <input type="hidden" id="x-history-field"/>
             <iframe id="x-history-frame"></iframe>
         </form>
     </newsletter:includeModuleBody>

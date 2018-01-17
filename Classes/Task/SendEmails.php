@@ -16,7 +16,7 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     /**
      * Sends emails for queued newsletter
      *
-     * @return bool	Returns true on successful execution, false on error
+     * @return bool Returns true on successful execution, false on error
      */
     public function execute()
     {
@@ -32,7 +32,7 @@ class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return	string	Information to display
+     * @return string Information to display
      */
     public function getAdditionalInformation()
     {

@@ -1,5 +1,5 @@
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     Ext.ns('Ext.ux.Ecodev.Newsletter.Store');
 
@@ -7,11 +7,11 @@
      * A Store for the movie model using ExtDirect to communicate with the
      * server side extbase framework.
      */
-    Ext.ux.Ecodev.Newsletter.Store.Newsletter = (function() {
+    Ext.ux.Ecodev.Newsletter.Store.Newsletter = (function () {
 
         var newsletterStore = null;
 
-        var initialize = function() {
+        var initialize = function () {
             if (newsletterStore === null) {
                 newsletterStore = new Ext.data.DirectStore({
                     storeId: 'Ecodev\\Newsletter\\Domain\\Model\\Newsletter',
@@ -39,29 +39,29 @@
                             {name: 'uidBounceAccount', type: 'int'},
                             {name: 'uidRecipientList', type: 'int'},
                             {name: 'emailCount', type: 'int'},
-                            {name: 'statistics'}
-                        ]
+                            {name: 'statistics'},
+                        ],
                     }),
                     writer: new Ext.data.JsonWriter({
                         encode: false,
-                        writeAllFields: false
+                        writeAllFields: false,
                     }),
                     api: {
                         read: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.listAction,
                         update: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.updateAction,
                         destroy: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.deleteAction,
-                        create: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.createAction
+                        create: Ext.ux.Ecodev.Newsletter.Remote.NewsletterController.createAction,
                     },
                     paramOrder: {
                         read: [],
                         update: ['data'],
                         create: ['data'],
-                        destroy: ['data']
+                        destroy: ['data'],
                     },
                     autoLoad: true,
                     restful: false,
                     batch: false,
-                    remoteSort: false
+                    remoteSort: false,
                 });
             }
         };
@@ -70,7 +70,7 @@
          * Public API of this singleton.
          */
         return {
-            initialize: initialize
+            initialize: initialize,
         };
     }());
 }());

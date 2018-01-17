@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeDirectApi />
+ *    <newsletter:includeDirectApi />
  * </newsletter:be.moduleContainer>
  */
 class ExtDirectProviderViewHelper extends AbstractViewHelper

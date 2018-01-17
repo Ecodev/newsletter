@@ -28,6 +28,7 @@ class EmailParserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @dataProvider dataProviderTestParser
+     *
      * @param int $expectedBounce
      * @param string $expectedAuthCode
      * @param string $message

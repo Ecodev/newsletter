@@ -10,6 +10,7 @@ class Uri
     /**
      * Returns the list of all official IANA registered schemes
      * http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml
+     *
      * @return array
      */
     public static function getSchemes()
@@ -213,6 +214,7 @@ class Uri
 
     /**
      * Return the regex pattern to detect absolute URI, including special URI fragment
+     *
      * @return string
      */
     private static function getPattern()

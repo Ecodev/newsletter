@@ -83,6 +83,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
     /**
      * @dataProvider dataProviderTestMailer
+     *
      * @param int $pid
      * @param bool $injectOpenSpy
      * @param bool $injectLinksSpy
@@ -95,12 +96,12 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
         $expectedEmail = file_get_contents($expectedEmailFile);
 
         $this->mockNewsletter->method('getValidatedContent')->will($this->returnValue(
-                [
-                    'content' => $input,
-                    'errors' => [],
-                    'warnings' => [],
-                    'infos' => [],
-                ]
+            [
+                'content' => $input,
+                'errors' => [],
+                'warnings' => [],
+                'infos' => [],
+            ]
         ));
         $this->mockNewsletter->method('getInjectOpenSpy')->will($this->returnValue($injectOpenSpy));
         $this->mockNewsletter->method('getInjectLinksSpy')->will($this->returnValue($injectLinksSpy));
@@ -128,6 +129,7 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
     /**
      * Assert that there is exactly 1 record corresponding to the given URL
+     *
      * @param string $url
      */
     private function assertLinkWasCreated($url)
@@ -139,7 +141,9 @@ class MailerTest extends \Ecodev\Newsletter\Tests\Functional\AbstractFunctionalT
 
     /**
      * Replace random parts of email with non-random string
+     *
      * @param string $email
+     *
      * @return string
      */
     private function unrandomizeEmail($email)

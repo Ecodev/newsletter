@@ -40,10 +40,10 @@ abstract class AbstractRecipientList extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getPlainOnlyReturnsInitialValueForBoolean()
     {
         $this->assertSame(
-                false, $this->subject->getPlainOnly()
+            false, $this->subject->getPlainOnly()
         );
         $this->assertSame(
-                false, $this->subject->isPlainOnly()
+            false, $this->subject->isPlainOnly()
         );
     }
 
@@ -55,7 +55,7 @@ abstract class AbstractRecipientList extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setPlainOnly(true);
 
         $this->assertAttributeSame(
-                true, 'plainOnly', $this->subject
+            true, 'plainOnly', $this->subject
         );
     }
 

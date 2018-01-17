@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * = Examples =
  *
  * <newsletter:be.moduleContainer pageTitle="foo">
- * 	<newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
+ *    <newsletter:includeJsFile file="foo.js" extKey="blog_example" pathInsideExt="Resources/Public/JavaScript" />
  * </newsletter:be.moduleContainer>
  */
 class IncludeJsFileViewHelper extends AbstractViewHelper
@@ -23,6 +23,7 @@ class IncludeJsFileViewHelper extends AbstractViewHelper
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
      * @param string $pathInsideExt the path to the file relative to the ext-folder
+     *
      * @return string the link
      */
     public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/')
