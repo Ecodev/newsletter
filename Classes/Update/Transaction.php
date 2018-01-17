@@ -16,7 +16,8 @@ class Transaction
      *
      * @param string[] $queries
      *            An array of SQL queries
-     * @return \Ecodev\Newsletter\Update\TransactionResult
+     *
+     * @return TransactionResult
      */
     public static function transactInnoDBQueries(array $queries)
     {
@@ -46,7 +47,8 @@ class Transaction
      *
      * @param string[] $queries
      *            An array of SQL queries
-     * @return \Ecodev\Newsletter\Update\TransactionResult
+     *
+     * @return TransactionResult
      */
     private static function transactDBQueries(array $queries)
     {

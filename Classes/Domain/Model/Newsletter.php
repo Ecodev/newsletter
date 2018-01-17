@@ -285,7 +285,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns an instance of plain converter
      * @throws \Exception
-     * @return \Ecodev\Newsletter\Domain\Model\IPlainConverter
+     * @return IPlainConverter
      */
     public function getPlainConverterInstance()
     {
@@ -626,7 +626,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for bounceAccount
      *
-     * @return \Ecodev\Newsletter\Domain\Model\BounceAccount bounceAccount
+     * @return BounceAccount bounceAccount
      */
     public function getBounceAccount()
     {
@@ -646,7 +646,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for recipientList
      *
-     * @return \Ecodev\Newsletter\Domain\Model\RecipientList recipientList
+     * @return RecipientList recipientList
      */
     public function getRecipientList()
     {

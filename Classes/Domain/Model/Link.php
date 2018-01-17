@@ -81,7 +81,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for newsletter
      *
-     * @return \Ecodev\Newsletter\Domain\Model\Newsletter newsletter
+     * @return Newsletter newsletter
      */
     public function getNewsletter()
     {

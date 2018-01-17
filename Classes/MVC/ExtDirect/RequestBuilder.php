@@ -2,7 +2,7 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use Ecodev\Newsletter\Exception as EcodevNewsletterException;
+use Ecodev\Newsletter\Exception;
 use TYPO3;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -47,13 +47,13 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
     /**
      * Builds an Ext Direct request
      *
-     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The built request
+     * @return Request The built request
      */
     public function build()
     {
         $postArguments = $_POST;
         if (isset($postArguments['extAction'])) {
-            throw new EcodevNewsletterException('Form Post Request building is not yet implemented.', 1281379502);
+            throw new Exception('Form Post Request building is not yet implemented.', 1281379502);
         }
         $request = $this->buildJsonRequest();
 
@@ -64,15 +64,14 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
      * Builds a Json Ext Direct request by reading the transaction data from
      * standard input.
      *
-     * @throws \Exception
-     * @return Ecodev\Newsletter\MVC\ExtDirect\Request The Ext Direct request object
+     * @return Request The Ext Direct request object
      */
     protected function buildJsonRequest()
     {
         $transactionDatas = file_get_contents('php://input');
 
         if (($transactionDatas = json_decode($transactionDatas)) === null) {
-            throw new \Exception('The request is not a valid Ext Direct request', 1268490738);
+            throw new Exception('The request is not a valid Ext Direct request', 1268490738);
         }
 
         if (!is_array($transactionDatas)) {

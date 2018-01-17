@@ -259,7 +259,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     /**
      * Getter for newsletter
      *
-     * @return \Ecodev\Newsletter\Domain\Model\Newsletter newsletter
+     * @return Newsletter newsletter
      */
     public function getNewsletter()
     {

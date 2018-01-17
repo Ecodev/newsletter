@@ -45,7 +45,8 @@ class NewsletterRepository extends AbstractRepository
 
     /**
      * Returns all newsletter which are ready to be sent now and not yet locked (sending already started)
-     * @return \Ecodev\Newsletter\Domain\Model\Newsletter[]
+     *
+     * @return Newsletter[]
      */
     public function findAllReadyToSend()
     {
@@ -61,7 +62,8 @@ class NewsletterRepository extends AbstractRepository
 
     /**
      * Returns all newsletter which are currently being sent
-     * @return \Ecodev\Newsletter\Domain\Model\Newsletter[]
+     *
+     * @return Newsletter[]
      */
     public function findAllBeingSent()
     {

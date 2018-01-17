@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Domain\Model\Link;
 use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\MarkerSubstitutor;
 
@@ -15,7 +16,7 @@ class LinkRepository extends AbstractRepository
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
-     * @return \Ecodev\Newsletter\Domain\Model\Link[]
+     * @return Link[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
     {

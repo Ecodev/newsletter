@@ -64,9 +64,9 @@ abstract class Tools
      * Create a configured mailer from a newsletter page record.
      * This mailer will have both plain and HTML content applied as well as files attached.
      *
-     * @param Newsletter The newsletter
+     * @param Newsletter $newsletter The newsletter
      * @param int $language
-     * @return \Ecodev\Newsletter\Mailer preconfigured mailer for sending
+     * @return Mailer preconfigured mailer for sending
      */
     public static function getConfiguredMailer(Newsletter $newsletter, $language = null)
     {

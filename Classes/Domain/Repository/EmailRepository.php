@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Tools;
 
 /**
@@ -14,7 +15,7 @@ class EmailRepository extends AbstractRepository
     /**
      * Returns the email corresponsding to the authCode
      * @param string $authcode
-     * @return \Ecodev\Newsletter\Domain\Model\Email
+     * @return Email
      */
     public function findByAuthcode($authcode)
     {
@@ -50,7 +51,7 @@ class EmailRepository extends AbstractRepository
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
-     * @return \Ecodev\Newsletter\Domain\Model\Email[]
+     * @return Email[]
      */
     public function findAllByNewsletter($uidNewsletter, $start, $limit)
     {

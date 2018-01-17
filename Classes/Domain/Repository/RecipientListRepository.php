@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Domain\Model\RecipientList;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -30,7 +31,7 @@ class RecipientListRepository extends AbstractRepository
     /**
      * Returns a RecipientList already initialized, even if it is hidden
      * @param int $uidRecipientlist
-     * @return \Ecodev\Newsletter\Domain\Model\RecipientList
+     * @return RecipientList
      */
     public function findByUidInitialized($uidRecipientlist)
     {
