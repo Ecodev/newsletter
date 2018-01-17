@@ -71,7 +71,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for newsletter
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
+     * @param Newsletter $newsletter newsletter
      */
     public function setNewsletter(Newsletter $newsletter)
     {

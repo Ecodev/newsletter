@@ -15,13 +15,13 @@ class LinkController extends ExtDirectActionController
     /**
      * linkRepository
      *
-     * @var Ecodev\Newsletter\Domain\Repository\LinkRepository
+     * @var LinkRepository
      */
     protected $linkRepository;
 
     /**
      * injectLinkRepository
-     * @param Ecodev\Newsletter\Domain\Repository\LinkRepository $linkRepository
+     * @param LinkRepository $linkRepository
      */
     public function injectLinkRepository(LinkRepository $linkRepository)
     {

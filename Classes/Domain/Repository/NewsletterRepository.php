@@ -74,7 +74,7 @@ class NewsletterRepository extends AbstractRepository
     /**
      * Returns newsletter statistics to be used for pie and timeline chart
      * We will get the full state for each time when something happened
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter
+     * @param Newsletter $newsletter
      * @return array eg: array(array(time, emailNotSentCount, emailSentCount, emailOpenedCount, emailBouncedCount, emailCount, linkOpenedCount, linkCount, [and same fields but Percentage instead of Count] ))
      */
     public function getStatistics(Newsletter $newsletter)

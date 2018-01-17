@@ -3,6 +3,8 @@
 namespace Ecodev\Newsletter;
 
 use DateTime;
+use Ecodev\Newsletter\Domain\Model\Email;
+use Ecodev\Newsletter\Domain\Model\RecipientList;
 use Ecodev\Newsletter\Domain\Repository\BounceAccountRepository;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\Domain\Repository\RecipientListRepository;
@@ -29,13 +31,13 @@ class BounceHandler
 
     /**
      * The email concerned by the bounce if any
-     * @var \Ecodev\Newsletter\Domain\Model\Email
+     * @var Email
      */
     private $email = null;
 
     /**
      * The recipient list concerned by the bounce if any
-     * @var \Ecodev\Newsletter\Domain\Model\RecipientList
+     * @var RecipientList
      */
     private $recipientList = null;
 

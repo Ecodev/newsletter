@@ -24,7 +24,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     protected $dispatcher;
 
     /**
-     * @var Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder
+     * @var \Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder
      */
     protected $requestBuilder;
 
@@ -39,7 +39,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      *
      * @param ObjectManagerInterface $objectManager A reference to the object factory
      * @param Dispatcher $dispatcher The request dispatcher
-     * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
+     * @param RequestBuilder $requestBuilder
      */
     public function __construct(
         ObjectManagerInterface $objectManager, Dispatcher $dispatcher, RequestBuilder $requestBuilder)
@@ -66,7 +66,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
     }
 
     /**
-     * @param Ecodev\Newsletter\MVC\ExtDirect\RequestBuilder $requestBuilder
+     * @param RequestBuilder $requestBuilder
      */
     public function injectRequestBuilder(RequestBuilder $requestBuilder)
     {
@@ -134,7 +134,7 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      * Sends the response
      *
      * @param array $results The collected results from the transaction requests
-     * @param Ecodev\Newsletter\MVC\ExtDirect\Request $extDirectRequest
+     * @param Request $extDirectRequest
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {

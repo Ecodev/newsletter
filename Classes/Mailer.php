@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Mailer
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
+     * @var Newsletter
      */
     private $newsletter;
     private $html;
@@ -294,7 +294,7 @@ class Mailer
     /**
      * Replace all links in the mail to make spy links.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email to prepare the newsletter for
+     * @param Email $email The email to prepare the newsletter for
      * @param bool $isPreview whether we are preparing a preview version (if true links will not be stored in database thus no statistics will be available)
      */
     private function injectLinksSpy(Email $email, $isPreview)
@@ -319,7 +319,7 @@ class Mailer
 
     /**
      * Prepare the newsletter content for the specified email (substitute markers and insert spies)
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email
+     * @param Email $email
      * @param bool $isPreview whether we are preparing a preview version of the newsletter
      */
     public function prepare(Email $email, $isPreview = false)
@@ -343,7 +343,7 @@ class Mailer
     /**
      * The regular send method. Use this to send a normal, personalized mail.
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Email $email The email object containing recipient email address and extra data for markers
+     * @param Email $email The email object containing recipient email address and extra data for markers
      */
     public function send(Email $email)
     {

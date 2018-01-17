@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter\Controller;
 
 use Ecodev\Newsletter\Domain\Model\Email;
 use Ecodev\Newsletter\Domain\Model\Newsletter;
+use Ecodev\Newsletter\Domain\Model\RecipientList;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\MVC\Controller\ExtDirectActionController;
 use Ecodev\Newsletter\Tools;
@@ -23,14 +24,14 @@ class EmailController extends ExtDirectActionController
     /**
      * emailRepository
      *
-     * @var \Ecodev\Newsletter\Domain\Repository\EmailRepository
+     * @var EmailRepository
      */
     protected $emailRepository;
 
     /**
      * injectEmailRepository
      *
-     * @param \Ecodev\Newsletter\Domain\Repository\EmailRepository $emailRepository
+     * @param EmailRepository $emailRepository
      */
     public function injectEmailRepository(EmailRepository $emailRepository)
     {
@@ -250,7 +251,7 @@ class EmailController extends ExtDirectActionController
      * Sends an email to the address configured in extension settings when a recipient unsubscribe
      *
      * @param Newsletter $newsletter
-     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList
+     * @param RecipientList $recipientList
      * @param Email $email
      */
     protected function notifyUnsubscribe($newsletter, $recipientList, Email $email)

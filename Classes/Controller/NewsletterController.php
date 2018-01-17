@@ -20,21 +20,21 @@ class NewsletterController extends ExtDirectActionController
     /**
      * newsletterRepository
      *
-     * @var Ecodev\Newsletter\Domain\Repository\NewsletterRepository
+     * @var NewsletterRepository
      */
     protected $newsletterRepository;
 
     /**
      * bounceAccountRepository
      *
-     * @var Ecodev\Newsletter\Domain\Repository\BounceAccountRepository
+     * @var BounceAccountRepository
      */
     protected $bounceAccountRepository;
 
     /**
      * injectNewsletterRepository
      *
-     * @param Ecodev\Newsletter\Domain\Repository\NewsletterRepository $newsletterRepository
+     * @param NewsletterRepository $newsletterRepository
      */
     public function injectNewsletterRepository(NewsletterRepository $newsletterRepository)
     {
@@ -44,9 +44,9 @@ class NewsletterController extends ExtDirectActionController
     /**
      * injectBounceAccounRepository
      *
-     * @param Ecodev\Newsletter\Domain\Repository\BounceAccountRepository $bounceAccountRepository
+     * @param BounceAccountRepository $bounceAccountRepository
      */
-    public function injectBounceAccounRepository(BounceAccountRepository $bounceAccountRepository)
+    public function injectBounceAccountRepository(BounceAccountRepository $bounceAccountRepository)
     {
         $this->bounceAccountRepository = $bounceAccountRepository;
     }

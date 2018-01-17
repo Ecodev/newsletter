@@ -118,7 +118,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * bounceAccount
      * @lazy
-     * @var \Ecodev\Newsletter\Domain\Model\BounceAccount
+     * @var BounceAccount
      */
     protected $bounceAccount;
 
@@ -131,7 +131,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * recipientList
      * @lazy
-     * @var \Ecodev\Newsletter\Domain\Model\RecipientList
+     * @var RecipientList
      */
     protected $recipientList;
 
@@ -591,7 +591,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for bounceAccount
      *
-     * @param \Ecodev\Newsletter\Domain\Model\BounceAccount $bounceAccount bounceAccount
+     * @param BounceAccount $bounceAccount bounceAccount
      */
     public function setBounceAccount(BounceAccount $bounceAccount = null)
     {
@@ -636,7 +636,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for recipientList
      *
-     * @param \Ecodev\Newsletter\Domain\Model\RecipientList $recipientList recipientList
+     * @param RecipientList $recipientList recipientList
      */
     public function setRecipientList(RecipientList $recipientList)
     {

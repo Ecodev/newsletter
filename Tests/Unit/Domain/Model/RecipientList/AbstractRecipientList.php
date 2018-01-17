@@ -8,7 +8,7 @@ namespace Ecodev\Newsletter\Tests\Unit\Domain\Model\RecipientList;
 abstract class AbstractRecipientList extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \Ecodev\Newsletter\Domain\Model\RecipientList
+     * @var RecipientList
      */
     protected $subject = null;
 

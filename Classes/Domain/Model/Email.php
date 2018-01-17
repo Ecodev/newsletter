@@ -56,7 +56,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     /**
      * newsletter
      * @lazy
-     * @var \Ecodev\Newsletter\Domain\Model\Newsletter
+     * @var Newsletter
      */
     protected $newsletter;
 
@@ -249,7 +249,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     /**
      * Setter for newsletter
      *
-     * @param \Ecodev\Newsletter\Domain\Model\Newsletter $newsletter newsletter
+     * @param Newsletter $newsletter newsletter
      */
     public function setNewsletter(Newsletter $newsletter)
     {
