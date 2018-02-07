@@ -113,7 +113,7 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	KEY newsletter_end_time (newsletter,end_time),
 	KEY newsletter_open_time (newsletter,open_time),
 	KEY newsletter_bounce_time (newsletter,bounce_time),
-	UNIQUE auth_code (auth_code),
+	UNIQUE auth_code (auth_code)
 ) ENGINE=InnoDB;
 
 CREATE TABLE tx_newsletter_domain_model_link (
