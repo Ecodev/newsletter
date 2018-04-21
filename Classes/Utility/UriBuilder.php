@@ -26,6 +26,17 @@ abstract class UriBuilder
     private static $uriBuilder = [];
 
     /**
+     * Cache of URI to avoid hitting RealURL when possible
+     *
+     * @var array
+     */
+    private static $uriCache = [];
+    /**
+     * @var string plugin namespace for arguments
+     */
+    private static $namespace;
+
+    /**
      * @param int $currentPid
      *
      * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
@@ -89,9 +100,7 @@ abstract class UriBuilder
      */
     private static function getNamespacedArguments($controllerName, $actionName, array $arguments)
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $extensionService = $objectManager->get(ExtensionService::class);
-        $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
+        $pluginNamespace = self::getNamespace();
 
         // Prepare arguments
         $arguments['action'] = $actionName;
@@ -131,18 +140,48 @@ abstract class UriBuilder
      */
     public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
     {
-        $namespacedArguments = self::getNamespacedArguments($controllerName, $actionName, $arguments);
+        $linkAuthCode = isset($arguments['l']) ? $arguments['l'] : null;
+        unset($arguments['l']);
+        $cacheKey = serialize([$currentPid, $controllerName, $actionName, $arguments]);
 
-        // Configure Uri
-        $uriBuilder = self::getUriBuilder($currentPid);
-        $uriBuilder->reset()
-            ->setUseCacheHash(false)
-            ->setCreateAbsoluteUri(true)
-            ->setArguments($namespacedArguments)
-            ->setTargetPageType(self::PAGE_TYPE);
+        if (array_key_exists($cacheKey, self::$uriCache)) {
+            $uri = self::$uriCache[$cacheKey];
+        } else {
+            $namespacedArguments = self::getNamespacedArguments($controllerName, $actionName, $arguments);
 
-        $uri = $uriBuilder->buildFrontendUri();
+            // Configure Uri
+            $uriBuilder = self::getUriBuilder($currentPid);
+            $uriBuilder->reset()
+                ->setUseCacheHash(false)
+                ->setCreateAbsoluteUri(true)
+                ->setArguments($namespacedArguments)
+                ->setTargetPageType(self::PAGE_TYPE);
+
+            $uri = $uriBuilder->buildFrontendUri();
+
+            self::$uriCache[$cacheKey] = $uri;
+        }
+
+        // Re-append linkAuthCode
+        if ($linkAuthCode) {
+            $prefix = strpos($uri, '?') === false ? '?' : '&';
+            $uri .= $prefix . http_build_query([self::getNamespace() => ['l' => $linkAuthCode]]);
+        }
 
         return $uri;
+    }
+
+    /**
+     * Returns the plugin namespace for arguments
+     *
+     * @return string
+     */
+    private static function getNamespace()
+    {
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $extensionService = $objectManager->get(ExtensionService::class);
+        $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
+
+        return $pluginNamespace;
     }
 }
