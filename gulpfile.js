@@ -29,7 +29,7 @@ gulp.task('lint-js', function () {
 });
 
 gulp.task('lint-php', ['composer'], shell.task([
-    './vendor/bin/php-cs-fixer fix . --diff',
+    './vendor/bin/php-cs-fixer fix --diff --verbose --dry-run',
 ]));
 
 gulp.task('composer', function () {
