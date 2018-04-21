@@ -34,12 +34,13 @@ Scheduler and Mail Transport
 .. code:: php
 
     <?php
-    return array(
-        'MAIL' => array(
+
+    return [
+        'MAIL' => [
             'transport' => 'smtp',
             'transport_smtp_server' => 'smtp.example.com:587',
-        ),
-    );
+        ],
+    ];
 
 .. _API documentation: http://api.typo3.org/typo3cms/current/html/class_t_y_p_o3_1_1_c_m_s_1_1_core_1_1_mail_1_1_mailer.html
 .. _Scheduler
@@ -388,51 +389,51 @@ Here is a example trimmed from ``realurlconf.php``:
 .. code:: php
 
     <?php
-    $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = array(
+    $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = [
         // ...
-        'postVarSets' => array(
-            '_DEFAULT' => array(
+        'postVarSets' => [
+            '_DEFAULT' => [
                 // RealURL for newsletter extension
-                'redirect' => array(
-                    array(
+                'redirect' => [
+                    [
                         'GETvar' => 'type',
-                        'valueMap' => array(
+                        'valueMap' => [
                             'z' => '1342671779',
-                        ),
-                    ),
-                    array(
+                        ],
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[action]',
-                        'valueMap' => array(
+                        'valueMap' => [
                             'g' => 'clicked',
                             's' => 'show',
                             'u' => 'unsubscribe',
                             'o' => 'opened',
-                        )
-                    ),
-                    array(
+                        ],
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[controller]',
-                        'valueMap' => array(
+                        'valueMap' => [
                             't' => 'Link',
                             'e' => 'Email',
-                        )
-                    ),
-                    array(
+                        ],
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[c]',
-                        'cond' => array(
-                            'prevValueInList' => 'Email'
-                        ),
-                    ),
-                    array(
+                        'cond' => [
+                            'prevValueInList' => 'Email',
+                        ],
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[n]',
-                    ),
-                    array(
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[l]',
-                    ),
-                    array(
+                    ],
+                    [
                         'GETvar' => 'tx_newsletter_p[p]',
-                    ),
-                ),
-            ),
-        ),
+                    ],
+                ],
+            ],
+        ],
         // ...
-    );
+    ];
