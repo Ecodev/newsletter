@@ -10,7 +10,19 @@ Newsletter |badge_travis| |badge_scrutinizer| |badge_coverage| |badge_gitter|
 .. |badge_coverage| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/coverage.png?b=develop
    :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
 
-.. |badge_gitter| image:: https://badges.gitter.im/Join%20Chat.svg
+.. |badge_downloads| image:: https://poser.pugx.org/ecodev/newsletter/downloads
+   :alt: Total Downloads
+   :target: https://packagist.org/packages/ecodev/newsletter
+
+.. |badge_version| image:: https://poser.pugx.org/ecodev/newsletter/v/stable
+   :alt: Latest Stable Version
+   :target: https://packagist.org/packages/ecodev/newsletter
+
+.. |badge_license| image:: https://poser.pugx.org/ecodev/newsletter/license
+   :alt: License
+   :target: https://packagist.org/packages/ecodev/newsletter
+
+.. |badge_gitter| image:: https://badges.gitter.im/Ecodev/newsletter.svg
    :alt: Join the chat at https://gitter.im/Ecodev/newsletter
    :target: https://gitter.im/Ecodev/newsletter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
