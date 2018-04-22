@@ -119,7 +119,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * bounceAccount
      *
      * @lazy
-     * @var BounceAccount
+     * @var \Ecodev\Newsletter\Domain\Model\BounceAccount
      */
     protected $bounceAccount;
 
@@ -134,7 +134,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * recipientList
      *
      * @lazy
-     * @var RecipientList
+     * @var \Ecodev\Newsletter\Domain\Model\RecipientList
      */
     protected $recipientList;
 

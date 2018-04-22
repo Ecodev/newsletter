@@ -21,7 +21,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * newsletter
-     * Here the type is intentionnaly wrong because for some reasons it does not
+     * Here the type is intentionally wrong because for some reasons it does not
      * work in TYPO3 7.3 and older if we specify the correct type of Newsletter
      *
      * @lazy
