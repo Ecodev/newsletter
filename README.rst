@@ -1,5 +1,7 @@
-Newsletter |badge_travis| |badge_scrutinizer| |badge_coverage| |badge_gitter|
-=============================================================================
+Newsletter
+==========
+
+|badge_travis| |badge_scrutinizer| |badge_coverage| |badge_downloads| |badge_version| |badge_license| |badge_gitter|
 
 .. |badge_travis| image:: https://travis-ci.org/Ecodev/newsletter.svg?branch=master
     :target: https://travis-ci.org/Ecodev/newsletter
