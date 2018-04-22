@@ -7,6 +7,7 @@ use Ecodev\Newsletter\MVC\View\JsonView;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -15,7 +16,7 @@ use TYPO3\CMS\Extbase\Validation\PropertyError;
 /**
  * A Controller used for answering via AJAX speaking JSON
  */
-class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ExtDirectActionController extends ActionController
 {
     /**
      * @var PersistenceManagerInterface
@@ -35,6 +36,8 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
     /**
      * Initializes the View to be a \Ecodev\Newsletter\ExtDirect\View\ExtDirectView that renders json without Template Files.
+     *
+     * @param ViewInterface $view
      */
     public function initializeView(ViewInterface $view)
     {
@@ -47,8 +50,6 @@ class ExtDirectActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     /**
      * Override parent method to render error message for ExtJS (in JSON).
      * Also append detail about what property failed to error message.
-     *
-     * @return string
      */
     protected function errorAction()
     {

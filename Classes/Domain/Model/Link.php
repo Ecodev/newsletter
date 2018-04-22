@@ -5,12 +5,13 @@ namespace Ecodev\Newsletter\Domain\Model;
 use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Link
  */
-class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Link extends AbstractEntity
 {
     /**
      * url

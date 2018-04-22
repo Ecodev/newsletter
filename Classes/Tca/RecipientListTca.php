@@ -16,6 +16,8 @@ class RecipientListTca
      *
      * @param $PA
      * @param $fObj
+     *
+     * @return string
      */
     public function render($PA, $fObj)
     {

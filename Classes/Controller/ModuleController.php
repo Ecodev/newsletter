@@ -5,11 +5,12 @@ namespace Ecodev\Newsletter\Controller;
 use Ecodev\Newsletter\Tools;
 use Ecodev\Newsletter\Utility\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * The view based backend module controller for the Newsletter package.
  */
-class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ModuleController extends ActionController
 {
     /**
      * @var int

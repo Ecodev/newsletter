@@ -240,7 +240,7 @@ class Transaction
     /**
      * Convert an object to an array recursively
      *
-     * @param stdClass $object The object to convert
+     * @param object $object The object to convert
      *
      * @return array The object converted to an array
      */

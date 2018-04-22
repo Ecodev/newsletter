@@ -23,8 +23,6 @@ class IncludeJsFileViewHelper extends AbstractViewHelper
      * @param string $name the file to include
      * @param string $extKey the extension, where the file is located
      * @param string $pathInsideExt the path to the file relative to the ext-folder
-     *
-     * @return string the link
      */
     public function render($name = null, $extKey = null, $pathInsideExt = 'Resources/Public/JavaScript/')
     {

@@ -345,9 +345,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for attachments
      *
-     * @param string $attachments List of files to be attached (comma separated list
+     * @param string[] $attachments List of files to be attached (comma separated list
      */
-    public function setAttachments($attachments)
+    public function setAttachments(array $attachments)
     {
         $this->attachments = implode(',', $attachments);
     }
@@ -355,7 +355,7 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for attachments
      *
-     * @return string List of files to be attached (comma separated list
+     * @return string[] List of files to be attached (comma separated list
      */
     public function getAttachments()
     {

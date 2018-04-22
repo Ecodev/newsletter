@@ -2,10 +2,12 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * Abstract repository to workaround difficulties (or misunderstanding?) with extbase.
  */
-abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+abstract class AbstractRepository extends Repository
 {
     /**
      * Override parent method to set default settings to ignore storagePid because we did

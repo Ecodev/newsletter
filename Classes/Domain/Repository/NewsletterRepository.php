@@ -192,7 +192,6 @@ class NewsletterRepository extends AbstractRepository
             'emailSentCount' => 0,
             'emailOpenedCount' => 0,
             'emailBouncedCount' => 0,
-            'emailBouncedCount' => 0,
             'linkOpenedCount' => 0,
         ];
 

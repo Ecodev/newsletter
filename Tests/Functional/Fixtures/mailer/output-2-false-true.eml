@@ -1,18 +1,18 @@
 Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
-Date: Sun, 22 Apr 2018 17:13:25 +0900
+Date: Sun, 22 Apr 2018 18:22:01 +0900
 Subject: Newsletter Title
 From: John Connor <noreply@example.com>
 To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="_=_swift_v4_1524384805_ca307ceb41d5864f9f37aa65fb31ef33_=_"
+ boundary="_=_swift_v4_1524388921_592318b8bf35e16e5d770006646ed3a1_=_"
 Precedence: bulk
 List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
  <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990>
 
 
---_=_swift_v4_1524384805_ca307ceb41d5864f9f37aa65fb31ef33_=_
+--_=_swift_v4_1524388921_592318b8bf35e16e5d770006646ed3a1_=_
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -79,17 +79,17 @@ r_p%5Bl%5D=3D5e0f4eea9bfa8131f3d92fe3e8f07972
 x.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bn%5D=3D12345&tx_newsletter=
 _p%5Baction%5D=3Dclicked&tx_newsletter_p%5Bcontroller%5D=3DLink&tx_newslett=
 er_p%5Bl%5D=3Dc779ff50a74c820d70b8d5c5e6739d00
-[4] /&#x6D;&#x61;&#x69;&#x=
-6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&#x61;&#x6D;=
-&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
+[4] example.com/&#x6D;&#x6=
+1;&#x69;&#x6C;&#x74;&#x6F;&#x3A;&#x6A;&#x6F;&#x68;&#x6E;&#x40;&#x65;&#x78;&=
+#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
---_=_swift_v4_1524384805_ca307ceb41d5864f9f37aa65fb31ef33_=_
+--_=_swift_v4_1524388921_592318b8bf35e16e5d770006646ed3a1_=_
 Content-Type: multipart/related;
- boundary="_=_swift_v4_1524384805_53d69137287d50ec7137a4cb71241b12_=_"
+ boundary="_=_swift_v4_1524388921_26c5e9c19561c7d4b44778073b3d6e5d_=_"
 
 
---_=_swift_v4_1524384805_53d69137287d50ec7137a4cb71241b12_=_
+--_=_swift_v4_1524388921_26c5e9c19561c7d4b44778073b3d6e5d_=_
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -188,16 +188,16 @@ ing_true=3Dtrue-ish
 =EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
 
         <img src=3D"=
-cid:1fdd4e3f8e0cd3f32611f9b188cbb4e5@swift.generated" alt=3D"image"/>
+cid:27dfdd2a54b63e4372ccb3849ca55b7a@swift.generated" alt=3D"image"/>
    =
  </body>
 </html>
 
 
---_=_swift_v4_1524384805_53d69137287d50ec7137a4cb71241b12_=_
+--_=_swift_v4_1524388921_26c5e9c19561c7d4b44778073b3d6e5d_=_
 Content-Type: image/png; name=tx_newsletter.png
 Content-Transfer-Encoding: base64
-Content-ID: <1fdd4e3f8e0cd3f32611f9b188cbb4e5@swift.generated>
+Content-ID: <27dfdd2a54b63e4372ccb3849ca55b7a@swift.generated>
 Content-Disposition: inline; filename=tx_newsletter.png
 
 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
@@ -213,7 +213,7 @@ Zg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST4
 Lpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6
 Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==
 
---_=_swift_v4_1524384805_53d69137287d50ec7137a4cb71241b12_=_--
+--_=_swift_v4_1524388921_26c5e9c19561c7d4b44778073b3d6e5d_=_--
 
 
---_=_swift_v4_1524384805_ca307ceb41d5864f9f37aa65fb31ef33_=_--
+--_=_swift_v4_1524388921_592318b8bf35e16e5d770006646ed3a1_=_--

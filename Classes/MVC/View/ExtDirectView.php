@@ -13,8 +13,6 @@ class ExtDirectView extends JsonView
     /**
      * Renders the Ext Direct view by delegating to the JsonView
      * for rendering a serializable array.
-     *
-     * @return string An empty string
      */
     public function render()
     {

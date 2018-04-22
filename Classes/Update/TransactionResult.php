@@ -53,7 +53,7 @@ class TransactionResult
     /**
      * Transaction state constructor.
      *
-     * @param number $totalOperands
+     * @param int $totalOperands
      */
     public function __construct($totalOperands = 0)
     {

@@ -13,7 +13,7 @@ use Ecodev\Newsletter\ViewHelpers\AbstractViewHelper;
  *
  * <code title="Simple">
  * {namespace newsletter=Ecodev\Newsletter\ViewHelpers}
- * <newsletter:be.container>your additional viewhelpers inside</ext:be.container>
+ * <newsletter:be.container>your additional viewHelpers inside</ext:be.container>
  * </code>
  *
  * Output:
@@ -39,7 +39,7 @@ class ModuleContainerViewHelper extends AbstractViewHelper
      *
      * @return string
      * @see template
-     * @see TYPO3\CMS\Core\Page\PageRenderer
+     * @see \TYPO3\CMS\Core\Page\PageRenderer
      */
     public function render($pageTitle = '')
     {

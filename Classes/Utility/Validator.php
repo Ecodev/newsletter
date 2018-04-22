@@ -43,10 +43,9 @@ class Validator
     private $infos = [];
 
     /**
-     * Initialize and return language service
+     * Initialize language service
      *
      * @global LanguageService $LANG
-     * @return LanguageService
      */
     private function initializeLang()
     {

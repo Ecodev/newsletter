@@ -38,6 +38,8 @@ class LinkRepository extends AbstractRepository
      * Returns the count of links for a given newsletter
      *
      * @param int $uidNewsletter
+     *
+     * @return int
      */
     public function getCount($uidNewsletter)
     {

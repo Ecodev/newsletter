@@ -165,8 +165,6 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
 
     /**
      * Compute authCode
-     *
-     * @return string authCode
      */
     private function computeAuthCode()
     {

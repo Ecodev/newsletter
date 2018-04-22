@@ -35,8 +35,6 @@ class LinkController extends ExtDirectActionController
      * @param int $uidNewsletter
      * @param int $start
      * @param int $limit
-     *
-     * @return string The rendered list view
      */
     public function listAction($uidNewsletter, $start, $limit)
     {
@@ -59,7 +57,7 @@ class LinkController extends ExtDirectActionController
 
     /**
      * Register when a link was clicked and redirect to link's URL.
-     * For this method we don't use extbase parameters system to have an URL as short as possible
+     * For this method we don't use Extbase parameters system to have an URL as short as possible
      */
     public function clickedAction()
     {

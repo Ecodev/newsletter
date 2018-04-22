@@ -199,6 +199,8 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Return HTML code showing an extract of recipients (first X recipients)
      *
      * @param int $limit
+     *
+     * @return string
      */
     public function getExtract($limit = 30)
     {
@@ -206,6 +208,7 @@ abstract class RecipientList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             $out = 'Error: ' . $this->getError();
         } else {
             $i = 0;
+            $out = '';
             while ($row = $this->getRecipient()) {
                 // Dump formatted table header
                 if ($i == 0) {

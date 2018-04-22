@@ -4,13 +4,14 @@ namespace Ecodev\Newsletter\Update;
 
 use Ecodev\Newsletter\Tools;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Update for extensions
  */
-class Update implements \TYPO3\CMS\Core\SingletonInterface
+class Update implements SingletonInterface
 {
     /**
      * @var \TYPO3\CMS\Core\Database\DatabaseConnection
@@ -64,6 +65,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
                 $severity = FlashMessage::ERROR;
             }
 
+            /** @var FlashMessage $flashMessage */
             $flashMessage = GeneralUtility::makeInstance(FlashMessage::class, $message, $title, $severity);
             $output .= $this->renderFlashMessage($flashMessage);
         }
@@ -91,7 +93,7 @@ class Update implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Return queries to generate the authCode of emails once and for all
      *
-     * @return string[]
+     * @return string[][]
      */
     public function getQueries()
     {

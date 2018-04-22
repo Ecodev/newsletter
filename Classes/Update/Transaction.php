@@ -57,7 +57,7 @@ class Transaction
             $db = Tools::getDatabaseConnection();
             foreach ($queries as $query) {
                 $res = $db->sql_query($query);
-                $results->appendAffectedDataCount($db->sql_affected_rows($res));
+                $results->appendAffectedDataCount($db->sql_affected_rows());
                 $error = $db->sql_error();
                 if ($error) {
                     $results->setErrorMessage($error);

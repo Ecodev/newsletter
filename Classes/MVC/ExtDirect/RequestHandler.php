@@ -136,9 +136,12 @@ class RequestHandler implements \TYPO3\CMS\Extbase\Mvc\RequestHandlerInterface
      *
      * @param array $results The collected results from the transaction requests
      * @param Request $extDirectRequest
+     *
+     * @return Response
      */
     protected function sendResponse(array $results, Request $extDirectRequest)
     {
+        /** @var Response $response */
         $response = $this->objectManager->get(Response::class);
         $jsonResponse = json_encode(count($results) === 1 ? $results[0] : $results);
         if ($extDirectRequest->isFormPost() && $extDirectRequest->isFileUpload()) {

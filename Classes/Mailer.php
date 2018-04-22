@@ -70,7 +70,7 @@ class Mailer
     public function getPlain()
     {
         $plainConverter = $this->newsletter->getPlainConverterInstance();
-        $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->domain);
+        $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->newsletter->getDomain());
 
         return $plainText;
     }

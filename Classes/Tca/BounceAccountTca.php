@@ -14,10 +14,12 @@ class BounceAccountTca
      *
      * @param mixed $table
      * @param mixed $field
+     * @param mixed $row
      * @param mixed $altName
      * @param mixed $palette
      * @param mixed $extra
      * @param mixed $pal
+     * @param mixed $pObj
      */
     public function getSingleField_preProcess($table, $field, &$row, $altName, $palette, $extra, $pal, &$pObj)
     {

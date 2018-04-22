@@ -203,6 +203,7 @@ abstract class Tools
                 $oldNewsletterUid = $newsletterUid;
                 $mailers = [];
 
+                /** @var Newsletter $newsletter */
                 $newsletter = $newsletterRepository->findByUid($newsletterUid);
             }
 

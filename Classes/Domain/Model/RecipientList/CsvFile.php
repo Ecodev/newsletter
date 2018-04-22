@@ -158,6 +158,6 @@ class CsvFile extends AbstractArray
             return $this->error;
         }
 
-        parent::getError();
+        return parent::getError();
     }
 }

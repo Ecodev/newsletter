@@ -2,6 +2,7 @@
 
 namespace Ecodev\Newsletter\Domain\Repository;
 
+use Ecodev\Newsletter\Domain\Model\BounceAccount;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -30,7 +31,7 @@ class BounceAccountRepository extends AbstractRepository
     /**
      * Returns the first BounceAccount or null if none at all
      *
-     * @return type
+     * @return BounceAccount
      */
     public function findFirst()
     {

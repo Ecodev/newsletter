@@ -71,6 +71,11 @@ class EmailParser
     private $unsubscribePattern = '/Subject:\s*unsubscribe-([\da-f]{32})/i';
 
     /**
+     * @var null|string
+     */
+    private $authCode;
+
+    /**
      * @param string $emailSource
      */
     public function parse($emailSource)

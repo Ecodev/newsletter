@@ -2,11 +2,13 @@
 
 namespace Ecodev\Newsletter\Tca;
 
+use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
+
 /**
  * Handle bounced account on-the-fly decryption for TYPO3 7.6
  * TYPO3 6.2 versions are done via a hook in BounceAccountTca class
  */
-class BounceAccountDataProvider implements \TYPO3\CMS\Backend\Form\FormDataProviderInterface
+class BounceAccountDataProvider implements FormDataProviderInterface
 {
     /**
      * Decrypt values from DB (on TYPO3 7.6)

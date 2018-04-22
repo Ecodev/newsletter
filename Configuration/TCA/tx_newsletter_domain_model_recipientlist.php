@@ -7,7 +7,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
-        'type' => 'type',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],

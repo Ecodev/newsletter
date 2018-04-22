@@ -7,11 +7,12 @@ use Ecodev\Newsletter\Tools;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Provides Scheduler task to send emails
  */
-class SendEmails extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class SendEmails extends AbstractTask
 {
     /**
      * Sends emails for queued newsletter

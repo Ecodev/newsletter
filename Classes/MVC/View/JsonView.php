@@ -4,6 +4,7 @@ namespace Ecodev\Newsletter\MVC\View;
 
 use ArrayAccess;
 use DateTime;
+use TYPO3\CMS\Extbase\Mvc\View\AbstractView;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
  * @scope prototype
  * @api
  */
-class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView
+class JsonView extends AbstractView
 {
     /**
      * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext

@@ -136,7 +136,7 @@ class Sql extends RecipientList
      * Fetch a recipient from the sql-record set. This also computes some commonly used values,
      * such as plain_only and language.
      *
-     * @return array recipient with user data
+     * @return array|false recipient with user data
      */
     public function getRecipient()
     {
@@ -163,7 +163,7 @@ class Sql extends RecipientList
 
     public function getError()
     {
-        return Tools::getDatabaseConnection()->sql_error($this->data);
+        return Tools::getDatabaseConnection()->sql_error();
     }
 
     /**
@@ -214,11 +214,7 @@ class Sql extends RecipientList
 
         if ($sql) {
             $db->sql_query($sql);
-
-            return $db->sql_affected_rows();
         }
-
-        return false;
     }
 
     /**
@@ -234,10 +230,6 @@ class Sql extends RecipientList
 
         if ($sql) {
             $db->sql_query($sql);
-
-            return $db->sql_affected_rows();
         }
-
-        return false;
     }
 }
