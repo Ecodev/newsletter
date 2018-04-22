@@ -13,7 +13,7 @@ class Request
 {
     /**
      * @inject
-     * @var ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 

@@ -14,13 +14,13 @@ class RequestBuilder implements TYPO3\CMS\Core\SingletonInterface
 {
     /**
      * @inject
-     * @var ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
      * @inject
-     * @var ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
      */
     protected $configurationManager;
 

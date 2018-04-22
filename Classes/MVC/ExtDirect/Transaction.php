@@ -3,7 +3,6 @@
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Mvc\Web\Request;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 
@@ -16,13 +15,13 @@ class Transaction
 {
     /**
      * @inject
-     * @var ReflectionService
+     * @var \TYPO3\CMS\Extbase\Reflection\ReflectionService
      */
     protected $reflectionService;
 
     /**
      * @inject
-     * @var ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
@@ -118,7 +117,7 @@ class Transaction
     public function buildRequest()
     {
         $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $request = $this->objectManager->get(Request::class);
+        $request = $this->objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Request::class);
         $request->setControllerObjectName($this->getControllerObjectName());
         $request->setControllerActionName($this->getControllerActionName());
         $request->setPluginName($frameworkConfiguration['pluginName']);

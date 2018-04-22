@@ -82,8 +82,8 @@ class JsonView extends AbstractView
     protected $configuration = [];
 
     /**
-     * @var PersistenceManagerInterface
      * @inject
+     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
      */
     protected $persistenceManager;
 

@@ -19,8 +19,8 @@ use TYPO3\CMS\Extbase\Validation\PropertyError;
 class ExtDirectActionController extends ActionController
 {
     /**
-     * @var PersistenceManagerInterface
      * @inject
+     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
      */
     protected $persistenceManager;
 
