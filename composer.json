@@ -14,7 +14,8 @@
   "require": {
     "php": ">=5.6.0",
     "ext-mcrypt": "*",
-    "ext-dom": "*"
+    "ext-dom": "*",
+    "typo3/cms": "^6.2 || ^7.6 || ^8.7 || ^9 || dev-master"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.1"
@@ -27,6 +28,12 @@
   "autoload-dev": {
     "psr-4": {
       "Ecodev\\Newsletter\\Tests\\": "Tests/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "web"
     }
   }
 }

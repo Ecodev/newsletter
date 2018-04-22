@@ -178,8 +178,8 @@ class EmailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getNewsletterReturnsInitialValueForNewsletter()
     {
-        $this->assertSame(
-            null, $this->subject->getNewsletter()
+        $this->assertNull(
+            $this->subject->getNewsletter()
         );
     }
 

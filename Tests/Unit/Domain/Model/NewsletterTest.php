@@ -71,8 +71,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getBeginTimeReturnsInitialValueForDateTime()
     {
-        $this->assertSame(
-            null, $this->subject->getBeginTime()
+        $this->assertNull(
+            $this->subject->getBeginTime()
         );
     }
 
@@ -94,8 +94,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getEndTimeReturnsInitialValueForDateTime()
     {
-        $this->assertSame(
-            null, $this->subject->getEndTime()
+        $this->assertNull(
+            $this->subject->getEndTime()
         );
     }
 
@@ -191,8 +191,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getIsTestReturnsInitialValueForBoolean()
     {
-        $this->assertSame(false, $this->subject->getIsTest());
-        $this->assertSame(false, $this->subject->isIsTest());
+        $this->assertFalse($this->subject->getIsTest());
+        $this->assertFalse($this->subject->isIsTest());
     }
 
     /**
@@ -212,8 +212,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getBounceAccountReturnsInitialValueForBounceAccount()
     {
-        $this->assertSame(
-            null, $this->subject->getBounceAccount()
+        $this->assertNull(
+            $this->subject->getBounceAccount()
         );
     }
 
@@ -276,8 +276,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getInjectOpenSpyReturnsInitialValueForBoolean()
     {
-        $this->assertSame(true, $this->subject->getInjectOpenSpy());
-        $this->assertSame(true, $this->subject->isInjectOpenSpy());
+        $this->assertTrue($this->subject->getInjectOpenSpy());
+        $this->assertTrue($this->subject->isInjectOpenSpy());
     }
 
     /**
@@ -297,8 +297,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getInjectLinksSpyReturnsInitialValueForBoolean()
     {
-        $this->assertSame(true, $this->subject->getInjectLinksSpy());
-        $this->assertSame(true, $this->subject->isInjectLinksSpy());
+        $this->assertTrue($this->subject->getInjectLinksSpy());
+        $this->assertTrue($this->subject->isInjectLinksSpy());
     }
 
     /**
@@ -318,8 +318,8 @@ class NewsletterTest extends \Ecodev\Newsletter\Tests\Unit\AbstractUnitTestCase
      */
     public function getRecipientListReturnsInitialValueForRecipientList()
     {
-        $this->assertSame(
-            null, $this->subject->getRecipientList()
+        $this->assertNull(
+            $this->subject->getRecipientList()
         );
     }
 
