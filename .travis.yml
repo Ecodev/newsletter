@@ -49,7 +49,7 @@ before_script:
   - mv typo3_core/* .
   - composer self-update 1.0.3
   - composer install
-  - composer self-update 1.0.3
+  - composer self-update
   - mkdir -p uploads typo3temp typo3conf/ext
   - mv newsletter typo3conf/ext/
   - export typo3DatabaseName="typo3";
