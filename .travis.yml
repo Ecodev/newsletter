@@ -15,7 +15,7 @@ php:
   - 7.2
 
 env:
-  - TYPO3_VERSION=7.6.23
+  - TYPO3_VERSION=7.6.25
   - TYPO3_VERSION=master
 
 matrix:
@@ -23,7 +23,7 @@ matrix:
     - php: 5.6
       env: TYPO3_VERSION=6.2.31
   allow_failures:
-    - env: TYPO3_VERSION=8.7.9
+    - env: TYPO3_VERSION=8.7.13
     - env: TYPO3_VERSION=master
     - php: 7.2
   fast_finish: true
@@ -41,8 +41,8 @@ before_install:
 
 before_script:
   - composer self-update 1.0.3
-  - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.23' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
-  - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.23' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.25' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.2' && $TYPO3_VERSION = '7.6.25' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - yarn install
   - composer install
   - cd ..
