@@ -141,8 +141,8 @@ abstract class UriBuilder
      */
     public static function buildFrontendUri($currentPid, $controllerName, $actionName, array $arguments = [])
     {
-        $linkAuthCode = isset($arguments['l']) ? $arguments['l'] : null;
-        unset($arguments['l']);
+        $argumentsToRestore = array_intersect_key($arguments, array_fill_keys(['c', 'l'], null));
+        unset($arguments['c'], $arguments['l']);
         $cacheKey = serialize([$currentPid, $controllerName, $actionName, $arguments]);
 
         if (array_key_exists($cacheKey, self::$uriCache)) {
@@ -164,9 +164,9 @@ abstract class UriBuilder
         }
 
         // Re-append linkAuthCode
-        if ($linkAuthCode) {
+        if ($argumentsToRestore) {
             $prefix = strpos($uri, '?') === false ? '?' : '&';
-            $uri .= $prefix . http_build_query([self::getNamespace() => ['l' => $linkAuthCode]]);
+            $uri .= $prefix . http_build_query([self::getNamespace() => $argumentsToRestore]);
         }
 
         return $uri;

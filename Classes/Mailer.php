@@ -212,10 +212,12 @@ class Mailer
 
     /**
      * Insert a "mail-open-spy" in the mail.
+     *
+     * @param Email $email
      */
     private function injectOpenSpy(Email $email)
     {
-        $url = UriBuilder::buildFrontendUri($email->getPid(), 'Email', 'opened', ['c' => $email->getAuthCode()]);
+        $url = $email->getOpenedUrl();
 
         $this->html = str_ireplace('</body>', '<div><img src="' . $url . '" width="0" height="0" /></div></body>', $this->html);
     }

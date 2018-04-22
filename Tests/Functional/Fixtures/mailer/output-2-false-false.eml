@@ -1,18 +1,18 @@
 Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
-Date: Fri, 31 Mar 2017 14:27:45 +0000
+Date: Sun, 22 Apr 2018 17:13:17 +0900
 Subject: Newsletter Title
 From: John Connor <noreply@example.com>
 To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="_=_swift_v4_1490970465_b268ba3743e1298dd507ee6a26636d25_=_"
+ boundary="_=_swift_v4_1524384797_29e2b39b474e99b941ab8995e280070c_=_"
 Precedence: bulk
 List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
- <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email>
+ <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990>
 
 
---_=_swift_v4_1490970465_b268ba3743e1298dd507ee6a26636d25_=_
+--_=_swift_v4_1524384797_29e2b39b474e99b941ab8995e280070c_=_
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -26,42 +26,42 @@ HTML entities encoded mailto link should still work [4]
 ###unknown_field_=
 will_be_kept###
 http://example.com/index.php?id=3D2&type=3D1342671779&tx_=
-newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Bac=
-tion%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_=
+newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
 http://example.com=
-/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e43=
-52719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_=
-p%5Bcontroller%5D=3DEmail
+/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Baction%5D=3Dunsubscri=
+be&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db7=
+6eb1e4352719c95f3ba617990
 recipient@example.com my custom value
 http://=
 unknown_field_will_be_kept
 http://example.com/index.php?id=3D2&type=3D134=
-2671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsle=
-tter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
-http://=
-example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D162=
-1db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_=
-newsletter_p%5Bcontroller%5D=3DEmail
-recipient@example.com my custom valu=
-e
+2671779&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=
+=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
+http:/=
+/example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Baction%5D=
+=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_newsletter_p%5Bc%=
+5D=3D1621db76eb1e4352719c95f3ba617990
+recipient@example.com my custom val=
+ue
 https://unknown_field_will_be_kept
 https://example.com/index.php?id=
-=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba6=
-17990&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3D=
-Email
+=3D2&type=3D1342671779&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5=
+Bcontroller%5D=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba6=
+17990
 https://example.com/index.php?id=3D2&type=3D1342671779&tx_newslette=
-r_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=
-=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail
-recipient@example.=
-com my custom value boolean_false=3D
-boolean_true=3Dtrue-ish integer_fals=
-e=3D integer_true=3Dtrue-ish
-string_false=3D string_true=3Dtrue-ish boole=
-an_false=3Dfalse-ish
-boolean_true=3Dtrue-ish integer_false=3Dfalse-ish in=
-teger_true=3Dtrue-ish
-string_false=3Dfalse-ish string_true=3Dtrue-ish UTF=
--8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
+r_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_ne=
+wsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
+recipient@example.co=
+m my custom value boolean_false=3D
+boolean_true=3Dtrue-ish integer_false=
+=3D integer_true=3Dtrue-ish
+string_false=3D string_true=3Dtrue-ish boolea=
+n_false=3Dfalse-ish
+boolean_true=3Dtrue-ish integer_false=3Dfalse-ish int=
+eger_true=3Dtrue-ish
+string_false=3Dfalse-ish string_true=3Dtrue-ish UTF-=
+8: k=C3=B6nnen =ED=95=9C=EA=B5=AD=EC=96=B4
 =E2=9C=93 =E2=82=AC =E2=98=
 =BA =E2=98=B9 [image]=20
 
@@ -76,12 +76,12 @@ Links:
 #x40;&#x65;&#x78;&#x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
---_=_swift_v4_1490970465_b268ba3743e1298dd507ee6a26636d25_=_
+--_=_swift_v4_1524384797_29e2b39b474e99b941ab8995e280070c_=_
 Content-Type: multipart/related;
- boundary="_=_swift_v4_1490970465_f80e8059fdbf623c1592eac7702f7b62_=_"
+ boundary="_=_swift_v4_1524384797_7bb10c8e8a087bcccfb6124d0fd9de19_=_"
 
 
---_=_swift_v4_1490970465_f80e8059fdbf623c1592eac7702f7b62_=_
+--_=_swift_v4_1524384797_7bb10c8e8a087bcccfb6124d0fd9de19_=_
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -113,12 +113,12 @@ work</a>
 
         ###unknown_field_will_be_kept###
         http://example.com=
-/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e43=
-52719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcon=
-troller%5D=3DEmail
+/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Baction%5D=3Dshow&tx_n=
+ewsletter_p%5Bcontroller%5D=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db76eb1e43=
+52719c95f3ba617990
         http://example.com/index.php?id=3D2&type=3D134=
-2671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsle=
-tter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail
+2671779&tx_newsletter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontrol=
+ler%5D=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
 =
         recipient@example.com
         my custom value
@@ -126,12 +126,12 @@ tter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail
         http:/=
 /unknown_field_will_be_kept
         http://example.com/index.php?id=3D2&t=
-ype=3D1342671779&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&=
-tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail=
+ype=3D1342671779&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontr=
+oller%5D=3DEmail&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990=
 
         http://example.com/index.php?id=3D2&type=3D1342671779&tx_newslet=
-ter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=
-=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail
+ter_p%5Baction%5D=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_=
+newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
         recipient@=
 example.com
         my custom value
@@ -139,12 +139,12 @@ example.com
         https://unknown_field_wi=
 ll_be_kept
         https://example.com/index.php?id=3D2&type=3D1342671779=
-&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990&tx_newsletter_p%=
-5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail
+&tx_newsletter_p%5Baction%5D=3Dshow&tx_newsletter_p%5Bcontroller%5D=3DEmail=
+&tx_newsletter_p%5Bc%5D=3D1621db76eb1e4352719c95f3ba617990
         https:=
-//example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Bc%5D=3D1=
-621db76eb1e4352719c95f3ba617990&tx_newsletter_p%5Baction%5D=3Dunsubscribe&t=
-x_newsletter_p%5Bcontroller%5D=3DEmail
+//example.com/index.php?id=3D2&type=3D1342671779&tx_newsletter_p%5Baction%5=
+D=3Dunsubscribe&tx_newsletter_p%5Bcontroller%5D=3DEmail&tx_newsletter_p%5Bc=
+%5D=3D1621db76eb1e4352719c95f3ba617990
         recipient@example.com
   =
       my custom value
@@ -172,16 +172,16 @@ false-ish
 =ED=95=9C=EA=B5=AD=EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
 
   =
-      <img src=3D"cid:a995c4f9ddf72bf7bb859b07a2f87bbd@swift.generated" alt=
+      <img src=3D"cid:bca818a0f018b2db977bc3321d240c7b@swift.generated" alt=
 =3D"image"/>
     </body>
 </html>
 
 
---_=_swift_v4_1490970465_f80e8059fdbf623c1592eac7702f7b62_=_
+--_=_swift_v4_1524384797_7bb10c8e8a087bcccfb6124d0fd9de19_=_
 Content-Type: image/png; name=tx_newsletter.png
 Content-Transfer-Encoding: base64
-Content-ID: <a995c4f9ddf72bf7bb859b07a2f87bbd@swift.generated>
+Content-ID: <bca818a0f018b2db977bc3321d240c7b@swift.generated>
 Content-Disposition: inline; filename=tx_newsletter.png
 
 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
@@ -197,7 +197,7 @@ Zg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST4
 Lpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6
 Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==
 
---_=_swift_v4_1490970465_f80e8059fdbf623c1592eac7702f7b62_=_--
+--_=_swift_v4_1524384797_7bb10c8e8a087bcccfb6124d0fd9de19_=_--
 
 
---_=_swift_v4_1490970465_b268ba3743e1298dd507ee6a26636d25_=_--
+--_=_swift_v4_1524384797_29e2b39b474e99b941ab8995e280070c_=_--

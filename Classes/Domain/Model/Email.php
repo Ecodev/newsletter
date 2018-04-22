@@ -306,4 +306,14 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
     {
         return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', ['c' => $this->getAuthCode()]);
     }
+
+    /**
+     * Return the URL to register when an email was opened
+     *
+     * @return string
+     */
+    public function getOpenedUrl()
+    {
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'opened', ['c' => $this->getAuthCode()]);
+    }
 }
