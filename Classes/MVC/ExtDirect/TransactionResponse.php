@@ -2,8 +2,6 @@
 
 namespace Ecodev\Newsletter\MVC\ExtDirect;
 
-use TYPO3\CMS\Extbase\Mvc\Web\Response;
-
 /**
  * A Ext Direct specific response implementation with raw content for json encodable results
  *
