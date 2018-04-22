@@ -179,10 +179,12 @@ abstract class UriBuilder
      */
     private static function getNamespace()
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $extensionService = $objectManager->get(ExtensionService::class);
-        $pluginNamespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
+        if (!self::$namespace) {
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+            $extensionService = $objectManager->get(ExtensionService::class);
+            self::$namespace = $extensionService->getPluginNamespace(self::EXTENSION_NAME, self::PLUGIN_NAME);
+        }
 
-        return $pluginNamespace;
+        return self::$namespace;
     }
 }
