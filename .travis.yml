@@ -40,7 +40,6 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 before_script:
-  - composer self-update 1.0.3
   - if [[ $TRAVIS_PHP_VERSION = '7.1' && $TYPO3_VERSION = '7.6.25' ]]; then PHPUNIT_FLAGS_UNIT="--coverage-clover=unit-tests-coverage.clover"; else PHPUNIT_FLAGS_UNIT=""; fi
   - if [[ $TRAVIS_PHP_VERSION = '7.1' && $TYPO3_VERSION = '7.6.25' ]]; then PHPUNIT_FLAGS_FUNCTIONAL="--coverage-clover=functional-tests-coverage.clover"; else PHPUNIT_FLAGS_FUNCTIONAL=""; fi
   - yarn install
@@ -48,7 +47,9 @@ before_script:
   - cd ..
   - git clone --branch $TYPO3_VERSION --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
+  - composer self-update 1.0.3
   - composer install
+  - composer self-update 1.0.3
   - mkdir -p uploads typo3temp typo3conf/ext
   - mv newsletter typo3conf/ext/
   - export typo3DatabaseName="typo3";
