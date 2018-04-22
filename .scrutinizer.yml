@@ -1,12 +1,28 @@
+checks:
+    php: true
+
+coding_style:
+    php:
+        spaces:
+            before_parentheses:
+                closure_definition: true
+            around_operators:
+                concatenation: true
+
+build:
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+
 tools:
     external_code_coverage:
         timeout: 3000  # Timeout in seconds
         runs: 2        # Scrutinizer will wait for code coverage of unit and functional tests
-    php_cpd: true
-    php_pdepend: true
-    php_changetracking: true
-    sensiolabs_security_checker: true
-checks:
-    php:
-        code_rating: true
-        duplication: true
+
+build_failure_conditions:
+    - 'elements.rating(<= C).new.exists'                        # No new classes/methods with a rating of C or worse allowed
+    - 'issues.severity(>= MAJOR).new.exists'                    # New issues of major or higher severity
+    - 'project.metric_change("scrutinizer.test_coverage", < 0)' # Code Coverage decreased from previous inspection
+    - 'patches.label("Unused Use Statements").new.exists'       # No new unused imports patches allowed
