@@ -43,7 +43,14 @@ class Mailer
     private $substitutor;
 
     /**
-     * Constructor that set up basic internal datastructures. Do not call directly
+     * Cached domain name
+     *
+     * @var string
+     */
+    private $domain;
+
+    /**
+     * Constructor that set up basic internal data structures. Do not call directly
      */
     public function __construct()
     {
@@ -70,7 +77,7 @@ class Mailer
     public function getPlain()
     {
         $plainConverter = $this->newsletter->getPlainConverterInstance();
-        $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->newsletter->getDomain());
+        $plainText = $plainConverter->getPlaintext($this->getHtml(), $this->domain);
 
         return $plainText;
     }
@@ -87,7 +94,8 @@ class Mailer
     {
         // When sending newsletter via scheduler (so via CLI mode) realurl cannot guess
         // the domain name by himself, so we help him by filling HTTP_HOST variable
-        $_SERVER['HTTP_HOST'] = $newsletter->getDomain();
+        $this->domain = $newsletter->getDomain();
+        $_SERVER['HTTP_HOST'] = $this->domain;
         $_SERVER['SCRIPT_NAME'] = '/index.php';
 
         $this->siteUrl = $newsletter->getBaseUrl() . '/';
@@ -419,7 +427,7 @@ class Mailer
 
         // Specify message-id for bounce identification
         $msgId = $message->getHeaders()->get('Message-ID');
-        $msgId->setId($email->getAuthCode() . '@' . $this->newsletter->getDomain());
+        $msgId->setId($email->getAuthCode() . '@' . $this->domain);
 
         // Build plaintext
         $plain = $this->getPlain();
