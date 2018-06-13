@@ -4,7 +4,7 @@ Newsletter style
 - - - - - - - - - - - - - - - - - - - - - */
 
 .t3-newsletter-button-planner {
-    background: url("../Icons/tx_newsletter.png") 0 50% no-repeat !important;
+    background: url("../Icons/tx_newsletter.svg") 0 50% no-repeat !important;
     padding-left: 20px !important;
 }
 

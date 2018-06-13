@@ -7,7 +7,8 @@ if (!defined('TYPO3_MODE')) {
 // ========== Register BE Modules
 if (TYPO3_MODE == 'BE') {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'Ecodev.' . $_EXTKEY, 'web', // Make newsletter module a submodule of 'user'
+        'Ecodev.' . $_EXTKEY,
+        'web', // Make newsletter module a submodule of 'user'
         'tx_newsletter_m1', // Submodule key
         'before:info', // Position
         [
@@ -17,9 +18,10 @@ if (TYPO3_MODE == 'BE') {
             'Link' => 'list',
             'BounceAccount' => 'list',
             'RecipientList' => 'list, listRecipient',
-        ], [
+        ],
+        [
             'access' => 'user,group',
-            'icon' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter.png',
+            'icon' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter.svg',
             'labels' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_module.xlf',
         ]
     );
