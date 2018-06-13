@@ -4,7 +4,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_email',
         'label' => 'recipient_address',
-        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_email.gif',
+        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_email.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'begin_time,end_time,recipient_address,recipient_data,open_time,bounce_time,unsubscribed,newsletter',

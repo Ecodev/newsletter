@@ -4,7 +4,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter',
         'label' => 'planned_time',
-        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
+        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_newsletter.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,replyto_name,replyto_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',

@@ -10,7 +10,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_bounceaccount.gif',
+        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_bounceaccount.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'email,server,protocol,port,username,password',

@@ -4,13 +4,15 @@ Newsletter style
 - - - - - - - - - - - - - - - - - - - - - */
 
 .t3-newsletter-button-planner {
-    background: url("../Icons/tx_newsletter.png") 0 50% no-repeat !important;
+    background: url("../Icons/tx_newsletter_domain_model_newsletter.svg") 0 50% no-repeat !important;
     padding-left: 20px !important;
+    background-size: contain !important;
 }
 
 .t3-newsletter-button-statistics {
-    background: url("../Icons/chart_bar.png") 0 50% no-repeat !important;
+    background: url("../Icons/pie_chart.svg") 0 50% no-repeat !important;
     padding-left: 20px !important;
+    background-size: contain !important;
 }
 
 .t3-newsletter-statistic {
@@ -61,25 +63,36 @@ Newsletter style
 ul.errors li,
 ul.warnings li,
 ul.infos li {
-    list-style-position: inside;
+    list-style: none;
 }
 
-ul.errors li {
-    list-style-image: url("../Icons/error.png");
+
+ul.errors li:before,
+ul.warnings li:before,
+ul.infos li:before {
+    content: '';
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.5em;
 }
 
-ul.warnings li {
-    list-style-image: url("../Icons/warning.png");
+ul.errors li:before {
+    background-image: url("../Icons/error.svg");
 }
 
-ul.infos li {
-    list-style-image: url("../Icons/information.png");
+ul.warnings li:before {
+    background-image: url("../Icons/warning.svg");
 }
 
-ul.errors li.none,
-ul.warnings li.none,
-ul.infos li.none {
-    list-style-image: url("../Icons/ok.png");
+ul.infos li:before {
+    background-image: url("../Icons/information.svg");
+}
+
+ul.errors li.none:before,
+ul.warnings li.none:before,
+ul.infos li.none:before {
+    background-image: url("../Icons/ok.svg");
 }
 
 /*

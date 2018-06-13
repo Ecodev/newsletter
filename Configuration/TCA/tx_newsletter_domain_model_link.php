@@ -4,7 +4,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_link',
         'label' => 'url',
-        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_link.gif',
+        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_link.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'url,opened_count,newsletter',

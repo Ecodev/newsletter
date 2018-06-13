@@ -32,30 +32,30 @@ div.messenge-box p {
 
 .message-ok {
     color: #3b7826 !important;
-    background-image: url("../Icons/ok.png") !important;
+    background-image: url("../Icons/ok.svg") !important;
 }
 
 .message-notice {
     color: #777 !important;
-    background-image: url("../Icons/notice.png") !important;
+    background-image: url("../Icons/information.svg") !important;
 }
 
 .message-information {
     color: #4c73a1 !important;
-    background-image: url("../Icons/information.png") !important;
+    background-image: url("../Icons/information.svg") !important;
 }
 
 .message-ok {
     color: #3b7826 !important;
-    background-image: url("../Icons/ok.png") !important;
+    background-image: url("../Icons/ok.svg") !important;
 }
 
 .message-warning {
     color: #9e7d4a !important;
-    background-image: url("../Icons/warning.png") !important;
+    background-image: url("../Icons/warning.svg") !important;
 }
 
 .message-error {
     color: #aa0225 !important;
-    background-image: url("../Icons/error.png") !important;
+    background-image: url("../Icons/error.svg") !important;
 }
