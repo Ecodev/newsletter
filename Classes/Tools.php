@@ -19,6 +19,10 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 abstract class Tools
 {
+    
+    const OPENSSL_METHOD = 'AES-256-OFB';
+    const RND_BYTES_LENGTH = 16;
+    
     protected static $configuration = null;
 
     /**
@@ -245,11 +249,15 @@ abstract class Tools
      */
     public static function encrypt($string)
     {
-        $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
-
-        return base64_encode(
-            $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
-        );
+        if(PHP_VERSION < '7.2.0') {
+            $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
+            return base64_encode(
+                $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
+            );
+        } else {
+            $rndBytes = random_bytes(self::RND_BYTES_LENGTH);
+            return base64_encode($rndBytes . openssl_encrypt($string, self::OPENSSL_METHOD, self::getSecureKey(), 0, $rndBytes));
+        }
     }
 
     /**
@@ -261,11 +269,19 @@ abstract class Tools
      */
     public static function decrypt($string)
     {
-        $string = base64_decode($string, true);
-        $iv = substr($string, 0, self::getIVSize());
-        $cipher = substr($string, self::getIVSize());
+        if(PHP_VERSION < '7.2.0') {
+            $string = base64_decode($string, true);
+            $iv = substr($string, 0, self::getIVSize());
+            $cipher = substr($string, self::getIVSize());
 
-        return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+            return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+        } else {
+            $string = base64_decode($string, true);
+            $rndBytes = substr($string, 0, self::RND_BYTES_LENGTH);
+            $cipher = substr($string, self::RND_BYTES_LENGTH);
+
+            return openssl_decrypt($cipher, self::OPENSSL_METHOD, self::getSecureKey(), 0, $rndBytes);
+        }
     }
 
     /**
