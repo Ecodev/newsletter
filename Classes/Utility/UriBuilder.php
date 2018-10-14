@@ -158,6 +158,18 @@ abstract class UriBuilder
                 ->setArguments($namespacedArguments)
                 ->setTargetPageType(self::PAGE_TYPE);
 
+                // check if running cli mode
+                $environment = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Service\EnvironmentService');
+                if ($environment->isEnvironmentInCliMode()) {
+                    // create a proper context in cli mode before building the uri. buildFrontendUri will otherwise throw an error.
+                    $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+                    $request = $objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Request::class);
+                    $request->setRequestURI(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+                    $request->setBaseURI(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
+                    $uriBuilder = $objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder::class);
+                    $uriBuilder->setRequest($request);
+                }
+
             $uri = $uriBuilder->buildFrontendUri();
 
             self::$uriCache[$cacheKey] = $uri;
