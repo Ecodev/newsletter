@@ -167,13 +167,13 @@ abstract class UriBuilder
                 $request->setRequestURI(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
                 $request->setBaseURI(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
                 $uriBuilder = $objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder::class);
-                # setCreateAbsoluteUri(true) doesn't work in cli mode since \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL') is not filled correctly without http context
+                // setCreateAbsoluteUri(true) doesn't work in cli mode since \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL') is not filled correctly without http context
                 $uriBuilder->setRequest($request)
                     ->setUseCacheHash(false)
                     ->setArguments($namespacedArguments)
                     ->setTargetPageType(self::PAGE_TYPE);                
                 
-                # prepend TYPO3_REQUEST_HOST to make uri absolute
+                // prepend TYPO3_REQUEST_HOST to make uri absolute
                 $uri = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' . $uriBuilder->buildFrontendUri();
             } else {
                 $uri = $uriBuilder->buildFrontendUri();
