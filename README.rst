@@ -9,7 +9,7 @@ Newsletter
 .. |badge_scrutinizer| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/quality-score.png?b=master
    :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
 
-.. |badge_coverage| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/coverage.png?b=develop
+.. |badge_coverage| image:: https://scrutinizer-ci.com/g/Ecodev/newsletter/badges/coverage.png?b=master
    :target: https://scrutinizer-ci.com/g/Ecodev/newsletter
 
 .. |badge_downloads| image:: https://poser.pugx.org/ecodev/newsletter/downloads
