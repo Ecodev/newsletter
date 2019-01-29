@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "15b5b7841a9d316d91c75d51e26d9bb1",
+    "content-hash": "7d676f33eedd68898d993a12ce9bbdf4",
     "packages": [
         {
             "name": "cogpowered/finediff",
@@ -1966,14 +1966,18 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "typo3/cms": 20
+        "typo3/cms-backend": 20,
+        "typo3/cms-core": 20,
+        "typo3/cms-extbase": 20,
+        "typo3/cms-fluid": 20,
+        "typo3/cms-scheduler": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.6.0",
-        "ext-mcrypt": "*",
-        "ext-dom": "*"
+        "ext-dom": "*",
+        "ext-openssl": "*"
     },
     "platform-dev": []
 }

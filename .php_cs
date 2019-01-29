@@ -43,7 +43,7 @@ return PhpCsFixer\Config::create()
         'lowercase_cast' => true,
         'lowercase_constants' => true,
         'lowercase_keywords' => true,
-        'mb_str_functions' => false, // Cannot use that or it would break mcrypt_decrypt()
+        'mb_str_functions' => false, // Cannot use that or it would break \Ecodev\Newsletter\Tools::decrypt()
         'method_argument_space' => true,
         'method_separation' => true,
         'modernize_types_casting' => true,

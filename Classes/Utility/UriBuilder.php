@@ -165,7 +165,7 @@ abstract class UriBuilder
 
         // Re-append linkAuthCode
         if ($argumentsToRestore) {
-            $prefix = strpos($uri, '?') === false ? '?' : '&';
+            $prefix = mb_strpos($uri, '?') === false ? '?' : '&';
             $uri .= $prefix . http_build_query([self::getNamespace() => $argumentsToRestore]);
         }
 

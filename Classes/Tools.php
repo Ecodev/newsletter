@@ -19,7 +19,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 abstract class Tools
 {
-    protected static $configuration = null;
+    private static $configuration = null;
+
+    private static $OPEN_SSL_CIPHER = 'aes-256-cbc';
 
     /**
      * Get a newsletter-conf-template parameter
@@ -239,17 +241,17 @@ abstract class Tools
     /**
      * Returns an base64_encode encrypted string
      *
-     * @param string $string
+     * @param string $data
      *
      * @return string base64_encode encrypted string
      */
-    public static function encrypt($string)
+    public static function encrypt($data)
     {
-        $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
+        $iv = openssl_random_pseudo_bytes(self::getInitializationVectorSize());
 
-        return base64_encode(
-            $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
-        );
+        $encryptedData = openssl_encrypt($data, self::$OPEN_SSL_CIPHER, self::getSecureKey(), 0, $iv);
+
+        return base64_encode($iv . $encryptedData);
     }
 
     /**
@@ -262,25 +264,21 @@ abstract class Tools
     public static function decrypt($string)
     {
         $string = base64_decode($string, true);
-        $iv = substr($string, 0, self::getIVSize());
-        $cipher = substr($string, self::getIVSize());
+        $ivSize = self::getInitializationVectorSize();
+        $iv = substr($string, 0, $ivSize);
+        $encryptedData = substr($string, $ivSize);
 
-        return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+        return trim(openssl_decrypt($encryptedData, self::$OPEN_SSL_CIPHER, self::getSecureKey(), 0, $iv));
     }
 
     /**
-     * Returns the size of the IV
+     * Returns the size of the initialization vector
      *
      * @return int
      */
-    private static function getIVSize()
+    private static function getInitializationVectorSize()
     {
-        static $iv_size;
-        if (!isset($iv_size)) {
-            $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-        }
-
-        return $iv_size;
+        return openssl_cipher_iv_length(self::$OPEN_SSL_CIPHER);
     }
 
     /**
@@ -290,12 +288,7 @@ abstract class Tools
      */
     private static function getSecureKey()
     {
-        static $secureKey;
-        if (!isset($secureKey)) {
-            $secureKey = hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true);
-        }
-
-        return $secureKey;
+        return hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true);
     }
 
     /**
