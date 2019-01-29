@@ -21,6 +21,8 @@ abstract class Tools
 {
     protected static $configuration = null;
 
+    protected static $OPEN_SSL_CIPHER = "aes-256-cbc";
+
     /**
      * Get a newsletter-conf-template parameter
      *
@@ -245,11 +247,17 @@ abstract class Tools
      */
     public static function encrypt($string)
     {
-        $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
-
-        return base64_encode(
-            $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
-        );
+        if(function_exists('mcrypt_create_iv')) {
+            $iv = mcrypt_create_iv(self::getIVSize(), MCRYPT_DEV_URANDOM);
+            return base64_encode(
+                $iv . mcrypt_encrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $string, MCRYPT_MODE_CBC, $iv)
+            );
+        } else {
+            $iv = openssl_random_pseudo_bytes(self::getIVSize());
+            return base64_encode(
+                $iv . openssl_encrypt($string, self::$OPEN_SSL_CIPHER, self::getSecureKey(), 0, $iv)
+            );
+        }
     }
 
     /**
@@ -265,7 +273,11 @@ abstract class Tools
         $iv = substr($string, 0, self::getIVSize());
         $cipher = substr($string, self::getIVSize());
 
-        return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+        if(function_exists('mcrypt_decrypt')) {
+            return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, self::getSecureKey(), $cipher, MCRYPT_MODE_CBC, $iv));
+        } else {
+            return trim(openssl_decrypt($cipher, self::$OPEN_SSL_CIPHER, self::getSecureKey(), 0, $iv));
+        }
     }
 
     /**
@@ -277,7 +289,11 @@ abstract class Tools
     {
         static $iv_size;
         if (!isset($iv_size)) {
-            $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+            if(function_exists('mcrypt_get_iv_size')) {
+                $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+            } else {
+                $iv_size = openssl_cipher_iv_length(self::$OPEN_SSL_CIPHER);
+        }
         }
 
         return $iv_size;

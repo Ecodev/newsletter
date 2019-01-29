@@ -15,6 +15,7 @@
     "php": ">=5.6.0",
     "ext-mcrypt": "*",
     "ext-dom": "*",
+    "ext-openssl": "*",
     "typo3/cms-backend": "^6.2 || ^7.6 || ^8.7 || ^9 || dev-master",
     "typo3/cms-core": "^6.2 || ^7.6 || ^8.7 || ^9 || dev-master",
     "typo3/cms-extbase": "^6.2 || ^7.6 || ^8.7 || ^9 || dev-master",
