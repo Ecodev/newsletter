@@ -289,7 +289,7 @@
             </trans-unit>
             <trans-unit id="unsubscribe_notification_body" xml:space="preserve" approved="yes">
                 <source>&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;The newsletter recipient &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; unsubscribed from list &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; when he received &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot;.&lt;/p&gt;&lt;p&gt;Depending on your configuration, no further action is required. In case of doubts, contact your webmaster.&lt;/p&gt;</source>
-                <target>&lt;p&gt;Guten Tag,&lt;/p&gt;&lt;p&gt;Der Newsletter Empfänger &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; hat sich vom Newsletter &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; abgemeledet, nachdem er &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot; erhalten hat.&lt;/p&gt;&lt;p&gt;Je nach Einstellung müssen Sie nichts weiter unternehmen. Im Zweifelsfall kontaktieren Sie Ihren Webmaster.&lt;/p&gt;</target>
+                <target>&lt;p&gt;Guten Tag,&lt;/p&gt;&lt;p&gt;Der Newsletter Empfänger &lt;a href=&quot;%2$s&quot;&gt;%1$s&lt;/a&gt; hat sich vom Newsletter &quot;&lt;a href=&quot;%4$s&quot;&gt;%3$s&lt;/a&gt;&quot; abgemeldet, nachdem er &quot;&lt;a href=&quot;%6$s&quot;&gt;%5$s&lt;/a&gt;&quot; erhalten hat.&lt;/p&gt;&lt;p&gt;Je nach Einstellung müssen Sie nichts weiter unternehmen. Im Zweifelsfall kontaktieren Sie Ihren Webmaster.&lt;/p&gt;</target>
             </trans-unit>
             <trans-unit id="message_title_no_pid_selected" xml:space="preserve" approved="yes">
                 <source>No page has been selected</source>
