@@ -811,9 +811,9 @@ class Newsletter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         // We cannot use extbase because __clone() doesn't work and even if we clone manually the PID cannot be set
         $db = Tools::getDatabaseConnection();
         $db->sql_query("INSERT INTO tx_newsletter_domain_model_newsletter
-        (uid, pid, planned_time, begin_time, end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, tstamp, crdate, deleted, hidden)
-		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list, " . time() . ' AS tstamp, ' . time() . ' AS crdate, deleted, hidden
-		FROM tx_newsletter_domain_model_newsletter WHERE uid = ' . $this->getUid());
+        (uid, pid, planned_time, begin_time, end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list)
+		SELECT null AS uid, pid, '$newPlannedTime' AS planned_time, 0 AS begin_time, 0 AS end_time, repetition, plain_converter, is_test, attachments, sender_name, sender_email, replyto_name, replyto_email, inject_open_spy, inject_links_spy, bounce_account, recipient_list
+		FROM tx_newsletter_domain_model_newsletter WHERE uid = " . $this->getUid());
     }
 
     /**

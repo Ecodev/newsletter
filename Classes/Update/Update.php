@@ -97,7 +97,13 @@ class Update implements SingletonInterface
      */
     public function getQueries()
     {
-        $queries = array_merge(self::getQueriesToMigrateClassPathsInRecords(), self::getQueriesToEncryptOldBounceAccountPasswords(), self::getQueriesToGenerateAuthCode());
+        $queries = array_merge(
+            $this->getQueriesToMigrateClassPathsInRecords(),
+            $this->getQueriesToEncryptOldBounceAccountPasswords(),
+            $this->getQueriesToGenerateAuthCode(),
+            $this->getQueriesToActuallyDeleteSoftDeleted('tx_newsletter_domain_model_newsletter'),
+            $this->getQueriesToActuallyDeleteSoftDeleted('tx_newsletter_domain_model_email')
+        );
 
         return $queries;
     }
@@ -176,5 +182,33 @@ class Update implements SingletonInterface
         }
 
         return ['Encrypt bounce account passwords' => $queries];
+    }
+
+    /**
+     * Actually delete soft deleted things
+     *
+     * @param string $table
+     *
+     * @return string[]
+     */
+    private function getQueriesToActuallyDeleteSoftDeleted($table)
+    {
+        $name = str_replace('tx_newsletter_domain_model_', '', $table);
+        $result = [];
+        $existingFields = $this->databaseConnection->admin_get_fields($table);
+
+        if (array_key_exists('deleted', $existingFields)) {
+            $where = 'deleted != 0';
+            $count = $this->databaseConnection->exec_SELECTcountRows('*', $table, $where);
+            if (!$count) {
+                return $result;
+            }
+
+            $result['Actually delete soft-deleted ' . $name] = [
+                $this->databaseConnection->DELETEquery($table, $where),
+            ];
+        }
+
+        return $result;
     }
 }

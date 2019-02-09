@@ -26,11 +26,6 @@ CREATE TABLE tx_newsletter_domain_model_newsletter (
 	inject_links_spy tinyint(1) unsigned DEFAULT '1' NOT NULL,
 	bounce_account int(11) unsigned DEFAULT '0',
 
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
-
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 ) ENGINE=InnoDB;
@@ -101,11 +96,6 @@ CREATE TABLE tx_newsletter_domain_model_email (
 	newsletter int(11) unsigned DEFAULT '0',
 	unsubscribed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	auth_code varchar(32) DEFAULT '' NOT NULL,
-
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
