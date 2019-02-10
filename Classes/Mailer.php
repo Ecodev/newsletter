@@ -92,12 +92,7 @@ class Mailer
      */
     public function setNewsletter(Newsletter $newsletter, $language = null)
     {
-        // When sending newsletter via scheduler (so via CLI mode) realurl cannot guess
-        // the domain name by himself, so we help him by filling HTTP_HOST variable
         $this->domain = $newsletter->getDomain();
-        $_SERVER['HTTP_HOST'] = $this->domain;
-        $_SERVER['SCRIPT_NAME'] = '/index.php';
-
         $this->siteUrl = $newsletter->getBaseUrl() . '/';
         $this->linksCache = [];
         $this->newsletter = $newsletter;
@@ -108,6 +103,7 @@ class Mailer
         $this->replytoEmail = $newsletter->getReplytoEmail();
         $bounceAccount = $newsletter->getBounceAccount();
         $this->bounceAddress = $bounceAccount ? $bounceAccount->getEmail() : null;
+        $this->setupCli();
 
         // Build html
         $validatedContent = $newsletter->getValidatedContent($language);
@@ -127,6 +123,25 @@ class Mailer
                 $this->attachments[] = Swift_Attachment::fromPath($filename);
             }
         }
+    }
+
+    /**
+     * When sending newsletter via scheduler (so via CLI mode) core and realurl cannot guess
+     * the domain name by themselves, so we help them by filling HTTP_HOST variable and a
+     * a few other things.
+     */
+    private function setupCli()
+    {
+        $_SERVER['HTTP_HOST'] = $this->domain;
+        $_SERVER['SCRIPT_NAME'] = '/index.php';
+
+        if (!defined('TYPO3_PATH_WEB')) {
+            define('TYPO3_PATH_WEB', true);
+        }
+
+        // Event though this is an internal method we must empty env variables cache,
+        // because it was already filled with incorrect values
+        GeneralUtility::flushInternalRuntimeCaches();
     }
 
     /**
