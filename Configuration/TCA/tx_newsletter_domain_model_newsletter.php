@@ -1,18 +1,10 @@
 <?php
 
-// From TYPO3 7.4.0 onward we must use EXT prefix
-if (version_compare(TYPO3_version, '7.4.0', '>=')) {
-    $wizardIcon = 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif';
-} else {
-    // But for TYPO3 6.2 family, we still have to use old style
-    $wizardIcon = 'edit2.gif';
-}
-
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang_db.xlf:tx_newsletter_domain_model_newsletter',
         'label' => 'planned_time',
-        'iconfile' => \Ecodev\Newsletter\Tools::getIconfilePrefix() . 'Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
+        'iconfile' => 'EXT:newsletter/Resources/Public/Icons/tx_newsletter_domain_model_newsletter.gif',
     ],
     'interface' => [
         'showRecordFieldList' => 'planned_time,begin_time,end_time,repetition,plain_converter,is_test,attachments,sender_name,sender_email,replyto_name,replyto_email,inject_open_spy,inject_links_spy,bounce_account,recipient_list',
@@ -158,7 +150,7 @@ return [
                 'wizards' => [
                     'edit' => [
                         'type' => 'popup',
-                        'icon' => $wizardIcon,
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
                         'module' => [
                             'name' => 'wizard_edit',
                         ],
@@ -176,7 +168,7 @@ return [
                 'wizards' => [
                     'edit' => [
                         'type' => 'popup',
-                        'icon' => $wizardIcon,
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
                         'module' => [
                             'name' => 'wizard_edit',
                         ],

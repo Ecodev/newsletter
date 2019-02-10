@@ -60,7 +60,6 @@ class Mailer
         $this->extConf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['newsletter']);
         $this->realPath = PATH_site;
         $this->substitutor = new Utility\MarkerSubstitutor();
-        $this->loadSwift();
     }
 
     /**
@@ -380,22 +379,6 @@ class Mailer
         $this->prepare($email);
         $message = $this->createMessage($email);
         $message->send();
-    }
-
-    /**
-     * Load Swift from well-known location
-     */
-    private function loadSwift()
-    {
-        // For TYPO3 6.X or TYPO3 7.X
-        $swift1 = PATH_typo3 . 'contrib/swiftmailer/swift_required.php';
-        $swift2 = PATH_typo3 . 'contrib/swiftmailer/lib/swift_required.php';
-
-        if (is_readable($swift1)) {
-            require_once $swift1;
-        } elseif (is_readable($swift2)) {
-            require_once $swift2;
-        }
     }
 
     /**

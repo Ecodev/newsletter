@@ -36,9 +36,8 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\Ecodev\Newslett
     'description' => 'LLL:EXT:newsletter/Resources/Private/Language/locallang.xlf:task_fetch_bounces_description',
 ];
 
-// Configure TCA custom eval and hooks to manage on-the-fly (de)encryption from database across TYPO3 6.2 and 7.6
+// Configure TCA custom eval and hooks to manage on-the-fly (de)encryption from database
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\Ecodev\Newsletter\Tca\BounceAccountTca::class] = 'EXT:' . $_EXTKEY . '/Classes/Tca/BounceAccountTca.php';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tceforms.php']['getSingleFieldClass'][] = \Ecodev\Newsletter\Tca\BounceAccountTca::class;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\Ecodev\Newsletter\Tca\BounceAccountDataProvider::class] = [
     'depends' => [
         \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseEditRow::class,

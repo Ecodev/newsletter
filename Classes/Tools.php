@@ -9,7 +9,6 @@ use Ecodev\Newsletter\Domain\Repository\EmailRepository;
 use Ecodev\Newsletter\Domain\Repository\NewsletterRepository;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Log\LogManager;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -330,22 +329,6 @@ abstract class Tools
         }
 
         return $content;
-    }
-
-    /**
-     * Returns the iconfile prefix
-     *
-     * @return string
-     */
-    public static function getIconfilePrefix()
-    {
-        // From TYPO3 7.4.0 onward we must use EXT prefix
-        if (version_compare(TYPO3_version, '7.4.0', '>=')) {
-            return 'EXT:newsletter/';
-        }
-
-        // But for TYPO3 6.2 family, we still have to use old style
-        return ExtensionManagementUtility::extRelPath('newsletter');
     }
 
     /**

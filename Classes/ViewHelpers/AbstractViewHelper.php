@@ -19,16 +19,6 @@ abstract class AbstractViewHelper extends AbstractBackendViewHelper
      */
     public function initialize()
     {
-        $this->pageRenderer = $this->getPageRendererCompatibility();
-    }
-
-    private function getPageRendererCompatibility()
-    {
-        // For TYPO3 7.4 and newer we can use a direct method, for older version 6.2-7.3
-        if (is_callable([$this, 'getPageRenderer'])) {
-            return $this->getPageRenderer();
-        }
-
-        return $this->getDocInstance()->getPageRenderer();
+        $this->pageRenderer = $this->getPageRenderer();
     }
 }
