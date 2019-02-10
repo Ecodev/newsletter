@@ -99,6 +99,9 @@ tx_newsletter_blank_page {
             extensionName = Newsletter
             vendorName = Ecodev
             pluginName = p
+            features {
+                requireCHashArgumentForActionArguments = 0
+            }
 			switchableControllerActions {
 				Email {
 					1 = show
