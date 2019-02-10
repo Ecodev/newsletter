@@ -292,7 +292,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
      */
     public function getViewUrl()
     {
-        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'show', ['c' => $this->getAuthCode()]);
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'show', $this->getUriArguments());
     }
 
     /**
@@ -302,7 +302,7 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
      */
     public function getUnsubscribeUrl()
     {
-        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', ['c' => $this->getAuthCode()]);
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'unsubscribe', $this->getUriArguments());
     }
 
     /**
@@ -312,6 +312,24 @@ class Email extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements Em
      */
     public function getOpenedUrl()
     {
-        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'opened', ['c' => $this->getAuthCode()]);
+        return UriBuilder::buildFrontendUri($this->getPid(), 'Email', 'opened', $this->getUriArguments());
+    }
+
+    /**
+     * Get arguments for URI
+     *
+     * @return array
+     */
+    private function getUriArguments()
+    {
+        $args = ['c' => $this->getAuthCode()];
+
+        $recipientData = $this->getRecipientData();
+        $language = array_key_exists('L', $recipientData) ? $recipientData['L'] : 0;
+        if ($language) {
+            $args['L'] = $language;
+        }
+
+        return $args;
     }
 }
