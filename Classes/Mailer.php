@@ -197,7 +197,7 @@ class Mailer
             preg_match_all($regex, $src, $urls);
             foreach ($urls[1] as $i => $url) {
                 // Mark places for embedded files
-                $swiftEmbeddedMarker = $this->getSwiftEmbeddedMarker($url);
+                $swiftEmbeddedMarker = $this->getSwiftEmbeddedMarker(urldecode($url));
                 if ($swiftEmbeddedMarker) {
                     $src = str_replace($urls[0][$i], str_replace($url, $swiftEmbeddedMarker, $urls[0][$i]), $src);
                 }

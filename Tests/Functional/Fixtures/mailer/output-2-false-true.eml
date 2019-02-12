@@ -1,18 +1,18 @@
 Return-Path: <bounce@example.com>
 Message-ID: <1621db76eb1e4352719c95f3ba617990@example.com>
-Date: Tue, 12 Feb 2019 13:01:40 +1100
+Date: Tue, 12 Feb 2019 17:33:11 +1100
 Subject: Newsletter Title
 From: John Connor <noreply@example.com>
 To: recipient@example.com
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
- boundary="_=_swift_v4_1549936900_3c3c925b375e41146daac91a3582ae85_=_"
+ boundary="_=_swift_v4_1549953191_93ac229789e5837fb1b38c954ed2e00f_=_"
 Precedence: bulk
 List-Unsubscribe: <mailto:bounce@example.com?subject=unsubscribe-1621db76eb1e4352719c95f3ba617990>,
  <http://example.com/index.php?id=2&type=1342671779&tx_newsletter_p%5Baction%5D=unsubscribe&tx_newsletter_p%5Bcontroller%5D=Email&tx_newsletter_p%5Bc%5D=1621db76eb1e4352719c95f3ba617990>
 
 
---_=_swift_v4_1549936900_3c3c925b375e41146daac91a3582ae85_=_
+--_=_swift_v4_1549953191_93ac229789e5837fb1b38c954ed2e00f_=_
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -84,12 +84,12 @@ er_p%5Bl%5D=3Dc779ff50a74c820d70b8d5c5e6739d00
 #x61;&#x6D;&#x70;&#x6C;&#x65;&#x2E;&#x63;&#x6F;&#x6D;
 
 
---_=_swift_v4_1549936900_3c3c925b375e41146daac91a3582ae85_=_
+--_=_swift_v4_1549953191_93ac229789e5837fb1b38c954ed2e00f_=_
 Content-Type: multipart/related;
- boundary="_=_swift_v4_1549936900_f9d6ce832353773b184bec2124840244_=_"
+ boundary="_=_swift_v4_1549953191_0a6c30a0ef15177c9218632209ce5fe7_=_"
 
 
---_=_swift_v4_1549936900_f9d6ce832353773b184bec2124840244_=_
+--_=_swift_v4_1549953191_0a6c30a0ef15177c9218632209ce5fe7_=_
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -188,46 +188,31 @@ ing_true=3Dtrue-ish
 =EC=96=B4 =E2=9C=93 =E2=82=AC =E2=98=BA =E2=98=B9
 
         <img src=3D"=
-cid:4e7f85e9e0f40c5aaefd812d94da2c84@swift.generated" alt=3D"image"/>
+cid:4448a44d237d06f2919597fa1d3c3ce9@swift.generated" alt=3D"image"/>
    =
  </body>
 </html>
 
 
---_=_swift_v4_1549936900_f9d6ce832353773b184bec2124840244_=_
-Content-Type: image/svg+xml; name=tx_newsletter.svg
+--_=_swift_v4_1549953191_0a6c30a0ef15177c9218632209ce5fe7_=_
+Content-Type: image/svg+xml;
+ name="=?utf-8?Q?test-k=C3=B6nnen_=ED=95=9C=EA=B5=AD=EC=96=B4_?=
+ =?utf-8?Q?=E2=9C=93_=E2=82=AC_=E2=98=BA_=E2=98=B9=2Esvg?="
 Content-Transfer-Encoding: base64
-Content-ID: <4e7f85e9e0f40c5aaefd812d94da2c84@swift.generated>
-Content-Disposition: inline; filename=tx_newsletter.svg
+Content-ID: <4448a44d237d06f2919597fa1d3c3ce9@swift.generated>
+Content-Disposition: inline;
+ filename*0*=utf-8''test-k%C3%B6nnen%20%ED%95%9C%EA%B5%AD%EC%96%B4%20;
+ filename*1*=%E2%9C%93%20%E2%82%AC%20%E2%98%BA%20%E2%98%B9.svg
 
-PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2
-NCI+PHBhdGggZmlsbD0iIzk2OTY5NiIgZD0iTTAgMGg2NHY2NEgwVjB6Ii8+PHBhdGggZmlsbD0i
-bm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1taXRlcmxpbWl0PSIx
-MCIgZD0iTTE1LjUgMTguNGgzOS43djI5SDE1LjV6TTE1LjUgMjMuM0g5LjR2MjQuMWg2LjEiLz48
-cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjAuOSAyMy4zaDI4Ljh2NS41SDIwLjl6TTIwLjkgMzEuNGgx
-Ny41djEuMkgyMC45ek0yMC45IDMzLjdoMTcuNXYxLjJIMjAuOXpNMjAuOSAzNmgxNy41djEuMkgy
-MC45ek0yMC45IDQwLjZoMTcuNXYxLjJIMjAuOXpNMjAuOSA0Mi45aDE3LjV2MS4ySDIwLjl6TTQ5
-LjcgMzYuOWMwIC41LS4xIDEtLjIgMS40LS4xLjQtLjMuOC0uNiAxLjFzLS41LjYtLjkuOC0uNy4z
-LTEgLjNjLS4zIDAtLjUgMC0uNy0uMS0uMi0uMS0uMy0uMS0uNC0uMy0uMS0uMS0uMi0uMi0uMi0u
-NCAwLS4xLS4xLS4zLS4xLS40LS4yLjMtLjUuNS0uOC43LS4zLjItLjcuMy0xIC4zLS41IDAtLjkt
-LjItMS4yLS41cy0uNC0uOC0uNC0xLjMuMS0xIC4yLTEuNGMuMi0uNS40LS45LjctMS4yLjMtLjMu
-Ni0uNiAxLjEtLjguNC0uMi45LS4zIDEuNS0uMy4zIDAgLjYgMCAuOS4xLjMuMS42LjIuOC4zLS4y
-LjUtLjMgMS4xLS40IDEuNi0uMS41LS4yIDEuMS0uMyAxLjYgMCAuMi0uMS40LS4xLjZ2LjNjMCAu
-MS4xLjEuMi4yaC4zYy4yIDAgLjQtLjEuNS0uMnMuMy0uMy40LS41Yy4xLS4yLjItLjUuMy0uOC4x
-LS4zLjEtLjcuMS0xLjEgMC0uNS0uMS0uOS0uMi0xLjNzLS40LS43LS42LTFjLS4zLS4zLS42LS41
-LTEtLjYtLjQtLjItLjktLjItMS40LS4yLS41IDAtLjkuMS0xLjQuMy0uNC4yLS44LjUtMS4yLjlz
-LS42LjgtLjggMS4zYy0uMi41LS4zIDEtLjMgMS42IDAgLjYuMSAxIC4zIDEuNXMuNC44LjcgMSAu
-Ny41IDEuMS42Yy40LjEuOC4yIDEuMy4yLjMgMCAuNiAwIC45LS4xLjMgMCAuNi0uMS44LS4ybC4y
-IDFjLS4zLjEtLjYuMi0uOS4yLS4zLjEtLjcuMS0xIC4xLS43IDAtMS4zLS4xLTEuOS0uMy0uNi0u
-Mi0xLjEtLjUtMS41LS45cy0uOC0uOC0xLTEuNGMtLjItLjYtLjQtMS4yLS40LTEuOXMuMS0xLjQu
-NC0yYy4zLS42LjYtMS4yIDEuMS0xLjcuNS0uNSAxLS45IDEuNi0xLjIuNi0uMyAxLjMtLjQgMi0u
-NHMxLjMuMSAxLjkuM2MuNi4yIDEuMS41IDEuNS45LjQuNC43LjggMSAxLjMgMCAuOC4xIDEuNC4x
-IDJ6TTQ2IDM1LjhjLS4xIDAtLjEtLjEtLjItLjFoLS4yYy0uNCAwLS43LjEtLjkuMy0uMi4yLS41
-LjQtLjYuNy0uMi4zLS4zLjYtLjMuOXMtLjEuNy0uMSAxYzAgLjIgMCAuNC4xLjYuMS4xLjIuMi40
-LjIuMSAwIC4zIDAgLjQtLjEuMi0uMS4zLS4yLjQtLjMuMS0uMS4zLS4zLjQtLjUuMS0uMi4yLS40
-LjItLjZsLjQtMi4xeiIvPjwvc3ZnPg==
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMSAx
+MSI+PGNpcmNsZSBmaWxsPSIjNzlBNTQ4IiBjeD0iNS41IiBjeT0iNS41IiByPSI1LjUiLz48cGF0
+aCBvcGFjaXR5PSIuMiIgZD0iTTUuNSAxQzggMSAxMCAzIDEwIDUuNVM4IDEwIDUuNSAxMCAxIDgg
+MSA1LjUgMyAxIDUuNSAxbTAtMUMyLjUgMCAwIDIuNSAwIDUuNVMyLjUgMTEgNS41IDExIDExIDgu
+NSAxMSA1LjUgOC41IDAgNS41IDB6Ii8+PHBhdGggZD0iTTcuNDUgMy4yODJMNS4xMTMgNS42MDcg
+My41NTYgNC4wNSAyLjUgNS4xMDZsMi42MTIgMi42MTJMOC41IDQuMzMiIGZpbGw9IiNmZmYiLz48
+L3N2Zz4=
 
---_=_swift_v4_1549936900_f9d6ce832353773b184bec2124840244_=_--
+--_=_swift_v4_1549953191_0a6c30a0ef15177c9218632209ce5fe7_=_--
 
 
---_=_swift_v4_1549936900_3c3c925b375e41146daac91a3582ae85_=_--
+--_=_swift_v4_1549953191_93ac229789e5837fb1b38c954ed2e00f_=_--
