@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b813ff62e664b1195a0ac1d97a27dbd4",
+    "content-hash": "13cd9e66e152e10c798da295efaf594b",
     "packages": [
         {
             "name": "cogpowered/finediff",
@@ -2112,13 +2112,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "typo3/cms-backend": 20,
-        "typo3/cms-core": 20,
-        "typo3/cms-extbase": 20,
-        "typo3/cms-fluid": 20,
-        "typo3/cms-scheduler": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
