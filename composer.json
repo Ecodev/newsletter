@@ -11,16 +11,6 @@
     "email",
     "statistics"
   ],
-  "require": {
-    "php": ">=5.6.0",
-    "ext-dom": "*",
-    "ext-openssl": "*",
-    "typo3/cms-backend": "^7.6 || ^8.7 || ^9.5",
-    "typo3/cms-core": "^7.6 || ^8.7 || ^9.5",
-    "typo3/cms-extbase": "^7.6 || ^8.7 || ^9.5",
-    "typo3/cms-fluid": "^7.6 || ^8.7 || ^9.5",
-    "typo3/cms-scheduler": "^7.6 || ^8.7 || ^9.5"
-  },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.1"
   },
