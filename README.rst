@@ -1,3 +1,10 @@
+DEPRECATED
+==========
+
+This extension is **no longer maintained** and will never support TYPO3 9+ for the reasons explained in https://github.com/Ecodev/newsletter/issues/168.
+
+Users should migrate to another extension, or fork this project.
+
 Newsletter
 ==========
 
